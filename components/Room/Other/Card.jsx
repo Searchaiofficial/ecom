@@ -28,8 +28,12 @@ const Card = ({ data }) => {
   const [coststate, setcoststate] = useState(7000);
   const [rollstate, setrollstate] = useState(0);
   const [selectedColor, setSelectedColor] = useState("");
+  const [paletteType, setPaletteType] = useState("color");
   const dispatch = useDispatch();
 
+  const handlePaletteType = (value) => {
+    setPaletteType(value === "color" ? "image" : "color");
+  };
   const [visible, setVisible] = useState(false);
   const handleClick = () => {
     setVisible(!visible);
@@ -48,6 +52,15 @@ const Card = ({ data }) => {
   useEffect(() => {
     priceCal();
   }, [widthstate, heightstate, coststate]);
+
+  const imageData = data.productImages?.map((item) => {
+    return {
+      color: item.color,
+      image: item.images[0],
+    };
+  });
+
+  console.log(imageData);
 
   const colorSep = data.productImages?.map((item) => {
     let hexCode = "";
@@ -184,38 +197,77 @@ const Card = ({ data }) => {
 
           {/* color-container */}
           <div className="colorContainer flex flex-col mt-[30px] sm:w-auto w-[80vw]">
-            <h1 className="mb-2 font-bold">Colours</h1>
-            <div className="colors flex gap-3">
-              {colorSep?.map((item, index) => (
-                <div
-                  key={index}
-                  onClick={() => handleColor(item.color)}
-                  className={`
-      w-[60px]
-      h-[60px]
-      border-b-2
-      border-black
-      text-gray-900
-      text-center 
-      text-xs
-      flex 
-      justify-center
-      items-center
-      cursor-pointer
-      ${
-        selectedColor === item.color || (index === 0 && selectedColor === "")
-          ? "border-2 border-green-500"
-          : ""
-      }
-    `}
-                  style={{
-                    backgroundColor: item.hexCode,
-                  }}
-                >
-                  {item.color}
-                </div>
-              ))}
+            <div className="w-full flex justify-between">
+              <h1 className="mb-2 font-bold">Colours</h1>
+              {paletteType === "color" ? (
+                <>
+                  <button onClick={() => handlePaletteType(paletteType)}>
+                    Image
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button onClick={() => handlePaletteType(paletteType)}>
+                    Color
+                  </button>
+                </>
+              )}
             </div>
+            {paletteType === "color" ? (
+              <>
+                <div className="colors flex gap-3">
+                  {colorSep?.map((item, index) => (
+                    <div
+                      key={index}
+                      onClick={() => handleColor(item.color)}
+                      className={`w-[60px] h-[60px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
+            ${
+              selectedColor === item.color ||
+              (index === 0 && selectedColor === "")
+                ? "border-b-[2px] border-black"
+                : "border-b-[0.5px] border-black"
+            }   
+          `}
+                      style={{
+                        backgroundColor: item.hexCode,
+                      }}
+                    >
+                      {item.color}
+                    </div>
+                  ))}
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="colors flex gap-3">
+                  {imageData?.map((item, index) => (
+                    <div
+                      key={index}
+                      onClick={() => handleColor(item.color)}
+                      className={`parent relative w-[60px] h-[60px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
+            ${
+              selectedColor === item.color ||
+              (index === 0 && selectedColor === "")
+                ? "border-[2px] border-black"
+                : "border-[0.5px] border-black"
+            }   
+          `}
+                    >
+                      <Image
+                        className="relative w-full h-full object-cover"
+                        src={item.image}
+                        alt={item.color}
+                        width={0}
+                        height={0}
+                        layout="fill"
+                        objectFit="cover"
+                      />
+                      .
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
           </div>
 
           {/* calculations */}

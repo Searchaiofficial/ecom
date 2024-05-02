@@ -59,7 +59,7 @@ function Header({ howMuchScrolled }) {
   };
 
   const handleClick = (idx) => {
-    if (idx === 3) router.push("/customerservice");
+    if (idx === 3) router.push("/");
   };
 
   const handleSearchChange = (event) => {
