@@ -36,7 +36,7 @@ const SuggestionPage = ({ params }) => {
     if (suggestionStatus === "idle" || suggestionStatus === "failed") {
       dispatch({ type: "FETCH_SUGGESTION_DATA", payload: id });
     }
-  }, []);
+  }, [id]);
 
   const [recommended, setRecommended] = useState([]);
   const [dataFetched, setDataFetched] = useState(false);
