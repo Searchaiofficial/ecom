@@ -17,6 +17,7 @@ import "../styles.css";
 import axios from "axios";
 import Image from "next/image";
 import { selectProductImages } from "@/components/Features/Slices/imageDataSlice";
+import { colorsData } from "../../../Model/ColorsData/Colors.js";
 
 const Card = ({ data }) => {
   const quantity = useSelector(selectQuantity);
@@ -26,7 +27,7 @@ const Card = ({ data }) => {
   const [pricestate, setpricestate] = useState(0);
   const [coststate, setcoststate] = useState(7000);
   const [rollstate, setrollstate] = useState(0);
-  const [selectedColor, setSelectedColor] = useState();
+  const [selectedColor, setSelectedColor] = useState("");
   const dispatch = useDispatch();
 
   const [visible, setVisible] = useState(false);
@@ -48,8 +49,24 @@ const Card = ({ data }) => {
     priceCal();
   }, [widthstate, heightstate, coststate]);
 
-  const colorSep = data.productImages;
+  const colorSep = data.productImages?.map((item) => {
+    let hexCode = "";
+    for (const category of colorsData) {
+      for (const key in category) {
+        if (category[key][item.color]) {
+          hexCode = category[key][item.color];
+          break;
+        }
+      }
+      if (hexCode) break;
+    }
 
+    return {
+      ...item,
+      hexCode: hexCode,
+    };
+  });
+  console.log(colorSep);
   const roomData = useSelector(selectRoomData);
   console.log(roomData);
   const roomStatus = useSelector(selectRoomStatus);
@@ -185,10 +202,14 @@ const Card = ({ data }) => {
       justify-center
       items-center
       cursor-pointer
-      ${selectedColor === item.color ? "border-2 border-green-500" : ""}
+      ${
+        selectedColor === item.color || (index === 0 && selectedColor === "")
+          ? "border-2 border-green-500"
+          : ""
+      }
     `}
                   style={{
-                    backgroundColor: item.color,
+                    backgroundColor: item.hexCode,
                   }}
                 >
                   {item.color}
