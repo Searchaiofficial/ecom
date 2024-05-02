@@ -114,7 +114,6 @@ function Card(props) {
               })}
             </span>
           </div>
-          {/* <Carousel data={props.imgSrc} className="card-img" /> */}
         </div>
         <div className="card-title">
           <div className="pt-[15px]">{props.title}</div>

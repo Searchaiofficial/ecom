@@ -38,6 +38,7 @@ const SuggestionPage = ({ params }) => {
     }
   }, [id]);
 
+
   const [recommended, setRecommended] = useState([]);
   const [dataFetched, setDataFetched] = useState(false);
   const dispatch = useDispatch();
@@ -49,11 +50,8 @@ const SuggestionPage = ({ params }) => {
       setDataFetched(true);
     }
 
-    console.log("selectData", selectData);
-
     if (selectData) {
-      setRecommended(selectData);
-      console.log("selectData", selectData);
+      setRecommended();
     }
   }, [dispatch, selectData, dataFetched]);
 

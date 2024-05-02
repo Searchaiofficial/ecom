@@ -28,6 +28,7 @@ import TabsProductContent from "../compounds/TabsProductContent";
 import Measure from "./meausrement";
 import Link from "next/link";
 import axios from "axios";
+import TabsProductCard from "./TabsProductCard";
 const Tabs = ({ filteredProductData, heading, param }) => {
   // console.log("Filtered products:", filteredProducts);
   const router = useRouter();
@@ -706,95 +707,24 @@ const Tabs = ({ filteredProductData, heading, param }) => {
               </button>
             )}
           </div>
-          <div className="main-image-pdt grid sm:grid-cols-4 grid-cols-2 gap-3 ">
+          <div className="main-image-pdt grid sm:grid-cols-4 grid-cols-2 gap-4 ">
             {firstPart.map((text, idx) => (
-              <Link href={`/product/${text.productTitle}`}>
-                <div
-                  className="flex flex-col gap-3 border-b border-r p-4 hover-divnine sm:border-none"
-                  key={idx}
-                  onClick={() => handlenav(text._id)}
-                >
-                  <div className="relative z[-999999] w-fit">
-                    <div
-                      onClick={(event) => event.stopPropagation()}
-                      className={`flex justify-between text-black gap-4  checkbox-div absolute top-0 right-0 z-10 ${
-                        selectedpdt.includes(text) ? "visible" : ""
-                      }`}
-                    >
-                      <input
-                        type="checkbox"
-                        onChange={(e) => {
-                          handleCheckbox(text, e.target.checked);
-                          setShowcompare(true);
-                        }}
-                        style={{
-                          border: "2px solid red",
-                        }}
-                        // className="ml-auto border-2 border-red-400 w-[500px] h-[500px]"
-                        checked={selectedpdt.includes(text)}
-                      />
-                    </div>
-
-                    {text.demandtype ? (
-                      <div
-                        // onClick={(event) => event.stopPropagation()}
-                        className={
-                          "flex justify-between text-white bg-red-500 p-1 absolute top-0 left-0 z-10"
-                        }
-                      >
-                        {text.demandtype}
-                      </div>
-                    ) : (
-                      ""
-                    )}
-
-                    <Image
-                      src={text.images[0]}
-                      alt=""
-                      width={260}
-                      height={150}
-                      className="object-cover object-center sm:w-[290px] w-[200px] sm:h-[300px] h-[200px]"
-                      // className="absolute "
-                      // layout="fill"
-                      // objectFit="contain"
-                    />
-                  </div>
-                  <p className="text-sm font-semibold">{text.productTitle}</p>
-                  <p className="text-sm">{text.productDescription}</p>
-                  {text.discountedprice ? (
-                    <p className="">
-                      Rs.{" "}
-                      <span className="text-3xl"> {text.discountedprice}</span>
-                    </p>
-                  ) : (
-                    ""
-                  )}
-                  {text.totalPrice ? (
-                    <p className="">Regular Price: Rs. {text.totalPrice}</p>
-                  ) : (
-                    ""
-                  )}
-                  {text.specialprice ? (
-                    <p className="flex items-center justify-center h-10 text-sm font-semibold bg-yellow-400 price-box w-28">
-                      Rs.<span className="text-3xl"> {text.specialprice}</span>
-                    </p>
-                  ) : (
-                    ""
-                  )}
-                  {text.specialprice ? <p>Price valid till 15 Feb 2025</p> : ""}
-                  <p className="flex flex-row items-center gap-1 text-sm text-black">
-                    {stars.map((star, index) => (
-                      <Image
-                        key={index}
-                        src={star}
-                        alt="star"
-                        width={15}
-                        height={15}
-                      />
-                    ))}
-                  </p>
-                </div>
-              </Link>
+              <TabsProductCard
+              text={text}
+              totalPrice={text.totalPrice}
+              discountedprice={text.discountedprice}
+              specialprice={text.specialprice}
+              productDescription={text.productDescription}
+              productTitle={text.productTitle}
+              images={text.images}
+              idx={idx}
+              handlenav={handlenav}
+              selectedpdt={selectedpdt}
+              handleCheckbox={handleCheckbox}
+              setShowcompare={setShowcompare}
+              demandtype={text.demandtype}
+              stars={stars}
+            />
             ))}
           </div>
           <Measure filteredProductData={filteredProductData} />

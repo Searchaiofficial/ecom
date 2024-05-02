@@ -4,8 +4,8 @@ import Label from "../Label/Label";
 
 const meausrement = ({ filteredProductData }) => {
   return (
-    <div className="flex md:flex-row w-full h-auto flex-col relative overflow-hidden ">
-      <div className="relative bg-red-200 max-h-[500px] md:w-2/3">
+    <div className="flex mt-8 md:flex-row w-full h-auto flex-col relative overflow-hidden ">
+      <div className="relative max-h-[500px] md:w-2/3">
         <Image
           src="/product/curtain.avif"
           alt="curtain"

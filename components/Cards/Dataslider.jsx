@@ -92,14 +92,18 @@ const Dataslider = ({ category, data, sliderIndex }) => {
             invert: false,
           }}
           breakpoints={{
-            400: {
-              slidesPerView: 1,
-              spaceBetween: 5,
+            300: {
+              slidesPerView: 1.2,
+              spaceBetween: 10,
             },
 
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
             1024: {
               slidesPerView: 4,
-              spaceBetween: 5,
+              spaceBetween: 10,
             },
           }}
           allowSlidePrev={true}

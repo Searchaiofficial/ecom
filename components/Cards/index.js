@@ -99,7 +99,6 @@ function Cards() {
               sliderIndex={index}
               data={Partdata(item)}
               ref={datasliderRefs.current[index]}
-              
             />
             {index === 1 && <Display />}
           </div>
