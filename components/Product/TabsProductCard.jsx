@@ -17,7 +17,7 @@ function TabsProductCard(props) {
     <>
       <div
         key={props.idx}
-        className="flex flex-col gap-3 border-b border-r p-4 hover-divnine sm:border-none"
+        className="flex flex-col gap-3 border-b border-r hover-divnine sm:border-none"
         style={{
           width: "100%",
           height: "100%",
@@ -27,7 +27,7 @@ function TabsProductCard(props) {
         <div className="relative z[-999999] w-fit">
           <div
             onClick={(event) => event.stopPropagation()}
-            className={`flex justify-between text-black gap-4  checkbox-div absolute top-0 right-0 z-10 ${
+            className={`flex justify-between text-black   checkbox-div absolute top-0 right-0 z-10 ${
               props.selectedpdt.includes(props.text) ? "visible" : ""
             }`}
           >
@@ -57,7 +57,7 @@ function TabsProductCard(props) {
             ""
           )}
           <div
-            className="relative flex h-full w-full items-center justify-center cursor-pointer aspect-square"
+            className="relative flex h-full w-full items-center justify-center  aspect-square"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
@@ -117,9 +117,11 @@ function TabsProductCard(props) {
             </span>
           </div>
         </div>
-        <p className="text-sm font-semibold">{props.productTitle}</p>
+        <p className="text-lg font-semibold hover:underline">
+          {props.productTitle}
+        </p>
         <p className="text-sm">{props.productDescription}</p>
-        {props.discountedprice ? (
+        {/* {props.discountedprice ? (
           <p className="">
             Rs. <span className="text-3xl"> {props.discountedprice}</span>
           </p>
@@ -130,20 +132,24 @@ function TabsProductCard(props) {
           <p className="">Regular Price: Rs. {props.totalPrice}</p>
         ) : (
           ""
-        )}
+        )} */}
         {props.specialprice ? (
-          <p className="flex items-center justify-center h-10 text-sm font-semibold bg-yellow-400 price-box w-28">
-            Rs.<span className="text-3xl"> {props.specialprice}</span>
+          <p className=" text-sm font-semibold bg-yellow-400 price-box w-fit px-2 py-1">
+            Rs.<span className="text-3xl">{props.specialprice}</span>
           </p>
         ) : (
-          ""
+          <p className="text-sm font-semibold">
+            Rs.<span className="text-3xl">{props.totalPrice}</span>
+          </p>
         )}
-        {props.specialprice ? <p>Price valid till 15 Feb 2025</p> : ""}
-        <p className="flex flex-row items-center gap-1 text-sm text-black">
-          {props.stars.map((star, index) => (
-            <Image key={index} src={star} alt="star" width={15} height={15} />
-          ))}
-        </p>
+        {props.ratings?.length >= 0 && (
+          <p className="flex flex-row items-center gap-1 text-sm text-black">
+            {props.stars.map((star, index) => (
+              <Image key={index} src={star} alt="star" width={15} height={15} />
+            ))}
+            ({props.ratings?.length})
+          </p>
+        )}
       </div>
     </>
   );

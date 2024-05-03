@@ -13,6 +13,7 @@ const Displaybox = (props) => {
     const category = encodeURIComponent(value.toLowerCase());
     const newPath = `/${props.parentCategory}/${currentCategory}/${category}`;
     router.push(newPath);
+    props.setHoveredIndex(-1);
   };
 
   useEffect(() => {
@@ -23,8 +24,8 @@ const Displaybox = (props) => {
   }, [props.data.categoryHeading]);
 
   return (
-    <main className="w-5/6 p-4 noto-sans-200">
-      <h1 className="text-xl mb-4 font-semibold">{props.data.categoryHeading}</h1>
+    <main className="w-full p-4 noto-sans-200">
+      <h1 className="text-xl mb-4 font-semibold w-full">{props.data.categoryHeading}</h1>
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {props.data && props.data.categoryData ? (
           props.data.categoryData.map((item) => (

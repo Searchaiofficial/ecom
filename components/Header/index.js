@@ -58,10 +58,6 @@ function Header({ howMuchScrolled }) {
     setIsOpen(false);
   };
 
-  const handleClick = (idx) => {
-    if (idx === 3) router.push("/");
-  };
-
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
@@ -201,7 +197,6 @@ function Header({ howMuchScrolled }) {
                         key={idx}
                         onMouseEnter={() => handleMouseEnter(idx)}
                         onMouseLeave={handleMouseLeave}
-                        onClick={() => handleClick(idx)}
                       >
                         <Link
                           className={`text-md  font-semibold  ${
@@ -222,10 +217,10 @@ function Header({ howMuchScrolled }) {
                         </Link>
                         {hoveredIndex === idx && (
                           // <Asidebox asideSectionList={value.asideSectionList} />
-                          <Asidebox hoveredIndex={hoveredIndex} />
+                          <Asidebox hoveredIndex={hoveredIndex} setHoveredIndex={setHoveredIndex}/>
                         )}
                         {value.label === "Shop by rooms" &&
-                          hoveredIndex === idx && <Midsection />}
+                          hoveredIndex === idx && <Midsection setHoveredIndex={setHoveredIndex} />}
                       </div>
                     ))}
                   </nav>

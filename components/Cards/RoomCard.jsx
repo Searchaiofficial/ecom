@@ -40,10 +40,10 @@ const RoomCard = () => {
     <>
       <div className="sm:px-[50px] px-[20px] flex justify-between mx-auto my-8 ">
         <div className=" w-full flex justify-center ">
-          <div className="w-full lg:h-[712px] grid grid-cols-2 lg:grid-cols-4 gap-x-4 auto-rows-fr">
+          <div className="w-full  grid grid-cols-2 lg:grid-cols-4 gap-x-4 auto-rows-fr">
             {/* 1 */}
             <div
-              className="parent col-start-1 col-end-3 row-start-1 mb-4 lg:mb-0 row-end-8
+              className="parent h-[490px] lg:h-[712px] col-start-1 col-end-3 row-start-1 mb-4 lg:mb-0 row-end-8
               lg:col-start-1 lg:col-end-3 lg:row-start-1 lg:row-end-8
             "
             >

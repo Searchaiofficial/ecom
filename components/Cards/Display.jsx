@@ -32,7 +32,7 @@ const Display = () => {
         <div className="max-w-1/2 w-full">
           {apiData.length > 0 ? (
             <>
-              <div className={`relative w-full h-[712px]  max-w-1/2]`}>
+              <div className={`relative w-full h-[490px]  lg:h-[712px] max-w-1/2]`}>
                 <Image
                   className="w-full h-full"
                   width={0}
@@ -65,7 +65,7 @@ const Display = () => {
         <div className="max-w-1/2 w-full">
           {apiData.length > 0 ? (
             <>
-              <div className={`relative w-full h-[712px]  max-w-1/2] `}>
+              <div className={`relative w-full h-[490px] lg:h-[712px]  max-w-1/2] `}>
                 <Image
                   className="w-full h-full"
                   width={0}

@@ -316,6 +316,8 @@ const Tabs = ({ filteredProductData, heading, param }) => {
   const firstPart = filterData.slice(0, 8);
   // console.log("firtst is ", firstPart);
   const secondPart = filterData.slice(8);
+  console.log("first part", firstPart);
+  console.log("second part", secondPart);
   // console.log("gere")
 
   return (
@@ -707,8 +709,8 @@ const Tabs = ({ filteredProductData, heading, param }) => {
               </button>
             )}
           </div>
-          <div className="main-image-pdt grid sm:grid-cols-4 grid-cols-2 gap-4 ">
-            {firstPart.map((text, idx) => (
+          <div className=" grid md:grid-cols-4 cursor-pointer sm:grid-cols-2 grid-cols-1 gap-4 ">
+            {firstPart.map((text, idx) => ( 
               <TabsProductCard
               text={text}
               totalPrice={text.totalPrice}
@@ -723,6 +725,7 @@ const Tabs = ({ filteredProductData, heading, param }) => {
               handleCheckbox={handleCheckbox}
               setShowcompare={setShowcompare}
               demandtype={text.demandtype}
+              ratings={text.ratings}
               stars={stars}
             />
             ))}
