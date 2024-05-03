@@ -9,33 +9,9 @@ import "./tabs.css";
 import TabImage from "./TabImage";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { useDispatch, useSelector } from "react-redux";
-import { selectAllProducts } from "../Features/Slices/productSlice";
 
-const Tabs = () => {
+const Tabs = ({data}) => {
   const router = useRouter();
-  const dispatch = useDispatch();
-  const selectData = useSelector(selectAllProducts);
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [dataFetched, setDataFetched] = useState(false);
-  useEffect(() => {
-    if (!dataFetched) {
-      dispatch({
-        type: "ALL_PRODUCTS_REQUEST",
-        payload: { limit: 10 },
-      });
-
-      setDataFetched(true);
-    }
-
-    if (selectData) {
-      setData(selectData);
-    }
-
-    setLoading(false);
-  }, [dispatch, selectData, dataFetched]); // Include dataFetched in the dependency array
-
   const [activeTab, setActiveTab] = useState("");
   const [isSticky, setIsSticky] = useState(false);
 

@@ -90,93 +90,40 @@ function Cards() {
 
       <RoomCard />
 
-      {uniqueCategories && uniqueCategories.length > 2 ? (
-        uniqueCategories?.map((item, index) => (
-          <div>
-            <Dataslider
-              key={item}
-              category={item}
-              sliderIndex={index}
-              data={Partdata(item)}
-              ref={datasliderRefs.current[index]}
-            />
-            {index === 1 && <Display />}
-          </div>
-        ))
-      ) : (
-        <div>
-          {uniqueCategories?.map((item, index) => (
-            <Dataslider
-              key={item}
-              category={item}
-              sliderIndex={index}
-              data={Partdata(item)}
-              ref={datasliderRefs.current[index]}
-            />
-          ))}
-          <Display />
+      {uniqueCategories.slice(0, 2).map((item, index) => (
+        <div key={item}>
+          <Dataslider
+            category={item}
+            sliderIndex={index}
+            data={Partdata(item)}
+            ref={datasliderRefs.current[index]}
+          />
         </div>
-      )}
+      ))}
+      <Display />
+
+      {uniqueCategories.slice(2).map((item, index) => (
+        <div key={item}>
+          <Dataslider
+            category={item}
+            sliderIndex={index + 2}
+            data={Partdata(item)}
+            ref={datasliderRefs.current[index + 2]}
+          />
+        </div>
+      ))}
 
       <Multicard />
 
       <Suggestion />
       {/* <Image /> */}
-      {/* {uniqueCategories &&
-        (uniqueCategories.includes("Flooring") ? (
-          <>
-            <Dataslider
-              category={"Wallpaper"}
-              sliderIndex={0}
-              data={Partdata("Wallpaper")}
-            />
-          </>
-        ) : (
-          <>
-            {uniqueCategories.includes("Curtains") ? (
-              <>
-                <Dataslider
-                  category={"Curtains"}
-                  sliderIndex={0}
-                  data={Partdata("Curtains")}
-                />
-              </>
-            ) : (
-              <>
-                <Dataslider
-                  category={"Blinds"}
-                  sliderIndex={0}
-                  data={Partdata("Blinds")}
-                />
-              </>
-            )}
-          </>
-        ))}
-
-      {uniqueCategories.includes("Flooring") ? (
-        <>
-          <Dataslider
-            category={"Curtains"}
-            sliderIndex={0}
-            data={Partdata("Curtains")}
-          />
-        </>
-      ) : (
-        <>
-          <Dataslider
-            category={"Blinds"}
-            sliderIndex={0}
-            data={Partdata("Blinds")}
-          />
-        </>
-      )} */}
 
       <div className="w-full sm:px-[50px] px-[20px]  h-auto">
         {/* <Imagechanger /> */}
       </div>
 
       {MemoizedProfileContent}
-      <Tabs />
+      <Tabs data={recommended} />
       <Phone />
       <Footer />
     </div>
