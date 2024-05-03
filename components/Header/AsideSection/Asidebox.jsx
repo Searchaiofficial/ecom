@@ -47,10 +47,10 @@ const Asidebox = (props) => {
             window.innerWidth > 800 && { y: -10, opacity: 0 }
           }
           whileInView={{ y: 0, opacity: 1 }}
-          className="absolute top-[2.8rem] pt-4 bg-transparent flex flex-col md:flex-row noto-sans-200 transition-all duration-300 ease-linear w-full md:left-0 h-lvh md:h-auto md:px-10"
+          className="absolute top-[2.8rem] p-4 bg-white flex flex-col md:flex-row noto-sans-200 transition-all duration-300 ease-linear w-full md:left-0 h-lvh md:h-auto md:px-10"
         >
           <aside
-            className="absolute bg-white top-5 w-1/6 md:top-0 md:static md:border-r md:pr-10 md:py-4"
+            className="absolute top-5 w-1/6 md:top-0 md:static md:border-r md:pr-10 md:py-4"
             initial={
               typeof window !== "undefined" &&
               window.innerWidth <= 800 && { x: 300, opacity: 0 }
