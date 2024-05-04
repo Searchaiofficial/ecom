@@ -15,34 +15,43 @@ import {
 } from "@/components/Features/Slices/roomSlice";
 import axios from "axios";
 import Image from "next/image";
-import Trending from "@/components/Cards/Trending";
+import BlogRelatedProducts from "@/components/Cards/BlogRelatedProducts";
 import QuiltSelector from "@/components/Cards/QuiltSelector";
 import { selectRecommendedProduct } from "@/components/Features/Slices/recommendationSlice";
 import Tabs from "@/components/Cards/Tabs";
 import { useParams } from "next/navigation";
+
 import {
   selectSuggestionData,
   selectSuggestionStatus,
 } from "@/components/Features/Slices/suggestionDataSlice";
 
-
 const SuggestionPage = ({ params }) => {
   const id = params.id;
 
+  const dispatch = useDispatch();
+  const selectData = useSelector(selectRecommendedProduct);
   const suggestion = useSelector(selectSuggestionData);
   const suggestionStatus = useSelector(selectSuggestionStatus);
+  const [relatedProducts, setRelatedProducts] = useState([]);
 
   useEffect(() => {
     if (suggestionStatus === "idle" || suggestionStatus === "failed") {
       dispatch({ type: "FETCH_SUGGESTION_DATA", payload: id });
     }
-  }, [id]);
-
+    if (suggestion?.category?.length > 0) {
+      const fetchRelatedProducts = async () => {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/relatedProducts?category=${suggestion.category[0]}`
+        );
+        setRelatedProducts(response.data);
+      };
+      fetchRelatedProducts();
+    }
+  }, [id, suggestion]);
 
   const [recommended, setRecommended] = useState([]);
   const [dataFetched, setDataFetched] = useState(false);
-  const dispatch = useDispatch();
-  const selectData = useSelector(selectRecommendedProduct);
 
   useEffect(() => {
     if (!dataFetched) {
@@ -51,9 +60,14 @@ const SuggestionPage = ({ params }) => {
     }
 
     if (selectData) {
-      setRecommended();
+      setRecommended(selectData.recommendations?.recommendedProducts);
     }
-  }, [dispatch, selectData, dataFetched]);
+
+
+    if (typeof window !== "undefined") {
+      var id = localStorage.getItem("deviceId");
+    }
+  }, [dispatch, selectData, dataFetched]); // Include dataFetched in the dependency array
 
   return (
     <>
@@ -110,7 +124,7 @@ const SuggestionPage = ({ params }) => {
 
             <div className="mt-6 flex flex-col md:flex-row gap-4  items-center justify-between mx-auto">
               {suggestion.subHeading?.subHeadingImages.map((img) => (
-                <div className="relative h-[400px]  md:h-[800px] w-full">
+                <div className="relative h-[400px]  md:h-[712px] w-full">
                   <Image
                     src={img}
                     alt="Sub Image"
@@ -123,8 +137,7 @@ const SuggestionPage = ({ params }) => {
           </div>
         </div>
 
-        <Trending />
-
+        <BlogRelatedProducts relatedProducts={relatedProducts} />
         <div className="sm:px-[50px] px-[20px]">
           <div>
             <h3 className="text-lg font-semibold">
@@ -169,41 +182,92 @@ const SuggestionPage = ({ params }) => {
             </h3>
             <p className="mt-2 text-sm">
               {
-                suggestion.differentMaterials?.chooseDifferentMaterial?.description
+                suggestion.differentMaterials?.chooseDifferentMaterial
+                  ?.description
               }
             </p>
             <div className="flex flex-wrap mt-8 gap-16">
-                <div className="flex gap-4 items-center">
-                  <div className="h-12 w-12 rounded-md justify-center items-center  flex flex-col bg-black text-white text-xs">
-                    <p>Free</p>
-                    <p>{suggestion.differentMaterials?.chooseDifferentMaterial?.material?.guaranteePeriod}</p>
-                  </div>
-                  <div className="flex-col text-xs flex">
-                    <h1>Ayatrio {suggestion.differentMaterials?.chooseDifferentMaterial?.material?.name} offer {suggestion.differentMaterials?.chooseDifferentMaterial?.material?.guaranteePeriod} guarantee</h1>
-                    <p>Refer to the product page for details</p>
-                  </div>
+              <div className="flex gap-4 items-center">
+                <div className="h-12 w-12 rounded-md justify-center items-center  flex flex-col bg-black text-white text-xs">
+                  <p>Free</p>
+                  <p>
+                    {
+                      suggestion.differentMaterials?.chooseDifferentMaterial
+                        ?.material?.guaranteePeriod
+                    }
+                  </p>
                 </div>
-                <div className="flex gap-4 items-center">
-                  <div className="h-12 w-12 rounded-md justify-center items-center  flex flex-col bg-black text-white text-xs">
-                    <p>Recycling</p>
-                    <p>{suggestion.differentMaterials?.chooseDifferentMaterial?.material?.recyclingFee}</p>
-                  </div>
-                  <div className="flex-col text-xs flex">
-                    <h1>{suggestion.differentMaterials?.chooseDifferentMaterial?.material?.name} recycling service</h1>
-                    <h1 className="font-bold">{suggestion.differentMaterials?.chooseDifferentMaterial?.material?.recyclingFee}/piece</h1>
-                    <p>Refer to the product page for details</p>
-                  </div>
+                <div className="flex-col text-xs flex">
+                  <h1>
+                    Ayatrio{" "}
+                    {
+                      suggestion.differentMaterials?.chooseDifferentMaterial
+                        ?.material?.name
+                    }{" "}
+                    offer{" "}
+                    {
+                      suggestion.differentMaterials?.chooseDifferentMaterial
+                        ?.material?.guaranteePeriod
+                    }{" "}
+                    guarantee
+                  </h1>
+                  <p>Refer to the product page for details</p>
                 </div>
-                <div className="flex gap-4 items-center">
-                  <div className="h-12 w-12 rounded-md justify-center items-center  flex flex-col bg-black text-white text-xs">
-                    <p>Offer</p>
-                    <p>{suggestion.differentMaterials?.chooseDifferentMaterial?.material?.trialSchema}</p>
-                  </div>
-                  <div className="flex-col text-xs flex">
-                    <h1>Ayatrio {suggestion.differentMaterials?.chooseDifferentMaterial?.material?.name} offer {suggestion.differentMaterials?.chooseDifferentMaterial?.material?.trialSchema}</h1>
-                    <p>Refer to the product page for details</p>
-                  </div>
+              </div>
+              <div className="flex gap-4 items-center">
+                <div className="h-12 w-12 rounded-md justify-center items-center  flex flex-col bg-black text-white text-xs">
+                  <p>Recycling</p>
+                  <p>
+                    {
+                      suggestion.differentMaterials?.chooseDifferentMaterial
+                        ?.material?.recyclingFee
+                    }
+                  </p>
                 </div>
+                <div className="flex-col text-xs flex">
+                  <h1>
+                    {
+                      suggestion.differentMaterials?.chooseDifferentMaterial
+                        ?.material?.name
+                    }{" "}
+                    recycling service
+                  </h1>
+                  <h1 className="font-bold">
+                    {
+                      suggestion.differentMaterials?.chooseDifferentMaterial
+                        ?.material?.recyclingFee
+                    }
+                    /piece
+                  </h1>
+                  <p>Refer to the product page for details</p>
+                </div>
+              </div>
+              <div className="flex gap-4 items-center">
+                <div className="h-12 w-12 rounded-md justify-center items-center  flex flex-col bg-black text-white text-xs">
+                  <p>Offer</p>
+                  <p>
+                    {
+                      suggestion.differentMaterials?.chooseDifferentMaterial
+                        ?.material?.trialSchema
+                    }
+                  </p>
+                </div>
+                <div className="flex-col text-xs flex">
+                  <h1>
+                    Ayatrio{" "}
+                    {
+                      suggestion.differentMaterials?.chooseDifferentMaterial
+                        ?.material?.name
+                    }{" "}
+                    offer{" "}
+                    {
+                      suggestion.differentMaterials?.chooseDifferentMaterial
+                        ?.material?.trialSchema
+                    }
+                  </h1>
+                  <p>Refer to the product page for details</p>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -216,34 +280,36 @@ const SuggestionPage = ({ params }) => {
             </p>
 
             <div className="flex flex-wrap ">
-              {suggestion.differentMaterials?.waysToImprove?.items.map((item) => (
-                <div className="w-full md:w-1/2 p-2">
-                  <p className="mt-2 text-sm font-medium">{item.label}</p>
-                  <div className="relative my-2 h-[300px]">
-                    <Image
-                      src={item.image}
-                      alt="Sub Image"
-                      layout="fill"
-                      objectFit="cover"
-                    />
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Image
-                      src={suggestion.suggestionCardImage}
-                      alt="Sub Image"
-                      width={50}
-                      height={50}
-                      objectFit="cover"
-                      className="aspect-square"
-                    />
-                    <div className="flex flex-col">
-                      <h1 className="font-bold">Matress</h1>
-                      <p className="text-sm">Memory foam</p>
-                      <p className="font-bold">Rs 400</p>
+              {suggestion.differentMaterials?.waysToImprove?.items.map(
+                (item) => (
+                  <div className="w-full md:w-1/2 p-2">
+                    <p className="mt-2 text-sm font-medium">{item.label}</p>
+                    <div className="relative my-2 h-[300px]">
+                      <Image
+                        src={item.image}
+                        alt="Sub Image"
+                        layout="fill"
+                        objectFit="cover"
+                      />
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Image
+                        src={suggestion.suggestionCardImage}
+                        alt="Sub Image"
+                        width={50}
+                        height={50}
+                        objectFit="cover"
+                        className="aspect-square"
+                      />
+                      <div className="flex flex-col">
+                        <h1 className="font-bold">Matress</h1>
+                        <p className="text-sm">Memory foam</p>
+                        <p className="font-bold">Rs 400</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                )
+              )}
             </div>
           </div>
         </div>

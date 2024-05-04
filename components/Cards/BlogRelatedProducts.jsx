@@ -1,3 +1,5 @@
+import Card from "./card";
+import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import PopUp from "../Reviews/PopUp";
@@ -8,43 +10,21 @@ import "swiper/css/navigation";
 import "swiper/css/free-mode";
 import "swiper/css/mousewheel";
 import "swiper/css/scrollbar";
-import { Pagination, Scrollbar, Mousewheel, FreeMode } from "swiper/modules";
+import {
+  Pagination,
+  Scrollbar,
+  Mousewheel,
+  FreeMode,
+} from "swiper/modules";
+// import axios from "axios";;
 
-import SuggestionCard from "./SuggestionCard";
-import { useSelector, useDispatch } from "react-redux";
-import { selectBlogCardData } from "../Features/Slices/blogCardSlice";
-
-const Suggestion = () => {
-  const blogCardData = useSelector(selectBlogCardData);
-  const dispatch = useDispatch();
-
-  const backgroundColors = [
-    "bg-slate-500",
-    "bg-blue-400",
-    "bg-purple-300",
-    "bg-gray-200",
-    "bg-zinc-400",
-  ];
-
-  const [suggestionSlider, setSuggestionSlider] = useState([]);
-
-  const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/fetchAllSuggestions`;
-
-  useEffect(() => {
-    if (blogCardData.length === 0) {
-      dispatch({ type: "FETCH_BLOG_CARD_DATA", payload: "blogCard" });
-    }
-    if (blogCardData) {
-      setSuggestionSlider(blogCardData);
-    }
-  }, [blogCardData]);
-
-  const swiperUseref = useRef(null);
+const BlogRecommendedProducts = ({relatedProducts}) => {
+  const [isPopupVisible, setPopupVisible] = useState(false);
 
   const swiperOptions2 = {
     slidesPerView: 4.08,
     centeredSlides: false,
-    spaceBetween: 1,
+    spaceBetween: 5,
     modules: [Pagination, Scrollbar, Mousewheel, FreeMode],
     navigation: {
       nextEl: ".custom-next-button",
@@ -58,16 +38,15 @@ const Suggestion = () => {
     setPopupVisible(false);
   };
   const swiper1Ref = useRef(null);
-  const swiper2Ref = useRef(null);
 
   return (
     <div>
-      <div className="pt-12 mb-20  bg-whit sm:px-[50px] px-[20px]">
+      <div className="pt-12  mb-20  bg-white sm:px-[50px] px-[20px]">
         <div className="mb-2 w-full flex justify-between items-center">
           <h2 className="font-semibold text-2xl py-[15px]">
-            {suggestionSlider && suggestionSlider.length === 0
-              ? "Inspiration and suggestion"
-              : "Inspiration and suggestion"}
+            {relatedProducts && relatedProducts.length === 0
+              ? ""
+              : "Related Products"}
           </h2>
           <div className="Slidenav flex  bg-white text-2xl cursor-pointer  text-white rounded-full gap-2">
             <div
@@ -80,6 +59,7 @@ const Suggestion = () => {
             ></div>
           </div>
         </div>
+        <PopUp isPopupVisible={isPopupVisible} closePopup={closePopup} />
         <Swiper
           ref={swiper1Ref}
           {...swiperOptions2}
@@ -98,43 +78,46 @@ const Suggestion = () => {
           breakpoints={{
             300: {
               slidesPerView: 1.2,
-              spaceBetween: 5,
+              spaceBetween: 10,
             },
 
             640: {
-              slidesPerView: 2.3,
-              spaceBetween: 5,
+              slidesPerView: 2,
+              spaceBetween: 10,
             },
             1024: {
-              slidesPerView: 3.5,
-              spaceBetween: 5,
+              slidesPerView: 4,
+              spaceBetween: 10,
             },
           }}
           allowSlideNext={true}
           allowSlidePrev={true}
           slideNextClass="custom-next-button"
           slidePrevClass="custom-prev-button"
-          // onSwiper={setSwiperRef}
           className="px-10"
         >
-          {!suggestionSlider ? (
+          {!relatedProducts ? (
             <SwiperSlide>
               <div className="flex"></div>
             </SwiperSlide>
           ) : (
-            suggestionSlider.map((suggestion, idx) => {
+            relatedProducts.map((product, idx) => {
               return (
                 <SwiperSlide key={idx} className="ml-0">
-                  <div className="">
-                    <SuggestionCard
-                      title={suggestion.heading}
-                      desc={suggestion.shortSummary}
-                      imgSrc={suggestion.suggestionCardImage}
+                  <div className="grid grid-cols-1 w-full h-full fade-in ">
+                    <Card
+                      title={product.productTitle}
+                      // date={product.date}
+                      price={product.perUnitPrice}
+                      desc={product.productTitle}
+                      imgSrc={product.images}
+                      rating={product.ratings}
                       key={idx}
-                      bgColorClass={
-                        backgroundColors[idx % backgroundColors.length]
-                      }
-                      id={suggestion._id}
+                      id={product._id}
+                      category={product.category}
+                      productId={product.productId}
+                      setPopupVisible={setPopupVisible}
+                      cssClass={"card1flex"}
                     />
                   </div>
                 </SwiperSlide>
@@ -147,4 +130,4 @@ const Suggestion = () => {
   );
 };
 
-export default Suggestion;
+export default BlogRecommendedProducts;

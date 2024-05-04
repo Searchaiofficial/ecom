@@ -142,7 +142,7 @@ function TabsProductCard(props) {
             Rs.<span className="text-3xl">{props.totalPrice}</span>
           </p>
         )}
-        {props.ratings?.length >= 0 && (
+        {props.ratings?.length > 0 && (
           <p className="flex flex-row items-center gap-1 text-sm text-black">
             {props.stars.map((star, index) => (
               <Image key={index} src={star} alt="star" width={15} height={15} />
