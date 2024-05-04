@@ -15,7 +15,9 @@
   .sticky-tabcategory {
     position: fixed;
     top: 0;
-    width: 72.7rem;
+    left: 0;
+    right: 0;
+    margin-inline: 50px;
     z-index: 1000;
     background-color: white; 
   }
@@ -32,7 +34,7 @@
   .sticky-tabcategory {
     position: fixed;
     top: 0;
-    width: 23.3rem;
+    margin-inline: 20px;
     z-index: 1000;
     background-color: white; 
   }
