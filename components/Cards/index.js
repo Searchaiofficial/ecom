@@ -74,7 +74,7 @@ function Cards() {
   }, [uniqueCategories]);
 
   if (loading) {
-    return <Splashscreen />;
+    return null;
   }
 
   if (typeof window !== "undefined") {
