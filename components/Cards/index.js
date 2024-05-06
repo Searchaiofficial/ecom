@@ -29,6 +29,7 @@ import NewMainSlider from "../MainSlider/NewMainSlider";
 import RoomTypes from "../Rooms/RoomTypes";
 import Display from "./Display";
 import RoomCard from "./RoomCard";
+import Splashscreen from "../Splashscreen/Splashscreen";
 const Cookies = dynamic(() => import("./Cookies"));
 
 function Cards() {
@@ -73,7 +74,7 @@ function Cards() {
   }, [uniqueCategories]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Splashscreen />;
   }
 
   if (typeof window !== "undefined") {
