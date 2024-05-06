@@ -55,7 +55,7 @@ export default function NewMainSlider() {
   };
 
   if (isSliderLoading) {
-    return <Splashscreen />;
+    return null;
   }
 
   return (
