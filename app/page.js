@@ -1,10 +1,12 @@
 "use client";
 import Splashscreen from "@/components/Splashscreen/Splashscreen";
 import SaveDeviceIdLocalstorage from "@/utils/SaveDeviceIdLocalstorage ";
-import HomePage from "@/components/home/HomePage";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectSliderData } from "@/components/Features/Slices/sliderSlice";
+import dynamic from "next/dynamic";
+const HomePage = dynamic(() => import("@/components/home/HomePage"));
+
 export default function Home() {
   const [loading, setLoading] = useState(true);
 
