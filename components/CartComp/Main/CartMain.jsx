@@ -149,18 +149,13 @@ const CartMain = () => {
 
   return (
     <>
-      <div className="px-20 pt-[6rem] pb-[3rem] ">
-        <div className="grid grid-cols-12 gap-10">
-          <div className="col-span-8">
-            {/* <h2 className="py-2 mb-6 text-2xl">Your Cart</h2>
-          <div className="flex items-center justify-between border-b border-slate-400 text-slate-400 pb-3 font-semibold text-sm mb-4">
-            <h2 className="uppercase">Product</h2>
-            <h2 className="uppercase">Quantity</h2>
-            <h2 className="uppercase">Price</h2>
-          </div> */}
+      <div className=" px-[20px] lg:px-20 pt-[6rem] pb-[3rem] ">
+        <div className=" grid grid-cols-1 lg:grid-cols-12 gap-10">
+          <div className="lg:col-span-8">
+
 
             {/* <!-- parent div --> */}
-            <div className="py-2 ml-12 mr-14">
+            <div className="py-2 lg:ml-12 lg:mr-14">
               {/* <!-- header section --> */}
               <div className="flex justify-between items-center mb-10">
                 <h1 className=" text-[22px] leading-[1.33] font-[700] tracking-tight">
@@ -315,7 +310,7 @@ const CartMain = () => {
           {cartStatus === "loading" && <p>Loading...</p>}
           {cartStatus === "failed" && <p>Error loading data from DB.</p>}
           {cartStatus === "succeeded" && cartdata && (
-            <div className="col-span-4 sm:block bg-white  border-gray-300 rounded-lg  overflow-hidden hidden pt-[0.6rem]  text-black ">
+            <div className="lg:col-span-4 sm:block bg-white  border-gray-300 rounded-lg  overflow-hidden hidden pt-[0.6rem]  text-black ">
               <h2 className="text-xl pb-3 font-bold ">Order summary</h2>
               <div className="flex items-center justify-between  border-slate-500 pb-6 ">
                 <span className="text-black">Products price </span>
@@ -349,11 +344,11 @@ const CartMain = () => {
               </div>
 
               <button
-                className="border border-slate-500 p-5 text-white font-[700] w-[100%] h-28  my-5 flex items-center justify-between text-xl bg-[#007b34] hover:bg-[#013fa3]"
+                className="border  rounded-[64px] lg:rounded-none text-[14px] border-slate-500 p-5 text-white font-[700] w-[100%] h-[56px] lg:h-28  my-5 flex items-center justify-center lg:justify-between lg:text-xl bg-[#007b34] hover:bg-[#013fa3]"
                 onClick={() => setSideMenu(true)}
               >
                 Continue to checkout
-                <div className=" w-10 h-10 flex items-center rounded-3xl bg-white ">
+                <div className=" hidden lg:flex w-10 h-10  items-center rounded-3xl bg-white ">
                   <ArrowRight className="translate-x-2 text-black" />
                 </div>
               </button>
@@ -362,7 +357,7 @@ const CartMain = () => {
             <span>$1000</span>
           </div> */}
 
-              <div className=" fixed h-full w-screen lg:hidden bg-black/50  backdrop:blur-sm top-0 right-0"></div>
+              {/* <div className=" fixed h-full w-screen lg:hidden bg-black/50  backdrop:blur-sm top-0 right-0"></div> */}
 
               {/* <Link
             href="#"
@@ -371,7 +366,7 @@ const CartMain = () => {
             Continue to Payment
           </Link> */}
 
-              <div className="flex gap-4 justify-between items-center font-bold mt-14">
+              <div className="flex gap-4  items-center font-bold mt-14">
                 <span>
                   <svg
                     focusable="false"

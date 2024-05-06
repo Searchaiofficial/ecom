@@ -1,42 +1,40 @@
-  .my-swiper-wrapper {
-    display: flex;
-  }
+.my-swiper-wrapper {
+  display: flex;
+}
+
+/* Individual slide */
+.my-swiper-slide {
+  flex: 0 0 auto; /* Ensure slides don't grow or shrink */
+  width: 25%; /* Adjust slide width as needed */
+  text-align: start;
+  border: 1px solid black;
+  border-radius: 2%;
+  padding: 20px;
+  box-sizing: border-box; /* Include padding in width */
+}
+
+/* Navigation buttons */
+.my-swiper-button-prev,
+.my-swiper-button-next {
+  position: absolute;
+  top: 50%;
+  width: 30px;
+  height: 30px;
+  transform: translateY(-50%);
+  z-index: 10;
+  cursor: pointer;
+  background-color: #333;
   
-  /* Individual slide */
-  .my-swiper-slide {
-    flex: 0 0 auto; /* Ensure slides don't grow or shrink */
-    width: 25%; /* Adjust slide width as needed */
-    text-align: start;
-    background: #cecece;
-    border: 1px solid black;
-    border-radius: 2%;
-    padding: 20px;
-    box-sizing: border-box; /* Include padding in width */
-  }
-  
-  /* Navigation buttons */
-  .my-swiper-button-prev,
-  .my-swiper-button-next {
-    position: absolute;
-    top: 50%;
-    width: 30px;
-    height: 30px;
-    transform: translateY(-50%);
-    z-index: 10;
-    cursor: pointer;
-    background-color: #333;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* Positioning of the buttons */
-  .my-swiper-button-prev {
-    left: 0px;
-  }
-  
-  .my-swiper-button-next {
-    right: 0px;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Positioning of the buttons */
+.my-swiper-button-prev {
+  left: 0px;
+}
+
+.my-swiper-button-next {
+  right: 0px;
+}

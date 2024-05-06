@@ -94,18 +94,18 @@ export default function NewMainSlider() {
       >
         <div className={`${navigationVisible ? "block" : "hidden"}`}>
           <Image
-            src="/icon/arrow_right.svg"
+            src="/ayatrio icon/Back-white.svg"
             width={30}
             height={30}
             alt="arrow"
-            className=" rotate-180  swiper-button-prev sm:-translate-y-[150px] sm:translate-x-[-80.8vw] absolute left-0"
+            className="  swiper-button-prev sm:-translate-y-[150px]  sm:translate-x-[-80.8vw] absolute left-0"
           />
         </div>
 
         {sliderApiData.map((data) => {
           return (
             <SwiperSlide key={data?._id}>
-              <div className="relative group h-[78vh] bg-gray-100">
+              <div className="relative group h-[78vh] ">
                 <Image
                   src={data?.imgSrc}
                   fill
@@ -115,14 +115,15 @@ export default function NewMainSlider() {
                   objectFit="cover"
                 />
                 <div className="absolute flex text-lg text-white bottom-[2.5rem] left-[3rem] flex-col md:flex-row gap-4 md:items-center">
-                  <div className="w-full md:w-auto">
-                    <button className="text-base px-5 py-2 bg-white text-black rounded-3xl border-none">
+                  <div className="w-full md:w-auto flex gap-2 flex-col">
+                    <p className="text-xl font-[500] drop-shadow-xl">
+                      Buy all living room products.
+                    </p>
+                    <button className="text-base px-5 py-2 max-w-fit bg-white text-black rounded-3xl border-none">
                       {data?.imgTitle}
                     </button>
                   </div>
-                  <p className="text-xl font-[500] drop-shadow-xl">
-                    Buy all living room products.
-                  </p>
+
                 </div>
                 <div className="absolute top-0 left-0 flex items-center justify-center w-full h-full transition-opacity opacity-0 group-hover:opacity-100">
                   <div onMouseEnter={handleEnter} className="cursor-pointer">
@@ -150,10 +151,10 @@ export default function NewMainSlider() {
                             {data?.circles[0].productPrice}
                           </p>
                         </div>
-                        <div className="absolute top-0 right-0 flex items-center justify-end h-full border-l border-gray-200">
+                        <div className="absolute top-0 right-0 flex items-center justify-end h-full border-l ">
                           <Image
                             className="flex mx-1"
-                            src="/icon/arrow_right.svg"
+                            src="/ayatrio icon/right.svg"
                             height={20}
                             width={20}
                             alt="arrow"
@@ -169,11 +170,11 @@ export default function NewMainSlider() {
         })}
         <div className={`${navigationVisible ? "block" : "hidden"}`}>
           <Image
-            src="/icon/arrow_right.svg"
+            src="/ayatrio icon/right-white.svg"
             width={30}
             height={30}
             alt="arrow"
-            className={`swiper-button-next sm:-translate-y-[150px]`}
+            className={`swiper-button-next hover:bg-opacity-50 sm:-translate-y-[150px] `}
           />
         </div>
       </Swiper>

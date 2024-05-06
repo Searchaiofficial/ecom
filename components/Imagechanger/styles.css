@@ -29,7 +29,7 @@
   color: black;
   font-weight: 300;
   margin-top:8rem;
-  background-color: rgb(197, 197, 197);
+  /* background-color: rgb(197, 197, 197); */
   border-radius: 50%;
   height: 32px;
   width: 28px;
@@ -41,7 +41,7 @@
 .swiper-button-next {
   margin-top: 8rem;
   color: black;
-  background-color: rgb(197, 197, 197);
+  /* background-color: rgb(197, 197, 197); */
   border-radius: 50%;
   height: 32px;
   width: 28px;

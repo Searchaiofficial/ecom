@@ -58,6 +58,10 @@ function Header({ howMuchScrolled }) {
     setIsOpen(false);
   };
 
+  const handleClick = (idx) => {
+    if (idx === 3) router.push("/customerservice");
+  };
+
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
@@ -137,23 +141,22 @@ function Header({ howMuchScrolled }) {
   const homeRoute = "/home";
 
   return (
-    <div className="">
+    <div className="z-[99999px]">
       {(homeRoute === pathname ||
         pathname.includes("/product/") ||
         pathname.includes("/products/")) &&
-      typeof window !== "undefined" ? (
+        typeof window !== "undefined" ? (
         typeof window !== "undefined" && window.scrollY < 20 ? (
           <TopHeader />
         ) : null
       ) : null}
       <div
-        className={`fixed w-full sm:bg-none ${
-          homeRoute === pathname || pathname.includes("/product/")
-            ? typeof window !== "undefined" && window.scrollY < 20
-              ? "md:top-[30px] top-[0px]"
-              : "top-0"
+        className={`fixed w-full sm:bg-none ${homeRoute === pathname || pathname.includes("/product/")
+          ? typeof window !== "undefined" && window.scrollY < 20
+            ? "md:top-[35px] top-[0px]"
             : "top-0"
-        } z-[99999]
+          : "top-0"
+          } z-[99999]
        ${isScrolled ? "bg-white" : "bg-white"} 
       
       
@@ -164,12 +167,11 @@ function Header({ howMuchScrolled }) {
         {!searchQuery ? (
           <>
             <div
-              className={`${
-                isScrolled ? " border-b-[0.5px] border-slate-200" : ""
-              } flex flex-row justify-between items-center sm:px-[10px] px-[10px] h-16`}
+              className={`${isScrolled ? " border-b-[0.5px] border-slate-200" : ""
+                } flex flex-row justify-between z-[99999px] items-center sm:px-[10px] px-[10px] h-[60px]`}
             >
               {/* main-logo */}
-              <div className=" flex items-center justify-start ">
+              <div className=" flex items-center justify-start pl-[25px]">
                 <div className="mainlogo 2lg:pr-[60px]">
                   <Link href="/">
                     <Image
@@ -178,7 +180,7 @@ function Header({ howMuchScrolled }) {
                       width={300}
                       height={40}
                       priority
-                      className="w-36 lg:w-44 object-cover"
+                      className="w-36 lg:w-36 object-cover"
                     />
                   </Link>
                 </div>
@@ -197,30 +199,29 @@ function Header({ howMuchScrolled }) {
                         key={idx}
                         onMouseEnter={() => handleMouseEnter(idx)}
                         onMouseLeave={handleMouseLeave}
+                        onClick={() => handleClick(idx)}
                       >
                         <Link
-                          className={`text-md  font-semibold  ${
-                            isOpen ? "border-b-2 border-black" : ""
-                          }`}
+                          className={`text-md  font-semibold  ${isOpen ? "border-b-2 border-black" : ""
+                            }`}
                           href="#"
                           onClick={toggleDropdown}
                         >
                           <p
-                            className={`block font-medium border-b-2 ${
-                              hoveredIndex === idx
-                                ? "border-black"
-                                : "border-transparent"
-                            }`}
+                            className={`block font-medium border-b-2 ${hoveredIndex === idx
+                              ? "border-black"
+                              : "border-transparent"
+                              }`}
                           >
                             {value.label}
                           </p>
                         </Link>
                         {hoveredIndex === idx && (
                           // <Asidebox asideSectionList={value.asideSectionList} />
-                          <Asidebox hoveredIndex={hoveredIndex} setHoveredIndex={setHoveredIndex}/>
+                          <Asidebox hoveredIndex={hoveredIndex} />
                         )}
                         {value.label === "Shop by rooms" &&
-                          hoveredIndex === idx && <Midsection setHoveredIndex={setHoveredIndex} />}
+                          hoveredIndex === idx && <Midsection />}
                       </div>
                     ))}
                   </nav>
@@ -380,18 +381,16 @@ function Header({ howMuchScrolled }) {
                   onClick={() => handleClick(idx)}
                 >
                   <Link
-                    className={`text-md  font-semibold  ${
-                      isOpen ? "border-b-2 border-black" : ""
-                    }`}
+                    className={`text-md  font-semibold  ${isOpen ? "border-b-2 border-black" : ""
+                      }`}
                     href="#"
                     onClick={toggleDropdown}
                   >
                     <p
-                      className={`block p-2 text-lg font-medium border-b-2 ${
-                        hoveredIndex === idx
-                          ? "border-black"
-                          : "border-transparent"
-                      }`}
+                      className={`block p-2 text-lg font-medium border-b-2 ${hoveredIndex === idx
+                        ? "border-black"
+                        : "border-transparent"
+                        }`}
                     >
                       {value.label}
                     </p>

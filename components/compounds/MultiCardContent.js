@@ -10,17 +10,33 @@ import "./../Imagechanger/styles.css";
 const MultiCardContent = (props) => {
   const { key, iconPath, iconSize, title, text } = props;
   return (
-    <div className=" relative bg-white  h-[300px] sm:w-[300px] w-[90%] p-2 sm:mb-24 mb-10">
-      <div className="mt-8 ml-6">
+    <div className="bg-white flex h-auto min-h-[350px]  w-[405px]  sm:mb-24 mb-10 p-3">
+      {/* <div className="mt-8 ml-6">
         <Image src={iconPath} width={iconSize} height={iconSize} alt="image" />
       </div>
-      <h2 className="text-xl font-medium ml-6 mr-12">{title}</h2>
-      <div className="mt-2 ml-6 mr-12 mb-12">{text}</div>
+      <h2 className="text-[28px] text-[#333333] font-bold ml-6 mr-12">{title}</h2>
+      <div className="mt-2 ml-6 mr-12 text-[17px] font-normal mb-12">{text}</div>
 
       <div className="absolute bottom-1 right-4 mb-8">
         <Image
           className="w-10 h-10"
           src="/MultiCardIcons/add-circle.svg"
+          width={0}
+          height={0}
+          alt="add"
+        />
+      </div> */}
+      <div className="flex flex-col pt-[32px] pl-[32px] pr-[77px] pb-[57px]">
+        <div className="pb-[9px]  h-[56px]">
+          <Image src={iconPath} width={iconSize} height={iconSize} alt="image" className="" />
+        </div>
+        <h2 className="text-[25px] trackinh-[0.007em] text-[#333333] font-bold mb-[1em] ">{title}</h2>
+        <div className=" text-[15px] h-[42px] font-normal -tracking-[-0.374px]">{text}</div>
+      </div>
+      <div className="self-end">
+        <Image
+          className="min-w-[36px] min-h-[36px] rounded-full bg-[#333336]"
+          src="/ayatrio icon/add.svg"
           width={0}
           height={0}
           alt="add"

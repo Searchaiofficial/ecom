@@ -39,7 +39,7 @@ const Trending = () => {
       setNewTrendingData(trendingData);
     }
   }, [trendingData]);
-  
+
   const swiperUseref = useRef(null);
   const swiperOptions2 = {
     slidesPerView: 4.08,
@@ -64,7 +64,7 @@ const Trending = () => {
     <div>
       <div className="pt-12  mb-20  bg-white sm:px-[50px] px-[20px]">
         <div className="mb-2 w-full flex justify-between items-center">
-          <h2 className="font-semibold text-2xl py-[15px]">
+          <h2 className="Blinds">
             {newTrendingData && newTrendingData.length === 0
               ? "Most Family Choice(Empty)"
               : "Most Family Choice"}

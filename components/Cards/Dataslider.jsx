@@ -54,7 +54,7 @@ const Dataslider = ({ category, data, sliderIndex }) => {
     <div>
       <div className=" bg-white sm:px-[50px] px-[20px] my-10">
         <div className="w-full flex justify-between items-center">
-          <h2 className="font-semibold text-2xl py-[15px]">{category}</h2>
+          <h2 className="font-semibold text-2xl py-[30px]">{category}</h2>
           <div className="Slidenav flex text-2xl cursor-pointer text-white rounded-full gap-2">
             <div
               onClick={() => swiperRef.current.swiper.slidePrev()}
@@ -92,18 +92,14 @@ const Dataslider = ({ category, data, sliderIndex }) => {
             invert: false,
           }}
           breakpoints={{
-            300: {
-              slidesPerView: 1.2,
-              spaceBetween: 10,
+            400: {
+              slidesPerView: 1,
+              spaceBetween: 5,
             },
 
-            640: {
-              slidesPerView: 2,
-              spaceBetween: 10,
-            },
             1024: {
               slidesPerView: 4,
-              spaceBetween: 10,
+              spaceBetween: 5,
             },
           }}
           allowSlidePrev={true}

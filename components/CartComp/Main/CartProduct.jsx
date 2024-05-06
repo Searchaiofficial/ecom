@@ -20,7 +20,7 @@ const CartProduct = ({
   return (
     <>
       <div className="">
-        <div className=" py-8 flex gap-4 border-b border-slate-400  mb-3 mt-3">
+        <div className=" py-8 items-start flex gap-10  border-b border-slate-400  mb-3 mt-3">
           {/* <!-- image of product --> */}
           <div className="">
             <Image
@@ -28,24 +28,24 @@ const CartProduct = ({
               width={249}
               height={249}
               alt={cartItem.name}
-              className="rounded-xl w-32 h-40 ml-8"
+              className="rounded-xl w-[88px] h-[88px] lg:w-32 lg:h-40 ml-8"
             />
             {/* <div className=" border-gray-400 w-32 flex items-center justify-center bg-gray-300 rounded-sm text-sm mx-7 my-2">
                   505.390.75
                 </div> */}
           </div>
-          <div className=" h-52 w-[76%] ">
+          <div className="">
             <ul className=" list-none">
-              <li className=" text-xl text-gray-600 font-[700] flex justify-between ">
+              <li className="  text-gray-600 font-[700] flex justify-between ">
                 {" "}
-                <div className="">{cartItem?.name}</div>
-                <div className="">Rs. {cartItem?.price.toFixed(2)}</div>
+                <div className=" text-[14px] md:text-[20px]  lg:text-xl">{cartItem?.name}</div>
+                <div className="text-[14px] md:text-[20px]  lg:text-xl">Rs. {cartItem?.price.toFixed(2)}</div>
               </li>
-              <li className=" text-gray-800 ">
+              <li className=" text-gray-800 text-[14px] md:text-[20px]  lg:text-xl ">
                 Room darkening curtains, 1 pair, yellow-beige
               </li>
-              <li className="text-gray-800">135x250 cm (53x98 ")</li>
-              <li className=" text-gray-800">1.18 kg per piece</li>
+              <li className="text-gray-800 text-[14px] md:text-[20px]  lg:text-xl">135x250 cm (53x98 ")</li>
+              <li className=" text-gray-800 text-[14px] md:text-[20px]  lg:text-xl">1.18 kg per piece</li>
               <li className=" my-2">
                 <span className=" box-border h-1 w-10  rounded-xl mr-3 text-xs text-gray-400 bg-slate-400">
                   .d.
@@ -55,7 +55,7 @@ const CartProduct = ({
                 </span>
               </li>
             </ul>
-            <div className="flex ">
+            <div className="flex">
               <div className=" rounded-3xl border border-gray-400 flex gap items-center w-36 m-7 ">
                 <button
                   onClick={() =>

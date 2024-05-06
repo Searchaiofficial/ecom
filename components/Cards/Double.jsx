@@ -11,7 +11,7 @@ import { selectMusicData } from "../Features/Slices/musicSectionSlice";
 
 const Double = () => {
   const musicSwiperData = useSelector(selectMusicData);
- // console.log('musicSwiperData : ',musicSwiperData);
+  // console.log('musicSwiperData : ',musicSwiperData);
   const dispatch = useDispatch();
   useEffect(() => {
     if (musicSwiperData.length === 0) {
@@ -110,7 +110,7 @@ const Double = () => {
           className="swiper-button-prev sm:-translate-y-[150px] rotate-180 sm:-translate-x-[585px] sm:block hidden"
         />
         <Image
-          src="/svg/dropdown/rightvector.svg"
+          src="/ayatrio icon/right.svg"
           width={30}
           height={30}
           alt="arrow"

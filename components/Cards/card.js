@@ -56,7 +56,7 @@ function Card(props) {
           >
             {isHovered && slide !== 0 && (
               <Image
-                src="/svg/dropdown/leftvector.svg"
+                src="/ayatrio icon/Back-white.svg"
                 height={20}
                 width={20}
                 alt="arrow"
@@ -89,7 +89,7 @@ function Card(props) {
             {isHovered && (
               <div>
                 <Image
-                  src="/svg/dropdown/rightvector.svg"
+                  src="/ayatrio icon/right-white.svg"
                   height={20}
                   width={20}
                   alt="arrow"
@@ -114,6 +114,7 @@ function Card(props) {
               })}
             </span>
           </div>
+          {/* <Carousel data={props.imgSrc} className="card-img" /> */}
         </div>
         <div className="card-title">
           <div className="pt-[15px]">{props.title}</div>

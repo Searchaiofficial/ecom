@@ -24,7 +24,7 @@ const ProfileContent = () => {
 
   return (
     <div className=" transparent rounded-lg  pb-8 ">
-      
+
       <Swiper
         className="h-80"
         spaceBetween={20}
@@ -48,35 +48,38 @@ const ProfileContent = () => {
       >
         {profileData.map((person, index) => (
           <SwiperSlide className="bg-[#f4f4f5] my-slider" key={index}>
-            <div className=" flex flex-col justify-start items-center">
-              <div className="p-4 flex justify-center items-center ">
-                {" "}
-                <div className="parent relative bg-black rounded-full md:h-40 h-28 md:w-40 w-28 mb-2 md:mt-8 mt-4  ">
-                  <Image
-                    src={person.image}
-                    className="child absolute rounded-full w-full h-full object-cover"
-                    width={0}
-                    height={0}
-                    layout="fill"
-                    objectFit="cover"
-                  />
+            <div className=" flex  justify-start items-center">
+              <div className="flex flex-col items-center">
+                <div className="p-4 flex justify-center items-center ">
+                  {" "}
+                  <div className="parent relative bg-black rounded-full md:h-40 h-28 md:w-40 w-28 mb-2 md:mt-8 mt-4  ">
+                    <Image
+                      src={person.image}
+                      className="child absolute rounded-full w-full h-full object-cover"
+                      width={0}
+                      height={0}
+                      layout="fill"
+                      objectFit="cover"
+                    />
+                  </div>
+                </div>
+                <div className=" w-full flex justify-center">
+                  <div className="text-md p-1 font-bold ">{person.name}</div>
+
+                </div>
+                <div>
+                  <p className="text-md">{person.role}</p>
                 </div>
               </div>
-              <div className=" w-full flex justify-center">
-                <div className="text-md p-1 font-bold ">{person.name}</div>
-                <a className="flex justify-center items-center" href="#">
-                  <Image
-                    className=" sm:h-8 h-8 sm:w-8 w-8 -mt-1"
-                    src="/social-icon/linkedln.svg"
-                    height={2}
-                    width={2}
-                    alt={`LinkedIn for ${person.name}`}
-                  />
-                </a>
-              </div>
-              <div>
-                <p className="text-md">{person.role}</p>
-              </div>
+              <a className="flex justify-center items-center self-end mb-6" href="#">
+                <Image
+                  className=" sm:h-8 h-8 sm:w-8 w-8 -mt-1"
+                  src="/social-icon/linkedln.svg"
+                  height={2}
+                  width={2}
+                  alt={`LinkedIn for ${person.name}`}
+                />
+              </a>
             </div>
             {/* <br />
             <br />
@@ -85,20 +88,20 @@ const ProfileContent = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-        <div className=" flex flex-row items-end justify-end gap-6">
+      <div className=" flex flex-row items-end justify-end gap-6">
         <Image
-          src="/svg/dropdown/leftvector.svg"
+          src="/ayatrio icon/left icon.svg"
           width={20}
           height={20}
           alt="Arrow"
-          className="vector-two bg-gray-300 rounded-full h-7 w-7"
+          className="vector-two  rounded-full h-7 w-7"
         />
         <Image
-          src="/svg/dropdown/rightvector.svg"
+          src="/ayatrio icon/right icon.svg"
           width={20}
           height={20}
           alt="Arrow"
-          className="vector-one mr-10  bg-gray-300 rounded-full h-7 w-7"
+          className="vector-one mr-10 rounded-full h-7 w-7"
         />
       </div>
     </div>

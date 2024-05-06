@@ -25,7 +25,7 @@ const Multicard = () => {
 
   return (
     <div>
-      <div className="bg-zinc-50 pt-[5rem] sm:pl-[50px] pl-[20px] overflow-x-auto">
+      <div className="bg-zinc-50 pt-[5rem] sm:pl-[50px] pl-[20px] overflow-x-auto pb-6">
         <div className="sm:text-3xl text-xl font-medium w-full pb-8">
           Why Ayatrio so innovative
           <br />
@@ -50,7 +50,7 @@ const Multicard = () => {
               spaceBetween: 10,
             },
             1024: {
-              slidesPerView: 4.07,
+              slidesPerView: 3.5,
               spaceBetween: 10,
             },
           }}
@@ -74,18 +74,18 @@ const Multicard = () => {
 
           <div className="flex flex-row items-end justify-end gap-4">
             <Image
-              src="/svg/dropdown/leftvector.svg"
+              src="/ayatrio icon/left icon.svg"
               width={20}
               height={20}
               alt="Arrow"
-              className="back bg-gray-300 rounded-full h-7 w-7"
+              className="back  rounded-full h-7 w-7"
             />
             <Image
-              src="/svg/dropdown/rightvector.svg"
+              src="/ayatrio icon/right icon.svg"
               width={20}
               height={20}
               alt="Arrow"
-              className="right mr-16  bg-gray-300 rounded-full h-7 w-7"
+              className="right mr-16   rounded-full h-7 w-7"
             />
           </div>
         </Swiper>

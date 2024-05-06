@@ -102,9 +102,9 @@ function App() {
 
     const newSelectedItems1 = isSelected
       ? selectedItems1.filter(
-          (item) =>
-            !(item.label === label && item.parentCategory === parentCategory)
-        )
+        (item) =>
+          !(item.label === label && item.parentCategory === parentCategory)
+      )
       : [...selectedItems1, { label, parentCategory }];
 
     setSelectedItems1(newSelectedItems1);
@@ -322,16 +322,15 @@ function App() {
                                 (subcategory, subIndex) => (
                                   <SwiperSlide key={subIndex}>
                                     <div
-                                      className={`box firstbox ${
-                                        selectedItems1.some(
-                                          (item) =>
-                                            item.label === subcategory &&
-                                            item.parentCategory ===
-                                              category.name
-                                        )
-                                          ? "selected"
-                                          : " "
-                                      }`}
+                                      className={`box firstbox ${selectedItems1.some(
+                                        (item) =>
+                                          item.label === subcategory &&
+                                          item.parentCategory ===
+                                          category.name
+                                      )
+                                        ? "selected"
+                                        : " "
+                                        }`}
                                       onClick={() =>
                                         toggleItemSelection1(
                                           subcategory,
@@ -347,11 +346,10 @@ function App() {
                                         height={20}
                                         width={20}
                                         alt="tick"
-                                        className={`absolute tickicon ${
-                                          selectedItems1.includes(subcategory)
-                                            ? "block"
-                                            : "hidden"
-                                        }`}
+                                        className={`absolute tickicon ${selectedItems1.includes(subcategory)
+                                          ? "block"
+                                          : "hidden"
+                                          }`}
                                       />
                                       <b className="bel">{subcategory.name}</b>
                                     </div>
@@ -369,7 +367,7 @@ function App() {
                             className="swiper-button-prev sm:-translate-y-[150px] sm:-translate-x-[460px]"
                           />
                           <Image
-                            src="/svg/dropdown/rightvector.svg"
+                            src="/ayatrio icon/right-white.svg"
                             width={30}
                             height={30}
                             alt="arrow"
@@ -410,9 +408,8 @@ function App() {
                 fetchCities.map((city, index) => (
                   <React.Fragment key={index}>
                     <div
-                      className={`box firstbox ${
-                        selectedItems2.includes(city) ? "selected" : ""
-                      }`}
+                      className={`box firstbox ${selectedItems2.includes(city) ? "selected" : ""
+                        }`}
                       onClick={() => toggleItemSelection2(city)}
                       style={{
                         backgroundImage: `url('${city.img}')`,
@@ -424,9 +421,8 @@ function App() {
                         height={20}
                         width={20}
                         alt="close"
-                        className={`absolute tickicon ${
-                          selectedItems2.includes(city) ? "block" : "hidden"
-                        }`}
+                        className={`absolute tickicon ${selectedItems2.includes(city) ? "block" : "hidden"
+                          }`}
                       />
                       <b className="bel">{city.name}</b>
                     </div>
@@ -439,7 +435,7 @@ function App() {
                     ${isMinItemsSelected ? "bg-red-700" : "bg-red-200"}
                     `}
                 onClick={done}
-                // disabled={!isMinItemsSelected}
+              // disabled={!isMinItemsSelected}
               >
                 Done
               </button>

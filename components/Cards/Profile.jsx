@@ -15,11 +15,12 @@ const Profile = () => {
           <div className="col-span-1  mt-4">
             <div className="mb-2 ">Inspiration to installation</div>
             <div className="font-bold text-3xl mb-4">
-              <span className="whitespace-nowrap">Meet our designers,</span>
+              {/* <span className="whitespace-nowrap">Meet our designers,</span>
               <br />
               <span className="whitespace-nowrap">to make your dream</span>
               <br />
-              to true
+              to true */}
+              <p className="">Meet our designers , to make your dream to true</p>
             </div>
             <div className="sm:text-xl text-lg mb-8">
               <span className="whitespace-nowrap">

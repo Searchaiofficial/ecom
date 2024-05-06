@@ -7,14 +7,30 @@ const RoomInfo = ({ data }) => {
   return (
     <div className=" my-6 sm:ml-1 ml-0">
       <div className="w-full">
-        <div className="room-details pb-4">
+        {/* <div className="room-details pb-4">
           <h2 className="sm:text-2xl text-lg sm:font-semibold font-medium sm:mt-0">
             Room Details
           </h2>
           <div className=" text-base">
             16+ guests 4 bedrooms 5 beds 3 bathrooms
           </div>
-        </div>
+        </div> */}
+        {/* <div className="flex mb-10 justify-center">
+
+          <div className="flex flex-col items-center max-w-48  gap-2">
+            <Image src={"/svg/dropdown/backarrowRevarce.svg"} height={35} width={35} alt="downarrow" className="rotate-90  hover:text-gray-600" />
+            <p className="text-[#1D1D1F] font-semibold   text-xs">Get free delivery, or pick up available items at an Apple Store</p>
+          </div>
+          <div className="flex flex-col items-center max-w-48  gap-2">
+            <Image src={"/svg/dropdown/backarrowRevarce.svg"} height={35} width={35} alt="downarrow" className="rotate-90 hover:text-gray-600" />
+            <p className="text-[#1D1D1F] font-semibold text-xs">Get 6 months of Ayatrio free with your HomePod miniFootnote*</p>
+          </div>
+          <div className="flex flex-col items-center max-w-48  gap-2">
+            <Image src={"/svg/dropdown/backarrowRevarce.svg"} height={35} width={35} alt="downarrow" className="rotate-90 hover:text-gray-600" />
+            <p className="text-[#1D1D1F] font-semibold text-xs">Free and easy returns</p>
+          </div>
+
+        </div> */}
         <div>
 
           <div>
