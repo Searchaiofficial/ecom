@@ -31,6 +31,8 @@ const Card = ({ data }) => {
   const [paletteType, setPaletteType] = useState("color");
   const dispatch = useDispatch();
 
+  const [sidebarContect, setsidebarContent] = useState(null)
+
   const handlePaletteType = (value) => {
     setPaletteType(value === "color" ? "image" : "color");
   };
@@ -160,14 +162,31 @@ const Card = ({ data }) => {
   const [modalContent, setModalContent] = useState(null);
 
   const handleOptionClick = (content) => {
-    setModalContent(content);
+    setsidebarContent(content);
   };
   return (
     <>
       <div className="flex justify-start md:min-w-[25vw] gap-1 mt-7 w-[100%] ml-0">
         <div className=" w-[100%] prefence-text">
           <div className="textHolders flex flex-col">
-            <h1 className="text-2xl md:mt-5 font-bold mb-3">
+            <div className="flex items-center justify-between mt-4">
+              {/* <p className="text-[16px] font-normal">Originals</p> */}
+
+              <p className="font-semibold text-red-600 text-[15px]">New lower price</p>
+
+              <div className="flex gap-2">
+                <div className="flex items-center">
+                  <Image src={"/icon/star.svg"} height={20} width={20} alt="downarrow" className=" h-[1em] w-[1em] hover:text-gray-600" />
+                  <Image src={"/icon/star.svg"} height={20} width={20} alt="downarrow" className=" h-[1em] w-[1em] hover:text-gray-600" />
+                  <Image src={"/icon/star.svg"} height={20} width={20} alt="downarrow" className=" h-[1em] w-[1em] hover:text-gray-600" />
+                  <Image src={"/icon/star.svg"} height={20} width={20} alt="downarrow" className=" h-[1em] w-[1em] hover:text-gray-600" />
+                  <Image src={"/icon/half-star.svg"} height={20} width={20} alt="downarrow" className=" h-[1em] w-[1em] hover:text-gray-600" />
+
+                </div>
+                <p className="text-gray-800 underline w-[31px] h-[20px] cursor-pointer">159</p>
+              </div>
+            </div>
+            <h1 className="text-2xl md:mt-1 font-bold mb-1">
               {data?.productTitle}
             </h1>
             <div className="font-medium flex tracking-wider text-[#757575] mb-1">
@@ -347,62 +366,80 @@ const Card = ({ data }) => {
             </div>
 
             {/* Modal */}
-            {modalContent && (
-              <div className="bg-gray-900 z-[999999] bg-opacity-30 fixed top-0 left-0 w-full h-full flex items-center justify-center ">
+            {sidebarContect && (
+              <div>
                 <div className="w-1/2 h-5/6 flex flex-col justify-between gap-4 bg-white rounded-3xl p-7 z-50">
-                  {modalContent === "zeroCostEMI" && (
-                    <>
-                      <h1>Content for ZERO Cost EMI</h1>
-                      <button onClick={() => setModalContent(null)}>
-                        Close
-                      </button>
-                    </>
-                  )}
-                  {modalContent === "inStoreRequest" && (
-                    <div className="bg-gray-900 z-[999999] bg-opacity-30 fixed top-0 left-0 w-full h-full flex items-center justify-center ">
-                      <div className="w-1/2 h-5/6 flex flex-col justify-between gap-4 bg-white rounded-3xl p-7 z-50">
-                        <div>
-                          <div className="pl-7">Enter city:</div>
-                          <input
-                            type="text"
-                            name="city"
-                            value=""
-                            className="border border-black ml-8 mb-2"
-                          />
+                  {sidebarContect === "zeroCostEMI" && (
+                    <div className=" fixed h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0">
+                      <section className="text-black bg-white flex-col absolute right-0 top-0 h-screen p-8 gap-8 z-50  w-[35%] flex ">
+                        <div className="flex items-end justify-end">
+                          <button
+                            className="text-3xl mt-0 mb-8 cursor-pointer  "
+                            onClick={() => setsidebarContent(null)}
+                          >
+                            X
+                          </button>
                         </div>
-                        <button onClick={() => setModalContent(null)}>
-                          Close
-                        </button>
-                      </div>
+                        <h1 className="text-3xl font-bold">
+                          Zero Cost EMI
+                        </h1>
+                        <p>Content for Zero cost emi</p>
+                      </section>
+                    </div>
+                  )}
+                  {sidebarContect === "inStoreRequest" && (
+                    <div className=" fixed h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0">
+                      <section className="text-black bg-white flex-col absolute right-0 top-0 h-screen p-8 gap-8 z-50  w-[35%] flex ">
+                        <div className="flex items-end justify-end">
+                          <button
+                            className="text-3xl mt-0 mb-8 cursor-pointer  "
+                            onClick={() => setsidebarContent(null)}
+                          >
+                            X
+                          </button>
+                        </div>
+                        <h1 className="text-3xl font-bold">
+                          In Store Request
+                        </h1>
+                        <p>Content for In store Request</p>
+                      </section>
                     </div>
                   )}
 
-                  {modalContent === "deliveryOption" && (
-                    <div className=" bg-gray-900 z-[999999] bg-opacity-30  fixed top-0 left-0 w-full h-full flex items-center justify-center ">
-                      <div className="  w-1/2 h-5/6  flex flex-col justify-between  gap-4 bg-white rounded-3xl p-7 z-50">
-                        <div>
-                          <div className="pl-7">Enter pincode:</div>
-                          <input
-                            type="number"
-                            name="pincode"
-                            value=""
-                            className="border border-black ml-8 mb-2"
-                          />
+                  {sidebarContect === "deliveryOption" && (
+                    <div className=" fixed h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0">
+                      <section className="text-black bg-white flex-col absolute right-0 top-0 h-screen p-8 gap-8 z-50  w-[35%] flex ">
+                        <div className="flex items-end justify-end">
+                          <button
+                            className="text-3xl mt-0 mb-8 cursor-pointer  "
+                            onClick={() => setsidebarContent(null)}
+                          >
+                            X
+                          </button>
                         </div>
-                        <button onClick={() => setModalContent(null)}>
-                          Close
-                        </button>
-                      </div>
+                        <h1 className="text-3xl font-bold">
+                          Delivery Options
+                        </h1>
+                        <p>Content Delivery Options </p>
+                      </section>
                     </div>
                   )}
-                  {modalContent === "calculator" && (
-                    <div className="   fixed top-0 left-0 w-full h-full flex items-center justify-center ">
-                      <div className="  w-1/2 h-5/6  flex flex-col justify-between  gap-4 bg-white rounded-3xl p-7 z-50">
-                        <Calculation priceData={data} />
-                        <button onClick={() => setModalContent(null)}>
-                          Close
-                        </button>
-                      </div>
+                  {sidebarContect === "calculator" && (
+                    <div className=" fixed h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0">
+                      <section className="text-black bg-white flex-col absolute right-0 top-0 h-screen p-8 gap-8 z-50  w-[35%] flex ">
+                        <div className="flex items-end justify-end">
+                          <button
+                            className="text-3xl mt-0 mb-8 cursor-pointer  "
+                            onClick={() => setsidebarContent(null)}
+                          >
+                            X
+                          </button>
+                        </div>
+                        <h1 className="text-3xl font-bold">
+                          Calculator
+                        </h1>
+                        <p>calculator here</p>
+                      </section>
                     </div>
                   )}
                 </div>
