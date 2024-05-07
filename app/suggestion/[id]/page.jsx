@@ -32,6 +32,7 @@ const SuggestionPage = ({ params }) => {
   const dispatch = useDispatch();
   const selectData = useSelector(selectRecommendedProduct);
   const suggestion = useSelector(selectSuggestionData);
+  console.log(suggestion);
   const suggestionStatus = useSelector(selectSuggestionStatus);
   const [relatedProducts, setRelatedProducts] = useState([]);
 
@@ -63,7 +64,6 @@ const SuggestionPage = ({ params }) => {
       setRecommended(selectData.recommendations?.recommendedProducts);
     }
 
-
     if (typeof window !== "undefined") {
       var id = localStorage.getItem("deviceId");
     }
@@ -71,8 +71,8 @@ const SuggestionPage = ({ params }) => {
 
   return (
     <>
-      <div className="container-rooms flex sm:block items-center pt-[65px]">
-        <div className="sm:px-[50px] px-[20px] ">
+      <div className="pt-[65px]">
+        <div className="sm:px-[50px] px-[20px]">
           <div>
             <div className="mt-10">
               <h1 className="text-lg md:text-2xl font-semibold text-center">
@@ -114,27 +114,29 @@ const SuggestionPage = ({ params }) => {
             </div>
           </div>
 
-          <div className="mt-16">
-            <h3 className="text-lg font-semibold">
-              {suggestion.subHeading?.title}
-            </h3>
-            <p className="text-gray-700 mt-2 text-sm">
-              {suggestion.subHeading?.subHeadingSummary}
-            </p>
-
-            <div className="mt-6 flex flex-col md:flex-row gap-4  items-center justify-between mx-auto">
-              {suggestion.subHeading?.subHeadingImages.map((img) => (
-                <div className="relative h-[400px]  md:h-[712px] w-full">
-                  <Image
-                    src={img}
-                    alt="Sub Image"
-                    layout="fill"
-                    objectFit="cover"
-                  />
+          {suggestion?.subHeading &&
+            suggestion?.subHeading.map((subHeadingItem, index) => (
+              <div className="my-16">
+                <h1 className="text-lg font-semibold">
+                  {subHeadingItem.title}
+                </h1>
+                <p className="text-gray-700 mt-2 text-sm">
+                  {subHeadingItem.subHeadingSummary}
+                </p>
+                <div className="mt-6 flex flex-col md:flex-row gap-4  items-center justify-between mx-auto">
+                  {subHeadingItem.subHeadingImages.map((img) => (
+                    <div className="relative h-[400px]  md:h-[712px] w-full">
+                      <Image
+                        src={img}
+                        alt="Sub Image"
+                        layout="fill"
+                        objectFit="cover"
+                      />
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
+              </div>
+            ))}
         </div>
 
         <BlogRelatedProducts relatedProducts={relatedProducts} />

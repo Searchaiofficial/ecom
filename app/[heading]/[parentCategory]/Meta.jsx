@@ -13,76 +13,68 @@ import { selectedFilteredProduct } from "@/components/Features/Slices/FilteredPr
 const ProductPage = ({ params }) => {
   console.log({ params });
   const [isFilterVisible, setIsFilterVisible] = useState(true);
-  // const [filteredProducts, setFilteredProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const dispatch = useDispatch();
   const filteredProductData = useSelector(selectedFilteredProduct);
   console.log(filteredProductData);
 
 
-  // let parentCategoryVar = params.parentCategory;
-  // const x = useSelector(allSelectedData);
-  // console.log(x);
+  let parentCategoryVar = params.parentCategory;
+  const x = useSelector(allSelectedData);
+  console.log(x);
 
   
-  // const isNumericString = (str) => /^\d+$/.test(str);
+  const isNumericString = (str) => /^\d+$/.test(str);
 
   // Remove entries with titles that are numeric strings
-  // const filteredRooms = Object.entries(x.room)
-  //   .filter(([roomId, isSelected]) => isSelected && !isNumericString(roomId))
-  //   .map(([roomId]) => ({ title: roomId }));
-  // const filteredStyle = Object.entries(x.style)
-  //   .filter(([styleId, isSelected]) => isSelected && !isNumericString(styleId))
-  //   .map(([styleId]) => ({ title: styleId }));
-  // const filteredSubcategory = Object.entries(x.subcategory)
-  //   .filter(
-  //     ([productId, isSelected]) => isSelected && !isNumericString(productId)
-  //   )
-  //   .map(([productId]) => ({ title: productId }));
-  // const filteredColors = Object.entries(x.color)
-  //   .filter(([color, isSelected]) => isSelected && !isNumericString(color))
-  //   .map(([color]) => ({ title: color }));
+  const filteredRooms = Object.entries(x.room)
+    .filter(([roomId, isSelected]) => isSelected && !isNumericString(roomId))
+    .map(([roomId]) => ({ title: roomId }));
+  const filteredStyle = Object.entries(x.style)
+    .filter(([styleId, isSelected]) => isSelected && !isNumericString(styleId))
+    .map(([styleId]) => ({ title: styleId }));
+  const filteredSubcategory = Object.entries(x.subcategory)
+    .filter(
+      ([productId, isSelected]) => isSelected && !isNumericString(productId)
+    )
+    .map(([productId]) => ({ title: productId }));
+  const filteredColors = Object.entries(x.color)
+    .filter(([color, isSelected]) => isSelected && !isNumericString(color))
+    .map(([color]) => ({ title: color }));
 
-  // const transformedData = {
-  //   category: x.category.category,
-  //   rooms: filteredRooms,
-  //   style: filteredStyle,
-  //   subcategory: filteredSubcategory,
-  //   price: [{ Label: x.budget.toString() }],
-  //   colors: filteredColors,
-  // };
-  // const router = useRouter();
-  // const requestData = JSON.stringify({ transformedData });
+  const transformedData = {
+    category: x.category.category,
+    rooms: filteredRooms,
+    style: filteredStyle,
+    subcategory: filteredSubcategory,
+    price: [{ Label: x.budget.toString() }],
+    colors: filteredColors,
+  };
+  const router = useRouter();
+  const requestData = JSON.stringify({ transformedData });
 
   useEffect(() => {
     if (params.parentCategory === "virtualexperience") {
-      // if (x.length > 0) {
-      //   router.push("/virtualexperience/category");
-      // }
-      // const fetchVeProducts = async () => {
-      //   try {
-      //     const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getVEFilter`;
-      //     const response = await axios.post(apiUrl, x, {
-      //       headers: {
-      //         "Content-Type": "application/json",
-      //       },
-      //     });
-      //     console.log("Filtered products:", response);
-      //     setFilteredProducts(response.data); // Save the filtered products in state
-      //   } catch (error) {
-      //     console.error("Error fetching filtered products:", error);
-      //   }
-      // };
-      // fetchVeProducts();
-      // console.log("ve products");
+      if (x.length > 0) {
+        router.push("/virtualexperience/category");
+      }
+      const fetchVeProducts = async () => {
+        try {
+          const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getVEFilter`;
+          const response = await axios.post(apiUrl, x, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          console.log("Filtered products:", response);
+          setFilteredProducts(response.data); // Save the filtered products in state
+        } catch (error) {
+          console.error("Error fetching filtered products:", error);
+        }
+      };
+      fetchVeProducts();
+      console.log("ve products");
     } else {
-      // const fetchProducts = async () => {
-      //   const response = await axios.get(
-      //     `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/productByCategoryAndSubCategory?category=${params.parentCategory}&subcategory=${params.cat}`
-      //   );
-      //   console.log("response", response.data);
-      // };
-
-      // fetchProducts();
       dispatch({
         type: "FETCH_FILTER_PRODUCTS",
         payload: {
@@ -120,7 +112,7 @@ const ProductPage = ({ params }) => {
         heading={x?.category?.category}
       /> */}
       <Tabproduct
-        filteredProductData={filteredProductData}
+        filteredProductData={params.parentCategory === "virtualexperience" ? filteredProducts : filteredProductData}
         // heading={x?.category?.category}
         heading={params.heading}
         param={params.parentCategory}
