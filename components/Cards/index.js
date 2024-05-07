@@ -1,6 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useMemo } from "react";
 import "./styles.css";
 import "swiper/css";
@@ -23,9 +23,34 @@ import NewMainSlider from "../MainSlider/NewMainSlider";
 import Display from "./Display";
 import RoomCard from "./RoomCard";
 import DataSliderWrapper from "./DataSliderWrapper";
+import { useDispatch, useSelector } from "react-redux";
+import { selectRecommendedProduct } from "../Features/Slices/recommendationSlice";
 
 function Cards() {
   const MemoizedProfileContent = useMemo(() => <Profile />, []);
+
+  const [recommended, setRecommended] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [dataFetched, setDataFetched] = useState(false);
+  const dispatch = useDispatch();
+  const selectData = useSelector(selectRecommendedProduct);
+
+  useEffect(() => {
+    if (!dataFetched) {
+      dispatch({ type: "RECOMMENDATION_REQUEST" });
+      setDataFetched(true);
+    }
+
+    if (selectData) {
+      setRecommended(selectData.recommendations?.recommendedProducts);
+    }
+
+    setLoading(false);
+  }, [dispatch, selectData, dataFetched]);
+
+  if (loading) {
+    return null;
+  }
 
   return (
     <div className="w-full h-auto">
@@ -50,7 +75,7 @@ function Cards() {
       <Suggestion />
 
       {MemoizedProfileContent}
-      <Tabs />
+      <Tabs data={recommended}/>
       <Multicard />
 
       <Phone />
