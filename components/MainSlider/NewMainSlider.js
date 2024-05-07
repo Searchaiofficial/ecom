@@ -9,9 +9,9 @@ import SwiperCore from "swiper/core";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-SwiperCore.use([Autoplay, Navigation]);
 import { selectSliderData, selectSliderLoader } from "../Features/Slices/sliderSlice";
-import Splashscreen from "../Splashscreen/Splashscreen";
+
+SwiperCore.use([Autoplay, Navigation]);
 
 export default function NewMainSlider() {
   const dispatch = useDispatch();
@@ -22,7 +22,6 @@ export default function NewMainSlider() {
   useEffect(() => {
     if (!SliderViewData || SliderViewData.length === 0) {
       fetchData();
-      // console.log("mainslider data fetched")
     }
   }, [page]);
   const fetchData = () => {
@@ -67,7 +66,6 @@ export default function NewMainSlider() {
         className="swiper-slider h-[78vh]"
         centeredSlides={true}
         grabCursor={true}
-        // freeMode={false}
         loop={true}
         mousewheel={false}
         keyboard={{

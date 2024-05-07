@@ -17,6 +17,7 @@ import "../styles.css";
 import axios from "axios";
 import Image from "next/image";
 import { selectProductImages } from "@/components/Features/Slices/imageDataSlice";
+import { colorsData } from "../../../Model/ColorsData/Colors.js";
 
 const Card = ({ data }) => {
   const quantity = useSelector(selectQuantity);
@@ -26,10 +27,13 @@ const Card = ({ data }) => {
   const [pricestate, setpricestate] = useState(0);
   const [coststate, setcoststate] = useState(7000);
   const [rollstate, setrollstate] = useState(0);
-  const [sidebarContect, setsidebarContent] = useState(null)
-  const [selectedColor, setSelectedColor] = useState();
+  const [selectedColor, setSelectedColor] = useState("");
+  const [paletteType, setPaletteType] = useState("color");
   const dispatch = useDispatch();
 
+  const handlePaletteType = (value) => {
+    setPaletteType(value === "color" ? "image" : "color");
+  };
   const [visible, setVisible] = useState(false);
   const handleClick = () => {
     setVisible(!visible);
@@ -49,8 +53,33 @@ const Card = ({ data }) => {
     priceCal();
   }, [widthstate, heightstate, coststate]);
 
-  const colorSep = data.productImages;
+  const imageData = data.productImages?.map((item) => {
+    return {
+      color: item.color,
+      image: item.images[0],
+    };
+  });
 
+  console.log(imageData);
+
+  const colorSep = data.productImages?.map((item) => {
+    let hexCode = "";
+    for (const category of colorsData) {
+      for (const key in category) {
+        if (category[key][item.color]) {
+          hexCode = category[key][item.color];
+          break;
+        }
+      }
+      if (hexCode) break;
+    }
+
+    return {
+      ...item,
+      hexCode: hexCode,
+    };
+  });
+  console.log(colorSep);
   const roomData = useSelector(selectRoomData);
   console.log(roomData);
   const roomStatus = useSelector(selectRoomStatus);
@@ -131,32 +160,14 @@ const Card = ({ data }) => {
   const [modalContent, setModalContent] = useState(null);
 
   const handleOptionClick = (content) => {
-    setsidebarContent(content);
+    setModalContent(content);
   };
   return (
     <>
       <div className="flex justify-start md:min-w-[25vw] gap-1 mt-7 w-[100%] ml-0">
         <div className=" w-[100%] prefence-text">
           <div className="textHolders flex flex-col">
-            <div className="flex items-center justify-between mt-4">
-              {/* <p className="text-[16px] font-normal">Originals</p> */}
-
-              <p className="font-semibold text-red-600 text-[15px]">New lower price</p>
-
-              <div className="flex gap-2">
-                <div className="flex items-center">
-                  <Image src={"/icon/star.svg"} height={20} width={20} alt="downarrow" className=" h-[1em] w-[1em] hover:text-gray-600" />
-                  <Image src={"/icon/star.svg"} height={20} width={20} alt="downarrow" className=" h-[1em] w-[1em] hover:text-gray-600" />
-                  <Image src={"/icon/star.svg"} height={20} width={20} alt="downarrow" className=" h-[1em] w-[1em] hover:text-gray-600" />
-                  <Image src={"/icon/star.svg"} height={20} width={20} alt="downarrow" className=" h-[1em] w-[1em] hover:text-gray-600" />
-                  <Image src={"/icon/half-star.svg"} height={20} width={20} alt="downarrow" className=" h-[1em] w-[1em] hover:text-gray-600" />
-
-                </div>
-                <p className="text-gray-800 underline w-[31px] h-[20px] cursor-pointer">159</p>
-              </div>
-            </div>
-
-            <h1 className="text-2xl md:mt-1 font-bold mb-1">
+            <h1 className="text-2xl md:mt-5 font-bold mb-3">
               {data?.productTitle}
             </h1>
             <div className="font-medium flex tracking-wider text-[#757575] mb-1">
@@ -187,34 +198,75 @@ const Card = ({ data }) => {
 
           {/* color-container */}
           <div className="colorContainer flex flex-col mt-[30px] sm:w-auto w-[80vw]">
-            <h1 className="mb-2 font-bold">Colours</h1>
-            <div className="colors flex gap-3">
-              {colorSep?.map((item, index) => (
-                <div
-                  key={index}
-                  onClick={() => handleColor(item.color)}
-                  className={`
-      w-[60px]
-      h-[60px]
-      border-b-2
-      border-black
-      text-gray-900
-      text-center 
-      text-xs
-      flex 
-      justify-center
-      items-center
-      cursor-pointer
-      ${selectedColor === item.color ? "border-2 border-green-500" : ""}
-    `}
-                  style={{
-                    backgroundColor: item.color,
-                  }}
-                >
-                  {item.color}
-                </div>
-              ))}
+            <div className="w-full flex justify-between">
+              <h1 className="mb-2 font-bold">Colours</h1>
+              {paletteType === "color" ? (
+                <>
+                  <button onClick={() => handlePaletteType(paletteType)}>
+                    Image
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button onClick={() => handlePaletteType(paletteType)}>
+                    Color
+                  </button>
+                </>
+              )}
             </div>
+            {paletteType === "color" ? (
+              <>
+                <div className="colors flex gap-3">
+                  {colorSep?.map((item, index) => (
+                    <div
+                      key={index}
+                      onClick={() => handleColor(item.color)}
+                      className={`w-[60px] h-[60px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
+            ${selectedColor === item.color ||
+                          (index === 0 && selectedColor === "")
+                          ? "border-b-[2px] border-black"
+                          : "border-b-[0.5px] border-black"
+                        }   
+          `}
+                      style={{
+                        backgroundColor: item.hexCode,
+                      }}
+                    >
+                      {item.color}
+                    </div>
+                  ))}
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="colors flex gap-3">
+                  {imageData?.map((item, index) => (
+                    <div
+                      key={index}
+                      onClick={() => handleColor(item.color)}
+                      className={`parent relative w-[60px] h-[60px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
+            ${selectedColor === item.color ||
+                          (index === 0 && selectedColor === "")
+                          ? "border-[2px] border-black"
+                          : "border-[0.5px] border-black"
+                        }   
+          `}
+                    >
+                      <Image
+                        className="relative w-full h-full object-cover"
+                        src={item.image}
+                        alt={item.color}
+                        width={0}
+                        height={0}
+                        layout="fill"
+                        objectFit="cover"
+                      />
+                      .
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
           </div>
 
           {/* calculations */}
@@ -295,80 +347,62 @@ const Card = ({ data }) => {
             </div>
 
             {/* Modal */}
-            {sidebarContect && (
-              <div>
+            {modalContent && (
+              <div className="bg-gray-900 z-[999999] bg-opacity-30 fixed top-0 left-0 w-full h-full flex items-center justify-center ">
                 <div className="w-1/2 h-5/6 flex flex-col justify-between gap-4 bg-white rounded-3xl p-7 z-50">
-                  {sidebarContect === "zeroCostEMI" && (
-                    <div className=" fixed h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0">
-                      <section className="text-black bg-white flex-col absolute right-0 top-0 h-screen p-8 gap-8 z-50  w-[35%] flex ">
-                        <div className="flex items-end justify-end">
-                          <button
-                            className="text-3xl mt-0 mb-8 cursor-pointer  "
-                            onClick={() => setsidebarContent(null)}
-                          >
-                            X
-                          </button>
-                        </div>
-                        <h1 className="text-3xl font-bold">
-                          Zero Cost EMI
-                        </h1>
-                        <p>Content for Zero cost emi</p>
-                      </section>
-                    </div>
+                  {modalContent === "zeroCostEMI" && (
+                    <>
+                      <h1>Content for ZERO Cost EMI</h1>
+                      <button onClick={() => setModalContent(null)}>
+                        Close
+                      </button>
+                    </>
                   )}
-                  {sidebarContect === "inStoreRequest" && (
-                    <div className=" fixed h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0">
-                      <section className="text-black bg-white flex-col absolute right-0 top-0 h-screen p-8 gap-8 z-50  w-[35%] flex ">
-                        <div className="flex items-end justify-end">
-                          <button
-                            className="text-3xl mt-0 mb-8 cursor-pointer  "
-                            onClick={() => setsidebarContent(null)}
-                          >
-                            X
-                          </button>
+                  {modalContent === "inStoreRequest" && (
+                    <div className="bg-gray-900 z-[999999] bg-opacity-30 fixed top-0 left-0 w-full h-full flex items-center justify-center ">
+                      <div className="w-1/2 h-5/6 flex flex-col justify-between gap-4 bg-white rounded-3xl p-7 z-50">
+                        <div>
+                          <div className="pl-7">Enter city:</div>
+                          <input
+                            type="text"
+                            name="city"
+                            value=""
+                            className="border border-black ml-8 mb-2"
+                          />
                         </div>
-                        <h1 className="text-3xl font-bold">
-                          In Store Request
-                        </h1>
-                        <p>Content for In store Request</p>
-                      </section>
+                        <button onClick={() => setModalContent(null)}>
+                          Close
+                        </button>
+                      </div>
                     </div>
                   )}
 
-                  {sidebarContect === "deliveryOption" && (
-                    <div className=" fixed h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0">
-                      <section className="text-black bg-white flex-col absolute right-0 top-0 h-screen p-8 gap-8 z-50  w-[35%] flex ">
-                        <div className="flex items-end justify-end">
-                          <button
-                            className="text-3xl mt-0 mb-8 cursor-pointer  "
-                            onClick={() => setsidebarContent(null)}
-                          >
-                            X
-                          </button>
+                  {modalContent === "deliveryOption" && (
+                    <div className=" bg-gray-900 z-[999999] bg-opacity-30  fixed top-0 left-0 w-full h-full flex items-center justify-center ">
+                      <div className="  w-1/2 h-5/6  flex flex-col justify-between  gap-4 bg-white rounded-3xl p-7 z-50">
+                        <div>
+                          <div className="pl-7">Enter pincode:</div>
+                          <input
+                            type="number"
+                            name="pincode"
+                            value=""
+                            className="border border-black ml-8 mb-2"
+                          />
                         </div>
-                        <h1 className="text-3xl font-bold">
-                          Delivery Options
-                        </h1>
-                        <p>Content Delivery Options </p>
-                      </section>
+                        <button onClick={() => setModalContent(null)}>
+                          Close
+                        </button>
+                      </div>
                     </div>
                   )}
-                  {sidebarContect === "calculator" && (
-                    <div className=" fixed h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0">
-                      <section className="text-black bg-white flex-col absolute right-0 top-0 h-screen p-8 gap-8 z-50  w-[35%] flex ">
-                        <div className="flex items-end justify-end">
-                          <button
-                            className="text-3xl mt-0 mb-8 cursor-pointer  "
-                            onClick={() => setsidebarContent(null)}
-                          >
-                            X
-                          </button>
-                        </div>
-                        <h1 className="text-3xl font-bold">
-                          Calculator
-                        </h1>
-                        <p>calculator here</p>
-                      </section>
+                  {modalContent === "calculator" && (
+                    <div className="   fixed top-0 left-0 w-full h-full flex items-center justify-center ">
+                      <div className="  w-1/2 h-5/6  flex flex-col justify-between  gap-4 bg-white rounded-3xl p-7 z-50">
+                        <Calculation priceData={data} />
+                        <button onClick={() => setModalContent(null)}>
+                          Close
+                        </button>
+                      </div>
                     </div>
                   )}
                 </div>
