@@ -32,7 +32,7 @@ const Profile = () => {
               </span>
               <br />
             </div>
-            <button className="bg-black pt-3 pb-3 pl-4 pr-4 mb-12 rounded-full flex justify-center items-center text-white">
+            <button className="bg-black pt-3 pb-3 pr-[25px] pl-[25px] mb-12 rounded-full flex justify-center items-center text-white">
               Book an appointment
             </button>
           </div>

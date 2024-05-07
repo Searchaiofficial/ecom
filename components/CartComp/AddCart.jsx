@@ -243,11 +243,11 @@ const AddCart = () => {
         {cartStatus === "failed" && <p>Error loading data from DB.</p>}
         {cartStatus === "succeeded" && cartdata && (
           <div className="right-cart flex flex-col  sm:w-1/3 w-[80vw]">
-            <h1 className="sm:text-4xl text-2xl font-semibold mb-6">
+            <h1 className="lg:text-4xl text-[16px] font-semibold mb-6">
               Order Summary
             </h1>
             <div className="subtotal flex justify-between items-center mb-4">
-              <div className="text-lg">Subtotal</div>
+              <div className="lg:text-lg text-[14px] ">Subtotal</div>
               <div className="text-lg sm:font-semibold font-medium">
                 ₹ &nbsp;{totalPrice}
               </div>

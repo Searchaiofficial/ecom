@@ -10,14 +10,14 @@ const TopHeader = () => {
     <div className="hidden md:block">
       <div
         className={`bg-[#f5f5f5] h-[35px] ${homeRoute === pathname ? "fixed" : ""
-          } z-[99999] w-full flex items-center justify-between`}
+          } z-[99999] w-full flex items-center justify-between px-5`}
       >
-        <div className="pt-1 pb-1 pl-[37.5px]">
+        <div className="">
           <Link className="pr-[20px] text-sm underline underline-offset-4" href="#">For you</Link>
           <Link className="text-sm" href="category/virtualexperience">For business</Link>
         </div>
         <div>
-          <div className="flex flex-row items-center gap-2 p-[5px] text-black  text-[12px] pr-5 ">
+          <div className="flex flex-row items-center gap-2  text-black  text-[12px]">
             <div className="pr-[1px]">
               <Link href="category/virtualexperience">My choices</Link>
             </div>

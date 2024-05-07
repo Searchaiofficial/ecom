@@ -48,14 +48,14 @@ const ProfileContent = () => {
       >
         {profileData.map((person, index) => (
           <SwiperSlide className="bg-[#f4f4f5] my-slider" key={index}>
-            <div className=" flex  justify-start items-center">
-              <div className="flex flex-col items-center">
+            <div className=" flex w-full  justify-start items-center">
+              <div className="flex flex-col justify-center items-center">
                 <div className="p-4 flex justify-center items-center ">
                   {" "}
                   <div className="parent relative bg-black rounded-full md:h-40 h-28 md:w-40 w-28 mb-2 md:mt-8 mt-4  ">
                     <Image
                       src={person.image}
-                      className="child absolute rounded-full w-full h-full object-cover"
+                      className="rounded-full w-full h-full object-cover"
                       width={0}
                       height={0}
                       layout="fill"
@@ -63,12 +63,12 @@ const ProfileContent = () => {
                     />
                   </div>
                 </div>
-                <div className=" w-full flex justify-center">
+                <div className="flex items-center justify-center">
                   <div className="text-md p-1 font-bold ">{person.name}</div>
 
                 </div>
                 <div>
-                  <p className="text-md">{person.role}</p>
+                  <p className="text-md ">{person.role}</p>
                 </div>
               </div>
               <a className="flex justify-center items-center self-end mb-6" href="#">

@@ -116,6 +116,7 @@ function Cards() {
       <Multicard />
 
       <Suggestion />
+
       {/* <Image /> */}
 
       <div className="w-full sm:px-[50px] px-[20px]  h-auto">
@@ -123,6 +124,8 @@ function Cards() {
       </div>
 
       {MemoizedProfileContent}
+      <Multicard />
+
       <Tabs data={recommended} />
       <Phone />
       <Footer />

@@ -94,7 +94,7 @@ export default function NewMainSlider() {
       >
         <div className={`${navigationVisible ? "block" : "hidden"}`}>
           <Image
-            src="/ayatrio icon/Back-white.svg"
+            src="/ayatrio icon/left-card.svg"
             width={30}
             height={30}
             alt="arrow"
@@ -153,8 +153,8 @@ export default function NewMainSlider() {
                         </div>
                         <div className="absolute top-0 right-0 flex items-center justify-end h-full border-l ">
                           <Image
-                            className="flex mx-1"
-                            src="/ayatrio icon/right.svg"
+                            className="flex mx-1 rotate-90"
+                            src="/ayatrio icon/uparrow.svg"
                             height={20}
                             width={20}
                             alt="arrow"
@@ -170,11 +170,11 @@ export default function NewMainSlider() {
         })}
         <div className={`${navigationVisible ? "block" : "hidden"}`}>
           <Image
-            src="/ayatrio icon/right-white.svg"
+            src="/ayatrio icon/right-card.svg"
             width={30}
             height={30}
             alt="arrow"
-            className={`swiper-button-next hover:bg-opacity-50 sm:-translate-y-[150px] `}
+            className={`swiper-button-next  hover:bg-opacity-50 sm:-translate-y-[150px] `}
           />
         </div>
       </Swiper>

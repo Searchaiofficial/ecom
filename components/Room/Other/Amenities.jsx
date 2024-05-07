@@ -40,14 +40,14 @@ const Amenities = ({ data }) => {
           >
             Show All amenities
           </button>
-          <div className="flex gap-6 mt-8 items-center justify-center">
+          {/* <div className="flex gap-6 mt-8 items-center justify-center">
             <Image src={"/svg/dropdown/backarrowRevarce.svg"} height={35} width={35} alt="downarrow" className="rotate-90 h-[35px] w-[35px]  hover:text-gray-600" />
 
             <div className="flex flex-col items-center">
               <p className="font-semibold text-[#1D1D1F] text-xs">Have questions about Ayatrio?</p>
               <p className="text-[#0066CC] text-xs cursor-pointer font-normal hover:underline">Chat with a Specialist</p>
             </div>
-          </div>
+          </div> */}
         </div>
       )}
     </>

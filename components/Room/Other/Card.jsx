@@ -135,13 +135,13 @@ const Card = ({ data }) => {
   };
   return (
     <>
-      <div className="flex justify-start md:min-w-[25vw] gap-1 mt-5 w-[100%] ml-0">
+      <div className="flex justify-start md:min-w-[25vw] gap-1 mt-7 w-[100%] ml-0">
         <div className=" w-[100%] prefence-text">
           <div className="textHolders flex flex-col">
             <div className="flex items-center justify-between mt-4">
               {/* <p className="text-[16px] font-normal">Originals</p> */}
 
-              <p className="font-bold text-red-600 text-[12px]">New lower price</p>
+              <p className="font-semibold text-red-600 text-[15px]">New lower price</p>
 
               <div className="flex gap-2">
                 <div className="flex items-center">
@@ -156,29 +156,30 @@ const Card = ({ data }) => {
               </div>
             </div>
 
-            <h1 className="text-2xl md:mt-5 font-bold mb-3">
+            <h1 className="text-2xl md:mt-1 font-bold mb-1">
               {data?.productTitle}
             </h1>
             <div className="font-medium flex tracking-wider text-[#757575] mb-1">
-              Collection:&nbsp;
+
               <h3>{data?.collectionName}</h3>
             </div>
-            <div className="font-medium tracking-wider text-[#757575] flex mb-1">
+            {/* <div className="font-medium tracking-wider text-[#757575] flex mb-1">
               Pattern Number:&nbsp;
               <h3>{data?.patternNumber}</h3>
-            </div>
+            </div> */}
             <div className="price">
-              <div className="font-bold flex mt-[25px]">
+              <div className="font-bold flex mt-[30px]">
                 <span>Rs. &nbsp;</span>
-                <h2 className="text-3xl leading-[0.5] tracking-wide">
+                <h2 className="text-3xl leading-[0.5] tracking-wide ">
                   {" "}
                   {data?.perUnitPrice}
                 </h2>{" "}
                 <span> &nbsp;/roll</span>
               </div>
-              <h5 className="text-[#757575] pb-[5px]">
-                Price incl. of all taxes
-              </h5>
+              <div className="flex flex-col">
+                <p className="text-[#757575] text-[12px] pt-[3px]">Regular price: Rs.499 (incl. of all taxes)</p>
+                <p className="text-[#757575] text-[12px] pb-[10px]">Price valid May 02 - May 29 or while supply lasts</p>
+              </div>
             </div>
 
             <IncDecCounter />
@@ -424,6 +425,15 @@ const Card = ({ data }) => {
               </button>
             </Link>
           </div>
+          <div className="flex gap-6 mt-8 items-center justify-center">
+            <Image src={"/ayatrio icon/chat.svg"} height={35} width={35} alt="downarrow" className="h-[35px] w-[35px]  hover:text-gray-600" />
+
+            <div className="flex flex-col items-center">
+              <p className="font-semibold text-[#1D1D1F] text-xs">Have questions about Ayatrio?</p>
+              <p className="text-[#0066CC] text-xs cursor-pointer font-normal hover:underline">Chat with a Specialist</p>
+            </div>
+          </div>
+
         </div>
         <ToastContainer
           position="top-right"

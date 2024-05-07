@@ -130,9 +130,9 @@ const Delivery = () => {
   //   const delcharge = (subtotal * 20) / 100;
   //   const totlaCharge = parseFloat(subtotal) + parseFloat(delcharge);
   return (
-    <div className="px-20  pt-[6rem] pb-[3rem] ">
-      <div className="grid grid-cols-12 gap-10 border-b-2">
-        <div className="col-span-8">
+    <div className="p-2 lg:px-20  pt-[6rem] pb-[3rem] ">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 border-b-2">
+        <div className="lg:col-span-8 order-2 lg:order-1 ">
           {/* <h2 className="py-2 mb-6 text-2xl">Your Cart</h2>
           <div className="flex items-center justify-between border-b border-slate-400 text-slate-400 pb-3 font-semibold text-sm mb-4">
             <h2 className="uppercase">Product</h2>
@@ -141,10 +141,10 @@ const Delivery = () => {
           </div> */}
 
           {/* <!-- parent div --> */}
-          <div className=" py-2 ml-12 mr-14">
+          <div className=" py-2 mx-2">
             {/* <!-- header section --> */}
             <div className="flex justify-between items-center mb-10">
-              <h1 className=" text-[22px] leading-[1.33] font-[700] tracking-tight">
+              <h1 className="lg:text-[22px] leading-[1.33] font-[700] tracking-tight">
                 Delivery and collection
               </h1>
               <div className="cursor-pointer hover:bg-gray-400 box-border rounded-xl">
@@ -218,11 +218,10 @@ const Delivery = () => {
                 <div className=" flex flex-col">
                   <label
                     className={` flex items-center space-x-2 p-4 cursor-pointer border-solid border-black border-l
-               ${
-                 selectedOption === "option1"
-                   ? "border-2 border-solid border-blue-800"
-                   : "border-none"
-               }`}
+               ${selectedOption === "option1"
+                        ? "border-2 border-solid border-blue-800"
+                        : "border-none"
+                      }`}
                   >
                     <input
                       type="radio"
@@ -235,18 +234,18 @@ const Delivery = () => {
                     />
                     <div className="mx-auto flex justify-between  w-full">
                       <div className="">
-                        <label className="text-lg font-bold" htmlFor="option1">
+                        <label className="lg:text-lg text-[18px] font-bold" htmlFor="option1">
                           Collect at pick-up point
                         </label>
                         {selectedOption !== "option1" ? (
                           <>
-                            <p className="text-md text-gray-500 py-2">
+                            <p className="lg:text-md text-[14px] text-gray-500 py-1 lg:py-2">
                               Earliest collection tomorrow 11:00 AM - 5:00 PM
                             </p>
                           </>
                         ) : (
                           <>
-                            <p className="text-md font text-gray-500 py-2">
+                            <p className="text-md font text-gray-500 py-1 lg:py-2">
                               You can collect items at the pick-up point.
                             </p>
                             <button className="rounded-full text-black text-sm font-bold border border-solid border-black p-2 my-2">
@@ -271,11 +270,10 @@ const Delivery = () => {
                   </label>
 
                   <label
-                    className={`flex items-center space-x-2 p-4 cursor-pointer ${
-                      selectedOption === "option2"
-                        ? "border-2 border-solid border-blue-800"
-                        : "border-none"
-                    }`}
+                    className={`flex items-center space-x-2 p-4 cursor-pointer ${selectedOption === "option2"
+                      ? "border-2 border-solid border-blue-800"
+                      : "border-none"
+                      }`}
                   >
                     <input
                       type="radio"
@@ -288,12 +286,12 @@ const Delivery = () => {
                     />
                     <div className="mx-auto flex justify-between  w-full">
                       <div className="">
-                        <label className="text-lg font-bold" htmlFor="option1">
+                        <label className="lg:text-lg text-[18px] font-bold" htmlFor="option1">
                           Collect at Store
                         </label>
                         {selectedOption !== "option2" ? (
                           <>
-                            <p className="text-md text-gray-500 py-2">
+                            <p className="lg:text-md text-[14px] text-gray-500 py-2">
                               Earliest collection tomorrow 11:00 AM - 5:00 PM
                             </p>
                           </>
@@ -337,7 +335,7 @@ const Delivery = () => {
                       <LiaWarehouseSolid size={30} />
                     </span>
                     <h3>
-                      <span className="text-lg font-bold text-black-500">
+                      <span className="lg:text-lg text-[18px] font-bold text-black-500">
                         {" "}
                         Home delivery
                       </span>{" "}
@@ -349,11 +347,10 @@ const Delivery = () => {
                   <div className=" flex flex-col">
                     <label
                       className={`flex items-center space-x-2 p-4 cursor-pointer border-solid border-black border-l
-       ${
-         selectedOption === "option3"
-           ? "border-2 border-solid border-blue-800"
-           : "border-none"
-       }`}
+       ${selectedOption === "option3"
+                          ? "border-2 border-solid border-blue-800"
+                          : "border-none"
+                        }`}
                     >
                       <input
                         type="radio"
@@ -367,14 +364,14 @@ const Delivery = () => {
                       <div className="mx-auto flex justify-between  w-full">
                         <div className="">
                           <label
-                            className="text-lg font-bold mb-6"
+                            className="lg:text-lg text-[18px] font-bold mb-6"
                             htmlFor="option1"
                           >
                             Regular delivery
                           </label>
                           {selectedOption !== "option3" ? (
                             <>
-                              <p className="text-md text-gray-500 py-2">
+                              <p className="lg:text-md text-[14px] text-gray-500 py-2">
                                 Estimated delivery 25.4.2024
                               </p>
                             </>
@@ -483,7 +480,7 @@ const Delivery = () => {
 
           <div className="">{/* CART1 */}</div>
         </div>
-        <div className="col-span-4 sm:block bg-white  overflow-hidden hidden p-[0.6rem]  text-black ">
+        <div className=" col-span-1 order-1 lg:order-2 lg:col-span-4  bg-white  overflow-hidden  p-[0.6rem]  text-black ">
           <div className="flex justify-between">
             <h3 className="text-xl font-bold text-black">Your Order</h3>
             <Link href={"/cart"} className="underline">
@@ -515,26 +512,26 @@ const Delivery = () => {
             </div>
           </div>
           <h2 className="text-xl pb-3 font-bold">Order summary</h2>
-          <div className="flex items-center justify-between  border-slate-500 pb-6 ">
-            <span className="text-black">Products price </span>
+          <div className="flex items-center justify-between  border-slate-500 pb-3 lg:pb-6 ">
+            <span className="text-[#767677]">Products price </span>
             <span className="text-black font-[700]">Rs.{totalPrice}</span>
           </div>
           <div className="flex items-center justify-between ">
-            <span className="text-black">Delivery charge </span>
+            <span className="text-[#767677]">Delivery charge </span>
             <span className="text-black">Rs. {deliveryChoice}</span>
           </div>
-          <p className="text-xs text-[#767677] border-b-4 border-black pb-6">
-          calculated on distance and weight
+          <p className="text-xs text-[#767677] border-b-2 lg:border-b-4 border-black pb-3 lg:pb-6">
+            calculated on distance and weight
           </p>
-          <div className="flex items-center justify-between pb-4 mt-2">
-          <span className="text-black">Subtotal </span>
+          <div className="flex items-center justify-between pb-2 lg:pb-4 mt-2">
+            <span className="text-black">Subtotal </span>
             <span className="font-[700] text-black text-2xl">
               Rs. {totalPrice + deliveryChoice}
             </span>
           </div>
-          <div className="flex items-center justify-between pb-4">
-          <span className="text-black">Total weight </span>
-            <span className="text-black font-[700]">1.9 kg</span>
+          <div className="flex items-center justify-between pb-2 lg:pb-4">
+            <span className="text-[#767677]">Total weight </span>
+            <span className="text-[#767677] font-[700]">1.9 kg</span>
           </div>
           <div className="border border-slate-500 p-[20px] w-[100%] h-auto">
             <p className="text-black font-[600] ">Make the most of delivery charges</p>
@@ -546,7 +543,7 @@ const Delivery = () => {
             <span>$1000</span>
           </div> */}
 
-          <div className=" fixed h-full w-screen lg:hidden bg-black/50  backdrop:blur-sm top-0 right-0"></div>
+          {/* <div className=" fixed h-full w-screen lg:hidden bg-black/50  backdrop:blur-sm top-0 right-0"></div> */}
 
           {/* <Link
             href="#"
@@ -555,7 +552,7 @@ const Delivery = () => {
             Continue to Payment
           </Link> */}
 
-          <div className="flex gap-4 justify-between items-center font-bold mt-14">
+          <div className="flex gap-4  items-center font-bold mt-14">
             <span>
               <svg
                 focusable="false"
