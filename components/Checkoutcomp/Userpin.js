@@ -72,9 +72,9 @@ const Userpin = () => {
   const delcharge = 100;
 
   return (
-    <div className="px-20 pt-[6rem] pb-[3rem] ">
-      <div className="grid grid-cols-12 gap-10 border-b-2">
-        <div className="col-span-8">
+    <div className="p-2 lg:px-20 pt-[6rem] pb-[3rem] ">
+      <div className="grid -grid-cols-1 lg:grid-cols-12 gap-10 border-b-2">
+        <div className="lg:col-span-8 col-span-1 order-2 lg:order-1">
           {/* <h2 className="py-2 mb-6 text-2xl">Your Cart</h2>
           <div className="flex items-center justify-between border-b border-slate-400 text-slate-400 pb-3 font-semibold text-sm mb-4">
             <h2 className="uppercase">Product</h2>
@@ -83,9 +83,9 @@ const Userpin = () => {
           </div> */}
 
           {/* <!-- parent div --> */}
-          <div class=" py-2 ml-12 mr-14">
+          <div class=" py-2 mx-2">
             {/* <!-- header section --> */}
-            <div class="flex justify-between items-center mb-10">
+            <div class="flex justify-between items-center mb-10 lg:pb-5">
               <h1 class=" text-[22px] leading-[1.33] font-[700] tracking-tight">
                 Shopping bag
               </h1>
@@ -220,7 +220,7 @@ const Userpin = () => {
             </div>
             {/*  code */}
 
-            <div className="pt-10">
+            {/* <div className="pt-10">
               <h1 className="text-2xl font-bold">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum,
                 quo.
@@ -230,12 +230,12 @@ const Userpin = () => {
                   Prev page
                 </a>
               </div>
-            </div>
+            </div> */}
           </div>
 
           <div className="">{/* CART1 */}</div>
         </div>
-        <div className="col-span-4 sm:block bg-white  border-gray-300 rounded-lg  overflow-hidden hidden p-[0.6rem]  text-slate-600 ">
+        <div className="lg:col-span-4 col-span-1 sm:block order-1 lg:order-2 bg-white  border-gray-300 rounded-lg  overflow-hidden  p-[0.6rem]  text-slate-600 ">
           <div className="flex justify-between">
             <h3 className="text-[22px] font-bold text-black">Your Order</h3>
             <Link href={"/cart"} className="underline">
@@ -267,26 +267,26 @@ const Userpin = () => {
             </div>
           </div>
           <h2 className="text- pb-3 text-black font-bold">Order summary</h2>
-          <div className="flex items-center justify-between  border-slate-500 pb-6 ">
-            <span className="text-black">Products price </span>
+          <div className="flex items-center justify-between  border-slate-500 pb-3 lg:pb-6 ">
+            <span className="text-[#767677]">Products price </span>
             <span className="font-[700] text-black">Rs. {totalPrice}</span>
           </div>
           <div className="flex items-center justify-between ">
-            <span className="text-black" >Delivery charge </span>
+            <span className="text-[#767677]" >Delivery charge </span>
             <span>-</span>
           </div>
-          <p className="text-xs text-[#767677] border-b-4 border-black pb-6">
-          calculated on distance and weight
+          <p className="text-xs text-[#767677] border-b-2 lg:border-b-4 border-black pb-6">
+            calculated on distance and weight
           </p>
-          <div className="flex items-center justify-between pb-4 mt-2">
-          <span className="text-black">Subtotal </span>
+          <div className="flex items-center justify-between pb-2 lg:pb-4 mt-2">
+            <span className="text-[#767677]">Subtotal </span>
             <span className="font-[700] text-black text-2xl">
               Rs. {totalPrice}
             </span>
           </div>
           <div className="flex items-center justify-between pb-4">
-            <span className="text-black">Total weight </span>
-            <span className="text-black font-[700]">1.9 kg</span>
+            <span className="text-[#767677]">Total weight </span>
+            <span className="text-[#767677] font-[700]">1.9 kg</span>
           </div>
           <div className="border border-[#e5e5e5] p-[20px] w-[100%] h-auto">
             <p className="text-black font-[600] ">Make the most of delivery charges</p>
@@ -298,7 +298,7 @@ const Userpin = () => {
             <span>$1000</span>
           </div> */}
 
-          <div className=" fixed h-full w-screen lg:hidden bg-black/50  backdrop:blur-sm top-0 right-0"></div>
+          {/* <div className=" fixed h-full w-screen lg:hidden bg-black/50  backdrop:blur-sm top-0 right-0"></div> */}
 
           {/* <Link
             href="#"
@@ -307,7 +307,7 @@ const Userpin = () => {
             Continue to Payment
           </Link> */}
 
-          <div className="flex gap-4 justify-between items-center font-bold mt-14">
+          <div className="flex gap-4 items-center font-bold mt-14">
             <span>
               <svg
                 focusable="false"

@@ -20,73 +20,78 @@ const CartProduct = ({
   return (
     <>
       <div className="">
-        <div className=" py-8 items-start flex gap-10  border-b border-slate-400  mb-3 mt-3">
+        <div className=" py-[24px] items-start flex gap-5 lg:gap-8  border-b border-slate-400 mt-3 mb-3">
           {/* <!-- image of product --> */}
-          <div className="">
-            <Image
-              src={cartItem.productId.images[0]}
-              width={249}
-              height={249}
-              alt={cartItem.name}
-              className="rounded-xl w-[88px] h-[88px] lg:w-32 lg:h-40 ml-8"
-            />
-            {/* <div className=" border-gray-400 w-32 flex items-center justify-center bg-gray-300 rounded-sm text-sm mx-7 my-2">
+
+          <Image
+            src={cartItem.productId.images[0]}
+            width={249}
+            height={249}
+            alt={cartItem.name}
+            className="rounded-xl w-[88px] h-[88px] lg:w-32 lg:h-40 "
+          />
+          {/* <div className=" border-gray-400 w-32 flex items-center justify-center bg-gray-300 rounded-sm text-sm mx-7 my-2">
                   505.390.75
                 </div> */}
-          </div>
-          <div className="">
-            <ul className=" list-none">
-              <li className="  text-gray-600 font-[700] flex justify-between ">
+
+          <div className="flex">
+            <div className=" flex flex-col">
+              <p className="  text-gray-600 font-[700] flex justify-between ">
                 {" "}
                 <div className=" text-[14px] md:text-[20px]  lg:text-xl">{cartItem?.name}</div>
-                <div className="text-[14px] md:text-[20px]  lg:text-xl">Rs. {cartItem?.price.toFixed(2)}</div>
-              </li>
-              <li className=" text-gray-800 text-[14px] md:text-[20px]  lg:text-xl ">
+                {/* <div className="text-[14px] md:text-[20px]  lg:text-xl">Rs. {cartItem?.price.toFixed(2)}</div> */}
+              </p>
+              <p className=" text-gray-800 text-[14px] md:text-[20px]  lg:text-xl ">
                 Room darkening curtains, 1 pair, yellow-beige
-              </li>
-              <li className="text-gray-800 text-[14px] md:text-[20px]  lg:text-xl">135x250 cm (53x98 ")</li>
-              <li className=" text-gray-800 text-[14px] md:text-[20px]  lg:text-xl">1.18 kg per piece</li>
-              <li className=" my-2">
+              </p>
+              <p className="text-gray-800 text-[14px] md:text-[20px]  lg:text-xl">135x250 cm (53x98 ")</p>
+              <p className=" text-gray-800 text-[14px] md:text-[20px]  lg:text-xl">1.18 kg per piece</p>
+              <p className=" my-2">
                 <span className=" box-border h-1 w-10  rounded-xl mr-3 text-xs text-gray-400 bg-slate-400">
                   .d.
                 </span>
-                <span className=" text-gray-500 text-xs">
+                <span className=" text-gray-500 text-xs underline">
                   Go to checkout for delivery information
                 </span>
-              </li>
-            </ul>
-            <div className="flex">
-              <div className=" rounded-3xl border border-gray-400 flex gap items-center w-36 m-7 ">
+              </p>
+              <div className="flex items-center justify-between mt-3">
+                <div className=" rounded-3xl p-2 lg:p-3 lg:w-36 w-[112px]  border border-gray-400 flex justify-between items-center">
+                  <button
+                    onClick={() =>
+                      handleItemDecr(cartItem?.productId._id, cartItem.quantity)
+                    }
+                    className=" border-gray-400 "
+                  >
+                    <Minus />
+                  </button>
+                  <p className="font-bold ">
+                    {cartItem.quantity}
+                  </p>
+                  <button
+                    onClick={() =>
+                      handleItemIncr(cartItem?.productId._id, cartItem.quantity)
+                    }
+                    className=" border-gray-400 "
+                  >
+                    <Plus />
+                  </button>
+                </div>
+                <div className="">
+                  <Heart />
+                </div>
                 <button
-                  onClick={() =>
-                    handleItemDecr(cartItem?.productId._id, cartItem.quantity)
-                  }
-                  className=" border-gray-400 py-2 px-4"
+                  onClick={() => handleItemDelete(cartItem?.productId._id)}
+                  className=""
                 >
-                  <Minus />
-                </button>
-                <p className="flex-grow py-2 px-4 font-bold leading-8">
-                  {cartItem.quantity}
-                </p>
-                <button
-                  onClick={() =>
-                    handleItemIncr(cartItem?.productId._id, cartItem.quantity)
-                  }
-                  className=" border-gray-400 py-2 px-4"
-                >
-                  <Plus />
+                  <Trash2 className=" " />
                 </button>
               </div>
-              <div className=" translate-y-10 mx-5">
-                <Heart />
-              </div>
-              <button
-                onClick={() => handleItemDelete(cartItem?.productId._id)}
-                className="mx-5"
-              >
-                <Trash2 className=" " />
-              </button>
             </div>
+            <div className="w-[100px] lg:w-auto">
+              <div className="text-[14px] md:text-[20px] text-gray-600 font-[700]  lg:text-xl">Rs. {cartItem?.price.toFixed(2)}</div>
+
+            </div>
+
           </div>
         </div>
       </div>

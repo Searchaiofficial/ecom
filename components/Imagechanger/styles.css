@@ -31,8 +31,8 @@
   margin-top:8rem;
   /* background-color: rgb(197, 197, 197); */
   border-radius: 50%;
-  height: 32px;
-  width: 28px;
+  height: 40px;
+  width: 40px;
   padding: 4px;
   margin-left: 84%;
   font-weight:bolder;
@@ -43,10 +43,11 @@
   color: black;
   /* background-color: rgb(197, 197, 197); */
   border-radius: 50%;
-  height: 32px;
-  width: 28px;
+  height: 40px;
+  width: 40px;
   padding: 4px;
   font-weight:bolder;
+  margin-right:2%;
 }
 
 @media only screen and (max-width: 800px) {

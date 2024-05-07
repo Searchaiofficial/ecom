@@ -52,7 +52,7 @@ const Dataslider = ({ category, data, sliderIndex }) => {
   }, []);
   return (
     <div>
-      <div className=" bg-white sm:px-[50px] px-[20px] my-10">
+      <div className=" bg-white sm:px-[50px] px-[20px] mt-10">
         <div className="w-full flex justify-between items-center">
           <h2 className="font-semibold text-2xl py-[30px]">{category}</h2>
           <div className="Slidenav flex text-2xl cursor-pointer text-white rounded-full gap-2">
@@ -61,7 +61,7 @@ const Dataslider = ({ category, data, sliderIndex }) => {
               className={`custom-prev-button-${sliderIndex} hover:bg-400 hover:scale-110 hover:text-slate-100 pr-6`}
             >
               <Image
-                src="/svg/dropdown/leftvector.svg"
+                src="/ayatrio icon/left icon.svg"
                 width={20}
                 height={20}
                 alt="Arrow"
@@ -73,7 +73,7 @@ const Dataslider = ({ category, data, sliderIndex }) => {
               className={`custom-next-button-${sliderIndex} hover:bg-400 sm:translate-y-0 translate-y-10 hover:scale-110 hover:text-slate-100`}
             >
               <Image
-                src="/svg/dropdown/rightvector.svg"
+                src="/ayatrio icon/right icon.svg"
                 width={20}
                 height={20}
                 alt="Arrow"
@@ -93,7 +93,7 @@ const Dataslider = ({ category, data, sliderIndex }) => {
           }}
           breakpoints={{
             400: {
-              slidesPerView: 1,
+              slidesPerView: 1.2,
               spaceBetween: 5,
             },
 

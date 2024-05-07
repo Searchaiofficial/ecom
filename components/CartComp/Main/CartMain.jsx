@@ -14,7 +14,7 @@ import { selecteddbItems, setDbItems } from "../../Features/Slices/cartSlice";
 import Link from "next/link";
 import axios from "axios";
 import CartProduct from "./CartProduct";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, X } from "lucide-react";
 const CartMain = () => {
   const dispatch = useDispatch();
   const selectedItems = useSelector(selecteddbItems);
@@ -149,16 +149,88 @@ const CartMain = () => {
 
   return (
     <>
+      {
+        sideMenu && (
+          <>
+            <div
+              initial={
+                typeof window !== "undefined" &&
+                window.innerWidth <= 800 && { x: 300, opacity: 0 }
+              }
+              whileInView={{ x: 0, opacity: 1 }}
+              transition={{ type: "just" }}
+              className="fixed inset-0 flex flex-col px-[8px] overflow-y-hidden bg-white z-[100000] md:hidden"
+            >
+              <div className="flex justify-between items-center py-[5px] w-full h-fit mb-4">
+                <div className=" flex items-center justify-start ">
+                  <div className="mainlogo">
+                    <Link href="/">
+                      <Image
+                        src="/images/ayatriologo.webp"
+                        alt="logo"
+                        width={300}
+                        height={40}
+                        priority
+                        className="p-2  sm:w-44"
+                      />
+                    </Link>
+                  </div>
+                </div>
+
+                <div className="w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer md:hidden">
+                  <X onClick={() => setSideMenu(false)} />
+                </div>
+              </div>
+              <div className="flex flex-col p-2">
+                <h1 className="text-lg font-bold">
+                  How would you like to check out?
+                </h1>
+                <ul className="list-disc">
+                  <h3 className="text-[18px] font-bold mt-2 mb-2">
+                    Join Ayatrio Family for free
+                  </h3>
+                  <div className="ml-8">
+                    <li>Get instant benefits</li>
+                    <li>Keep track of your orders</li>
+                    <li>Save time during checkout</li>
+                  </div>
+                </ul>
+                <Link
+                  href={"#"}
+                  className=" border-2 border-black  h-10 mt-20  w-[98%] rounded-full flex items-center font-bold justify-center  text-black"
+                >
+                  Log in or sign up
+                </Link>
+                <hr className="border border-black" />
+                <Link
+                  href={{
+                    pathname: "/checkout/pin",
+                    query: { search: "rooms" },
+                  }}
+                  className="border-2 h-10 w-[98%] text-white bg-black font-bold rounded-full flex items-center justify-center border-black"
+                >
+                  Continue as guest
+                </Link>
+              </div>
+
+
+              {/* <div className="flex"> */}
+
+              {/* </div> */}
+            </div>
+          </>
+        )}
+
       <div className=" px-[20px] lg:px-20 pt-[6rem] pb-[3rem] ">
-        <div className=" grid grid-cols-1 lg:grid-cols-12 gap-10">
-          <div className="lg:col-span-8">
+        <div className=" grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-10">
+          <div className="lg:col-span-8 col-span-1">
 
 
             {/* <!-- parent div --> */}
             <div className="py-2 lg:ml-12 lg:mr-14">
               {/* <!-- header section --> */}
-              <div className="flex justify-between items-center mb-10">
-                <h1 className=" text-[22px] leading-[1.33] font-[700] tracking-tight">
+              <div className="flex justify-between items-center lg:mb-10 mb-5 ">
+                <h1 className=" text-[24px] text-[#111111] leading-[1.33] font-[700] tracking-tight">
                   Shopping Details
                 </h1>
                 <div className="cursor-pointer hover:bg-gray-400 box-border rounded-xl">
@@ -310,28 +382,28 @@ const CartMain = () => {
           {cartStatus === "loading" && <p>Loading...</p>}
           {cartStatus === "failed" && <p>Error loading data from DB.</p>}
           {cartStatus === "succeeded" && cartdata && (
-            <div className="lg:col-span-4 sm:block bg-white  border-gray-300 rounded-lg  overflow-hidden hidden pt-[0.6rem]  text-black ">
-              <h2 className="text-xl pb-3 font-bold ">Order summary</h2>
-              <div className="flex items-center justify-between  border-slate-500 pb-6 ">
-                <span className="text-black">Products price </span>
+            <div className="lg:col-span-4  bg-white  border-gray-300 rounded-lg  overflow-hidden pt-[0.6rem]  text-black ">
+              <h2 className="text-[16px] pb-3 font-bold ">Order summary</h2>
+              <div className="flex items-center justify-between  border-slate-500 pb-3 ">
+                <span className="text-[#767677]">Products price </span>
                 <span className="text-black font-[700]">Rs.{totalPrice}</span>
               </div>
               <div className="flex items-center justify-between ">
-                <span>Delivery charge </span>
+                <span className="text-[#767677]">Delivery charge </span>
                 <span>-</span>
               </div>
-              <p className="text-xs text-[#767677] border-b-4 border-black pb-6">
+              <p className="text-xs text-[#767677] border-b-2 lg:border-b-4 border-black pb-6">
                 calculated on distance and weight
               </p>
               <div className="flex items-center justify-between pb-4 mt-2">
-                <span className="text-black">Subtotal </span>
+                <span className="text-black text-[14px] font-semibold">Subtotal </span>
                 <span className="font-[700] text-black text-2xl">
                   Rs.{totalPrice}
                 </span>
               </div>
               <div className="flex items-center justify-between pb-4">
                 <span className="text-black">Total weight </span>
-                <span className="text-black font-[700]">1.9 kg</span>
+                <span className="text-black">1.9 kg</span>
               </div>
               <div
                 onClick={() => handleSchedular(!schedular)}
@@ -423,7 +495,7 @@ const CartMain = () => {
               <h1 className="text-3xl font-bold">
                 How would you like to check out?
               </h1>
-              <ul className="list-disc	">
+              <ul className="list-disc">
                 <h3 className="text-xl font-bold mt-5">
                   Join Ayatrio Family for free
                 </h3>

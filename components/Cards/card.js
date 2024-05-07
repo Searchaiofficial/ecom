@@ -56,7 +56,7 @@ function Card(props) {
           >
             {isHovered && slide !== 0 && (
               <Image
-                src="/ayatrio icon/Back-white.svg"
+                src="/ayatrio icon/left-card.svg"
                 height={20}
                 width={20}
                 alt="arrow"
@@ -89,7 +89,7 @@ function Card(props) {
             {isHovered && (
               <div>
                 <Image
-                  src="/ayatrio icon/right-white.svg"
+                  src="/ayatrio icon/right-card.svg"
                   height={20}
                   width={20}
                   alt="arrow"

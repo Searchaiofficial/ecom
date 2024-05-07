@@ -53,6 +53,9 @@ function Cards() {
 
       {MemoizedProfileContent}
       <Tabs />
+      <Multicard />
+
+      <Tabs data={recommended} />
       <Phone />
       <Footer />
     </div>

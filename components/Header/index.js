@@ -168,22 +168,22 @@ function Header({ howMuchScrolled }) {
           <>
             <div
               className={`${isScrolled ? " border-b-[0.5px] border-slate-200" : ""
-                } flex flex-row justify-between z-[99999px] items-center sm:px-[10px] px-[10px] h-[60px]`}
+                } flex flex-row justify-between z-[99999px] items-center sm:px-[20px] px-[20px] h-[60px]`}
             >
               {/* main-logo */}
-              <div className=" flex items-center justify-start pl-[25px]">
-                <div className="mainlogo 2lg:pr-[60px]">
-                  <Link href="/">
-                    <Image
-                      src="/images/ayatriologo.webp"
-                      alt="logo"
-                      width={300}
-                      height={40}
-                      priority
-                      className="w-36 lg:w-36 object-cover"
-                    />
-                  </Link>
-                </div>
+              <div className=" flex mainlogo items-center justify-start">
+
+                <Link href="/">
+                  <Image
+                    src="/images/ayatriologo.webp"
+                    alt="logo"
+                    width={300}
+                    height={40}
+                    priority
+                    className="w-36 lg:w-36 object-cover"
+                  />
+                </Link>
+
               </div>
               {/* center-list */}
               <div className=" flex justify-center items-center gap-1 md:gap-5 ">
@@ -208,7 +208,7 @@ function Header({ howMuchScrolled }) {
                           onClick={toggleDropdown}
                         >
                           <p
-                            className={`block font-medium border-b-2 ${hoveredIndex === idx
+                            className={`block font-medium py-[15px] px-[5px] border-b-2  ${hoveredIndex === idx
                               ? "border-black"
                               : "border-transparent"
                               }`}

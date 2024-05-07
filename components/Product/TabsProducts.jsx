@@ -421,16 +421,14 @@ const Tabs = ({ filteredProductData, heading, param }) => {
                 handleTabClick();
               }}
               className={`Tabbtn z-0 bg-gray-100
-                  ${
-                    openAll
-                      ? `active-tabs  border border-black ${commonClasses}`
-                      : `tabS  border border-white ${commonClasses}`
-                  }
-                  ${
-                    typeof window !== "undefined" && window.innerWidth <= 450
-                      ? " justify-center"
-                      : " justify-between"
-                  }
+                  ${openAll
+                  ? `active-tabs  border border-black ${commonClasses}`
+                  : `tabS  border border-white ${commonClasses}`
+                }
+                  ${typeof window !== "undefined" && window.innerWidth <= 450
+                  ? " justify-center"
+                  : " justify-between"
+                }
                   `}
             >
               All Filters &nbsp;
@@ -666,9 +664,8 @@ const Tabs = ({ filteredProductData, heading, param }) => {
 
                           <button
                             onClick={handleContent}
-                            className={`text-left underline ${
-                              openContent ? "block" : "hidden"
-                            }`}
+                            className={`text-left underline ${openContent ? "block" : "hidden"
+                              }`}
                           >
                             Less
                           </button>
@@ -708,24 +705,24 @@ const Tabs = ({ filteredProductData, heading, param }) => {
             )}
           </div>
           <div className=" grid md:grid-cols-4 cursor-pointer sm:grid-cols-2 grid-cols-1 gap-4 ">
-            {firstPart.map((text, idx) => ( 
+            {firstPart.map((text, idx) => (
               <TabsProductCard
-              text={text}
-              totalPrice={text.totalPrice}
-              discountedprice={text.discountedprice}
-              specialprice={text.specialprice}
-              productDescription={text.productDescription}
-              productTitle={text.productTitle}
-              images={text.images}
-              idx={idx}
-              handlenav={handlenav}
-              selectedpdt={selectedpdt}
-              handleCheckbox={handleCheckbox}
-              setShowcompare={setShowcompare}
-              demandtype={text.demandtype}
-              ratings={text.ratings}
-              stars={stars}
-            />
+                text={text}
+                totalPrice={text.totalPrice}
+                discountedprice={text.discountedprice}
+                specialprice={text.specialprice}
+                productDescription={text.productDescription}
+                productTitle={text.productTitle}
+                images={text.images}
+                idx={idx}
+                handlenav={handlenav}
+                selectedpdt={selectedpdt}
+                handleCheckbox={handleCheckbox}
+                setShowcompare={setShowcompare}
+                demandtype={text.demandtype}
+                ratings={text.ratings}
+                stars={stars}
+              />
             ))}
           </div>
           <Measure filteredProductData={filteredProductData} />

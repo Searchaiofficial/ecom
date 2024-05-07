@@ -17,6 +17,7 @@ import "../styles.css";
 import axios from "axios";
 import Image from "next/image";
 import { selectProductImages } from "@/components/Features/Slices/imageDataSlice";
+import { colorsData } from "../../../Model/ColorsData/Colors.js";
 
 const Card = ({ data }) => {
   const quantity = useSelector(selectQuantity);
@@ -26,10 +27,15 @@ const Card = ({ data }) => {
   const [pricestate, setpricestate] = useState(0);
   const [coststate, setcoststate] = useState(7000);
   const [rollstate, setrollstate] = useState(0);
-  const [sidebarContect, setsidebarContent] = useState(null)
-  const [selectedColor, setSelectedColor] = useState();
+  const [selectedColor, setSelectedColor] = useState("");
+  const [paletteType, setPaletteType] = useState("color");
   const dispatch = useDispatch();
 
+  const [sidebarContect, setsidebarContent] = useState(null)
+
+  const handlePaletteType = (value) => {
+    setPaletteType(value === "color" ? "image" : "color");
+  };
   const [visible, setVisible] = useState(false);
   const handleClick = () => {
     setVisible(!visible);
@@ -49,8 +55,33 @@ const Card = ({ data }) => {
     priceCal();
   }, [widthstate, heightstate, coststate]);
 
-  const colorSep = data.productImages;
+  const imageData = data.productImages?.map((item) => {
+    return {
+      color: item.color,
+      image: item.images[0],
+    };
+  });
 
+  console.log(imageData);
+
+  const colorSep = data.productImages?.map((item) => {
+    let hexCode = "";
+    for (const category of colorsData) {
+      for (const key in category) {
+        if (category[key][item.color]) {
+          hexCode = category[key][item.color];
+          break;
+        }
+      }
+      if (hexCode) break;
+    }
+
+    return {
+      ...item,
+      hexCode: hexCode,
+    };
+  });
+  console.log(colorSep);
   const roomData = useSelector(selectRoomData);
   console.log(roomData);
   const roomStatus = useSelector(selectRoomStatus);
@@ -135,13 +166,13 @@ const Card = ({ data }) => {
   };
   return (
     <>
-      <div className="flex justify-start md:min-w-[25vw] gap-1 mt-5 w-[100%] ml-0">
+      <div className="flex justify-start md:min-w-[25vw] gap-1 mt-7 w-[100%] ml-0">
         <div className=" w-[100%] prefence-text">
           <div className="textHolders flex flex-col">
             <div className="flex items-center justify-between mt-4">
               {/* <p className="text-[16px] font-normal">Originals</p> */}
 
-              <p className="font-bold text-red-600 text-[12px]">New lower price</p>
+              <p className="font-semibold text-red-600 text-[15px]">New lower price</p>
 
               <div className="flex gap-2">
                 <div className="flex items-center">
@@ -155,30 +186,30 @@ const Card = ({ data }) => {
                 <p className="text-gray-800 underline w-[31px] h-[20px] cursor-pointer">159</p>
               </div>
             </div>
-
-            <h1 className="text-2xl md:mt-5 font-bold mb-3">
+            <h1 className="text-2xl md:mt-1 font-bold mb-1">
               {data?.productTitle}
             </h1>
             <div className="font-medium flex tracking-wider text-[#757575] mb-1">
-              Collection:&nbsp;
+
               <h3>{data?.collectionName}</h3>
             </div>
-            <div className="font-medium tracking-wider text-[#757575] flex mb-1">
+            {/* <div className="font-medium tracking-wider text-[#757575] flex mb-1">
               Pattern Number:&nbsp;
               <h3>{data?.patternNumber}</h3>
-            </div>
+            </div> */}
             <div className="price">
-              <div className="font-bold flex mt-[25px]">
+              <div className="font-bold flex mt-[30px]">
                 <span>Rs. &nbsp;</span>
-                <h2 className="text-3xl leading-[0.5] tracking-wide">
+                <h2 className="text-3xl leading-[0.5] tracking-wide ">
                   {" "}
                   {data?.perUnitPrice}
                 </h2>{" "}
                 <span> &nbsp;/roll</span>
               </div>
-              <h5 className="text-[#757575] pb-[5px]">
-                Price incl. of all taxes
-              </h5>
+              <div className="flex flex-col">
+                <p className="text-[#757575] text-[12px] pt-[3px]">Regular price: Rs.499 (incl. of all taxes)</p>
+                <p className="text-[#757575] text-[12px] pb-[10px]">Price valid May 02 - May 29 or while supply lasts</p>
+              </div>
             </div>
 
             <IncDecCounter />
@@ -186,34 +217,75 @@ const Card = ({ data }) => {
 
           {/* color-container */}
           <div className="colorContainer flex flex-col mt-[30px] sm:w-auto w-[80vw]">
-            <h1 className="mb-2 font-bold">Colours</h1>
-            <div className="colors flex gap-3">
-              {colorSep?.map((item, index) => (
-                <div
-                  key={index}
-                  onClick={() => handleColor(item.color)}
-                  className={`
-      w-[60px]
-      h-[60px]
-      border-b-2
-      border-black
-      text-gray-900
-      text-center 
-      text-xs
-      flex 
-      justify-center
-      items-center
-      cursor-pointer
-      ${selectedColor === item.color ? "border-2 border-green-500" : ""}
-    `}
-                  style={{
-                    backgroundColor: item.color,
-                  }}
-                >
-                  {item.color}
-                </div>
-              ))}
+            <div className="w-full flex justify-between">
+              <h1 className="mb-2 font-bold">Colours</h1>
+              {paletteType === "color" ? (
+                <>
+                  <button onClick={() => handlePaletteType(paletteType)}>
+                    Image
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button onClick={() => handlePaletteType(paletteType)}>
+                    Color
+                  </button>
+                </>
+              )}
             </div>
+            {paletteType === "color" ? (
+              <>
+                <div className="colors flex gap-3">
+                  {colorSep?.map((item, index) => (
+                    <div
+                      key={index}
+                      onClick={() => handleColor(item.color)}
+                      className={`w-[60px] h-[60px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
+            ${selectedColor === item.color ||
+                          (index === 0 && selectedColor === "")
+                          ? "border-b-[2px] border-black"
+                          : "border-b-[0.5px] border-black"
+                        }   
+          `}
+                      style={{
+                        backgroundColor: item.hexCode,
+                      }}
+                    >
+                      {item.color}
+                    </div>
+                  ))}
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="colors flex gap-3">
+                  {imageData?.map((item, index) => (
+                    <div
+                      key={index}
+                      onClick={() => handleColor(item.color)}
+                      className={`parent relative w-[60px] h-[60px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
+            ${selectedColor === item.color ||
+                          (index === 0 && selectedColor === "")
+                          ? "border-[2px] border-black"
+                          : "border-[0.5px] border-black"
+                        }   
+          `}
+                    >
+                      <Image
+                        className="relative w-full h-full object-cover"
+                        src={item.image}
+                        alt={item.color}
+                        width={0}
+                        height={0}
+                        layout="fill"
+                        objectFit="cover"
+                      />
+                      .
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
           </div>
 
           {/* calculations */}
@@ -424,6 +496,15 @@ const Card = ({ data }) => {
               </button>
             </Link>
           </div>
+          <div className="flex gap-6 mt-8 items-center justify-center">
+            <Image src={"/ayatrio icon/chat.svg"} height={35} width={35} alt="downarrow" className="h-[35px] w-[35px]  hover:text-gray-600" />
+
+            <div className="flex flex-col items-center">
+              <p className="font-semibold text-[#1D1D1F] text-xs">Have questions about Ayatrio?</p>
+              <p className="text-[#0066CC] text-xs cursor-pointer font-normal hover:underline">Chat with a Specialist</p>
+            </div>
+          </div>
+
         </div>
         <ToastContainer
           position="top-right"

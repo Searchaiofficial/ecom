@@ -195,9 +195,9 @@
     visibility: visible;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     transform: scale(0.9);
-    width: 150px;
+    width: 144px;
     /* height: 75px; */
   }
 
