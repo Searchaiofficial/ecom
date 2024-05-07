@@ -1,19 +1,38 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import "../MainSlider/Mainslidestyle.css";
-import room from "@/public/images/room.webp";
 import work from "@/public/images/work.webp";
-import living from "@/public/images/living.webp";
-import kitchen from "@/public/images/kitchen.webp";
 import "./tabs.css";
 import TabImage from "./TabImage";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectRecommendationLoader,
+  selectRecommendationStatus,
+  selectRecommendedProduct,
+} from "../Features/Slices/recommendationSlice";
 
-const Tabs = ({data}) => {
+const Tabs = () => {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("");
   const [isSticky, setIsSticky] = useState(false);
+  const [data, setData] = useState([]);
+
+  const dispatch = useDispatch();
+  const recommended = useSelector(selectRecommendedProduct);
+  const isRecommendedLoading = useSelector(selectRecommendationLoader);
+  const recommendedStatus = useSelector(selectRecommendationStatus);
+
+  useEffect(() => {
+    if (recommendedStatus === "idle" && !isRecommendedLoading) {
+      dispatch({ type: "RECOMMENDATION_REQUEST" });
+    }
+
+    if (recommended) {
+      setData(recommended?.recommendations?.recommendedProducts);
+    }
+  }, [dispatch, isRecommendedLoading, recommendedStatus]);
 
   useEffect(() => {
     if (data) {
