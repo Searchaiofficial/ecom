@@ -47,15 +47,12 @@ function Cards() {
         sliderIndexOffset={2}
       />
 
-      <Multicard />
-
       <Suggestion />
 
       {MemoizedProfileContent}
       <Tabs />
       <Multicard />
 
-      <Tabs data={recommended} />
       <Phone />
       <Footer />
     </div>
