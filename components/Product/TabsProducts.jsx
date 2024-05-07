@@ -316,8 +316,6 @@ const Tabs = ({ filteredProductData, heading, param }) => {
   const firstPart = filterData.slice(0, 8);
   // console.log("firtst is ", firstPart);
   const secondPart = filterData.slice(8);
-  console.log("first part", firstPart);
-  console.log("second part", secondPart);
   // console.log("gere")
 
   return (

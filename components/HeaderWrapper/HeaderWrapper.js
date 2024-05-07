@@ -9,7 +9,7 @@ const Header = dynamic(() => import("../Header"), { ssr: false });
 const HeaderWrapper = () => {
   const pathname = usePathname();
 
-  const routes = ["/", "/login", "/success"];
+  const routes = ["/login", "/success"];
   if (routes.includes(pathname)) {
     return null;
   } else {

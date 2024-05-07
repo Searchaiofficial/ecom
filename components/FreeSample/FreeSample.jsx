@@ -274,13 +274,17 @@ const FreeSample = () => {
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/rooms`
       );
       console.log(response.data);
+      const uniqueResponseRooms = response.data.filter(
+        (room, index, self) =>
+          index === self.findIndex((t) => t.roomType === room.roomType)
+      );
       console.log({ products });
       const fetchAllRooms = products.map((item) => item.roomCategory);
       console.log({ fetchAllRooms });
       const allRooms = fetchAllRooms.flat();
       const uniqueRooms = [...new Set(allRooms)];
       console.log(uniqueRooms);
-      const x = response.data
+      const x = uniqueResponseRooms
         .filter((room) => uniqueRooms.includes(room.roomType))
         .map(({ roomType, imgSrc }) => ({ roomType, imgSrc }));
       setRooms(x);

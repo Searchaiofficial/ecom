@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 const TopHeader = () => {
   const pathname = usePathname();
-  const homeRoute = "/home";
+  const homeRoute = "/";
   return (
     <div className="hidden md:block">
       <div

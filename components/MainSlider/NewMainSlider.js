@@ -10,11 +10,14 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 SwiperCore.use([Autoplay, Navigation]);
-import { selectSliderData } from "../Features/Slices/sliderSlice";
+import { selectSliderData, selectSliderLoader } from "../Features/Slices/sliderSlice";
+import Splashscreen from "../Splashscreen/Splashscreen";
 
 export default function NewMainSlider() {
   const dispatch = useDispatch();
   const SliderViewData = useSelector(selectSliderData);
+  const isSliderLoading = useSelector(selectSliderLoader)
+
   const [page, setPage] = useState(1);
   useEffect(() => {
     if (!SliderViewData || SliderViewData.length === 0) {
@@ -50,6 +53,11 @@ export default function NewMainSlider() {
   const handleLeave = () => {
     setHov(false);
   };
+
+  if (isSliderLoading) {
+    return null;
+  }
+
   return (
     <div
       onMouseEnter={() => setNavigationVisible(true)}

@@ -138,7 +138,7 @@ function Header({ howMuchScrolled }) {
     };
   }, []);
 
-  const homeRoute = "/home";
+  const homeRoute = "/";
 
   return (
     <div className="z-[99999px]">
