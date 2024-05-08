@@ -116,7 +116,7 @@ export default function NewMainSlider({initialData}) {
         {sliderApiData.map((data) => {
           return (
             <SwiperSlide key={data?._id}>
-              <div className="relative group h-[78vh] ">
+              <div className="relative group h-[78vh] -translate-x-[5px] md:translate-x-0">
                 <Image
                   src={data?.imgSrc}
                   fill
