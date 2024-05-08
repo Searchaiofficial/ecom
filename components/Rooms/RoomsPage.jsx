@@ -20,6 +20,8 @@ import './styles.css';
 import { Keyboard, Scrollbar, Navigation, Mousewheel, Pagination, FreeMode } from 'swiper/modules';
 import TabImage from "../Cards/TabImage";
 import Card from "../Cards/card";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchRoomMainDataRequest, selectProductData, selectRoomData, selectRoomMain } from "../Features/Slices/roomMainSlice";
 
 
 export const RoomsPage = ({ params }) => {
@@ -27,24 +29,28 @@ export const RoomsPage = ({ params }) => {
     const [roomData, setRoomData] = useState([]);
     const [swiperRef, setSwiperRef] = useState(null);
 
+    const [dataFetched, setDataFetched] = useState(false);
+    const [roomMain, setRoomMain] = useState({});
+
+    const dispatch = useDispatch();
+    const roomD = useSelector(selectRoomData);
+    const productD = useSelector(selectProductData);
+    const roomM = useSelector(selectRoomMain);
+
     useEffect(() => {
-        const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/rooms?roomType=${params.replace(/-/g, " ")}`;
 
-        const apiUrl2 = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/productsByRoomType?roomType=${params.replace(/-/g, " ")}`;
+        if (!dataFetched) {
+            dispatch({ type: "FETCH_ROOM_MAIN_DATA_REQUEST", payload: { params } });
+            setDataFetched(true);
+        }
+        if (roomD && productD && roomM) {
+            setRoomData(roomD);
+            setProductData(productD);
+            setRoomMain(roomM);
+        }
 
-        fetch(apiUrl)
-            .then((response) => response.json())
-            .then((data) => setRoomData(data))
-            .catch((error) => console.error('Error fetching data:', error));
 
-        fetch(apiUrl2)
-            .then((response) => response.json())
-            .then((data) => setProductData(data))
-            .catch((error) => console.error('Error fetching data:', error));
-    }, []);
-
-    console.log(productData);
-    console.log(roomData);
+    }, [dispatch, params, dataFetched, roomD, productD, roomM]);
 
     const swiperUseref = useRef(null);
     const swiperOptions2 = {
@@ -69,24 +75,27 @@ export const RoomsPage = ({ params }) => {
         <div>
             <div className="pt-12 w-full flex justify-center ">
                 <div className="w-10/12  p-5 p flex flex-col">
-                    <h1 className="text-2xl font-semibold">{params.replace(/-/g, " ").toUpperCase()}</h1>
+                    <h1 className="text-2xl font-semibold">{roomMain?.title}</h1>
                     <p className="mt-5 w-7/12">
-                        Our bedroom furniture includes single bed, double bed or king-size
-                        beds perfect for everyone. Many of our beds come with storage options.
-                        Also, our cots and children's beds are perfect for kids. And our
-                        sofa:beds, guests are a solution to a tight space.
+                        {roomMain?.description}
                     </p>
-                    <a className="mt-5" href="/">
+                    <a className="my-5" href="/">
                         click here for size guide
                     </a>
+
+                    <TabImage
+                        src={roomMain?.img}
+                        alt={`Image `}
+                        width={500}
+                        height={100}
+                        labelData={roomMain?.children}
+                    />
                     <h1 className="mt-20 text-2xl font-semibold">
-                        Double bed comfort, as you like it
+                        {roomMain && roomMain.details && roomMain.details[0]?.title}
                     </h1>
                     <div className="mt-5  flex justify-between items-end">
                         <p className="w-7/12">
-                            Whatever its style, a double bed with headboard always creates an inviting centrepiece.
-                            Whether you’re after a sleek, timeless finish, the warmth of cosy upholstery, or prefer
-                            elegantly curved metal, explore our range to find one for your dream bedroom, and your budget.
+                            {roomMain && roomMain.details && roomMain.details[0]?.description}
                         </p>
                         <button className="border-2 border-black rounded-full p-3">
                             see all double beds
@@ -147,13 +156,11 @@ export const RoomsPage = ({ params }) => {
                     </div>
                     <div className="mt-20">
                         <h1 className="mt-20 text-2xl font-semibold">
-                            Guests Beds & Day Beds for your guest
+                            {roomMain && roomMain.details && roomMain.details[1]?.title}
                         </h1>
                         <div className="mt-5  flex justify-between items-end">
                             <p className="w-7/12">
-                                Family or friends staying over can mean a lot of fun and a lot of things going on.
-                                A good day bed is more than just a sofa. It also gives guests the comfort they need
-                                to sleep well so you can all make the most of your time together.
+                                {roomMain && roomMain.details && roomMain.details[1]?.description}
                             </p>
                             <button className="border-2 border-black rounded-full p-3">
                                 See all guest beds & day beds
@@ -179,13 +186,11 @@ export const RoomsPage = ({ params }) => {
                     </div>
                     <div className="mt-20">
                         <h1 className="text-2xl font-semibold">
-                            Essentials to help your guests feel at home
+                            {roomMain && roomMain.details && roomMain.details[2]?.title}
                         </h1>
                         <div className="mt-5  flex justify-between items-end">
                             <p className="w-7/12 mb-10">
-                                From soft bed linen to hangers for party dresses,
-                                here are a few ideas to help you make sure that when family and
-                                friends visit, they have the practical things they need.
+                                {roomMain && roomMain.details && roomMain.details[2]?.description}
                             </p>
                         </div>
                     </div>

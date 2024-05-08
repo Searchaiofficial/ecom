@@ -25,6 +25,7 @@ import firstImageChangerReducer from "./Slices/firstImageChangerSlice";
 import allProductsReducer from "./Slices/productSlice";
 import imageDataSliceReducer from "./Slices/imageDataSlice";
 import suggestionDataReducer from "./Slices/suggestionDataSlice";
+import roomMainReducer from "./Slices/roomMainSlice";
 
 import filteredProductReducer from "./Slices/FilteredProduct";
 import roomCardReducer from "./Slices/roomCardSlice";
@@ -77,6 +78,7 @@ export const store = configureStore({
     images: imageDataSliceReducer,
     suggestionData: suggestionDataReducer,
     roomCard: roomCardReducer,
+    roomMainDetails: roomMainReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(sagaMiddleware),
