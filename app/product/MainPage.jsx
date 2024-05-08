@@ -77,6 +77,7 @@ const RoomPage = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
   return (
     <>
       <div className="container-rooms flex sm:block items-center ">

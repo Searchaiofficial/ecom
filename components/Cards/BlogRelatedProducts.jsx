@@ -109,6 +109,7 @@ const BlogRecommendedProducts = ({relatedProducts}) => {
                       title={product.productTitle}
                       // date={product.date}
                       price={product.perUnitPrice}
+                      demandtype={product.demandType}
                       desc={product.productTitle}
                       imgSrc={product.images}
                       rating={product.ratings}

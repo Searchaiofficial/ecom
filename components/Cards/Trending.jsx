@@ -134,6 +134,7 @@ const Trending = () => {
                       // date={product.date}
                       price={product.perUnitPrice}
                       desc={product.productTitle}
+                      demandtype={product.demandtype}
                       imgSrc={product.images}
                       rating={product.ratings}
                       key={idx}

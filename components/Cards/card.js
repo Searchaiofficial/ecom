@@ -38,6 +38,8 @@ function Card(props) {
   // useEffect(() => {
 
   // }, [dispatch]);
+
+
   return (
     <>
       <div
@@ -48,7 +50,18 @@ function Card(props) {
           height: "100%",
         }}
       >
-        <div className={``}>
+        <div className={`relative`}>
+          {props.demandtype ? (
+            <div
+              className={
+                "flex justify-between text-white bg-red-500 p-1 absolute top-0 left-0 z-10"
+              }
+            >
+              {props.demandtype}
+            </div>
+          ) : (
+            ""
+          )}
           <div
             className="relative flex h-full w-full items-center justify-center cursor-pointer aspect-square"
             onMouseEnter={() => setIsHovered(true)}

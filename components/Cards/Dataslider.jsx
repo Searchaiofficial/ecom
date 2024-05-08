@@ -124,6 +124,7 @@ const Dataslider = ({ category, data, sliderIndex }) => {
                     price={product.perUnitPrice}
                     desc={product.subcategory}
                     productId={product.productId}
+                    demandtype={product.demandtype}
                     imgSrc={product.images}
                     rating={product.ratings}
                     id={product._id}

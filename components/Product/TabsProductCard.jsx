@@ -1,10 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 function TabsProductCard(props) {
   const [slide, setSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  
+  const [formattedDate, setFormattedDate] = useState({
+    startDate: "",
+    endDate: "",
+  });
+
+  useEffect(() => {
+    const startDate = new Date(props.specialprice?.startDate);
+    const endDate = new Date(props.specialprice?.endDate);
+
+    const startMonth = startDate.toLocaleString("default", { month: "long" });
+    const startDay = startDate.getDate();
+
+    const endMonth = endDate.toLocaleString("default", { month: "long" });
+    const endDay = endDate.getDate();
+    setFormattedDate({
+      startDate: `${startMonth} ${startDay}`,
+      endDate: `${endMonth} ${endDay}`,
+    });
+  }, []);
 
   const nextSlide = () => {
     setSlide(slide === props.images.length - 1 ? 0 : slide + 1);
@@ -17,7 +37,7 @@ function TabsProductCard(props) {
     <>
       <div
         key={props.idx}
-        className="flex flex-col gap-3 border-b border-r hover-divnine sm:border-none"
+        className="card flex flex-col gap-3 border-b border-r hover-divnine sm:border-none"
         style={{
           width: "100%",
           height: "100%",
@@ -46,7 +66,6 @@ function TabsProductCard(props) {
 
           {props.text.demandtype ? (
             <div
-              // onClick={(event) => event.stopPropagation()}
               className={
                 "flex justify-between text-white bg-red-500 p-1 absolute top-0 left-0 z-10"
               }
@@ -121,22 +140,23 @@ function TabsProductCard(props) {
           {props.productTitle}
         </p>
         <p className="text-sm">{props.productDescription}</p>
-        {/* {props.discountedprice ? (
-          <p className="">
-            Rs. <span className="text-3xl"> {props.discountedprice}</span>
-          </p>
-        ) : (
-          ""
-        )}
-        {props.totalPrice ? (
-          <p className="">Regular Price: Rs. {props.totalPrice}</p>
-        ) : (
-          ""
-        )} */}
+
         {props.specialprice ? (
-          <p className=" text-sm font-semibold bg-yellow-400 price-box w-fit px-2 py-1">
-            Rs.<span className="text-3xl">{props.specialprice}</span>
-          </p>
+          <div>
+            <p className=" text-sm font-semibold bg-yellow-400 price-box w-fit px-2 py-1">
+              Rs.<span className="text-3xl">{props.specialprice?.price}</span>
+            </p>
+            <p className="text-sm mt-2 text-gray-500">
+              Regular price: Rs.{props.totalPrice}
+            </p>
+
+            {props.specialprice.startDate && props.specialprice.endDate && (
+              <p className="text-sm mt-1 text-gray-500">
+                Price valid from {formattedDate.startDate} to{" "}
+                {formattedDate.endDate}
+              </p>
+            )}
+          </div>
         ) : (
           <p className="text-sm font-semibold">
             Rs.<span className="text-3xl">{props.totalPrice}</span>

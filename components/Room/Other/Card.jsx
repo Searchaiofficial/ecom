@@ -153,6 +153,8 @@ const Card = ({ data }) => {
     router.push("/checkout");
   };
 
+  console.log({data})
+
   const [Modal, setModal] = useState(false);
   const [delivery, setDelivery] = useState(false);
   const [store, setStore] = useState(false);
