@@ -1,3 +1,5 @@
+"use client"
+
 import React from "react";
 import "./styles.css";
 import JoinAyatrioFamily from "./Footer_child/JoinAyatrioFamily";

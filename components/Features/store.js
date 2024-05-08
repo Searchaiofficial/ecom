@@ -27,6 +27,7 @@ import imageDataSliceReducer from "./Slices/imageDataSlice";
 import suggestionDataReducer from "./Slices/suggestionDataSlice";
 
 import filteredProductReducer from "./Slices/FilteredProduct";
+import roomCardReducer from "./Slices/roomCardSlice";
 const sagaMiddleware = createSagaMiddleware();
 
 const roomsReducer = (state = { selectedActivity: {} }, action) => {
@@ -75,6 +76,7 @@ export const store = configureStore({
     allProducts: allProductsReducer,
     images: imageDataSliceReducer,
     suggestionData: suggestionDataReducer,
+    roomCard: roomCardReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(sagaMiddleware),

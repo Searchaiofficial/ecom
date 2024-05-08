@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useEffect } from "react";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -8,19 +10,20 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
-import { selectProfileData } from "../Features/Slices/profileSlice";
+import { getProfileSuccess, selectProfileData } from "../Features/Slices/profileSlice";
 
-const ProfileContent = () => {
+const ProfileContent = ({initialData}) => {
   const profileData = useSelector(selectProfileData);
   const dispatch = useDispatch();
+
   useEffect(() => {
-    if (profileData.length === 0) {
+    if (initialData?.length > 0) {
+      dispatch(getProfileSuccess(initialData))
+    } else {
+      console.log("Fetching Profile Data");
       dispatch({ type: "FETCH_PROFILE_REQUEST", payload: "Profile" });
-      // console.log("profile data fetch funtion called");
     }
   }, []);
-
-  // console.log(profileData);
 
   return (
     <div className=" transparent rounded-lg  pb-8 ">

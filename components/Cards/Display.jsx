@@ -1,30 +1,23 @@
-import axios from "axios";
+// import axios from "axios";
+import { fetchDisplayData } from "@/actions/fetchDisplayData";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { selectedDisplayData } from "../Features/Slices/displaySlice";
-import { selectedImagechanger } from "../Features/Slices/ImagechangerSlice";
-import { FETCH_DISPLAY_DATA } from "../Features/Sagas/displaySaga";
+// import { useSelector, useDispatch } from "react-redux";
+// import { selectedDisplayData } from "../Features/Slices/displaySlice";
+// import { selectedImagechanger } from "../Features/Slices/ImagechangerSlice";
+// import { FETCH_DISPLAY_DATA } from "../Features/Sagas/displaySaga";
 
-const Display = () => {
-  // const [apiData, setApiData] = useState([]);
+const Display = async () => {
+  // // const [apiData, setApiData] = useState([]);
 
-  const dispatch = useDispatch();
-  const apiData = useSelector(selectedDisplayData);
-  useEffect(() => {
-    if (apiData.length === 0) {
-      dispatch({ type: FETCH_DISPLAY_DATA });
-    }
-  }, []);
-
+  // const dispatch = useDispatch();
+  // const apiData = useSelector(selectedDisplayData);
   // useEffect(() => {
-  //   fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getBannerSection`)
-  //     .then((response) => response.json())
-  //     .then((data) => setApiData(data))
-  //     .catch((error) => console.error("Error fetching images data:", error));
+  //   if (apiData.length === 0) {
+  //     dispatch({ type: FETCH_DISPLAY_DATA });
+  //   }
   // }, []);
 
-  // console.log(apiData);
+  const apiData = await fetchDisplayData()
 
   return (
     <>

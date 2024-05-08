@@ -2,7 +2,7 @@ import axios from "axios";
 
 // const BASE_URL = "http://52.66.30.159:8080/api";
 const BASE_URL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api`;
-const createApiEndpoint = (endpoint) => `${BASE_URL}/${endpoint}`;
+export const createApiEndpoint = (endpoint) => `${BASE_URL}/${endpoint}`;
 // if (typeof window !== "undefined") {
 //   var id = localStorage.getItem("deviceId");
 //   // console.log("id",id);

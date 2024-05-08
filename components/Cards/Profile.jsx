@@ -6,8 +6,11 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import ProfileContent from "./ProfileContent";
+import { fetchProfileData } from "@/actions/fetchProfileData";
 
-const Profile = () => {
+const Profile = async () => {
+  const profileData = await fetchProfileData()
+
   return (
     <div>
       <div className="pt-14 grid md:grid-cols-5 grid-cols-1 gap-4 bg-zinc-100 sm:px-[50px] px-[20px]  ">
@@ -38,7 +41,7 @@ const Profile = () => {
           </div>
         </div>
         <div className=" col-span-3 my-auto overflow-x-auto">
-          <ProfileContent />
+          <ProfileContent initialData={profileData} />
         </div>
       </div>
     </div>
