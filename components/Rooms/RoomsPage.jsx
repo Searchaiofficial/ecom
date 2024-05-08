@@ -21,7 +21,7 @@ import { Keyboard, Scrollbar, Navigation, Mousewheel, Pagination, FreeMode } fro
 import TabImage from "../Cards/TabImage";
 import Card from "../Cards/card";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchRoomMainDataRequest, selectProductData, selectRoomData, selectRoomMain } from "../Features/Slices/roomMainSlice";
+import { selectProductData, selectRoomData, selectRoomMain } from "../Features/Slices/roomMainSlice";
 
 
 export const RoomsPage = ({ params }) => {
@@ -33,9 +33,9 @@ export const RoomsPage = ({ params }) => {
     const [roomMain, setRoomMain] = useState({});
 
     const dispatch = useDispatch();
-    const roomD = useSelector(selectRoomData);
-    const productD = useSelector(selectProductData);
-    const roomM = useSelector(selectRoomMain);
+    const roomSelect = useSelector(selectRoomData);
+    const productSelect = useSelector(selectProductData);
+    const roomMainSelect = useSelector(selectRoomMain);
 
     useEffect(() => {
 
@@ -43,14 +43,17 @@ export const RoomsPage = ({ params }) => {
             dispatch({ type: "FETCH_ROOM_MAIN_DATA_REQUEST", payload: { params } });
             setDataFetched(true);
         }
-        if (roomD && productD && roomM) {
-            setRoomData(roomD);
-            setProductData(productD);
-            setRoomMain(roomM);
+        if (roomSelect) {
+            setRoomData(roomSelect);
+        }
+        if (productSelect) {
+            setProductData(productSelect);
+        }
+        if (roomMainSelect) {
+            setRoomMain(roomMainSelect);
         }
 
-
-    }, [dispatch, params, dataFetched, roomD, productD, roomM]);
+    }, [dispatch, params, dataFetched, roomSelect, productSelect, roomMainSelect]);
 
     const swiperUseref = useRef(null);
     const swiperOptions2 = {
