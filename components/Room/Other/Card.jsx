@@ -31,7 +31,7 @@ const Card = ({ data }) => {
   const [paletteType, setPaletteType] = useState("color");
   const dispatch = useDispatch();
 
-  const [sidebarContect, setsidebarContent] = useState(null)
+  const [sidebarContect, setsidebarContent] = useState(null);
 
   const handlePaletteType = (value) => {
     setPaletteType(value === "color" ? "image" : "color");
@@ -153,7 +153,7 @@ const Card = ({ data }) => {
     router.push("/checkout");
   };
 
-  console.log({data})
+  console.log({ data });
 
   const [Modal, setModal] = useState(false);
   const [delivery, setDelivery] = useState(false);
@@ -174,25 +174,57 @@ const Card = ({ data }) => {
             <div className="flex items-center justify-between mt-4">
               {/* <p className="text-[16px] font-normal">Originals</p> */}
 
-              <p className="font-semibold text-red-600 text-[15px]">New lower price</p>
+              <p className="font-semibold text-red-600 text-[15px]">
+                New lower price
+              </p>
 
               <div className="flex gap-2">
                 <div className="flex items-center">
-                  <Image src={"/icon/star.svg"} height={20} width={20} alt="downarrow" className=" h-[1em] w-[1em] hover:text-gray-600" />
-                  <Image src={"/icon/star.svg"} height={20} width={20} alt="downarrow" className=" h-[1em] w-[1em] hover:text-gray-600" />
-                  <Image src={"/icon/star.svg"} height={20} width={20} alt="downarrow" className=" h-[1em] w-[1em] hover:text-gray-600" />
-                  <Image src={"/icon/star.svg"} height={20} width={20} alt="downarrow" className=" h-[1em] w-[1em] hover:text-gray-600" />
-                  <Image src={"/icon/half-star.svg"} height={20} width={20} alt="downarrow" className=" h-[1em] w-[1em] hover:text-gray-600" />
-
+                  <Image
+                    src={"/icon/star.svg"}
+                    height={20}
+                    width={20}
+                    alt="downarrow"
+                    className=" h-[1em] w-[1em] hover:text-gray-600"
+                  />
+                  <Image
+                    src={"/icon/star.svg"}
+                    height={20}
+                    width={20}
+                    alt="downarrow"
+                    className=" h-[1em] w-[1em] hover:text-gray-600"
+                  />
+                  <Image
+                    src={"/icon/star.svg"}
+                    height={20}
+                    width={20}
+                    alt="downarrow"
+                    className=" h-[1em] w-[1em] hover:text-gray-600"
+                  />
+                  <Image
+                    src={"/icon/star.svg"}
+                    height={20}
+                    width={20}
+                    alt="downarrow"
+                    className=" h-[1em] w-[1em] hover:text-gray-600"
+                  />
+                  <Image
+                    src={"/icon/half-star.svg"}
+                    height={20}
+                    width={20}
+                    alt="downarrow"
+                    className=" h-[1em] w-[1em] hover:text-gray-600"
+                  />
                 </div>
-                <p className="text-gray-800 underline w-[31px] h-[20px] cursor-pointer">159</p>
+                <p className="text-gray-800 underline w-[31px] h-[20px] cursor-pointer">
+                  159
+                </p>
               </div>
             </div>
             <h1 className="text-2xl md:mt-1 font-bold mb-1">
               {data?.productTitle}
             </h1>
             <div className="font-medium flex tracking-wider text-[#757575] mb-1">
-
               <h3>{data?.collectionName}</h3>
             </div>
             {/* <div className="font-medium tracking-wider text-[#757575] flex mb-1">
@@ -209,8 +241,12 @@ const Card = ({ data }) => {
                 <span> &nbsp;/roll</span>
               </div>
               <div className="flex flex-col">
-                <p className="text-[#757575] text-[12px] pt-[3px]">Regular price: Rs.499 (incl. of all taxes)</p>
-                <p className="text-[#757575] text-[12px] pb-[10px]">Price valid May 02 - May 29 or while supply lasts</p>
+                <p className="text-[#757575] text-[12px] pt-[3px]">
+                  Regular price: Rs.499 (incl. of all taxes)
+                </p>
+                <p className="text-[#757575] text-[12px] pb-[10px]">
+                  Price valid May 02 - May 29 or while supply lasts
+                </p>
               </div>
             </div>
 
@@ -221,44 +257,8 @@ const Card = ({ data }) => {
           <div className="colorContainer flex flex-col mt-[30px] sm:w-auto w-[80vw]">
             <div className="w-full flex justify-between">
               <h1 className="mb-2 font-bold">Colours</h1>
-              {paletteType === "color" ? (
-                <>
-                  <button onClick={() => handlePaletteType(paletteType)}>
-                    Image
-                  </button>
-                </>
-              ) : (
-                <>
-                  <button onClick={() => handlePaletteType(paletteType)}>
-                    Color
-                  </button>
-                </>
-              )}
             </div>
-            {paletteType === "color" ? (
-              <>
-                <div className="colors flex gap-3">
-                  {colorSep?.map((item, index) => (
-                    <div
-                      key={index}
-                      onClick={() => handleColor(item.color)}
-                      className={`w-[60px] h-[60px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
-            ${selectedColor === item.color ||
-                          (index === 0 && selectedColor === "")
-                          ? "border-b-[2px] border-black"
-                          : "border-b-[0.5px] border-black"
-                        }   
-          `}
-                      style={{
-                        backgroundColor: item.hexCode,
-                      }}
-                    >
-                      {item.color}
-                    </div>
-                  ))}
-                </div>
-              </>
-            ) : (
+            {
               <>
                 <div className="colors flex gap-3">
                   {imageData?.map((item, index) => (
@@ -266,11 +266,12 @@ const Card = ({ data }) => {
                       key={index}
                       onClick={() => handleColor(item.color)}
                       className={`parent relative w-[60px] h-[60px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
-            ${selectedColor === item.color ||
-                          (index === 0 && selectedColor === "")
-                          ? "border-[2px] border-black"
-                          : "border-[0.5px] border-black"
-                        }   
+            ${
+              selectedColor === item.color ||
+              (index === 0 && selectedColor === "")
+                ? "border-[2px] border-black"
+                : "border-[0.5px] border-black"
+            }   
           `}
                     >
                       <Image
@@ -287,7 +288,7 @@ const Card = ({ data }) => {
                   ))}
                 </div>
               </>
-            )}
+            }
           </div>
 
           {/* calculations */}
@@ -382,9 +383,7 @@ const Card = ({ data }) => {
                             X
                           </button>
                         </div>
-                        <h1 className="text-3xl font-bold">
-                          Zero Cost EMI
-                        </h1>
+                        <h1 className="text-3xl font-bold">Zero Cost EMI</h1>
                         <p>Content for Zero cost emi</p>
                       </section>
                     </div>
@@ -400,9 +399,7 @@ const Card = ({ data }) => {
                             X
                           </button>
                         </div>
-                        <h1 className="text-3xl font-bold">
-                          In Store Request
-                        </h1>
+                        <h1 className="text-3xl font-bold">In Store Request</h1>
                         <p>Content for In store Request</p>
                       </section>
                     </div>
@@ -419,9 +416,7 @@ const Card = ({ data }) => {
                             X
                           </button>
                         </div>
-                        <h1 className="text-3xl font-bold">
-                          Delivery Options
-                        </h1>
+                        <h1 className="text-3xl font-bold">Delivery Options</h1>
                         <p>Content Delivery Options </p>
                       </section>
                     </div>
@@ -437,9 +432,7 @@ const Card = ({ data }) => {
                             X
                           </button>
                         </div>
-                        <h1 className="text-3xl font-bold">
-                          Calculator
-                        </h1>
+                        <h1 className="text-3xl font-bold">Calculator</h1>
                         <p>calculator here</p>
                       </section>
                     </div>
@@ -499,14 +492,23 @@ const Card = ({ data }) => {
             </Link>
           </div>
           <div className="flex gap-6 mt-8 items-center justify-center">
-            <Image src={"/ayatrio icon/chat.svg"} height={35} width={35} alt="downarrow" className="h-[35px] w-[35px]  hover:text-gray-600" />
+            <Image
+              src={"/ayatrio icon/chat.svg"}
+              height={35}
+              width={35}
+              alt="downarrow"
+              className="h-[35px] w-[35px]  hover:text-gray-600"
+            />
 
             <div className="flex flex-col items-center">
-              <p className="font-semibold text-[#1D1D1F] text-xs">Have questions about Ayatrio?</p>
-              <p className="text-[#0066CC] text-xs cursor-pointer font-normal hover:underline">Chat with a Specialist</p>
+              <p className="font-semibold text-[#1D1D1F] text-xs">
+                Have questions about Ayatrio?
+              </p>
+              <p className="text-[#0066CC] text-xs cursor-pointer font-normal hover:underline">
+                Chat with a Specialist
+              </p>
             </div>
           </div>
-
         </div>
         <ToastContainer
           position="top-right"
