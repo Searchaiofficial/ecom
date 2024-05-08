@@ -43,15 +43,9 @@ export const RoomsPage = ({ params }) => {
             dispatch({ type: "FETCH_ROOM_MAIN_DATA_REQUEST", payload: { params } });
             setDataFetched(true);
         }
-        if (roomSelect) {
-            setRoomData(roomSelect);
-        }
-        if (productSelect) {
-            setProductData(productSelect);
-        }
-        if (roomMainSelect) {
-            setRoomMain(roomMainSelect);
-        }
+        setRoomData(roomSelect);
+        setProductData(productSelect);
+        setRoomMain(roomMainSelect);
 
     }, [dispatch, params, dataFetched, roomSelect, productSelect, roomMainSelect]);
 
@@ -107,7 +101,7 @@ export const RoomsPage = ({ params }) => {
                     <div>
                         <div className="mt-5 gap-3 flex">
                             <div className="w-1/2">
-                                {roomData.length > 0 && (
+                                {roomData?.length > 0 && (
                                     <img
                                         className="w-full h-auto object-cover"
                                         src={roomData[0].imgSrc} // Use the first image of the first product
@@ -116,7 +110,7 @@ export const RoomsPage = ({ params }) => {
                                 )}
                             </div>
                             <div className="w-1/2 columns-2 gap-3">
-                                {roomData.slice(1, 5).map((product, index) => (
+                                {roomData?.slice(1, 5).map((product, index) => (
                                     <div key={index}>
 
                                         <img
@@ -171,7 +165,7 @@ export const RoomsPage = ({ params }) => {
                         </div>
                     </div>
                     <div className="flex gap-3 mt-5">
-                        {roomData.length > 0 && (
+                        {roomData?.length > 0 && (
                             roomData.map((room, index) => (
                                 <div key={index} className="w-1/2">
 
