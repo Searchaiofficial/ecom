@@ -34,12 +34,12 @@ const Amenities = ({ data }) => {
               </div>
             ))}
           </div>
-          <button
+          {/* <button
             type="button"
             className="amenities-button mt-8 bg-white border-black inline-flex items-center gap-x-4 font-normal rounded-lg border"
           >
             Show All amenities
-          </button>
+          </button> */}
           {/* <div className="flex gap-6 mt-8 items-center justify-center">
             <Image src={"/svg/dropdown/backarrowRevarce.svg"} height={35} width={35} alt="downarrow" className="rotate-90 h-[35px] w-[35px]  hover:text-gray-600" />
 

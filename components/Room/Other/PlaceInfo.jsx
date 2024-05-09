@@ -3,6 +3,7 @@ import React from "react";
 // import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 const PlaceInfo = (data) => {
+  console.log("Place info", data)
   return (
     <>
       {data?.data?.coreValues ? (
@@ -175,7 +176,7 @@ const PlaceInfo = (data) => {
       <div className="flex flex-col gap-2">
         <p className="text-[#484848] text-xs font-normal">Pattern Number</p>
         <div className="flex">
-          <p className="bg-black px-4 py-1 text-white text-xs font-bold min-w-min">246398.90</p>
+          <p className="bg-black px-4 py-1 text-white text-xs font-bold min-w-min">{data?.data?.patternNumber}</p>
           <div />
         </div>
       </div>

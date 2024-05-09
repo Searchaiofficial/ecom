@@ -67,17 +67,18 @@
 .arrow {
   position: absolute;
   filter: drop-shadow(0px 0px 5px rgba(0,0,0,0.12));
-  width: 2rem;
-  height: 2rem;
+  width: 30px;
+  height: 30px;
   color: white;
-  opacity: 80%;
+  opacity: 85%;
+  margin-top: -13px;
 }
 
 .card:hover .arrow {
   position: absolute;
   /* filter: drop-shadow(0px 2px 6px rgba(0,0,0,0.12)); */
-  width: 2rem;
-  height: 2rem;
+  width: 30px;
+  height: 30px;
   color: white;
   outline: #000;
   
@@ -92,6 +93,7 @@
 
 .arrow-left {
   left: 1rem;
+  margin-top: 5px;
 }
 
 
@@ -108,12 +110,13 @@
 
 .indicator {
   background-color: white;
-  height: 0.15rem;
-  width: 1.3rem;
+  height: 0.5rem;
+  width: 0.5rem;
   border: none;
   outline: none;
   margin: 0 0.2rem;
   cursor: pointer;
+  border-radius: 50%;
 }
 
 .indicator-inactive {
@@ -179,9 +182,15 @@
 }
 
 .swiper-scrollbar-drag {
-  width: 30% !important;
+  width: 30% !important; /* For small screens */
   background-color: #000 !important;
-  border-radius: 0px !important;
+  border-radius: 0px !important;
+}
+
+@media screen and (min-width: 1200px) {
+  .swiper-scrollbar-drag {
+    width: 80% !important; /* For large screens (at least 1200px wide) */
+  }
 }
 
 .swiper-slide {

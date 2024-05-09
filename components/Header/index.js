@@ -141,7 +141,7 @@ function Header({ howMuchScrolled }) {
   const homeRoute = "/";
 
   return (
-    <div className="z-[99999px]">
+    <div className="z-[99999px] ">
       {(homeRoute === pathname ||
         pathname.includes("/product/") ||
         pathname.includes("/products/")) &&
@@ -171,7 +171,7 @@ function Header({ howMuchScrolled }) {
                 } flex flex-row justify-between z-[99999px] items-center sm:px-[20px] px-[20px] h-[60px]`}
             >
               {/* main-logo */}
-              <div className=" flex mainlogo items-center justify-start">
+              <div className=" flex mainlogo items-center justify-start lg:mr-[80px]">
 
                 <Link href="/">
                   <Image

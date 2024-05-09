@@ -61,7 +61,7 @@ function Card(props) {
                 width={20}
                 alt="arrow"
                 onClick={prevSlide}
-                className="arrow arrow-left sm:mt-4"
+                className="arrow arrow-left"
               />
             )}
             <div className="w-[400px] overflow-hidden">

@@ -23,7 +23,7 @@ const ProfileContent = () => {
   // console.log(profileData);
 
   return (
-    <div className=" transparent rounded-lg  pb-8 ">
+    <div className=" transparent rounded-lg  pb-[80px] ">
 
       <Swiper
         className="h-80"
@@ -50,7 +50,7 @@ const ProfileContent = () => {
           <SwiperSlide className="bg-[#f4f4f5] my-slider" key={index}>
             <div className=" flex w-full  justify-start items-center">
               <div className="flex flex-col justify-center items-center">
-                <div className="p-4 flex justify-center items-center ">
+                <div className=" p-2 lg:p-4 flex justify-center items-center ">
                   {" "}
                   <div className="parent relative bg-black rounded-full md:h-40 h-28 md:w-40 w-28 mb-2 md:mt-8 mt-4  ">
                     <Image
@@ -64,7 +64,7 @@ const ProfileContent = () => {
                   </div>
                 </div>
                 <div className="flex items-center justify-center">
-                  <div className="text-md p-1 font-bold ">{person.name}</div>
+                  <div className="text-md p-1 font-bold line-clamp-1">{person.name}</div>
 
                 </div>
                 <div>
@@ -88,7 +88,7 @@ const ProfileContent = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className=" flex flex-row items-end justify-end gap-6">
+      <div className=" flex flex-row items-end justify-end gap-6 mt-[25px]">
         <Image
           src="/ayatrio icon/left icon.svg"
           width={20}

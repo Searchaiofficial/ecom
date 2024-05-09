@@ -38,7 +38,7 @@ const RoomCard = () => {
 
   return (
     <>
-      <div className="sm:px-[50px] px-[20px] flex justify-between mx-auto my-20 ">
+      <div className="sm:px-[50px] px-[20px] flex justify-between mx-auto mb-10 ">
         <div className=" w-full flex justify-center ">
           <div className="w-full  grid grid-cols-2 lg:grid-cols-4 gap-x-4 auto-rows-fr">
             {/* 1 */}

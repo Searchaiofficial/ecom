@@ -13,9 +13,8 @@ const ratingsData = [
         {[5, 4, 3, 2, 1].map((number, index) => (
           <div
             key={index}
-            className={`border mb-2 ${
-              index === 0 ? "border-black bg-black" : "bg-gray-300"
-            } rounded-full w-32 h-1.5 flex flex-row items-center ml-4 justify-start`}
+            className={`border mb-2 ${index === 0 ? "border-black bg-black" : "bg-gray-300"
+              } rounded-full w-32 h-1.5 flex flex-row items-center ml-4 justify-start`}
           >
             <span className="-ml-3">{number}</span>
           </div>
@@ -86,6 +85,7 @@ const Reviews = ({ productId, data }) => {
   const [isReview, setIsReview] = useState(false);
 
   console.log(data._id);
+  console.log("Reviews data", data)
 
   const handleReview = () => {
     setIsReview(!isReview);
@@ -121,6 +121,19 @@ const Reviews = ({ productId, data }) => {
     checkUser();
   }, []);
   console.log(productId);
+  // const fetchReviews = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getReview?productId=${productId}`
+  //     );
+  //     console.log("reviews", response.data);
+
+  //     setReviews(response.data);
+  //   } catch (error) {
+  //     console.error("Error fetching reviews:", error);
+  //   }
+  // };
+
   const fetchReviews = async () => {
     try {
       const response = await axios.get(
@@ -128,7 +141,11 @@ const Reviews = ({ productId, data }) => {
       );
       console.log("reviews", response.data);
 
-      setReviews(response.data);
+      if (Array.isArray(response.data) && response.data.length > 0) {
+        setReviews(response.data);
+      } else {
+        console.error("Empty or invalid response data:", response.data);
+      }
     } catch (error) {
       console.error("Error fetching reviews:", error);
     }
@@ -187,51 +204,55 @@ const Reviews = ({ productId, data }) => {
   return (
     <>
       <div className="py-12 border-t sm:w-auto w-[90vw] border-b overflow-x-hidden">
-        <div>
-          <div className="flex flex-col justify-center mx-auto">
-            <div className="flex items-center justify-center overflow-hidden flex-row ">
-              <img
-                src="https://a0.muscache.com/pictures/ec500a26-609d-440f-b5d0-9e5f92afd478.jpg"
-                className="h-28"
-                alt=""
-                data-original-uri="https://a0.muscache.com/pictures/ec500a26-609d-440f-b5d0-9e5f92afd478.jpg"
-              />
-              <div className="text-[6rem] font-bold text-gray-700 pb-5">
-                5.0
+        {
+          data.demandtype === "Ayatrio Member Favourite" && (
+            <div>
+              <div className="flex flex-col justify-center mx-auto">
+                <div className="flex items-center justify-center overflow-hidden flex-row ">
+                  <img
+                    src="https://a0.muscache.com/pictures/ec500a26-609d-440f-b5d0-9e5f92afd478.jpg"
+                    className="h-28"
+                    alt=""
+                    data-original-uri="https://a0.muscache.com/pictures/ec500a26-609d-440f-b5d0-9e5f92afd478.jpg"
+                  />
+                  <div className="text-[6rem] font-bold text-gray-700 pb-5">
+                    5.0
+                  </div>
+                  <img
+                    className="h-28"
+                    alt=""
+                    src="https://a0.muscache.com/pictures/65bb2a6c-0bdf-42fc-8e1c-38cec04b2fa5.jpg"
+                    data-original-uri="https://a0.muscache.com/pictures/65bb2a6c-0bdf-42fc-8e1c-38cec04b2fa5.jpg"
+                  />
+                </div>
+                <div className="flex justify-center items-center flex-col ">
+                  <div className="text-xl font-bold -mt-5">Guest favourite</div>
+                  <div className="text-lg text-gray-500">
+                    One of the most loved homes on Airbnb
+                    <br />
+                    based on ratings, reviews, and reliability
+                  </div>
+                </div>
               </div>
-              <img
-                className="h-28"
-                alt=""
-                src="https://a0.muscache.com/pictures/65bb2a6c-0bdf-42fc-8e1c-38cec04b2fa5.jpg"
-                data-original-uri="https://a0.muscache.com/pictures/65bb2a6c-0bdf-42fc-8e1c-38cec04b2fa5.jpg"
-              />
+              <div className="rating-map flex flex-row justify-between mt-12 sm:w-auto w-[90vw] overflow-x-auto">
+                {ratingsData.map((item, index) => (
+                  <div
+                    key={index}
+                    className={` basis-1/7 flex pr-6 ${index < ratingsData.length - 1
+                      ? "border-r border-gray-400 h-32 "
+                      : ""
+                      }flex-col pl-6`}
+                  >
+                    {item.label}
+                    <div>{item.value}</div>
+                    <div>{item.icon}</div>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="flex justify-center items-center flex-col ">
-              <div className="text-xl font-bold -mt-5">Guest favourite</div>
-              <div className="text-lg text-gray-500">
-                One of the most loved homes on Airbnb
-                <br />
-                based on ratings, reviews, and reliability
-              </div>
-            </div>
-          </div>
-          <div className="rating-map flex flex-row justify-between mt-12 sm:w-auto w-[90vw] overflow-x-auto">
-            {ratingsData.map((item, index) => (
-              <div
-                key={index}
-                className={` basis-1/7 flex pr-6 ${
-                  index < ratingsData.length - 1
-                    ? "border-r border-gray-400 h-32 "
-                    : ""
-                }flex-col pl-6`}
-              >
-                {item.label}
-                <div>{item.value}</div>
-                <div>{item.icon}</div>
-              </div>
-            ))}
-          </div>
-        </div>
+          )
+        }
+
         <br />
         <hr />
         <h3 className="mb-1 text-xl font-semibold pt-4">

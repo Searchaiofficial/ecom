@@ -125,9 +125,9 @@ export default function NewMainSlider() {
                     <p className="text-xl font-[500] drop-shadow-xl">
                       Buy all living room products.
                     </p>
-                    <button className="text-base px-5 py-2 max-w-fit bg-white text-black rounded-3xl border-none">
+                    {/* <button className="text-base px-5 py-2 max-w-fit bg-white text-black rounded-3xl border-none">
                       {data?.imgTitle}
-                    </button>
+                    </button> */}
                   </div>
 
                 </div>

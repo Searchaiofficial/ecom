@@ -10,7 +10,7 @@ import "./../Imagechanger/styles.css";
 const MultiCardContent = (props) => {
   const { key, iconPath, iconSize, title, text } = props;
   return (
-    <div className="bg-white flex h-auto min-h-[350px]  w-[405px]  sm:mb-24 mb-10 p-3">
+    <div className="bg-white flex flex-col md:flex-row h-auto min-h-[350px] mb-[60px] p-3">
       {/* <div className="mt-8 ml-6">
         <Image src={iconPath} width={iconSize} height={iconSize} alt="image" />
       </div>
@@ -26,12 +26,12 @@ const MultiCardContent = (props) => {
           alt="add"
         />
       </div> */}
-      <div className="flex flex-col pt-[32px] pl-[32px] pr-[77px] pb-[57px]">
+      <div className="flex flex-col xl:pt-[32px] pt-[32px] pl-[24px]  xl:pl-[32px] pr-[24px] lg:pr-[77px] pb-[50px]">
         <div className="pb-[9px]  h-[56px]">
           <Image src={iconPath} width={iconSize} height={iconSize} alt="image" className="" />
         </div>
-        <h2 className="text-[25px] trackinh-[0.007em] text-[#333333] font-bold mb-[1em] ">{title}</h2>
-        <div className=" text-[15px] h-[42px] font-normal -tracking-[-0.374px]">{text}</div>
+        <h2 className=" text-[21px] lg:text-[25px] trackinh-[0.007em] text-[#333333] font-semibold mb-[1em] ">{title}</h2>
+        <div className=" text-[14px] lg:text-[15px] h-[42px] font-normal -tracking-[-0.374px]">{text}</div>
       </div>
       <div className="self-end">
         <Image

@@ -25,11 +25,11 @@ const Multicard = () => {
 
   return (
     <div>
-      <div className="bg-zinc-50 pt-[5rem] sm:pl-[50px] pl-[20px] overflow-x-auto pb-6">
-        <div className="sm:text-3xl text-xl font-medium w-full pb-8">
-          Why Ayatrio so innovative
-          <br />
-          for home furnishing.
+      <div className="bg-zinc-50 pt-[5rem] sm:pl-[50px] pl-[20px] overflow-x-auto pb-[80px] lg:pb-[80px]">
+        <div className="text-2xl flex flex-col gap-[2px]  font-semibold w-full pb-8">
+          <p>Why Ayatrio so innovative</p>
+
+          <p>for home furnishing.</p>
         </div>
         <Swiper
           ref={swiper1Ref}
@@ -42,7 +42,7 @@ const Multicard = () => {
           style={{ "--swiper-navigation-size": "24px" }}
           breakpoints={{
             450: {
-              slidesPerView: 1,
+              slidesPerView: 1.5,
               spaceBetween: 10,
             },
             768: {

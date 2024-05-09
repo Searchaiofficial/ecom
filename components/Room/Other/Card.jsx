@@ -19,9 +19,11 @@ import Image from "next/image";
 import { selectProductImages } from "@/components/Features/Slices/imageDataSlice";
 import { colorsData } from "../../../Model/ColorsData/Colors.js";
 
-const Card = ({ data }) => {
+const Card = ({ data, productId }) => {
   const quantity = useSelector(selectQuantity);
+  const [Starts, setStars] = useState()
   const router = useRouter();
+  const [reviews, setReviews] = useState([]);
   const [widthstate, setwidthstate] = useState(0);
   const [heightstate, setheightstate] = useState(0);
   const [pricestate, setpricestate] = useState(0);
@@ -30,6 +32,97 @@ const Card = ({ data }) => {
   const [selectedColor, setSelectedColor] = useState("");
   const [paletteType, setPaletteType] = useState("color");
   const dispatch = useDispatch();
+
+
+
+
+  console.log("Card Data", data)
+  console.log("Product ID", productId)
+
+  const fetchReviews = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getReview?productId=${productId}`
+      );
+      console.log("reviews", response.data);
+
+      if (Array.isArray(response.data) && response.data.length > 0) {
+        setReviews(response.data);
+      } else {
+        console.error("Empty or invalid response data:", response.data);
+      }
+    } catch (error) {
+      console.error("Error fetching reviews:", error);
+    }
+  };
+
+  function renderStars(averageRating) {
+    const maxStars = 5;
+    const fullStars = Math.floor(averageRating);
+    const halfStar = averageRating - fullStars >= 0.5 ? 1 : 0;
+    const emptyStars = maxStars - fullStars - halfStar;
+
+    const starsArray = [];
+    for (let i = 0; i < fullStars; i++) {
+      starsArray.push(
+        <img
+          key={i}
+          src={"/icon/star.svg"}
+          height={20}
+          width={20}
+          alt="star"
+          className="h-[1em] w-[1em] hover:text-gray-600"
+        />
+      );
+    }
+
+    if (halfStar === 1) {
+      starsArray.push(
+        <img
+          key={fullStars}
+          src={"/icon/half-star.svg"}
+          height={20}
+          width={20}
+          alt="half-star"
+          className="h-[1em] w-[1em] hover:text-gray-600"
+        />
+      );
+    }
+
+    for (let i = 0; i < emptyStars; i++) {
+      starsArray.push(
+        <img
+          key={fullStars + halfStar + i}
+          src={"/ayatrio icon/no fill star.svg"}
+          height={20}
+          width={20}
+          alt="empty-star"
+          className="h-[0.85em] w-[0.85em] hover:text-gray-600"
+        />
+      );
+    }
+
+    return starsArray;
+  }
+
+
+  useEffect(() => {
+    fetchReviews();
+    const stars = renderStars(3.6);
+    setStars(stars)
+
+  }, [productId]);
+
+  console.log("Reviews Data", reviews)
+
+
+
+
+
+
+
+
+
 
   const [sidebarContect, setsidebarContent] = useState(null)
 
@@ -90,6 +183,9 @@ const Card = ({ data }) => {
     var id = localStorage.getItem("deviceId");
     console.log("deviceId : ", id);
   }
+
+
+
 
   const handleColor = (color) => {
     setSelectedColor(color);
@@ -164,6 +260,42 @@ const Card = ({ data }) => {
   const handleOptionClick = (content) => {
     setsidebarContent(content);
   };
+
+
+
+
+  const startDate = new Date(data?.specialprice?.startDate);
+  const endDate = new Date(data?.specialprice?.endDate);
+
+  const formattedStartDate = startDate.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+  });
+  const formattedEndDate = endDate.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+  });
+
+  const [formattedDate, setFormattedDate] = useState({
+    startDate: "",
+    endDate: "",
+  });
+
+  useEffect(() => {
+    const startDate = new Date(data.specialprice?.startDate);
+    const endDate = new Date(data.specialprice?.endDate);
+
+    const startMonth = startDate.toLocaleString("default", { month: "long" });
+    const startDay = startDate.getDate();
+
+    const endMonth = endDate.toLocaleString("default", { month: "long" });
+    const endDay = endDate.getDate();
+    setFormattedDate({
+      startDate: `${startMonth} ${startDay}`,
+      endDate: `${endMonth} ${endDay}`,
+    });
+  }, []);
+
   return (
     <>
       <div className="flex justify-start md:min-w-[25vw] gap-1 mt-7 w-[100%] ml-0">
@@ -172,18 +304,21 @@ const Card = ({ data }) => {
             <div className="flex items-center justify-between mt-4">
               {/* <p className="text-[16px] font-normal">Originals</p> */}
 
-              <p className="font-semibold text-red-600 text-[15px]">New lower price</p>
+              <p className="font-semibold text-red-600 text-[15px]">{data.demandtype}</p>
 
               <div className="flex gap-2">
                 <div className="flex items-center">
+                  {/* <Image src={"/icon/star.svg"} height={20} width={20} alt="downarrow" className=" h-[1em] w-[1em] hover:text-gray-600" />
                   <Image src={"/icon/star.svg"} height={20} width={20} alt="downarrow" className=" h-[1em] w-[1em] hover:text-gray-600" />
                   <Image src={"/icon/star.svg"} height={20} width={20} alt="downarrow" className=" h-[1em] w-[1em] hover:text-gray-600" />
                   <Image src={"/icon/star.svg"} height={20} width={20} alt="downarrow" className=" h-[1em] w-[1em] hover:text-gray-600" />
-                  <Image src={"/icon/star.svg"} height={20} width={20} alt="downarrow" className=" h-[1em] w-[1em] hover:text-gray-600" />
-                  <Image src={"/icon/half-star.svg"} height={20} width={20} alt="downarrow" className=" h-[1em] w-[1em] hover:text-gray-600" />
-
+                  <Image src={"/icon/half-star.svg"} height={20} width={20} alt="downarrow" className=" h-[1em] w-[1em] hover:text-gray-600" /> */}
+                  {/* {stars} */}
+                  {
+                    Starts
+                  }
                 </div>
-                <p className="text-gray-800 underline w-[31px] h-[20px] cursor-pointer">159</p>
+                <p className="text-gray-800 underline w-[31px] h-[20px] cursor-pointer">{reviews.length}</p>
               </div>
             </div>
             <h1 className="text-2xl md:mt-1 font-bold mb-1">
@@ -198,18 +333,55 @@ const Card = ({ data }) => {
               <h3>{data?.patternNumber}</h3>
             </div> */}
             <div className="price">
-              <div className="font-bold flex mt-[30px]">
-                <span>Rs. &nbsp;</span>
-                <h2 className="text-3xl leading-[0.5] tracking-wide ">
+              <div className="font-bold items-end flex mt-[30px]">
+
+                <h2 className={`text-3xl leading-[0.5] tracking-wide ${data?.specialprice ? "bg-yellow-400 px-2 pt-3 w-fit" : ""} `}>
+                  <span className="text-sm">Rs. &nbsp;</span>
                   {" "}
-                  {data?.perUnitPrice}
+                  {data?.specialprice?.price ? data?.specialprice.price : data.perUnitPrice}
                 </h2>{" "}
                 <span> &nbsp;/roll</span>
               </div>
-              <div className="flex flex-col">
+              {
+                data?.specialprice && (
+                  <div className="flex flex-col">
+                    <p className="text-[#757575] text-[12px] pt-[3px]">Regular price: Rs.{data?.totalPrice} (incl. of all taxes)</p>
+                    {
+                      data?.specialprice?.startDate && data?.specialprice?.endDate && (
+                        <p className="text-[#757575] text-[12px] pb-[10px]">Price valid {formattedStartDate} - {formattedEndDate} or while supply lasts</p>
+                      )
+                    }
+                    {/* <p className="text-[#757575] text-[12px] pb-[10px]">Price valid May 02 - May 29 or while supply lasts</p> */}
+                  </div>
+                )
+              }
+
+              {/* {data.specialprice ? (
+                <div>
+                  <p className=" text-sm font-semibold bg-yellow-400 price-box w-fit px-2 py-1">
+                    Rs.<span className="text-3xl">{data.specialprice?.price}</span>
+                  </p>
+                  <p className="text-sm mt-2 text-gray-500">
+                    Regular price: Rs.{data.totalPrice}
+                  </p>
+
+                  {data.specialprice.startDate && data.specialprice.endDate && (
+                    <p className="text-sm mt-1 text-gray-500">
+                      Price valid from {formattedDate.startDate} to{" "}
+                      {formattedDate.endDate}
+                    </p>
+                  )}
+                </div>
+              ) : (
+                <p className="text-sm font-semibold">
+                  Rs.<span className="text-3xl">{data.totalPrice}</span>
+                </p>
+              )} */}
+              {/* <div className="flex flex-col">
                 <p className="text-[#757575] text-[12px] pt-[3px]">Regular price: Rs.499 (incl. of all taxes)</p>
                 <p className="text-[#757575] text-[12px] pb-[10px]">Price valid May 02 - May 29 or while supply lasts</p>
-              </div>
+              </div> */}
+
             </div>
 
             <IncDecCounter />
@@ -368,7 +540,7 @@ const Card = ({ data }) => {
             {/* Modal */}
             {sidebarContect && (
               <div>
-                <div className="w-1/2 h-5/6 flex flex-col justify-between gap-4 bg-white rounded-3xl p-7 z-50">
+                <div className="w-1/2 h-5/6 flex flex-col justify-between gap-4 bg-white rounded-3xl p-7 z-50k">
                   {sidebarContect === "zeroCostEMI" && (
                     <div className=" fixed h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0">
                       <section className="text-black bg-white flex-col absolute right-0 top-0 h-screen p-8 gap-8 z-50  w-[35%] flex ">

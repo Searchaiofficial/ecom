@@ -93,7 +93,7 @@ const RoomPage = () => {
             </div>
             <div className="md:basis-2/3 hidden  md:flex flex-col ">
               <div className="md:sticky flex top-9 mb-16 ml-0">
-                <Card data={data} />
+                <Card data={data} productId={data._id} />
               </div>
             </div>
           </div>

@@ -22,6 +22,7 @@ const Phone = dynamic(() => import("./Phone"));
 const DoubleComp = dynamic(() => import("./DoubleComp"));
 const Trending = dynamic(() => import("./Trending"));
 const Suggestion = dynamic(() => import("./Suggestion"));
+const MulticardService = dynamic(() => import("./MultiCardService"))
 import Dataslider from "./Dataslider";
 import { useDispatch, useSelector } from "react-redux";
 import { selectRecommendedProduct } from "../Features/Slices/recommendationSlice";
@@ -29,6 +30,7 @@ import NewMainSlider from "../MainSlider/NewMainSlider";
 import RoomTypes from "../Rooms/RoomTypes";
 import Display from "./Display";
 import RoomCard from "./RoomCard";
+import CategoriesSlider from "./categorySlider"
 import Splashscreen from "../Splashscreen/Splashscreen";
 const Cookies = dynamic(() => import("./Cookies"));
 
@@ -85,6 +87,8 @@ function Cards() {
       {/* {MemoizedMainSlider} */}
       <NewMainSlider />
 
+      <CategoriesSlider />
+
       <Cookies />
       {/* {MemoizedTrendingProducts} */}
       <Trending />
@@ -125,7 +129,8 @@ function Cards() {
       </div>
 
       {MemoizedProfileContent}
-      <Multicard />
+      {/* <Multicard /> */}
+      <MulticardService />
 
       <Tabs data={recommended} />
       <Phone />
