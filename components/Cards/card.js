@@ -38,6 +38,8 @@ function Card(props) {
   // useEffect(() => {
 
   // }, [dispatch]);
+
+
   return (
     <>
       <div
@@ -48,7 +50,18 @@ function Card(props) {
           height: "100%",
         }}
       >
-        <div className={``}>
+        <div className={`relative`}>
+          {props.demandtype ? (
+            <div
+              className={
+                "flex justify-between text-black font-semibold bg-white py-1 px-3 absolute top-2 left-2 z-10"
+              }
+            >
+              {props.demandtype === "Ayatrio Member Favourite" ? "Top Rated" : props.demandtype}
+            </div>
+          ) : (
+            ""
+          )}
           <div
             className="relative flex h-full w-full items-center justify-center cursor-pointer aspect-square"
             onMouseEnter={() => setIsHovered(true)}
@@ -116,8 +129,14 @@ function Card(props) {
           </div>
           {/* <Carousel data={props.imgSrc} className="card-img" /> */}
         </div>
-        <div className="card-title">
-          <div className="pt-[15px]">{props.title}</div>
+        <div className="card-title flex flex-col">
+          {
+            props.demandtype === "Ayatrio Member Favourite" && (
+
+              <p className="font-semibold text-blue-500 mt-[14px] mb-[3px] text-[14px]">{props.demandtype}</p>
+            )
+          }
+          <div className={` ${props.demandtype === "Ayatrio Member Favourite" ? "" : "pt-[14px]"}`}>{props.title}</div>
         </div>
         <div className="card-date text-sm text-[#757575]">{props.desc}</div>
         <div className="card-price">

@@ -322,7 +322,7 @@ const Tabs = ({ filteredProductData, heading, param }) => {
     <>
       <div className="wrapper sm:px-[50px] px-[20px] mt-20 relative  ">
         <div>
-          <h2 className="mb-5 text-xl font-bold">More ideas and inspiration</h2>
+          <h2 className="mb-5 text-xl font-bold">{heading}</h2>
         </div>
         <div className="hidden md:flex sticky top-0 z-20 bg-white py-5 scrollbar">
           <TabsProductContent
@@ -704,8 +704,8 @@ const Tabs = ({ filteredProductData, heading, param }) => {
               </button>
             )}
           </div>
-          <div className=" grid md:grid-cols-4 cursor-pointer sm:grid-cols-2 grid-cols-1 gap-4 ">
-            {firstPart.map((text, idx) => (
+          <div className=" grid md:grid-cols-4 cursor-pointer grid-cols-2  gap-4 ">
+            {firstPart.map((text, idx) => ( 
               <TabsProductCard
                 text={text}
                 totalPrice={text.totalPrice}

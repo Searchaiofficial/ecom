@@ -1,15 +1,16 @@
+"use client"
 import Image from "next/image";
 import React, { useRef, useEffect, useState } from "react";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import "./styles.css";
+// import "swiper/css";
+// import "swiper/css/pagination";
+// import "swiper/css/navigation";
+// import "./styles.css";
 
-import MultiCardContent from "../compounds/MultiCardContent";
-import { useSelector, useDispatch } from "react-redux";
-import { selectMultiCardData } from "../Features/Slices/multiCardSlice";
+// import MultiCardContent from "../compounds/MultiCardContent";
+// import { useSelector, useDispatch } from "react-redux";
+// import { selectMultiCardData } from "../Features/Slices/multiCardSlice";
 import Link from "next/link";
 import axios from "axios";
 
@@ -64,7 +65,8 @@ const CategoriesSlider = () => {
     const fetchCategory = async () => {
         try {
             const response = await axios.get(
-                "http://localhost:4000/api/categories"
+                `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/categories`
+
             );
             console.log("categories", response.data);
 
@@ -85,12 +87,12 @@ const CategoriesSlider = () => {
 
 
     return (
-        <div>
+        <div className="flex items-center justify-start">
             <div className=" pt-[5rem] sm:pl-[50px] pl-[20px]  overflow-x-auto  relative">
                 {
                     categories.length > 0 && (
                         <div className="flex flex-row group items-center justify-end gap-2 mb-4">
-                            <div className="back rounded-full  bg-[#d2d2d7a3]  group-hover:opacity-60 opacity-0  absolute left-5 z-10">
+                            <div className="back rounded-full  bg-[#d2d2d7a3]  group-hover:opacity-60  opacity-0  absolute left-5 z-10">
                                 <Image
                                     src="/ayatrio icon/left-card.svg"
                                     width={20}

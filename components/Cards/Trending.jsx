@@ -1,3 +1,5 @@
+"use client"
+
 import Card from "./card";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
@@ -62,7 +64,7 @@ const Trending = () => {
 
   return (
     <div>
-      <div className="pt-12  mb-20  bg-white sm:px-[50px] px-[20px]">
+      <div className="pt-8  mb-20  bg-white sm:px-[50px] px-[20px]">
         <div className="mb-2 w-full flex justify-between items-center">
           <h2 className="Blinds font-semibold text-2xl py-[30px]">
             {newTrendingData && newTrendingData.length === 0
@@ -132,6 +134,7 @@ const Trending = () => {
                       // date={product.date}
                       price={product.perUnitPrice}
                       desc={product.productTitle}
+                      demandtype={product.demandtype}
                       imgSrc={product.images}
                       rating={product.ratings}
                       key={idx}

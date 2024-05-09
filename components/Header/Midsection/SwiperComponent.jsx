@@ -8,7 +8,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Scrollbar } from "swiper/modules";
 import { roomOptions } from "@/Model/Dropdown/SliderData/SliderData";
 
-const SwiperComponent = ({setHoveredIndex}) => {
+const SwiperComponent = () => {
   return (
     <Swiper
       className="bg-white parent h-48 gap-1"
@@ -26,7 +26,7 @@ const SwiperComponent = ({setHoveredIndex}) => {
           <div className=" child w-full h-full flex flex-col px-2 justify-start">
             <Link
               key={index}
-              onClick={() => setHoveredIndex(-1)}
+              // onClick={() => setHoveredIndex(-1)}
               href={`/rooms/${data.room.replace(/\s+/g, "-")}`}
               passHref
             >

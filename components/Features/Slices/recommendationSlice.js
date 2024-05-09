@@ -30,5 +30,6 @@ export const {
 
 export const selectRecommendedProduct = (state) => state.recommendedProduct.recommendedProductData;
 export const selectRecommendationLoader = (state) => state.recommendedProduct.recomendationLoader;
+export const selectRecommendationStatus = (state) => state.recommendedProduct.status;
 
 export default recommendationSlice.reducer;

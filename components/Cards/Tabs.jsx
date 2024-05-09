@@ -1,16 +1,13 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import "../MainSlider/Mainslidestyle.css";
-import room from "@/public/images/room.webp";
 import work from "@/public/images/work.webp";
-import living from "@/public/images/living.webp";
-import kitchen from "@/public/images/kitchen.webp";
 import "./tabs.css";
 import TabImage from "./TabImage";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-const Tabs = ({ data }) => {
+const Tabs = ({data}) => {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("");
   const [isSticky, setIsSticky] = useState(false);

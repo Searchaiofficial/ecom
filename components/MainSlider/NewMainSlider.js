@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -9,18 +11,21 @@ import SwiperCore from "swiper/core";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { selectSliderData, selectSliderLoader } from "../Features/Slices/sliderSlice";
+import { getSliderSuccess, selectSliderData, selectSliderLoader } from "../Features/Slices/sliderSlice";
+import Splashscreen from "../Splashscreen/Splashscreen";
 
 SwiperCore.use([Autoplay, Navigation]);
 
-export default function NewMainSlider() {
+export default function NewMainSlider({initialData}) {
   const dispatch = useDispatch();
   const SliderViewData = useSelector(selectSliderData);
   const isSliderLoading = useSelector(selectSliderLoader)
 
   const [page, setPage] = useState(1);
   useEffect(() => {
-    if (!SliderViewData || SliderViewData.length === 0) {
+    if (initialData?.result?.length > 0) {
+      dispatch(getSliderSuccess(initialData))
+    } else {
       fetchData();
     }
   }, [page]);
@@ -54,7 +59,7 @@ export default function NewMainSlider() {
   };
 
   if (isSliderLoading) {
-    return null;
+    return <Splashscreen />;
   }
 
   return (
@@ -111,7 +116,7 @@ export default function NewMainSlider() {
         {sliderApiData.map((data) => {
           return (
             <SwiperSlide key={data?._id}>
-              <div className="relative group h-[78vh] ">
+              <div className="relative group h-[78vh] -translate-x-[5px] md:translate-x-0">
                 <Image
                   src={data?.imgSrc}
                   fill

@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useRef, useEffect } from "react";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -41,8 +43,8 @@ const Multicard = () => {
           draggable={true}
           style={{ "--swiper-navigation-size": "24px" }}
           breakpoints={{
-            450: {
-              slidesPerView: 1.5,
+            400: {
+              slidesPerView: 1.2,
               spaceBetween: 10,
             },
             768: {

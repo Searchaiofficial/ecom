@@ -58,9 +58,9 @@ function Header({ howMuchScrolled }) {
     setIsOpen(false);
   };
 
-  const handleClick = (idx) => {
-    if (idx === 3) router.push("/customerservice");
-  };
+  // const handleClick = (idx) => {
+  //   // if (idx === 3) router.push("/customerservice");
+  // };
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
@@ -199,7 +199,7 @@ function Header({ howMuchScrolled }) {
                         key={idx}
                         onMouseEnter={() => handleMouseEnter(idx)}
                         onMouseLeave={handleMouseLeave}
-                        onClick={() => handleClick(idx)}
+                      // onClick={() => handleClick(idx)}
                       >
                         <Link
                           className={`text-md  font-semibold  ${isOpen ? "border-b-2 border-black" : ""
@@ -378,7 +378,7 @@ function Header({ howMuchScrolled }) {
                   key={idx}
                   onMouseEnter={() => handleMouseEnter(idx)}
                   onMouseLeave={handleMouseLeave}
-                  onClick={() => handleClick(idx)}
+                // onClick={() => handleClick(idx)}
                 >
                   <Link
                     className={`text-md  font-semibold  ${isOpen ? "border-b-2 border-black" : ""

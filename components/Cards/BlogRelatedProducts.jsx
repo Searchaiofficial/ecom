@@ -18,7 +18,7 @@ import {
 } from "swiper/modules";
 // import axios from "axios";;
 
-const BlogRecommendedProducts = ({relatedProducts}) => {
+const BlogRecommendedProducts = ({ relatedProducts }) => {
   const [isPopupVisible, setPopupVisible] = useState(false);
 
   const swiperOptions2 = {
@@ -41,7 +41,7 @@ const BlogRecommendedProducts = ({relatedProducts}) => {
 
   return (
     <div>
-      <div className="pt-12  mb-20  bg-white sm:px-[50px] px-[20px]">
+      <div className="pt-10  mb-20  bg-white sm:px-[50px] px-[20px]">
         <div className="mb-2 w-full flex justify-between items-center">
           <h2 className="font-semibold text-2xl py-[15px]">
             {relatedProducts && relatedProducts.length === 0
@@ -109,6 +109,7 @@ const BlogRecommendedProducts = ({relatedProducts}) => {
                       title={product.productTitle}
                       // date={product.date}
                       price={product.perUnitPrice}
+                      demandtype={product.demandType}
                       desc={product.productTitle}
                       imgSrc={product.images}
                       rating={product.ratings}
