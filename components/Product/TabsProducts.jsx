@@ -29,7 +29,7 @@ import Measure from "./meausrement";
 import Link from "next/link";
 import axios from "axios";
 import TabsProductCard from "./TabsProductCard";
-const Tabs = ({ filteredProductData, heading, param }) => {
+const Tabs = ({ filteredProductData, heading, param, categoryName, description }) => {
   // console.log("Filtered products:", filteredProducts);
   const router = useRouter();
   const dispatch = useDispatch();
@@ -322,7 +322,8 @@ const Tabs = ({ filteredProductData, heading, param }) => {
     <>
       <div className="wrapper sm:px-[50px] px-[20px] mt-20 relative  ">
         <div>
-          <h2 className="mb-5 text-xl font-bold">{heading}</h2>
+          <h2 className="mb-2 text-xl font-bold capitalize">{categoryName}</h2>
+          <p className="leading-2">{description}</p>
         </div>
         <div className="hidden md:flex sticky top-0 z-20 bg-white py-5 scrollbar">
           <TabsProductContent
