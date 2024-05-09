@@ -58,9 +58,9 @@ function Header({ howMuchScrolled }) {
     setIsOpen(false);
   };
 
-  // const handleClick = (idx) => {
-  //   // if (idx === 3) router.push("/customerservice");
-  // };
+  const handleClick = (idx) => {
+    if (idx === 3) router.push("/customerservice");
+  };
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
@@ -139,9 +139,10 @@ function Header({ howMuchScrolled }) {
   }, []);
 
   const homeRoute = "/";
+  const liveRoomRoute = "/liveroom";
 
   return (
-    <div className="z-[99999px] ">
+    <div className="z-[99999px]">
       {(homeRoute === pathname ||
         pathname.includes("/product/") ||
         pathname.includes("/products/")) &&
@@ -151,7 +152,7 @@ function Header({ howMuchScrolled }) {
         ) : null
       ) : null}
       <div
-        className={`fixed w-full sm:bg-none ${homeRoute === pathname || pathname.includes("/product/")
+        className={`fixed ${liveRoomRoute === pathname && "hidden"} w-full sm:bg-none ${homeRoute === pathname || pathname.includes("/product/")
           ? typeof window !== "undefined" && window.scrollY < 20
             ? "md:top-[35px] top-[0px]"
             : "top-0"
@@ -171,7 +172,7 @@ function Header({ howMuchScrolled }) {
                 } flex flex-row justify-between z-[99999px] items-center sm:px-[20px] px-[20px] h-[60px]`}
             >
               {/* main-logo */}
-              <div className=" flex mainlogo items-center justify-start lg:mr-[80px]">
+              <div className=" flex mainlogo items-center justify-start">
 
                 <Link href="/">
                   <Image
@@ -199,7 +200,7 @@ function Header({ howMuchScrolled }) {
                         key={idx}
                         onMouseEnter={() => handleMouseEnter(idx)}
                         onMouseLeave={handleMouseLeave}
-                      // onClick={() => handleClick(idx)}
+                        onClick={() => handleClick(idx)}
                       >
                         <Link
                           className={`text-md  font-semibold  ${isOpen ? "border-b-2 border-black" : ""
@@ -378,7 +379,7 @@ function Header({ howMuchScrolled }) {
                   key={idx}
                   onMouseEnter={() => handleMouseEnter(idx)}
                   onMouseLeave={handleMouseLeave}
-                // onClick={() => handleClick(idx)}
+                  onClick={() => handleClick(idx)}
                 >
                   <Link
                     className={`text-md  font-semibold  ${isOpen ? "border-b-2 border-black" : ""

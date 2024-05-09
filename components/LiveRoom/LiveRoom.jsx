@@ -71,9 +71,9 @@ const LiveRoom = () => {
   };
 
   return (
-    <div className="pt-[9vh] ">
-      <div className="sm:px-[50px] flex px-[20px]">
-        <div className="relative w-3/4 bg-gray-200 h-[90vh] border-2 border-black">
+    <div className="">
+      <div className="sm:px-4 flex px-[20px] h-screen py-4 ">
+        <div className="relative w-[70%] bg-gray-200 py-4 border-2 border-black">
           <div className=" absolute bottom-4 w-full flex gap-2 justify-center">
             <button className="bg-red-500 hover:bg-red-400 text-xs text-center text-white font-medium shadow-sm  rounded-full w-10 h-10">
               Mute
@@ -92,7 +92,7 @@ const LiveRoom = () => {
             </button>
           </div>
         </div>
-        <div className="relative flex flex-col w-1/4 pl-4  h-[90vh] ">
+        <div className="relative flex flex-col w-[30%] pl-4">
           <div className="relative w-full overflow-y-scroll h-[92%]">
             <div>
               <h1 className="text-2xl font-semibold mb-2">Related Products</h1>
@@ -148,6 +148,7 @@ const LiveRoom = () => {
           <div className="absolute p-2 w-full bottom-0 left-0 h-[8%] ">
             <input
               type="text"
+              placeholder="Type here to chat..."
               className="w-full h-full border-1 bg-gray-200  rounded-full p-2 focus:outline-none"
             />
           </div>
