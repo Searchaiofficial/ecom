@@ -86,9 +86,9 @@ const Map = ({ setBoundaries, coords, places, PlacesData }) => {
             {PlacesData &&
               PlacesData.map((place, i) => (
                 <CustomMarker
-                  lat={place.geo_location.latitude}
-                  lng={place.geo_location.longitude}
-                  key={places._id}
+                  lat={place.lat}
+                  lng={place.lng}
+                  key={places.id}
                   content={<MapMarker place={place} />}
                 />
               ))}
