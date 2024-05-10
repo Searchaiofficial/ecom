@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 import { allSelectedData } from "@/components/Features/Slices/virtualDataSlice";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import LiveRoomProductCard from "./LiveRoomProductCard"
+import LiveRoomProductCard from "./LiveRoomProductCard";
+import Link from "next/link";
 
 const LiveRoom = () => {
   const x = useSelector(allSelectedData);
-  console.log(x);
 
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [similarProducts, setSimilarProducts] = useState([]);
@@ -24,7 +24,7 @@ const LiveRoom = () => {
             "Content-Type": "application/json",
           },
         });
-        setFilteredProducts(response.data); 
+        setFilteredProducts(response.data);
       } catch (error) {
         console.error("Error fetching filtered products:", error);
       }
@@ -38,8 +38,7 @@ const LiveRoom = () => {
             category: x.category,
           },
         });
-        setSimilarProducts(response.data); // Save the filtered products in state
-        console.log("ve products", similarProducts);
+        setSimilarProducts(response.data); 
       } catch (error) {
         console.error("Error fetching filtered products:", error);
       }
@@ -103,11 +102,11 @@ const LiveRoom = () => {
               {filteredProducts.length > 0 ? (
                 filteredProducts.map((product, idx) => (
                   <div className="grid grid-cols-1 w-full h-full fade-in ">
-                     <LiveRoomProductCard
+                    <LiveRoomProductCard
                       productTitle={product.productTitle}
                       price={product.perUnitPrice}
                       demandtype={product.demandtype}
-                      specialprice = {product.specialprice}
+                      specialprice={product.specialprice}
                       desc={product.productTitle}
                       imgSrc={product.images}
                       rating={product.ratings}
@@ -117,15 +116,13 @@ const LiveRoom = () => {
                       productId={product.productId}
                       ratings={product.ratings}
                       stars={stars}
-                      totalPrice = {product.totalPrice}
+                      totalPrice={product.totalPrice}
                       productDescription={product.productDescription}
                     />
                   </div>
                 ))
               ) : (
-                <div className="w-[200px] mb-2 h-[250px] bg-black">
-                  No products found
-                </div>
+                <div className="mt-2">No products found</div>
               )}
             </div>
             <div className="mt-4">
@@ -137,7 +134,7 @@ const LiveRoom = () => {
                       productTitle={product.productTitle}
                       price={product.perUnitPrice}
                       demandtype={product.demandtype}
-                      specialprice = {product.specialprice}
+                      specialprice={product.specialprice}
                       desc={product.productTitle}
                       imgSrc={product.images}
                       rating={product.ratings}
@@ -147,15 +144,13 @@ const LiveRoom = () => {
                       productId={product.productId}
                       ratings={product.ratings}
                       stars={stars}
-                      totalPrice = {product.totalPrice}
+                      totalPrice={product.totalPrice}
                       productDescription={product.productDescription}
                     />
                   </div>
                 ))
               ) : (
-                <div className="w-[200px] mb-2 h-[250px] bg-black">
-                  No products found
-                </div>
+                <div className="mt-2">No products found</div>
               )}
             </div>
           </div>
@@ -228,6 +223,33 @@ const LiveRoom = () => {
               </div>
             )}
           </section>
+        </div>
+      )}
+
+      {filteredProducts.length === 0 && similarProducts.length === 0 && (
+        <div
+          className="relative z-[9999]"
+          aria-labelledby="modal-title"
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="fixed inset-0 bg-gray-500 bg-opacity-70 transition-opacity"></div>
+
+          <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+              <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                  <div className="sm:flex flex-col  items-center">
+                    <p className="text-lg  mb-2">No Product Found</p>
+                  
+                    <Link href="/category/virtualexperience">
+                      <h1 className="bg-blue-500 p-2 text-white rounded-md">Go Back</h1>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>
