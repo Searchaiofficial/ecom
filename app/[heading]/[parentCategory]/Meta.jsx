@@ -18,12 +18,10 @@ const ProductPage = ({ params }) => {
   const filteredProductData = useSelector(selectedFilteredProduct);
   console.log(filteredProductData);
 
-
   let parentCategoryVar = params.parentCategory;
   const x = useSelector(allSelectedData);
   console.log(x);
 
-  
   const isNumericString = (str) => /^\d+$/.test(str);
 
   // Remove entries with titles that are numeric strings
@@ -53,6 +51,8 @@ const ProductPage = ({ params }) => {
   const router = useRouter();
   const requestData = JSON.stringify({ transformedData });
 
+  const [category, setCategory] = useState({});
+
   useEffect(() => {
     if (params.parentCategory === "virtualexperience") {
       if (x.length > 0) {
@@ -66,7 +66,6 @@ const ProductPage = ({ params }) => {
               "Content-Type": "application/json",
             },
           });
-          console.log("Filtered products:", response);
           setFilteredProducts(response.data); // Save the filtered products in state
         } catch (error) {
           console.error("Error fetching filtered products:", error);
@@ -75,6 +74,16 @@ const ProductPage = ({ params }) => {
       fetchVeProducts();
       console.log("ve products");
     } else {
+      const fetchCategoryDescription = async () => {
+        const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getCategoryByName/${params.parentCategory}`;
+        const response = await axios.get(apiUrl, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        setCategory(response.data);
+      };
+      fetchCategoryDescription();
       dispatch({
         type: "FETCH_FILTER_PRODUCTS",
         payload: {
@@ -112,9 +121,16 @@ const ProductPage = ({ params }) => {
         heading={x?.category?.category}
       /> */}
       <Tabproduct
-        filteredProductData={params.parentCategory === "virtualexperience" ? filteredProducts : filteredProductData}
+        filteredProductData={
+          params.parentCategory === "virtualexperience"
+            ? filteredProducts
+            : filteredProductData
+        }
         // heading={x?.category?.category}
         heading={params.heading}
+        categoryName={params.parentCategory}
+        description={category?.description}
+        subCategory={category?.subcategories}
         param={params.parentCategory}
       />
       {/* <Measure filteredProductData={filteredProductData} /> */}

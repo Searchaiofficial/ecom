@@ -29,7 +29,13 @@ import Measure from "./meausrement";
 import Link from "next/link";
 import axios from "axios";
 import TabsProductCard from "./TabsProductCard";
-const Tabs = ({ filteredProductData, heading, param }) => {
+const Tabs = ({
+  filteredProductData,
+  heading,
+  subCategory,
+  categoryName,
+  description,
+}) => {
   // console.log("Filtered products:", filteredProducts);
   const router = useRouter();
   const dispatch = useDispatch();
@@ -322,7 +328,28 @@ const Tabs = ({ filteredProductData, heading, param }) => {
     <>
       <div className="wrapper sm:px-[50px] px-[20px] mt-20 relative  ">
         <div>
-          <h2 className="mb-5 text-xl font-bold">{heading}</h2>
+          <h2 className="mb-2 text-xl font-bold capitalize">{categoryName}</h2>
+          {subCategory && (
+            <div className="grid mb-4 md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-2 gap-y-4">
+              {subCategory.map((sub, idx) => (
+                <div key={idx} className=" gap-2">
+                  <div className="relative flex items-center gap-4 cursor-pointer ">
+                    <div className="w-[60px] aspect-square">
+                      <Image
+                        src={sub.img}
+                        alt="NA"
+                        height={300}
+                        width={300}
+                        className="aspect-square "
+                      />
+                    </div>
+                    <h1>{sub.name}</h1>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+          <p className="leading-2 mb-4">{description}</p>
         </div>
         <div className="hidden md:flex sticky top-0 z-20 bg-white py-5 scrollbar">
           <TabsProductContent
@@ -421,14 +448,16 @@ const Tabs = ({ filteredProductData, heading, param }) => {
                 handleTabClick();
               }}
               className={`Tabbtn z-0 bg-gray-100
-                  ${openAll
-                  ? `active-tabs  border border-black ${commonClasses}`
-                  : `tabS  border border-white ${commonClasses}`
-                }
-                  ${typeof window !== "undefined" && window.innerWidth <= 450
-                  ? " justify-center"
-                  : " justify-between"
-                }
+                  ${
+                    openAll
+                      ? `active-tabs  border border-black ${commonClasses}`
+                      : `tabS  border border-white ${commonClasses}`
+                  }
+                  ${
+                    typeof window !== "undefined" && window.innerWidth <= 450
+                      ? " justify-center"
+                      : " justify-between"
+                  }
                   `}
             >
               All Filters &nbsp;
@@ -664,8 +693,9 @@ const Tabs = ({ filteredProductData, heading, param }) => {
 
                           <button
                             onClick={handleContent}
-                            className={`text-left underline ${openContent ? "block" : "hidden"
-                              }`}
+                            className={`text-left underline ${
+                              openContent ? "block" : "hidden"
+                            }`}
                           >
                             Less
                           </button>
@@ -705,7 +735,7 @@ const Tabs = ({ filteredProductData, heading, param }) => {
             )}
           </div>
           <div className=" grid md:grid-cols-4 cursor-pointer grid-cols-2  gap-4 ">
-            {firstPart.map((text, idx) => ( 
+            {firstPart.map((text, idx) => (
               <TabsProductCard
                 text={text}
                 totalPrice={text.totalPrice}
