@@ -51,7 +51,7 @@ const ProductPage = ({ params }) => {
   const router = useRouter();
   const requestData = JSON.stringify({ transformedData });
 
-  const [categoryDescription, setCategoryDescription] = useState("");
+  const [category, setCategory] = useState({});
 
   useEffect(() => {
     if (params.parentCategory === "virtualexperience") {
@@ -75,14 +75,13 @@ const ProductPage = ({ params }) => {
       console.log("ve products");
     } else {
       const fetchCategoryDescription = async () => {
-        console.log("Category: data", params.parentCategory);
-        const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getCategoryDescription/${params.parentCategory}`;
+        const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getCategoryByName/${params.parentCategory}`;
         const response = await axios.get(apiUrl, {
           headers: {
             "Content-Type": "application/json",
           },
         });
-        setCategoryDescription(response.data);
+        setCategory(response.data);
       };
       fetchCategoryDescription();
       dispatch({
@@ -130,7 +129,8 @@ const ProductPage = ({ params }) => {
         // heading={x?.category?.category}
         heading={params.heading}
         categoryName={params.parentCategory}
-        description={categoryDescription}
+        description={category?.description}
+        subCategory={category?.subcategories}
         param={params.parentCategory}
       />
       {/* <Measure filteredProductData={filteredProductData} /> */}
