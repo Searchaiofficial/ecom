@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { allSelectedData } from "@/components/Features/Slices/virtualDataSlice";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import Card from "@/components/Cards/card";
+import LiveRoomProductCard from "./LiveRoomProductCard"
 
 const LiveRoom = () => {
   const x = useSelector(allSelectedData);
@@ -70,6 +70,10 @@ const LiveRoom = () => {
     setIsDataFilled(true);
   };
 
+  const stars = new Array(4)
+    .fill("/svg/icon/star.svg")
+    .concat("/svg/icon/half-star.svg");
+
   return (
     <div className="">
       <div className="sm:px-4 flex px-[20px] h-screen py-4 ">
@@ -99,10 +103,11 @@ const LiveRoom = () => {
               {filteredProducts.length > 0 ? (
                 filteredProducts.map((product, idx) => (
                   <div className="grid grid-cols-1 w-full h-full fade-in ">
-                    <Card
-                      title={product.productTitle}
+                     <LiveRoomProductCard
+                      productTitle={product.productTitle}
                       price={product.perUnitPrice}
                       demandtype={product.demandtype}
+                      specialprice = {product.specialprice}
                       desc={product.productTitle}
                       imgSrc={product.images}
                       rating={product.ratings}
@@ -110,6 +115,10 @@ const LiveRoom = () => {
                       id={product._id}
                       category={product.category}
                       productId={product.productId}
+                      ratings={product.ratings}
+                      stars={stars}
+                      totalPrice = {product.totalPrice}
+                      productDescription={product.productDescription}
                     />
                   </div>
                 ))
@@ -124,10 +133,11 @@ const LiveRoom = () => {
               {similarProducts.length > 0 ? (
                 similarProducts.map((product, idx) => (
                   <div className="grid grid-cols-1 w-full h-full fade-in ">
-                    <Card
-                      title={product.productTitle}
+                    <LiveRoomProductCard
+                      productTitle={product.productTitle}
                       price={product.perUnitPrice}
                       demandtype={product.demandtype}
+                      specialprice = {product.specialprice}
                       desc={product.productTitle}
                       imgSrc={product.images}
                       rating={product.ratings}
@@ -135,6 +145,10 @@ const LiveRoom = () => {
                       id={product._id}
                       category={product.category}
                       productId={product.productId}
+                      ratings={product.ratings}
+                      stars={stars}
+                      totalPrice = {product.totalPrice}
+                      productDescription={product.productDescription}
                     />
                   </div>
                 ))

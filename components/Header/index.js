@@ -173,7 +173,6 @@ function Header({ howMuchScrolled }) {
             >
               {/* main-logo */}
               <div className=" flex mainlogo items-center justify-start">
-
                 <Link href="/">
                   <Image
                     src="/images/ayatriologo.webp"
@@ -184,7 +183,6 @@ function Header({ howMuchScrolled }) {
                     className="w-36 lg:w-36 object-cover"
                   />
                 </Link>
-
               </div>
               {/* center-list */}
               <div className=" flex justify-center items-center gap-1 md:gap-5 ">
