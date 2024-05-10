@@ -86,7 +86,7 @@ const RoomPage = () => {
 
   return (
     <>
-      <div className="container-rooms flex sm:block items-center ">
+      <div className="overflow-y-auto container-rooms flex sm:block items-center ">
         <div className="sm:px-[50px] px-[20px] mt-[65px]">
           <div className="flex sm:flex-row gap-8 flex-col">
             <div className="sm:basis-2/3 flex flex-col sm:flex-grow">

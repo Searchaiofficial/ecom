@@ -6,12 +6,11 @@ import Image from "next/image";
 
 const TopHeader = () => {
   const pathname = usePathname();
-  const homeRoute = "/";
+  // const homeRoute = "/";
   return (
     <div className="hidden md:block">
       <div
-        className={`bg-[#f5f5f5] h-[35px] ${homeRoute === pathname ? "fixed" : ""
-          } z-[99999] w-full flex items-center justify-between px-5`}
+        className={`bg-[#f5f5f5] fixed h-[35px] z-[99999] w-full flex items-center justify-between px-5`}
       >
         <div className="">
           <Link className="pr-[20px] text-sm underline underline-offset-4" href="#">For you</Link>
