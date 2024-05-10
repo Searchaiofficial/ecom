@@ -5,11 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectRoomData } from "../Features/Slices/roomSlice";
 import {
   selectDeliveryPrice,
+  selectPickupOption,
   selectPrice,
   selectQuantity,
 } from "../Features/Slices/calculationSlice";
 import { setDbItems } from "../Features/Slices/cartSlice";
 import Link from "next/link";
+import axios from "axios";
+
 
 import { FcOk } from "react-icons/fc";
 
@@ -22,30 +25,86 @@ import { selecteddbItems } from "../Features/Slices/cartSlice";
 
 const Details = () => {
   const dispatch = useDispatch();
+  const [CartData, setCartData] = useState([])
+  const [DeliverCost, setDeliveryCost] = useState(99);
+
+  const pickup = useSelector(selectPickupOption);
+
+  useEffect(() => {
+    if (pickup === "collect") {
+      setDeliveryCost(59);
+    }
+  }, [pickup]);
+
 
   // const roomData = useSelector(selectRoomData);
   // const quantity = useSelector(selectQuantity);
 
+
+
+
   const deliveryPrice = useSelector(selectDeliveryPrice);
   const cartdata = useSelector(selecteddbItems);
+
+  if (typeof window !== "undefined") {
+    var id = localStorage.getItem("deviceId");
+    console.log(id);
+  }
+
+  useEffect(() => {
+    if (!cartdata) {
+      const fetchData = async () => {
+        try {
+          const id = localStorage.getItem("deviceId");
+          const response = await axios.get(
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
+            {
+              params: {
+                deviceId: id,
+              },
+            }
+          );
+          if (response.status !== 200) {
+            throw new Error("HTTP status " + response.status);
+          }
+          const data = response.data;
+          setCartData(data);
+        } catch (error) {
+          console.log("Error fetching data from API:", error);
+        }
+      };
+      fetchData();
+    }
+  }, [cartdata, dispatch]);
+
+
+  // console.log("Card Data", cartdata)
+  console.log("Fetched Card Data", CartData)
   console.log(deliveryPrice);
 
   let totalPrice = 0;
-  if (cartdata) {
+  if (cartdata && cartdata.items) {
     totalPrice = cartdata.items.reduce(
       (total, item) => total + item.productId.totalPrice * item.quantity,
       0
     );
   }
 
-  console.log(cartdata);
+  if (CartData && CartData.items) {
+    totalPrice = CartData.items.reduce(
+      (total, item) => total + item.productId.totalPrice * item.quantity,
+      0
+    );
+  }
+
+  // console.log(cartdata);
 
   //--------------------xx--------------xx---------
   const router = useRouter();
 
   const [selected, setSelected] = useState(null);
   const formData = useSelector(selectFormData);
-  console.log(formData);
+  // console.log(formData);
   let selecteddate = formData.selectedDate;
   let selectedtime = formData.selectedTime;
 
@@ -152,26 +211,26 @@ const Details = () => {
   const properties = searchParams.get("search");
 
   return (
-    <div className="px-20 py-16">
-      <div className="grid grid-cols-12 gap-10 border-b-2">
-        <div className="col-span-8">
+    <div className=" px-2 lg:px-20 lg:py-16">
+      <div className="grid lg:grid-cols-12 lg:gap-10 border-b-2">
+        <div className="lg:col-span-8 lg:order-1 order-2 ">
           {/* <!-- parent div --> */}
-          <div class=" py-2 ml-12 mr-14">
+          <div class=" py-2 ml-2 lg:ml-12 lg:mr-14 mr-2">
             {/* <!-- header section --> */}
             <div className="">
-              <div className="bg-white p-4 w-full mx-auto ">
-                <div className="flex justify-between items-center p-2 mb-4">
+              <div className="bg-white  w-full mx-auto ">
+                <div className="flex justify-between items-center  mb-4">
                   <div className="flex items-center  ">
                     <span>
                       <FcOk size={40} />
                     </span>
-                    <h3 className="pl-4 text-lg font-bold ">
+                    <h3 className="text-lg font-bold ">
                       Collect information
                     </h3>
                   </div>
                   <div className=" text-md underline">Edit</div>
                 </div>
-                <div className="p-2 mb-2">
+                <div className="mb-2">
                   <h3 className="text-md font-bold ">
                     Delivered to pick-up location via parcel at
                   </h3>
@@ -180,7 +239,7 @@ const Details = () => {
                     Mumbai
                   </p>
                 </div>
-                <div className="p-2 mb-2">
+                <div className="mb-2">
                   <h3 className="text-md font-bold ">Estimated Pick-up Date</h3>
                   <p className="text-sm text-gray-700">
                     24.3.2024 11:00 AM - 5:00 PM
@@ -193,8 +252,8 @@ const Details = () => {
             <div className="w-full">
               <h3 className="text-md font-bold my-4">Billing address</h3>
               <form onSubmit={handleData}>
-                <div className="flex justify-between ">
-                  <div className="mb-4 mr-4">
+                <div className="flex  lg:flex-row w-full   ">
+                  <div className="mb-4 mr-4 flex-1 ">
                     <label
                       htmlFor="first"
                       className="block text-md text-gray-700 mb-1"
@@ -206,12 +265,12 @@ const Details = () => {
                       id="first"
                       name="first"
                       onChange={handlefunc}
-                      className="w-[16rem] border border-gray-700 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+                      className=" border w-full  border-gray-700 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
                       required
                     />
                   </div>
 
-                  <div className="mb-4">
+                  <div className="mb-4 flex-1">
                     <label
                       htmlFor="last"
                       className="block text-md text-gray-700 mb-1"
@@ -223,7 +282,7 @@ const Details = () => {
                       id="last"
                       name="last"
                       onChange={handlefunc}
-                      className="w-[16rem] border border-gray-700 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+                      className="w-full border border-gray-700 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
                       required
                     />
                   </div>
@@ -404,7 +463,7 @@ const Details = () => {
                     required
                   />
                 </div>
-                <div className="pt-10">
+                <div className=" pt-6 lg:pt-10">
                   {/* <Link href={"/payment"}> */}
                   <button
                     type="submit"
@@ -420,7 +479,7 @@ const Details = () => {
 
           <div className="">{/* CART1 */}</div>
         </div>
-        <div className="col-span-4 sm:block bg-white  border-gray-300 rounded-lg  overflow-hidden hidden p-6  text-slate-600 ">
+        <div className=" lg:order-2 order-1  lg:col-span-4  bg-white  border-gray-300 rounded-lg  overflow-hidden  p-3 lg:p-6  text-slate-600 ">
           <div className="flex justify-between">
             <h3 className="text-xl font-bold">Your Order</h3>
             <Link href={"/cart"} className="underline">
@@ -430,7 +489,7 @@ const Details = () => {
           </div>
           <div className="">
             <div className="flex my-4">
-              {cartdata && cartdata.items && cartdata.items.length > 0 ? (
+              {cartdata && cartdata.items && cartdata.items.length > 0 && (
                 cartdata.items.map((item, index) => (
                   <Image
                     key={index}
@@ -438,12 +497,26 @@ const Details = () => {
                     width={249}
                     height={249}
                     alt={item.name}
-                    className="rounded-xl w-20 h-20 ml-8"
+                    className="w-20 h-20 mr-4"
+                  />
+                ))
+              )
+
+              }
+              {CartData && CartData.items && CartData.items.length > 0 ? (
+                CartData.items.map((item, index) => (
+                  <Image
+                    key={index}
+                    src={item.productId.images[0]}
+                    width={249}
+                    height={249}
+                    alt={item.name}
+                    className="w-20 h-20 mr-4"
                   />
                 ))
               ) : (
                 <div className="text-lg text-gray-500 font-bold px-5">
-                  Empty cart
+                  {cartdata !== null ? "" : "Empty cart"}
                 </div>
               )}
             </div>
@@ -455,22 +528,22 @@ const Details = () => {
           </div>
           <div className="flex items-center justify-between ">
             <span className="text-black">Delivery charge </span>
-            <span className="text-black">Rs.{deliveryPrice}</span>
+            <span className="text-black">Rs.{deliveryPrice === null ? DeliverCost : deliveryPrice}</span>
           </div>
-          <p className="text-xs text-[#767677] border-b-4 border-black pb-6">
-          calculated on distance and weight
+          <p className="text-xs text-[#767677] border-b-2 lg:border-b-4 border-black pb-6">
+            calculated on distance and weight
           </p>
           <div className="flex items-center justify-between pb-4 mt-2">
             <span className="text-black">Subtotal </span>
             <span className="font-[700] text-black text-2xl">
-              Rs. {totalPrice + deliveryPrice}
+              Rs. {totalPrice + DeliverCost || deliveryPrice}
             </span>
           </div>
           <div className="flex items-center justify-between pb-4">
-          <span className="text-black">Total weight </span>
-          <span className="text-black font-[700]">1.9 kg</span>
+            <span className="text-black">Total weight </span>
+            <span className="text-black font-[700]">1.9 kg</span>
           </div>
-          <div className="border border-slate-500 p-[20px] w-[100%] h-auto">
+          <div className="border border-slate-500 p-[10px] lg:p-[20px] w-[100%] lg:w-[100%] h-auto">
             <p className="text-black font-[600] ">Make the most of delivery charges</p>
             <p className="text-[#757575] text-[12px] pt-[5px]">The current delivery price of your order is Rs. 99 for up to 5 kg.</p>
           </div>
@@ -479,7 +552,7 @@ const Details = () => {
             <span>$1000</span>
           </div> */}
 
-          <div className=" fixed h-full w-screen lg:hidden bg-black/50  backdrop:blur-sm top-0 right-0"></div>
+          {/* <div className=" fixed h-full w-screen lg:hidden bg-black/50  backdrop:blur-sm top-0 right-0"></div> */}
 
           {/* <Link
             href="#"
@@ -488,7 +561,7 @@ const Details = () => {
             Continue to Payment
           </Link> */}
 
-          <div className="flex gap-4 justify-between items-center font-bold mt-14">
+          <div className="flex gap-4  items-center font-bold mt-5 lg:mt-14">
             <span>
               <svg
                 focusable="false"

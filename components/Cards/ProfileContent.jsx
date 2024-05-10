@@ -12,7 +12,7 @@ import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfileSuccess, selectProfileData } from "../Features/Slices/profileSlice";
 
-const ProfileContent = ({initialData}) => {
+const ProfileContent = ({ initialData }) => {
   const profileData = useSelector(selectProfileData);
   const dispatch = useDispatch();
 
@@ -29,20 +29,28 @@ const ProfileContent = ({initialData}) => {
     <div className=" transparent rounded-lg  pb-[80px] ">
 
       <Swiper
-        className="h-80"
+        className=" h-50  lg:h-80"
+        mousewheel={{
+          forceToAxis: true,
+          invert: false,
+        }}
+        freeMode={{
+          enabled: false,
+          sticky: true,
+        }}
         spaceBetween={20}
         navigation={{
           nextEl: ".vector-one",
           prevEl: ".vector-two",
         }}
         modules={[Navigation]}
-        style={{ "--swiper-navigation-size": "24px", paddingRight: "30px" }}
+        style={{ "--swiper-navigation-size": "24px" }}
         breakpoints={{
           100: {
             slidesPerView: 2,
           },
           768: {
-            slidesPerView: 3,
+            slidesPerView: 2,
           },
           1024: {
             slidesPerView: 3,
@@ -50,8 +58,8 @@ const ProfileContent = ({initialData}) => {
         }}
       >
         {profileData.map((person, index) => (
-          <SwiperSlide className="bg-[#f4f4f5] my-slider" key={index}>
-            <div className=" flex w-full  justify-start items-center">
+          <SwiperSlide className="bg-[#f4f4f5] my-slider pr-3" key={index}>
+            {/* <div className=" flex w-full  justify-start items-center">
               <div className="flex flex-col justify-center items-center">
                 <div className=" p-2 lg:p-4 flex justify-center items-center ">
                   {" "}
@@ -75,6 +83,29 @@ const ProfileContent = ({initialData}) => {
                 </div>
               </div>
               <a className="flex justify-center items-center self-end mb-6" href="#">
+                <Image
+                  className=" sm:h-8 h-8 sm:w-8 w-8 -mt-1"
+                  src="/social-icon/linkedln.svg"
+                  height={2}
+                  width={2}
+                  alt={`LinkedIn for ${person.name}`}
+                />
+              </a>
+            </div> */}
+            <div className="flex flex-col items-center">
+              <div className="parent relative bg-black rounded-full md:h-36 h-28 md:w-36 w-28 mb-2 md:mt-8 mt-4">
+                <Image
+                  src={person.image}
+                  className="rounded-full w-full h-full object-cover"
+                  width={0}
+                  height={0}
+                  layout="fill"
+                  objectFit="cover"
+                />
+              </div>
+              <div className="text-md p-1 font-bold line-clamp-1">{person.name}</div>
+              <p className="text-md ">{person.role}</p>
+              <a className="absolute bottom-0  md:bottom-5 lg:bottom-24 right-0 lg:right-2" href="#">
                 <Image
                   className=" sm:h-8 h-8 sm:w-8 w-8 -mt-1"
                   src="/social-icon/linkedln.svg"

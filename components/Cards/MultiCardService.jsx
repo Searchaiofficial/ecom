@@ -83,6 +83,14 @@ const MulticardService = () => {
                 </div>
                 <Swiper
                     ref={swiper1Ref}
+                    mousewheel={{
+                        forceToAxis: true,
+                        invert: false,
+                    }}
+                    freeMode={{
+                        enabled: false,
+                        sticky: true,
+                    }}
                     modules={[Navigation, Pagination, Scrollbar, A11y]}
                     navigation={{
                         nextEl: ".right",
@@ -91,7 +99,7 @@ const MulticardService = () => {
                     draggable={true}
                     style={{ "--swiper-navigation-size": "24px" }}
                     breakpoints={{
-                        400: {
+                        300: {
                             slidesPerView: 1.2,
                             spaceBetween: 10,
                         },

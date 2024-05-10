@@ -203,7 +203,7 @@ const Reviews = ({ productId, data }) => {
 
   return (
     <>
-      <div className="py-12 border-t sm:w-auto w-[90vw] border-b overflow-x-hidden">
+      <div className="py-12 sm:w-auto w-[90vw]  overflow-x-hidden">
         {
           data.demandtype === "Ayatrio Member Favourite" && (
             <div>
@@ -254,7 +254,7 @@ const Reviews = ({ productId, data }) => {
         }
 
         <br />
-        <hr />
+
         <h3 className="mb-1 text-xl font-semibold pt-4">
           {reviews.length}
           <span> reviews</span>

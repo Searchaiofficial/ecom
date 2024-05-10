@@ -5,7 +5,7 @@ import Link from "next/link";
 function TabsProductCard(props) {
   const [slide, setSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-  
+
   const [formattedDate, setFormattedDate] = useState({
     startDate: "",
     endDate: "",
@@ -47,9 +47,8 @@ function TabsProductCard(props) {
         <div className="relative z[-999999] w-fit">
           <div
             onClick={(event) => event.stopPropagation()}
-            className={`flex justify-between text-black   checkbox-div absolute top-0 right-0 z-10 ${
-              props.selectedpdt.includes(props.text) ? "visible" : ""
-            }`}
+            className={`flex justify-between text-black   checkbox-div absolute top-0 right-0 z-10 ${props.selectedpdt.includes(props.text) ? "visible" : ""
+              }`}
           >
             <input
               type="checkbox"

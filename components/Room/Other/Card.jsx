@@ -686,9 +686,9 @@ const Card = ({ data, productId }) => {
               </button>
             </Link>
           </div>
-          <div className="flex gap-6 mt-8 items-center justify-center">
+          <div className="flex gap-3 mt-8 items-center justify-center">
             <Image
-              src={"/ayatrio icon/chat.svg"}
+              src={"/Ayatrio updated icon/chat togather.svg"}
               height={35}
               width={35}
               alt="downarrow"

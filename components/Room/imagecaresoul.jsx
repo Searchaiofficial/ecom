@@ -70,7 +70,7 @@ const Carousel = ({ images }) => {
           {images?.map((src, index) => (
             <li
               key={src}
-              className={`slide ${index === activeIndex ? "active" : ""}`}
+              className={`slide ${index === activeIndex ? "indicator" : "indicator-inactive"}`}
             >
               <Image
                 src={src}
@@ -87,7 +87,7 @@ const Carousel = ({ images }) => {
         {images?.map((_, index) => (
           <div
             key={index}
-            className={`indicator ${index === activeIndex ? "active" : ""}`}
+            className={`indicator ${index === activeIndex ? "indicator" : "indicator-inactive"}`}
             onClick={() => goToSlide(index)}
           ></div>
         ))}

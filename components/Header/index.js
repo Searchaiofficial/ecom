@@ -229,7 +229,7 @@ function Header({ howMuchScrolled }) {
               </div>
               {/* search-bar */}
 
-              <div className="flex flex-row items-center justify-end  gap-2">
+              <div className="flex flex-row items-center justify-between  lg:gap-2">
                 <div
                   onClick={handleModalOpen}
                   className="bg-[#f5f5f5] justify-end rounded-full w-[9rem] h-10 p-[9px] hover:bg-[#e5e5e5] hover:rounded-full cursor-pointer lg:block hidden"
@@ -282,7 +282,7 @@ function Header({ howMuchScrolled }) {
                 </div>
                 {loginStatus === "true" ? (
                   <div
-                    className="pro flex p-[9px] hover:bg-zinc-100 hover:rounded-full whitespace-nowrap "
+                    className="pro w-10 h-10 flex p-[9px] hover:bg-zinc-100 hover:rounded-full whitespace-nowrap "
                     onClick={handleProfileNav}
                   >
                     <Image
@@ -295,15 +295,15 @@ function Header({ howMuchScrolled }) {
                   </div>
                 ) : (
                   <div
-                    className="pro flex p-[9px] hover:bg-zinc-100 hover:rounded-full whitespace-nowrap cursor-pointer "
+                    className="pro w-10 h-10 flex p-[9px] hover:bg-zinc-100 hover:rounded-full whitespace-nowrap cursor-pointer "
                     onClick={handleProfileNav}
                   >
                     <Image
                       src="/svg/icon/profile.svg"
                       onClick={handleLoginNav}
                       alt=""
-                      width={20}
-                      height={20}
+                      width={18}
+                      height={18}
                       className="header-div-icon"
                     />
                   </div>

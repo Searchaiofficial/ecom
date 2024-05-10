@@ -31,6 +31,7 @@ const Delivery = () => {
 
   const isSchedular = useSelector(selectSchedular);
   const pickup = useSelector(selectPickupOption);
+  console.log(pickup)
 
   useEffect(() => {
     if (pickup === "collect") {
@@ -500,7 +501,7 @@ const Delivery = () => {
                       width={249}
                       height={249}
                       alt={item.name}
-                      className=" w-20 h-20"
+                      className=" w-20 h-20 mr-4"
                     />
                   );
                 })

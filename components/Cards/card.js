@@ -54,7 +54,7 @@ function Card(props) {
           {props.demandtype ? (
             <div
               className={
-                "flex justify-between text-black font-semibold bg-white py-1 px-3 absolute top-2 left-2 z-10"
+                "flex text-[12px] justify-between text-black font-normal bg-white py-1 px-3 absolute top-2 left-2 z-10"
               }
             >
               {props.demandtype === "Ayatrio Member Favourite" ? "Top Rated" : props.demandtype}
@@ -75,6 +75,7 @@ function Card(props) {
                 alt="arrow"
                 onClick={prevSlide}
                 className="arrow arrow-left"
+              // className="absolute filter drop-shadow-sm w-7 h-7  text-white opacity-85 group hover:cursor-pointer hover:opacity-100 hover:scale-104 hover:filter-drop-shadow-lg  arrow-left"
               />
             )}
             <div className="w-[400px] overflow-hidden">
@@ -100,15 +101,17 @@ function Card(props) {
             </div>
 
             {isHovered && (
-              <div>
+              <div className="z-50">
                 <Image
                   src="/ayatrio icon/right-card.svg"
-                  height={20}
-                  width={20}
+                  height={30}
+                  width={30}
                   alt="arrow"
                   onClick={nextSlide}
                   className="arrow arrow-right"
+                // className="absolute filter drop-shadow-sm w-7 h-7 -mt-[13px] text-white opacity-85 group hover:cursor-pointer hover:opacity-100 hover:scale-104 hover:filter-drop-shadow-lg arrow-right"
                 />
+
               </div>
             )}
             <span className="flex absolute bottom-[16px]">
@@ -118,8 +121,8 @@ function Card(props) {
                     key={idx}
                     className={
                       slide === idx
-                        ? "indicator"
-                        : "indicator indicator-inactive"
+                        ? "bg-white h-2 w-2 rounded-[50%] mr-1"
+                        : "bg-[#cccc] h-2 w-2 rounded-[50%] mr-1"
                     }
                     onClick={() => setSlide(idx)}
                   ></button>
@@ -133,7 +136,7 @@ function Card(props) {
           {
             props.demandtype === "Ayatrio Member Favourite" && (
 
-              <p className="font-semibold text-blue-500 mt-[14px] mb-[3px] text-[14px]">{props.demandtype}</p>
+              <p className="font-medium text-blue-500 mt-[14px] mb-[3px] text-[12px]">{props.demandtype}</p>
             )
           }
           <div className={` ${props.demandtype === "Ayatrio Member Favourite" ? "" : "pt-[14px]"}`}>{props.title}</div>

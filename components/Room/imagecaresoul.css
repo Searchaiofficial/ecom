@@ -102,8 +102,8 @@ body {
 
 .indicator {
   background-color: gray;
-  height: 0.15rem;
-  width: 4.2rem;
+  height: 0.5rem;
+  width: 0.5rem;
   border: none;
   border-radius: 34px;
   outline: none;
@@ -113,5 +113,6 @@ body {
 }
 
 .indicator.active {
-  opacity: 1; /* Adjust the opacity for the active line */
+  opacity: 1;
+  /* background-color: white; Adjust the opacity for the active line */
 }

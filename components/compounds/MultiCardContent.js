@@ -26,7 +26,7 @@ const MultiCardContent = (props) => {
           alt="add"
         />
       </div> */}
-      <div className="flex flex-col xl:pt-[32px] pt-[32px] pl-[24px]  xl:pl-[32px] pr-[24px] lg:pr-[77px] pb-[50px]">
+      <div className="flex flex-col  xl:pt-[32px] pt-[32px] pl-[18px]  lg:pl-[24px]  xl:pl-[32px] pr-[18px] lg:pr-[24px] xl:pr-[77px] pb-[50px]">
         <div className="pb-[9px]  h-[56px]">
           <Image src={iconPath} width={iconSize} height={iconSize} alt="image" className="" />
         </div>

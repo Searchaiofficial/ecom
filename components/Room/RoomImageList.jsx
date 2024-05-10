@@ -7,7 +7,8 @@ import { selectProductImages } from "../Features/Slices/imageDataSlice";
 
 export default function RoomImageList() {
   const data = useSelector(selectProductImages);
-  console.log(data);
+  console.log(data)
+
   return (
     <div className="flex flex-col">
       <div className="imggallery mt-[50px] w-[60vw]">

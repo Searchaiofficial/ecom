@@ -92,13 +92,13 @@ const CategoriesSlider = () => {
                 {
                     categories.length > 0 && (
                         <div className="flex flex-row group items-center justify-end gap-2 mb-4">
-                            <div className="back rounded-full  bg-[#d2d2d7a3]  group-hover:opacity-60  opacity-0  absolute left-5 z-10">
+                            <div className="back rounded-full   group-hover:opacity-60  opacity-0  absolute left-5 z-10">
                                 <Image
                                     src="/ayatrio icon/left-card.svg"
                                     width={20}
                                     height={20}
                                     alt="Arrow"
-                                    className=" h-[48px]   w-[48px] "
+                                    className=" h-[28px] -mt-5  w-[28px] "
                                 />
 
                             </div>
@@ -110,7 +110,7 @@ const CategoriesSlider = () => {
                                     prevEl: ".back",
                                 }}
                                 draggable={true}
-                                style={{ "--swiper-navigation-size": "24px" }}
+                                style={{ "--swiper-navigation-size": "24px", maxHeight: "160px" }}
                                 breakpoints={{
                                     400: {
                                         slidesPerView: 2.5,
@@ -142,13 +142,13 @@ const CategoriesSlider = () => {
                                     );
                                 })}
                             </Swiper>
-                            <div className="right rounded-full  bg-[#d2d2d7a3] group-hover:opacity-60 opacity-0   absolute right-5 z-10">
+                            <div className="right rounded-full   group-hover:opacity-60 opacity-0   absolute right-5 z-10">
                                 <Image
                                     src="/ayatrio icon/right-card.svg"
                                     width={20}
                                     height={20}
                                     alt="Arrow"
-                                    className="  h-[48px]   w-[48px] "
+                                    className="  h-[28px] -mt-5  w-[28px] "
                                 />
 
                             </div>
