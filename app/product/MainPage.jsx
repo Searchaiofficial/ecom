@@ -24,19 +24,25 @@ const RoomPage = () => {
   const [data, setData] = useState([]);
   const selectedData = useSelector(selectRoomData);
   console.log("selectedData", selectedData);
+
   useEffect(() => {
     if (selectedData && Object.keys(selectedData).length !== 0) {
       sessionStorage?.setItem("roomData", JSON.stringify(selectedData));
     }
+  }, [selectedData]);
+
+  useEffect(() => {
     if (sessionStorage?.getItem("roomData")) {
       let cachedData = JSON.parse(sessionStorage?.getItem("roomData"));
       setData(cachedData);
+      dispatch(setRoomData({ roomData: cachedData }));
       dispatch({
         type: "FETCH_IMAGE_DATA",
         payload: cachedData?.productImages[0]?.color,
       });
     }
-  }, [selectedData]);
+  }, []);
+
   console.log(data);
   useEffect(() => {
     const handleScroll = () => {
