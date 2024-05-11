@@ -30,7 +30,7 @@ const Asidebox = (props) => {
     //   setAsideCategory(null);
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getCategoriesByType/${parentCategory}`;
     const fetchHomeDecorCategoryData = async () => {
       const response = await axios.get(apiUrl, {
@@ -43,10 +43,10 @@ const Asidebox = (props) => {
       }
       setAsideCategory(response.data);
       setSelectedData(response.data[0]);
-    }
+    };
 
     fetchHomeDecorCategoryData();
-  }, [parentCategory,])
+  }, [parentCategory]);
 
   const [defaultLinkIndex, setDefaultLinkIndex] = useState(0);
   const [selectedData, setSelectedData] = useState(
@@ -69,10 +69,10 @@ const Asidebox = (props) => {
             window.innerWidth > 800 && { y: -10, opacity: 0 }
           }
           whileInView={{ y: 0, opacity: 1 }}
-          className="absolute top-[2.7rem] p-4 bg-white flex flex-col mt-[15px] md:flex-row noto-sans-200 transition-all duration-300 ease-linear w-full md:left-0 h-lvh md:h-auto md:px-10"
+          className="absolute top-[2.7rem]  p-4 bg-white flex flex-col mt-[15px] md:flex-row noto-sans-200 transition-all duration-300 ease-linear w-full md:left-0 min-h-[20rem] md:h-auto md:px-10"
         >
           <aside
-            className="absolute top-[2.8rem] w-1/6 md:top-0 md:static md:border-r md:pr-10 md:py-4"
+            className="absolute top-[2.8rem] w-[15%] md:top-0 md:static md:border-r md:pr-10 md:py-4"
             initial={
               typeof window !== "undefined" &&
               window.innerWidth <= 800 && { x: 300, opacity: 0 }
@@ -84,28 +84,20 @@ const Asidebox = (props) => {
               <Link
                 key={idx}
                 onMouseEnter={() => handleMouseEnter(idx, value)}
-                className={`block p-2 text-lg font-medium ${defaultLinkIndex === idx ? "text-blue-600" : ""
-                  }`}
+                className={`block p-2 text-lg font-medium ${
+                  defaultLinkIndex === idx ? "text-blue-600" : ""
+                }`}
                 href="#"
                 onClick={() => setInnerData(true)}
               >
-                <div className="flex items-center gap-4">
-                  <Image
-                    src={value.image}
-                    alt="category"
-                    width={100}
-                    height={100}
-                    className="w-16 h-16 bg-gray-200"
-                  />
-                  <span>{value.name}</span>
-                </div>
-              
+                <span>{value.name}</span>
               </Link>
             ))}
           </aside>
           <div
-            className={`${innerData ? "block" : "hidden"
-              } md:block absolute  bg-white md:h-auto md:w-auto md:static z-[99]`}
+            className={`${
+              innerData ? "block" : "hidden"
+            } md:block absolute  bg-white md:h-auto md:w-auto md:static z-[99]`}
           >
             <Displaybox
               parentCategory={parentCategory}
