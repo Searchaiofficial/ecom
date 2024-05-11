@@ -13,6 +13,7 @@ import SaveDeviceIdLocalstorage from "@/utils/SaveDeviceIdLocalstorage ";
 import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import ChatPrompt from "../components/ChatPromptWidget/chatprompt";
 
 
 export default async function Home() {
@@ -22,17 +23,7 @@ export default async function Home() {
       <SaveDeviceIdLocalstorage />
 
       <Suspense fallback={<Splashscreen />}>
-        <div className="flex items-center lg:right-6 right-12 bottom-12  lg:bottom-5 gap-[8px] rounded-lg  fixed z-50">
-          <div>
-            <Image src="/ayatrio icon/store-chat.jpg" width={35} height={35} className="lg:w-[35px] w-[50px] h-[50px]  lg:h-[35px] rounded-full" />
-          </div>
-          <div className="lg:flex flex-col hidden">
-            <p className="text-[14px] font-semibold text-[#1D1D1F]">Need shopping help?</p>
-            <Link href="">
-              <p className="text-blue-500 text-[14px] font-normal">Ask a specialist</p>
-            </Link>
-          </div>
-        </div>
+        <ChatPrompt />
         <HomePage />
       </Suspense>
     </>
