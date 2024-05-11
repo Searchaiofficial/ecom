@@ -21,7 +21,6 @@ export default async function Home() {
     <>
       <SaveDeviceIdLocalstorage />
 
-      <Suspense fallback={<Splashscreen />}>
         <div className="flex items-center lg:right-6 right-12 bottom-12  lg:bottom-5 gap-[8px] rounded-lg  fixed z-50">
           <div>
             <Image src="/ayatrio icon/store-chat.jpg" width={35} height={35} className="lg:w-[35px] w-[50px] h-[50px]  lg:h-[35px] rounded-full" />
@@ -33,6 +32,7 @@ export default async function Home() {
             </Link>
           </div>
         </div>
+      <Suspense fallback={<Splashscreen />}>
         <HomePage />
       </Suspense>
     </>

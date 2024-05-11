@@ -1,8 +1,6 @@
 import dynamic from "next/dynamic";
 import "./styles.css";
-const Footer = dynamic(() => import("../Footer/Footer"), {
-  ssr: false,
-});
+const Footer = dynamic(() => import("../Footer/Footer"));
 const Multicard = dynamic(() => import("../Imagechanger/Multicard"));
 const TabsWrapper = dynamic(() => import("./TabsWrapper"));
 const Profile = dynamic(() => import("./Profile"));
@@ -23,24 +21,18 @@ const Suggestion = dynamic(() => import("./Suggestion"));
 // const Cookies = dynamic(() => import("./Cookies"));
 // =======
 const Cookies = dynamic(() => import("./Cookies"));
-const MulticardService = dynamic(() => import("./MultiCardService"))
-// const NewMainSlider = dynamic(() => import("../MainSlider/NewMainSlider"));
-// import NewMainSlider from "../MainSlider/NewMainSlider";
+const MulticardService = dynamic(() => import("./MultiCardService"));
 import Display from "./Display";
 import RoomCard from "./RoomCard";
 import DataSliderWrapper from "./DataSliderWrapper";
-import { Suspense } from "react";
 import MainSliderWrapper from "../MainSlider/MainSliderWrapper";
-import CategoriesSlider from "./categorySlider"
+import CategoriesSlider from "./categorySlider";
 // >>>>>>> c5884d5bc6361cb1d9e12f35f788d80f70e78eeb
 
 function Cards() {
   return (
     <div className="w-full h-auto">
-      {/* <NewMainSlider /> */}
-      <Suspense fallback={<div>Loading...</div>}>
-        <MainSliderWrapper />
-      </Suspense>
+      <MainSliderWrapper />
 
       <CategoriesSlider />
 
@@ -48,15 +40,11 @@ function Cards() {
 
       <Trending />
 
-      <Suspense fallback={<div>Loading...</div>}>
-        <RoomCard />
-      </Suspense>
+      <RoomCard />
 
       <DataSliderWrapper />
 
-      <Suspense fallback={<div>Loading...</div>}>
-        <Display />
-      </Suspense>
+      <Display />
 
       <DataSliderWrapper
         sliderIndexStart={2}
@@ -67,16 +55,8 @@ function Cards() {
       <Multicard />
       <Suggestion />
 
+      <Profile />
 
-      <Suspense fallback={<div>Loading...</div>}>
-        <Profile />
-      </Suspense>
-
-      {/* <<<<<<< HEAD
-
-      {MemoizedProfileContent} */}
-      {/* <Multicard /> */}
-      {/* ======= */}
       <MulticardService />
       <TabsWrapper />
       {/* >>>>>>> c5884d5bc6361cb1d9e12f35f788d80f70e78eeb */}
