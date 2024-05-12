@@ -9,9 +9,6 @@ const SearchBarWrapper = dynamic(() =>
 const MapButton = dynamic(() =>
   import("../MapButton/MapButton").catch((err) => console.error(err))
 );
-// const Cards = dynamic(() =>
-//   import("../Cards").catch((err) => console.error(err))
-// );
 
 const HomePage = async () => {
   return (

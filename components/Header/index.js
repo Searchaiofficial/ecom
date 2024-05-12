@@ -143,14 +143,16 @@ function Header({ howMuchScrolled }) {
 
   return (
     <div className="z-[99999px]">
-      {(homeRoute === pathname) &&
+      {(homeRoute === pathname ||
+        pathname.includes("/product/") ||
+        pathname.includes("/products/")) &&
         typeof window !== "undefined" ? (
         typeof window !== "undefined" && window.scrollY < 20 ? (
           <TopHeader />
         ) : null
       ) : null}
       <div
-        className={`fixed ${liveRoomRoute === pathname && "hidden"} w-full sm:bg-none ${homeRoute === pathname
+        className={`fixed ${liveRoomRoute === pathname && "hidden"} w-full sm:bg-none ${homeRoute === pathname || pathname.includes("/product/")
           ? typeof window !== "undefined" && window.scrollY < 20
             ? "md:top-[35px] top-[0px]"
             : "top-0"
