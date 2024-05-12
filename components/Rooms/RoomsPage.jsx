@@ -165,8 +165,8 @@ export const RoomsPage = ({ params }) => {
                         </div>
                     </div>
                     <div className="flex gap-3 mt-5">
-                        {roomData?.length > 0 && (
-                            roomData.map((room, index) => (
+                        {roomMain && roomMain.rooms && roomMain.rooms.length > 0 && (
+                            roomMain.rooms.map((room, index) => (
                                 <div key={index} className="w-1/2">
 
                                     <TabImage
