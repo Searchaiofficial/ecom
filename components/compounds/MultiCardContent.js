@@ -10,7 +10,7 @@ import "./../Imagechanger/styles.css";
 const MultiCardContent = (props) => {
   const { key, iconPath, iconSize, title, text } = props;
   return (
-    <div className="bg-white flex flex-col md:flex-row h-auto min-h-[350px] mb-[60px] p-3">
+    <div className="bg-white flex flex-col  md:flex-row h-auto min-h-[350px] mb-[60px] p-3">
       {/* <div className="mt-8 ml-6">
         <Image src={iconPath} width={iconSize} height={iconSize} alt="image" />
       </div>
