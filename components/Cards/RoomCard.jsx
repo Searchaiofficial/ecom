@@ -75,11 +75,11 @@ const RoomCard = async () => {
               {
                 <>
                   <TabImage
-                    src={roomData[1].imgSrc}
+                    src={roomData[1]?.imgSrc}
                     alt={`Image  of Children`}
                     width={1000}
                     height={300}
-                    labelData={roomData[1].children}
+                    labelData={roomData[1]?.children}
                   />
                 </>
               }
@@ -93,11 +93,11 @@ const RoomCard = async () => {
               {
                 <>
                   <TabImage
-                    src={roomData[2].imgSrc}
+                    src={roomData[2]?.imgSrc}
                     alt={`Image  of Children`}
                     width={1000}
                     height={300}
-                    labelData={roomData[2].children}
+                    labelData={roomData[2]?.children}
                   />
                 </>
               }
@@ -111,11 +111,11 @@ const RoomCard = async () => {
               {
                 <>
                   <TabImage
-                    src={roomData[3].imgSrc}
+                    src={roomData[3]?.imgSrc}
                     alt={`Image  of Children`}
                     width={1000}
                     height={300}
-                    labelData={roomData[3].children}
+                    labelData={roomData[3]?.children}
                   />
                 </>
               }

@@ -692,7 +692,7 @@ const Card = ({ data, productId }) => {
               height={35}
               width={35}
               alt="downarrow"
-              className="h-[35px] w-[35px]  hover:text-gray-600"
+              className="hover:text-gray-600"
             />
 
             <div className="flex flex-col items-center">

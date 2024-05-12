@@ -526,11 +526,10 @@ const FreeSample = () => {
                         }}
                         style={{ width: "272px", height: "150px" }}
                         className={`parent relative rounded-2xl object-cover w-full opactiy-100 h-full block bg-gray-500 
-                        ${
-                          subCategoryState === item.name
+                        ${subCategoryState === item.name
                             ? " border-2 border-black"
                             : ""
-                        }`}
+                          }`}
                       >
                         <img
                           className="child absolute object-cover w-full h-full"
@@ -695,16 +694,14 @@ const FreeSample = () => {
                         }}
                         style={{ width: "272px", height: "150px" }}
                         className={` rounded-2xl object-cover w-full opactiy-100 h-full block p-1 bg-gray-500 
-                        ${
-                          colorstate === color ? " border-2 border-black" : ""
-                        }`}
+                        ${colorstate === color ? " border-2 border-black" : ""
+                          }`}
                       ></div>
                       <h3
-                        className={` p-1 rounded-sm absolute right-0 bottom-0 ${
-                          colorstate === color
+                        className={` p-1 rounded-sm absolute right-0 bottom-0 ${colorstate === color
                             ? "font-semibold text-white absolute left-2 bottom-2 bg-transparent"
                             : "bg-white"
-                        }`}
+                          }`}
                       >
                         {color}
                       </h3>
@@ -772,16 +769,14 @@ const FreeSample = () => {
                         }}
                         style={{ width: "272px", height: "150px" }}
                         className={` rounded-2xl object-cover w-full opactiy-100 h-full block p-1 bg-gray-500 
-                        ${
-                          stylestate === style ? " border-2 border-black" : ""
-                        }`}
+                        ${stylestate === style ? " border-2 border-black" : ""
+                          }`}
                       ></div>
                       <h3
-                        className={` p-1 rounded-sm absolute right-0 bottom-0 ${
-                          stylestate === style
+                        className={` p-1 rounded-sm absolute right-0 bottom-0 ${stylestate === style
                             ? "font-semibold text-white absolute left-2 bottom-2 bg-transparent"
                             : "bg-white"
-                        }`}
+                          }`}
                       >
                         {style}
                       </h3>
@@ -849,18 +844,16 @@ const FreeSample = () => {
                         }}
                         style={{ width: "272px", height: "150px" }}
                         className={` rounded-2xl object-cover w-full opactiy-100 h-full block p-1 bg-gray-500 
-                        ${
-                          priceState === item.price
+                        ${priceState === item.price
                             ? " border-2 border-black"
                             : ""
-                        }`}
+                          }`}
                       ></div>
                       <h3
-                        className={` p-1 rounded-sm absolute right-0 bottom-0 ${
-                          priceState === item.price
+                        className={` p-1 rounded-sm absolute right-0 bottom-0 ${priceState === item.price
                             ? "font-semibold text-white absolute left-2 bottom-2 bg-transparent"
                             : "bg-white"
-                        }`}
+                          }`}
                       >
                         {item.price}
                       </h3>
@@ -962,26 +955,23 @@ const FreeSample = () => {
                           );
                         }}
                         className={`room-item rounded-2xl object-cover w-full opactiy-100 h-full block p-1
-                    ${
-                      selectedProduct.productId === item.productId
-                        ? " "
-                        : "overlay z-10 "
-                    }  ${
-                          selectedProduct.productId === item.productId
+                    ${selectedProduct.productId === item.productId
+                            ? " "
+                            : "overlay z-10 "
+                          }  ${selectedProduct.productId === item.productId
                             ? " border-2 border-black "
                             : ""
-                        }
+                          }
                   `}
                       />
 
                       {/* Your existing code for displaying product title */}
                       <h3
                         className={` p-1 rounded-sm absolute right-0 bottom-0
-                    ${
-                      selectedProduct.productId === item.productId
-                        ? "font-semibold text-white absolute left-2 bottom-2 bg-transparent"
-                        : "bg-white"
-                    }
+                    ${selectedProduct.productId === item.productId
+                            ? "font-semibold text-white absolute left-2 bottom-2 bg-transparent"
+                            : "bg-white"
+                          }
                   `}
                       >
                         {item.productTitle}

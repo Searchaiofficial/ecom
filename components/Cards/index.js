@@ -22,6 +22,7 @@ const Suggestion = dynamic(() => import("./Suggestion"));
 // =======
 const Cookies = dynamic(() => import("./Cookies"));
 const MulticardService = dynamic(() => import("./MultiCardService"));
+const ShopByRoomSlider = dynamic(() => import("./ShopByRoomSlider"));
 import Display from "./Display";
 import RoomCard from "./RoomCard";
 import DataSliderWrapper from "./DataSliderWrapper";
@@ -53,9 +54,10 @@ function Cards() {
       />
 
       <Multicard />
-      <Suggestion />
+      <ShopByRoomSlider />
 
       <Profile />
+      <Suggestion />
 
       <MulticardService />
       <TabsWrapper />

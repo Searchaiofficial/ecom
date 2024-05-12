@@ -103,17 +103,17 @@ const ProfileContent = ({ initialData }) => {
                   objectFit="cover"
                 />
               </div>
-              <div className="text-md p-1 font-bold line-clamp-1">{person.name}</div>
-              <p className="text-md ">{person.role}</p>
-              <a className="absolute bottom-0  md:bottom-5 lg:bottom-24 right-0 lg:right-2" href="#">
+              <div className="text-md p-1 flex gap-1 items-center font-bold ">
+                <p className="line-clamp-1">{person.name}</p>
                 <Image
-                  className=" sm:h-8 h-8 sm:w-8 w-8 -mt-1"
+                  className=" sm:h-6 h-6 sm:w-6 w-6"
                   src="/social-icon/linkedln.svg"
                   height={2}
                   width={2}
                   alt={`LinkedIn for ${person.name}`}
                 />
-              </a>
+              </div>
+              <p className="lg:text-[16px] text-sm ">{person.role}</p>
             </div>
             {/* <br />
             <br />
