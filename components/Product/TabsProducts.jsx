@@ -326,7 +326,7 @@ const Tabs = ({
 
   return (
     <>
-      <div className="wrapper sm:px-[50px] px-[20px] mt-20 relative  ">
+      <div className="wrapper  lg:px-[80px] sm:px-[50px] px-[20px] mt-20 relative  ">
         <div>
           <h2 className="mb-2 text-xl font-bold capitalize">{categoryName}</h2>
           {subCategory && (
@@ -448,16 +448,14 @@ const Tabs = ({
                 handleTabClick();
               }}
               className={`Tabbtn z-0 bg-gray-100
-                  ${
-                    openAll
-                      ? `active-tabs  border border-black ${commonClasses}`
-                      : `tabS  border border-white ${commonClasses}`
-                  }
-                  ${
-                    typeof window !== "undefined" && window.innerWidth <= 450
-                      ? " justify-center"
-                      : " justify-between"
-                  }
+                  ${openAll
+                  ? `active-tabs  border border-black ${commonClasses}`
+                  : `tabS  border border-white ${commonClasses}`
+                }
+                  ${typeof window !== "undefined" && window.innerWidth <= 450
+                  ? " justify-center"
+                  : " justify-between"
+                }
                   `}
             >
               All Filters &nbsp;
@@ -693,9 +691,8 @@ const Tabs = ({
 
                           <button
                             onClick={handleContent}
-                            className={`text-left underline ${
-                              openContent ? "block" : "hidden"
-                            }`}
+                            className={`text-left underline ${openContent ? "block" : "hidden"
+                              }`}
                           >
                             Less
                           </button>

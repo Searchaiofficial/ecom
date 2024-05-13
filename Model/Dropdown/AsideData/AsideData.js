@@ -9,7 +9,7 @@ export const headerLinks = [
     label: "Floor",
   },
   {
-    label: "Shop by rooms",
+    label: "Rooms",
   },
   {
     label: "Offers",

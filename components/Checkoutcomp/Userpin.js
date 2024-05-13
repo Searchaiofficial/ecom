@@ -83,13 +83,13 @@ const Userpin = () => {
           </div> */}
 
           {/* <!-- parent div --> */}
-          <div class=" py-2 mx-2">
+          <div className=" py-2 mx-2">
             {/* <!-- header section --> */}
-            <div class="flex justify-between items-center mb-10 lg:pb-5">
-              <h1 class=" text-[22px] leading-[1.33] font-[700] tracking-tight">
+            <div className="flex justify-between items-center mb-10 lg:pb-5">
+              <h1 className=" text-[22px] leading-[1.33] font-[700] tracking-tight">
                 Shopping bag
               </h1>
-              <div class="cursor-pointer hover:bg-gray-400 box-border rounded-xl">
+              <div className="cursor-pointer hover:bg-gray-400 box-border rounded-xl">
                 <svg
                   focusable="false"
                   viewBox="0 0 24 24"
@@ -107,7 +107,7 @@ const Userpin = () => {
               </div>
             </div>
             {/* <!-- Address pin  --> */}
-            <div class="flex h-11 w-48">
+            <div className="flex h-11 w-48">
               <svg
                 focusable="false"
                 viewBox="0 0 24 24"
@@ -124,13 +124,13 @@ const Userpin = () => {
                 ></path>
                 <path d="M14.0001 9.2157c0 1.1046-.8954 2-2 2-1.1045 0-2-.8954-2-2s.8955-2 2-2c1.1046 0 2 .8954 2 2z"></path>
               </svg>
-              <p class="w-full ml-3 font-[300] text-[15.5px]">
-                Your pincode <span class="underline">843146</span>
+              <p className="w-full ml-3 font-[300] text-[15.5px]">
+                Your pincode <span className="underline">843146</span>
               </p>
             </div>
 
             {/* <!-- order text --> */}
-            <div class="tracking-wide font-[700] text-[1.09rem] leading-6 mb-4">
+            <div className="tracking-wide font-[700] text-[1.09rem] leading-6 mb-4">
               How would you like to receive your order?
             </div>
             {/*devivery PIN CODE  */}
@@ -168,7 +168,7 @@ const Userpin = () => {
             </div>
 
             {/* <!-- Take option  --> */}
-            <div class="flex flex-row gap-5">
+            <div className="flex flex-row gap-5">
               {/* <!-- delivery  --> */}
               {/* <div class="box-border border rounded-sm border-gray-400 h-24 w-[50%]">
                 <div class="flex px-6 py-5 h-24 items-center">
@@ -255,7 +255,7 @@ const Userpin = () => {
                       width={249}
                       height={249}
                       alt={item.name}
-                      className="w-20 h-20"
+                      className="w-20 h-20 mr-5"
                     />
                   );
                 })

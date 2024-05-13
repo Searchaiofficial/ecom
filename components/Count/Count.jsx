@@ -60,7 +60,7 @@ function IncDecCounter() {
             </button>
           </div>
         </div>
-        <div class="">
+        <div className="">
           <button
             className={` bg-black  h-9 w-auto text-white  rounded-full border  px-7 text-sm items-center justify-center
             ${visible === true ? "block" : "hidden"}

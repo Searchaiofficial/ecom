@@ -35,35 +35,32 @@ function Cards() {
     <div className="w-full h-auto">
       <MainSliderWrapper />
 
-      <CategoriesSlider />
+      <div className="lg:px-[52px]">
+        <CategoriesSlider />
+        <Cookies />
+        <Trending />
+        <RoomCard />
+        <DataSliderWrapper />
+        <Display />
+        <DataSliderWrapper
+          sliderIndexStart={2}
+          sliderIndexEnd={4}
+          sliderIndexOffset={2}
+        />
+      </div>
 
-      <Cookies />
-
-      <Trending />
-
-      <RoomCard />
-
-      <DataSliderWrapper />
-
-      <Display />
-
-      <DataSliderWrapper
-        sliderIndexStart={2}
-        sliderIndexEnd={4}
-        sliderIndexOffset={2}
-      />
 
       <Multicard />
       <ShopByRoomSlider />
-
       <Profile />
       <Suggestion />
-
       <MulticardService />
-      <TabsWrapper />
-      {/* >>>>>>> c5884d5bc6361cb1d9e12f35f788d80f70e78eeb */}
 
-      <Phone />
+
+      <div className="lg:px-[52px]">
+        <TabsWrapper />
+        <Phone />
+      </div>
       <Footer />
     </div>
   );

@@ -205,7 +205,7 @@ const Reviews = ({ productId, data }) => {
     <>
       <div className="py-12 sm:w-auto w-[90vw]  overflow-x-hidden">
         {
-          data.demandtype === "Ayatrio Member Favourite" && (
+          data.demandtype === "Ayatrio Member Favorite" && (
             <div>
               <div className="flex flex-col justify-center mx-auto">
                 <div className="flex items-center justify-center overflow-hidden flex-row ">

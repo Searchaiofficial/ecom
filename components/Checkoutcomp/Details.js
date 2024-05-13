@@ -215,7 +215,7 @@ const Details = () => {
       <div className="grid lg:grid-cols-12 lg:gap-10 border-b-2">
         <div className="lg:col-span-8 lg:order-1 order-2 ">
           {/* <!-- parent div --> */}
-          <div class=" py-2 ml-2 lg:ml-12 lg:mr-14 mr-2">
+          <div className=" py-2 ml-2 lg:ml-12 lg:mr-14 mr-2">
             {/* <!-- header section --> */}
             <div className="">
               <div className="bg-white  w-full mx-auto ">

@@ -14,6 +14,7 @@ function Card(props) {
   const router = useRouter();
   const dispatch = useDispatch();
 
+
   const handleImageClick = () => {
     props.setPopupVisible(true);
   };
@@ -57,7 +58,7 @@ function Card(props) {
                 "flex text-[12px] justify-between text-black font-normal bg-white py-1 px-3 absolute top-2 left-2 z-10"
               }
             >
-              {props.demandtype === "Ayatrio Member Favourite" ? "Top Rated" : props.demandtype}
+              {props.demandtype === "Ayatrio Member Favorite" ? "Top Rated" : props.demandtype}
             </div>
           ) : (
             ""
@@ -134,12 +135,12 @@ function Card(props) {
         </div>
         <div className="card-title flex flex-col">
           {
-            props.demandtype === "Ayatrio Member Favourite" && (
+            props.demandtype === "Ayatrio Member Favorite" && (
 
               <p className="font-medium text-blue-500 mt-[14px] mb-[3px] text-[12px]">{props.demandtype}</p>
             )
           }
-          <div className={` ${props.demandtype === "Ayatrio Member Favourite" ? "" : "pt-[14px]"}`}>{props.title}</div>
+          <div className={` ${props.demandtype === "Ayatrio Member Favorite" ? "" : "pt-[14px]"}`}>{props.title}</div>
         </div>
         <div className="card-date text-sm text-[#757575]">{props.desc}</div>
         <div className="card-price">

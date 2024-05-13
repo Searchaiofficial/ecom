@@ -36,7 +36,7 @@ const RoomInfo = ({ data }) => {
           <div>
             {/* star */}
             {
-              data.demandtype === "Ayatrio Member Favourite" && (
+              data.demandtype === "Ayatrio Member Favorite" && (
                 <div className="border border-gray-300 px-2  sm:h-20 h-auto sm:gap-0 gap-3 sm:w-fit w-[100%] rounded-lg  flex flex-row justify-center items-center">
                   <div
                     id="box1"

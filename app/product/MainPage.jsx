@@ -86,10 +86,10 @@ const RoomPage = () => {
 
   return (
     <>
-      <div className="overflow-y-auto container-rooms flex sm:block items-center ">
-        <div className="sm:px-[50px] px-[20px] mt-[65px]">
+      <div className="overflow-y-auto container-rooms flex sm:block items-center px-[20px] sm:px-[50px] lg:px-[40px] ">
+        <div className="mt-[65px]">
           <div className="flex sm:flex-row gap-8 flex-col">
-            <div className="sm:basis-2/3 flex flex-col sm:flex-grow">
+            <div className="sm:basis-2/3 flex lg:px-[40px] flex-col sm:flex-grow">
               <RoomImageList images={data?.images} />
               <ImageCaresoul images={data?.images} />
               <div className="block md:hidden">

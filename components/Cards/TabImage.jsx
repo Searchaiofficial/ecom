@@ -13,7 +13,7 @@ const TabImage = ({ src, alt, width, height, labelData }) => {
         height={height}
       />
       <div className="cursor-pointer">
-        <div class="border-2 border-neutral-300 hover:border-white top-16 left-16 absolute hover:bg-[rgba(0,0,0,0.3)] rounded-full size-[30px] flex items-center justify-center transition-all duration-200 before:content-[''] before:size-3 before:bg-white  before:rounded-full before:hover:size-2 before:transition-all before:duration-200">
+        <div className="border-2 border-neutral-300 hover:border-white lg:top-16 lg:left-16 top-8 left-16 absolute hover:bg-[rgba(0,0,0,0.3)] rounded-full size-[30px] flex items-center justify-center transition-all duration-200 before:content-[''] before:size-3 before:bg-white  before:rounded-full before:hover:size-2 before:transition-all before:duration-200">
           <Label labelData={labelData} />
         </div>
       </div>

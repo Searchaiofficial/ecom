@@ -227,7 +227,7 @@ const CartMain = () => {
 
 
             {/* <!-- parent div --> */}
-            <div className="py-2 lg:ml-12 lg:mr-14">
+            <div className="py-2 ">
               {/* <!-- header section --> */}
               <div className="flex justify-between items-center lg:mb-10 mb-5 ">
                 <h1 className=" text-[24px] text-[#111111] leading-[1.33] font-[700] tracking-tight">

@@ -172,7 +172,7 @@ function Header({ howMuchScrolled }) {
                 } flex flex-row justify-between z-[99999px] items-center sm:px-[20px] px-[20px] h-[60px]`}
             >
               {/* main-logo */}
-              <div className=" flex mainlogo items-center justify-start">
+              <div className=" flex mainlogo items-center mr-20 justify-start">
                 <Link href="/">
                   <Image
                     src="/images/ayatriologo.webp"
@@ -219,7 +219,7 @@ function Header({ howMuchScrolled }) {
                           // <Asidebox asideSectionList={value.asideSectionList} />
                           <Asidebox hoveredIndex={hoveredIndex} />
                         )}
-                        {value.label === "Shop by rooms" &&
+                        {value.label === "Rooms" &&
                           hoveredIndex === idx && <Midsection />}
                       </div>
                     ))}

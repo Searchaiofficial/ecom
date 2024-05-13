@@ -12,13 +12,13 @@ const RoomCard = async () => {
 
   return (
     <>
-      <div className="sm:px-[50px] px-[20px] flex justify-between mx-auto mb-10 ">
+      <div className="px-[28px] flex justify-between mx-auto mb-10 ">
         <div className=" w-full flex justify-center ">
-          <div className="w-full h-[712px] grid grid-cols-2 lg:grid-cols-4 gap-x-4 auto-rows-fr">
+          <div className="w-full  h-[1157px]  lg:h-[816px] grid grid-cols-2 lg:grid-cols-12  gap-x-4 auto-rows-fr">
             {/* 1 */}
             <div
-              className="parent  col-start-1 col-end-3 row-start-1 mb-4 lg:mb-0 row-end-8
-              lg:col-start-1 lg:col-end-3 lg:row-start-1 lg:row-end-8
+              className="parent  col-start-1 col-end-3 row-start-1 mb-4 lg:mb-0 row-end-7
+              lg:col-start-1 lg:col-end-7 lg:row-start-1 lg:row-end-12
             "
             >
               {gallery.length > 0 ? (
@@ -34,9 +34,9 @@ const RoomCard = async () => {
                       <h2 className="text-white text-center text-3xl  mb-4">
                         {gallery[0].items[0].heading}
                       </h2>
-                      <button className="bg-black hover:bg-zinc-300 text-white  py-2 px-10 h-12 rounded-full">
+                      {/* <button className="bg-black hover:bg-zinc-300 text-white  py-2 px-10 h-12 rounded-full">
                         {gallery[0].items[0].buttonText}
-                      </button>
+                      </button> */}
                     </div>
                   </div>
                 </>
@@ -50,8 +50,8 @@ const RoomCard = async () => {
             </div>
             {/* 2 */}
             <div
-              className="parent mb-4 col-start-1 col-end-2 row-start-8 row-span-3
-              lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-4
+              className="parent mb-4 col-start-1 col-end-2 row-start-7 row-span-3
+              lg:col-start-7 lg:col-end-10 lg:row-start-1 lg:row-end-6
             "
             >
               {
@@ -60,7 +60,7 @@ const RoomCard = async () => {
                     src={roomData[0].imgSrc}
                     alt={`Image  of Children`}
                     width={1000}
-                    height={300}
+                    height={338}
                     labelData={roomData[0].children}
                   />
                 </>
@@ -68,8 +68,8 @@ const RoomCard = async () => {
             </div>
             {/* 3 */}
             <div
-              className=" parent mb-4  col-start-2 col-end-3 row-start-8 row-span-5
-            lg:col-start-4 lg:col-end-5 lg:row-start-1 lg:row-end-6
+              className=" parent mb-4  col-start-2 col-end-3 row-start-7 row-span-4
+            lg:col-start-10 lg:col-end-13 lg:row-start-1 lg:row-end-7
             "
             >
               {
@@ -86,8 +86,8 @@ const RoomCard = async () => {
             </div>
             {/* 4 */}
             <div
-              className=" parent col-start-1 col-end-2 row-start-11 row-span-4
-              lg:col-start-3 lg:col-end-4 lg:row-start-4 lg:row-end-8
+              className=" parent col-start-1 col-end-2 row-start-10 row-span-4
+              lg:col-start-7 lg:col-end-10 lg:row-start-6 lg:row-end-12
             "
             >
               {
@@ -104,8 +104,8 @@ const RoomCard = async () => {
             </div>
             {/* 5 */}
             <div
-              className=" parent col-start-2 col-end-3 row-start-13 row-span-2
-              lg:col-start-4 lg:col-end-5 lg:row-start-6 lg:row-end-8
+              className=" parent col-start-2 col-end-3 row-start-11 row-span-3
+              lg:col-start-10 lg:col-end-13 lg:row-start-7 lg:row-end-12
             "
             >
               {

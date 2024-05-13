@@ -8,7 +8,7 @@ import Link from "next/link";
 function LiveRoomProductCard(props) {
   const router = useRouter();
   const dispatch = useDispatch();
-  
+
   const [formattedDate, setFormattedDate] = useState({
     startDate: "",
     endDate: "",
@@ -71,7 +71,7 @@ function LiveRoomProductCard(props) {
                 "flex justify-between text-black font-semibold bg-white py-1 px-3 absolute top-2 left-2 z-10"
               }
             >
-              {props.demandtype === "Ayatrio Member Favourite"
+              {props.demandtype === "Ayatrio Member Favorite"
                 ? "Top Rated"
                 : props.demandtype}
             </div>
@@ -123,18 +123,18 @@ function LiveRoomProductCard(props) {
                 </p>
               )}
               {/* {props.ratings?.length > 0 && ( */}
-                <p className="flex flex-row items-center gap-1 text-sm text-black">
-                  {props.stars.map((star, index) => (
-                    <Image
-                      key={index}
-                      src={star}
-                      alt="star"
-                      width={15}
-                      height={15}
-                    />
-                  ))}
-                  ({props.ratings?.length})
-                </p>
+              <p className="flex flex-row items-center gap-1 text-sm text-black">
+                {props.stars.map((star, index) => (
+                  <Image
+                    key={index}
+                    src={star}
+                    alt="star"
+                    width={15}
+                    height={15}
+                  />
+                ))}
+                ({props.ratings?.length})
+              </p>
               {/* )} */}
             </div>
           </div>

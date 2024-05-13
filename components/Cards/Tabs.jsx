@@ -7,7 +7,7 @@ import TabImage from "./TabImage";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-const Tabs = ({data}) => {
+const Tabs = ({ data }) => {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("");
   const [isSticky, setIsSticky] = useState(false);
@@ -86,7 +86,7 @@ const Tabs = ({data}) => {
 
   return (
     <>
-      <div className="sm:px-[50px] px-[20px] py-20 h-full">
+      <div className="lg:px-[28px] px-[20px] sm:px-[50px]  py-20 h-full">
         <div>
           <h2 className="text-xl font-bold mb-5">More ideas and inspiration</h2>
         </div>

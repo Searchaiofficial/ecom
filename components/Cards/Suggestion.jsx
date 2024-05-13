@@ -64,7 +64,7 @@ const Suggestion = () => {
 
   return (
     <div>
-      <div className="pt-12 mb-20  bg-white sm:px-[50px] px-[20px]">
+      <div className="pt-12 mb-20  bg-white sm:pl-[50px]  pl-[20px]  lg:pl-[80px]">
         <div className="mb-2 w-full flex justify-between items-center">
           <h2 className="font-semibold text-2xl py-[15px]">
             {suggestionSlider && suggestionSlider.length === 0

@@ -63,13 +63,13 @@ function TabsProductCard(props) {
             />
           </div>
 
-          {props.text.demandtype ? (
+          {props.demandtype ? (
             <div
               className={
-                "flex justify-between text-white bg-red-500 p-1 absolute top-0 left-0 z-10"
+                "flex text-[12px] justify-between text-black font-normal bg-white py-1 px-3 absolute top-2 left-2 z-10"
               }
             >
-              {props.text.demandtype}
+              {props.demandtype === "Ayatrio Member Favorite" ? "Top Rated" : props.demandtype}
             </div>
           ) : (
             ""
@@ -135,6 +135,12 @@ function TabsProductCard(props) {
             </span>
           </div>
         </div>
+        {
+          props.demandtype === "Ayatrio Member Favorite" && (
+
+            <p className="font-medium text-blue-500 mt-[10px] text-[12px]">{props.demandtype}</p>
+          )
+        }
         <p className="text-lg font-semibold hover:underline">
           {props.productTitle}
         </p>

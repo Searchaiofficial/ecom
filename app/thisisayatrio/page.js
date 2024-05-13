@@ -53,7 +53,7 @@ const imageAndText = [
 const ThisIsAyatrioPage = () => {
   return (
     <div>
-      <div className="mt-20 sm:px-[50px] px-[20px] space-y-10">
+      <div className="mt-20 px-[28px] space-y-10">
         {/* THis is ayatrio section starts */}
         <section>
           <div className="flex flex-col w-full gap-6">
