@@ -1,12 +1,10 @@
 
 import React from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import Image from "next/image";
 
 const TopHeader = () => {
-  const pathname = usePathname();
-  // const homeRoute = "/";
+
   return (
     <div className="hidden md:block">
       <div

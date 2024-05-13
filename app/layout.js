@@ -3,7 +3,6 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/provider";
 
-import HeaderWrapper from "@/components/HeaderWrapper/HeaderWrapper";
 import FooterWrapper from "@/components/FooterWrapper/FooterWrapper";
 import NextTopLoader from "nextjs-toploader";
 // const myFont = localFont({
@@ -51,7 +50,6 @@ export default function RootLayout({ children }) {
     <html lang="en" className={poppins.className}>
       <body>
         <Providers>
-          <HeaderWrapper />
           <NextTopLoader color="#000" showSpinner={false} />
           {children}
           <FooterWrapper />

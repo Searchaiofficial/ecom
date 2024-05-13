@@ -1,28 +1,22 @@
 "use client";
 import React from "react";
 import "./styles.css";
-import SearchModal from "./MobileSearch";
-import Menu from "./menu";
 import { useEffect, useState } from "react";
 import Asidebox from "./AsideSection/Asidebox";
 import Expandedbar from "./Expandedbar";
 
-import TopLoader from "../AddOn/TopLoader";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import TopHeader from "./TopHeader";
-import dynamic from "next/dynamic";
 import { selectQuantity } from "../Features/Slices/calculationSlice";
-import {
-  AsideSectionList,
-  headerLinks,
-} from "@/Model/Dropdown/AsideData/AsideData";
+import { headerLinks } from "@/Model/Dropdown/AsideData/AsideData";
 import Midsection from "./Midsection/Midsection";
 import { useSelector } from "react-redux";
 import { MenuIcon, X } from "lucide-react";
-// import NextTopLoader from "nextjs-toploader";
+import TopHeaderWrapper from "./TopHeaderWrapper";
+import { useScrollVisibility } from "@/hooks/useScrollVisibility";
 
 function Header({ howMuchScrolled }) {
   const pathname = usePathname();
@@ -30,7 +24,6 @@ function Header({ howMuchScrolled }) {
   const quantity = useSelector(selectQuantity);
 
   // Filter
-  const [isFilterVisible, setIsFilterVisible] = useState(true);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [searchEngine, SetSeacrhEngine] = useState("");
@@ -118,46 +111,23 @@ function Header({ howMuchScrolled }) {
     onClose();
   };
 
-  // const [isFilterVisible, setIsFilterVisible] = useState(true);
-
-  useEffect(() => {
-    let prevScrollPos = window.scrollY;
-
-    const handleScroll = () => {
-      const currentScrollPos = window.scrollY;
-      setIsFilterVisible(
-        currentScrollPos <= prevScrollPos || currentScrollPos < 100
-      );
-      prevScrollPos = currentScrollPos;
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  const {isVisible: isFilterVisible} = useScrollVisibility()
 
   const homeRoute = "/";
-  const liveRoomRoute = "/liveroom";
 
   return (
     <div className="z-[99999px]">
-      {(homeRoute === pathname ||
-        pathname.includes("/product/") ||
-        pathname.includes("/products/")) &&
-        typeof window !== "undefined" ? (
-        typeof window !== "undefined" && window.scrollY < 20 ? (
-          <TopHeader />
-        ) : null
-      ) : null}
+      <TopHeaderWrapper>
+        <TopHeader />
+      </TopHeaderWrapper>
       <div
-        className={`fixed ${liveRoomRoute === pathname && "hidden"} w-full sm:bg-none ${homeRoute === pathname || pathname.includes("/product/")
-          ? typeof window !== "undefined" && window.scrollY < 20
-            ? "md:top-[35px] top-[0px]"
+        className={`fixed w-full sm:bg-none ${
+          homeRoute === pathname || pathname.includes("/product/")
+            ? typeof window !== "undefined" && window.scrollY < 20
+              ? "md:top-[35px] top-[0px]"
+              : "top-0"
             : "top-0"
-          : "top-0"
-          } z-[99999]
+        } z-[99999]
        ${isScrolled ? "bg-white" : "bg-white"} 
       
       
@@ -168,8 +138,9 @@ function Header({ howMuchScrolled }) {
         {!searchQuery ? (
           <>
             <div
-              className={`${isScrolled ? " border-b-[0.5px] border-slate-200" : ""
-                } flex flex-row justify-between z-[99999px] items-center sm:px-[20px] px-[20px] h-[60px]`}
+              className={`${
+                isScrolled ? " border-b-[0.5px] border-slate-200" : ""
+              } flex flex-row justify-between z-[99999px] items-center sm:px-[20px] px-[20px] h-[60px]`}
             >
               {/* main-logo */}
               <div className=" flex mainlogo items-center mr-20 justify-start">
@@ -198,19 +169,21 @@ function Header({ howMuchScrolled }) {
                         key={idx}
                         onMouseEnter={() => handleMouseEnter(idx)}
                         onMouseLeave={handleMouseLeave}
-                      // onClick={() => handleClick(idx)}
+                        // onClick={() => handleClick(idx)}
                       >
                         <Link
-                          className={`text-md  font-semibold  ${isOpen ? "border-b-2 border-black" : ""
-                            }`}
+                          className={`text-md  font-semibold  ${
+                            isOpen ? "border-b-2 border-black" : ""
+                          }`}
                           href="#"
                           onClick={toggleDropdown}
                         >
                           <p
-                            className={`block font-medium py-[15px] px-[5px] border-b-2  ${hoveredIndex === idx
-                              ? "border-black"
-                              : "border-transparent"
-                              }`}
+                            className={`block font-medium py-[15px] px-[5px] border-b-2  ${
+                              hoveredIndex === idx
+                                ? "border-black"
+                                : "border-transparent"
+                            }`}
                           >
                             {value.label}
                           </p>
@@ -219,8 +192,9 @@ function Header({ howMuchScrolled }) {
                           // <Asidebox asideSectionList={value.asideSectionList} />
                           <Asidebox hoveredIndex={hoveredIndex} />
                         )}
-                        {value.label === "Rooms" &&
-                          hoveredIndex === idx && <Midsection />}
+                        {value.label === "Rooms" && hoveredIndex === idx && (
+                          <Midsection />
+                        )}
                       </div>
                     ))}
                   </nav>
@@ -377,19 +351,21 @@ function Header({ howMuchScrolled }) {
                   key={idx}
                   onMouseEnter={() => handleMouseEnter(idx)}
                   onMouseLeave={handleMouseLeave}
-                // onClick={() => handleClick(idx)}
+                  // onClick={() => handleClick(idx)}
                 >
                   <Link
-                    className={`text-md  font-semibold  ${isOpen ? "border-b-2 border-black" : ""
-                      }`}
+                    className={`text-md  font-semibold  ${
+                      isOpen ? "border-b-2 border-black" : ""
+                    }`}
                     href="#"
                     onClick={toggleDropdown}
                   >
                     <p
-                      className={`block p-2 text-lg font-medium border-b-2 ${hoveredIndex === idx
-                        ? "border-black"
-                        : "border-transparent"
-                        }`}
+                      className={`block p-2 text-lg font-medium border-b-2 ${
+                        hoveredIndex === idx
+                          ? "border-black"
+                          : "border-transparent"
+                      }`}
                     >
                       {value.label}
                     </p>

@@ -3,7 +3,7 @@ import "../styles.css";
 import Carous from "@/components/Carousel/Carous";
 import Image from "next/image";
 import axios from "axios";
-import ReviewForm from "../../../app/profile/ReviewForm";
+import ReviewForm from "../../../app/(with-header)/profile/ReviewForm";
 
 const ratingsData = [
   {
