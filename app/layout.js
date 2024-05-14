@@ -2,7 +2,7 @@ import { Poppins } from "next/font/google";
 // import localFont from "next/font/local";
 import "./globals.css";
 import { Providers } from "@/provider";
-
+import { GoogleTagManager } from "@next/third-parties/google";
 import FooterWrapper from "@/components/FooterWrapper/FooterWrapper";
 import NextTopLoader from "nextjs-toploader";
 import { BASE_URL } from "@/constants/base-url";
@@ -56,8 +56,11 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
+
   return (
     <html lang="en" className={poppins.className}>
+      <GoogleTagManager gtmId={gtmId} />
       <body>
         <Providers>
           <NextTopLoader color="#000" showSpinner={false} />
