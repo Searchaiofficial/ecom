@@ -5,6 +5,7 @@ import { Providers } from "@/provider";
 
 import FooterWrapper from "@/components/FooterWrapper/FooterWrapper";
 import NextTopLoader from "nextjs-toploader";
+import { BASE_URL } from "@/constants/base-url";
 // const myFont = localFont({
 //   src: "../public/Font/Jost-Regular.ttf",
 // });
@@ -14,11 +15,11 @@ const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 export const metadata = {
-  metadataBase: new URL("http://localhost:3000/"),
+  metadataBase: new URL(BASE_URL),
 
   title: {
     default: "Ayatrio",
-    template: "Ayatrio - %s ",
+    template: "Ayatrio - %s",
   },
   description:
     "Custom Wallpaper, Wooden Flooring, Laminate & Vinyl Floors in India India&#039;s first Virtual Reality based Interior Design Solution",
@@ -35,10 +36,19 @@ export const metadata = {
     ],
   },
   applicationName: "Ayatrio",
-  keywords: ["Ayatrio", "Flooring store"],
+  keywords: [
+    "Ayatrio",
+    "Flooring store",
+    "Wallpaper store",
+    "Custom Wallpaper",
+    "Wooden Flooring",
+    "Curtains",
+    "Blinds",
+    "Laminate & Vinyl Floors",
+  ],
   authors: [{ name: "Ayatrio" }],
   alternates: {
-    canonical: "/",
+    canonical: BASE_URL,
     languages: {
       "en-US": "/en-US",
     },

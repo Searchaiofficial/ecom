@@ -1,3 +1,5 @@
+import { BASE_URL } from "@/constants/base-url";
+
 export default function robots() {
   return {
     rules: {
@@ -5,6 +7,6 @@ export default function robots() {
       allow: "/",
       disallow: "/private/",
     },
-    sitemap: "http://localhost:3000/sitemap.xml",
+    sitemap: `${BASE_URL}/sitemap.xml`,
   };
 }
