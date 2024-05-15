@@ -14,7 +14,7 @@ const Footer = () => {
   const pathname = usePathname();
   const liveRoomRoute = "/liveroom"
   return (
-    <div className={`${liveRoomRoute === pathname && "hidden"} bg-gray-100 lg:px-[80px] sm:px-[50px] px-[20px] p mt-20 pt-[70px]`}>
+    <div className={`${liveRoomRoute === pathname && "hidden"} bg-gray-100 lg:px-[67px] sm:px-[50px] px-[20px] p mt-20 pt-[70px]`}>
       <div className="grid md:grid-cols-6 grid-cols-1 pb-9">
         <div className="md:col-span-2 row-span-1 col-span-1 mr-12 mb-5">
           <JoinAyatrioFamily />
@@ -86,9 +86,9 @@ const Footer = () => {
         </div>
 
         <div className="flex gap-3">
-          <ul className="flex flex-wrap pt-2.5 justify-center text-gray-900 dark:text-white">
+          <ul className="flex flex-wrap pt-2.5 justify-center text-gray-900 ">
             <li>
-              <a href="#" className="me-4 text-xs hover:underline">
+              <a href="/cookie-policy" className="me-4 text-xs hover:underline">
                 Cookie policy
               </a>
             </li>

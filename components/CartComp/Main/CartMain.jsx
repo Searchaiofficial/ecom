@@ -221,7 +221,7 @@ const CartMain = () => {
           </>
         )}
 
-      <div className=" px-[20px] lg:px-20 pt-[6rem] pb-[3rem] ">
+      <div className=" px-[20px] lg:px-[67px] pt-[6rem] pb-[3rem] ">
         <div className=" grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-10">
           <div className="lg:col-span-8 col-span-1">
 

@@ -72,7 +72,7 @@ const Userpin = () => {
   const delcharge = 100;
 
   return (
-    <div className="p-2 lg:px-20 pt-[6rem] pb-[3rem] ">
+    <div className="p-2 lg:px-[67px] pt-[6rem] pb-[3rem] ">
       <div className="grid -grid-cols-1 lg:grid-cols-12 gap-10 border-b-2">
         <div className="lg:col-span-8 col-span-1 order-2 lg:order-1">
           {/* <h2 className="py-2 mb-6 text-2xl">Your Cart</h2>

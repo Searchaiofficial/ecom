@@ -326,7 +326,7 @@ const Tabs = ({
 
   return (
     <>
-      <div className="wrapper  lg:px-[80px] sm:px-[50px] px-[20px] mt-20 relative  ">
+      <div className="wrapper  lg:px-[67px] sm:px-[50px] px-[20px] mt-20 relative  ">
         <div>
           <h2 className="mb-2 text-xl font-bold capitalize">{categoryName}</h2>
           {subCategory && (

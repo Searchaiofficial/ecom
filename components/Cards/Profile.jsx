@@ -13,7 +13,7 @@ const Profile = async () => {
 
   return (
     <div>
-      <div className="pt-14 grid md:grid-cols-5 grid-cols-1 gap-4 bg-zinc-100 lg:pl-[80px] sm:pl-[50px] pl-[20px]  ">
+      <div className="pt-14 grid md:grid-cols-5 grid-cols-1 gap-4 bg-zinc-100 lg:pl-[67px] sm:pl-[50px] pl-[20px]  ">
         <div className="col-span-2 md:mb-auto mb-0">
           <div className="col-span-1  mt-4">
             <div className="mb-2 ">Inspiration to installation</div>

@@ -31,7 +31,7 @@ const ChatPrompt = () => {
     }
 
     return (
-        <Link href={"https://wa.me/message/SJJ5WR6RYEJKN1"} className={`flex items-center lg:right-6 right-7 bottom-12 lg:bottom-5 gap-[8px] rounded-lg fixed z-50 ${!showContent && "lg:mr-1.5 lg:mb-1.5"}`}>
+        <Link href={"https://wa.me/message/SJJ5WR6RYEJKN1"} className={`flex items-center lg:right-6 right-7 bottom-4 lg:bottom-3.5 gap-[8px] rounded-lg fixed z-50 ${!showContent && "lg:mr-1.5 lg:mb-1.5"}`}>
             <div>
                 <Image src="/ayatrio icon/store-chat.jpg" width={35} height={35} className={`lg:w-[35px] w-[45px] h-[45px] lg:h-[35px] rounded-full`} />
             </div>

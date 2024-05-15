@@ -52,7 +52,7 @@ const Dataslider = ({ category, data, sliderIndex }) => {
   }, []);
   return (
     <div>
-      <div className=" bg-white  px-[28px] ">
+      <div className=" bg-white  px-[15px] ">
         <div className="w-full flex justify-between items-center">
           <h2 className="font-semibold text-2xl py-[30px]">{category}</h2>
           <div className="Slidenav flex text-2xl cursor-pointer text-white rounded-full gap-2">

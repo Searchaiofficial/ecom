@@ -30,13 +30,17 @@ export const footerData = [
     categoryHeading: "Help",
     categoryData: [
       { id: 1, text: "Design & Planners" },
-      { id: 2, text: "Return policy" },
-      { id: 3, text: "Prices and price tags" },
-      { id: 4, text: "Gift Cards" },
-      { id: 5, text: "Contact us" },
-      { id: 6, text: "FAQ" },
+      { id: 2, text: "Billing-payment" },
+      { id: 3, text: "Shipping Delivery" },
+      { id: 4, text: "Financial Support" },
+      { id: 5, text: "Prices and price tags" },
+      { id: 6, text: "Gift Cards" },
       { id: 7, text: "Terms and conditions" },
-      { id: 8, text: "Financial Support"},
+      { id: 8, text: "Return policy" },
+      { id: 9, text: "Privacy policy" },
+      { id: 10, text: "Contact us" },
+      { id: 11, text: "FAQ" },
+
     ],
   },
   {

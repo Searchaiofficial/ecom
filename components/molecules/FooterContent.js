@@ -28,36 +28,38 @@ const FooterContent = (props) => {
       elementId === 1
         ? router.push("/deliveryservice")
         : elementId === 2
-        ? router.push("/installationservice")
-        : elementId === 8
-        ? router.push("/designservice")
-        : elementId === 9
-        ? router.push("customerservice")
-        : router.push("/home");
+          ? router.push("/installationservice")
+          : elementId === 8
+            ? router.push("/designservice")
+            : elementId === 9
+              ? router.push("customerservice")
+              : router.push("/home");
     } else if (headingId === 3) {
-      elementId === 2
+      elementId === 8
         ? router.push("/customerservice/returnpolicy")
-        : elementId === 3
-        ? router.push("/customerservice/priceguarantee")
         : elementId === 4
-        ? router.push("/customerservice/giftcards")
-        : elementId === 5
-        ? router.push("/customerservice/contactus")
-        : elementId === 6
-        ? router.push("/customerservice/faq")
-        : elementId === 7
-        ? router.push("/customerservice/termsandconditions")
-        : elementId === 8
-        ? router.push("/way-to-buy")
-        : router.push("/home");
+          ? router.push("/customerservice/priceguarantee")
+          : elementId === 6
+            ? router.push("/customerservice/giftcards")
+            : elementId === 10
+              ? router.push("/customerservice/contactus")
+              : elementId === 11
+                ? router.push("/customerservice/faq")
+                : elementId === 2
+                  ? router.push("/billing-payment")
+                  : elementId === 3
+                    ? router.push("shipping-delivery")
+                    : elementId === 9
+                      ? router.push("customer-privacy-policy")
+                      : router.push("/home");
     } else {
       elementId === 1
         ? router.push("/thisisayatrio")
         : elementId === 2
-        ? router.push("/sustainability")
-        : elementId === 3
-        ? router.push("/ayatrio-map")
-        : router.push("/home");
+          ? router.push("/sustainability")
+          : elementId === 3
+            ? router.push("/ayatrio-map")
+            : router.push("/home");
     }
   };
   return (
