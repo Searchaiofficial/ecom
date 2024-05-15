@@ -10,7 +10,9 @@ export const createApiEndpoint = (endpoint) => `${BASE_URL}/${endpoint}`;
 
 export const fetchAllProducts = async (limit) => {
   try {
-    const response = await axios.get(createApiEndpoint(`products?limit=${limit}`));
+    const response = await axios.get(
+      createApiEndpoint(`products?limit=${limit}`)
+    );
     return response.data;
   } catch (error) {
     console.error("Error fetching products:", error);
@@ -81,7 +83,6 @@ export const fetchBlogCardDataApi = async () => {
   }
 };
 
-
 export const fetchProfileContent = async () => {
   try {
     const response = await axios.get(createApiEndpoint("profileContent"));
@@ -150,5 +151,22 @@ export const fetchSuggestionData = async (id) => {
   } catch (error) {
     console.error(`Error fetching suggestions: ${error.message}`);
     throw error;
+  }
+};
+
+export const fetchHeaderCategoryData = async (category) => {
+  try {
+    const response = await axios.get(
+      createApiEndpoint(`getCategoriesByType/${category}`),
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching header category data: ${error.message}`);
   }
 };
