@@ -6,6 +6,7 @@ import { GoogleTagManager } from "@next/third-parties/google";
 import FooterWrapper from "@/components/FooterWrapper/FooterWrapper";
 import NextTopLoader from "nextjs-toploader";
 import { BASE_URL } from "@/constants/base-url";
+import { OrganizationJsonLd } from "next-seo";
 // const myFont = localFont({
 //   src: "../public/Font/Jost-Regular.ttf",
 // });
@@ -62,6 +63,35 @@ export default function RootLayout({ children }) {
     <html lang="en" className={poppins.className}>
       <GoogleTagManager gtmId={gtmId} />
       <body>
+        <OrganizationJsonLd
+          useAppDir={true}
+          type={"Organization"}
+          url="https://www.ayatrio.com"
+          name="Ayatrio"
+          logo="https://ayatrio.com/api/og"
+          contactPoint={[
+            {
+              telephone: "(+91) 9007404292",
+              areaServed: "IN",
+              email: "info.ayatrio@gmail.com",
+              contactType: "Customer Service",
+            },
+          ]}
+          sameAs={[
+            "https://www.facebook.com/ayatrio.india/",
+            "https://twitter.com/ayatrio_india/",
+            "https://www.instagram.com/ayatrio_india/",
+            "https://in.pinterest.com/ayatrio_india/",
+            "https://www.youtube.com/ayatrio/",
+          ]}
+          address={{
+            type: "PostalAddress",
+            streetAddress: "25C, Elliot Road",
+            addressLocality: "Kolkata",
+            postalCode: "700016",
+            contactType: "Customer Service",
+          }}
+        />
         <Providers>
           <NextTopLoader color="#000" showSpinner={false} />
           {children}
