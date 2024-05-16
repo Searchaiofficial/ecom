@@ -6,6 +6,7 @@ import { getPlaceData } from "@/components/Map/api/index";
 import Map from "@/components/Map/index";
 import axios from "axios";
 import { STORE_MAP_DATA } from "@/constants/store-map-data";
+import SaveUserCoordinates from "@/utils/SaveUserCoordinates";
 
 const MapPage = () => {
   const [places, setPlaces] = useState([]);
@@ -18,7 +19,7 @@ const MapPage = () => {
     if (boundaries) {
       // console.log(boundaries);
       getPlaceData(boundaries.sw, boundaries.ne).then((data) => {
-        console.log({boundaries, data});
+        console.log({ boundaries, data });
         setPlaces(data);
         // console.log("data", data);
       });
@@ -32,7 +33,9 @@ const MapPage = () => {
   useEffect(() => {
     // Update isMobile state on window resize
     const handleResize = () => {
-      setIsMobile( ()=>typeof window !== "undefined" && window.innerWidth <= 450);
+      setIsMobile(
+        () => typeof window !== "undefined" && window.innerWidth <= 450
+      );
     };
 
     window.addEventListener("resize", handleResize);
@@ -48,13 +51,14 @@ const MapPage = () => {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/mapPlaces`
       );
-      console.log("fetchmapdata",response.data);
+      console.log("fetchmapdata", response.data);
       setPlacesData(response.data);
     };
     fetchMapData();
   }, []);
   return (
     <>
+      <SaveUserCoordinates />
       {!isMobile && <Header />}
       <Map
         setBoundaries={setBoundaries}

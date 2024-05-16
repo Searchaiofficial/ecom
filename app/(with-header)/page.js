@@ -11,17 +11,14 @@ import SaveDeviceIdLocalstorage from "@/utils/SaveDeviceIdLocalstorage ";
 // const HomePage = dynamic(() => import("@/components/home/HomePage"));
 
 import { Suspense } from "react";
-import Image from "next/image";
-import Link from "next/link";
 import ChatPrompt from "../../components/ChatPromptWidget/chatprompt";
-
+import SaveUserCoordinatesOnscroll from "@/utils/SaveUserCoordinatesOnScroll";
 
 export default async function Home() {
-
   return (
     <>
       <SaveDeviceIdLocalstorage />
-
+      <SaveUserCoordinatesOnscroll threshold={50} />
       <Suspense fallback={<Splashscreen />}>
         <ChatPrompt />
         <HomePage />
