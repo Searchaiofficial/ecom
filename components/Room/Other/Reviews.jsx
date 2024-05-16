@@ -298,7 +298,7 @@ const Reviews = ({ productId, data }) => {
                 {[...Array(review.rating)].map((_, i) => (
                   <Image
                     key={i}
-                    src="/rooms/star-black-filled-icon.svg"
+                    src="/icon/star.svg"
                     width={15}
                     height={15}
                     alt="star"

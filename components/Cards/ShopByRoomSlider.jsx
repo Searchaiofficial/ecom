@@ -75,7 +75,7 @@ const ShopByRoomSlider = () => {
     const swiper2Ref = useRef(null);
     return (
         <div className="">
-            <div className="pt-12 mb-20  bg-white sm:px-[50px] px-[20px] lg:px-[80px] ">
+            <div className="pt-12 mb-20  bg-white sm:px-[50px] px-[20px] lg:px-[67px] ">
                 <div className="mb-2 w-full flex justify-between items-center">
                     <h2 className="font-semibold text-2xl py-[15px]">
                         Room discovery

@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 const Phone = () => {
   return (
-    <div className="lg:px-[28px] px-[20px] sm:px-[50px] ">
+    <div className="lg:px-[15px] px-[20px] sm:px-[50px] ">
       <h1 className="font-bold xl:text-4xl text-2xl py-4">
         Ayatrio is a global leader in life at home.
       </h1>

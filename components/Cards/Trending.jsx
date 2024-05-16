@@ -64,7 +64,7 @@ const Trending = () => {
 
   return (
     <div>
-      <div className="mb-20  bg-white px-[28px]">
+      <div className="mb-20  bg-white px-[15px]">
         <div className="mb-2 w-full flex justify-between items-center">
           <h2 className="Blinds font-semibold text-2xl py-[30px]">
             {newTrendingData && newTrendingData.length === 0

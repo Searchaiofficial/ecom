@@ -37,6 +37,7 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^14.0.4",
+    "@types/react": "18.3.2",
     "autoprefixer": "^10.0.1",
     "cross-env": "^7.0.3",
     "postcss": "^8",

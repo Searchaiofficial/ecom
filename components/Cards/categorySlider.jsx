@@ -88,7 +88,7 @@ const CategoriesSlider = () => {
 
     return (
         <div className="flex items-center justify-start">
-            <div className=" pt-[5rem] pl-[28px]  overflow-x-auto  relative">
+            <div className=" pt-[5rem] pl-[15px]  overflow-x-auto  relative">
                 {
                     categories.length > 0 && (
                         <div className="flex flex-row group items-center justify-end gap-2 mb-4">
