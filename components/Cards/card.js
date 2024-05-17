@@ -1,27 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./styles.css";
 
-import Carousel from "./swip";
 
 import PopUp from "../Reviews/PopUp";
-import { useRouter } from "next/navigation";
 import axios from "axios";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
 
 function Card(props) {
-  const router = useRouter();
   const dispatch = useDispatch();
-
-
-  const handleImageClick = () => {
-    props.setPopupVisible(true);
-  };
-  const handleclick = async (id, category) => {
-    const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getSingleProduct?id=${id}`;
-    const response = await axios.get(url);
-    const data = response.data;
+  const handleclick = async (id) => {
     dispatch({ type: "FETCH_ROOM_REQUEST", payload: id });
 
     // router.push(`/product`);
@@ -85,7 +74,7 @@ function Card(props) {
                   <Link href={`/product/${props.title}`}>
                     <Image
                       src={item}
-                      alt="NA"
+                      alt={props.title}
                       key={idx}
                       height={300}
                       width={300}

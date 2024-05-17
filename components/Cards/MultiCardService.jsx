@@ -1,5 +1,5 @@
 "use client"
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef } from "react";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
@@ -8,9 +8,6 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import MultiCardContent from "../compounds/MultiCardContent";
-import { useSelector, useDispatch } from "react-redux";
-import { selectMultiCardData } from "../Features/Slices/multiCardSlice";
 import MultiCardServiceContent from "../compounds/MultiCardServiceContect";
 
 // a.Shop online with click and collect and delivery

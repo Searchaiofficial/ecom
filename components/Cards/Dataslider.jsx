@@ -8,24 +8,9 @@ import "swiper/css/pagination";
 import "swiper/css/free-mode";
 import "swiper/css/mousewheel";
 import "swiper/css/scrollbar";
-import { useSelector } from "react-redux";
 import { Pagination, Scrollbar, Mousewheel, FreeMode } from "swiper/modules";
-import {
-  Items1selected,
-  Items2selected,
-  Items3selected,
-} from "../Features/Slices/selectedItemsSlice";
 
 const Dataslider = ({ category, data, sliderIndex }) => {
-  const itm1 = useSelector(Items1selected);
-  // console.log("from selecteditems1", itm1);
-
-  const itm2 = useSelector(Items2selected);
-  // console.log("from selecteditems2", itm2);
-
-  const itm3 = useSelector(Items3selected);
-  // console.log("from selecteditems3", itm3);
-
   const swiperRef = useRef(null);
   const [isPopupVisible, setPopupVisible] = useState(false);
   const swiperOptions = {

@@ -1,13 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./styles.css";
 
-import Carousel from "./swip";
 
 import PopUp from "../Reviews/PopUp";
-import { useRouter } from "next/navigation";
-import axios from "axios";
 import Image from "next/image";
-import { useDispatch } from "react-redux";
 import Link from "next/link";
 
 function SuggestionCard(props) {
@@ -19,7 +15,7 @@ function SuggestionCard(props) {
           <div className="flex h-full w-full items-center justify-center cursor-pointer  overflow-hidden">
             <Image
               src={props.imgSrc}
-              alt="NA"
+              alt={props.title}
               height={600}
               width={600}
               className={"aspect-square w-full object-cover "}

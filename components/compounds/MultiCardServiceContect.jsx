@@ -29,7 +29,7 @@ const MultiCardServiceContent = (props) => {
       </div> */}
             <div className="flex gap-5 flex-col xl:pt-[32px] pt-[32px] pl-[24px]  xl:pl-[32px] ">
                 <div className="pb-[9px]  h-[56px]">
-                    <Image src={iconPath} width={50} height={50} alt="image" className="" />
+                    <Image src={iconPath} width={50} height={50} alt={title} className="" />
                 </div>
                 <h2 className="text-[21px] lg:text-[25px] trackinh-[0.007em] text-[#333333] font-semibold mb-[1em] ">{title}</h2>
             </div>

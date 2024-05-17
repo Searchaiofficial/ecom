@@ -24,7 +24,7 @@ const MapButton = ({}) => {
           width={25}
           height={25}
           src="/svg/icon/ayatrio_store.svg"
-          alt=""
+          alt="Store icon"
           className="header-div-sStore-icon"
         />
       </button>
@@ -38,7 +38,7 @@ const MapButton = ({}) => {
           width={25}
           height={25}
           src="/svg/icon/ayatrio_store.svg"
-          alt=""
+          alt="Store icon"
           className="header-div-sStore-icon"
         />
       </button>

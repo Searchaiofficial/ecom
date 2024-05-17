@@ -89,7 +89,7 @@ function PopUp({ isPopupVisible, setPopupVisible, closePopup }) {
               <hr className="my-4" />
               <div className="flex justify-between text-2xl">
                 <h2 className="font-medium">Golwen&apos;s reviews</h2>
-                <Image src="/rooms/right-arrow-in-circle-icon.svg" className="mt-1 text-gray-200" />
+                <Image src="/rooms/right-arrow-in-circle-icon.svg" className="mt-1 text-gray-200" alt="Arrow"/>
               </div>
               <div className="border border-gray-200 rounded-lg my-10">
                 <p className="mx-5 mb-20 mt-5">

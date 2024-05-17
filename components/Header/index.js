@@ -18,7 +18,7 @@ import { MenuIcon, X } from "lucide-react";
 import TopHeaderWrapper from "./TopHeaderWrapper";
 import { useScrollVisibility } from "@/hooks/useScrollVisibility";
 
-function Header({ howMuchScrolled }) {
+function Header() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const quantity = useSelector(selectQuantity);
@@ -145,7 +145,7 @@ function Header({ howMuchScrolled }) {
                 <Link href="/">
                   <Image
                     src="/images/ayatriologo.webp"
-                    alt="logo"
+                    alt="Ayatrio Logo"
                     width={300}
                     height={40}
                     priority
@@ -206,7 +206,7 @@ function Header({ howMuchScrolled }) {
                   <span>
                     <Image
                       src="/svg/icon/search.svg"
-                      alt=""
+                      alt="Search Icon"
                       className="absolute z-10 seachbar-div2-icon"
                       width={27}
                       height={27}
@@ -220,7 +220,7 @@ function Header({ howMuchScrolled }) {
                 >
                   <Image
                     src="/svg/icon/search.svg"
-                    alt=""
+                    alt="Search Icon"
                     width={20}
                     height={20}
                     className="header-div-icon"
@@ -230,7 +230,7 @@ function Header({ howMuchScrolled }) {
                   <Link href={"/login"}>
                     <Image
                       src="/svg/icon/like.svg"
-                      alt=""
+                      alt="Like Icon"
                       className="header-div-icon"
                       width={22}
                       height={22}
@@ -241,7 +241,7 @@ function Header({ howMuchScrolled }) {
                   <Link href={"/cart"}>
                     <Image
                       src="/svg/icon/adtocart.svg"
-                      alt=""
+                      alt="Cart Icon"
                       className="header-div-icon"
                       width={22}
                       height={22}
@@ -256,7 +256,7 @@ function Header({ howMuchScrolled }) {
                   >
                     <Image
                       src="/svg/icon/profile.svg"
-                      alt=""
+                      alt="Profile Icon"
                       className="header-div-icon"
                       width={22}
                       height={22}
@@ -270,7 +270,7 @@ function Header({ howMuchScrolled }) {
                     <Image
                       src="/svg/icon/profile.svg"
                       onClick={handleLoginNav}
-                      alt=""
+                      alt="Profile Icon"
                       width={18}
                       height={18}
                       className="header-div-icon"

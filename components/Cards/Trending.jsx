@@ -1,7 +1,6 @@
 "use client"
 
 import Card from "./card";
-import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import PopUp from "../Reviews/PopUp";
@@ -42,7 +41,6 @@ const Trending = () => {
     }
   }, [trendingData]);
 
-  const swiperUseref = useRef(null);
   const swiperOptions2 = {
     slidesPerView: 4.08,
     centeredSlides: false,

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useEffect } from "react";
 import { Navigation } from "swiper/modules";
@@ -10,7 +10,10 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
-import { getProfileSuccess, selectProfileData } from "../Features/Slices/profileSlice";
+import {
+  getProfileSuccess,
+  selectProfileData,
+} from "../Features/Slices/profileSlice";
 
 const ProfileContent = ({ initialData }) => {
   const profileData = useSelector(selectProfileData);
@@ -18,7 +21,7 @@ const ProfileContent = ({ initialData }) => {
 
   useEffect(() => {
     if (initialData?.length > 0) {
-      dispatch(getProfileSuccess(initialData))
+      dispatch(getProfileSuccess(initialData));
     } else {
       console.log("Fetching Profile Data");
       dispatch({ type: "FETCH_PROFILE_REQUEST", payload: "Profile" });
@@ -27,7 +30,6 @@ const ProfileContent = ({ initialData }) => {
 
   return (
     <div className=" transparent rounded-lg  pb-[80px] ">
-
       <Swiper
         className=" h-50  lg:h-80"
         mousewheel={{
@@ -57,9 +59,10 @@ const ProfileContent = ({ initialData }) => {
           },
         }}
       >
-        {profileData.map((person, index) => (
-          <SwiperSlide className="bg-[#f4f4f5] my-slider pr-3" key={index}>
-            {/* <div className=" flex w-full  justify-start items-center">
+        {profileData.map((person, index) => {
+          return (
+            <SwiperSlide className="bg-[#f4f4f5] my-slider pr-3" key={index}>
+              {/* <div className=" flex w-full  justify-start items-center">
               <div className="flex flex-col justify-center items-center">
                 <div className=" p-2 lg:p-4 flex justify-center items-center ">
                   {" "}
@@ -92,35 +95,37 @@ const ProfileContent = ({ initialData }) => {
                 />
               </a>
             </div> */}
-            <div className="flex flex-col items-center">
-              <div className="parent relative bg-black rounded-full md:h-36 h-28 md:w-36 w-28 mb-2 md:mt-8 mt-4">
-                <Image
-                  src={person.image}
-                  className="rounded-full w-full h-full object-cover"
-                  width={0}
-                  height={0}
-                  layout="fill"
-                  objectFit="cover"
-                />
+              <div className="flex flex-col items-center">
+                <div className="parent relative bg-black rounded-full md:h-36 h-28 md:w-36 w-28 mb-2 md:mt-8 mt-4">
+                  <Image
+                    src={person.image}
+                    alt={person.name}
+                    className="rounded-full w-full h-full object-cover"
+                    width={0}
+                    height={0}
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </div>
+                <div className="text-md p-1 flex gap-1 items-center font-bold ">
+                  <p className="line-clamp-1">{person.name}</p>
+                  <Image
+                    className=" sm:h-6 h-6 sm:w-6 w-6"
+                    src="/social-icon/linkedln.svg"
+                    height={2}
+                    width={2}
+                    alt={`LinkedIn for ${person.name}`}
+                  />
+                </div>
+                <p className="lg:text-[16px] text-sm ">{person.role}</p>
               </div>
-              <div className="text-md p-1 flex gap-1 items-center font-bold ">
-                <p className="line-clamp-1">{person.name}</p>
-                <Image
-                  className=" sm:h-6 h-6 sm:w-6 w-6"
-                  src="/social-icon/linkedln.svg"
-                  height={2}
-                  width={2}
-                  alt={`LinkedIn for ${person.name}`}
-                />
-              </div>
-              <p className="lg:text-[16px] text-sm ">{person.role}</p>
-            </div>
-            {/* <br />
+              {/* <br />
             <br />
             <br />
             <br /> */}
-          </SwiperSlide>
-        ))}
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
       <div className=" flex flex-row items-end justify-end gap-6 mt-[25px]">
         <Image

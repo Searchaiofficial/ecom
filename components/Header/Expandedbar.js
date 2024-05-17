@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import ayatrioLogo from "../../public/images/ayatriologo.webp";
 import "./Expandbar.css";
 import axios from "axios";
 import Image from "next/image";
@@ -95,7 +96,7 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
       >
         <div className="flex flex-row gapofsearchclose  justify-between bg-white rounded-lg w-full absolute left-0">
           <div className="logo hidden sm:block pl-[50px]">
-            <img src="/images/ayatriologo.webp" className="w-40 z-30" alt="" />
+            <Image src={ayatrioLogo} className="w-40 z-30" alt="Ayatrio Logo" />
           </div>
           <div className="searchDiv  flex flex-col">
             <div className="searchCon relative sm:w-[600px] w-[60vw] bg-zinc-100 p-2 rounded-none">
@@ -107,9 +108,11 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
               />
-              <img
+              <Image
                 src="/svg/icon/search.svg"
-                alt=""
+                alt="Search icon"
+                width={20}
+                height={20}
                 className=" search_icon_mar w-5 mx-1 my-1.5 top-[18%] left-[1%]  absolute z-10"
               />
             </div>

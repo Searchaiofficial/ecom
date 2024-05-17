@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,7 +11,11 @@ import SwiperCore from "swiper/core";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { getSliderSuccess, selectSliderData, selectSliderLoader } from "../Features/Slices/sliderSlice";
+import {
+  getSliderSuccess,
+  selectSliderData,
+  selectSliderLoader,
+} from "../Features/Slices/sliderSlice";
 import Splashscreen from "../Splashscreen/Splashscreen";
 
 SwiperCore.use([Autoplay, Navigation]);
@@ -19,12 +23,12 @@ SwiperCore.use([Autoplay, Navigation]);
 export default function NewMainSlider({ initialData }) {
   const dispatch = useDispatch();
   const SliderViewData = useSelector(selectSliderData);
-  const isSliderLoading = useSelector(selectSliderLoader)
+  const isSliderLoading = useSelector(selectSliderLoader);
 
   const [page, setPage] = useState(1);
   useEffect(() => {
     if (initialData?.result?.length > 0) {
-      dispatch(getSliderSuccess(initialData))
+      dispatch(getSliderSuccess(initialData));
     } else {
       fetchData();
     }
@@ -120,7 +124,7 @@ export default function NewMainSlider({ initialData }) {
                 <Image
                   src={data?.imgSrc}
                   fill
-                  alt="Swiper"
+                  alt={data.imgTitle || "Swiper image"}
                   priority
                   className=" swiper-slide "
                   objectFit="cover"
@@ -134,7 +138,6 @@ export default function NewMainSlider({ initialData }) {
                       {data?.imgTitle}
                     </button> */}
                   </div>
-
                 </div>
                 <div className="absolute top-0 left-0 flex items-center justify-center w-full h-full transition-opacity opacity-0 group-hover:opacity-100">
                   <div onMouseEnter={handleEnter} className="cursor-pointer">
@@ -154,9 +157,7 @@ export default function NewMainSlider({ initialData }) {
                           <h2 className="font-[600]">
                             {data?.circles[0].productTitle}
                           </h2>
-                          <p>
-                            {data?.circles[0].productCategory}
-                          </p>
+                          <p>{data?.circles[0].productCategory}</p>
                           <p className="flex items-center gap-1 text-2xl mt-1">
                             <sub className="text-[12px] font-bold">₹</sub>
                             {data?.circles[0].productPrice}
