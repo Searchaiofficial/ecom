@@ -16,9 +16,11 @@ import {
 } from "@/components/Features/Slices/roomSlice";
 import axios from "axios";
 import Carous from "@/components/Carousel/Carous";
+import { useParams } from "next/navigation";
 const RoomPage = () => {
   const dispatch = useDispatch();
   const quantity = useSelector(selectQuantity);
+  const { title } = useParams();
   let url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getSingleProduct?id=`;
   const [howMuchScrolled, setHowMuchScrolled] = useState(0);
   const [data, setData] = useState([]);
@@ -26,22 +28,36 @@ const RoomPage = () => {
   console.log("selectedData", selectedData);
 
   useEffect(() => {
+    const fetchData = async () => {
+      const cachedData = sessionStorage?.getItem("roomData");
+      if (cachedData) {
+        const parsedData = JSON.parse(cachedData);
+        setData(parsedData);
+        dispatch(setRoomData({ roomData: parsedData }));
+        dispatch({
+          type: "FETCH_IMAGE_DATA",
+          payload: parsedData?.productImages[0]?.color,
+        });
+      } else {
+        // Fetch data if there's no cached data
+        dispatch({ type: "FETCH_ROOM_REQUEST", payload: title });
+      }
+    };
+
+    fetchData();
+  }, [dispatch, title]);
+
+  // Use another useEffect hook to update the selectedData after dispatching FETCH_ROOM_REQUEST
+  useEffect(() => {
     if (selectedData && Object.keys(selectedData).length !== 0) {
       sessionStorage?.setItem("roomData", JSON.stringify(selectedData));
-    }
-  }, [selectedData]);
-
-  useEffect(() => {
-    if (sessionStorage?.getItem("roomData")) {
-      let cachedData = JSON.parse(sessionStorage?.getItem("roomData"));
-      setData(cachedData);
-      dispatch(setRoomData({ roomData: cachedData }));
+      setData(selectedData); // Update component state with selectedData
       dispatch({
         type: "FETCH_IMAGE_DATA",
-        payload: cachedData?.productImages[0]?.color,
+        payload: selectedData?.productImages[0]?.color,
       });
     }
-  }, []);
+  }, [selectedData, dispatch]);
 
   console.log(data);
   useEffect(() => {

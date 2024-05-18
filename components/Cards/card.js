@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./styles.css";
 
+import Carousel from "./swip";
 
 import PopUp from "../Reviews/PopUp";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
@@ -10,7 +12,15 @@ import Link from "next/link";
 
 function Card(props) {
   const dispatch = useDispatch();
-  const handleclick = async (id) => {
+
+  const handleImageClick = () => {
+    props.setPopupVisible(true);
+  };
+
+  const handleclick = async (id, category) => {
+    const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getSingleProduct?id=${id}`;
+    const response = await axios.get(url);
+    const data = response.data;
     dispatch({ type: "FETCH_ROOM_REQUEST", payload: id });
 
     // router.push(`/product`);
@@ -74,11 +84,11 @@ function Card(props) {
                   <Link href={`/product/${props.title}`}>
                     <Image
                       src={item}
-                      alt={props.title}
+                      alt="NA"
                       key={idx}
                       height={300}
                       width={300}
-                      onClick={() => handleclick(props.id, props.category)}
+                      onClick={() => handleclick(props.title, props.category)}
                       className={
                         slide === idx
                           ? "aspect-square w-full hover:scale-110 transition-all duration-300"

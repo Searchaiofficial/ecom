@@ -12,7 +12,7 @@ export async function generateMetadata({ params }) {
   };
 }
 
-const page = () => {
+const page = ({ params }) => {
   return (
     <>
       <BreadcrumbJsonLd
