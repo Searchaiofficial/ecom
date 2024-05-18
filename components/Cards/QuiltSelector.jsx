@@ -64,7 +64,7 @@ const QuiltSelector = () => {
 
   return (
     <div>
-      <div className="pt-12 mb-20  bg-whit sm:px-[50px] px-[20px]">
+      <div className="pt-12 mb-20  bg-white">
         <div className="mb-2 w-full flex justify-between items-center">
           <h2 className="font-semibold text-2xl py-[15px]">
             {quilts && quilts.length === 0
@@ -139,7 +139,7 @@ const QuiltSelector = () => {
                       </div>
 
                       <div
-                        className={`bg-gray-400 px-4 py-8  overflow-hidden`}
+                        className={`bg-gray-400 px-4 py-8 h-[200px] overflow-hidden`}
                       >
                         <div className="text-lg font-semibold hover:underline  text-ellipsis mb-1">
                           {quilt.weatherTitle}
