@@ -13,6 +13,19 @@ export const renderSortItem = (text, idx, handleSorting) => (
   </div>
 );
 
+export const renderOfferItem = (type, idx, setType) => (
+  <div
+    className="flex justify-between"
+    key={idx}
+    onClick={() => setType(type)}
+  >
+    <label htmlFor="age1" className="">
+      {type}
+    </label>
+    <input type="radio" id="age1" name="age" value={type} />
+  </div>
+);
+
 export const rendersizewidth = (text, idx) => (
   <div className="flex justify-between" key={idx}>
     <label for="age1" className="">

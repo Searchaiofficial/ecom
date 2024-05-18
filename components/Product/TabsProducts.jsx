@@ -23,6 +23,7 @@ import {
   rendersizewidth,
   renderSortItem,
   renderColor,
+  renderOfferItem,
 } from "./tabsRender";
 import TabsProductContent from "../compounds/TabsProductContent";
 import Measure from "./meausrement";
@@ -32,13 +33,17 @@ import TabsProductCard from "./TabsProductCard";
 const Tabs = ({
   filteredProductData,
   heading,
+  allTypes,
   subCategory,
-  categoryName,
   description,
+  setType,
+  offerCategory,
+  parentCategory,
+  setSelectedOfferCategory
 }) => {
-  // console.log("Filtered products:", filteredProducts);
   const router = useRouter();
   const dispatch = useDispatch();
+
   // const handlenav = (id) => {
   //   router.push(`/room/${id}`);
   // };
@@ -66,7 +71,8 @@ const Tabs = ({
       openCollection === false &&
       openType === false &&
       openAll === false &&
-      openCaategory === false
+      openCaategory === false &&
+      openOffer === false
     ) {
       setOpenSort(!openSort);
     }
@@ -88,7 +94,8 @@ const Tabs = ({
       openCollection === false &&
       openType === false &&
       openAll === false &&
-      openCaategory === false
+      openCaategory === false &&
+      openOffer === false
     ) {
       setOpenSize(!openSize);
     }
@@ -108,7 +115,8 @@ const Tabs = ({
       opencolor === false &&
       openType === false &&
       openAll === false &&
-      openCaategory === false
+      openCaategory === false &&
+      openOffer === false
     ) {
       setOpenCollection(!openCollection);
     }
@@ -139,7 +147,8 @@ const Tabs = ({
       openCollection === false &&
       openType === false &&
       openAll === false &&
-      openCaategory === false
+      openCaategory === false &&
+      openOffer === false
     ) {
       setOpenColor(!opencolor);
     }
@@ -157,7 +166,8 @@ const Tabs = ({
       openCollection === false &&
       openType === false &&
       openAll === false &&
-      openSize === false
+      openSize === false &&
+      openOffer === false
     ) {
       setOpenCategory(!openCaategory);
     }
@@ -188,7 +198,8 @@ const Tabs = ({
       opencolor === false &&
       openCollection === false &&
       openAll === false &&
-      openCaategory === false
+      openCaategory === false &&
+      openOffer === false
     ) {
       setOpenType(!openType);
     }
@@ -206,11 +217,28 @@ const Tabs = ({
       opencolor === false &&
       openCollection === false &&
       openType === false &&
-      openCaategory === false
+      openCaategory === false &&
+      openOffer === false
     ) {
       setOpenAll(true);
     }
   };
+
+  const [openOffer, setOpenOffer] = useState(false);
+  const handleOffer = () => {
+    if (
+      openSize === false &&
+      openSort === false &&
+      opencolor === false &&
+      openCollection === false &&
+      openType === false &&
+      openCaategory === false &&
+      openAll === false
+    ) {
+      setOpenOffer(!openOffer);
+    }
+  };
+
   const closeAll = () => {
     setOpenAll(false);
     setOpenAllType(false);
@@ -218,6 +246,7 @@ const Tabs = ({
     setOpenAllcolor(false);
     setOpenAllSIze(false);
     setopenallsort(false);
+    setOpenOffer(false);
   };
 
   const commonClasses = "px-3 py-2 mr-2.5 rounded-full flex  whitespace-nowrap";
@@ -319,37 +348,74 @@ const Tabs = ({
     .concat("/svg/icon/half-star.svg");
 
   // const firstPart = filterData;
-  const firstPart = filterData.slice(0, 8);
+  // const firstPart = filterData.slice(0, 8);
   // console.log("firtst is ", firstPart);
-  const secondPart = filterData.slice(8);
   // console.log("gere")
 
   return (
     <>
       <div className="wrapper  lg:px-[67px] sm:px-[50px] px-[20px] mt-20 relative  ">
         <div>
-          <h2 className="mb-2 text-xl font-bold capitalize">{categoryName}</h2>
-          {subCategory && (
+          <h2 className="mb-2 text-xl font-bold capitalize">{heading}</h2>
+
+          {parentCategory === "demandtype" && allTypes && (
             <div className="grid mb-4 md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-2 gap-y-4">
-              {subCategory.map((sub, idx) => (
+              {allTypes.map((type, idx) => (
                 <div key={idx} className=" gap-2">
-                  <div className="relative flex items-center gap-4 cursor-pointer ">
-                    <div className="w-[60px] aspect-square">
-                      <Image
-                        src={sub.img}
-                        alt="NA"
-                        height={300}
-                        width={300}
-                        className="aspect-square "
-                      />
-                    </div>
-                    <h1>{sub.name}</h1>
+                  <div className="flex items-center gap-4 cursor-pointer ">
+                    <h1
+                      onClick={() => setType(type)}
+                      className="text-black bg-zinc-200 hover:bg-zinc-100 px-4 py-2"
+                    >
+                      {type}
+                    </h1>
                   </div>
                 </div>
               ))}
             </div>
           )}
-          <p className="leading-2 mb-4">{description}</p>
+          {parentCategory === "offers" && offerCategory && (
+            <div className="grid mb-4 md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-2 gap-y-4">
+              {offerCategory.map((category, idx) => (
+                <div key={idx} className=" gap-2">
+                  <div className="flex items-center gap-4 cursor-pointer ">
+                    <h1
+                      className="text-black bg-zinc-200 hover:bg-zinc-100 px-4 py-2"
+                      onClick={()=>setSelectedOfferCategory(category)}
+                    >
+                      {category}
+                    </h1>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+          {subCategory && (
+            <>
+              <div className="grid mb-4 md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-2 gap-y-4">
+                {subCategory.map((sub, idx) => (
+                  <div key={idx} className=" gap-2 hover:bg-zinc-100">
+                    <div
+                      className="relative flex items-center gap-4 cursor-pointer "
+                      onClick={() => setType(sub.name)}
+                    >
+                      <div className="w-[60px] aspect-square">
+                        <Image
+                          src={sub.img}
+                          alt="NA"
+                          height={300}
+                          width={300}
+                          className="aspect-square "
+                        />
+                      </div>
+                      <h1>{sub.name}</h1>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <p className="leading-2 mb-4">{description}</p>
+            </>
+          )}
         </div>
         <div className="hidden md:flex sticky top-0 z-20 bg-white py-5 scrollbar">
           <TabsProductContent
@@ -440,6 +506,22 @@ const Tabs = ({
             renderTypeContent={renderTypeContent}
           />
 
+          { parentCategory === "offers" && 
+            <TabsProductContent
+              filterName={"Offers"}
+              commonClasses={commonClasses}
+              isFilterOpen={openOffer}
+              handleAll={handleAll}
+              handleTabClick={handleTabClick}
+              handleFilter={handleOffer}
+              handleAllFilter={handleAllType}
+              filterArr={allTypes}
+              renderFilter={(text, idx) => renderOfferItem(text, idx, setType)}
+              openContent={openContent}
+              handleContent={handleContent}
+            />
+          }
+
           {/* ddropdown6 */}
           <div>
             <button
@@ -448,14 +530,16 @@ const Tabs = ({
                 handleTabClick();
               }}
               className={`Tabbtn z-0 bg-gray-100
-                  ${openAll
-                  ? `active-tabs  border border-black ${commonClasses}`
-                  : `tabS  border border-white ${commonClasses}`
-                }
-                  ${typeof window !== "undefined" && window.innerWidth <= 450
-                  ? " justify-center"
-                  : " justify-between"
-                }
+                  ${
+                    openAll
+                      ? `active-tabs  border border-black ${commonClasses}`
+                      : `tabS  border border-white ${commonClasses}`
+                  }
+                  ${
+                    typeof window !== "undefined" && window.innerWidth <= 450
+                      ? " justify-center"
+                      : " justify-between"
+                  }
                   `}
             >
               All Filters &nbsp;
@@ -691,8 +775,9 @@ const Tabs = ({
 
                           <button
                             onClick={handleContent}
-                            className={`text-left underline ${openContent ? "block" : "hidden"
-                              }`}
+                            className={`text-left underline ${
+                              openContent ? "block" : "hidden"
+                            }`}
                           >
                             Less
                           </button>
@@ -732,25 +817,33 @@ const Tabs = ({
             )}
           </div>
           <div className=" grid md:grid-cols-4 cursor-pointer grid-cols-2  gap-4 ">
-            {firstPart.map((text, idx) => (
-              <TabsProductCard
-                text={text}
-                totalPrice={text.totalPrice}
-                discountedprice={text.discountedprice}
-                specialprice={text.specialprice}
-                productDescription={text.productDescription}
-                productTitle={text.productTitle}
-                images={text.images}
-                idx={idx}
-                handlenav={handlenav}
-                selectedpdt={selectedpdt}
-                handleCheckbox={handleCheckbox}
-                setShowcompare={setShowcompare}
-                demandtype={text.demandtype}
-                ratings={text.ratings}
-                stars={stars}
-              />
-            ))}
+            {filterData && filterData.length > 0 ? (
+              filterData.map((text, idx) => (
+                <TabsProductCard
+                  text={text}
+                  totalPrice={text.totalPrice}
+                  discountedprice={text.discountedprice}
+                  specialprice={text.specialprice}
+                  productDescription={text.productDescription}
+                  productTitle={text.productTitle}
+                  images={text.images}
+                  idx={idx}
+                  handlenav={handlenav}
+                  selectedpdt={selectedpdt}
+                  handleCheckbox={handleCheckbox}
+                  setShowcompare={setShowcompare}
+                  demandtype={text.demandtype}
+                  ratings={text.ratings}
+                  stars={stars}
+                  parentCategory={parentCategory}
+                  offer={text.offer}
+                />
+              ))
+            ) : (
+              <div className="flex justify-center items-center h-[50vh] w-full">
+                <h1 className="text-2xl">No Products Found</h1>
+              </div>
+            )}
           </div>
           <Measure filteredProductData={filteredProductData} />
           {/* <div className="main-image-pdt pt-[32px] grid sm:grid-cols-4 grid-cols-2 sm:gap-6 gap-0">

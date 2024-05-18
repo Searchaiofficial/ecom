@@ -178,7 +178,7 @@ function Header() {
                           className={`text-md  font-semibold  ${
                             isOpen ? "border-b-2 border-black" : ""
                           }`}
-                          href="#"
+                          href={value.label === "Offers" ? "/heading/offers/all" : "#"}
                           onClick={toggleDropdown}
                         >
                           <p

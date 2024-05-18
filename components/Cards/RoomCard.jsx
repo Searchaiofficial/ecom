@@ -1,14 +1,11 @@
-
 import Image from "next/image";
 import TabImage from "../Cards/TabImage";
 import { fetchRoomData } from "@/actions/fetchRoomData";
 import { fetchGalleryData } from "@/actions/fetchGalleryData";
-
+import Link from "next/link";
 
 const RoomCard = async () => {
-  const roomData = await fetchRoomData()
-  const gallery = await fetchGalleryData()
-
+  const gallery = await fetchGalleryData();
 
   return (
     <>
@@ -21,30 +18,29 @@ const RoomCard = async () => {
               lg:col-start-1 lg:col-end-7 lg:row-start-1 lg:row-end-12
             "
             >
-              {gallery.length > 0 ? (
-                <>
-                  <div className="parent relative w-full h-full">
-                    <Image
-                      className="child object-cover rounded-sm"
-                      src={gallery[0].items[0].img}
-                      layout="fill"
-                      alt="Image"
-                      objectFit="cover"
-                    />
-                    <div className="absolute md:top-[20rem]  left-0 right-0 bottom-0 flex flex-col justify-center items-center p-2">
-                      <h2 className="text-white absolute bottom-4 text-center left-7 lg:bottom-10 lg:left-20  text-lg lg:text-3xl  mb-4">
-                        {gallery[0].items[0].heading}
-                      </h2>
-                    </div>
+              <Link
+                href={`heading/offers/${gallery.items[0].offer.replace(
+                  / /g,
+                  "-"
+                )}`}
+              >
+                <div className="parent relative w-full h-full">
+                  <Image
+                    className="child object-cover rounded-sm"
+                    src={gallery.items[0].img}
+                    layout="fill"
+                    alt="Image"
+                  />
+                  <div className="absolute md:top-[20rem]  left-0 right-0 bottom-0 flex flex-col justify-center items-center p-2">
+                    <h2 className="text-white text-center text-3xl  mb-4">
+                      {gallery.items[0].heading}
+                    </h2>
+                    {/* <button className="bg-black hover:bg-zinc-300 text-white  py-2 px-10 h-12 rounded-full">
+                        {gallery.items[0].buttonText}
+                      </button> */}
                   </div>
-                </>
-              ) : (
-                <>
-                  <div className="child w-full h-full bg-gray-300 flex justify-center items-center">
-                    <p>Data Loading...</p>
-                  </div>
-                </>
-              )}
+                </div>
+              </Link>
             </div>
             {/* 2 */}
             <div
@@ -54,13 +50,19 @@ const RoomCard = async () => {
             >
               {
                 <>
-                  <TabImage
-                    src={roomData[0].imgSrc}
-                    alt={`Image  of Children`}
-                    width={1000}
-                    height={338}
-                    labelData={roomData[0].children}
-                  />
+                  {gallery.mode == "room" && (
+                    <Link
+                      href={`/rooms/${gallery.rooms[0].roomType.replace(/ /g, "-")}`}
+                    >
+                      <TabImage
+                        src={gallery.rooms[0].imgSrc}
+                        alt={`Image  of Children`}
+                        width={1000}
+                        height={338}
+                        labelData={gallery.rooms[0].children}
+                      />
+                    </Link>
+                  )}
                 </>
               }
             </div>
@@ -72,13 +74,19 @@ const RoomCard = async () => {
             >
               {
                 <>
-                  <TabImage
-                    src={roomData[1]?.imgSrc}
-                    alt={`Image  of Children`}
-                    width={1000}
-                    height={300}
-                    labelData={roomData[1]?.children}
-                  />
+                  {gallery.mode === "room" && (
+                    <Link
+                    href={`/rooms/${gallery.rooms[1].roomType.replace(/ /g, "-")}`}
+                  >
+                    <TabImage
+                      src={gallery.rooms[1].imgSrc}
+                      alt={`Image  of Children`}
+                      width={1000}
+                      height={338}
+                      labelData={gallery.rooms[1].children}
+                    />
+                    </Link>
+                  )}
                 </>
               }
             </div>
@@ -90,13 +98,19 @@ const RoomCard = async () => {
             >
               {
                 <>
-                  <TabImage
-                    src={roomData[2]?.imgSrc}
-                    alt={`Image  of Children`}
-                    width={1000}
-                    height={300}
-                    labelData={roomData[2]?.children}
-                  />
+                  {gallery.mode === "room" && (
+                    <Link
+                    href={`/rooms/${gallery.rooms[2].roomType.replace(/ /g, "-")}`}
+                  >
+                    <TabImage
+                      src={gallery.rooms[2].imgSrc}
+                      alt={`Image  of Children`}
+                      width={1000}
+                      height={338}
+                      labelData={gallery.rooms[2].children}
+                    />
+                    </Link>
+                  )}
                 </>
               }
             </div>
@@ -108,13 +122,19 @@ const RoomCard = async () => {
             >
               {
                 <>
-                  <TabImage
-                    src={roomData[3]?.imgSrc}
-                    alt={`Image  of Children`}
-                    width={1000}
-                    height={300}
-                    labelData={roomData[3]?.children}
-                  />
+                  {gallery.mode === "room" && (
+                    <Link
+                    href={`/rooms/${gallery.rooms[3].roomType.replace(/ /g, "-")}`}
+                  >
+                    <TabImage
+                      src={gallery.rooms[3].imgSrc}
+                      alt={`Image  of Children`}
+                      width={1000}
+                      height={338}
+                      labelData={gallery.rooms[3].children}
+                    />
+                    </Link>
+                  )}
                 </>
               }
             </div>

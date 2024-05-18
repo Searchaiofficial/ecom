@@ -21,6 +21,8 @@ const TabsProductContent = (props) => {
     stickyDrop,
   } = props;
 
+  console.log(filterArr)
+
   return (
     <>
       <div className="flex flex-col w-fit">

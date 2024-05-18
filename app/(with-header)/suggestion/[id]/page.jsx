@@ -32,7 +32,6 @@ const SuggestionPage = ({ params }) => {
   const dispatch = useDispatch();
   const selectData = useSelector(selectRecommendedProduct);
   const suggestion = useSelector(selectSuggestionData);
-  console.log(suggestion);
   const suggestionStatus = useSelector(selectSuggestionStatus);
   const [relatedProducts, setRelatedProducts] = useState([]);
 
