@@ -8,63 +8,64 @@ import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
+import { useDebounceValue } from "usehooks-ts";
 // import search from "../../assets/icon/search.svg";
 // import mainlogo from "../../assets/ayatriologo.png";
 
 const Expandedbar = ({ searchText, onClose, onSearch }) => {
-  const [searchTexte, setSearchText] = useState(searchText);
+  const [searchQuery, setSearchQuery] = useState(searchText);
+  const [debouncedSearchQuery] = useDebounceValue(searchQuery, 500);
+
+  const router = useRouter();
+
   const [data, setData] = useState([]);
   const [isLoading, setLoading] = useState(false);
 
   let cacheddata = JSON.parse(sessionStorage.getItem("cachedData"));
 
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const cachedData = sessionStorage.getItem("cachedData");
+      const cachedSearchText = sessionStorage.getItem("cachedSearchText");
+
+      if (debouncedSearchQuery !== cachedSearchText) {
+        // Perform the search and update the cache
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/products?search=${searchQuery}`
+        );
+        sessionStorage.setItem("cachedData", JSON.stringify(response.data));
+        sessionStorage.setItem("cachedSearchText", debouncedSearchQuery);
+
+        setData(response.data);
+        // console.log("search api fetched");
+        // console.log(response.data);
+        onSearch(response.data);
+      } else {
+        setData(JSON.parse(cachedData));
+        onSearch(JSON.parse(cachedData));
+        // console.log(data);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // console.log("cached data is ", JSON.parse(cacheddata));
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const cachedData = sessionStorage.getItem("cachedData");
-        const cachedSearchText = sessionStorage.getItem("cachedSearchText");
+    if (debouncedSearchQuery) {
+      fetchData();
+    }
 
-        if (searchTexte !== cachedSearchText) {
-          // Perform the search and update the cache
-          const response = await axios.get(
-            `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/products?search=${searchTexte}`
-          );
-          sessionStorage.setItem("cachedData", JSON.stringify(response.data));
-          sessionStorage.setItem("cachedSearchText", searchTexte);
-
-          setData(response.data);
-          // console.log("search api fetched");
-          // console.log(response.data);
-          onSearch(response.data);
-        } else {
-          setData(JSON.parse(cachedData));
-          onSearch(JSON.parse(cachedData));
-          // console.log(data);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    const timeoutId = setTimeout(() => {
-      if (searchTexte) {
-        fetchData();
-      }
-    }, 700);
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [searchTexte]);
+    router.push(`?search=${debouncedSearchQuery}`);
+  }, [debouncedSearchQuery]);
   const inputRef = useRef();
   useEffect(() => {
     inputRef.current.focus();
   }, []);
   const dispatch = useDispatch();
-  const router = useRouter();
   const handleRoute = async (item) => {
     const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getSingleProduct?id=${item._id}`;
     const response = await axios.get(url);
@@ -105,8 +106,10 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
                 type="text"
                 placeholder="Search"
                 className="search-input bg-transparent h-full sm:w-full w-[60vw] pl-10 border-0 focus:outline-none"
-                value={searchText}
-                onChange={(e) => setSearchText(e.target.value)}
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                }}
               />
               <Image
                 src="/svg/icon/search.svg"
@@ -126,7 +129,7 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
         </div>
         <div
           className={`dropdown   sm:pt-20 pt-0 sm:pb-[50px] pb-0 flex sm:flex-row flex-col justify-center gap-4 max-w-full bg-white ${
-            searchTexte
+            searchQuery
               ? "sm:pl-[50px] pl-0 "
               : "items-center sm:pr-[50px] pr-0 sm:pl-[50px] pl-0 "
           }`}
