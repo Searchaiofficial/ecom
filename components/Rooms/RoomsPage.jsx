@@ -54,9 +54,8 @@ export const RoomsPage = ({ params }) => {
 
 
   const fetchRoomMain = async () => {
-    const url = `${
-      process.env.NEXT_PUBLIC_API_BASE_URL
-    }/api/getRoommain?roomType=${params.replace(/-/g, " ")}`;
+    const url = `${process.env.NEXT_PUBLIC_API_BASE_URL
+      }/api/getRoommain?roomType=${params.replace(/-/g, " ")}`;
     const response = await axios.get(url);
     setRoomMain(response.data);
   };
@@ -100,8 +99,8 @@ export const RoomsPage = ({ params }) => {
   return (
     // <div className="pt-12 bg-white sm:px-[50px] px-[20px]">
     <div>
-      <div className="pt-12 w-full flex justify-center ">
-        <div className="w-10/12  p-5 p flex flex-col">
+      <div className="w-full flex justify-center ">
+        <div className="mt-20 w-10/12  p-5 p flex flex-col">
           <h1 className="text-2xl font-semibold">{roomMain?.title}</h1>
           <p className="mt-5 w-7/12">{roomMain?.description}</p>
           <a className="my-5" href="/">

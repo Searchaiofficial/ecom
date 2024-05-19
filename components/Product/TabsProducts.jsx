@@ -354,12 +354,12 @@ const Tabs = ({
 
   return (
     <>
-      <div className="wrapper  lg:px-[67px] sm:px-[50px] px-[20px] mt-20 relative  ">
+      <div className="wrapper  lg:px-[67px] sm:px-[50px] px-[20px] relative">
         <div>
           <h2 className="mb-2 text-xl font-bold capitalize">{heading}</h2>
 
           {parentCategory === "demandtype" && allTypes && (
-            <div className="grid mb-4 md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-2 gap-y-4">
+            <div className="mt-20 grid mb-4 md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-2 gap-y-4">
               {allTypes.map((type, idx) => (
                 <div key={idx} className=" gap-2">
                   <div className="flex items-center gap-4 cursor-pointer ">
@@ -375,13 +375,13 @@ const Tabs = ({
             </div>
           )}
           {parentCategory === "offers" && offerCategory && (
-            <div className="grid mb-4 md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-2 gap-y-4">
+            <div className="mt-20 grid mb-4 md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-2 gap-y-4">
               {offerCategory.map((category, idx) => (
                 <div key={idx} className=" gap-2">
                   <div className="flex items-center gap-4 cursor-pointer ">
                     <h1
                       className="text-black bg-zinc-200 hover:bg-zinc-100 px-4 py-2"
-                      onClick={()=>setSelectedOfferCategory(category)}
+                      onClick={() => setSelectedOfferCategory(category)}
                     >
                       {category}
                     </h1>
@@ -392,7 +392,7 @@ const Tabs = ({
           )}
           {subCategory && (
             <>
-              <div className="grid mb-4 md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-2 gap-y-4">
+              <div className="mt-20 grid mb-4 md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-2 gap-y-4">
                 {subCategory.map((sub, idx) => (
                   <div key={idx} className=" gap-2 hover:bg-zinc-100">
                     <div
@@ -506,7 +506,7 @@ const Tabs = ({
             renderTypeContent={renderTypeContent}
           />
 
-          { parentCategory === "offers" && 
+          {parentCategory === "offers" &&
             <TabsProductContent
               filterName={"Offers"}
               commonClasses={commonClasses}
@@ -530,16 +530,14 @@ const Tabs = ({
                 handleTabClick();
               }}
               className={`Tabbtn z-0 bg-gray-100
-                  ${
-                    openAll
-                      ? `active-tabs  border border-black ${commonClasses}`
-                      : `tabS  border border-white ${commonClasses}`
-                  }
-                  ${
-                    typeof window !== "undefined" && window.innerWidth <= 450
-                      ? " justify-center"
-                      : " justify-between"
-                  }
+                  ${openAll
+                  ? `active-tabs  border border-black ${commonClasses}`
+                  : `tabS  border border-white ${commonClasses}`
+                }
+                  ${typeof window !== "undefined" && window.innerWidth <= 450
+                  ? " justify-center"
+                  : " justify-between"
+                }
                   `}
             >
               All Filters &nbsp;
@@ -775,9 +773,8 @@ const Tabs = ({
 
                           <button
                             onClick={handleContent}
-                            className={`text-left underline ${
-                              openContent ? "block" : "hidden"
-                            }`}
+                            className={`text-left underline ${openContent ? "block" : "hidden"
+                              }`}
                           >
                             Less
                           </button>

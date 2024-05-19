@@ -124,16 +124,13 @@ function Header() {
         <TopHeader />
       </TopHeaderWrapper>
       <div
-        className={`fixed w-full sm:bg-none ${
-          homeRoute === pathname || pathname.includes("/product/")
-            ? typeof window !== "undefined" && window.scrollY < 20
-              ? "md:top-[35px] top-[0px]"
-              : "top-0"
+        className={`fixed w-full sm:bg-none ${!pathname.includes("/checkout")
+          ? typeof window !== "undefined" && window.scrollY < 20
+            ? "md:top-[35px] top-[0px]"
             : "top-0"
-        } z-[99999]
+          : "top-0"
+          } z-[99999]
        ${isScrolled ? "bg-white" : "bg-white"} 
-      
-      
       ${isFilterVisible ? "block" : "hidden"}
       `}
       >
@@ -141,9 +138,8 @@ function Header() {
         {!searchQuery ? (
           <>
             <div
-              className={`${
-                isScrolled ? " border-b-[0.5px] border-slate-200" : ""
-              } flex flex-row justify-between z-[99999px] items-center sm:px-[20px] px-[20px] h-[60px]`}
+              className={`${isScrolled ? " border-b-[0.5px] border-slate-200" : ""
+                } flex flex-row justify-between z-[99999px] items-center sm:px-[20px] px-[20px] h-[60px]`}
             >
               {/* main-logo */}
               <div className=" flex mainlogo items-center mr-20 justify-start">
@@ -172,21 +168,19 @@ function Header() {
                         key={idx}
                         onMouseEnter={() => handleMouseEnter(idx)}
                         onMouseLeave={handleMouseLeave}
-                        // onClick={() => handleClick(idx)}
+                      // onClick={() => handleClick(idx)}
                       >
                         <Link
-                          className={`text-md  font-semibold  ${
-                            isOpen ? "border-b-2 border-black" : ""
-                          }`}
+                          className={`text-md  font-semibold  ${isOpen ? "border-b-2 border-black" : ""
+                            }`}
                           href={value.label === "Offers" ? "/heading/offers/all" : "#"}
                           onClick={toggleDropdown}
                         >
                           <p
-                            className={`block font-medium py-[15px] px-[5px] border-b-2  ${
-                              hoveredIndex === idx
-                                ? "border-black"
-                                : "border-transparent"
-                            }`}
+                            className={`block font-medium py-[15px] px-[5px] border-b-2  ${hoveredIndex === idx
+                              ? "border-black"
+                              : "border-transparent"
+                              }`}
                           >
                             {value.label}
                           </p>
@@ -354,21 +348,19 @@ function Header() {
                   key={idx}
                   onMouseEnter={() => handleMouseEnter(idx)}
                   onMouseLeave={handleMouseLeave}
-                  // onClick={() => handleClick(idx)}
+                // onClick={() => handleClick(idx)}
                 >
                   <Link
-                    className={`text-md  font-semibold  ${
-                      isOpen ? "border-b-2 border-black" : ""
-                    }`}
+                    className={`text-md  font-semibold  ${isOpen ? "border-b-2 border-black" : ""
+                      }`}
                     href="#"
                     onClick={toggleDropdown}
                   >
                     <p
-                      className={`block p-2 text-lg font-medium border-b-2 ${
-                        hoveredIndex === idx
-                          ? "border-black"
-                          : "border-transparent"
-                      }`}
+                      className={`block p-2 text-lg font-medium border-b-2 ${hoveredIndex === idx
+                        ? "border-black"
+                        : "border-transparent"
+                        }`}
                     >
                       {value.label}
                     </p>
