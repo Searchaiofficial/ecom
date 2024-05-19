@@ -13,7 +13,7 @@ import SaveDeviceIdLocalstorage from "@/utils/SaveDeviceIdLocalstorage ";
 import { Suspense } from "react";
 import ChatPrompt from "../../components/ChatPromptWidget/chatprompt";
 import SaveUserCoordinatesOnscroll from "@/utils/SaveUserCoordinatesOnScroll";
-import { OrganizationJsonLd } from "next-seo";
+import { OrganizationJsonLd, SiteLinksSearchBoxJsonLd } from "next-seo";
 
 export default async function Home() {
   return (
@@ -46,6 +46,16 @@ export default async function Home() {
           postalCode: "700016",
           contactType: "Customer Service",
         }}
+      />
+      <SiteLinksSearchBoxJsonLd
+        useAppDir={true}
+        url="https://www.ayatrio.com"
+        potentialActions={[
+          {
+            target: "https://www.ayatrio.com/?search={search_term_string}",
+            queryInput: "required name=search_term_string",
+          },
+        ]}
       />
       <SaveDeviceIdLocalstorage />
       <SaveUserCoordinatesOnscroll threshold={50} />
