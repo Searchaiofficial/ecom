@@ -63,7 +63,7 @@ export default function RootLayout({ children }) {
       <GoogleTagManager gtmId={gtmId} />
       <body>
         <Providers>
-          <NextTopLoader color="#000" showSpinner={false} />
+          <NextTopLoader color="#000" showSpinner={false} zIndex={99999}/>
           {children}
           <FooterWrapper />
         </Providers>
