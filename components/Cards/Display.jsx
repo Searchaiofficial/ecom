@@ -12,7 +12,7 @@ const Display = async () => {
     <>
       <div className="px-[15px] flex flex-col  lg:grid lg:grid-cols-2 md:flex-row gap-4  items-center justify-between mx-auto my-8">
         <div className="w-full">
-          {apiData.length > 0 ? (
+          {apiData && apiData.length > 0 ? (
             <>
               <div
                 className={`relative w-full h-[435px]  lg:h-[730px] max-w-1/2`}
@@ -55,7 +55,7 @@ const Display = async () => {
           )}
         </div>
         <div className="max-w-1/2 w-full">
-          {apiData.length > 0 ? (
+          {apiData && apiData.length > 0 ? (
             <>
               <div
                 className={`relative w-full h-[435px] lg:h-[730px]  max-w-1/2 `}

@@ -129,7 +129,7 @@ const CategoriesSlider = () => {
                                 {categories?.map((curElement, idx) => {
                                     return (
                                         <SwiperSlide className="max-w-[140px]" key={idx}>
-                                            <Link href={""} className="">
+                                            <Link href={`/category/${curElement.name.replace(/ /g, "-")}/all`} className="">
                                                 <div className="flex flex-col items-center">
                                                     <div className="lg:mb-[12px] ">
                                                         <Image src={curElement.image || "/ayatrio icon/demo1.png"} width={200} height={130} alt={curElement.name || "Swiper image"} className="w-[200px] h-[130px]" />

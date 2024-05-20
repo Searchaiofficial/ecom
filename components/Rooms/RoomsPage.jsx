@@ -36,6 +36,8 @@ import {
 import Link from "next/link";
 import axios from "axios";
 
+import BlogRelatedProducts from "../Cards/BlogRelatedProducts";
+
 export const RoomsPage = ({ params }) => {
   const [productData, setProductData] = useState([]);
   const [roomData, setRoomData] = useState([]);
@@ -47,10 +49,7 @@ export const RoomsPage = ({ params }) => {
   const dispatch = useDispatch();
   const roomSelect = useSelector(selectRoomData);
   const productSelect = useSelector(selectProductData);
-  console.log({ productData });
   const roomMainSelect = useSelector(selectRoomMain);
-
-  console.log({ roomData });
 
 
   const fetchRoomMain = async () => {
@@ -125,6 +124,9 @@ export const RoomsPage = ({ params }) => {
               see all double beds
             </button>
           </div>
+
+          
+          <BlogRelatedProducts relatedProducts={roomMain.firstSlider}/>
 
           {roomMain &&
             roomMain.fiveRooms &&
@@ -228,6 +230,7 @@ export const RoomsPage = ({ params }) => {
                 </div>
               </>
             )}
+            <BlogRelatedProducts relatedProducts={roomMain.secondSlider}/>
           {/* <div>
                         <div className="mt-5 gap-3 flex">
                             <div className="w-1/2">
@@ -324,6 +327,9 @@ export const RoomsPage = ({ params }) => {
               </p>
             </div>
           </div>
+
+          
+          <BlogRelatedProducts relatedProducts={roomMain.thirdSlider}/>
 
           <div className="pt-12  mb-20  bg-white sm:px-[50px] px-[20px]">
             <div className="mb-2 w-full flex justify-between items-center">

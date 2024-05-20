@@ -354,12 +354,12 @@ const Tabs = ({
 
   return (
     <>
-      <div className="wrapper  lg:px-[67px] sm:px-[50px] px-[20px] relative">
+      <div className="wrapper py-[100px]  lg:px-[67px] sm:px-[50px] px-[20px] relative">
         <div>
-          <h2 className="mb-2 text-xl font-bold capitalize">{heading}</h2>
 
+          <h2 className="mb-4 text-2xl font-bold capitalize">{heading}</h2>
           {parentCategory === "demandtype" && allTypes && (
-            <div className="mt-20 grid mb-4 md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-2 gap-y-4">
+            <div className="mt-2 grid mb-4 md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-2 gap-y-4">
               {allTypes.map((type, idx) => (
                 <div key={idx} className=" gap-2">
                   <div className="flex items-center gap-4 cursor-pointer ">
@@ -375,7 +375,7 @@ const Tabs = ({
             </div>
           )}
           {parentCategory === "offers" && offerCategory && (
-            <div className="mt-20 grid mb-4 md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-2 gap-y-4">
+            <div className="mt-4 grid mb-4 md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-2 gap-y-4">
               {offerCategory.map((category, idx) => (
                 <div key={idx} className=" gap-2">
                   <div className="flex items-center gap-4 cursor-pointer ">
@@ -392,7 +392,7 @@ const Tabs = ({
           )}
           {subCategory && (
             <>
-              <div className="mt-20 grid mb-4 md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-2 gap-y-4">
+              <div className="mt-4 grid mb-4 md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-2 gap-y-4">
                 {subCategory.map((sub, idx) => (
                   <div key={idx} className=" gap-2 hover:bg-zinc-100">
                     <div

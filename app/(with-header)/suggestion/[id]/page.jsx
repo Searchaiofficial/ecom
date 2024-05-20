@@ -106,6 +106,12 @@ const SuggestionPage = ({ params }) => {
             </div>
           </div>
 
+          {suggestion &&
+            suggestion.firstSlider &&
+            suggestion.firstSlider.length > 0 && (
+              <BlogRelatedProducts relatedProducts={suggestion.firstSlider} />
+            )}
+
           {suggestion?.subHeading &&
             suggestion?.subHeading.map((subHeadingItem, index) => (
               <div className="my-16">
@@ -168,7 +174,13 @@ const SuggestionPage = ({ params }) => {
                 </div>
               </div>
             </div>
-
+            {suggestion &&
+              suggestion.secondSlider &&
+              suggestion.secondSlider.length > 0 && (
+                <BlogRelatedProducts
+                  relatedProducts={suggestion.secondSlider}
+                />
+              )}
             <div>
               <h3 className="text-lg font-semibold mt-24">
                 Different Rooms Different Design
@@ -339,7 +351,14 @@ const SuggestionPage = ({ params }) => {
               )}
             </div>
           </div> */}
+
             <QuiltSelector />
+
+            {suggestion &&
+              suggestion.thirdSlider &&
+              suggestion.thirdSlider.length > 0 && (
+                <BlogRelatedProducts relatedProducts={suggestion.thirdSlider} />
+              )}
             <Tabs data={recommended} />
           </div>
         )}

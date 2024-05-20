@@ -153,6 +153,26 @@ const ProductPage = ({ params }) => {
       };
       fetchVeProducts();
       console.log("ve products");
+    } else if (params.heading === "category" && type === "all") {
+      dispatch({
+        type: "FETCH_FILTER_PRODUCTS",
+        payload: {
+          heading: params.heading,
+          parentCategoryVar: params.parentCategory.replace(/-/g, " "),
+        },
+      });
+      if (!category.name) {
+        const fetchCategoryData = async () => {
+          const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getCategoryByName/${params.parentCategory}`;
+          const response = await axios.get(apiUrl, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          setCategory(response.data);
+        };
+        fetchCategoryData();
+      }
     } else {
       if (!category.name) {
         const fetchCategoryData = async () => {
@@ -196,36 +216,36 @@ const ProductPage = ({ params }) => {
 
   return (
     <>
-       {/* ( */}
-        <div>
-          <Tabproduct
-            filteredProductData={
-              params.parentCategory === "virtualexperience"
-                ? filteredProducts
-                : params.parentCategory === "offers"
-                ? offerProductData
-                : params.parentCategory === "demandtype"
-                ? demandTypeProduct
-                : filteredProductData
-            }
-            heading={
-              params.parentCategory === "offers"
-                ? type === "highest"
-                  ? "Highest Offer"
-                  : type
-                : params.parentCategory === "demandtype"
-                ? type
-                : category.name
-            }
-            description={category?.description}
-            subCategory={category?.subcategories}
-            allTypes={allTypes}
-            parentCategory={params.parentCategory}
-            offerCategory={offerCategory}
-            setType={setType}
-            setSelectedOfferCategory={setSelectedOfferCategory}
-          />
-        </div>
+      {/* ( */}
+      <div>
+        <Tabproduct
+          filteredProductData={
+            params.parentCategory === "virtualexperience"
+              ? filteredProducts
+              : params.parentCategory === "offers"
+              ? offerProductData
+              : params.parentCategory === "demandtype"
+              ? demandTypeProduct
+              : filteredProductData
+          }
+          heading={
+            params.parentCategory === "offers"
+              ? type === "highest"
+                ? "Highest Offer"
+                : type
+              : params.parentCategory === "demandtype"
+              ? type
+              : category.name
+          }
+          description={category?.description}
+          subCategory={category?.subcategories}
+          allTypes={allTypes}
+          parentCategory={params.parentCategory}
+          offerCategory={offerCategory}
+          setType={setType}
+          setSelectedOfferCategory={setSelectedOfferCategory}
+        />
+      </div>
       {/* ) : (
         <div className="flex justify-center items-center h-[80vh]">
           <h1 className="text-2xl">No Products Found</h1>
