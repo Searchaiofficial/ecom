@@ -32,6 +32,10 @@ const Card = ({ data, productId }) => {
   const [selectedColor, setSelectedColor] = useState("");
   const [paletteType, setPaletteType] = useState("color");
   const dispatch = useDispatch();
+  const [isActive, setIsActive] = useState("EMI Plans")
+  const [openOfferDetails, setOpenOfferDetails] = useState(false)
+  const [EmiOption, setEmiOption] = useState("Credit Card EMI")
+  const [openEmiDetails, setOpenEMIDetails] = useState(false)
 
 
 
@@ -309,16 +313,10 @@ const Card = ({ data, productId }) => {
               {/* <p className="text-[16px] font-normal">Originals</p> */}
 
               {/* <<<<<<< HEAD */}
-              <p className="font-semibold text-red-600 text-[15px]">{data.demandtype}</p>
+              <p className="font-semibold text-[#C31952] text-[15px]">{data.demandtype}</p>
 
               <div className="flex gap-2">
                 <div className="flex items-center">
-                  {/* <Image src={"/icon/star.svg"} height={20} width={20} alt="downarrow" className=" h-[1em] w-[1em] hover:text-gray-600" />
-                  <Image src={"/icon/star.svg"} height={20} width={20} alt="downarrow" className=" h-[1em] w-[1em] hover:text-gray-600" />
-                  <Image src={"/icon/star.svg"} height={20} width={20} alt="downarrow" className=" h-[1em] w-[1em] hover:text-gray-600" />
-                  <Image src={"/icon/star.svg"} height={20} width={20} alt="downarrow" className=" h-[1em] w-[1em] hover:text-gray-600" />
-                  <Image src={"/icon/half-star.svg"} height={20} width={20} alt="downarrow" className=" h-[1em] w-[1em] hover:text-gray-600" /> */}
-                  {/* {stars} */}
                   {
                     Starts
                   }
@@ -387,7 +385,7 @@ const Card = ({ data, productId }) => {
               <div className="font-bold items-end flex mb-1 mt-[30px]">
 
 
-                <h2 className={`text-3xl leading-[0.5] tracking-wide ${data?.specialprice ? "bg-yellow-400 px-2 pt-3 w-fit" : ""} shadow-lg`} style={{ boxShadow: '3px 3px #ad3535' }}>
+                <h2 className={`text-3xl leading-[0.5] tracking-wide ${data?.specialprice ? "bg-[#FFC21F] px-2 pt-3 w-fit" : ""} shadow-lg`} style={{ boxShadow: '3px 3px #ad3535' }}>
                   <span className="text-sm">Rs. &nbsp;</span>{" "}
                   {data?.specialprice?.price ? data?.specialprice.price : data.perUnitPrice}
                 </h2>{" "}
@@ -464,8 +462,8 @@ const Card = ({ data, productId }) => {
                       className={`parent relative w-[60px] h-[60px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
             ${selectedColor === item.color ||
                           (index === 0 && selectedColor === "")
-                          ? "border-[2px] border-black"
-                          : "border-[0.5px] border-black"
+                          ? " border-black border-b-[6px]"
+                          : " border-black"
                         }   
           `}
                     >
@@ -565,75 +563,408 @@ const Card = ({ data, productId }) => {
 
             {/* Modal */}
             {sidebarContect && (
-              <div>
-                <div className="w-1/2 h-5/6 flex flex-col justify-between gap-4 bg-white rounded-3xl p-7 z-50k">
+              <div className="">
+                <div className="w-1/2 flex flex-col justify-between gap-4 h-full bg-white rounded-3xl p-7 z-50k">
                   {sidebarContect === "zeroCostEMI" && (
-                    <div className=" fixed h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0">
-                      <section className="text-black bg-white flex-col absolute right-0 top-0 h-screen p-8 gap-8 z-50  w-[35%] flex ">
-                        <div className="flex items-end justify-end">
+                    <div className="fixed h-full w-screen bg-black/50 backdrop:blur-sm top-0 left-0">
+                      <section className="text-black bg-white flex-col absolute right-0 top-0 h-full  z-50 w-full  lg:w-[35%] flex overflow-y-auto">
+                        <div className="flex px-[40px]  mt-5 items-end justify-end">
                           <button
-                            className="text-3xl mt-0 mb-8 cursor-pointer  "
+                            className="text-2xl text-center mt-0 mb-8 cursor-pointer  "
                             onClick={() => setsidebarContent(null)}
                           >
                             X
                           </button>
                         </div>
-                        <h1 className="text-3xl font-bold">Zero Cost EMI</h1>
-                        <p>Content for Zero cost emi</p>
+                        <div className="flex flex-col w-full border-t">
+                          <div className="px-[40px] pb-[32px]">
+                            <div className="flex items-center ">
+                              <div onClick={() => setIsActive("Offers for you")} className={`flex-1 cursor-pointer flex items-center justify-center h-[65px]  ${isActive === "Offers for you" ? "border-b-4 border-[#2e2e2e] text-black" : "border-[#8E8E8E] text-[#8E8E8E]"}  `}>
+                                <p className=" text-[16px]">Offers for you</p>
+                              </div>
+                              <div onClick={() => setIsActive("EMI Plans")} className={`flex-1 cursor-pointer flex items-center justify-center h-[65px]   ${isActive === "EMI Plans" ? "border-b-4 border-[#2e2e2e] text-black" : "border-[#8E8E8E]  text-[#8E8E8E]"}  `}>
+                                <p className="text-[16px]">EMI Plans</p>
+                              </div>
+                            </div>
+                            {
+                              isActive === "Offers for you" && (
+                                <div className="">
+                                  <div className="pt-[32px] flex items-center justify-between">
+                                    <p className="text-[#2E2E2E] text-[16px] font-[470px]">All Offers</p>
+                                    <p className="text-[#8E8E8E] text-[16px] font-normal">How to avail?</p>
+                                  </div>
+                                  <div onClick={() => setOpenOfferDetails((prev) => !prev)} className="py-[20px]  border-b border-[#D1D1D1] cursor-pointer ">
+                                    <div className="flex items-center">
+                                      <div className="mr-[15px] p-1  ">
+                                        <Image src="/Ayatrio updated icon/adtocart.svg" height={25} width={25} alt="arrow-right" />
+                                      </div>
+                                      <p className="text-[#2E2E2E] text-[14px] flex-1">Get cashback up to Rs 200, Pay using CRED UPI</p>
+                                      {
+                                        openOfferDetails ? <Image src="/icon/arrow_right.svg" className="-rotate-90" height={20} width={20} alt="arrow-right" /> : <Image src="/icon/arrow_right.svg" className="rotate-90" height={20} width={20} alt="arrow-right" />
+                                      }
+                                    </div>
+
+                                    {
+                                      openOfferDetails && (
+                                        <div className="pt-[10px] ml-[55px]">
+                                          <div className="flex flex-col pb-[12px]">
+                                            <p className="text-[#8E8E8E] text-[14px]">Get cashback up to Rs 200, Pay using CRED UPI, Applicable once per user per month</p>
+                                            <p className="text-blue-500 underline text-xs">Terms and Conditions</p>
+                                          </div>
+                                          <p className="text-xs text-[#2E2E2E] pb-[12px]">Offer applicable on:</p>
+                                          <p className="px-[8px] py-[5px] text-[12px] text-center text-[#8E8E8E] w-[85px] border bg-[#f3f5f5]">UPI</p>
+                                        </div>
+
+                                      )
+                                    }
+                                  </div>
+                                </div>
+                              )
+                            }
+
+                            {
+                              isActive === "EMI Plans" && (
+                                <div className="">
+                                  <div className="flex items-center gap-[10px] pb-[20px] pt-[32px] ">
+                                    <button onClick={(e) => setEmiOption("Credit Card EMI")} className={`${EmiOption === "Credit Card EMI" ? "bg-[#0E342C] text-white py-[16px] px-[30px] text-center text-[14px] rounded-full" : "py-[16px] px-[30px] rounded-full border text-[14px] text-center"}`}>Credit Card EMI</button>
+                                    <button onClick={(e) => setEmiOption("Debit Card")} className={`${EmiOption === "Debit Card" ? "bg-[#0E342C] flex-1 text-white py-[16px] px-[30px] text-center text-[14px] rounded-full" : "py-[16px] flex-1 px-[30px] rounded-full border text-[14px] text-center"}`}>Debit Card & Cardless EMI</button>
+                                  </div>
+                                  {
+                                    EmiOption === "Credit Card EMI" && (
+                                      <div>
+
+                                        <div className="flex items-center justify-between">
+                                          <p className="text-[#2E2E2E] text-[16px] font-[470px]">All Offers</p>
+                                          <p className="text-[#8E8E8E] text-[16px] font-normal">How to avail?</p>
+                                        </div>
+                                        <div onClick={(e) => setOpenEMIDetails(prev => !prev)} className="flex flex-col items-center py-[20px] border-b cursor-pointer">
+                                          <div className="flex items-center w-full ">
+                                            <div className="mr-[15px] p-1 ">
+                                              <Image src="/ayatrio icon/utib.svg" height={24} width={24} alt="arrow-right" />
+                                            </div>
+                                            <div className="flex flex-col flex-1 ">
+                                              <p className="text-[#2E2E2E] text-[14px]">ICIC Bank</p>
+                                              <p className="text-[#8E8E8E] text-xs">from ₹294/month</p>
+                                            </div>
+                                            {
+                                              openEmiDetails ? <Image src="/icon/arrow_right.svg" className="-rotate-90" height={20} width={20} alt="arrow-right" /> : <Image src="/icon/arrow_right.svg" className="rotate-90" height={20} width={20} alt="arrow-right" />
+                                            }
+                                          </div>
+                                          {
+                                            openEmiDetails && (
+                                              <div className="w-[90%] mt-5 ml-12 flex flex-col gap-1">
+                                                <table className=" bg-white border border-gray-200 rounded-lg text-xs">
+                                                  <tbody>
+                                                    <tr className="hover:bg-gray-50 border-b border-gray-200">
+                                                      <td className="py-2 px-4">₹294 X 24 months</td>
+                                                      <td className="py-2 px-4">₹7049</td>
+                                                      <td className="py-2 px-4">15.99%</td>
+                                                    </tr>
+                                                    <tr className="bg-gray-50 hover:bg-gray-100 border-b border-gray-200">
+                                                      <td className="py-2 px-4">₹377 X 18 months</td>
+                                                      <td className="py-2 px-4">₹6787</td>
+                                                      <td className="py-2 px-4">15.99%</td>
+                                                    </tr>
+                                                    <tr className="hover:bg-gray-50 border-b border-gray-200">
+                                                      <td className="py-2 px-4">₹544 X 12 months</td>
+                                                      <td className="py-2 px-4">₹6531</td>
+                                                      <td className="py-2 px-4">15.99%</td>
+                                                    </tr>
+                                                    <tr className="bg-gray-50 hover:bg-gray-100 border-b border-gray-200">
+                                                      <td className="py-2 px-4">₹712 X 9 months</td>
+                                                      <td className="py-2 px-4">₹6406</td>
+                                                      <td className="py-2 px-4">15.99%</td>
+                                                    </tr>
+                                                    <tr className="hover:bg-gray-50 border-b border-gray-200">
+                                                      <td className="py-2 px-4">₹1047 X 6 months</td>
+                                                      <td className="py-2 px-4">₹6282</td>
+                                                      <td className="py-2 px-4">15.99%</td>
+                                                    </tr>
+                                                    <tr className="bg-gray-50 hover:bg-gray-100 border-b border-gray-200">
+                                                      <td className="py-2 px-4">₹2053 X 3 months</td>
+                                                      <td className="py-2 px-4">₹6160</td>
+                                                      <td className="py-2 px-4">15.99%</td>
+                                                    </tr>
+                                                  </tbody>
+                                                </table>
+
+                                                <div className="p-[12px] text-[#10846d] text-[12px] bg-[#f8f9f3] border border-[#10846d] mt-2 max-w-fit">
+                                                  Save for payment
+                                                </div>
+                                              </div>
+                                            )
+                                          }
+                                        </div>
+                                        <div className="flex items-center py-[20px] border-b cursor-pointer">
+                                          <div className="mr-[15px] p-1 ">
+                                            <Image src="/ayatrio icon/utib.svg" height={24} width={24} alt="arrow-right" />
+                                          </div>
+                                          <div className="flex flex-col flex-1 ">
+                                            <p className="text-[#2E2E2E] text-[14px]">ICIC Bank</p>
+                                            <p className="text-[#8E8E8E] text-xs">from ₹294/month</p>
+                                          </div>
+                                          <Image src="/icon/arrow_right.svg" className="rotate-90" height={20} width={20} alt="arrow-right" />
+                                        </div>
+                                        <div className="flex items-center py-[20px] border-b cursor-pointer">
+                                          <div className="mr-[15px] p-1  ">
+                                            <Image src="/ayatrio icon/utib.svg" height={24} width={24} alt="arrow-right" />
+                                          </div>
+                                          <div className="flex flex-col flex-1 ">
+                                            <p className="text-[#2E2E2E] text-[14px]">ICIC Bank</p>
+                                            <p className="text-[#8E8E8E] text-xs">from ₹294/month</p>
+                                          </div>
+                                          <Image src="/icon/arrow_right.svg" className="rotate-90" height={20} width={20} alt="arrow-right" />
+                                        </div>
+                                      </div>
+                                    )
+                                  }
+                                  {
+                                    EmiOption === "Debit Card" && (
+                                      <div>
+                                        <div className="flex items-center justify-between">
+                                          <p className="text-[#2E2E2E] text-[16px] font-[470px]">Debit Card EMIs</p>
+                                          <p className="text-[#8E8E8E] text-[16px] font-normal">How to avail?</p>
+                                        </div>
+                                        {/* <div className="flex items-center py-[20px] border-b cursor-pointer">
+                                          <div className="mr-[15px] p-1 shadow-lg ">
+                                            <Image src="/ayatrio icon/utib.svg" height={24} width={24} alt="arrow-right" />
+                                          </div>
+                                          <div className="flex flex-col flex-1 ">
+                                            <p className="text-[#2E2E2E] text-[14px]">ICIC Bank</p>
+                                            <p className="text-[#8E8E8E] text-xs">from ₹294/month</p>
+                                          </div>
+                                          <Image src="/icon/arrow_right.svg" className="rotate-90" height={20} width={20} alt="arrow-right" />
+                                        </div> */}
+                                        <div onClick={(e) => setOpenEMIDetails(prev => !prev)} className="flex flex-col items-center py-[20px] border-b cursor-pointer">
+                                          <div className="flex items-center w-full ">
+                                            <div className="mr-[15px] p-1 ">
+                                              <Image src="/ayatrio icon/utib.svg" height={24} width={24} alt="arrow-right" />
+                                            </div>
+                                            <div className="flex flex-col flex-1 ">
+                                              <p className="text-[#2E2E2E] text-[14px]">ICIC Bank</p>
+                                              <p className="text-[#8E8E8E] text-xs">from ₹294/month</p>
+                                            </div>
+                                            {
+                                              openEmiDetails ? <Image src="/icon/arrow_right.svg" className="-rotate-90" height={20} width={20} alt="arrow-right" /> : <Image src="/icon/arrow_right.svg" className="rotate-90" height={20} width={20} alt="arrow-right" />
+                                            }
+                                          </div>
+                                          {
+                                            openEmiDetails && (
+                                              <div className="w-[90%] mt-5 ml-12 flex flex-col gap-1">
+                                                <table className=" bg-white border border-gray-200 rounded-lg text-xs">
+                                                  <tbody>
+                                                    <tr className="hover:bg-gray-50 border-b border-gray-200">
+                                                      <td className="py-2 px-4">₹294 X 24 months</td>
+                                                      <td className="py-2 px-4">₹7049</td>
+                                                      <td className="py-2 px-4">15.99%</td>
+                                                    </tr>
+                                                    <tr className="bg-gray-50 hover:bg-gray-100 border-b border-gray-200">
+                                                      <td className="py-2 px-4">₹377 X 18 months</td>
+                                                      <td className="py-2 px-4">₹6787</td>
+                                                      <td className="py-2 px-4">15.99%</td>
+                                                    </tr>
+                                                    <tr className="hover:bg-gray-50 border-b border-gray-200">
+                                                      <td className="py-2 px-4">₹544 X 12 months</td>
+                                                      <td className="py-2 px-4">₹6531</td>
+                                                      <td className="py-2 px-4">15.99%</td>
+                                                    </tr>
+                                                    <tr className="bg-gray-50 hover:bg-gray-100 border-b border-gray-200">
+                                                      <td className="py-2 px-4">₹712 X 9 months</td>
+                                                      <td className="py-2 px-4">₹6406</td>
+                                                      <td className="py-2 px-4">15.99%</td>
+                                                    </tr>
+                                                    <tr className="hover:bg-gray-50 border-b border-gray-200">
+                                                      <td className="py-2 px-4">₹1047 X 6 months</td>
+                                                      <td className="py-2 px-4">₹6282</td>
+                                                      <td className="py-2 px-4">15.99%</td>
+                                                    </tr>
+                                                    <tr className="bg-gray-50 hover:bg-gray-100 border-b border-gray-200">
+                                                      <td className="py-2 px-4">₹2053 X 3 months</td>
+                                                      <td className="py-2 px-4">₹6160</td>
+                                                      <td className="py-2 px-4">15.99%</td>
+                                                    </tr>
+                                                  </tbody>
+                                                </table>
+
+                                                <div className="p-[12px] text-[#10846d] text-[12px] bg-[#f8f9f3] border border-[#10846d] mt-2 max-w-fit">
+                                                  Save for payment
+                                                </div>
+                                              </div>
+                                            )
+                                          }
+                                        </div>
+                                        <div className="mt-[32px]">
+                                          <p className="text-[#2E2E2E] text-[16px] font-[470px]">Cardless and Other EMIs</p>
+                                          <p className=" text-center w-full mt-[40px] text-[14px]">No Cardless EMI plans avaliable</p>
+                                        </div>
+                                      </div>
+                                    )
+                                  }
+                                </div>
+                              )
+                            }
+                          </div>
+                        </div>
                       </section>
                     </div>
                   )}
                   {sidebarContect === "inStoreRequest" && (
-                    <div className=" fixed h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0">
-                      <section className="text-black bg-white flex-col absolute right-0 top-0 h-screen p-8 gap-8 z-50  w-[35%] flex ">
-                        <div className="flex items-end justify-end">
+                    <div className="fixed h-full w-screen bg-black/50 backdrop:blur-sm top-0 left-0">
+                      <section className="text-black bg-white flex-col absolute right-0 top-0 h-full  z-50 w-full  lg:w-[35%] flex overflow-y-auto">
+                        <div className="flex px-[40px]  mt-5 items-end justify-end">
                           <button
-                            className="text-3xl mt-0 mb-8 cursor-pointer  "
+                            className="text-2xl mt-0 mb-8 cursor-pointer  "
                             onClick={() => setsidebarContent(null)}
                           >
                             X
                           </button>
                         </div>
-                        <h1 className="text-3xl font-bold">In Store Request</h1>
-                        <p>Content for In store Request</p>
-                      </section>
-                    </div>
-                  )}
-
-                  {sidebarContect === "deliveryOption" && (
-                    <div className=" fixed h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0">
-                      <section className="text-black bg-white flex-col absolute right-0 top-0 h-screen p-8 gap-8 z-50  w-[35%] flex ">
-                        <div className="flex items-end justify-end">
-                          <button
-                            className="text-3xl mt-0 mb-8 cursor-pointer  "
-                            onClick={() => setsidebarContent(null)}
-                          >
-                            X
-                          </button>
+                        <div className="flex flex-col">
+                          <div className="px-[40px] pb-[32px]">
+                            <div>
+                              <h1 className="text-[24px] font-semibold text-[#111111]">Visit us at your preferred Ayatrio store</h1>
+                              <div className="my-[16px] flex flex-col">
+                                <label className="text-[14px] font-normal text-[#484848]">Search by city</label>
+                                <div className="w-full px-[6px] border-2 border-[#484848] rounded-md h-[48px]">
+                                  <input className="w-full h-full focus-within:outline-none" />
+                                </div>
+                                <div className="flex items-start justify-between mt-[32px]">
+                                  <p>Stores with available stock</p>
+                                  <label className="inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" value="" className="sr-only peer" />
+                                    <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                                  </label>
+                                </div>
+                              </div>
+                              {/* 1 location */}
+                              <div className="py-[32px] border-t flex items-center">
+                                <div>
+                                  <h3 className="text-[14px] font-bold">Hyderabad</h3>
+                                  <p className="text-[14px] text-[#484848] font-normal mb-[8px]">Raidurg, Serilingampally, Mandal, Survey no. 83/1, plot No.25, 26, Part 29 Panmaqath, Rangareddy, Hyderabad, Hyderabad</p>
+                                  <div className="flex gap-2 items-center">
+                                    <div className="h-3 w-3 border-red-700 border-2 rounded-full" />
+                                    <p className="text-[14px] font-normal text-[#484848]">Click & Collect - Currently unavailable</p>
+                                  </div>
+                                  <div className="flex gap-2 items-center">
+                                    <div className="h-3 w-3 bg-green-600 rounded-full" />
+                                    <p className="text-[14px] font-normal text-[#484848]">Store - In stock</p>
+                                  </div>
+                                </div>
+                                <div>
+                                  <Image src="/icon/arrow_right.svg" height={50} width={50} alt="arrow-right" />
+                                </div>
+                              </div>
+                              {/* 2 Location */}
+                              <div className="py-[32px] border-t flex items-center">
+                                <div>
+                                  <h3 className="text-[14px] font-bold">Hyderabad</h3>
+                                  <p className="text-[14px] text-[#484848] font-normal mb-[8px]">Raidurg, Serilingampally, Mandal, Survey no. 83/1, plot No.25, 26, Part 29 Panmaqath, Rangareddy, Hyderabad, Hyderabad</p>
+                                  <div className="flex gap-2 items-center">
+                                    <div className="h-3 w-3 border-red-700 border-2 rounded-full" />
+                                    <p className="text-[14px] font-normal text-[#484848]">Click & Collect - Currently unavailable</p>
+                                  </div>
+                                  <div className="flex gap-2 items-center">
+                                    <div className="h-3 w-3 bg-green-600 rounded-full" />
+                                    <p className="text-[14px] font-normal text-[#484848]">Store - In stock</p>
+                                  </div>
+                                </div>
+                                <div>
+                                  <Image src="/icon/arrow_right.svg" height={50} width={50} alt="arrow-right" />
+                                </div>
+                              </div>
+                              {/* 3 Location */}
+                              <div className="py-[32px] border-t flex items-center">
+                                <div>
+                                  <h3 className="text-[14px] font-bold">Hyderabad</h3>
+                                  <p className="text-[14px] text-[#484848] font-normal mb-[8px]">Raidurg, Serilingampally, Mandal, Survey no. 83/1, plot No.25, 26, Part 29 Panmaqath, Rangareddy, Hyderabad, Hyderabad</p>
+                                  <div className="flex gap-2 items-center">
+                                    <div className="h-3 w-3 border-red-700 border-2 rounded-full" />
+                                    <p className="text-[14px] font-normal text-[#484848]">Click & Collect - Currently unavailable</p>
+                                  </div>
+                                  <div className="flex gap-2 items-center">
+                                    <div className="h-3 w-3 bg-green-600 rounded-full" />
+                                    <p className="text-[14px] font-normal text-[#484848]">Store - In stock</p>
+                                  </div>
+                                </div>
+                                <div>
+                                  <Image src="/icon/arrow_right.svg" height={50} width={50} alt="arrow-right" />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                        <h1 className="text-3xl font-bold">Delivery Options</h1>
-                        <p>Content Delivery Options </p>
-                      </section>
-                    </div>
-                  )}
-                  {sidebarContect === "calculator" && (
-                    <div className=" fixed h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0">
-                      <section className="text-black bg-white flex-col absolute right-0 top-0 h-screen p-8 gap-8 z-50  w-[35%] flex ">
-                        <div className="flex items-end justify-end">
-                          <button
-                            className="text-3xl mt-0 mb-8 cursor-pointer  "
-                            onClick={() => setsidebarContent(null)}
-                          >
-                            X
-                          </button>
-                        </div>
-                        <h1 className="text-3xl font-bold">Calculator</h1>
-                        <p>calculator here</p>
                       </section>
                     </div>
                   )}
                 </div>
+
+
+
+                {sidebarContect === "deliveryOption" && (
+                  <div className=" fixed h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0">
+                    <section className="text-black bg-white flex-col absolute right-0 top-0 h-screen  z-50 w-full  lg:w-[35%] flex ">
+                      <div className="flex px-[40px]  mt-5 items-end justify-end">
+                        <button
+                          className="text-2xl mt-0 mb-8 cursor-pointer  "
+                          onClick={() => setsidebarContent(null)}
+                        >
+                          X
+                        </button>
+                      </div>
+                      <div className="flex flex-col">
+                        <div className="px-[40px] pb-[32px]">
+                          <div>
+                            <h1 className="text-[24px] font-semibold text-[#111111]">Use your location</h1>
+                            <div className="mt-[16px]">
+                              <p className="text-[14px] text-[#484848]">Get updated information about product delivery and stock availability for your area.</p>
+                            </div>
+                            <div className="my-[16px] flex flex-col">
+                              <lable className="text-[14px] font-normal text-[#484848]">Enter a PIN code</lable>
+                              <div className="w-full px-[6px] border-2 border-[#484848]  rounded-md h-[48px]">
+                                <input className="w-full h-full focus-within:outline-none" />
+                              </div>
+                              <p className="text-xs text-[#767676]">e.g. 560075</p>
+                            </div>
+                            <div className="mb-[32px]">
+                              <p className="text-[14px] text-[#767676]">We use cookies to provide this service. Read more about how we use cookies in our policy . Please note that your location won’t be shared.</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="p-6 border-t lg:mt-32">
+                          <button
+                            className="bg-black text-white w-[100%] sm:h-14 h-10 rounded-full hover:bg-gray-900 transition duration-300 px-4"
+                          >
+                            Buy Now
+                          </button>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                )}
+                {sidebarContect === "calculator" && (
+                  <div className=" fixed h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0">
+                    <section className="text-black bg-white flex-col absolute right-0 top-0 h-screen  z-50 w-full  lg:w-[35%] flex ">
+                      <div className="flex px-[40px]  mt-5 items-end justify-end">
+                        <button
+                          className="text-2xl mt-0 mb-8 cursor-pointer  "
+                          onClick={() => setsidebarContent(null)}
+                        >
+                          X
+                        </button>
+                      </div>
+                      <div className="flex flex-col">
+                        <div className="px-[40px] pb-[32px]">
+                          <h1 className="text-[24px] font-semibold text-[#111111] mb-10">Calculator</h1>
+                          <Calculation priceData={data} />
+                        </div>
+                      </div>
+
+
+                    </section>
+                  </div>
+                )}
               </div>
+
             )}
           </div>
 
@@ -704,7 +1035,7 @@ const Card = ({ data, productId }) => {
               </p>
             </div>
           </div>
-        </div>
+        </div >
         <ToastContainer
           position="top-right"
           autoClose={5000}
@@ -712,7 +1043,7 @@ const Card = ({ data, productId }) => {
           theme="light"
           style={{ zIndex: "9999999999999" }}
         />
-      </div>
+      </div >
     </>
   );
 };

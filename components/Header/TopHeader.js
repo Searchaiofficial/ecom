@@ -30,7 +30,7 @@ const TopHeader = () => {
             </div>
             <span className="">|</span>
             <div>
-              <Link href="/login">Help</Link>
+              <Link href="/customerservice">Help</Link>
             </div>
           </div>
         </div>

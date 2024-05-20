@@ -21,11 +21,13 @@ import axios from "axios";
 const ShopByRoomSlider = () => {
 
     const backgroundColors = [
-        "bg-slate-500",
-        "bg-blue-400",
-        "bg-purple-300",
-        "bg-gray-200",
-        "bg-zinc-400",
+        "bg-[#FF5B45]",
+        "bg-[#FFC21F]",
+        "bg-[#B6E3A0]",
+        "bg-[#5680FF]",
+        "bg-[#D8B4FE]",
+        "bg-[#000000]",
+        "bg-[#91D8FB ]",
     ];
 
     const [RoomDataSlider, setRoomDataSlider] = useState([]);
@@ -97,16 +99,16 @@ const ShopByRoomSlider = () => {
                     }}
                     breakpoints={{
                         300: {
-                            slidesPerView: 1.2,
+                            slidesPerView: 1,
                             spaceBetween: 5,
                         },
 
                         640: {
-                            slidesPerView: 2.3,
+                            slidesPerView: 2,
                             spaceBetween: 5,
                         },
                         1024: {
-                            slidesPerView: 3.5,
+                            slidesPerView: 3,
                             spaceBetween: 5,
                         },
                     }}

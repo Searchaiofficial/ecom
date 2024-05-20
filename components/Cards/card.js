@@ -83,7 +83,7 @@ function Card(props) {
                 return (
                   <Link href={`/product/${props.title}`}>
                     <Image
-                      src={item}
+                      src={isHovered ? props.imgSrc[2] : item}
                       alt="NA"
                       key={idx}
                       height={300}
@@ -136,7 +136,7 @@ function Card(props) {
           {
             props.demandtype === "Ayatrio Member Favorite" && (
 
-              <p className="font-medium text-blue-500 mt-[14px] mb-[3px] text-[12px]">{props.demandtype}</p>
+              <p className="font-medium text-[#0076D3] mt-[14px] mb-[3px] text-[12px]">{props.demandtype}</p>
             )
           }
           <div className={` ${props.demandtype === "Ayatrio Member Favorite" ? "" : "pt-[14px]"}`}>{props.title}</div>
