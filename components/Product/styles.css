@@ -236,3 +236,7 @@ input[type="radio"] {
     width: 70% !important; /* For large screens (at least 1200px wide) */
   }
 }
+
+.swiper-wrapper{
+  display: flex;
+}

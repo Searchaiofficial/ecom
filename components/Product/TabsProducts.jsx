@@ -48,6 +48,7 @@ const Tabs = ({
   heading,
   allTypes,
   subCategory,
+  categoryName,
   description,
   setType,
   offerCategory,
@@ -379,7 +380,7 @@ const Tabs = ({
 
   return (
     <>
-      <div className="lg:px-[67px] sm:px-[50px] px-[20px] mt-20 relative  ">
+      <div className="lg:px-[67px] sm:px-[50px] px-[20px]">
         {/* <div className="overflow-x-auto">
           <h2 className="lg:text-[36px] text-[24px] font-semibold capitalize mb-[50px]">{categoryName}</h2>
           {subCategory && (
@@ -444,58 +445,59 @@ const Tabs = ({
           <p className="leading-2 mb-4 text-[14px] pt-[30px] text-[#484848] lg:w-[50%]">{description}</p>
         </div> */}
 
-        <div className="  pl-[15px] flex flex-col  overflow-x-auto  relative">
-          <h2 className="lg:text-[36px] text-[24px] font-semibold capitalize mb-[50px]">{categoryName}</h2>
-          {
-            subCategory && (
-              <div className="group items-center justify-start gap-2 mb-4">
+        <div className="  pl-[15px] flex flex-col  overflow-x-auto">
+          <h2 className="lg:text-[36px] text-[24px] font-semibold capitalize mb-[50px] mt-24">{parentCategory}</h2>
+          <div className="flex items-center">
+            {
+              subCategory && (
+                <div className="group flex flex-row items-center justify-start gap-2 mb-4">
 
-                <Swiper
-                  ref={swiper1Ref}
-                  modules={[Navigation, Pagination, Scrollbar, A11y]}
-                  navigation={{
-                    nextEl: ".right",
-                    prevEl: ".back",
-                  }}
-                  draggable={true}
-                  style={{ "--swiper-navigation-size": "24px", maxHeight: "160px" }}
-                  breakpoints={{
-                    400: {
-                      slidesPerView: 2.5,
-                      spaceBetween: 10,
-                    },
-                    768: {
-                      slidesPerView: 3,
-                      spaceBetween: 10,
-                    },
-                    1024: {
-                      slidesPerView: 3,
-                      spaceBetween: 10,
-                    },
-                  }}
-                >
-                  {subCategory?.map((curElement, idx) => {
-
-                    return (
-                      <SwiperSlide className="max-w-[130px]" key={idx}>
-                        <Link href={""} className="">
-                          <div className="flex flex-col items-center">
-                            <div className="lg:mb-[12px] ">
-                              <Image src={curElement.img} width={200} height={130} alt="image" className="w-[200px] h-[130px]" />
+                  <Swiper
+                    ref={swiper1Ref}
+                    modules={[Navigation, Pagination, Scrollbar, A11y]}
+                    navigation={{
+                      nextEl: ".right",
+                      prevEl: ".back",
+                    }}
+                    draggable={true}
+                    style={{ "--swiper-navigation-size": "24px", maxHeight: "190px" }}
+                    breakpoints={{
+                      400: {
+                        slidesPerView: 2.5,
+                        spaceBetween: 10,
+                      },
+                      768: {
+                        slidesPerView: 3,
+                        spaceBetween: 10,
+                      },
+                      1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 10,
+                      },
+                    }}
+                  >
+                    {subCategory?.map((curElement, idx) => {
+                      return (
+                        <SwiperSlide className="max-w-[130px]" key={idx}>
+                          <Link href={""} className="">
+                            <div className="flex flex-col items-center">
+                              <div className="lg:mb-[12px] ">
+                                <Image src={curElement.img} width={200} height={130} alt="image" className="w-[200px] h-[130px]" />
+                              </div>
+                              <h2 className="text-[#333333] font-semibold text-[14px] hover:underline text-center ">{curElement.name}</h2>
                             </div>
-                            <h2 className="text-[#333333] font-semibold text-[14px] hover:underline text-center ">{curElement.name}</h2>
-                          </div>
-                        </Link>
-                      </SwiperSlide>
-                    );
-                  })}
-                </Swiper>
+                          </Link>
+                        </SwiperSlide>
+                      );
+                    })}
+                  </Swiper>
 
 
-              </div>
-            )
-          }
-          <p className="leading-2 mb-4 text-[14px] pt-[60px] text-[#484848] lg:w-[50%]">{description}</p>
+                </div>
+              )
+            }
+          </div>
+          <p className="leading-2 mb-4 text-[14px] pt-[54px] text-[#484848] lg:w-[50%]">{description}</p>
         </div>
         <div className="hidden md:flex sticky top-0 z-20 bg-white py-5 scrollbar">
           <TabsProductContent

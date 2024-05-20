@@ -61,70 +61,32 @@ const ProfileContent = ({ initialData }) => {
       >
         {profileData.map((person, index) => (
           <SwiperSlide className="bg-[#fafafa] my-slider pr-3" key={index}>
-            {/* <div className=" flex w-full  justify-start items-center">
-              <div className="flex flex-col justify-center items-center">
-                <div className=" p-2 lg:p-4 flex justify-center items-center ">
-                  {" "}
-                  <div className="parent relative bg-black rounded-full md:h-40 h-28 md:w-40 w-28 mb-2 md:mt-8 mt-4  ">
-                    <Image
-                      src={person.image}
-                      className="rounded-full w-full h-full object-cover"
-                      width={0}
-                      height={0}
-                      layout="fill"
-                      objectFit="cover"
-                    />
-                  </div>
-                </div>
-                <div className="flex items-center justify-center">
-                  <div className="text-md p-1 font-bold line-clamp-1">{person.name}</div>
-
-                </div>
-                <div>
-                  <p className="text-md ">{person.role}</p>
-                </div>
-              </div>
-              <a className="flex justify-center items-center self-end mb-6" href="#">
-                <Image
-                  className=" sm:h-8 h-8 sm:w-8 w-8 -mt-1"
-                  src="/social-icon/linkedln.svg"
-                  height={2}
-                  width={2}
-                  alt={`LinkedIn for ${person.name}`}
-                />
-              </a>
-            </div> */}
             <div className="flex flex-col items-center">
               <div className="parent relative bg-black rounded-full md:h-36 h-28 md:w-36 w-28 mb-2 md:mt-8 mt-4">
                 <Image
                   src={person.image}
                   alt={person.name}
                   className="rounded-full w-full h-full object-cover"
-                  width={0}
-                  height={0}
                   layout="fill"
                   objectFit="cover"
                 />
               </div>
               <div className="text-md p-1 flex gap-1 items-center font-bold ">
                 <p className="line-clamp-1">{person.name}</p>
-                <Image
-                  className=" sm:h-6 h-6 sm:w-6 w-6"
-                  src="/social-icon/linkedln.svg"
-                  height={2}
-                  width={2}
-                  alt={`LinkedIn for ${person.name}`}
-                />
+                <a href="#" className="flex items-center">
+                  <Image
+                    className="sm:h-6 h-6 sm:w-6 w-6"
+                    src="/social-icon/linkedln.svg"
+                    alt={`LinkedIn for ${person.name}`}
+                    width={24}
+                    height={24}
+                  />
+                </a>
               </div>
-              <p className="lg:text-[16px] text-sm ">{person.role}</p>
+              <p className="lg:text-[16px] text-sm">{person.role}</p>
             </div>
-            {/* <br />
-            <br />
-            <br />
-            <br /> */}
           </SwiperSlide>
-        );
-        })}
+        ))}
       </Swiper>
       <div className=" flex flex-row items-end justify-end gap-6 mt-[25px]">
         <Image

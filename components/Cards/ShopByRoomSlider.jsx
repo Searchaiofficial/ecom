@@ -99,16 +99,16 @@ const ShopByRoomSlider = () => {
                     }}
                     breakpoints={{
                         300: {
-                            slidesPerView: 1.2,
+                            slidesPerView: 1,
                             spaceBetween: 5,
                         },
 
                         640: {
-                            slidesPerView: 2.3,
+                            slidesPerView: 2,
                             spaceBetween: 5,
                         },
                         1024: {
-                            slidesPerView: 3.5,
+                            slidesPerView: 3,
                             spaceBetween: 5,
                         },
                     }}
