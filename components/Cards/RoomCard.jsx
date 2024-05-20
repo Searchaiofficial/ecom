@@ -6,10 +6,9 @@ import Link from "next/link";
 
 const RoomCard = async () => {
   const gallery = await fetchGalleryData();
-
   return (
     <>
-      {gallery && gallery.length > 0 && (
+      {gallery && (
         <div className="px-[15px] flex justify-between mx-auto mb-10 ">
           <div className=" w-full flex justify-center ">
             <div className="w-full  h-[900px]  lg:h-[730px] grid grid-cols-2 lg:grid-cols-12  gap-x-4 auto-rows-fr">

@@ -34,7 +34,7 @@ import {
 } from "../Features/Slices/roomMainSlice";
 import Link from "next/link";
 import axios from "axios";
-
+import Tabs from "../Cards/Tabs";
 import BlogRelatedProducts from "../Cards/BlogRelatedProducts";
 
 export const RoomsPage = ({ params }) => {
@@ -50,23 +50,24 @@ export const RoomsPage = ({ params }) => {
   const productSelect = useSelector(selectProductData);
   const roomMainSelect = useSelector(selectRoomMain);
 
-
   const fetchRoomMain = async () => {
-    const url = `${process.env.NEXT_PUBLIC_API_BASE_URL
-      }/api/getRoommain?roomType=${params.replace(/-/g, " ")}`;
+    const url = `${
+      process.env.NEXT_PUBLIC_API_BASE_URL
+    }/api/getRoommain?roomType=${params.replace(/-/g, " ")}`;
     const response = await axios.get(url);
     setRoomMain(response.data);
   };
 
   useEffect(() => {
-    fetchRoomMain();
+    // fetchRoomMain();
     if (!dataFetched) {
       dispatch({ type: "FETCH_ROOM_MAIN_DATA_REQUEST", payload: { params } });
       setDataFetched(true);
     }
     setRoomData(roomSelect);
     setProductData(productSelect);
-    // setRoomMain(roomMainSelect);
+    console.log(productSelect);
+    setRoomMain(roomMainSelect);
   }, [
     dispatch,
     params,
@@ -124,8 +125,11 @@ export const RoomsPage = ({ params }) => {
             </button>
           </div>
 
-
-          <BlogRelatedProducts relatedProducts={roomMain.firstSlider} />
+          {roomMain &&
+            roomMain.firstSlider &&
+            roomMain.firstSlider.length > 0 && (
+              <BlogRelatedProducts relatedProducts={roomMain.firstSlider} />
+            )}
 
           {roomMain &&
             roomMain.fiveRooms &&
@@ -229,7 +233,11 @@ export const RoomsPage = ({ params }) => {
                 </div>
               </>
             )}
-          <BlogRelatedProducts relatedProducts={roomMain.secondSlider} />
+          {roomMain &&
+            roomMain.secondSlider &&
+            roomMain.secondSlider.length > 0 && (
+              <BlogRelatedProducts relatedProducts={roomMain.secondSlider} />
+            )}
           {/* <div>
                         <div className="mt-5 gap-3 flex">
                             <div className="w-1/2">
@@ -325,8 +333,11 @@ export const RoomsPage = ({ params }) => {
             </div>
           </div>
 
-
-          <BlogRelatedProducts relatedProducts={roomMain.thirdSlider} />
+          {roomMain &&
+            roomMain.thirdSlider &&
+            roomMain.thirdSlider.length > 0 && (
+              <BlogRelatedProducts relatedProducts={roomMain.thirdSlider} />
+            )}
 
           <div className="pt-12  mb-20  bg-white sm:px-[50px] px-[20px]">
             <div className="mb-2 w-full flex justify-between items-center">
@@ -378,12 +389,13 @@ export const RoomsPage = ({ params }) => {
               onSwiper={setSwiperRef}
               className="px-10"
             >
-              {!productData ? (
+              {!productSelect ? (
                 <SwiperSlide>
+                  ll
                   <div className="flex"></div>
                 </SwiperSlide>
               ) : (
-                productData.map((product, idx) => {
+                productSelect.map((product, idx) => {
                   return (
                     <SwiperSlide key={idx} className="ml-0">
                       <div className="grid grid-cols-1 mt-2 w-full  h-full fade-in ">
@@ -407,6 +419,10 @@ export const RoomsPage = ({ params }) => {
               )}
             </Swiper>
           </div>
+
+          {productSelect && productSelect.length > 0 && (
+            <Tabs data={productSelect} />
+          )}
         </div>
       </div>
     </div>
