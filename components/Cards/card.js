@@ -11,13 +11,12 @@ import { useDispatch } from "react-redux";
 import Link from "next/link";
 
 function Card(props) {
-  const router = useRouter();
   const dispatch = useDispatch();
-
 
   const handleImageClick = () => {
     props.setPopupVisible(true);
   };
+
   const handleclick = async (id, category) => {
     const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getSingleProduct?id=${id}`;
     const response = await axios.get(url);
@@ -89,7 +88,7 @@ function Card(props) {
                       key={idx}
                       height={300}
                       width={300}
-                      onClick={() => handleclick(props.id, props.category)}
+                      onClick={() => handleclick(props.title, props.category)}
                       className={
                         slide === idx
                           ? "aspect-square w-full hover:scale-110 transition-all duration-300"

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useEffect } from "react";
 import { Navigation } from "swiper/modules";
@@ -10,7 +10,10 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
-import { getProfileSuccess, selectProfileData } from "../Features/Slices/profileSlice";
+import {
+  getProfileSuccess,
+  selectProfileData,
+} from "../Features/Slices/profileSlice";
 
 const ProfileContent = ({ initialData }) => {
   const profileData = useSelector(selectProfileData);
@@ -18,7 +21,7 @@ const ProfileContent = ({ initialData }) => {
 
   useEffect(() => {
     if (initialData?.length > 0) {
-      dispatch(getProfileSuccess(initialData))
+      dispatch(getProfileSuccess(initialData));
     } else {
       console.log("Fetching Profile Data");
       dispatch({ type: "FETCH_PROFILE_REQUEST", payload: "Profile" });
@@ -27,7 +30,6 @@ const ProfileContent = ({ initialData }) => {
 
   return (
     <div className=" transparent rounded-lg  pb-[80px] ">
-
       <Swiper
         className=" h-50  lg:h-80"
         mousewheel={{
@@ -96,6 +98,7 @@ const ProfileContent = ({ initialData }) => {
               <div className="parent relative bg-black rounded-full md:h-36 h-28 md:w-36 w-28 mb-2 md:mt-8 mt-4">
                 <Image
                   src={person.image}
+                  alt={person.name}
                   className="rounded-full w-full h-full object-cover"
                   width={0}
                   height={0}
@@ -120,7 +123,8 @@ const ProfileContent = ({ initialData }) => {
             <br />
             <br /> */}
           </SwiperSlide>
-        ))}
+        );
+        })}
       </Swiper>
       <div className=" flex flex-row items-end justify-end gap-6 mt-[25px]">
         <Image

@@ -47,8 +47,9 @@ function TabsProductCard(props) {
         <div className="relative z[-999999] w-fit">
           <div
             onClick={(event) => event.stopPropagation()}
-            className={`flex justify-between text-black   checkbox-div absolute top-0 right-0 z-10 ${props.selectedpdt.includes(props.text) ? "visible" : ""
-              }`}
+            className={`flex justify-between text-black   checkbox-div absolute top-0 right-0 z-10 ${
+              props.selectedpdt.includes(props.text) ? "visible" : ""
+            }`}
           >
             <input
               type="checkbox"
@@ -62,14 +63,23 @@ function TabsProductCard(props) {
               checked={props.selectedpdt.includes(props.text)}
             />
           </div>
-
-          {props.demandtype ? (
+          {props.parentCategory === "offers" ? (
             <div
               className={
                 "flex text-[12px] justify-between text-black font-normal bg-white py-1 px-3 absolute top-2 left-2 z-10"
               }
             >
-              {props.demandtype === "Ayatrio Member Favorite" ? "Top Rated" : props.demandtype}
+              {props.offer}
+            </div>
+          ) : props.demandtype ? (
+            <div
+              className={
+                "flex text-[12px] justify-between text-black font-normal bg-white py-1 px-3 absolute top-2 left-2 z-10"
+              }
+            >
+              {props.demandtype === "Ayatrio Member Favorite"
+                ? "Top Rated"
+                : props.demandtype}
             </div>
           ) : (
             ""
@@ -135,18 +145,29 @@ function TabsProductCard(props) {
             </span>
           </div>
         </div>
-        {
-          props.demandtype === "Ayatrio Member Favorite" && (
-
-            <p className="font-medium text-blue-500 mt-[10px] text-[12px]">{props.demandtype}</p>
-          )
-        }
+        {props.demandtype === "Ayatrio Member Favorite" && (
+          <p className="font-medium text-blue-500 mt-[10px] text-[12px]">
+            {props.demandtype}
+          </p>
+        )}
         <p className="text-lg font-semibold hover:underline">
           {props.productTitle}
         </p>
         <p className="text-sm">{props.productDescription}</p>
 
-        {props.specialprice ? (
+        {props.discountedprice ? (
+          <div>
+            <p className="text-sm my-2 text-gray-500">
+              Offer price
+            </p>
+            <p className=" text-sm font-semibold bg-yellow-400 price-box w-fit px-2 py-1">
+              Rs.<span className="text-3xl">{props.discountedprice}</span>
+            </p>
+            <p className="text-sm mt-2 text-gray-500">
+              Regular price: Rs.{props.totalPrice}
+            </p>
+          </div>
+        ) : props.specialprice ? (
           <div>
             <p className=" text-sm font-semibold bg-yellow-400 price-box w-fit px-2 py-1">
               Rs.<span className="text-3xl">{props.specialprice?.price}</span>

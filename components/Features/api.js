@@ -170,3 +170,23 @@ export const fetchHeaderCategoryData = async (category) => {
     console.error(`Error fetching header category data: ${error.message}`);
   }
 };
+
+export const fetchProductsFromDemandType = async (type) => {
+  try {
+    const response = await axios.get(createApiEndpoint(`getAllProductsByDemandType/${type}`));
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching suggestions: ${error.message}`);
+    throw error;
+  }
+};
+
+export const fetchProductsFromOffers = async (type) => {
+  try {
+    const response = await axios.get(createApiEndpoint(`getAllProductsByOffer/${type}`));
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching suggestions: ${error.message}`);
+    throw error;
+  }
+}

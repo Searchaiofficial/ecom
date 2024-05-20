@@ -5,21 +5,14 @@ import RoomImageList from "@/components/Room/RoomImageList";
 import RoomInfo from "@/components/Room/RoomInfo";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectQuantity,
-  updateQuantity,
-} from "@/components/Features/Slices/calculationSlice";
-import {
-  selectRoomData,
-  setRoomData,
-} from "@/components/Features/Slices/roomSlice";
 import axios from "axios";
 import Image from "next/image";
 import BlogRelatedProducts from "@/components/Cards/BlogRelatedProducts";
 import QuiltSelector from "@/components/Cards/QuiltSelector";
 import { selectRecommendedProduct } from "@/components/Features/Slices/recommendationSlice";
 import Tabs from "@/components/Cards/Tabs";
-import { useParams } from "next/navigation";
+
+import TabImage from "@/components/Cards/TabImage";
 
 import {
   selectSuggestionData,
@@ -32,7 +25,6 @@ const SuggestionPage = ({ params }) => {
   const dispatch = useDispatch();
   const selectData = useSelector(selectRecommendedProduct);
   const suggestion = useSelector(selectSuggestionData);
-  console.log(suggestion);
   const suggestionStatus = useSelector(selectSuggestionStatus);
   const [relatedProducts, setRelatedProducts] = useState([]);
 
@@ -72,7 +64,7 @@ const SuggestionPage = ({ params }) => {
   return (
     <>
       <div className="pt-[65px]">
-        <div className="sm:px-[50px] px-[20px]">
+        <div className="sm:px-[100px] px-[20px]">
           <div>
             <div className="mt-10">
               <h1 className="text-lg md:text-2xl font-semibold text-center">
@@ -114,6 +106,12 @@ const SuggestionPage = ({ params }) => {
             </div>
           </div>
 
+          {suggestion &&
+            suggestion.firstSlider &&
+            suggestion.firstSlider.length > 0 && (
+              <BlogRelatedProducts relatedProducts={suggestion.firstSlider} />
+            )}
+
           {suggestion?.subHeading &&
             suggestion?.subHeading.map((subHeadingItem, index) => (
               <div className="my-16">
@@ -139,46 +137,85 @@ const SuggestionPage = ({ params }) => {
             ))}
         </div>
 
-        <BlogRelatedProducts relatedProducts={relatedProducts} />
-        <div className="sm:px-[50px] px-[20px]">
-          <div>
-            <h3 className="text-lg font-semibold">
-              {suggestion.differentMaterials?.title}
-            </h3>
-            <div className="flex flex-wrap ">
-              {suggestion.differentMaterials?.items.map((item) => (
-                <div className="w-full md:w-1/2 p-2">
-                  <p className="mt-2 text-sm font-medium">{item.label}</p>
-                  <div className="relative my-2 h-[300px]">
-                    <Image
-                      src={item.image}
-                      alt="Sub Image"
-                      layout="fill"
-                      objectFit="cover"
-                    />
-                  </div>
+        {suggestion && relatedProducts && relatedProducts.length > 0 && (
+          <BlogRelatedProducts relatedProducts={relatedProducts} />
+        )}
 
-                  <div className="flex items-center gap-2">
-                    <Image
-                      src={suggestion.suggestionCardImage}
-                      alt="Sub Image"
-                      width={50}
-                      height={50}
+        {suggestion && suggestion.rooms && (
+          <div className="sm:px-[100px] px-[20px]">
+            <div>
+              <h3 className="text-lg font-semibold">Different Rooms</h3>
+              <div className="flex flex-wrap ">
+                <div className="w-full md:w-1/2 p-2">
+                  <div className="relative my-2 h-[300px]">
+                    <TabImage
+                      src={suggestion.rooms[0].imgSrc}
+                      alt={`Image  of Children`}
+                      layout="fill"
+                      width={1000}
+                      height={1000}
                       objectFit="cover"
-                      className="aspect-square"
+                      labelData={suggestion.rooms[0].children}
                     />
-                    <div className="flex flex-col">
-                      <h1 className="font-bold">Matress</h1>
-                      <p className="text-sm">Memory foam</p>
-                      <p className="font-bold">Rs 400</p>
-                    </div>
                   </div>
                 </div>
-              ))}
+                <div className="w-full md:w-1/2 p-2">
+                  <div className="relative my-2 h-[300px]">
+                    <TabImage
+                      src={suggestion.rooms[1].imgSrc}
+                      alt={`Image  of Children`}
+                      layout="fill"
+                      width={1000}
+                      height={1000}
+                      objectFit="cover"
+                      labelData={suggestion.rooms[1].children}
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
+            {suggestion &&
+              suggestion.secondSlider &&
+              suggestion.secondSlider.length > 0 && (
+                <BlogRelatedProducts
+                  relatedProducts={suggestion.secondSlider}
+                />
+              )}
+            <div>
+              <h3 className="text-lg font-semibold mt-24">
+                Different Rooms Different Design
+              </h3>
+              <div className="flex flex-wrap ">
+                <div className="w-full md:w-1/2 p-2">
+                  <div className="relative my-2 h-[300px]">
+                    <TabImage
+                      src={suggestion.rooms[2].imgSrc}
+                      alt={`Image  of Children`}
+                      layout="fill"
+                      width={1000}
+                      height={1000}
+                      objectFit="cover"
+                      labelData={suggestion.rooms[2].children}
+                    />
+                  </div>
+                </div>
+                <div className="w-full md:w-1/2 p-2">
+                  <div className="relative my-2 h-[300px]">
+                    <TabImage
+                      src={suggestion.rooms[3].imgSrc}
+                      alt={`Image  of Children`}
+                      width={1000}
+                      height={1000}
+                      layout="fill"
+                      objectFit="cover"
+                      labelData={suggestion.rooms[3].children}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
 
-          <div className="mt-16">
+            {/* <div className="mt-16">
             <h3 className="text-lg font-semibold">
               {suggestion.differentMaterials?.chooseDifferentMaterial?.title}
             </h3>
@@ -313,12 +350,18 @@ const SuggestionPage = ({ params }) => {
                 )
               )}
             </div>
+          </div> */}
+
+            <QuiltSelector />
+
+            {suggestion &&
+              suggestion.thirdSlider &&
+              suggestion.thirdSlider.length > 0 && (
+                <BlogRelatedProducts relatedProducts={suggestion.thirdSlider} />
+              )}
+            <Tabs data={recommended} />
           </div>
-        </div>
-
-        <QuiltSelector />
-
-        <Tabs data={recommended} />
+        )}
       </div>
     </>
   );

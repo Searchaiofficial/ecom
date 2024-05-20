@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import PopUp from "../Reviews/PopUp";
 import "./styles.css";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -12,10 +11,6 @@ import "swiper/css/mousewheel";
 import "swiper/css/scrollbar";
 import { Pagination, Scrollbar, Mousewheel, FreeMode } from "swiper/modules";
 
-import SuggestionCard from "./SuggestionCard";
-import { useSelector, useDispatch } from "react-redux";
-import { selectBlogCardData } from "../Features/Slices/blogCardSlice";
-import { roomOptions } from "@/Model/Dropdown/SliderData/SliderData";
 import ShopByRoomCard from "./shopbyroomCard";
 import axios from "axios";
 
@@ -24,7 +19,6 @@ import axios from "axios";
 
 
 const ShopByRoomSlider = () => {
-    console.log(roomOptions)
 
     const backgroundColors = [
         "bg-[#FF5B45]",
@@ -36,7 +30,6 @@ const ShopByRoomSlider = () => {
         "bg-[#91D8FB ]",
     ];
 
-    const swiperUseref = useRef(null);
     const [RoomDataSlider, setRoomDataSlider] = useState([]);
 
 
@@ -70,11 +63,7 @@ const ShopByRoomSlider = () => {
         allowSlidePrev: true,
         allowSlideNext: true,
     };
-    const closePopup = () => {
-        setPopupVisible(false);
-    };
     const swiper1Ref = useRef(null);
-    const swiper2Ref = useRef(null);
     return (
         <div className="">
             <div className="pt-12 mb-20  bg-white sm:px-[50px] px-[20px] lg:px-[67px] ">

@@ -1,48 +1,45 @@
 // import axios from "axios";
 import { fetchDisplayData } from "@/actions/fetchDisplayData";
 import Image from "next/image";
-// import { useSelector, useDispatch } from "react-redux";
-// import { selectedDisplayData } from "../Features/Slices/displaySlice";
-// import { selectedImagechanger } from "../Features/Slices/ImagechangerSlice";
-// import { FETCH_DISPLAY_DATA } from "../Features/Sagas/displaySaga";
+
+import TabImage from "../Cards/TabImage";
+import Link from "next/link";
 
 const Display = async () => {
-  // // const [apiData, setApiData] = useState([]);
-
-  // const dispatch = useDispatch();
-  // const apiData = useSelector(selectedDisplayData);
-  // useEffect(() => {
-  //   if (apiData.length === 0) {
-  //     dispatch({ type: FETCH_DISPLAY_DATA });
-  //   }
-  // }, []);
-
-  const apiData = await fetchDisplayData()
+  const apiData = await fetchDisplayData();
 
   return (
     <>
       <div className="px-[15px] flex flex-col  lg:grid lg:grid-cols-2 md:flex-row gap-4  items-center justify-between mx-auto my-8">
         <div className="w-full">
-          {apiData.length > 0 ? (
+          {apiData && apiData.length > 0 ? (
             <>
-              <div className={`relative w-full h-[446px]  lg:h-[730px] max-w-1/2]`}>
-                <Image
+              <div
+                className={`relative w-full h-[435px]  lg:h-[730px] max-w-1/2`}
+              >
+                <TabImage
+                  src={apiData[0].room.imgSrc}
+                  alt={`Image  of Children`}
+                  width={1000}
+                  height={338}
+                  labelData={apiData[0].room.children}
                   className="w-full h-full"
-                  width={0}
-                  height={0}
-                  src={apiData[0].img}
-                  alt={apiData[0].imgTitle}
-                  layout="fill"
-                  objectFit="cover"
                 />
                 <div className="absolute bottom-0 left-0 justify-start p-[30px]">
                   <div>
                     <h2 className="text-white text-[12px]">
-                      {apiData[1].imgTitle}
+                      {apiData[0].text}
                     </h2>
-                    <p className="text-blue-500 text-[12px] font-semibold">
-                      View More
-                    </p>
+                    <Link
+                      href={`/rooms/${apiData[0].room.roomType.replace(
+                        / /g,
+                        "-"
+                      )}`}
+                    >
+                      <p className="text-blue-500 text-[12px] font-semibold">
+                        View More
+                      </p>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -58,26 +55,34 @@ const Display = async () => {
           )}
         </div>
         <div className="max-w-1/2 w-full">
-          {apiData.length > 0 ? (
+          {apiData && apiData.length > 0 ? (
             <>
-              <div className={`relative w-full h-[446px] lg:h-[720px]  max-w-1/2] `}>
-                <Image
-                  className="w-full h-full"
-                  width={0}
-                  height={0}
-                  src={apiData[1].img}
-                  alt={apiData[1].imgTitle}
-                  layout="fill"
-                  objectFit="cover"
+              <div
+                className={`relative w-full h-[435px] lg:h-[730px]  max-w-1/2 `}
+              >
+                <TabImage
+                  src={apiData[1].room.imgSrc}
+                  alt={`Image  of Children`}
+                  width={1000}
+                  height={338}
+                  labelData={apiData[1].room.children}
                 />
                 <div className="absolute bottom-0 left-0 justify-start p-[30px]">
                   <div>
                     <h2 className="text-white text-[12px]">
-                      {apiData[1].imgTitle}
+                      {apiData[1].text}
                     </h2>
-                    <p className="text-blue-500 text-[12px] font-semibold">
-                      View More
-                    </p>
+
+                    <Link
+                      href={`/rooms/${apiData[1].room.roomType.replace(
+                        / /g,
+                        "-"
+                      )}`}
+                    >
+                      <p className="text-blue-500 text-[12px] font-semibold">
+                        View More
+                      </p>
+                    </Link>
                   </div>
                 </div>
               </div>

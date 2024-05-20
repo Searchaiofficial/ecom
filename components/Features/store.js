@@ -26,6 +26,8 @@ import allProductsReducer from "./Slices/productSlice";
 import imageDataSliceReducer from "./Slices/imageDataSlice";
 import suggestionDataReducer from "./Slices/suggestionDataSlice";
 import roomMainReducer from "./Slices/roomMainSlice";
+import demandTypeProductsSlice from "./Slices/demandTypeProductsSlice";
+import offerProductsSlice from "./Slices/offerProductsSlice";
 
 import filteredProductReducer from "./Slices/FilteredProduct";
 import roomCardReducer from "./Slices/roomCardSlice";
@@ -79,6 +81,8 @@ export const store = configureStore({
     suggestionData: suggestionDataReducer,
     roomCard: roomCardReducer,
     roomMainDetails: roomMainReducer,
+    demandTypeProducts: demandTypeProductsSlice,
+    offerProducts: offerProductsSlice, 
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(sagaMiddleware),

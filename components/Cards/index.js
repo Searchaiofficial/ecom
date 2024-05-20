@@ -1,3 +1,4 @@
+// "use client";
 import dynamic from "next/dynamic";
 import "./styles.css";
 const Footer = dynamic(() => import("../Footer/Footer"));
@@ -28,9 +29,13 @@ import RoomCard from "./RoomCard";
 import DataSliderWrapper from "./DataSliderWrapper";
 import MainSliderWrapper from "../MainSlider/MainSliderWrapper";
 import CategoriesSlider from "./categorySlider";
-// >>>>>>> c5884d5bc6361cb1d9e12f35f788d80f70e78eeb
+import OfferSlider from "./OfferSlider";
 
 function Cards() {
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, []);
+
   return (
     <div className="w-full h-auto">
       <MainSliderWrapper />
@@ -40,6 +45,7 @@ function Cards() {
         <Cookies />
         <Trending />
         <RoomCard />
+        <OfferSlider />
         <DataSliderWrapper />
         <Display />
         <DataSliderWrapper
@@ -49,13 +55,11 @@ function Cards() {
         />
       </div>
 
-
       <Multicard />
       <ShopByRoomSlider />
       <Profile />
       <Suggestion />
       <MulticardService />
-
 
       <div className="lg:px-[52px]">
         <TabsWrapper />

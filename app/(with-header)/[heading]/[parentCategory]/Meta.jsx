@@ -7,18 +7,65 @@ import { allSelectedData } from "@/components/Features/Slices/virtualDataSlice";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { selectedFilteredProduct } from "@/components/Features/Slices/FilteredProduct";
+
+import {
+  selectOfferProducts,
+  selectOfferProductsStatus,
+} from "@/components/Features/Slices/offerProductsSlice";
+
+import {
+  selectDemandTypeProducts,
+  selectDemandTypeProductsStatus,
+} from "@/components/Features/Slices/demandTypeProductsSlice";
+
 // const hideheader=
 const ProductPage = ({ params }) => {
-  console.log({ params });
+  const [type, setType] = useState(
+    params.cat.replace(/-/g, " ")
+    // params.cat.replace(/percent-/g, "% ")
+  );
   const [isFilterVisible, setIsFilterVisible] = useState(true);
   const [filteredProducts, setFilteredProducts] = useState([]);
+
+  // Offers
+  let offerProduct = useSelector(selectOfferProducts);
+  let offerProductData = offerProduct;
+  const offerProductStatus = useSelector(selectOfferProductsStatus);
+  const [allTypes, setAllTypes] = useState([]);
+  const [selectedOfferCategory, setSelectedOfferCategory] = useState("");
+  let offerCategory;
+  console.log("offerProduct", offerProductData);
+  if (params.parentCategory === "offers" && offerProductData.length > 0) {
+    offerCategory = offerProductData.map((product) => product.category);
+    if (offerCategory.length > 0) offerCategory = [...new Set(offerCategory)];
+
+    if (selectedOfferCategory) {
+      offerProductData = offerProductData.filter(
+        (product) => product.category === selectedOfferCategory
+      );
+    }
+  }
+
+  useEffect(() => {
+    offerProductData = offerProduct;
+  }, [type]);
+  // if(params.parentCategory === "offers" && offerProductData.length > 0 && selectedOfferCategory) {
+  //   offerProductData = offerProductData.filter((product) => product.category === selectedOfferCategory);
+  // }
+
+  useEffect(() => {
+    if (offerProductData.length === 0) offerProductData = offerProductData;
+  }, [type]);
+
+  // DemandType
+  const demandTypeProduct = useSelector(selectDemandTypeProducts);
+  const demandTypeProductStatus = useSelector(selectDemandTypeProductsStatus);
+
   const dispatch = useDispatch();
   const filteredProductData = useSelector(selectedFilteredProduct);
-  console.log(filteredProductData);
 
   let parentCategoryVar = params.parentCategory;
   const x = useSelector(allSelectedData);
-  console.log(x);
 
   const isNumericString = (str) => /^\d+$/.test(str);
 
@@ -52,7 +99,42 @@ const ProductPage = ({ params }) => {
   const [category, setCategory] = useState({});
 
   useEffect(() => {
-    if (params.parentCategory === "virtualexperience") {
+    if (params.parentCategory === "offers") {
+      if (params.cat === "all") {
+        setType("highest");
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (params.parentCategory === "offers") {
+      const encodedType = encodeURI(type);
+      dispatch({
+        type: "FETCH_PRODUCTS_FROM_OFFER",
+        payload: encodedType,
+      });
+
+      const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getAllOffers`;
+      const fetchAllOfferAndProducts = async () => {
+        const response = await axios.get(url);
+        setAllTypes(response.data.map((item) => item.type));
+      };
+
+      fetchAllOfferAndProducts();
+    } else if (params.parentCategory === "demandtype") {
+      const encodedType = encodeURI(type);
+      dispatch({
+        type: "FETCH_PRODUCTS_FROM_DEMAND_TYPE",
+        payload: encodedType,
+      });
+
+      const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getAllDemandTypes`;
+      const fetchAllDemandType = async () => {
+        const response = await axios.get(url);
+        setAllTypes(response.data.map((item) => item.type));
+      };
+      fetchAllDemandType();
+    } else if (params.parentCategory === "virtualexperience") {
       if (x.length > 0) {
         router.push("/virtualexperience/category");
       }
@@ -71,27 +153,48 @@ const ProductPage = ({ params }) => {
       };
       fetchVeProducts();
       console.log("ve products");
-    } else {
-      const fetchCategoryDescription = async () => {
-        const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getCategoryByName/${params.parentCategory}`;
-        const response = await axios.get(apiUrl, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        setCategory(response.data);
-      };
-      fetchCategoryDescription();
+    } else if (params.heading === "category" && type === "all") {
       dispatch({
         type: "FETCH_FILTER_PRODUCTS",
         payload: {
-          parentCategoryVar: params.parentCategory,
-          cat: params.cat,
+          heading: params.heading,
+          parentCategoryVar: params.parentCategory.replace(/-/g, " "),
         },
       });
-      // }
+      if (!category.name) {
+        const fetchCategoryData = async () => {
+          const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getCategoryByName/${params.parentCategory}`;
+          const response = await axios.get(apiUrl, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          setCategory(response.data);
+        };
+        fetchCategoryData();
+      }
+    } else {
+      if (!category.name) {
+        const fetchCategoryData = async () => {
+          const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getCategoryByName/${params.parentCategory}`;
+          const response = await axios.get(apiUrl, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          setCategory(response.data);
+        };
+        fetchCategoryData();
+      }
+      dispatch({
+        type: "FETCH_FILTER_PRODUCTS",
+        payload: {
+          parentCategoryVar: params.parentCategory.replace(/-/g, " "),
+          cat: type,
+        },
+      });
     }
-  }, [params.parentCategory, params.cat]);
+  }, [params.parentCategory, params.cat, type]);
 
   useEffect(() => {
     let prevScrollPos = window.scrollY;
@@ -112,28 +215,43 @@ const ProductPage = ({ params }) => {
   }, []);
 
   return (
-    <div>
-      {/* {isFilterVisible && <Header />} */}
-      {/* <Products
-        filteredProductData={filteredProductData}
-        heading={x?.category?.category}
-      /> */}
-      <Tabproduct
-        filteredProductData={
-          params.parentCategory === "virtualexperience"
-            ? filteredProducts
-            : filteredProductData
-        }
-        // heading={x?.category?.category}
-        heading={params.heading}
-        categoryName={params.parentCategory}
-        description={category?.description}
-        subCategory={category?.subcategories}
-        param={params.parentCategory}
-      />
-      {/* <Measure filteredProductData={filteredProductData} /> */}
-      {/* <Footer /> */}
-    </div>
+    <>
+      {/* ( */}
+      <div>
+        <Tabproduct
+          filteredProductData={
+            params.parentCategory === "virtualexperience"
+              ? filteredProducts
+              : params.parentCategory === "offers"
+              ? offerProductData
+              : params.parentCategory === "demandtype"
+              ? demandTypeProduct
+              : filteredProductData
+          }
+          heading={
+            params.parentCategory === "offers"
+              ? type === "highest"
+                ? "Highest Offer"
+                : type
+              : params.parentCategory === "demandtype"
+              ? type
+              : category.name
+          }
+          description={category?.description}
+          subCategory={category?.subcategories}
+          allTypes={allTypes}
+          parentCategory={params.parentCategory}
+          offerCategory={offerCategory}
+          setType={setType}
+          setSelectedOfferCategory={setSelectedOfferCategory}
+        />
+      </div>
+      {/* ) : (
+        <div className="flex justify-center items-center h-[80vh]">
+          <h1 className="text-2xl">No Products Found</h1>
+        </div>
+      )} */}
+    </>
   );
 };
 

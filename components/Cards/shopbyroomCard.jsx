@@ -19,7 +19,7 @@ function ShopByRoomCard(props) {
                     <div className="flex h-full w-full items-center justify-center cursor-pointer ">
                         <Image
                             src={props.imgSrc}
-                            alt="NA"
+                            alt={props.title}
                             height={600}
                             width={600}
                             className={"aspect-square w-full object-cover "}

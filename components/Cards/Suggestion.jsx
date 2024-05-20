@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import PopUp from "../Reviews/PopUp";
 import "./styles.css";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -32,8 +31,6 @@ const Suggestion = () => {
 
   const [suggestionSlider, setSuggestionSlider] = useState([]);
 
-  const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/fetchAllSuggestions`;
-
   useEffect(() => {
     if (blogCardData.length === 0) {
       dispatch({ type: "FETCH_BLOG_CARD_DATA", payload: "blogCard" });
@@ -42,8 +39,6 @@ const Suggestion = () => {
       setSuggestionSlider(blogCardData);
     }
   }, [blogCardData]);
-
-  const swiperUseref = useRef(null);
 
   const swiperOptions2 = {
     slidesPerView: 4.08,
@@ -58,11 +53,8 @@ const Suggestion = () => {
     allowSlidePrev: true,
     allowSlideNext: true,
   };
-  const closePopup = () => {
-    setPopupVisible(false);
-  };
+
   const swiper1Ref = useRef(null);
-  const swiper2Ref = useRef(null);
 
   return (
     <div>

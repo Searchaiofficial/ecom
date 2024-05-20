@@ -9,7 +9,7 @@ const Displaybox = (props) => {
 
   const handleClick = (value) => {
     // const category = value.replace(/\s+/g, "-").toLowerCase();
-    const category = encodeURIComponent(value.toLowerCase());
+    const category = value.toLowerCase().replace(/ /g, "-");
     const newPath = `/${props.parentCategory}/${currentCategory}/${category}`;
     router.push(newPath);
     props.setAsideCategory(null);
@@ -17,9 +17,7 @@ const Displaybox = (props) => {
 
   useEffect(() => {
     if (props.data.name) {
-      const category = encodeURIComponent(
-        props.data.name.toLowerCase()
-      );
+      const category = props.data.name.toLowerCase().replace(/ /g, "-")
       setCurrentCategory(category);
     }
   }, [props.data.name]);

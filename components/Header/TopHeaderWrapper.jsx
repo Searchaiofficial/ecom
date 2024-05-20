@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 const TopHeaderWrapper = ({ children }) => {
   const pathname = usePathname();
 
-  if (pathname !== "/" && !pathname.includes("/product")) return null;
+  if (pathname.includes("/checkout")) return null;
 
   if (typeof window === "undefined") return null;
 

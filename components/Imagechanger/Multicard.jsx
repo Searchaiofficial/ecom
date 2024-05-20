@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
@@ -12,7 +12,6 @@ import "swiper/css/scrollbar";
 import MultiCardContent from "../compounds/MultiCardContent";
 import { useSelector, useDispatch } from "react-redux";
 import { selectMultiCardData } from "../Features/Slices/multiCardSlice";
-import { current } from "@reduxjs/toolkit";
 
 
 

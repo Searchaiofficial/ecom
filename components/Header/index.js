@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Asidebox from "./AsideSection/Asidebox";
 import Expandedbar from "./Expandedbar";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -18,14 +18,17 @@ import { MenuIcon, X } from "lucide-react";
 import TopHeaderWrapper from "./TopHeaderWrapper";
 import { useScrollVisibility } from "@/hooks/useScrollVisibility";
 
-function Header({ howMuchScrolled }) {
+function Header() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const quantity = useSelector(selectQuantity);
 
   // Filter
 
-  const [searchQuery, setSearchQuery] = useState("");
+  const searchParams = useSearchParams();
+  const urlSearchQuery = searchParams.get("search");
+
+  const [searchQuery, setSearchQuery] = useState(urlSearchQuery);
   const [searchEngine, SetSeacrhEngine] = useState("");
 
   // aside section toggle
@@ -111,7 +114,7 @@ function Header({ howMuchScrolled }) {
     onClose();
   };
 
-  const { isVisible: isFilterVisible } = useScrollVisibility()
+  const { isVisible: isFilterVisible } = useScrollVisibility();
 
   const homeRoute = "/";
 
@@ -121,15 +124,13 @@ function Header({ howMuchScrolled }) {
         <TopHeader />
       </TopHeaderWrapper>
       <div
-        className={`fixed w-full sm:bg-none ${homeRoute === pathname || pathname.includes("/product/")
+        className={`fixed w-full sm:bg-none ${!pathname.includes("/checkout")
           ? typeof window !== "undefined" && window.scrollY < 20
             ? "md:top-[35px] top-[0px]"
             : "top-0"
           : "top-0"
           } z-[99999]
        ${isScrolled ? "bg-white" : "bg-white"} 
-      
-      
       ${isFilterVisible ? "block" : "hidden"}
       `}
       >
@@ -145,7 +146,7 @@ function Header({ howMuchScrolled }) {
                 <Link href="/">
                   <Image
                     src="/images/ayatriologo.webp"
-                    alt="logo"
+                    alt="Ayatrio Logo"
                     width={300}
                     height={40}
                     priority
@@ -172,7 +173,7 @@ function Header({ howMuchScrolled }) {
                         <Link
                           className={`text-md  font-semibold  ${isOpen ? "border-b-2 border-black" : ""
                             }`}
-                          href="#"
+                          href={value.label === "Offers" ? "/heading/offers/all" : "#"}
                           onClick={toggleDropdown}
                         >
                           <p
@@ -206,7 +207,7 @@ function Header({ howMuchScrolled }) {
                   <span>
                     <Image
                       src="/svg/icon/search.svg"
-                      alt=""
+                      alt="Search Icon"
                       className="absolute z-10 seachbar-div2-icon"
                       width={27}
                       height={27}
@@ -220,7 +221,7 @@ function Header({ howMuchScrolled }) {
                 >
                   <Image
                     src="/svg/icon/search.svg"
-                    alt=""
+                    alt="Search Icon"
                     width={20}
                     height={20}
                     className="header-div-icon"
@@ -230,7 +231,7 @@ function Header({ howMuchScrolled }) {
                   <Link href={"/login"}>
                     <Image
                       src="/svg/icon/like.svg"
-                      alt=""
+                      alt="Like Icon"
                       className="header-div-icon"
                       width={22}
                       height={22}
@@ -241,7 +242,7 @@ function Header({ howMuchScrolled }) {
                   <Link href={"/cart"}>
                     <Image
                       src="/svg/icon/adtocart.svg"
-                      alt=""
+                      alt="Cart Icon"
                       className="header-div-icon"
                       width={22}
                       height={22}
@@ -256,7 +257,7 @@ function Header({ howMuchScrolled }) {
                   >
                     <Image
                       src="/svg/icon/profile.svg"
-                      alt=""
+                      alt="Profile Icon"
                       className="header-div-icon"
                       width={22}
                       height={22}
@@ -270,7 +271,7 @@ function Header({ howMuchScrolled }) {
                     <Image
                       src="/svg/icon/profile.svg"
                       onClick={handleLoginNav}
-                      alt=""
+                      alt="Profile Icon"
                       width={18}
                       height={18}
                       className="header-div-icon"
@@ -292,7 +293,7 @@ function Header({ howMuchScrolled }) {
                 }
               /> */
                   <Expandedbar
-                    searchQuery={searchQuery}
+                    searchText={searchQuery}
                     onClose={handleModalClose}
                     onSearch={handleSearchChange}
                   />
@@ -302,7 +303,7 @@ function Header({ howMuchScrolled }) {
           </>
         ) : (
           <Expandedbar
-            searchQuery={searchQuery}
+            searchText={searchQuery}
             onClose={onClose}
             onSearch={handleSearchChange}
           />
