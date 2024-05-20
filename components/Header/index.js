@@ -122,10 +122,10 @@ function Header({ howMuchScrolled }) {
       </TopHeaderWrapper>
       <div
         className={`fixed w-full sm:bg-none ${homeRoute === pathname || pathname.includes("/product/")
-            ? typeof window !== "undefined" && window.scrollY < 20
-              ? "md:top-[35px] top-[0px]"
-              : "top-0"
+          ? typeof window !== "undefined" && window.scrollY < 20
+            ? "md:top-[35px] top-[0px]"
             : "top-0"
+          : "top-0"
           } z-[99999]
        ${isScrolled ? "bg-white" : "bg-white"} 
       
@@ -177,8 +177,8 @@ function Header({ howMuchScrolled }) {
                         >
                           <p
                             className={`block font-medium py-[15px] px-[5px] border-b-2  ${hoveredIndex === idx
-                                ? "border-black"
-                                : "border-transparent"
+                              ? "border-black"
+                              : "border-transparent"
                               }`}
                           >
                             {value.label}
@@ -357,8 +357,8 @@ function Header({ howMuchScrolled }) {
                   >
                     <p
                       className={`block p-2 text-lg font-medium border-b-2 ${hoveredIndex === idx
-                          ? "border-black"
-                          : "border-transparent"
+                        ? "border-black"
+                        : "border-transparent"
                         }`}
                     >
                       {value.label}

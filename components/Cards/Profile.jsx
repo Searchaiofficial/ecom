@@ -7,13 +7,14 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import ProfileContent from "./ProfileContent";
 import { fetchProfileData } from "@/actions/fetchProfileData";
+import Image from "next/image";
 
 const Profile = async () => {
   const profileData = await fetchProfileData()
 
   return (
     <div>
-      <div className="pt-14 grid md:grid-cols-5 grid-cols-1 gap-4 bg-zinc-100 lg:pl-[67px] sm:pl-[50px] pl-[20px]  ">
+      <div className="pt-14 lg:pt-[90px] grid md:grid-cols-5 grid-cols-1 gap-4 bg-[#fafafa] lg:pl-[67px] sm:pl-[50px] pl-[20px]  ">
         <div className="col-span-2 md:mb-auto mb-0">
           <div className="col-span-1  mt-4">
             <div className="mb-2 ">Inspiration to installation</div>
@@ -36,7 +37,8 @@ const Profile = async () => {
               <br />
             </div>
             <button className="bg-black pt-3 pb-3 pr-[25px] pl-[25px] mb-5 lg:mb-12 rounded-full flex justify-center items-center text-white">
-              Book an appointment
+              <p>Book an appointment</p>
+              <Image src={"/ayatrio icon/Back_arrow.svg"} alt="arrow" height={20} width={20} className="px-[30px]" />
             </button>
           </div>
         </div>

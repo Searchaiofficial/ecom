@@ -21,11 +21,13 @@ const Suggestion = () => {
   const dispatch = useDispatch();
 
   const backgroundColors = [
-    "bg-slate-500",
-    "bg-blue-400",
-    "bg-purple-300",
-    "bg-gray-200",
-    "bg-zinc-400",
+    "bg-[#FFF6EB]",
+    "bg-[#DBF3E2]",
+    "bg-[#F8F7FF]",
+    "bg-[#C6ECEB]",
+    "bg-[#FFFEA8]",
+    "bg-[#EFEFEF]",
+    "bg-[#FFF6EB]",
   ];
 
   const [suggestionSlider, setSuggestionSlider] = useState([]);

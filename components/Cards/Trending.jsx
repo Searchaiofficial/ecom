@@ -118,7 +118,6 @@ const Trending = () => {
           slideNextClass="custom-next-button"
           slidePrevClass="custom-prev-button"
           onSwiper={setSwiperRef}
-          className="px-10"
         >
           {!newTrendingData ? (
             <SwiperSlide>

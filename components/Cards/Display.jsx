@@ -25,7 +25,7 @@ const Display = async () => {
         <div className="w-full">
           {apiData.length > 0 ? (
             <>
-              <div className={`relative w-full h-[435px]  lg:h-[730px] max-w-1/2]`}>
+              <div className={`relative w-full h-[446px]  lg:h-[730px] max-w-1/2]`}>
                 <Image
                   className="w-full h-full"
                   width={0}
@@ -60,7 +60,7 @@ const Display = async () => {
         <div className="max-w-1/2 w-full">
           {apiData.length > 0 ? (
             <>
-              <div className={`relative w-full h-[435px] lg:h-[720px]  max-w-1/2] `}>
+              <div className={`relative w-full h-[446px] lg:h-[720px]  max-w-1/2] `}>
                 <Image
                   className="w-full h-full"
                   width={0}

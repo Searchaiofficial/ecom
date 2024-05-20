@@ -27,11 +27,13 @@ const ShopByRoomSlider = () => {
     console.log(roomOptions)
 
     const backgroundColors = [
-        "bg-slate-500",
-        "bg-blue-400",
-        "bg-purple-300",
-        "bg-gray-200",
-        "bg-zinc-400",
+        "bg-[#FF5B45]",
+        "bg-[#FFC21F]",
+        "bg-[#B6E3A0]",
+        "bg-[#5680FF]",
+        "bg-[#D8B4FE]",
+        "bg-[#000000]",
+        "bg-[#91D8FB ]",
     ];
 
     const swiperUseref = useRef(null);

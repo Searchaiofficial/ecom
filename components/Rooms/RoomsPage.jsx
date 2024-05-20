@@ -1,34 +1,25 @@
 "use client";
 import Image from "next/image";
-
 import bedimageh from "../../public/testp/h.jpeg";
 import React, { useEffect, useRef, useState } from 'react';
-// Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
 import 'swiper/css';
-import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/free-mode";
 import "swiper/css/mousewheel";
 import "swiper/css/scrollbar";
 import './styles.css';
-
-// import required modules
 import { Keyboard, Scrollbar, Navigation, Mousewheel, Pagination, FreeMode } from 'swiper/modules';
 import TabImage from "../Cards/TabImage";
 import Card from "../Cards/card";
 import { useDispatch, useSelector } from "react-redux";
 import { selectProductData, selectRoomData, selectRoomMain } from "../Features/Slices/roomMainSlice";
 
-
 export const RoomsPage = ({ params }) => {
     const [productData, setProductData] = useState([]);
     const [roomData, setRoomData] = useState([]);
     const [swiperRef, setSwiperRef] = useState(null);
-
     const [dataFetched, setDataFetched] = useState(false);
     const [roomMain, setRoomMain] = useState({});
 
@@ -38,7 +29,6 @@ export const RoomsPage = ({ params }) => {
     const roomMainSelect = useSelector(selectRoomMain);
 
     useEffect(() => {
-
         if (!dataFetched) {
             dispatch({ type: "FETCH_ROOM_MAIN_DATA_REQUEST", payload: { params } });
             setDataFetched(true);
@@ -46,7 +36,6 @@ export const RoomsPage = ({ params }) => {
         setRoomData(roomSelect);
         setProductData(productSelect);
         setRoomMain(roomMainSelect);
-
     }, [dispatch, params, dataFetched, roomSelect, productSelect, roomMainSelect]);
 
     const swiperUseref = useRef(null);
@@ -62,88 +51,100 @@ export const RoomsPage = ({ params }) => {
         noSwiping: true,
         allowSlidePrev: true,
         allowSlideNext: true,
+        breakpoints: {
+            320: {
+                slidesPerView: 1,
+                spaceBetween: 10,
+            },
+            640: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+            },
+            768: {
+                slidesPerView: 3,
+                spaceBetween: 30,
+            },
+            1024: {
+                slidesPerView: 4.08,
+                spaceBetween: 1,
+            },
+        },
     };
 
     const swiper1Ref = useRef(null);
     const swiper2Ref = useRef(null);
 
     return (
-        // <div className="pt-12 bg-white sm:px-[50px] px-[20px]">
         <div>
-            <div className="pt-12 w-full flex justify-center ">
-                <div className="w-10/12  p-5 p flex flex-col">
-                    <h1 className="text-2xl font-semibold">{roomMain?.title}</h1>
-                    <p className="mt-5 w-7/12">
-                        {roomMain?.description}
-                    </p>
-                    <a className="my-5" href="/">
-                        click here for size guide
-                    </a>
+            <div className="pt-12 flex justify-center ">
+                <div className="lg:px-[67px] px-[20px] pt-8 sm:px-[50px] flex flex-col">
+                    <h1 className="lg:text-[32px] text-[24px] font-semibold mb-[64px]">{roomMain?.title}</h1>
+                    <p className="text-gray-600">{roomMain?.description}</p>
+                    <a className="my-5" href="/">click here for size guide</a>
 
-                    <TabImage
-                        src={roomMain?.img}
-                        alt={`Image `}
-                        width={500}
-                        height={100}
-                        labelData={roomMain?.children}
-                    />
+                    <div className="object-cover w-full max-h-[800px]">
+                        <TabImage
+                            src={roomMain?.img}
+                            alt={`Image`}
+                            width={500}
+                            height={100}
+                            labelData={roomMain?.children}
+                        />
+                    </div>
                     <h1 className="mt-20 text-2xl font-semibold">
                         {roomMain && roomMain.details && roomMain.details[0]?.title}
                     </h1>
-                    <div className="mt-5  flex justify-between items-end">
-                        <p className="w-7/12">
+                    <div className="mt-5 flex flex-col lg:flex-row justify-between items-end">
+                        <p className="w-full lg:w-7/12">
                             {roomMain && roomMain.details && roomMain.details[0]?.description}
                         </p>
-                        <button className="border-2 border-black rounded-full p-3">
+                        <button className="border-2 border-black rounded-full p-3 mt-4 lg:mt-0">
                             see all double beds
                         </button>
                     </div>
                     <div>
-                        <div className="mt-5 gap-3 flex">
-                            <div className="w-1/2">
+                        <div className="mt-5 gap-3 flex flex-col lg:flex-row">
+                            <div className="">
                                 {roomData?.length > 0 && (
                                     <img
-                                        className="w-full h-auto object-cover"
-                                        src={roomData[0].imgSrc} // Use the first image of the first product
+                                        className=" object-cover"
+                                        src={roomData[0].imgSrc}
                                         alt="First Image of First Product"
                                     />
                                 )}
                             </div>
-                            <div className="w-1/2 columns-2 gap-3">
+                            <div className=" grid grid-cols-2 gap-3">
                                 {roomData?.slice(1, 5).map((product, index) => (
                                     <div key={index}>
-
                                         <img
                                             key={product._id}
                                             src={product.imgSrc}
-                                            className="w-full h-auto object-cover"
+                                            className="object-cover"
                                             alt={`Image of Product ${index + 2}`}
                                         />
-
                                     </div>
                                 ))}
                             </div>
                         </div>
                     </div>
 
-                    <div className="mt-20  flex justify-between items-center">
-                        <h1 className=" text-2xl font-semibold">
-                            Looking for Bedroom Storage options ?
+                    <div className="mt-20 flex flex-col lg:flex-row justify-between items-center">
+                        <h1 className="text-2xl font-semibold">
+                            Looking for Bedroom Storage options?
                         </h1>
-                        <button className="border-2 border-black rounded-full p-3">
+                        <button className="border-2 border-black rounded-full p-3 mt-4 lg:mt-0">
                             Explore all Bedroom storage solution
                         </button>
                     </div>
-                    <div className="mt-20 flex bg-orange-500">
+                    <div className="mt-20 flex flex-col lg:flex-row bg-orange-500">
                         <Image
                             src={bedimageh}
                             width={850}
-                            className=""
                             height={100}
                             alt="Image of bed"
                         />
-                        <div className="py-20 pl-10 flex flex-col  justify-between ">
-                            <h1 className="text-xl  w-3/4 font-semibold">
+                        <div className="py-20 pl-10 flex flex-col justify-between">
+                            <h1 className="text-xl  font-semibold">
                                 Explore all Bedroom storage solution
                             </h1>
                             <div className="bg-black w-14 h-14 flex justify-center items-center text-white rounded-full">
@@ -155,20 +156,19 @@ export const RoomsPage = ({ params }) => {
                         <h1 className="mt-20 text-2xl font-semibold">
                             {roomMain && roomMain.details && roomMain.details[1]?.title}
                         </h1>
-                        <div className="mt-5  flex justify-between items-end">
-                            <p className="w-7/12">
+                        <div className="mt-5 flex flex-col lg:flex-row justify-between items-end">
+                            <p className=" mb-10">
                                 {roomMain && roomMain.details && roomMain.details[1]?.description}
                             </p>
-                            <button className="border-2 border-black rounded-full p-3">
+                            <button className="border-2 border-black rounded-full p-3 mt-4 lg:mt-0">
                                 See all guest beds & day beds
                             </button>
                         </div>
                     </div>
-                    <div className="flex gap-3 mt-5">
+                    <div className="flex flex-col lg:flex-row gap-3 mt-5">
                         {roomMain && roomMain.rooms && roomMain.rooms.length > 0 && (
                             roomMain.rooms.map((room, index) => (
-                                <div key={index} className="w-1/2">
-
+                                <div key={index} className="">
                                     <TabImage
                                         src={room.imgSrc}
                                         alt={`Image ${index + 1} of Product`}
@@ -179,32 +179,28 @@ export const RoomsPage = ({ params }) => {
                                 </div>
                             ))
                         )}
-
                     </div>
                     <div className="mt-20">
                         <h1 className="text-2xl font-semibold">
                             {roomMain && roomMain.details && roomMain.details[2]?.title}
                         </h1>
-                        <div className="mt-5  flex justify-between items-end">
-                            <p className="w-7/12 mb-10">
+                        <div className="mt-5 flex flex-col lg:flex-row justify-between items-end">
+                            <p className=" mb-10">
                                 {roomMain && roomMain.details && roomMain.details[2]?.description}
                             </p>
                         </div>
                     </div>
 
-
-                    <div className="pt-12  mb-20  bg-white sm:px-[50px] px-[20px]">
+                    <div className="pt-12 mb-20 bg-white sm:px-[50px] px-[20px]">
                         <div className="mb-2 w-full flex justify-between items-center">
-
-                            <div className="Slidenav flex  bg-white text-2xl cursor-pointer  text-white rounded-full gap-2">
-
+                            <div className="Slidenav flex bg-white text-2xl cursor-pointer text-white rounded-full gap-2">
                                 <div
                                     onClick={() => swiper1Ref.current.swiper.slidePrev()}
-                                    className="custom-prev-button bg-slate-500  rounded-full  hover:bg-400 hover:scale-110 hover:text-slate-100"
+                                    className="custom-prev-button bg-slate-500 rounded-full hover:bg-400 hover:scale-110 hover:text-slate-100"
                                 ></div>
                                 <div
                                     onClick={() => swiper1Ref.current.swiper.slideNext()}
-                                    className="custom-next-button bg-slate-500  rounded-full hover:bg-400 hover:scale-110 hover:text-slate-100"
+                                    className="custom-next-button bg-slate-500 rounded-full hover:bg-400 hover:scale-110 hover:text-slate-100"
                                 ></div>
                             </div>
                         </div>
@@ -224,18 +220,21 @@ export const RoomsPage = ({ params }) => {
                                 sticky: true,
                             }}
                             breakpoints={{
-                                300: {
+                                320: {
                                     slidesPerView: 1,
-                                    spaceBetween: 1,
+                                    spaceBetween: 10,
                                 },
-
-                                // 640: {
-                                //   slidesPerView: 1.25,
-                                //   spaceBetween: 5,
-                                // },
+                                640: {
+                                    slidesPerView: 2,
+                                    spaceBetween: 20,
+                                },
+                                768: {
+                                    slidesPerView: 3,
+                                    spaceBetween: 30,
+                                },
                                 1024: {
-                                    slidesPerView: 4.07,
-                                    spaceBetween: 5,
+                                    slidesPerView: 4.08,
+                                    spaceBetween: 1,
                                 },
                             }}
                             allowSlideNext={true}
@@ -253,10 +252,9 @@ export const RoomsPage = ({ params }) => {
                                 productData.map((product, idx) => {
                                     return (
                                         <SwiperSlide key={idx} className="ml-0">
-                                            <div className="grid grid-cols-1 mt-2 w-full  h-full fade-in ">
+                                            <div className="grid grid-cols-1 mt-2 w-full h-full fade-in">
                                                 <Card
                                                     title={product.productTitle}
-                                                    // date={product.date}
                                                     price={product.perUnitPrice}
                                                     desc={product.productTitle}
                                                     imgSrc={product.images}
@@ -273,7 +271,6 @@ export const RoomsPage = ({ params }) => {
                                 })
                             )}
                         </Swiper>
-
                     </div>
                 </div>
             </div>

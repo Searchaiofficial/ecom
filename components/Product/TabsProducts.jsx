@@ -1,10 +1,23 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import "./styles.css";
 import "./styles.css";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
 import { useRouter, usePathname } from "next/navigation";
 import { setselectedproduct } from "../Features/Slices/compareSlice";
+import { A11y } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import {
+  Pagination,
+  Navigation,
+  Scrollbar,
+  Mousewheel,
+  FreeMode,
+} from "swiper/modules";
 import {
   srtarr,
   typeContent,
@@ -37,8 +50,10 @@ const Tabs = ({
   description,
 }) => {
   // console.log("Filtered products:", filteredProducts);
+  const [swiperRef, setSwiperRef] = useState(null);
   const router = useRouter();
   const dispatch = useDispatch();
+  const swiper1Ref = useRef(null);
   // const handlenav = (id) => {
   //   router.push(`/room/${id}`);
   // };
@@ -324,32 +339,135 @@ const Tabs = ({
   const secondPart = filterData.slice(8);
   // console.log("gere")
 
+  const swiperOptions2 = {
+    slidesPerView: 4.08,
+    centeredSlides: false,
+    spaceBetween: 5,
+    modules: [Pagination, Scrollbar, Mousewheel, FreeMode],
+    noSwiping: true,
+    allowSlidePrev: true,
+    allowSlideNext: true,
+  };
+
   return (
     <>
-      <div className="wrapper  lg:px-[67px] sm:px-[50px] px-[20px] mt-20 relative  ">
-        <div>
-          <h2 className="mb-2 text-xl font-bold capitalize">{categoryName}</h2>
+      <div className="lg:px-[67px] sm:px-[50px] px-[20px] mt-20 relative  ">
+        {/* <div className="overflow-x-auto">
+          <h2 className="lg:text-[36px] text-[24px] font-semibold capitalize mb-[50px]">{categoryName}</h2>
           {subCategory && (
-            <div className="grid mb-4 md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-2 gap-y-4">
+
+            <Swiper
+              ref={swiper1Ref}
+              {...swiperOptions2}
+              scrollbar={{
+                hide: false,
+                draggable: true,
+              }}
+              mousewheel={{
+                forceToAxis: true,
+                invert: false,
+              }}
+              freeMode={{
+                enabled: false,
+                sticky: true,
+              }}
+              breakpoints={{
+                400: {
+                  slidesPerView: 3,
+                  spaceBetween: 10,
+                },
+
+                768: {
+                  slidesPerView: 5,
+                  spaceBetween: 10,
+                },
+                1024: {
+                  slidesPerView: 9,
+                  spaceBetween: 10,
+                },
+              }}
+              allowSlideNext={true}
+              allowSlidePrev={true}
+              slideNextClass="custom-next-button"
+              slidePrevClass="custom-prev-button"
+              onSwiper={setSwiperRef}
+            >
               {subCategory.map((sub, idx) => (
-                <div key={idx} className=" gap-2">
-                  <div className="relative flex items-center gap-4 cursor-pointer ">
-                    <div className="w-[60px] aspect-square">
+                <SwiperSlide className="mb-10 " key={idx}>
+                  <div className="flex flex-col items-center cursor-pointer">
+                    <div className="w-[130px] h-[130px] mb-[12px] ">
                       <Image
                         src={sub.img}
                         alt="NA"
                         height={300}
                         width={300}
-                        className="aspect-square "
+                        className="object-cover w-full h-full"
                       />
                     </div>
-                    <h1>{sub.name}</h1>
+                    <h1 className="text-[14px] hover:underline text-[#484848]  text-center">{sub.name}</h1>
                   </div>
-                </div>
+                </SwiperSlide>
               ))}
-            </div>
+            </Swiper>
+
+
+
           )}
-          <p className="leading-2 mb-4">{description}</p>
+          <p className="leading-2 mb-4 text-[14px] pt-[30px] text-[#484848] lg:w-[50%]">{description}</p>
+        </div> */}
+
+        <div className="  pl-[15px] flex flex-col  overflow-x-auto  relative">
+          <h2 className="lg:text-[36px] text-[24px] font-semibold capitalize mb-[50px]">{categoryName}</h2>
+          {
+            subCategory && (
+              <div className="group items-center justify-start gap-2 mb-4">
+
+                <Swiper
+                  ref={swiper1Ref}
+                  modules={[Navigation, Pagination, Scrollbar, A11y]}
+                  navigation={{
+                    nextEl: ".right",
+                    prevEl: ".back",
+                  }}
+                  draggable={true}
+                  style={{ "--swiper-navigation-size": "24px", maxHeight: "160px" }}
+                  breakpoints={{
+                    400: {
+                      slidesPerView: 2.5,
+                      spaceBetween: 10,
+                    },
+                    768: {
+                      slidesPerView: 3,
+                      spaceBetween: 10,
+                    },
+                    1024: {
+                      slidesPerView: 3,
+                      spaceBetween: 10,
+                    },
+                  }}
+                >
+                  {subCategory?.map((curElement, idx) => {
+
+                    return (
+                      <SwiperSlide className="max-w-[130px]" key={idx}>
+                        <Link href={""} className="">
+                          <div className="flex flex-col items-center">
+                            <div className="lg:mb-[12px] ">
+                              <Image src={curElement.img} width={200} height={130} alt="image" className="w-[200px] h-[130px]" />
+                            </div>
+                            <h2 className="text-[#333333] font-semibold text-[14px] hover:underline text-center ">{curElement.name}</h2>
+                          </div>
+                        </Link>
+                      </SwiperSlide>
+                    );
+                  })}
+                </Swiper>
+
+
+              </div>
+            )
+          }
+          <p className="leading-2 mb-4 text-[14px] pt-[60px] text-[#484848] lg:w-[50%]">{description}</p>
         </div>
         <div className="hidden md:flex sticky top-0 z-20 bg-white py-5 scrollbar">
           <TabsProductContent
@@ -808,7 +926,7 @@ const Tabs = ({
             ))}
           </div> */}
         </div>
-      </div>
+      </div >
     </>
   );
 };

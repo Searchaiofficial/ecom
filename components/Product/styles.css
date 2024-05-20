@@ -222,3 +222,17 @@ input[type="radio"] {
   background-color: #ccc;
   opacity: 0.7;
 }
+
+
+.swiper-scrollbar-drag {
+  width: 40% !important; /* For small screens */
+  background-color: #000 !important;
+  border-radius: 0px !important;
+}
+
+
+@media screen and (min-width: 800px) {
+  .swiper-scrollbar-drag {
+    width: 70% !important; /* For large screens (at least 1200px wide) */
+  }
+}

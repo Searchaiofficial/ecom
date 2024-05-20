@@ -55,7 +55,7 @@ const RoomCard = async () => {
               {
                 <>
                   <TabImage
-                    src={roomData[0].imgSrc}
+                    src={roomData[0]?.imgSrc}
                     alt={`Image  of Children`}
                     width={1000}
                     height={338}
