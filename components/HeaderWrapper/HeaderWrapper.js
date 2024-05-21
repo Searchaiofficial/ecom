@@ -1,20 +1,20 @@
 "use client";
-import dynamic from "next/dynamic";
 
-import { usePathname } from "next/navigation";
-import React from "react";
-// import Header from "../Header";
+import dynamic from "next/dynamic";
+import React, { useState } from "react";
+import Splashscreen from "../Splashscreen/Splashscreen";
+
 const Header = dynamic(() => import("../Header"), { ssr: false });
 
 const HeaderWrapper = () => {
-  const pathname = usePathname();
+  const [isHeaderMounted, setIsHeaderMounted] = useState(false);
 
-  const routes = ["/login", "/success"];
-  if (routes.includes(pathname)) {
-    return null;
-  } else {
-    return <Header />;
-  }
+  return (
+    <>
+      {isHeaderMounted ? null : <Splashscreen />}
+      <Header setIsHeaderMounted={setIsHeaderMounted} />
+    </>
+  );
 };
 
 export default HeaderWrapper;

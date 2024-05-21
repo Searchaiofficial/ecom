@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Displaybox from "./Displaybox";
-import { homeDecorCategoryData } from "@/Model/Dropdown/CategoryData/HomeDecorCategoryData";
-import { flooringCategoryData } from "@/Model/Dropdown/CategoryData/FlooringCategoryData";
-import { wallDecorCategoryData } from "@/Model/Dropdown/CategoryData/WallDecorCategoryData";
-import Midsection from "../Midsection/Midsection";
 import axios from "axios";
-import Image from "next/image";
-// import { AsideSectionList } from "@/Model/Dropdown/AsideData/AsideData";
 
 const Asidebox = (props) => {
   const [asideCategory, setAsideCategory] = useState(null);
