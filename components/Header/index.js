@@ -18,12 +18,12 @@ import { MenuIcon, X } from "lucide-react";
 import TopHeaderWrapper from "./TopHeaderWrapper";
 import { useScrollVisibility } from "@/hooks/useScrollVisibility";
 
-function Header() {
-  // useEffect(() => {
-  //   if (setIsHeaderMounted) {
-  //     setIsHeaderMounted(true);
-  //   }
-  // });
+function Header({ setIsHeaderMounted }) {
+  useEffect(() => {
+    if (setIsHeaderMounted) {
+      setIsHeaderMounted(true);
+    }
+  });
 
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
