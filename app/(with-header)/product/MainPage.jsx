@@ -34,10 +34,12 @@ const RoomPage = () => {
         const parsedData = JSON.parse(cachedData);
         setData(parsedData);
         dispatch(setRoomData({ roomData: parsedData }));
-        dispatch({
-          type: "FETCH_IMAGE_DATA",
-          payload: parsedData?.productImages[0]?.color,
-        });
+        if (parsedData?.productImages?.[0]?.color) {
+          dispatch({
+            type: "FETCH_IMAGE_DATA",
+            payload: parsedData?.productImages[0]?.color,
+          });
+        }
       } else {
         // Fetch data if there's no cached data
         dispatch({ type: "FETCH_ROOM_REQUEST", payload: title });
@@ -52,10 +54,12 @@ const RoomPage = () => {
     if (selectedData && Object.keys(selectedData).length !== 0) {
       sessionStorage?.setItem("roomData", JSON.stringify(selectedData));
       setData(selectedData); // Update component state with selectedData
-      dispatch({
-        type: "FETCH_IMAGE_DATA",
-        payload: selectedData?.productImages[0]?.color,
-      });
+      if (selectedData?.productImages?.[0]?.color) {
+        dispatch({
+          type: "FETCH_IMAGE_DATA",
+          payload: selectedData?.productImages[0]?.color,
+        });
+      }
     }
   }, [selectedData, dispatch]);
 
