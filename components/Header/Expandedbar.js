@@ -91,7 +91,7 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
   return (
     <>
       <div
-        className={`expanded-search-box block pt-[10px] bg-white sm:h-310px h-full  sm:w-full w-[100vw]  absolute right-0 top-0 sm:shadow-[0_350px_60px_500px_rgba(0,0,0,0.5)] z-[9999999] ${
+        className={`expanded-search-box block pt-[10px] bg-white sm:h-310px h-full  sm:w-full w-[100vw]  absolute right-0 top-0 sm:shadow-[0_350px_60px_500px_rgba(0,0,0,0.5)] z-[9999] ${
           path == "/" ? "sm:mt-[-36px]" : ""
         } `}
       >

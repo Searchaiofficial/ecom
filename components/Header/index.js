@@ -123,7 +123,7 @@ function Header({ setIsHeaderMounted }) {
   const homeRoute = "/";
 
   return (
-    <div className="z-[99999px]">
+    <div className="">
       <TopHeaderWrapper>
         <TopHeader />
       </TopHeaderWrapper>
@@ -134,7 +134,7 @@ function Header({ setIsHeaderMounted }) {
               ? "md:top-[35px] top-[0px]"
               : "top-0"
             : "top-0"
-        } z-[99999]
+        } z-[9998]
        ${isScrolled ? "bg-white" : "bg-white"} 
       ${isFilterVisible ? "block" : "hidden"}
       `}
@@ -330,7 +330,7 @@ function Header({ setIsHeaderMounted }) {
             }
             whileInView={{ x: 0, opacity: 1 }}
             transition={{ type: "just" }}
-            className="fixed inset-0 flex flex-col px-[10px] overflow-y-hidden bg-white z-[100000] md:hidden"
+            className="fixed inset-0 flex flex-col px-[10px] overflow-y-hidden bg-white z-[9998] md:hidden"
           >
             <div className="flex justify-between items-center py-[5px] w-full h-fit mb-4">
               <div className=" flex items-center justify-start ">

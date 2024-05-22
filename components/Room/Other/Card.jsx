@@ -564,10 +564,10 @@ const Card = ({ data, productId }) => {
             {/* Modal */}
             {sidebarContect && (
               <div className="">
-                <div className="w-1/2 flex flex-col justify-between gap-4 h-full bg-white rounded-3xl p-7 z-50k">
+                <div className="w-1/2 flex flex-col justify-between gap-4 h-full bg-white rounded-3xl p-7">
                   {sidebarContect === "zeroCostEMI" && (
-                    <div className="fixed h-full w-screen bg-black/50 backdrop:blur-sm top-0 left-0">
-                      <section className="text-black bg-white flex-col absolute right-0 top-0 h-full  z-50 w-full  lg:w-[35%] flex overflow-y-auto">
+                    <div className="fixed z-[9999] h-full w-screen bg-black/50 backdrop:blur-sm top-0 left-0">
+                      <section className="text-black bg-white flex-col absolute right-0 top-0 h-full  z-[99999] w-full  lg:w-[35%] flex overflow-y-auto">
                         <div className="flex px-[40px]  mt-5 items-end justify-end">
                           <button
                             className="text-2xl text-center mt-0 mb-8 cursor-pointer  "
@@ -809,8 +809,8 @@ const Card = ({ data, productId }) => {
                     </div>
                   )}
                   {sidebarContect === "inStoreRequest" && (
-                    <div className="fixed h-full w-screen bg-black/50 backdrop:blur-sm top-0 left-0">
-                      <section className="text-black bg-white flex-col absolute right-0 top-0 h-full  z-50 w-full  lg:w-[35%] flex overflow-y-auto">
+                    <div className="fixed z-[99999] h-full w-screen bg-black/50 backdrop:blur-sm top-0 left-0">
+                      <section className="text-black bg-white flex-col absolute right-0 top-0 h-full z-[99999] w-full  lg:w-[35%] flex overflow-y-auto">
                         <div className="flex px-[40px]  mt-5 items-end justify-end">
                           <button
                             className="text-2xl mt-0 mb-8 cursor-pointer  "
@@ -901,8 +901,8 @@ const Card = ({ data, productId }) => {
 
 
                 {sidebarContect === "deliveryOption" && (
-                  <div className=" fixed h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0">
-                    <section className="text-black bg-white flex-col absolute right-0 top-0 h-screen  z-50 w-full  lg:w-[35%] flex ">
+                  <div className=" fixed z-[99999] h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0">
+                    <section className="text-black z-[99999] bg-white flex-col absolute right-0 top-0 h-screen w-full  lg:w-[35%] flex ">
                       <div className="flex px-[40px]  mt-5 items-end justify-end">
                         <button
                           className="text-2xl mt-0 mb-8 cursor-pointer  "
@@ -942,8 +942,8 @@ const Card = ({ data, productId }) => {
                   </div>
                 )}
                 {sidebarContect === "calculator" && (
-                  <div className=" fixed h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0">
-                    <section className="text-black bg-white flex-col absolute right-0 top-0 h-screen  z-50 w-full  lg:w-[35%] flex ">
+                  <div className=" fixed h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0 z-[99999]">
+                    <section className="text-black bg-white flex-col absolute right-0 top-0 h-screen z-[99999] w-full  lg:w-[35%] flex ">
                       <div className="flex px-[40px]  mt-5 items-end justify-end">
                         <button
                           className="text-2xl mt-0 mb-8 cursor-pointer  "
