@@ -41,8 +41,6 @@ const Card = ({ data, productId }) => {
 
 
 
-  console.log("Card Data", data)
-  console.log("Product ID", productId)
 
   const fetchReviews = async () => {
     try {
@@ -306,74 +304,46 @@ const Card = ({ data, productId }) => {
 
   return (
     <>
-      <div className="flex justify-start md:min-w-[25vw] gap-1 mt-7 w-[100%] ml-0">
+      <div className="flex justify-start md:min-w-[25vw] gap-1 mt-2.5 w-[100%] ml-0">
         <div className=" w-[100%] prefence-text">
           <div className="textHolders flex flex-col">
-            <div className="flex items-center justify-between mt-4">
-              {/* <p className="text-[16px] font-normal">Originals</p> */}
+            {
+              data.demandtype && (
+                <div className="flex items-center justify-between">
+                  <p className="font-semibold text-[#C31952] text-[15px]">{data.demandtype}</p>
 
-              {/* <<<<<<< HEAD */}
-              <p className="font-semibold text-[#C31952] text-[15px]">{data.demandtype}</p>
-
-              <div className="flex gap-2">
-                <div className="flex items-center">
-                  {
-                    Starts
-                  }
+                  <div className="flex gap-2">
+                    <div className="flex items-center">
+                      {
+                        Starts
+                      }
+                    </div>
+                    <p className="text-gray-800 underline w-[31px] h-[20px] cursor-pointer">{reviews.length}</p>
+                  </div>
                 </div>
-                <p className="text-gray-800 underline w-[31px] h-[20px] cursor-pointer">{reviews.length}</p>
-                {/* ======= */}
-                {/* <p className="font-semibold text-red-600 text-[15px]">
-                New lower price
-              </p>
-
-              <div className="flex gap-2">
-                <div className="flex items-center">
-                  <Image
-                    src={"/icon/star.svg"}
-                    height={20}
-                    width={20}
-                    alt="downarrow"
-                    className=" h-[1em] w-[1em] hover:text-gray-600"
-                  />
-                  <Image
-                    src={"/icon/star.svg"}
-                    height={20}
-                    width={20}
-                    alt="downarrow"
-                    className=" h-[1em] w-[1em] hover:text-gray-600"
-                  />
-                  <Image
-                    src={"/icon/star.svg"}
-                    height={20}
-                    width={20}
-                    alt="downarrow"
-                    className=" h-[1em] w-[1em] hover:text-gray-600"
-                  />
-                  <Image
-                    src={"/icon/star.svg"}
-                    height={20}
-                    width={20}
-                    alt="downarrow"
-                    className=" h-[1em] w-[1em] hover:text-gray-600"
-                  />
-                  <Image
-                    src={"/icon/half-star.svg"}
-                    height={20}
-                    width={20}
-                    alt="downarrow"
-                    className=" h-[1em] w-[1em] hover:text-gray-600"
-                  />
+              )
+            }
+            {
+              !data.demandtype ? (
+                <div className="flex items-center justify-between">
+                  <h1 className="text-2xl  font-bold mb-1">
+                    {data?.productTitle}
+                  </h1>
+                  <div className="flex gap-2">
+                    <div className="flex items-center">
+                      {
+                        Starts
+                      }
+                    </div>
+                    <p className="text-gray-800 underline w-[31px] h-[20px] cursor-pointer">{reviews.length}</p>
+                  </div>
                 </div>
-                <p className="text-gray-800 underline w-[31px] h-[20px] cursor-pointer">
-                  159
-                </p> */}
-                {/* >>>>>>> c5884d5bc6361cb1d9e12f35f788d80f70e78eeb */}
-              </div>
-            </div>
-            <h1 className="text-2xl md:mt-1 font-bold mb-1">
-              {data?.productTitle}
-            </h1>
+              ) :
+                <h1 className="text-2xl  font-bold mb-1">
+                  {data?.productTitle}
+                </h1>
+
+            }
             <div className="font-medium flex tracking-wider text-[#757575] mb-1">
               <h3>{data?.collectionName}</h3>
             </div>
@@ -385,7 +355,7 @@ const Card = ({ data, productId }) => {
               <div className="font-bold items-end flex mb-1 mt-[30px]">
 
 
-                <h2 className={`text-3xl leading-[0.5] tracking-wide ${data?.specialprice ? "bg-[#FFC21F] px-2 pt-3 w-fit" : ""} shadow-lg`} style={{ boxShadow: '3px 3px #ad3535' }}>
+                <h2 className={`text-3xl leading-[0.5] tracking-wide ${data?.specialprice ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg" : ""} `} style={data?.specialprice ? { boxShadow: '3px 3px #ad3535' } : {}}>
                   <span className="text-sm">Rs. &nbsp;</span>{" "}
                   {data?.specialprice?.price ? data?.specialprice.price : data.perUnitPrice}
                 </h2>{" "}
@@ -462,7 +432,7 @@ const Card = ({ data, productId }) => {
                       className={`parent relative w-[60px] h-[60px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
             ${selectedColor === item.color ||
                           (index === 0 && selectedColor === "")
-                          ? " border-black border-b-[6px]"
+                          ? " border-black "
                           : " border-black"
                         }   
           `}
@@ -476,7 +446,13 @@ const Card = ({ data, productId }) => {
                         layout="fill"
                         objectFit="cover"
                       />
-                      .
+                      {
+                        selectedColor === item.color ||
+                          (index === 0 && selectedColor === "") ? (
+                          <div className="w-[55px] h-[5px] bg-black mt-[75px] rounded-lg " />
+                        ) : ""
+                      }
+
                     </div>
                   ))}
                 </div>
@@ -626,8 +602,8 @@ const Card = ({ data, productId }) => {
                               isActive === "EMI Plans" && (
                                 <div className="">
                                   <div className="flex items-center gap-[10px] pb-[20px] pt-[32px] ">
-                                    <button onClick={(e) => setEmiOption("Credit Card EMI")} className={`${EmiOption === "Credit Card EMI" ? "bg-[#0E342C] text-white py-[16px] px-[30px] text-center text-[14px] rounded-full" : "py-[16px] px-[30px] rounded-full border text-[14px] text-center"}`}>Credit Card EMI</button>
-                                    <button onClick={(e) => setEmiOption("Debit Card")} className={`${EmiOption === "Debit Card" ? "bg-[#0E342C] flex-1 text-white py-[16px] px-[30px] text-center text-[14px] rounded-full" : "py-[16px] flex-1 px-[30px] rounded-full border text-[14px] text-center"}`}>Debit Card & Cardless EMI</button>
+                                    <button onClick={(e) => setEmiOption("Credit Card EMI")} className={`${EmiOption === "Credit Card EMI" ? "bg-black text-white py-[16px] hover:bg-gray-900 px-[30px] text-center text-[14px] rounded-full" : "py-[16px] border-2  px-[30px] rounded-full  text-[14px] text-center"}`}>Credit Card EMI</button>
+                                    <button onClick={(e) => setEmiOption("Debit Card")} className={`${EmiOption === "Debit Card" ? "bg-black hover:bg-gray-900 flex-1 text-white py-[16px] px-[30px] text-center text-[14px]  rounded-full" : "py-[16px] flex-1 border-2 px-[30px]  rounded-full  text-[14px] text-center"}`}>Debit Card & Cardless EMI</button>
                                   </div>
                                   {
                                     EmiOption === "Credit Card EMI" && (

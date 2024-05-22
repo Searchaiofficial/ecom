@@ -120,7 +120,7 @@ export default function NewMainSlider({ initialData }) {
         {sliderApiData.map((data) => {
           return (
             <SwiperSlide key={data?._id}>
-              <div className="relative group h-[78vh] -translate-x-[5px] md:translate-x-0">
+              <div className="relative group h-[78vh] -translate-x-[10px] md:translate-x-0">
                 <Image
                   src={data?.imgSrc}
                   fill
@@ -163,7 +163,7 @@ export default function NewMainSlider({ initialData }) {
                             {data?.circles[0].productPrice}
                           </p>
                         </div>
-                        <div className="absolute top-0 right-0 flex items-center justify-end h-full border-l ">
+                        <div className="absolute top-0 right-0 flex items-center justify-end h-full">
                           <Image
                             className="flex mx-1 rotate-90"
                             src="/ayatrio icon/uparrow.svg"

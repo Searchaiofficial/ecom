@@ -17,6 +17,7 @@ import {
   Scrollbar,
   Mousewheel,
   FreeMode,
+  A11y,
 } from "swiper/modules";
 // import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
@@ -84,6 +85,7 @@ const Trending = () => {
         <Swiper
           ref={swiper1Ref}
           {...swiperOptions2}
+          modules={[Navigation, Pagination, Scrollbar, A11y]}
           scrollbar={{
             hide: false,
             draggable: true,

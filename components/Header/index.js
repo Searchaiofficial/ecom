@@ -128,13 +128,12 @@ function Header({ setIsHeaderMounted }) {
         <TopHeader />
       </TopHeaderWrapper>
       <div
-        className={`fixed w-full sm:bg-none ${
-          !pathname.includes("/checkout")
-            ? typeof window !== "undefined" && window.scrollY < 20
-              ? "md:top-[35px] top-[0px]"
-              : "top-0"
+        className={`fixed w-full sm:bg-none ${!pathname.includes("/checkout")
+          ? typeof window !== "undefined" && window.scrollY < 20
+            ? "md:top-[35px] top-[0px]"
             : "top-0"
-        } z-[9998]
+          : "top-0"
+          } z-[9998]
        ${isScrolled ? "bg-white" : "bg-white"} 
       ${isFilterVisible ? "block" : "hidden"}
       `}
@@ -143,9 +142,8 @@ function Header({ setIsHeaderMounted }) {
         {!searchQuery ? (
           <>
             <div
-              className={`${
-                isScrolled ? " border-b-[0.5px] border-slate-200" : ""
-              } flex flex-row justify-between z-[99999px] items-center sm:px-[20px] px-[20px] h-[60px]`}
+              className={`${isScrolled ? " border-b-[0.5px] border-slate-200" : ""
+                } flex flex-row justify-between z-[99999px] items-center sm:px-[20px] px-[20px] h-[60px]`}
             >
               {/* main-logo */}
               <div className=" flex mainlogo items-center mr-20 justify-start">
@@ -174,12 +172,11 @@ function Header({ setIsHeaderMounted }) {
                         key={idx}
                         onMouseEnter={() => handleMouseEnter(idx)}
                         onMouseLeave={handleMouseLeave}
-                        // onClick={() => handleClick(idx)}
+                      // onClick={() => handleClick(idx)}
                       >
                         <Link
-                          className={`text-md  font-semibold  ${
-                            isOpen ? "border-b-2 border-black" : ""
-                          }`}
+                          className={`text-md  font-semibold  ${isOpen ? "border-b-2 border-black" : ""
+                            }`}
                           href={
                             value.label === "Offers"
                               ? "/heading/offers/all"
@@ -188,11 +185,10 @@ function Header({ setIsHeaderMounted }) {
                           onClick={toggleDropdown}
                         >
                           <p
-                            className={`block font-medium py-[15px] px-[5px] border-b-2  ${
-                              hoveredIndex === idx
-                                ? "border-black"
-                                : "border-transparent"
-                            }`}
+                            className={`block font-medium py-[15px] px-[5px] border-b-2  ${hoveredIndex === idx
+                              ? "border-black"
+                              : "border-transparent"
+                              }`}
                           >
                             {value.label}
                           </p>
@@ -214,7 +210,7 @@ function Header({ setIsHeaderMounted }) {
               <div className="flex flex-row items-center justify-between  lg:gap-2">
                 <div
                   onClick={handleModalOpen}
-                  className="bg-[#f5f5f5] justify-end rounded-full w-[9rem] h-10 p-[9px] hover:bg-[#e5e5e5] hover:rounded-full cursor-pointer lg:block hidden"
+                  className="bg-[#f5f5f5] justify-end rounded-full w-[11rem] h-10 p-[9px] hover:bg-[#e5e5e5] hover:rounded-full cursor-pointer lg:block hidden"
                 >
                   <span>
                     <Image
@@ -227,7 +223,7 @@ function Header({ setIsHeaderMounted }) {
                   </span>
                   <p className="ml-6  text-gray-400">Search</p>
                 </div>
-                <div
+                {/* <div
                   className="md:hidden block w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer"
                   onClick={handleModalOpen}
                 >
@@ -238,7 +234,7 @@ function Header({ setIsHeaderMounted }) {
                     height={20}
                     className="header-div-icon"
                   />
-                </div>
+                </div> */}
                 <div className="sm:block hidden w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer">
                   <Link href={"/login"}>
                     <Image
@@ -292,7 +288,8 @@ function Header({ setIsHeaderMounted }) {
                 )}
 
                 <div className="w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer md:hidden">
-                  <MenuIcon onClick={toggleMobileMenu} />
+                  {/* <MenuIcon onClick={toggleMobileMenu} /> */}
+                  <Image src={"/ayatrio icon/menu.svg"} height={50} width={50} alt="Menu Icon" className="h-[21px] w-[21px]" onClick={toggleMobileMenu} />
                 </div>
 
                 {/* for only mobole search */}
@@ -310,6 +307,21 @@ function Header({ setIsHeaderMounted }) {
                     onSearch={handleSearchChange}
                   />
                 )}
+              </div>
+            </div>
+            <div className="flex  w-full items-center  md:hidden px-[20px] sm:px-[50px] lg:px-[67px] mb-3">
+              <div
+                className="md:hidden py-[8px] flex items-center w-full bg-zinc-100 rounded-full   h-[45px] p-[9px] hover:bg-zinc-200 hover:rounded-full cursor-pointer"
+                onClick={handleModalOpen}
+              >
+                <Image
+                  src="/svg/icon/search.svg"
+                  alt="Search Icon"
+                  width={20}
+                  height={20}
+                  className="header-div-icon"
+                />
+                <p className="ml-6  text-gray-400">Search</p>
               </div>
             </div>
           </>
@@ -360,21 +372,19 @@ function Header({ setIsHeaderMounted }) {
                   key={idx}
                   onMouseEnter={() => handleMouseEnter(idx)}
                   onMouseLeave={handleMouseLeave}
-                  // onClick={() => handleClick(idx)}
+                // onClick={() => handleClick(idx)}
                 >
                   <Link
-                    className={`text-md  font-semibold  ${
-                      isOpen ? "border-b-2 border-black" : ""
-                    }`}
+                    className={`text-md  font-semibold  ${isOpen ? "border-b-2 border-black" : ""
+                      }`}
                     href="#"
                     onClick={toggleDropdown}
                   >
                     <p
-                      className={`block p-2 text-lg font-medium border-b-2 ${
-                        hoveredIndex === idx
-                          ? "border-black"
-                          : "border-transparent"
-                      }`}
+                      className={`block p-2 text-lg font-medium border-b-2 ${hoveredIndex === idx
+                        ? "border-black"
+                        : "border-transparent"
+                        }`}
                     >
                       {value.label}
                     </p>

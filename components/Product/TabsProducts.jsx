@@ -381,86 +381,36 @@ const Tabs = ({
   return (
     <>
       <div className="lg:px-[67px] sm:px-[50px] px-[20px]">
-        {/* <div className="overflow-x-auto">
-          <h2 className="lg:text-[36px] text-[24px] font-semibold capitalize mb-[50px]">{categoryName}</h2>
-          {subCategory && (
-
-            <Swiper
-              ref={swiper1Ref}
-              {...swiperOptions2}
-              scrollbar={{
-                hide: false,
-                draggable: true,
-              }}
-              mousewheel={{
-                forceToAxis: true,
-                invert: false,
-              }}
-              freeMode={{
-                enabled: false,
-                sticky: true,
-              }}
-              breakpoints={{
-                400: {
-                  slidesPerView: 3,
-                  spaceBetween: 10,
-                },
-
-                768: {
-                  slidesPerView: 5,
-                  spaceBetween: 10,
-                },
-                1024: {
-                  slidesPerView: 9,
-                  spaceBetween: 10,
-                },
-              }}
-              allowSlideNext={true}
-              allowSlidePrev={true}
-              slideNextClass="custom-next-button"
-              slidePrevClass="custom-prev-button"
-              onSwiper={setSwiperRef}
-            >
-              {subCategory.map((sub, idx) => (
-                <SwiperSlide className="mb-10 " key={idx}>
-                  <div className="flex flex-col items-center cursor-pointer">
-                    <div className="w-[130px] h-[130px] mb-[12px] ">
-                      <Image
-                        src={sub.img}
-                        alt="NA"
-                        height={300}
-                        width={300}
-                        className="object-cover w-full h-full"
-                      />
-                    </div>
-                    <h1 className="text-[14px] hover:underline text-[#484848]  text-center">{sub.name}</h1>
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-
-
-
-          )}
-          <p className="leading-2 mb-4 text-[14px] pt-[30px] text-[#484848] lg:w-[50%]">{description}</p>
-        </div> */}
-
-        <div className="  pl-[15px] flex flex-col  overflow-x-auto">
-          <h2 className="lg:text-[36px] text-[24px] font-semibold capitalize mb-[50px] mt-24">{parentCategory}</h2>
+        <div className="flex flex-col overflow-hidden">
+          <div className="mt-36" />
+          <h2 className="lg:text-[30px] text-[24px] font-semibold capitalize mb-[30px] ">{heading}</h2>
           <div className="flex items-center">
             {
-              subCategory && (
+              subCategory ? (
                 <div className="group flex flex-row items-center justify-start gap-2 mb-4">
 
                   <Swiper
                     ref={swiper1Ref}
+                    {...swiperOptions2}
                     modules={[Navigation, Pagination, Scrollbar, A11y]}
                     navigation={{
                       nextEl: ".right",
                       prevEl: ".back",
                     }}
                     draggable={true}
-                    style={{ "--swiper-navigation-size": "24px", maxHeight: "190px" }}
+                    style={{ "--swiper-navigation-size": "24px", maxHeight: "120px" }}
+                    scrollbar={{
+                      hide: false,
+                      draggable: true,
+                    }}
+                    mousewheel={{
+                      forceToAxis: true,
+                      invert: false,
+                    }}
+                    freeMode={{
+                      enabled: false,
+                      sticky: true,
+                    }}
                     breakpoints={{
                       400: {
                         slidesPerView: 2.5,
@@ -471,7 +421,7 @@ const Tabs = ({
                         spaceBetween: 10,
                       },
                       1024: {
-                        slidesPerView: 3,
+                        slidesPerView: 7,
                         spaceBetween: 10,
                       },
                     }}
@@ -479,14 +429,14 @@ const Tabs = ({
                     {subCategory?.map((curElement, idx) => {
                       return (
                         <SwiperSlide className="max-w-[130px]" key={idx}>
-                          <Link href={""} className="">
-                            <div className="flex flex-col items-center">
+                          <div className="cursor-pointer" onClick={() => setType(curElement.name)}>
+                            <div className="flex flex-col ">
                               <div className="lg:mb-[12px] ">
-                                <Image src={curElement.img} width={200} height={130} alt="image" className="w-[200px] h-[130px]" />
+                                <Image src={curElement.img} width={200} height={130} alt="image" className="w-[200px] h-[70px]" />
                               </div>
-                              <h2 className="text-[#333333] font-semibold text-[14px] hover:underline text-center ">{curElement.name}</h2>
+                              <h2 className="text-[#333333] text-[14px] hover:underline line-clamp-1">{curElement.name}</h2>
                             </div>
-                          </Link>
+                          </div>
                         </SwiperSlide>
                       );
                     })}
@@ -495,10 +445,46 @@ const Tabs = ({
 
                 </div>
               )
+                :
+                parentCategory && (
+                  parentCategory === "offers" && offerCategory ? (
+                    <div className="mt-4 grid mb-4 md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-2 gap-y-4">
+                      {offerCategory.map((category, idx) => (
+                        <div key={idx} className=" gap-2">
+                          <div className="flex items-center gap-4 cursor-pointer ">
+                            <h1
+                              className="text-black bg-zinc-200 hover:bg-zinc-100 px-4 py-2"
+                              onClick={() => setSelectedOfferCategory(category)}
+                            >
+                              {category}
+                            </h1>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )
+                    :
+                    parentCategory === "demandtype" && allTypes && (
+                      <div className="mt-2 grid mb-4 md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-2 gap-y-4">
+                        {allTypes.map((type, idx) => (
+                          <div key={idx} className=" gap-2">
+                            <div className="flex items-center gap-4 cursor-pointer ">
+                              <h1
+                                onClick={() => setType(type)}
+                                className="text-black bg-zinc-200 hover:bg-zinc-100 px-4 py-2"
+                              >
+                                {type}
+                              </h1>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )
+                )
             }
           </div>
-          <p className="leading-2 mb-4 text-[14px] pt-[54px] text-[#484848] lg:w-[50%]">{description}</p>
         </div>
+        <p className="leading-2 mb-4 text-[14px] pt-[5px] text-[#484848] lg:w-[70%] line-clamp-2">{description}</p>
         <div className="hidden md:flex sticky top-0 z-20 bg-white py-5 scrollbar">
           <TabsProductContent
             filterName={"Sort"}
@@ -880,9 +866,8 @@ const Tabs = ({
         </div>
         <hr />
         {/* iimages */}
-        <div
-          className="
-          flex flex-col image-product "
+        <div div
+          className="flex flex-col image-product"
         >
           <div className="text-right">
             {showCompare && (

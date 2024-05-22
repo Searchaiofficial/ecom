@@ -91,7 +91,7 @@ function Card(props) {
                       onClick={() => handleclick(props.title, props.category)}
                       className={
                         slide === idx
-                          ? "aspect-square w-full hover:scale-110 transition-all duration-300"
+                          ? "aspect-square w-full"
                           : "slide-hidden"
                       }
                     />
@@ -121,8 +121,8 @@ function Card(props) {
                     key={idx}
                     className={
                       slide === idx
-                        ? "bg-white h-2 w-2 rounded-[50%] mr-1"
-                        : "bg-[#cccc] h-2 w-2 rounded-[50%] mr-1"
+                        ? "bg-white h-[0.4rem] w-[0.4rem] rounded-[50%] mr-1"
+                        : "bg-[#cccc] h-[0.4rem] w-[0.4rem] rounded-[50%] mr-1"
                     }
                     onClick={() => setSlide(idx)}
                   ></button>
