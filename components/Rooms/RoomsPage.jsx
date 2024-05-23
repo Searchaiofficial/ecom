@@ -58,6 +58,42 @@ export const RoomsPage = ({ params }) => {
     setRoomMain(response.data);
   };
 
+
+  const [reviewRoom, setReviewRoom] = useState({});
+  const [reviewData, setReviewData] = useState([]);
+
+  const fetchRoomData = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:4000/api/getRoomByQuery",
+        {
+          params: {
+            roomType: params.replace(/-/g, " "),
+          },
+        }
+      );
+      setReviewRoom(response.data);
+    } catch (error) {
+      console.error("Error fetching room data:", error);
+    }
+  };
+
+  const fetchReviewData = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:4000/api/getSpecialReview"
+      );
+      setReviewData(response.data[0]);
+    } catch (error) {
+      console.error("Error fetching review data:", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchRoomData();
+    fetchReviewData();
+  }, [params]);
+
   useEffect(() => {
     // fetchRoomMain();
     if (!dataFetched) {
@@ -272,7 +308,8 @@ export const RoomsPage = ({ params }) => {
               Explore all Bedroom storage solution
             </button>
           </div>
-          <div className="mt-20 flex bg-orange-500">
+
+          {/* <div className="mt-20 flex bg-orange-500">
             <Image
               src={bedimageh}
               width={850}
@@ -288,7 +325,39 @@ export const RoomsPage = ({ params }) => {
                 A
               </div>
             </div>
+          </div> */}
+
+          <div className="flex mt-8  h-[600px] md:flex-row w-full flex-col relative  ">
+            <div className="relative md:w-2/3">
+              {reviewRoom && (
+                <TabImage
+                  src={reviewRoom.imgSrc}
+                  alt={`Image  of Children`}
+                  width={1000}
+                  height={338}
+                  labelData={reviewRoom.children}
+                />
+              )}
+            </div>
+            <div className="md:w-1/3  sm:h-auto sm:flex-grow bg-zinc-100  px-10 sm:py-10 py-5">
+              <div className="flex flex-col ">
+                <div>
+                  <p>{reviewData && reviewData.comment}</p>
+                </div>
+                <div className="flex mt-2 flex-row items-center gap-2 ">
+                  <Image
+                    src={reviewData && reviewData.image}
+                    width={45}
+                    height={45}
+                    alt="arrow"
+                    className=" aspect-square object-cover rounded-full"
+                  />
+                  <p>{reviewData && reviewData.name}</p>
+                </div>
+              </div>
+            </div>
           </div>
+
           <div className="mt-20">
             <h1 className="mt-20 text-2xl font-semibold">
               {roomMain && roomMain.details && roomMain.details[1]?.title}

@@ -61,6 +61,42 @@ const SuggestionPage = ({ params }) => {
     }
   }, [dispatch, selectData, dataFetched]); // Include dataFetched in the dependency array
 
+
+  const [reviewRoom, setReviewRoom] = useState({});
+  const [reviewData, setReviewData] = useState([]);
+
+  const fetchRoomData = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:4000/api/getRoomByQuery",
+        {
+          params: {
+            category: suggestion && suggestion.category && suggestion.category[0] || "",
+          },
+        }
+      );
+      setReviewRoom(response.data);
+    } catch (error) {
+      console.error("Error fetching room data:", error);
+    }
+  };
+
+  const fetchReviewData = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:4000/api/getSpecialReview"
+      );
+      setReviewData(response.data[0]);
+    } catch (error) {
+      console.error("Error fetching review data:", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchRoomData();
+    fetchReviewData();
+  }, [params, suggestion]);
+
   return (
     <>
       <div className="pt-[65px]">
@@ -174,6 +210,13 @@ const SuggestionPage = ({ params }) => {
                 </div>
               </div>
             </div>
+
+
+
+
+
+
+
             {suggestion &&
               suggestion.secondSlider &&
               suggestion.secondSlider.length > 0 && (
@@ -214,6 +257,7 @@ const SuggestionPage = ({ params }) => {
                 </div>
               </div>
             </div>
+
 
             {/* <div className="mt-16">
             <h3 className="text-lg font-semibold">
@@ -353,6 +397,41 @@ const SuggestionPage = ({ params }) => {
           </div> */}
 
             <QuiltSelector />
+
+            
+
+            <div className="flex mt-8  h-[600px] md:flex-row w-full flex-col relative  ">
+            <div className="relative md:w-2/3">
+              {reviewRoom && (
+                <TabImage
+                  src={reviewRoom.imgSrc}
+                  alt={`Image  of Children`}
+                  width={1000}
+                  height={338}
+                  labelData={reviewRoom.children}
+                />
+              )}
+            </div>
+            <div className="md:w-1/3  sm:h-auto sm:flex-grow bg-zinc-100  px-10 sm:py-10 py-5">
+              <div className="flex flex-col ">
+                <div>
+                  <p>{reviewData && reviewData.comment}</p>
+                </div>
+                <div className="flex mt-2 flex-row items-center gap-2 ">
+                  <Image
+                    src={reviewData && reviewData.image}
+                    width={45}
+                    height={45}
+                    alt="arrow"
+                    className=" aspect-square object-cover rounded-full"
+                  />
+                  <p>{reviewData && reviewData.name}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
 
             {suggestion &&
               suggestion.thirdSlider &&

@@ -493,8 +493,8 @@ const FreeSample = () => {
   };
 
   const handleNext = () => {
-    // router.push("/products/virtualexperience/ayatrio");
-    router.push("/liveroom")
+    router.push("/products/virtualexperience/ayatrio");
+    // router.push("/liveroom")
   };
   const usersfilters = useSelector(allSelectedData);
   console.log(usersfilters);

@@ -53,7 +53,7 @@ const Tabs = ({
   setType,
   offerCategory,
   parentCategory,
-  setSelectedOfferCategory
+  setSelectedOfferCategory,
 }) => {
   // console.log("Filtered products:", filteredProducts);
   const [swiperRef, setSwiperRef] = useState(null);
@@ -383,108 +383,121 @@ const Tabs = ({
       <div className="lg:px-[67px] sm:px-[50px] px-[20px]">
         <div className="flex flex-col overflow-hidden">
           <div className="mt-36" />
-          <h2 className="lg:text-[30px] text-[24px] font-semibold capitalize mb-[30px] ">{heading}</h2>
+          <h2 className="lg:text-[30px] text-[24px] font-semibold capitalize mb-[30px] ">
+            {heading}
+          </h2>
           <div className="flex items-center">
-            {
-              subCategory ? (
-                <div className="group flex flex-row items-center justify-start gap-2 mb-4">
-
-                  <Swiper
-                    ref={swiper1Ref}
-                    {...swiperOptions2}
-                    modules={[Navigation, Pagination, Scrollbar, A11y]}
-                    navigation={{
-                      nextEl: ".right",
-                      prevEl: ".back",
-                    }}
-                    draggable={true}
-                    style={{ "--swiper-navigation-size": "24px", maxHeight: "120px" }}
-                    scrollbar={{
-                      hide: false,
-                      draggable: true,
-                    }}
-                    mousewheel={{
-                      forceToAxis: true,
-                      invert: false,
-                    }}
-                    freeMode={{
-                      enabled: false,
-                      sticky: true,
-                    }}
-                    breakpoints={{
-                      400: {
-                        slidesPerView: 2.5,
-                        spaceBetween: 10,
-                      },
-                      768: {
-                        slidesPerView: 3,
-                        spaceBetween: 10,
-                      },
-                      1024: {
-                        slidesPerView: 7,
-                        spaceBetween: 10,
-                      },
-                    }}
-                  >
-                    {subCategory?.map((curElement, idx) => {
-                      return (
-                        <SwiperSlide className="max-w-[130px]" key={idx}>
-                          <div className="cursor-pointer" onClick={() => setType(curElement.name)}>
-                            <div className="flex flex-col ">
-                              <div className="lg:mb-[12px] ">
-                                <Image src={curElement.img} width={200} height={130} alt="image" className="w-[200px] h-[70px]" />
-                              </div>
-                              <h2 className="text-[#333333] text-[14px] hover:underline line-clamp-1">{curElement.name}</h2>
+            {subCategory ? (
+              <div className="group flex flex-row items-center justify-start gap-2 mb-4">
+                <Swiper
+                  ref={swiper1Ref}
+                  {...swiperOptions2}
+                  modules={[Navigation, Pagination, Scrollbar, A11y]}
+                  navigation={{
+                    nextEl: ".right",
+                    prevEl: ".back",
+                  }}
+                  draggable={true}
+                  style={{
+                    "--swiper-navigation-size": "24px",
+                    maxHeight: "120px",
+                  }}
+                  scrollbar={{
+                    hide: false,
+                    draggable: true,
+                  }}
+                  mousewheel={{
+                    forceToAxis: true,
+                    invert: false,
+                  }}
+                  freeMode={{
+                    enabled: false,
+                    sticky: true,
+                  }}
+                  breakpoints={{
+                    400: {
+                      slidesPerView: 2.5,
+                      spaceBetween: 10,
+                    },
+                    768: {
+                      slidesPerView: 3,
+                      spaceBetween: 10,
+                    },
+                    1024: {
+                      slidesPerView: 7,
+                      spaceBetween: 10,
+                    },
+                  }}
+                >
+                  {subCategory?.map((curElement, idx) => {
+                    return (
+                      <SwiperSlide className="max-w-[130px]" key={idx}>
+                        <div
+                          className="cursor-pointer"
+                          onClick={() => setType(curElement.name)}
+                        >
+                          <div className="flex flex-col ">
+                            <div className="lg:mb-[12px] ">
+                              <Image
+                                src={curElement.img}
+                                width={200}
+                                height={130}
+                                alt="image"
+                                className="w-[200px] h-[70px]"
+                              />
                             </div>
-                          </div>
-                        </SwiperSlide>
-                      );
-                    })}
-                  </Swiper>
-
-
-                </div>
-              )
-                :
-                parentCategory && (
-                  parentCategory === "offers" && offerCategory ? (
-                    <div className="mt-4 grid mb-4 md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-2 gap-y-4">
-                      {offerCategory.map((category, idx) => (
-                        <div key={idx} className=" gap-2">
-                          <div className="flex items-center gap-4 cursor-pointer ">
-                            <h1
-                              className="text-black bg-zinc-200 hover:bg-zinc-100 px-4 py-2"
-                              onClick={() => setSelectedOfferCategory(category)}
-                            >
-                              {category}
-                            </h1>
+                            <h2 className="text-[#333333] text-[14px] hover:underline line-clamp-1">
+                              {curElement.name}
+                            </h2>
                           </div>
                         </div>
-                      ))}
-                    </div>
-                  )
-                    :
-                    parentCategory === "demandtype" && allTypes && (
-                      <div className="mt-2 grid mb-4 md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-2 gap-y-4">
-                        {allTypes.map((type, idx) => (
-                          <div key={idx} className=" gap-2">
-                            <div className="flex items-center gap-4 cursor-pointer ">
-                              <h1
-                                onClick={() => setType(type)}
-                                className="text-black bg-zinc-200 hover:bg-zinc-100 px-4 py-2"
-                              >
-                                {type}
-                              </h1>
-                            </div>
-                          </div>
-                        ))}
+                      </SwiperSlide>
+                    );
+                  })}
+                </Swiper>
+              </div>
+            ) : (
+              parentCategory &&
+              (parentCategory === "offers" && offerCategory ? (
+                <div className="mt-4 grid mb-4 md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-2 gap-y-4">
+                  {offerCategory.map((category, idx) => (
+                    <div key={idx} className=" gap-2">
+                      <div className="flex items-center gap-4 cursor-pointer ">
+                        <h1
+                          className="text-black bg-zinc-200 hover:bg-zinc-100 px-4 py-2"
+                          onClick={() => setSelectedOfferCategory(category)}
+                        >
+                          {category}
+                        </h1>
                       </div>
-                    )
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                parentCategory === "demandtype" &&
+                allTypes && (
+                  <div className="mt-2 grid mb-4 md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-2 gap-y-4">
+                    {allTypes.map((type, idx) => (
+                      <div key={idx} className=" gap-2">
+                        <div className="flex items-center gap-4 cursor-pointer ">
+                          <h1
+                            onClick={() => setType(type)}
+                            className="text-black bg-zinc-200 hover:bg-zinc-100 px-4 py-2"
+                          >
+                            {type}
+                          </h1>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 )
-            }
+              ))
+            )}
           </div>
         </div>
-        <p className="leading-2 mb-4 text-[14px] pt-[5px] text-[#484848] lg:w-[70%] line-clamp-2">{description}</p>
+        <p className="leading-2 mb-4 text-[14px] pt-[5px] text-[#484848] lg:w-[70%] line-clamp-2">
+          {description}
+        </p>
         <div className="hidden md:flex sticky top-0 z-20 bg-white py-5 scrollbar">
           <TabsProductContent
             filterName={"Sort"}
@@ -574,7 +587,7 @@ const Tabs = ({
             renderTypeContent={renderTypeContent}
           />
 
-          {parentCategory === "offers" &&
+          {parentCategory === "offers" && (
             <TabsProductContent
               filterName={"Offers"}
               commonClasses={commonClasses}
@@ -588,7 +601,7 @@ const Tabs = ({
               openContent={openContent}
               handleContent={handleContent}
             />
-          }
+          )}
 
           {/* ddropdown6 */}
           <div>
@@ -598,14 +611,16 @@ const Tabs = ({
                 handleTabClick();
               }}
               className={`Tabbtn z-0 bg-gray-100
-                  ${openAll
-                  ? `active-tabs  border border-black ${commonClasses}`
-                  : `tabS  border border-white ${commonClasses}`
-                }
-                  ${typeof window !== "undefined" && window.innerWidth <= 450
-                  ? " justify-center"
-                  : " justify-between"
-                }
+                  ${
+                    openAll
+                      ? `active-tabs  border border-black ${commonClasses}`
+                      : `tabS  border border-white ${commonClasses}`
+                  }
+                  ${
+                    typeof window !== "undefined" && window.innerWidth <= 450
+                      ? " justify-center"
+                      : " justify-between"
+                  }
                   `}
             >
               All Filters &nbsp;
@@ -841,8 +856,9 @@ const Tabs = ({
 
                           <button
                             onClick={handleContent}
-                            className={`text-left underline ${openContent ? "block" : "hidden"
-                              }`}
+                            className={`text-left underline ${
+                              openContent ? "block" : "hidden"
+                            }`}
                           >
                             Less
                           </button>
@@ -866,9 +882,7 @@ const Tabs = ({
         </div>
         <hr />
         {/* iimages */}
-        <div div
-          className="flex flex-col image-product"
-        >
+        <div div className="flex flex-col image-product">
           <div className="text-right">
             {showCompare && (
               <button
@@ -965,7 +979,7 @@ const Tabs = ({
             ))}
           </div> */}
         </div>
-      </div >
+      </div>
     </>
   );
 };

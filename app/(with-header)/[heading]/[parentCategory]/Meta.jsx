@@ -101,7 +101,7 @@ const ProductPage = ({ params }) => {
   useEffect(() => {
     if (params.parentCategory === "offers") {
       if (params.cat === "all") {
-        setType("highest");
+        setType("all");
       }
     }
   }, []);
@@ -230,7 +230,7 @@ const ProductPage = ({ params }) => {
           }
           heading={
             params.parentCategory === "offers"
-              ? type === "highest"
+              ? type === "all"
                 ? "Highest Offer"
                 : type
               : params.parentCategory === "demandtype"
