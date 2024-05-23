@@ -68,7 +68,7 @@ const SuggestionPage = ({ params }) => {
   const fetchRoomData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:4000/api/getRoomByQuery",
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getRoomByQuery`,
         {
           params: {
             category: suggestion && suggestion.category && suggestion.category[0] || "",
@@ -84,7 +84,7 @@ const SuggestionPage = ({ params }) => {
   const fetchReviewData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:4000/api/getSpecialReview"
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getSpecialReview`
       );
       setReviewData(response.data[0]);
     } catch (error) {

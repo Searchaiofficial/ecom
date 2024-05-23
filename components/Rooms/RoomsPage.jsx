@@ -58,14 +58,13 @@ export const RoomsPage = ({ params }) => {
     setRoomMain(response.data);
   };
 
-
   const [reviewRoom, setReviewRoom] = useState({});
   const [reviewData, setReviewData] = useState([]);
 
   const fetchRoomData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:4000/api/getRoomByQuery",
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getRoomByQuery`,
         {
           params: {
             roomType: params.replace(/-/g, " "),
@@ -81,13 +80,13 @@ export const RoomsPage = ({ params }) => {
   const fetchReviewData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:4000/api/getSpecialReview"
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getSpecialReview`
       );
       setReviewData(response.data[0]);
     } catch (error) {
       console.error("Error fetching review data:", error);
     }
-  }
+  };
 
   useEffect(() => {
     fetchRoomData();

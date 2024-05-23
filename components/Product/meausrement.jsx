@@ -12,7 +12,7 @@ const meausrement = ({ filteredProductData }) => {
   const fetchRoomData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:4000/api/getRoomByQuery",
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getRoomByQuery`,
         {
           params: {
             category:
@@ -32,7 +32,7 @@ const meausrement = ({ filteredProductData }) => {
   const fetchReviewData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:4000/api/getSpecialReview"
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getSpecialReview`
       );
       setReviewData(response.data[0]);
     } catch (error) {
@@ -72,7 +72,11 @@ const meausrement = ({ filteredProductData }) => {
                 alt="arrow"
                 className="usercon aspect-square object-cover rounded-full"
               />
-              <Link href={`${reviewData.instagramUrl}`} rel="noopener noreferrer" target="_blank">
+              <Link
+                href={`${reviewData.instagramUrl}`}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
                 <p>{reviewData && reviewData.name}</p>
               </Link>
             </div>
