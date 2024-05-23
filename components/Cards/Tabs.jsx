@@ -44,7 +44,7 @@ const Tabs = ({ data }) => {
   const tabImages = {};
   const labelData = {};
 
-  const uniqueRoomCategories = [...new Set(recommendedProducts), "all"];
+  let uniqueRoomCategories = [...new Set(recommendedProducts)];
 
   uniqueRoomCategories?.forEach((category) => {
     const products = data.filter((item) =>
@@ -71,6 +71,8 @@ const Tabs = ({ data }) => {
       labelData[category.toLowerCase()] = labels;
     }
   });
+
+  uniqueRoomCategories = uniqueRoomCategories.map(category => category.toLowerCase());
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -125,18 +127,69 @@ const Tabs = ({ data }) => {
 
         {activeTab === "all" ? (
           <div className="classic-tabs text-green-800 grid sm:grid-cols-3 grid-cols-2 gap-3 grid-rows-3">
-            {tabsData.map((tab, i) => (
-              <TabImage
-                key={i}
-                width={450}
-                height={700}
-                src={tab.img}
-                alt="Room"
-                handleTab={handleTab}
-                labelData={labelData[tab.key]?.[0] || []}
-              />
-            ))}
+          <TabImage
+            width={450}
+            height={700}
+            src={tabImages[uniqueRoomCategories[0]]?.[0]}
+            alt="Room"
+            handleTab={handleTab}
+            labelData={labelData[uniqueRoomCategories[0]]?.[0]|| []}
+          />
+
+          <div className="overflow-hidden relative">
+            <Image
+              className="h-full w-full object-cover "
+              src={tabImages[uniqueRoomCategories[1]]?.[0]}
+              alt="Room"
+              width={450}
+              height={350}
+            />
           </div>
+
+          <TabImage
+            src={tabImages[uniqueRoomCategories[2]]?.[0]}
+            labelData={labelData[uniqueRoomCategories[2]]?.[0] || []}
+            alt="Room"
+            width={450}
+            height={700}
+            handleTab={handleTab}
+          />
+          <div className="overflow-hidden sm:hidden block">
+            <Image
+              className="h-full w-full object-cover "
+              src={work}
+              alt="Room"
+            />
+          </div>
+
+          <TabImage
+            src={tabImages[uniqueRoomCategories[3]]?.[0]}
+            labelData={labelData[uniqueRoomCategories[3]]?.[0] || []}
+            alt="Room"
+            handleTab={handleTab}
+            width={450}
+            height={700}
+          />
+          <div className="overflow-hidden">
+            <Image
+              className="h-full w-full object-cover"
+              src={tabImages[uniqueRoomCategories[4]]?.[0]}
+              alt="Room"
+              width={450}
+              height={350}
+            />
+          </div>
+          <div className="bg-teal-100 overflow-hidden ">
+            <Image
+              className="h-full w-full object-cover"
+              src={tabImages[uniqueRoomCategories[5]]?.[0]}
+              alt="Room"
+              width={450}
+              height={350}
+            />
+          </div>
+        </div>
+
         ) : (
           <div className="classic-tabs text-green-800 grid sm:grid-cols-3 grid-cols-2 gap-3 grid-rows-3">
             <TabImage
