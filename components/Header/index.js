@@ -327,17 +327,20 @@ function Header({ setIsHeaderMounted }) {
             </div>
             {atTop && <div className="flex  w-full items-center  md:hidden px-[20px] sm:px-[50px] lg:px-[67px] mb-3">
               <div
-                className="md:hidden py-[8px] flex items-center w-full bg-zinc-100 rounded-full   h-[45px] p-[9px] hover:bg-zinc-200 hover:rounded-full cursor-pointer"
+                className="md:hidden py-[8px] flex items-center justify-between w-full bg-zinc-100 rounded-full   h-[45px] p-[9px] hover:bg-zinc-200 hover:rounded-full cursor-pointer"
                 onClick={handleModalOpen}
               >
-                <Image
-                  src="/svg/icon/search.svg"
-                  alt="Search Icon"
-                  width={20}
-                  height={20}
-                  className="ml-[10px]"
-                />
-                <p className="ml-3  text-gray-400">Search</p>
+                <div className="flex items-center">
+                  <Image
+                    src="/svg/icon/search.svg"
+                    alt="Search Icon"
+                    width={20}
+                    height={20}
+                    className="ml-[10px]"
+                  />
+                  <p className="ml-3  text-gray-400">Search</p>
+                </div>
+                <Image src={"/ayatrio icon/camera.svg"} width={20} height={20} className="mr-[10px]" />
               </div>
             </div>}
           </>
