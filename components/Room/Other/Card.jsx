@@ -449,7 +449,7 @@ const Card = ({ data, productId }) => {
                       {
                         selectedColor === item.color ||
                           (index === 0 && selectedColor === "") ? (
-                          <div className="w-[55px] h-[5px] bg-black mt-[75px] rounded-lg " />
+                          <div className="w-[100%] h-[4px] bg-black mt-[70px]" />
                         ) : ""
                       }
 
@@ -544,21 +544,21 @@ const Card = ({ data, productId }) => {
                   {sidebarContect === "zeroCostEMI" && (
                     <div className="fixed z-[9999] h-full w-screen bg-black/50 backdrop:blur-sm top-0 left-0">
                       <section className="text-black bg-white flex-col absolute right-0 top-0 h-full  z-[99999] w-full  lg:w-[35%] flex overflow-y-auto">
-                        <div className="flex px-[40px]  mt-5 items-end justify-end">
+                        <div className="flex px-[40px] h-[72px] items-center   justify-end">
                           <button
-                            className="text-2xl text-center mt-0 mb-8 cursor-pointer  "
+                            className="text-xl  px-3 py-1 hover:bg-[#e5e5e5] rounded-full mt-0 cursor-pointer  "
                             onClick={() => setsidebarContent(null)}
                           >
                             X
                           </button>
                         </div>
-                        <div className="flex flex-col w-full border-t">
+                        <div className="flex flex-col w-full ">
                           <div className="px-[40px] pb-[32px]">
                             <div className="flex items-center ">
-                              <div onClick={() => setIsActive("Offers for you")} className={`flex-1 cursor-pointer flex items-center justify-center h-[65px]  ${isActive === "Offers for you" ? "border-b-4 border-[#2e2e2e] text-black" : "border-[#8E8E8E] text-[#8E8E8E]"}  `}>
+                              <div onClick={() => setIsActive("Offers for you")} className={`flex-1 cursor-pointer flex items-center justify-center h-[50px]  ${isActive === "Offers for you" ? "border-b-4 border-[#2e2e2e] text-black" : "border-[#8E8E8E] text-[#8E8E8E]"}  `}>
                                 <p className=" text-[16px]">Offers for you</p>
                               </div>
-                              <div onClick={() => setIsActive("EMI Plans")} className={`flex-1 cursor-pointer flex items-center justify-center h-[65px]   ${isActive === "EMI Plans" ? "border-b-4 border-[#2e2e2e] text-black" : "border-[#8E8E8E]  text-[#8E8E8E]"}  `}>
+                              <div onClick={() => setIsActive("EMI Plans")} className={`flex-1 cursor-pointer flex items-center justify-center h-[50px]   ${isActive === "EMI Plans" ? "border-b-4 border-[#2e2e2e] text-black" : "border-[#8E8E8E]  text-[#8E8E8E]"}  `}>
                                 <p className="text-[16px]">EMI Plans</p>
                               </div>
                             </div>
@@ -616,7 +616,7 @@ const Card = ({ data, productId }) => {
                                         <div onClick={(e) => setOpenEMIDetails(prev => !prev)} className="flex flex-col items-center py-[20px] border-b cursor-pointer">
                                           <div className="flex items-center w-full ">
                                             <div className="mr-[15px] p-1 ">
-                                              <Image src="/ayatrio icon/utib.svg" height={24} width={24} alt="arrow-right" />
+                                              <Image src="/Ayatrio updated icon/icic.svg" height={24} width={24} alt="arrow-right" />
                                             </div>
                                             <div className="flex flex-col flex-1 ">
                                               <p className="text-[#2E2E2E] text-[14px]">ICIC Bank</p>
@@ -671,26 +671,6 @@ const Card = ({ data, productId }) => {
                                             )
                                           }
                                         </div>
-                                        <div className="flex items-center py-[20px] border-b cursor-pointer">
-                                          <div className="mr-[15px] p-1 ">
-                                            <Image src="/ayatrio icon/utib.svg" height={24} width={24} alt="arrow-right" />
-                                          </div>
-                                          <div className="flex flex-col flex-1 ">
-                                            <p className="text-[#2E2E2E] text-[14px]">ICIC Bank</p>
-                                            <p className="text-[#8E8E8E] text-xs">from ₹294/month</p>
-                                          </div>
-                                          <Image src="/icon/arrow_right.svg" className="rotate-90" height={20} width={20} alt="arrow-right" />
-                                        </div>
-                                        <div className="flex items-center py-[20px] border-b cursor-pointer">
-                                          <div className="mr-[15px] p-1  ">
-                                            <Image src="/ayatrio icon/utib.svg" height={24} width={24} alt="arrow-right" />
-                                          </div>
-                                          <div className="flex flex-col flex-1 ">
-                                            <p className="text-[#2E2E2E] text-[14px]">ICIC Bank</p>
-                                            <p className="text-[#8E8E8E] text-xs">from ₹294/month</p>
-                                          </div>
-                                          <Image src="/icon/arrow_right.svg" className="rotate-90" height={20} width={20} alt="arrow-right" />
-                                        </div>
                                       </div>
                                     )
                                   }
@@ -714,7 +694,7 @@ const Card = ({ data, productId }) => {
                                         <div onClick={(e) => setOpenEMIDetails(prev => !prev)} className="flex flex-col items-center py-[20px] border-b cursor-pointer">
                                           <div className="flex items-center w-full ">
                                             <div className="mr-[15px] p-1 ">
-                                              <Image src="/ayatrio icon/utib.svg" height={24} width={24} alt="arrow-right" />
+                                              <Image src="/Ayatrio updated icon/icic.svg" height={24} width={24} alt="arrow-right" />
                                             </div>
                                             <div className="flex flex-col flex-1 ">
                                               <p className="text-[#2E2E2E] text-[14px]">ICIC Bank</p>
@@ -787,9 +767,9 @@ const Card = ({ data, productId }) => {
                   {sidebarContect === "inStoreRequest" && (
                     <div className="fixed z-[99999] h-full w-screen bg-black/50 backdrop:blur-sm top-0 left-0">
                       <section className="text-black bg-white flex-col absolute right-0 top-0 h-full z-[99999] w-full  lg:w-[35%] flex overflow-y-auto">
-                        <div className="flex px-[40px]  mt-5 items-end justify-end">
+                        <div className="flex px-[40px] h-[72px] items-center mt-[20px] mb-[10px]   justify-end">
                           <button
-                            className="text-2xl mt-0 mb-8 cursor-pointer  "
+                            className="text-xl  px-3 py-1 hover:bg-[#e5e5e5] rounded-full mt-0 cursor-pointer  "
                             onClick={() => setsidebarContent(null)}
                           >
                             X
@@ -879,9 +859,9 @@ const Card = ({ data, productId }) => {
                 {sidebarContect === "deliveryOption" && (
                   <div className=" fixed z-[99999] h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0">
                     <section className="text-black z-[99999] bg-white flex-col absolute right-0 top-0 h-screen w-full  lg:w-[35%] flex ">
-                      <div className="flex px-[40px]  mt-5 items-end justify-end">
+                      <div className="flex px-[40px] h-[72px] items-center    justify-end">
                         <button
-                          className="text-2xl mt-0 mb-8 cursor-pointer  "
+                          className="text-xl  px-3 py-1 hover:bg-[#e5e5e5] rounded-full mt-0 cursor-pointer  "
                           onClick={() => setsidebarContent(null)}
                         >
                           X
@@ -920,9 +900,9 @@ const Card = ({ data, productId }) => {
                 {sidebarContect === "calculator" && (
                   <div className=" fixed h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0 z-[99999]">
                     <section className="text-black bg-white flex-col absolute right-0 top-0 h-screen z-[99999] w-full  lg:w-[35%] flex ">
-                      <div className="flex px-[40px]  mt-5 items-end justify-end">
+                      <div className="flex px-[40px] h-[72px]   items-center justify-end">
                         <button
-                          className="text-2xl mt-0 mb-8 cursor-pointer  "
+                          className="text-xl mt-0 px-3 py-1 hover:bg-[#e5e5e5] rounded-full  cursor-pointer  "
                           onClick={() => setsidebarContent(null)}
                         >
                           X
@@ -995,7 +975,7 @@ const Card = ({ data, productId }) => {
           </div>
           <div className="flex gap-3 mt-8 items-center justify-center">
             <Image
-              src={"/Ayatrio updated icon/chat togather.svg"}
+              src={"/Ayatrio updated icon/ayatrio_comment_button.svg"}
               height={35}
               width={35}
               alt="downarrow"
@@ -1011,7 +991,7 @@ const Card = ({ data, productId }) => {
               </p>
             </div>
           </div>
-        </div >
+        </div>
         <ToastContainer
           position="top-right"
           autoClose={5000}
@@ -1019,7 +999,7 @@ const Card = ({ data, productId }) => {
           theme="light"
           style={{ zIndex: "9999999999999" }}
         />
-      </div >
+      </div>
     </>
   );
 };

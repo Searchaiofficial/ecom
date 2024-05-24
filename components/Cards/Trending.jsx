@@ -65,7 +65,7 @@ const Trending = () => {
     <div>
       <div className="mb-20  bg-white px-[15px]">
         <div className="mb-2 w-full flex justify-between items-center">
-          <h2 className="Blinds font-semibold text-2xl py-[30px]">
+          <h2 className="Blinds font-semibold text-2xl pb-[30px] lg:pt-[30px]">
             {newTrendingData && newTrendingData.length === 0
               ? "Most Family Choice(Empty)"
               : "Most Family Choice"}

@@ -174,28 +174,34 @@ input[type="radio"] {
 
 .arrow {
   position: absolute;
-  filter: drop-shadow(0px 0px 5px #cfc4c4);
-  width: 2rem;
-  height: 2rem;
+  filter: drop-shadow(0px 0px 5px rgba(0,0,0,0.12));
+  width: 30px;
+  height: 30px;
   color: white;
-  opacity: 25%;
+  opacity: 85%;
+  margin-top: -13px;
 }
 
 .card:hover .arrow {
   position: absolute;
-  filter: drop-shadow(0px 0px 5px #555);
-  width: 2rem;
-  height: 2rem;
+  /* filter: drop-shadow(0px 2px 6px rgba(0,0,0,0.12)); */
+  width: 30px;
+  height: 30px;
   color: white;
-  opacity: 60%;
+  outline: #000;
+  
 }
 
 .arrow:hover {
   cursor: pointer;
+  opacity: 100%;
+  transform: scale(1.04);
+  filter: drop-shadow(0px,6px,16px,rgba(0, 0, 0, 0.0018));
 }
 
 .arrow-left {
   left: 1rem;
+  margin-top: 2px;
 }
 
 .arrow-right {
@@ -210,12 +216,13 @@ input[type="radio"] {
 
 .indicator {
   background-color: white;
-  height: 0.5rem;
-  width: 0.5rem;
+  height: 0.4rem;
+  width: 0.4rem;
   border: none;
   outline: none;
   margin: 0 0.2rem;
   cursor: pointer;
+  border-radius: 50%;
 }
 
 .indicator-inactive {

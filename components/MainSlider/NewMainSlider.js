@@ -118,15 +118,16 @@ export default function NewMainSlider({ initialData }) {
         </div>
 
         {sliderApiData.map((data) => {
+
           return (
             <SwiperSlide key={data?._id}>
-              <div className="relative group h-[78vh] -translate-x-[10px] md:translate-x-0">
+              <div className={`relative group h-[78vh] lg:-translate-x-[5px] -translate-x-[10px] translate-r md:translate-x-0`}>
                 <Image
                   src={data?.imgSrc}
                   fill
                   alt={data.imgTitle || "Swiper image"}
                   priority
-                  className=" swiper-slide "
+                  className=" swiper-slide px-[10px] lg:px-[0px] w-full"
                   objectFit="cover"
                 />
                 <div className="absolute flex text-lg text-white bottom-[2.5rem] left-[3rem] flex-col md:flex-row gap-4 md:items-center">

@@ -24,14 +24,14 @@ const Displaybox = (props) => {
 
   return (
     <main className="w-full p-4 noto-sans-200">
-      <h1 className="text-xl mb-4 font-semibold w-full">
+      <h1 className="text-[14px] mb-4 font-semibold w-full">
         {props.data?.name}
       </h1>
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {props.data?.subcategories && props.data.subcategories.length > 0 ? (
           props.data.subcategories.map((item) => (
             <div
-              className="flex gap-4 p-2 items-center cursor-pointer hover:bg-zinc-200"
+              className="flex gap-4 p-2 items-center cursor-pointer hover:bg-[#e5e5e5]"
               onClick={() => handleClick(item.name)}
             >
               <Image
@@ -39,9 +39,9 @@ const Displaybox = (props) => {
                 alt={item.name}
                 width={100}
                 height={100}
-                className="w-[50px] h-[50px] bg-gray-200"
+                className="w-[50px] h-[56px] bg-gray-200"
               />
-              <h2 className=" text-lg font-medium">{item.name}</h2>
+              <h2 className=" text-[14px] font-normal text-[#111111]">{item.name}</h2>
             </div>
             // <div>
             //    <ListContent parentCategory={parentCategory} items={item} />

@@ -78,9 +78,8 @@ const Asidebox = (props) => {
               <Link
                 key={idx}
                 onMouseEnter={() => handleMouseEnter(idx, value)}
-                className={`block p-2 text-lg font-medium ${
-                  defaultLinkIndex === idx ? "text-blue-600" : ""
-                }`}
+                className={`block p-2 text-[14px] font-semibold ${defaultLinkIndex === idx ? "text-blue-600" : ""
+                  }`}
                 href="#"
                 onClick={() => setInnerData(true)}
               >
@@ -89,9 +88,8 @@ const Asidebox = (props) => {
             ))}
           </aside>
           <div
-            className={`${
-              innerData ? "block" : "hidden"
-            } md:block absolute  bg-white md:h-auto md:w-auto md:static z-[99]`}
+            className={`${innerData ? "block" : "hidden"
+              } md:block absolute  bg-white md:h-auto md:w-auto md:static z-[99]`}
           >
             <Displaybox
               parentCategory={parentCategory}

@@ -5,7 +5,7 @@ import Amenities from "./Other/Amenities";
 import Image from "next/image";
 const RoomInfo = ({ data }) => {
   return (
-    <div className=" my-6 sm:ml-1 ml-0">
+    <div className=" my-6 ">
       <div className="w-full">
         {/* <div className="room-details pb-4">
           <h2 className="sm:text-2xl text-lg sm:font-semibold font-medium sm:mt-0">

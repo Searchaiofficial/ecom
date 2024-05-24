@@ -93,7 +93,7 @@ const Suggestion = () => {
           }}
           breakpoints={{
             300: {
-              slidesPerView: 1.2,
+              slidesPerView: 1.1,
               spaceBetween: 5,
             },
 

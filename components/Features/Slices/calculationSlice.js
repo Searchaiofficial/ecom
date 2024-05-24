@@ -30,7 +30,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  quantity: 1, // Set your initial quantity value
+  quantity: 0, // Set your initial quantity value
   pickup: "",
   schedular: false,
   deliveryPrice: null,

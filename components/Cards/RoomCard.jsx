@@ -10,11 +10,11 @@ const RoomCard = async () => {
     <>
       {gallery && (
         <div className="px-[15px] flex justify-between mx-auto mb-10 ">
-          <div className=" w-full flex justify-center ">
-            <div className="w-full  h-[900px]  lg:h-[730px] grid grid-cols-2 lg:grid-cols-12  gap-x-4 auto-rows-fr">
+          <div className=" w-full flex justify-center max-h-[915px] screens ">
+            <div className="w-full  lg:h-[730px] grid grid-cols-2 lg:grid-cols-12 gap-y-4  gap-x-4 auto-rows-fr">
               {/* 1 */}
               <div
-                className="parent col-start-1 col-end-3 row-start-1 mb-4 lg:mb-0 row-end-6
+                className="parent col-start-1 col-end-3 row-start-1  lg:mb-0 row-end-6
               lg:col-start-1 lg:col-end-7 lg:row-start-1 lg:row-end-12
             "
               >
@@ -31,8 +31,8 @@ const RoomCard = async () => {
                       layout="fill"
                       alt="Image"
                     />
-                    <div className="absolute md:top-[20rem]  left-0 right-0 bottom-0 flex flex-col justify-center items-center p-2">
-                      <h2 className="text-white text-center text-3xl  mb-4">
+                    <div className="absolute md:top-[20rem] left-3  lg:left-16 lg:-bottom-60  bottom-8 flex flex-col justify-center items-center p-2">
+                      <h2 className="text-white text-center text-xl lg:text-3xl">
                         {gallery.items[0].heading}
                       </h2>
                       {/* <button className="bg-black hover:bg-zinc-300 text-white  py-2 px-10 h-12 rounded-full">
@@ -44,7 +44,7 @@ const RoomCard = async () => {
               </div>
               {/* 2 */}
               <div
-                className="parent mb-4 col-start-1 col-end-2 row-start-6 row-span-2
+                className="parent col-start-1 col-end-2 row-start-6 row-span-2
               lg:col-start-7 lg:col-end-10 lg:row-start-1 lg:row-end-6
             "
               >
@@ -71,7 +71,7 @@ const RoomCard = async () => {
               </div>
               {/* 3 */}
               <div
-                className=" parent mb-4  col-start-2 col-end-3 row-start-6 row-span-3
+                className=" parent  col-start-2 col-end-3 row-start-6 row-span-3
             lg:col-start-10 lg:col-end-13 lg:row-start-1 lg:row-end-7
             "
               >

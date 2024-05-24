@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import "./styles.css"
 
 function TabsProductCard(props) {
   const [slide, setSlide] = useState(0);
@@ -47,9 +48,8 @@ function TabsProductCard(props) {
         <div className="relative z[-999999] w-fit">
           <div
             onClick={(event) => event.stopPropagation()}
-            className={`flex justify-between text-black   checkbox-div absolute top-0 right-0 z-10 ${
-              props.selectedpdt.includes(props.text) ? "visible" : ""
-            }`}
+            className={`flex justify-between text-black   checkbox-div absolute top-0 right-0 z-10 ${props.selectedpdt.includes(props.text) ? "visible" : ""
+              }`}
           >
             <input
               type="checkbox"
@@ -91,19 +91,19 @@ function TabsProductCard(props) {
           >
             {isHovered && slide !== 0 && (
               <Image
-                src="/svg/dropdown/leftvector.svg"
+                src="/ayatrio icon/left-card.svg"
                 height={20}
                 width={20}
                 alt="arrow"
                 onClick={prevSlide}
-                className="arrow arrow-left sm:mt-4"
+                className="arrow arrow-left"
               />
             )}
             {props.images?.map((item, idx) => {
               return (
                 <Link href={`/product/${props.productTitle}`}>
                   <Image
-                    src={item}
+                    src={isHovered ? props.images[2] : item}
                     alt="NA"
                     key={idx}
                     height={300}
@@ -119,7 +119,7 @@ function TabsProductCard(props) {
             {isHovered && (
               <div>
                 <Image
-                  src="/svg/dropdown/rightvector.svg"
+                  src="/ayatrio icon/right-card.svg"
                   height={20}
                   width={20}
                   alt="arrow"
@@ -135,8 +135,8 @@ function TabsProductCard(props) {
                     key={idx}
                     className={
                       slide === idx
-                        ? "indicator"
-                        : "indicator indicator-inactive"
+                        ? "bg-white w-[0.4rem] h-[0.4rem] cursor-pointer rounded-[50%] mr-1"
+                        : "bg-[#ccc] w-[0.4rem] h-[0.4rem] cursor-pointer rounded-[50%] mr-1"
                     }
                     onClick={() => setSlide(idx)}
                   ></button>

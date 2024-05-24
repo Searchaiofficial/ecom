@@ -4,6 +4,7 @@ import Image from "next/image";
 
 import TabImage from "../Cards/TabImage";
 import Link from "next/link";
+import "./styles.css";
 
 const Display = async () => {
   const apiData = await fetchDisplayData();
@@ -15,7 +16,7 @@ const Display = async () => {
           {apiData && apiData.length > 0 ? (
             <>
               <div
-                className={`relative w-full h-[435px]  lg:h-[730px] max-w-1/2`}
+                className={`relative w-full h-[449px] screen  lg:min-h-[730px] max-w-1/2`}
               >
                 <TabImage
                   src={apiData[0].room.imgSrc}
@@ -58,7 +59,7 @@ const Display = async () => {
           {apiData && apiData.length > 0 ? (
             <>
               <div
-                className={`relative w-full h-[435px] lg:h-[730px]  max-w-1/2 `}
+                className={`relative w-full h-[449px] screen lg:min-h-[730px]  max-w-1/2 `}
               >
                 <TabImage
                   src={apiData[1].room.imgSrc}
