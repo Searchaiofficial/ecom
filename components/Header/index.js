@@ -209,11 +209,11 @@ function Header({ setIsHeaderMounted }) {
                         </Link>
                         {hoveredIndex === idx && (
                           // <Asidebox asideSectionList={value.asideSectionList} />
-                          <Asidebox hoveredIndex={hoveredIndex} />
+                          <Asidebox hoveredIndex={hoveredIndex} setHoveredIndex={setHoveredIndex} label={value.label}/>
                         )}
-                        {value.label === "Rooms" && hoveredIndex === idx && (
+                        {/* {value.label === "Rooms" && hoveredIndex === idx && (
                           <Midsection />
-                        )}
+                        )} */}
                       </div>
                     ))}
                   </nav>

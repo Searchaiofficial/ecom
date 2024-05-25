@@ -200,7 +200,7 @@ const FreeSample = () => {
   //   fetchSubCategory(); // Call fetchSubCategory when component mounts
   // }, []); // Empty dependency array ensures this effect runs only once on mount
 
-  let url2 = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/relatedProducts`;
+  let url2 = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/fetchProductsByCategory/${searchparams.get("category")}`;
   // let url2 = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/products`;
   const [datastat, setDatastat] = useState("");
 
@@ -218,11 +218,7 @@ const FreeSample = () => {
           (item) => item.name === searchparams.get("category")
         );
         console.log(Subcat[0].subcategories);
-        const response = await axios.get(url2, {
-          params: {
-            category: searchparams.get("category"),
-          },
-        });
+        const response = await axios.get(url2);
         // const response = await axios.get(url2);
         if (response.status !== 200) {
           throw new Error("HTTP status" + response.status);

@@ -81,7 +81,7 @@ export const RoomsPage = ({ params }) => {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getSpecialReview`
       );
-      setReviewData(response.data[0]);
+      setReviewData(response.data);
     } catch (error) {
       console.error("Error fetching review data:", error);
     }
