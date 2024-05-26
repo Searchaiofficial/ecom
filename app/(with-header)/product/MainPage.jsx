@@ -108,8 +108,8 @@ const RoomPage = () => {
     <>
       <div className="overflow-y-auto container-rooms flex sm:block items-center px-[20px] sm:px-[50px] lg:px-[27px] ">
         <div className="mt-[65px]">
-          <div className="flex sm:flex-row gap-8 flex-col">
-            <div className="sm:basis-2/3 flex lg:pl-[40px] flex-col sm:flex-grow">
+          <div className="sm:flex-row gap-8 flex-col grid grid-cols-[2fr,1fr]">
+            <div className="sm:basis-2/3 flex lg:pl-[40px] flex-col sm:flex-grow h-[90vh] overflow-y-scroll">
               <RoomImageList images={data?.images} />
               <ImageCaresoul images={data?.images} />
               <div className="block md:hidden">
@@ -118,7 +118,7 @@ const RoomPage = () => {
               <RoomInfo data={data} />
               <Reviews productId={data._id} data={data} />
             </div>
-            <div className="md:basis-2/3 hidden  md:flex flex-col ">
+            <div className="md:basis-2/3 hidden md:flex flex-col">
               <div className="md:relative flex top-9 mb-16 ml-0">
                 <Card data={data} productId={data._id} />
               </div>
