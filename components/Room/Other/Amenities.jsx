@@ -7,8 +7,8 @@ const Amenities = ({ data }) => {
   return (
     <>
       {amenities.length > 0 && (
-        <div className="place-offerings mt-[16px] py-[32px] ">
-          <h3 className="mb-6 text-xl font-semibold ml-1">
+        <div className="place-offerings mt-[16px] pt-[32px] ">
+          <h3 className="mb-6 text-xl font-semibold">
             What this place offers
           </h3>
           <div className="amenities grid grid-cols-2  sm:w-auto ">
@@ -33,6 +33,9 @@ const Amenities = ({ data }) => {
                 </span>
               </div>
             ))}
+          </div>
+          <div className="pt-[30px] font-normal text-sm text-gray-500">
+            <p>View more</p>
           </div>
           {/* <button
             type="button"

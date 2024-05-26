@@ -221,3 +221,14 @@
   margin-left: 0px;
   /* height: 450px !important; */
 }
+
+@media (min-width: 400px) {
+  .screens{
+      max-height: 1010px;
+  }
+}
+@media (min-width: 400px) {
+  .screen{
+      height: 497px;
+  }
+}

@@ -18,7 +18,7 @@ const QuiltSelector = () => {
   //   const [newTrendingData, setNewTrendingData] = useState([]);
   //   const trendingData = useSelector(selectTrendingData);
   //   const dispatch = useDispatch();
-     const [swiperRef, setSwiperRef] = useState(null);
+  const [swiperRef, setSwiperRef] = useState(null);
   //   const [isPopupVisible, setPopupVisible] = useState(false);
   //   const handleImageClick = () => {
   //     setPopupVisible(true);
@@ -42,7 +42,7 @@ const QuiltSelector = () => {
     { imageUrl: 'https://source.unsplash.com/featured/?quilt', temperature: '29°C', weatherTitle: 'Elegant Quilt for Stylish Summer Bedrooms' },
     { imageUrl: 'https://source.unsplash.com/featured/?quilt', temperature: '26°C', weatherTitle: 'Quilt with Floral Designs for Summer Gardens' },
     { imageUrl: 'https://source.unsplash.com/featured/?quilt', temperature: '31°C', weatherTitle: 'Modern Quilt for Urban Summer Living' }
-];
+  ];
 
   const swiperOptions2 = {
     slidesPerView: 4.08,
@@ -82,7 +82,7 @@ const QuiltSelector = () => {
             ></div>
           </div>
         </div>
-       <Swiper
+        <Swiper
           ref={swiper1Ref}
           {...swiperOptions2}
           scrollbar={{
@@ -99,24 +99,24 @@ const QuiltSelector = () => {
           }}
           breakpoints={{
             300: {
-              slidesPerView: 1,
-              spaceBetween: 5,
+              slidesPerView: 1.1,
+              spaceBetween: 10,
             },
 
             640: {
               slidesPerView: 3,
-              spaceBetween: 5,
+              spaceBetween: 10,
             },
             1024: {
               slidesPerView: 5,
-              spaceBetween: 5,
+              spaceBetween: 10,
             },
           }}
           allowSlideNext={true}
           allowSlidePrev={true}
           slideNextClass="custom-next-button"
           slidePrevClass="custom-prev-button"
-        //  onSwiper={setSwiperRef}
+          //  onSwiper={setSwiperRef}
           className="px-10"
         >
           {!quilts ? (
@@ -128,28 +128,28 @@ const QuiltSelector = () => {
               return (
                 <SwiperSlide key={idx} className="ml-0">
                   <div className="pb-8  cursor-pointer ">
-                      <div className="flex h-full w-full items-center justify-center cursor-pointer  overflow-hidden">
-                        <Image
-                          src={quilt.imageUrl}
-                          alt="NA"
-                          height={600}
-                          width={600}
-                          className={"aspect-square w-full object-cover "}
-                        />
-                      </div>
+                    <div className="flex h-full w-full items-center justify-center cursor-pointer  overflow-hidden">
+                      <Image
+                        src={quilt.imageUrl}
+                        alt="NA"
+                        height={600}
+                        width={600}
+                        className={"aspect-square w-full object-cover "}
+                      />
+                    </div>
 
-                      <div
-                        className={`bg-gray-400 px-4 py-8 h-[200px] overflow-hidden`}
-                      >
-                        <div className="text-lg font-semibold hover:underline  text-ellipsis mb-1">
-                          {quilt.weatherTitle}
-                        </div>
-                        <p
-                          className={`text-xs overflow-hidden text-ellipsis `}
-                        >
-                          Suitable for indoor temperature &gt; {quilt.temperature}
-                        </p>
+                    <div
+                      className={`bg-gray-400 px-4 py-8 h-[200px] overflow-hidden`}
+                    >
+                      <div className="text-lg font-semibold hover:underline  text-ellipsis mb-1">
+                        {quilt.weatherTitle}
                       </div>
+                      <p
+                        className={`text-xs overflow-hidden text-ellipsis `}
+                      >
+                        Suitable for indoor temperature &gt; {quilt.temperature}
+                      </p>
+                    </div>
                   </div>
                 </SwiperSlide>
               );

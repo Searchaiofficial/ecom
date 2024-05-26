@@ -88,7 +88,7 @@ const CategoriesSlider = () => {
 
     return (
         <div className="flex items-center justify-start">
-            <div className=" pt-[5rem] pl-[15px]  overflow-x-auto  relative">
+            <div className=" pt-[2rem] lg:pt-[5rem] pl-[15px]  overflow-x-auto  relative">
                 {
                     categories.length > 0 && (
                         <div className="flex flex-row group items-center justify-end gap-2 mb-4">
@@ -110,31 +110,31 @@ const CategoriesSlider = () => {
                                     prevEl: ".back",
                                 }}
                                 draggable={true}
-                                style={{ "--swiper-navigation-size": "24px", maxHeight: "160px" }}
+                                style={{ "--swiper-navigation-size": "24px", maxHeight: "180px" }}
                                 breakpoints={{
-                                    400: {
-                                        slidesPerView: 2.5,
-                                        spaceBetween: 10,
+                                    300: {
+                                        slidesPerView: 3.1,
+                                        spaceBetween: 5,
                                     },
                                     768: {
                                         slidesPerView: 3,
-                                        spaceBetween: 10,
+                                        spaceBetween: 5,
                                     },
                                     1024: {
                                         slidesPerView: 3,
-                                        spaceBetween: 10,
+                                        spaceBetween: 5,
                                     },
                                 }}
                             >
                                 {categories?.map((curElement, idx) => {
                                     return (
-                                        <SwiperSlide className="max-w-[140px]" key={idx}>
+                                        <SwiperSlide className=" max-w-[100px] lg:max-w-[140px] mr-[10px] min-h-[148px] " key={idx}>
                                             <Link href={`/category/${curElement.name.replace(/ /g, "-")}/all`} className="">
-                                                <div className="flex flex-col items-center">
-                                                    <div className="lg:mb-[12px] ">
-                                                        <Image src={curElement.image || "/ayatrio icon/demo1.png"} width={200} height={130} alt={curElement.name || "Swiper image"} className="w-[200px] h-[130px]" />
+                                                <div className="flex flex-col py-[16px] ">
+                                                    <div className="mb-[12px] ">
+                                                        <Image src={curElement.image || "/ayatrio icon/demo1.png"} width={200} height={130} alt={curElement.name || "Swiper image"} className="w-[200px] h-[62px] lg:h-[130px] " />
                                                     </div>
-                                                    <h2 className="text-[#333333] font-semibold text-[14px] hover:underline">{curElement.name}</h2>
+                                                    <h2 className="text-[#333333] lg:text-center line-clamp-1 font-semibold text-[14px] hover:underline">{curElement.name}</h2>
                                                 </div>
                                             </Link>
                                         </SwiperSlide>

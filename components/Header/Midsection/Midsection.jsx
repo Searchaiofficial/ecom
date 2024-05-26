@@ -1,5 +1,5 @@
 import React from "react";
-import SwiperComponent from "./SwiperComponent";
+import SwiperComponent from "../AsideSection/SwiperComponent";
 const Midsection = () => {
   return (
     <>

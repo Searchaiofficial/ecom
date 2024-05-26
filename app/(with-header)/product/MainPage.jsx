@@ -124,7 +124,9 @@ const RoomPage = () => {
               </div>
             </div>
           </div>
-          <Carous data={data} />
+          <div className="lg:ml-[40px]">
+            <Carous data={data} />
+          </div>
         </div>
       </div>
     </>

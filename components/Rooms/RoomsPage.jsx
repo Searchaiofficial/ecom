@@ -51,9 +51,8 @@ export const RoomsPage = ({ params }) => {
   const roomMainSelect = useSelector(selectRoomMain);
 
   const fetchRoomMain = async () => {
-    const url = `${
-      process.env.NEXT_PUBLIC_API_BASE_URL
-    }/api/getRoommain?roomType=${params.replace(/-/g, " ")}`;
+    const url = `${process.env.NEXT_PUBLIC_API_BASE_URL
+      }/api/getRoommain?roomType=${params.replace(/-/g, " ")}`;
     const response = await axios.get(url);
     setRoomMain(response.data);
   };
@@ -82,7 +81,7 @@ export const RoomsPage = ({ params }) => {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getSpecialReview`
       );
-      setReviewData(response.data[0]);
+      setReviewData(response.data);
     } catch (error) {
       console.error("Error fetching review data:", error);
     }
@@ -130,32 +129,40 @@ export const RoomsPage = ({ params }) => {
   const swiper1Ref = useRef(null);
   const swiper2Ref = useRef(null);
 
+  console.log(roomMain)
+
   return (
     // <div className="pt-12 bg-white sm:px-[50px] px-[20px]">
-    <div>
-      <div className="w-full flex justify-center ">
-        <div className="mt-20 w-10/12  p-5 p flex flex-col">
-          <h1 className="text-2xl font-semibold">{roomMain?.title}</h1>
-          <p className="mt-5 w-7/12">{roomMain?.description}</p>
+    <div className="w-full">
+      <div className=" px-[20px] sm:px-[50px] lg:px-[67px] flex justify-center ">
+        <div className="mt-36 w-full flex flex-col">
+          <h1 className="lg:text-[30px] text-[24px] font-semibold">{roomMain?.title}</h1>
+          <div className="mt-5 lg:w-[70%] w-full">
+            <p className="line-clamp-3 mb-5">
+              {roomMain?.description}
+            </p>
+          </div>
           <a className="my-5" href="/">
             click here for size guide
           </a>
 
-          <TabImage
-            src={roomMain?.img}
-            alt={`Image `}
-            width={500}
-            height={100}
-            labelData={roomMain?.children}
-          />
-          <h1 className="mt-20 text-2xl font-semibold">
+          <div className="w-full lg:min-h-[730px] lg:max-h-[730px] min-h-[449px]">
+            <TabImage
+              src={roomMain?.img}
+              alt={`Image `}
+              width={500}
+              height={100}
+              labelData={roomMain?.children}
+            />
+          </div>
+          <h1 className=" text-2xl font-semibold">
             {roomMain && roomMain.details && roomMain.details[0]?.title}
           </h1>
-          <div className="mt-5  flex justify-between items-end">
-            <p className="w-7/12">
+          <div className="flex justify-between items-end">
+            <p className="">
               {roomMain && roomMain.details && roomMain.details[0]?.description}
             </p>
-            <button className="border-2 border-black rounded-full p-3">
+            <button className="mt-5 border-2 border-black rounded-full p-2 lg:p-3">
               see all double beds
             </button>
           </div>
@@ -170,15 +177,12 @@ export const RoomsPage = ({ params }) => {
             roomMain.fiveRooms &&
             roomMain.fiveRooms.length === 5 && (
               <>
-                <div className="px-[15px] flex justify-between mx-auto mb-10 ">
-                  <div className=" w-full flex justify-center ">
-                    <div className="w-full  h-[900px]  lg:h-[730px] grid grid-cols-2 lg:grid-cols-12  gap-x-4 auto-rows-fr">
+                <div className=" flex justify-between  mb-10 ">
+                  <div className=" w-full flex justify-center max-h-[915px] screens">
+                    <div className="w-full  lg:h-[730px] grid grid-cols-2 lg:grid-cols-12 gap-y-4  gap-x-4 auto-rows-fr">
                       {/* 1 */}
                       <div
-                        className="parent col-start-1 col-end-3 row-start-1 mb-4 lg:mb-0 row-end-6
-              lg:col-start-1 lg:col-end-7 lg:row-start-1 lg:row-end-12
-            "
-                      >
+                        className="parent col-start-1 col-end-3 row-start-1 lg:mb-0 row-end-6 lg:col-start-1 lg:col-end-7 lg:row-start-1 lg:row-end-12">
                         <div className="parent relative w-full h-full">
                           <>
                             <TabImage
@@ -193,7 +197,7 @@ export const RoomsPage = ({ params }) => {
                       </div>
                       {/* 2 */}
                       <div
-                        className="parent mb-4 col-start-1 col-end-2 row-start-6 row-span-2
+                        className="parent col-start-1 col-end-2 row-start-6 row-span-2
               lg:col-start-7 lg:col-end-10 lg:row-start-1 lg:row-end-6
             "
                       >
@@ -211,7 +215,7 @@ export const RoomsPage = ({ params }) => {
                       </div>
                       {/* 3 */}
                       <div
-                        className=" parent mb-4  col-start-2 col-end-3 row-start-6 row-span-3
+                        className=" parent  col-start-2 col-end-3 row-start-6 row-span-3
             lg:col-start-10 lg:col-end-13 lg:row-start-1 lg:row-end-7
             "
                       >
@@ -299,24 +303,25 @@ export const RoomsPage = ({ params }) => {
                         </div>
                     </div> */}
 
-          <div className="mt-20  flex justify-between items-center">
-            <h1 className=" text-2xl font-semibold">
+          <div className="flex lg:flex-row flex-col justify-between items-center">
+            <h1 className=" text-[24x] lg:text-[30px] font-semibold">
               Looking for Bedroom Storage options ?
             </h1>
             <button className="border-2 border-black rounded-full p-3">
               Explore all Bedroom storage solution
             </button>
           </div>
-
-          {/* <div className="mt-20 flex bg-orange-500">
-            <Image
-              src={bedimageh}
-              width={850}
-              className=""
-              height={100}
-              alt="Image of bed"
-            />
-            <div className="py-20 pl-10 flex flex-col  justify-between ">
+          {/* <div className="mt-8 flex w-[100%] lg:max-h-[490px] lg:flex-row flex-col screens bg-orange-500">
+            <div className="lg:w-2/3">
+              <Image
+                src={bedimageh}
+                width={850}
+                className="w-full min-h-[446px] object-cover"
+                height={100}
+                alt="Image of bed"
+              />
+            </div>
+            <div className="lg:p-12 p-10 lg:w-1/3  flex flex-col min-h-[363px]  justify-between ">
               <h1 className="text-xl  w-3/4 font-semibold">
                 Explore all Bedroom storage solution
               </h1>
@@ -326,8 +331,8 @@ export const RoomsPage = ({ params }) => {
             </div>
           </div> */}
 
-          <div className="flex mt-8  h-[600px] md:flex-row w-full flex-col relative  ">
-            <div className="relative md:w-2/3">
+          <div className="flex mt-8  lg:max-h-[490px] lg:flex-row w-full flex-col relative  ">
+            <div className="relative lg:w-2/3 min-h-[446px]">
               {reviewRoom && (
                 <TabImage
                   src={reviewRoom.imgSrc}
@@ -338,12 +343,12 @@ export const RoomsPage = ({ params }) => {
                 />
               )}
             </div>
-            <div className="md:w-1/3  sm:h-auto sm:flex-grow bg-zinc-100  px-10 sm:py-10 py-5">
+            <div className="md:w-1/3 min-h-[363px]   bg-zinc-100  lg:p-12 p-10 ">
               <div className="flex flex-col ">
                 <div>
                   <p>{reviewData && reviewData.comment}</p>
                 </div>
-                <div className="flex mt-2 flex-row items-center gap-2 ">
+                <div className="flex mt-5 flex-row items-center gap-2 ">
                   <Image
                     src={reviewData && reviewData.image}
                     width={45}
@@ -356,13 +361,12 @@ export const RoomsPage = ({ params }) => {
               </div>
             </div>
           </div>
-
-          <div className="mt-20">
-            <h1 className="mt-20 text-2xl font-semibold">
+          <div className="lg:mt-20 mt-10">
+            <h1 className="text-2xl font-semibold">
               {roomMain && roomMain.details && roomMain.details[1]?.title}
             </h1>
             <div className="mt-5  flex justify-between items-end">
-              <p className="w-7/12">
+              <p className="">
                 {roomMain &&
                   roomMain.details &&
                   roomMain.details[1]?.description}
@@ -372,12 +376,12 @@ export const RoomsPage = ({ params }) => {
               </button>
             </div>
           </div>
-          <div className="flex gap-3 mt-5">
+          <div className="flex lg:flex-row flex-col gap-3 mt-5">
             {roomMain &&
               roomMain.rooms &&
               roomMain.rooms.length > 0 &&
               roomMain.rooms.map((room, index) => (
-                <div key={index} className="w-1/2">
+                <div key={index} className="lg:w-1/2 lg:max-h-[730px]">
                   <TabImage
                     src={room.imgSrc}
                     alt={`Image ${index + 1} of Product`}
@@ -388,12 +392,12 @@ export const RoomsPage = ({ params }) => {
                 </div>
               ))}
           </div>
-          <div className="mt-20">
+          <div className="">
             <h1 className="text-2xl font-semibold">
               {roomMain && roomMain.details && roomMain.details[2]?.title}
             </h1>
-            <div className="mt-5  flex justify-between items-end">
-              <p className="w-7/12 mb-10">
+            <div className="flex justify-between items-end">
+              <p className="">
                 {roomMain &&
                   roomMain.details &&
                   roomMain.details[2]?.description}
@@ -407,7 +411,7 @@ export const RoomsPage = ({ params }) => {
               <BlogRelatedProducts relatedProducts={roomMain.thirdSlider} />
             )}
 
-          <div className="pt-12  mb-20  bg-white sm:px-[50px] px-[20px]">
+          <div className="bg-white ">
             <div className="mb-2 w-full flex justify-between items-center">
               <div className="Slidenav flex  bg-white text-2xl cursor-pointer  text-white rounded-full gap-2">
                 <div

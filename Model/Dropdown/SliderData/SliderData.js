@@ -1,150 +1,50 @@
 export const roomOptions = [
   {
     room: "Living Room",
-    list1: {
-      1: "Lights",
-      2: "Training Equiment",
-      3: "Lamps",
-      4: "Curtains",
-    },
-    list2: {
-      1: "Flower",
-      2: "Artifacts",
-      3: "Show piece",
-    },
+    src : "/room/livingroom.jpg",
   },
 
   {
     room: "Bedroom",
-    list1: {
-      1: "Lights",
-      2: "Training Equiment",
-      3: "Lamps",
-      4: "Curtains",
-    },
-    list2: {
-      1: "Flower",
-      2: "Artifacts",
-      3: "Show piece",
-    },
+    src : "/room/bedroom.jpg",
   },
 
   {
     room: "Dining Room",
-    list1: {
-      1: "Lights",
-      2: "Training Equiment",
-      3: "Lamps",
-      4: "Curtains",
-    },
-    list2: {
-      1: "Flower",
-      2: "Artifacts",
-      3: "Show piece",
-    },
+    src : "/room/diningroom.jpg",
   },
 
   {
     room: "Bathroom",
-    list1: {
-      1: "Lights",
-      2: "Training Equiment",
-      3: "Lamps",
-      4: "Curtains",
-    },
-    list2: {
-      1: "Flower",
-      2: "Artifacts",
-      3: "Show piece",
-    },
+    src : "/room/bathroom.jpg",
   },
 
   {
     room: "Balcony",
-    list1: {
-      1: "Lights",
-      2: "Training Equiment",
-      3: "Lamps",
-      4: "Curtains",
-    },
-    list2: {
-      1: "Flower",
-      2: "Artifacts",
-      3: "Show piece",
-    },
+    src : "/room/livingroom.jpg",
   },
 
   {
     room: "Office Room",
-    list1: {
-      1: "Lights",
-      2: "Training Equiment",
-      3: "Lamps",
-      4: "Curtains",
-    },
-    list2: {
-      1: "Flower",
-      2: "Artifacts",
-      3: "Show piece",
-    },
+    src : "/room/homeoffice.jpg",
   },
 
   {
     room: "Guest Room",
-    list1: {
-      1: "Lights",
-      2: "Training Equiment",
-      3: "Lamps",
-      4: "Curtains",
-    },
-    list2: {
-      1: "Flower",
-      2: "Artifacts",
-      3: "Show piece",
-    },
+    src : "/room/livingroom.jpg",
   },
 
   {
     room: "Pooja Room",
-    list1: {
-      1: "Lights",
-      2: "Training Equiment",
-      3: "Lamps",
-      4: "Curtains",
-    },
-    list2: {
-      1: "Flower",
-      2: "Artifacts",
-      3: "Show piece",
-    },
+    src : "/room/livingroom.jpg",
   },
 
   {
     room: "Kids Room",
-    list1: {
-      1: "Lights",
-      2: "Training Equiment",
-      3: "Lamps",
-      4: "Curtains",
-    },
-    list2: {
-      1: "Flower",
-      2: "Artifacts",
-      3: "Show piece",
-    },
+    src : "/room/kidroom.jpg",
   },
   {
     room: "Kitchen",
-    list1: {
-      1: "Lights",
-      2: "Training Equiment",
-      3: "Lamps",
-      4: "Curtains",
-    },
-    list2: {
-      1: "Flower",
-      2: "Artifacts",
-      3: "Show piece",
-    },
+    src : "/room/kitchen.jpg",
   },
 ];

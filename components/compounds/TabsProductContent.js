@@ -38,15 +38,14 @@ const TabsProductContent = (props) => {
             }
           }}
           className={`bg-gray-100
-                  ${
-                    isFilterOpen
-                      ? `relative active-tabs z-10 border border-black ${commonClasses}`
-                      : `relative tabS  border border-white ${commonClasses}`
-                  }
+                  ${isFilterOpen
+              ? `relative active-tabs z-10 border border-black ${commonClasses}`
+              : `relative tabS  border border-white ${commonClasses}`
+            }
                   ${() =>
-                    typeof window !== "undefined" && window.innerWidth <= 450
-                      ? " justify-center"
-                      : " justify-between"}
+              typeof window !== "undefined" && window.innerWidth <= 450
+                ? " justify-center"
+                : " justify-between"}
                   `}
         >
           {filterName} &nbsp;
@@ -54,7 +53,7 @@ const TabsProductContent = (props) => {
             src="/svg/dropdown/backarrow.svg"
             width={40}
             height={40}
-            className={`w-6 h-6  mt-1 sm:block hidden
+            className={`w-4 h-4  mt-1 sm:block hidden
                 ${isFilterOpen ? " rotate-90" : "-rotate-90"}
                 
                 `}
@@ -79,9 +78,8 @@ const TabsProductContent = (props) => {
             {filterName === "Type" && openContent ? (
               <button
                 onClick={handleContent}
-                className={`text-left underline ${
-                  openContent ? "block" : "hidden"
-                }`}
+                className={`text-left underline ${openContent ? "block" : "hidden"
+                  }`}
               >
                 Less
               </button>

@@ -203,7 +203,7 @@ const Reviews = ({ productId, data }) => {
 
   return (
     <>
-      <div className="py-12 sm:w-auto w-[90vw]">
+      <div className="pb-12 sm:w-auto w-[90vw]">
         {
           data.demandtype === "Ayatrio Member Favorite" && (
             <div>

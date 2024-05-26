@@ -32,13 +32,9 @@ const LiveRoom = () => {
 
     const fetchProductByCategory = async () => {
       try {
-        const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/relatedProducts`;
-        const response = await axios.get(apiUrl, {
-          params: {
-            category: x.category,
-          },
-        });
-        setSimilarProducts(response.data); 
+        const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/fetchProductsByCategory/${x.category}`;
+        const response = await axios.get(apiUrl);
+        setSimilarProducts(response.data);
       } catch (error) {
         console.error("Error fetching filtered products:", error);
       }
@@ -241,9 +237,11 @@ const LiveRoom = () => {
                 <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                   <div className="sm:flex flex-col  items-center">
                     <p className="text-lg  mb-2">No Product Found</p>
-                  
+
                     <Link href="/category/virtualexperience">
-                      <h1 className="bg-blue-500 p-2 text-white rounded-md">Go Back</h1>
+                      <h1 className="bg-blue-500 p-2 text-white rounded-md">
+                        Go Back
+                      </h1>
                     </Link>
                   </div>
                 </div>

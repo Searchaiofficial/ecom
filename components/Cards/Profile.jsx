@@ -36,9 +36,11 @@ const Profile = async () => {
               </span>
               <br />
             </div>
-            <button className="bg-black pt-3 pb-3 pr-[25px] pl-[25px] mb-5 lg:mb-12 rounded-full flex justify-center items-center text-white">
+            <button className=" bg-black pt-3 pb-3 pr-[25px] pl-[25px] mb-5 lg:mb-12 rounded-full flex justify-center items-center text-white">
               <p>Book an appointment</p>
-              <Image src={"/ayatrio icon/Back_arrow.svg"} alt="arrow" height={20} width={20} className="px-[30px]" />
+              <div className="ml-5">
+                <Image src={"/Ayatrio updated icon/Back_arrow_white.svg"} alt="arrow profile" height={20} width={20} />
+              </div>
             </button>
           </div>
         </div>

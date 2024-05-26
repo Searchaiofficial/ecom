@@ -3,7 +3,7 @@ import Card from "@/components/Room/Other/Card";
 import Reviews from "@/components/Room/Other/Reviews";
 import RoomImageList from "@/components/Room/RoomImageList";
 import RoomInfo from "@/components/Room/RoomInfo";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import Image from "next/image";
@@ -18,6 +18,8 @@ import {
   selectSuggestionData,
   selectSuggestionStatus,
 } from "@/components/Features/Slices/suggestionDataSlice";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { A11y, FreeMode, Mousewheel, Navigation, Pagination, Scrollbar } from "swiper/modules";
 
 const SuggestionPage = ({ params }) => {
   const id = params.id;
@@ -26,21 +28,21 @@ const SuggestionPage = ({ params }) => {
   const selectData = useSelector(selectRecommendedProduct);
   const suggestion = useSelector(selectSuggestionData);
   const suggestionStatus = useSelector(selectSuggestionStatus);
-  const [relatedProducts, setRelatedProducts] = useState([]);
+  // const [relatedProducts, setRelatedProducts] = useState([]);
 
   useEffect(() => {
     if (suggestionStatus === "idle" || suggestionStatus === "failed") {
       dispatch({ type: "FETCH_SUGGESTION_DATA", payload: id });
     }
-    if (suggestion?.category?.length > 0) {
-      const fetchRelatedProducts = async () => {
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/relatedProducts?category=${suggestion.category[0]}`
-        );
-        setRelatedProducts(response.data);
-      };
-      fetchRelatedProducts();
-    }
+    // if (suggestion?.category?.length > 0) {
+    //   const fetchRelatedProducts = async () => {
+    //     const response = await axios.get(
+    //       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/relatedProducts?category=${suggestion.category[0]}`
+    //     );
+    //     setRelatedProducts(response.data);
+    //   };
+    //   fetchRelatedProducts();
+    // }
   }, [id, suggestion]);
 
   const [recommended, setRecommended] = useState([]);
@@ -86,7 +88,7 @@ const SuggestionPage = ({ params }) => {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getSpecialReview`
       );
-      setReviewData(response.data[0]);
+      setReviewData(response.data);
     } catch (error) {
       console.error("Error fetching review data:", error);
     }
@@ -97,18 +99,28 @@ const SuggestionPage = ({ params }) => {
     fetchReviewData();
   }, [params, suggestion]);
 
+  const swiperOptions2 = {
+    slidesPerView: 4.08,
+    centeredSlides: false,
+    spaceBetween: 5,
+    modules: [Pagination, Scrollbar, Mousewheel, FreeMode],
+    noSwiping: true,
+    allowSlidePrev: true,
+    allowSlideNext: true,
+  };
+
   return (
     <>
-      <div className="pt-[65px]">
-        <div className="sm:px-[100px] px-[20px]">
+      <div className="pt-36 px-[20px] sm:px-[50px] lg:px-[67px]">
+        <div className="">
           <div>
-            <div className="mt-10">
-              <h1 className="text-lg md:text-2xl font-semibold text-center">
+            <div className="">
+              <h1 className="lg:text-[30px] text-[24px] font-semibold ">
                 {suggestion.heading}
               </h1>
-              <p className="mt-2 text-sm ">{suggestion.summary}</p>
+              <p className="mt-5 line-clamp-3 lg:line-clamp-none lg:w-[70%] ">{suggestion.summary}</p>
             </div>
-            <div className="relative mt-6 h-60 md:h-[500px]">
+            <div className="relative mt-5 w-full lg:min-h-[730px] lg:max-h-[730px] min-h-[449px]">
               <Image
                 src={suggestion.mainImage}
                 alt="Main Image"
@@ -118,28 +130,70 @@ const SuggestionPage = ({ params }) => {
             </div>
           </div>
 
-          <div className="mt-16">
-            <h1 className="text-lg font-semibold">
+          <div className="mt-20">
+            <h1 className="text-2xl font-semibold mb-[30px]">
               {suggestion.factors?.title}
             </h1>
-            <div className="mt-4 flex gap-4">
-              {suggestion.factors?.items.map((item) => (
-                <div
-                  key={item._id}
-                  className="flex flex-col  cursor-pointer gap-2 items-center justify-center"
-                >
-                  <div className="relative h-20 aspect-square">
-                    <Image
-                      src={item.image}
-                      alt="Factor Image"
-                      layout="fill"
-                      objectFit="cover"
-                    />
+            <Swiper
+              ref={swiper1Ref}
+              {...swiperOptions2}
+              modules={[Navigation, Pagination, A11y]}
+              navigation={{
+                nextEl: ".right",
+                prevEl: ".back",
+              }}
+              draggable={true}
+              style={{
+                "--swiper-navigation-size": "24px",
+                maxHeight: "120px",
+              }}
+              mousewheel={{
+                forceToAxis: true,
+                invert: false,
+              }}
+              freeMode={{
+                enabled: false,
+                sticky: true,
+              }}
+              breakpoints={{
+                300: {
+                  slidesPerView: 2.5,
+                  spaceBetween: 10,
+                },
+                768: {
+                  slidesPerView: 3,
+                  spaceBetween: 10,
+                },
+                1024: {
+                  slidesPerView: 7,
+                  spaceBetween: 10,
+                },
+              }}
+            >
+
+
+
+              {suggestion.factors?.items.map((item, idx) => (
+                <SwiperSlide key={idx} className="max-w-[130px]">
+                  <div className="flex flex-col ">
+                    <div className="mb-[12px] ">
+                      <Image
+                        src={item.image}
+                        width={200}
+                        height={130}
+                        alt="image"
+                        className="h-[70px] object-cover"
+                      />
+                    </div>
+                    <h2 className="text-[#333333] text-[14px] hover:underline line-clamp-1">
+                      {item.label}
+                    </h2>
                   </div>
-                  <div className="text-xs">{item.label}</div>
-                </div>
+
+                </SwiperSlide>
               ))}
-            </div>
+
+            </Swiper>
           </div>
 
           {suggestion &&
@@ -150,16 +204,16 @@ const SuggestionPage = ({ params }) => {
 
           {suggestion?.subHeading &&
             suggestion?.subHeading.map((subHeadingItem, index) => (
-              <div className="my-16">
-                <h1 className="text-lg font-semibold">
+              <div className="my-20">
+                <h1 className="text-2xl font-semibold">
                   {subHeadingItem.title}
                 </h1>
-                <p className="text-gray-700 mt-2 text-sm">
+                <p className="text-gray-700 mt-5 line-clamp-3 lg:line-clamp-none ">
                   {subHeadingItem.subHeadingSummary}
                 </p>
-                <div className="mt-6 flex flex-col md:flex-row gap-4  items-center justify-between mx-auto">
+                <div className="mt-6 flex flex-col md:flex-row gap-3  items-center justify-between mx-auto">
                   {subHeadingItem.subHeadingImages.map((img) => (
-                    <div className="relative h-[400px]  md:h-[712px] w-full">
+                    <div className="relative h-[449px]  lg:min-h-[730px] w-full">
                       <Image
                         src={img}
                         alt="Sub Image"
@@ -173,16 +227,16 @@ const SuggestionPage = ({ params }) => {
             ))}
         </div>
 
-        {suggestion && relatedProducts && relatedProducts.length > 0 && (
+        {/* {suggestion && relatedProducts && relatedProducts.length > 0 && (
           <BlogRelatedProducts relatedProducts={relatedProducts} />
-        )}
+        )} */}
 
         {suggestion && suggestion.rooms && (
-          <div className="sm:px-[100px] px-[20px]">
+          <div className="">
             <div>
-              <h3 className="text-lg font-semibold">Different Rooms</h3>
-              <div className="flex flex-wrap ">
-                <div className="w-full md:w-1/2 p-2">
+              <h3 className="text-2xl mb-5 font-semibold">Different Rooms</h3>
+              <div className="flex lg:flex-row flex-col gap-3 w-full ">
+                <div className="w-full lg:w-1/2">
                   <div className="relative my-2 h-[300px]">
                     <TabImage
                       src={suggestion.rooms[0].imgSrc}
@@ -195,7 +249,7 @@ const SuggestionPage = ({ params }) => {
                     />
                   </div>
                 </div>
-                <div className="w-full md:w-1/2 p-2">
+                <div className="w-full lg:w-1/2 ">
                   <div className="relative my-2 h-[300px]">
                     <TabImage
                       src={suggestion.rooms[1].imgSrc}
@@ -225,11 +279,11 @@ const SuggestionPage = ({ params }) => {
                 />
               )}
             <div>
-              <h3 className="text-lg font-semibold mt-24">
+              <h3 className="text-2xl mb-5 font-semibold mt-24">
                 Different Rooms Different Design
               </h3>
-              <div className="flex flex-wrap ">
-                <div className="w-full md:w-1/2 p-2">
+              <div className="flex lg:flex-row flex-col gap-3 w-full ">
+                <div className="w-full lg:w-1/2 ">
                   <div className="relative my-2 h-[300px]">
                     <TabImage
                       src={suggestion.rooms[2].imgSrc}
@@ -242,7 +296,7 @@ const SuggestionPage = ({ params }) => {
                     />
                   </div>
                 </div>
-                <div className="w-full md:w-1/2 p-2">
+                <div className="w-full lg:w-1/2">
                   <div className="relative my-2 h-[300px]">
                     <TabImage
                       src={suggestion.rooms[3].imgSrc}
@@ -259,177 +313,42 @@ const SuggestionPage = ({ params }) => {
             </div>
 
 
-            {/* <div className="mt-16">
-            <h3 className="text-lg font-semibold">
-              {suggestion.differentMaterials?.chooseDifferentMaterial?.title}
-            </h3>
-            <p className="mt-2 text-sm">
-              {
-                suggestion.differentMaterials?.chooseDifferentMaterial
-                  ?.description
-              }
-            </p>
-            <div className="flex flex-wrap mt-8 gap-16">
-              <div className="flex gap-4 items-center">
-                <div className="h-12 w-12 rounded-md justify-center items-center  flex flex-col bg-black text-white text-xs">
-                  <p>Free</p>
-                  <p>
-                    {
-                      suggestion.differentMaterials?.chooseDifferentMaterial
-                        ?.material?.guaranteePeriod
-                    }
-                  </p>
-                </div>
-                <div className="flex-col text-xs flex">
-                  <h1>
-                    Ayatrio{" "}
-                    {
-                      suggestion.differentMaterials?.chooseDifferentMaterial
-                        ?.material?.name
-                    }{" "}
-                    offer{" "}
-                    {
-                      suggestion.differentMaterials?.chooseDifferentMaterial
-                        ?.material?.guaranteePeriod
-                    }{" "}
-                    guarantee
-                  </h1>
-                  <p>Refer to the product page for details</p>
-                </div>
-              </div>
-              <div className="flex gap-4 items-center">
-                <div className="h-12 w-12 rounded-md justify-center items-center  flex flex-col bg-black text-white text-xs">
-                  <p>Recycling</p>
-                  <p>
-                    {
-                      suggestion.differentMaterials?.chooseDifferentMaterial
-                        ?.material?.recyclingFee
-                    }
-                  </p>
-                </div>
-                <div className="flex-col text-xs flex">
-                  <h1>
-                    {
-                      suggestion.differentMaterials?.chooseDifferentMaterial
-                        ?.material?.name
-                    }{" "}
-                    recycling service
-                  </h1>
-                  <h1 className="font-bold">
-                    {
-                      suggestion.differentMaterials?.chooseDifferentMaterial
-                        ?.material?.recyclingFee
-                    }
-                    /piece
-                  </h1>
-                  <p>Refer to the product page for details</p>
-                </div>
-              </div>
-              <div className="flex gap-4 items-center">
-                <div className="h-12 w-12 rounded-md justify-center items-center  flex flex-col bg-black text-white text-xs">
-                  <p>Offer</p>
-                  <p>
-                    {
-                      suggestion.differentMaterials?.chooseDifferentMaterial
-                        ?.material?.trialSchema
-                    }
-                  </p>
-                </div>
-                <div className="flex-col text-xs flex">
-                  <h1>
-                    Ayatrio{" "}
-                    {
-                      suggestion.differentMaterials?.chooseDifferentMaterial
-                        ?.material?.name
-                    }{" "}
-                    offer{" "}
-                    {
-                      suggestion.differentMaterials?.chooseDifferentMaterial
-                        ?.material?.trialSchema
-                    }
-                  </h1>
-                  <p>Refer to the product page for details</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-16">
-            <h3 className="text-lg font-semibold">
-              {suggestion.differentMaterials?.waysToImprove?.title}
-            </h3>
-            <p className="mt-2 text-sm">
-              {suggestion.differentMaterials?.waysToImprove?.description}
-            </p>
-
-            <div className="flex flex-wrap ">
-              {suggestion.differentMaterials?.waysToImprove?.items.map(
-                (item) => (
-                  <div className="w-full md:w-1/2 p-2">
-                    <p className="mt-2 text-sm font-medium">{item.label}</p>
-                    <div className="relative my-2 h-[300px]">
-                      <Image
-                        src={item.image}
-                        alt="Sub Image"
-                        layout="fill"
-                        objectFit="cover"
-                      />
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Image
-                        src={suggestion.suggestionCardImage}
-                        alt="Sub Image"
-                        width={50}
-                        height={50}
-                        objectFit="cover"
-                        className="aspect-square"
-                      />
-                      <div className="flex flex-col">
-                        <h1 className="font-bold">Matress</h1>
-                        <p className="text-sm">Memory foam</p>
-                        <p className="font-bold">Rs 400</p>
-                      </div>
-                    </div>
-                  </div>
-                )
-              )}
-            </div>
-          </div> */}
-
             <QuiltSelector />
 
-            
 
-            <div className="flex mt-8  h-[600px] md:flex-row w-full flex-col relative  ">
-            <div className="relative md:w-2/3">
-              {reviewRoom && (
-                <TabImage
-                  src={reviewRoom.imgSrc}
-                  alt={`Image  of Children`}
-                  width={1000}
-                  height={338}
-                  labelData={reviewRoom.children}
-                />
-              )}
-            </div>
-            <div className="md:w-1/3  sm:h-auto sm:flex-grow bg-zinc-100  px-10 sm:py-10 py-5">
-              <div className="flex flex-col ">
-                <div>
-                  <p>{reviewData && reviewData.comment}</p>
-                </div>
-                <div className="flex mt-2 flex-row items-center gap-2 ">
-                  <Image
-                    src={reviewData && reviewData.image}
-                    width={45}
-                    height={45}
-                    alt="arrow"
-                    className=" aspect-square object-cover rounded-full"
+
+            <div className="flex my-8  lg:max-h-[490px] lg:flex-row w-full flex-col">
+              <div className="lg:w-2/3 h-[446px]">
+                {reviewRoom && (
+
+                  <TabImage
+                    src={reviewRoom.imgSrc}
+                    alt={`Image  of Children`}
+                    width={1000}
+                    height={446}
+                    labelData={reviewRoom.children}
                   />
-                  <p>{reviewData && reviewData.name}</p>
+
+                )}
+              </div>
+              <div className="lg:w-1/3 min-h-[363px]  bg-zinc-100 p-10  lg:p-12">
+                <div className="flex flex-col ">
+                  <div>
+                    <p>{reviewData && reviewData.comment}</p>
+                  </div>
+                  <div className="flex mt-5 flex-row items-center gap-2 ">
+                    <Image
+                      src={reviewData && reviewData.image}
+                      width={45}
+                      height={45}
+                      alt="arrow"
+                      className=" aspect-square object-cover rounded-full"
+                    />
+                    <p>{reviewData && reviewData.name}</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
 
 
@@ -438,7 +357,9 @@ const SuggestionPage = ({ params }) => {
               suggestion.thirdSlider.length > 0 && (
                 <BlogRelatedProducts relatedProducts={suggestion.thirdSlider} />
               )}
+
             <Tabs data={recommended} />
+
           </div>
         )}
       </div>

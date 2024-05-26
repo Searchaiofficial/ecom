@@ -119,6 +119,20 @@ function Header({ setIsHeaderMounted }) {
   };
 
   const { isVisible: isFilterVisible } = useScrollVisibility();
+  const [atTop, setAtTop] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setAtTop(window.scrollY === 0);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const homeRoute = "/";
 
@@ -195,11 +209,11 @@ function Header({ setIsHeaderMounted }) {
                         </Link>
                         {hoveredIndex === idx && (
                           // <Asidebox asideSectionList={value.asideSectionList} />
-                          <Asidebox hoveredIndex={hoveredIndex} />
+                          <Asidebox hoveredIndex={hoveredIndex} setHoveredIndex={setHoveredIndex} label={value.label}/>
                         )}
-                        {value.label === "Rooms" && hoveredIndex === idx && (
+                        {/* {value.label === "Rooms" && hoveredIndex === idx && (
                           <Midsection />
-                        )}
+                        )} */}
                       </div>
                     ))}
                   </nav>
@@ -256,7 +270,9 @@ function Header({ setIsHeaderMounted }) {
                       height={22}
                     />
                   </Link>
-                  <div className="cart-notification">{quantity}</div>
+                  {
+                    quantity > 0 && <div className="cart-notification">{quantity}</div>
+                  }
                 </div>
                 {loginStatus === "true" ? (
                   <div
@@ -289,7 +305,7 @@ function Header({ setIsHeaderMounted }) {
 
                 <div className="w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer md:hidden">
                   {/* <MenuIcon onClick={toggleMobileMenu} /> */}
-                  <Image src={"/ayatrio icon/menu.svg"} height={50} width={50} alt="Menu Icon" className="h-[21px] w-[21px]" onClick={toggleMobileMenu} />
+                  <Image src={"/Ayatrio updated icon/manu.svg"} height={50} width={50} alt="Menu Icon" className="h-[21px] w-[21px]" onClick={toggleMobileMenu} />
                 </div>
 
                 {/* for only mobole search */}
@@ -309,21 +325,24 @@ function Header({ setIsHeaderMounted }) {
                 )}
               </div>
             </div>
-            <div className="flex  w-full items-center  md:hidden px-[20px] sm:px-[50px] lg:px-[67px] mb-3">
+            {atTop && <div className="flex  w-full items-center  md:hidden px-[20px] sm:px-[50px] lg:px-[67px] mb-3">
               <div
-                className="md:hidden py-[8px] flex items-center w-full bg-zinc-100 rounded-full   h-[45px] p-[9px] hover:bg-zinc-200 hover:rounded-full cursor-pointer"
+                className="md:hidden py-[8px] flex items-center justify-between w-full bg-zinc-100 rounded-full   h-[45px] p-[9px] hover:bg-zinc-200 hover:rounded-full cursor-pointer"
                 onClick={handleModalOpen}
               >
-                <Image
-                  src="/svg/icon/search.svg"
-                  alt="Search Icon"
-                  width={20}
-                  height={20}
-                  className="header-div-icon"
-                />
-                <p className="ml-6  text-gray-400">Search</p>
+                <div className="flex items-center">
+                  <Image
+                    src="/svg/icon/search.svg"
+                    alt="Search Icon"
+                    width={20}
+                    height={20}
+                    className="ml-[10px]"
+                  />
+                  <p className="ml-3  text-gray-400">Search</p>
+                </div>
+                <Image src={"/ayatrio icon/camera.svg"} width={20} height={20} className="mr-[10px]" />
               </div>
-            </div>
+            </div>}
           </>
         ) : (
           <Expandedbar
@@ -400,6 +419,7 @@ function Header({ setIsHeaderMounted }) {
           </div>
         </>
       )}
+
     </div>
   );
 }

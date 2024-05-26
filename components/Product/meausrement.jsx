@@ -34,7 +34,7 @@ const meausrement = ({ filteredProductData }) => {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getSpecialReview`
       );
-      setReviewData(response.data[0]);
+      setReviewData(response.data);
     } catch (error) {
       console.error("Error fetching review data:", error);
     }
@@ -46,8 +46,8 @@ const meausrement = ({ filteredProductData }) => {
   }, [filteredProductData]);
 
   return (
-    <div className="flex mt-8 md:flex-row w-full flex-col relative overflow-hidden ">
-      <div className="relative h-[600px] md:w-2/3">
+    <div className="flex mt-8 lg:flex-row lg:max-h-[490px] w-full flex-col relative overflow-hidden ">
+      <div className="relative w-full min-h-[446px] object-cover md:w-2/3">
         {roomData && (
           <TabImage
             src={roomData.imgSrc}
@@ -59,7 +59,7 @@ const meausrement = ({ filteredProductData }) => {
         )}
       </div>
       {reviewData && (
-        <div className="md:w-1/3  sm:h-auto sm:flex-grow bg-zinc-100  px-10 sm:py-10 py-5">
+        <div className="md:w-1/3  sm:h-auto min-h-[363px] sm:flex-grow bg-zinc-100  lg:p-12 p-10">
           <div className="flex flex-col ">
             <div>
               <p>{reviewData && reviewData.comment}</p>

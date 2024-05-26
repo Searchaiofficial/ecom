@@ -628,7 +628,7 @@ const Tabs = ({
                 src="/svg/icon/choserightfloor.svg"
                 width={40}
                 height={40}
-                className={`w-6 h-6  sm:block hidden
+                className={`w-4 h-4 mt-1  sm:block hidden
                 
                 
                 `}

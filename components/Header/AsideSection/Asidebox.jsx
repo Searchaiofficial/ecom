@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Displaybox from "./Displaybox";
 import axios from "axios";
+import SwiperComponent from "./SwiperComponent";
 
 const Asidebox = (props) => {
   const [asideCategory, setAsideCategory] = useState(null);
@@ -78,9 +79,8 @@ const Asidebox = (props) => {
               <Link
                 key={idx}
                 onMouseEnter={() => handleMouseEnter(idx, value)}
-                className={`block p-2 text-lg font-medium ${
-                  defaultLinkIndex === idx ? "text-blue-600" : ""
-                }`}
+                className={`block p-2 text-[14px] font-semibold ${defaultLinkIndex === idx ? "text-blue-600" : ""
+                  }`}
                 href="#"
                 onClick={() => setInnerData(true)}
               >
@@ -89,9 +89,8 @@ const Asidebox = (props) => {
             ))}
           </aside>
           <div
-            className={`${
-              innerData ? "block" : "hidden"
-            } md:block absolute  bg-white md:h-auto md:w-auto md:static z-[99]`}
+            className={`${innerData ? "block" : "hidden"
+              } md:block absolute  bg-white md:h-auto md:w-auto md:static z-[99]`}
           >
             <Displaybox
               parentCategory={parentCategory}
@@ -100,6 +99,21 @@ const Asidebox = (props) => {
               setAsideCategory={setAsideCategory}
             />
           </div>
+        </div>
+      )}
+      {(props.hoveredIndex === 3 || props.hoveredIndex == 4) && (
+        <div
+          initial={
+            typeof window !== "undefined" &&
+            window.innerWidth > 800 && { y: -10, opacity: 0 }
+          }
+          whileInView={{ y: 0, opacity: 1 }}
+          className="absolute top-[2.7rem]  p-4 bg-white flex flex-col mt-[15px] md:flex-row noto-sans-200 transition-all duration-300 ease-linear w-full md:left-0 min-h-[20rem] md:h-auto md:px-10"
+        >
+          <SwiperComponent
+            setHoveredIndex={props.setHoveredIndex}
+            hoveredIndex={props.hoveredIndex}
+          />
         </div>
       )}
     </>
