@@ -129,7 +129,10 @@ function Header({ setIsHeaderMounted }) {
 
   const handleModalOpen = () => {
     setModalOpen(true);
-    document.body.style.overflow = "hidden";
+    // document.body.style.overflow = "hidden";
+    if (window.matchMedia("(max-width: 768px)").matches) {
+      document.body.style.overflow = "hidden";
+    }
   };
   const handleModalClose = (event) => {
     event.stopPropagation();
