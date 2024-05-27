@@ -140,7 +140,7 @@ export default function NewMainSlider({ initialData }) {
                     </button> */}
                   </div>
                 </div>
-                <div className="absolute top-0 left-0 flex items-center justify-center w-full h-full transition-opacity opacity-0 group-hover:opacity-100">
+                <div className="absolute top-14 sm:top-0 left-0 flex items-center justify-center w-full h-full transition-opacity opacity-0 group-hover:opacity-100">
                   <div onMouseEnter={handleEnter} className="cursor-pointer">
                     <div className="border-2 border-neutral-300 hover:border-white top-28 left-40 absolute hover:bg-[rgba(0,0,0,0.3)] rounded-full size-[30px] flex items-center justify-center transition-all duration-200 before:content-[''] before:size-3 before:bg-white  before:rounded-full before:hover:size-2 before:transition-all before:duration-200" />
                   </div>

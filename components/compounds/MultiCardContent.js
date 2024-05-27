@@ -33,10 +33,10 @@ const MultiCardContent = (props) => {
         <h2 className=" text-[21px] lg:text-[25px] trackinh-[0.007em] text-[#333333] font-semibold mb-[1em] ">{title}</h2>
         <div className=" text-[14px] lg:text-[15px] h-[42px] font-normal -tracking-[-0.374px]">{text}</div>
       </div>
-      <div className="self-end">
+      <div className="lg:self-end absolute bottom-20 left-10 bg-[#333336] rounded-full">
         <Image
-          className="min-w-[36px] min-h-[36px] rounded-full bg-[#333336]"
-          src="/ayatrio icon/add.svg"
+          className="min-w-[25px] min-h-[25px] p-1 m-2"
+          src="/Ayatrio updated icon/Back_arrow_white.svg"
           width={0}
           height={0}
           alt="Add icon"

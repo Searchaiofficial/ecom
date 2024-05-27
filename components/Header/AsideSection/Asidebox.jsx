@@ -64,10 +64,11 @@ const Asidebox = (props) => {
             window.innerWidth > 800 && { y: -10, opacity: 0 }
           }
           whileInView={{ y: 0, opacity: 1 }}
-          className="absolute top-[2.7rem]  p-4 bg-white flex flex-col mt-[15px] md:flex-row noto-sans-200 transition-all duration-300 ease-linear w-full md:left-0 min-h-[20rem] md:h-auto md:px-10"
+          style={{ overflowY: "auto" }}
+          className="absolute top-[2.7rem]  lg:p-4 bg-white flex flex-col mt-[15px] md:flex-row noto-sans-200 transition-all duration-300 ease-linear w-full md:left-0 min-h-[90%] lg:min-h-[20rem] md:h-auto md:px-10"
         >
           <aside
-            className="absolute top-[2.8rem] w-[15%] md:top-0 md:static md:border-r md:pr-10 md:py-4"
+            className="absolute lg:top-[2.8rem] w-[50%] lg:w-[15%] md:top-0 md:static md:border-r md:pr-10 md:py-4"
             initial={
               typeof window !== "undefined" &&
               window.innerWidth <= 800 && { x: 300, opacity: 0 }
@@ -79,12 +80,12 @@ const Asidebox = (props) => {
               <Link
                 key={idx}
                 onMouseEnter={() => handleMouseEnter(idx, value)}
-                className={`block p-2 text-[14px] font-semibold ${defaultLinkIndex === idx ? "text-blue-600" : ""
+                className={`block p-2 lg:text-[14px] text-[18px] font-semibold ${defaultLinkIndex === idx ? "text-blue-600" : ""
                   }`}
                 href="#"
                 onClick={() => setInnerData(true)}
               >
-                <span>{value.name}</span>
+                <span >{value.name}</span>
               </Link>
             ))}
           </aside>

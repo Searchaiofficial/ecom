@@ -378,6 +378,7 @@ const Tabs = ({
     allowSlideNext: true,
   };
 
+
   return (
     <>
       <div className="lg:px-[67px] sm:px-[50px] px-[20px]">
@@ -611,16 +612,14 @@ const Tabs = ({
                 handleTabClick();
               }}
               className={`Tabbtn z-0 bg-gray-100
-                  ${
-                    openAll
-                      ? `active-tabs  border border-black ${commonClasses}`
-                      : `tabS  border border-white ${commonClasses}`
-                  }
-                  ${
-                    typeof window !== "undefined" && window.innerWidth <= 450
-                      ? " justify-center"
-                      : " justify-between"
-                  }
+                  ${openAll
+                  ? `active-tabs  border border-black ${commonClasses}`
+                  : `tabS  border border-white ${commonClasses}`
+                }
+                  ${typeof window !== "undefined" && window.innerWidth <= 450
+                  ? " justify-center"
+                  : " justify-between"
+                }
                   `}
             >
               All Filters &nbsp;
@@ -856,9 +855,8 @@ const Tabs = ({
 
                           <button
                             onClick={handleContent}
-                            className={`text-left underline ${
-                              openContent ? "block" : "hidden"
-                            }`}
+                            className={`text-left underline ${openContent ? "block" : "hidden"
+                              }`}
                           >
                             Less
                           </button>

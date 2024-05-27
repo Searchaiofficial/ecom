@@ -14,7 +14,7 @@ function ShopByRoomCard(props) {
 
     return (
         <>
-            <div key={props.cardkey} className="pb-8  cursor-pointer ">
+            <div key={props.cardkey} className="pb-8 min-w-[322px] cursor-pointer ">
                 <Link href={`/rooms/${props.id}`}>
                     <div className="flex h-full w-full items-center justify-center cursor-pointer ">
                         <Image
@@ -27,7 +27,7 @@ function ShopByRoomCard(props) {
                     </div>
 
                     <div
-                        className={`${props.bgColorClass} p-8 h-[220px] overflow-hidden`}
+                        className={`${props.bgColorClass} p-8  overflow-hidden`}
                     >
                         <div className="text-lg font-semibold hover:underline  text-ellipsis mb-1">
                             {props.title}
@@ -35,8 +35,12 @@ function ShopByRoomCard(props) {
                         <div className={` line-clamp-4 text-sm overflow-hidden text-ellipsis`}>
                             {props.summary}
                         </div>
+                        <div className="bg-[#333336] rounded-full max-w-fit p-2  mt-[30px]">
+                            <Image src={"/Ayatrio updated icon/Back_arrow_white.svg"} height={25} width={25} className="p-1" />
+                        </div>
                     </div>
                 </Link>
+
             </div>
             {props.isPopupVisible && (
                 <PopUp

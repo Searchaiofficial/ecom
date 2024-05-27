@@ -62,7 +62,7 @@ const ProfileContent = ({ initialData }) => {
         {profileData.map((person, index) => (
           <SwiperSlide className="bg-[#fafafa] my-slider pr-3" key={index}>
             <div className="flex flex-col items-center">
-              <div className="parent relative bg-black rounded-full md:h-36 h-28 md:w-36 w-28 mb-2 md:mt-8 mt-4">
+              <div className="parent flex flex-col items-center relative bg-black rounded-full md:h-36 h-28 md:w-36 w-28 mb-2 md:mt-8 mt-4">
                 <Image
                   src={person.image}
                   alt={person.name}
@@ -71,7 +71,7 @@ const ProfileContent = ({ initialData }) => {
                   objectFit="cover"
                 />
               </div>
-              <div className="text-md p-1 flex gap-1 items-center font-bold ">
+              <div className="text-[13px] lg:text-[16px] p-1 flex  items-center font-bold ">
                 <p className="line-clamp-1">{person.name}</p>
                 <a href="#" className="flex items-center">
                   <Image
@@ -83,7 +83,7 @@ const ProfileContent = ({ initialData }) => {
                   />
                 </a>
               </div>
-              <p className="lg:text-[16px] text-sm">{person.role}</p>
+              <p className="lg:text-[16px] text-[12px] ">{person.role}</p>
             </div>
           </SwiperSlide>
         ))}
