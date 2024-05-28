@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import "../styles/virtualexperience.css";
@@ -21,6 +21,7 @@ import {
 
 const FreeSample = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const dispatch = useDispatch();
   const [catDatas, setcatDatas] = useState([]);
   const dataSelector = useSelector(selectVirtualData);
@@ -200,7 +201,9 @@ const FreeSample = () => {
   //   fetchSubCategory(); // Call fetchSubCategory when component mounts
   // }, []); // Empty dependency array ensures this effect runs only once on mount
 
-  let url2 = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/fetchProductsByCategory/${searchparams.get("category")}`;
+  let url2 = `${
+    process.env.NEXT_PUBLIC_API_BASE_URL
+  }/api/fetchProductsByCategory/${searchparams.get("category")}`;
   // let url2 = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/products`;
   const [datastat, setDatastat] = useState("");
 
@@ -265,9 +268,11 @@ const FreeSample = () => {
   const [rooms, setRooms] = useState([]);
 
   const getRooms = async () => {
+    console.log("abc");
     try {
+      console.log("abc");
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/rooms`
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getAllRooms`
       );
       console.log(response.data);
       const uniqueResponseRooms = response.data.filter(
@@ -291,6 +296,7 @@ const FreeSample = () => {
   };
 
   useEffect(() => {
+    console.log({ subCategory });
     getRooms();
   }, [subCategory]);
 
@@ -489,7 +495,10 @@ const FreeSample = () => {
   };
 
   const handleNext = () => {
-    router.push("/products/virtualexperience/ayatrio");
+    if (pathname === "/freesample")
+      router.push("/products/virtualexperience/ayatrio")
+    else if (pathname === "/virtualexperience")
+      router.push("/liveroom")
     // router.push("/liveroom")
   };
   const usersfilters = useSelector(allSelectedData);
@@ -522,10 +531,11 @@ const FreeSample = () => {
                         }}
                         style={{ width: "272px", height: "150px" }}
                         className={`parent relative rounded-2xl object-cover w-full opactiy-100 h-full block bg-gray-500 
-                        ${subCategoryState === item.name
+                        ${
+                          subCategoryState === item.name
                             ? " border-2 border-black"
                             : ""
-                          }`}
+                        }`}
                       >
                         <img
                           className="child absolute object-cover w-full h-full"
@@ -690,14 +700,16 @@ const FreeSample = () => {
                         }}
                         style={{ width: "272px", height: "150px" }}
                         className={` rounded-2xl object-cover w-full opactiy-100 h-full block p-1 bg-gray-500 
-                        ${colorstate === color ? " border-2 border-black" : ""
-                          }`}
+                        ${
+                          colorstate === color ? " border-2 border-black" : ""
+                        }`}
                       ></div>
                       <h3
-                        className={` p-1 rounded-sm absolute right-0 bottom-0 ${colorstate === color
+                        className={` p-1 rounded-sm absolute right-0 bottom-0 ${
+                          colorstate === color
                             ? "font-semibold text-white absolute left-2 bottom-2 bg-transparent"
                             : "bg-white"
-                          }`}
+                        }`}
                       >
                         {color}
                       </h3>
@@ -765,14 +777,16 @@ const FreeSample = () => {
                         }}
                         style={{ width: "272px", height: "150px" }}
                         className={` rounded-2xl object-cover w-full opactiy-100 h-full block p-1 bg-gray-500 
-                        ${stylestate === style ? " border-2 border-black" : ""
-                          }`}
+                        ${
+                          stylestate === style ? " border-2 border-black" : ""
+                        }`}
                       ></div>
                       <h3
-                        className={` p-1 rounded-sm absolute right-0 bottom-0 ${stylestate === style
+                        className={` p-1 rounded-sm absolute right-0 bottom-0 ${
+                          stylestate === style
                             ? "font-semibold text-white absolute left-2 bottom-2 bg-transparent"
                             : "bg-white"
-                          }`}
+                        }`}
                       >
                         {style}
                       </h3>
@@ -840,16 +854,18 @@ const FreeSample = () => {
                         }}
                         style={{ width: "272px", height: "150px" }}
                         className={` rounded-2xl object-cover w-full opactiy-100 h-full block p-1 bg-gray-500 
-                        ${priceState === item.price
+                        ${
+                          priceState === item.price
                             ? " border-2 border-black"
                             : ""
-                          }`}
+                        }`}
                       ></div>
                       <h3
-                        className={` p-1 rounded-sm absolute right-0 bottom-0 ${priceState === item.price
+                        className={` p-1 rounded-sm absolute right-0 bottom-0 ${
+                          priceState === item.price
                             ? "font-semibold text-white absolute left-2 bottom-2 bg-transparent"
                             : "bg-white"
-                          }`}
+                        }`}
                       >
                         {item.price}
                       </h3>
@@ -951,23 +967,26 @@ const FreeSample = () => {
                           );
                         }}
                         className={`room-item rounded-2xl object-cover w-full opactiy-100 h-full block p-1
-                    ${selectedProduct.productId === item.productId
-                            ? " "
-                            : "overlay z-10 "
-                          }  ${selectedProduct.productId === item.productId
+                    ${
+                      selectedProduct.productId === item.productId
+                        ? " "
+                        : "overlay z-10 "
+                    }  ${
+                          selectedProduct.productId === item.productId
                             ? " border-2 border-black "
                             : ""
-                          }
+                        }
                   `}
                       />
 
                       {/* Your existing code for displaying product title */}
                       <h3
                         className={` p-1 rounded-sm absolute right-0 bottom-0
-                    ${selectedProduct.productId === item.productId
-                            ? "font-semibold text-white absolute left-2 bottom-2 bg-transparent"
-                            : "bg-white"
-                          }
+                    ${
+                      selectedProduct.productId === item.productId
+                        ? "font-semibold text-white absolute left-2 bottom-2 bg-transparent"
+                        : "bg-white"
+                    }
                   `}
                       >
                         {item.productTitle}
