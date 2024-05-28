@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ListContent from "./ListContent";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 const Displaybox = (props) => {
   const router = useRouter();
@@ -9,6 +10,7 @@ const Displaybox = (props) => {
 
   const handleClick = (value) => {
     // const category = value.replace(/\s+/g, "-").toLowerCase();
+    handleIncrementCategoryPopularity();
     const category = value.toLowerCase().replace(/ /g, "-");
     const newPath = `/${props.parentCategory}/${currentCategory}/${category}`;
     router.push(newPath);
@@ -21,6 +23,17 @@ const Displaybox = (props) => {
       setCurrentCategory(category);
     }
   }, [props.data.name]);
+
+  const handleIncrementCategoryPopularity = async () => {
+    try {
+        await axios.get(
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/incrementCategoryPopularity?category=${currentCategory}`
+        );
+    } catch (error) {
+        console.error("Error incrementing category popularity:", error);
+    }
+};
+  
 
   return (
     <main className="w-full  noto-sans-200">

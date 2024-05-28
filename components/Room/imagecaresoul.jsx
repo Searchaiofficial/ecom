@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./imagecaresoul.css"; // Assuming your CSS file is named Carousel.css
+import "./imagecaresoul.css"; 
 import Image from "next/image";
 const Carousel = ({ images }) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -66,31 +66,46 @@ const Carousel = ({ images }) => {
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
       >
-        <ul>
-          {images?.map((src, index) => (
-            <li
-              key={src}
-              className={`slide ${index === activeIndex ? "indicator" : "indicator-inactive"}`}
-            >
-              <Image
-                src={src}
-                alt=""
-                width={400}
-                height={400}
-                className=" aspect-square w-[400px] object-cover"
-              />
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="indicators flex items-center mt-[2rem]">
-        {images?.map((_, index) => (
-          <div
-            key={index}
-            className={`indicator ${index === activeIndex ? "indicator" : "indicator-inactive"}`}
-            onClick={() => goToSlide(index)}
-          ></div>
-        ))}
+        <div className="relative flex h-full w-full items-center justify-center  aspect-square">
+          {images && images.length > 1 ? (
+            images?.map((src, idx) => {
+              return (
+                <div>
+                  <Image
+                    src={src}
+                    alt="NA"
+                    key={idx}
+                    height={400}
+                    width={400}
+                    className={
+                      activeIndex === idx ? "aspect-square w-[400px]" : "hidden"
+                    }
+                  />
+                </div>
+              );
+            })
+          ) : (
+            <div className="h-full w-full aspect-square flex items-center justify-center">
+              Loading...
+            </div>
+          )}
+
+          <span className="flex absolute bottom-[16px]">
+            {images?.map((_, idx) => {
+              return (
+                <button
+                  key={idx}
+                  className={
+                    activeIndex === idx
+                      ? "bg-white h-[0.4rem] w-[0.4rem] rounded-[50%] mr-1"
+                      : "bg-[#cccc] h-[0.4rem] w-[0.4rem] rounded-[50%] mr-1"
+                  }
+                  onClick={() => goToSlide(idx)}
+                ></button>
+              );
+            })}
+          </span>
+        </div>
       </div>
     </section>
   );

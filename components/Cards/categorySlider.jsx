@@ -65,7 +65,7 @@ const CategoriesSlider = () => {
     const fetchCategory = async () => {
         try {
             const response = await axios.get(
-                `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/categories`
+                `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/trendingCategories`
 
             );
             console.log("categories", response.data);
@@ -79,11 +79,21 @@ const CategoriesSlider = () => {
         }
     };
 
+    const handleIncrementCategoryPopularity = async (categoryName) => {
+        try {
+            await axios.get(
+                `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/incrementCategoryPopularity?category=${categoryName}`
+            );
+        } catch (error) {
+            console.error("Error incrementing category popularity:", error);
+        }
+    };
+
+
     useEffect(() => {
         fetchCategory()
     }, [])
 
-    console.log(categories)
 
 
     return (
@@ -129,7 +139,9 @@ const CategoriesSlider = () => {
                                 {categories?.map((curElement, idx) => {
                                     return (
                                         <SwiperSlide className=" max-w-[100px] lg:max-w-[140px] mr-[10px] min-h-[148px] " key={idx}>
-                                            <Link href={`/category/${curElement.name.replace(/ /g, "-")}/all`} className="">
+                                            <Link href={`/category/${curElement.name.replace(/ /g, "-")}/all`} 
+                                                onClick={() => handleIncrementCategoryPopularity(curElement.name)}
+                                            >
                                                 <div className="flex flex-col py-[16px] ">
                                                     <div className="mb-[12px] ">
                                                         <Image src={curElement.image || "/ayatrio icon/demo1.png"} width={200} height={130} alt={curElement.name || "Swiper image"} className="w-[200px] h-[62px] lg:h-[130px] " />

@@ -499,7 +499,7 @@ const Tabs = ({
         <p className="leading-2 mb-4 text-[14px] pt-[5px] text-[#484848] lg:w-[70%] line-clamp-2">
           {description}
         </p>
-        <div className="hidden md:flex sticky top-0 z-20 bg-white py-5 scrollbar">
+        <div className="flex overflow-x-scroll sticky top-0 z-20 bg-white py-5 scrollbar">
           <TabsProductContent
             filterName={"Sort"}
             commonClasses={commonClasses}

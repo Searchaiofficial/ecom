@@ -47,7 +47,7 @@ const meausrement = ({ filteredProductData }) => {
 
   return (
     <div className="flex mt-8 lg:flex-row lg:max-h-[490px] w-full flex-col relative overflow-hidden ">
-      <div className="relative w-full min-h-[446px] object-cover md:w-2/3">
+      <div className="relative w-full object-cover md:w-2/3">
         {roomData && (
           <TabImage
             src={roomData.imgSrc}

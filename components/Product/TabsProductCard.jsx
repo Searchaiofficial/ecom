@@ -1,11 +1,22 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import "./styles.css"
+import { useDispatch } from "react-redux";
+import "./styles.css";
+import axios from "axios";
 
 function TabsProductCard(props) {
   const [slide, setSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const handleclick = async (id) => {
+    const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getSingleProduct?id=${id}`;
+    const response = await axios.get(url);
+    const data = response.data;
+    dispatch({ type: "FETCH_ROOM_REQUEST", payload: id });
+  };
 
   const [formattedDate, setFormattedDate] = useState({
     startDate: "",
@@ -38,18 +49,15 @@ function TabsProductCard(props) {
     <>
       <div
         key={props.idx}
-        className="card flex flex-col gap-3 border-b border-r hover-divnine sm:border-none"
-        style={{
-          width: "100%",
-          height: "100%",
-        }}
+        className="flex flex-col gap-3 border-b border-r  sm:border-none "
         onClick={() => props.handlenav(props.text._id)}
       >
         <div className="relative z[-999999] w-fit">
           <div
             onClick={(event) => event.stopPropagation()}
-            className={`flex justify-between text-black   checkbox-div absolute top-0 right-0 z-10 ${props.selectedpdt.includes(props.text) ? "visible" : ""
-              }`}
+            className={`flex justify-between text-black   checkbox-div absolute top-0 right-0 z-10 ${
+              props.selectedpdt.includes(props.text) ? "visible" : ""
+            }`}
           >
             <input
               type="checkbox"
@@ -101,7 +109,10 @@ function TabsProductCard(props) {
             )}
             {props.images?.map((item, idx) => {
               return (
-                <Link href={`/product/${props.productTitle}`}>
+                <Link
+                  href={`/product/${props.productTitle}`}
+                  onClick={() => handleclick(props.productTitle)}
+                >
                   <Image
                     src={isHovered ? props.images[2] : item}
                     alt="NA"
@@ -157,9 +168,7 @@ function TabsProductCard(props) {
 
         {props.discountedprice ? (
           <div>
-            <p className="text-sm my-2 text-gray-500">
-              Offer price
-            </p>
+            <p className="text-sm my-2 text-gray-500">Offer price</p>
             <p className=" text-sm font-semibold bg-yellow-400 price-box w-fit px-2 py-1">
               Rs.<span className="text-3xl">{props.discountedprice}</span>
             </p>
