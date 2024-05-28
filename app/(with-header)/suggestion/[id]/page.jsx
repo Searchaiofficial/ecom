@@ -108,7 +108,7 @@ const SuggestionPage = ({ params }) => {
     allowSlidePrev: true,
     allowSlideNext: true,
   };
-
+  const swiper1Ref = useRef(null);
   return (
     <>
       <div className="pt-36 px-[20px] sm:px-[50px] lg:px-[67px]">

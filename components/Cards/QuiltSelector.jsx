@@ -34,14 +34,14 @@ const QuiltSelector = () => {
   //   }, [trendingData]);
 
   const quilts = [
-    { imageUrl: 'https://source.unsplash.com/featured/?quilt', temperature: '25°C', weatherTitle: 'Light and Comfortable Quilt for Warm Nights' },
-    { imageUrl: 'https://source.unsplash.com/featured/?quilt', temperature: '30°C', weatherTitle: 'Breathable Quilt for Hot and Humid Weather' },
-    { imageUrl: 'https://source.unsplash.com/featured/?quilt', temperature: '28°C', weatherTitle: 'Refreshing Quilt Perfect for Beachside Nights' },
-    { imageUrl: 'https://source.unsplash.com/featured/?quilt', temperature: '32°C', weatherTitle: 'Lightweight Quilt with Tropical Vibes' },
-    { imageUrl: 'https://source.unsplash.com/featured/?quilt', temperature: '27°C', weatherTitle: 'Soft and Cozy Quilt for Summer Evenings' },
-    { imageUrl: 'https://source.unsplash.com/featured/?quilt', temperature: '29°C', weatherTitle: 'Elegant Quilt for Stylish Summer Bedrooms' },
-    { imageUrl: 'https://source.unsplash.com/featured/?quilt', temperature: '26°C', weatherTitle: 'Quilt with Floral Designs for Summer Gardens' },
-    { imageUrl: 'https://source.unsplash.com/featured/?quilt', temperature: '31°C', weatherTitle: 'Modern Quilt for Urban Summer Living' }
+    { imageUrl: 'https://ayatrio-bucket.s3.ap-south-1.amazonaws.com/1716035443808_mainImage_mainImage.jpeg', temperature: '25°C', weatherTitle: 'Light and Comfortable Quilt for Warm Nights' },
+    { imageUrl: 'https://ayatrio-bucket.s3.ap-south-1.amazonaws.com/1716035443808_mainImage_mainImage.jpeg', temperature: '30°C', weatherTitle: 'Breathable Quilt for Hot and Humid Weather' },
+    { imageUrl: 'https://ayatrio-bucket.s3.ap-south-1.amazonaws.com/1716035443808_mainImage_mainImage.jpeg', temperature: '28°C', weatherTitle: 'Refreshing Quilt Perfect for Beachside Nights' },
+    { imageUrl: 'https://ayatrio-bucket.s3.ap-south-1.amazonaws.com/1716035443808_mainImage_mainImage.jpeg', temperature: '32°C', weatherTitle: 'Lightweight Quilt with Tropical Vibes' },
+    { imageUrl: 'https://ayatrio-bucket.s3.ap-south-1.amazonaws.com/1716035443808_mainImage_mainImage.jpeg', temperature: '27°C', weatherTitle: 'Soft and Cozy Quilt for Summer Evenings' },
+    { imageUrl: 'https://ayatrio-bucket.s3.ap-south-1.amazonaws.com/1716035443808_mainImage_mainImage.jpeg', temperature: '29°C', weatherTitle: 'Elegant Quilt for Stylish Summer Bedrooms' },
+    { imageUrl: 'https://ayatrio-bucket.s3.ap-south-1.amazonaws.com/1716035443808_mainImage_mainImage.jpeg', temperature: '26°C', weatherTitle: 'Quilt with Floral Designs for Summer Gardens' },
+    { imageUrl: 'https://ayatrio-bucket.s3.ap-south-1.amazonaws.com/1716035443808_mainImage_mainImage.jpeg', temperature: '31°C', weatherTitle: 'Modern Quilt for Urban Summer Living' }
   ];
 
   const swiperOptions2 = {
