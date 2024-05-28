@@ -85,7 +85,7 @@ const Trending = () => {
         <Swiper
           ref={swiper1Ref}
           {...swiperOptions2}
-          modules={[Navigation, Pagination, Scrollbar, A11y]}
+          modules={[Navigation, Pagination, Mousewheel, Scrollbar, A11y]}
           scrollbar={{
             hide: false,
             draggable: true,
