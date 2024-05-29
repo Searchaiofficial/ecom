@@ -51,7 +51,7 @@ const Trending = () => {
       nextEl: ".custom-next-button",
       prevEl: ".custom-prev-button",
     },
-    noSwiping: true,
+    noSwiping: false,
     allowSlidePrev: true,
     allowSlideNext: true,
   };
@@ -95,8 +95,11 @@ const Trending = () => {
             invert: false,
           }}
           freeMode={{
-            enabled: false,
+            enabled: true,
             sticky: true,
+            momentum: true,
+            momentumRatio: 0.5, // Adjust this value for softer scrolling
+            momentumBounceRatio: 0.5,
           }}
           breakpoints={{
             300: {

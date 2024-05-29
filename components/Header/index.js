@@ -28,6 +28,7 @@ function Header({ setIsHeaderMounted }) {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const quantity = useSelector(selectQuantity);
+  const [sidebarNavigationItem, setSidebarNavigationItem] = useState("")
 
 
   console.log(pathname)
@@ -64,9 +65,11 @@ function Header({ setIsHeaderMounted }) {
 
   };
 
-  const toggleDropdown = () => {
+  const toggleDropdown = (item) => {
+    setSidebarNavigationItem(item)
     setIsOpen(!isOpen);
   };
+
 
   const handleMouseEnter = (index) => {
     setHoveredIndex(index);
@@ -158,7 +161,7 @@ function Header({ setIsHeaderMounted }) {
   const homeRoute = "/";
 
   const [displayedText, setDisplayedText] = useState("");
-  const phrases = ["Wallpapers", "Curtains", "Blinds"];
+  const phrases = [` ' Wallpapers '`, ` ' Curtains '`, ` ' Blinds '`];
 
   useEffect(() => {
     let currentPhraseIndex = 0;
@@ -170,13 +173,13 @@ function Header({ setIsHeaderMounted }) {
       if (index < phrases[currentPhraseIndex].length) {
         setDisplayedText(`${phrases[currentPhraseIndex].slice(0, index + 1)}`);
         index++;
-        typingTimeout = setTimeout(typeWriter, 100);
+        typingTimeout = setTimeout(typeWriter, 50);
       } else {
         phraseTimeout = setTimeout(() => {
           index = 0;
           currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
           typeWriter();
-        }, 2000);
+        }, 1000);
       }
     };
 
@@ -275,7 +278,7 @@ function Header({ setIsHeaderMounted }) {
                               ? "/heading/offers/all"
                               : "#"
                           }
-                          onClick={toggleDropdown}
+                          onClick={() => toggleDropdown(value.label)}
                         >
                           <p
                             className={`block font-medium py-[15px] px-[5px] border-b-2  ${hoveredIndex === idx
@@ -417,7 +420,7 @@ function Header({ setIsHeaderMounted }) {
                     height={20}
                     className="ml-[10px]"
                   />
-                  <p className="ml-3 line-clamp-1  text-gray-400">Search for {displayedText}</p>
+                  <p className="ml-3 line-clamp-1 text-[13px] mt-[2px]  text-gray-400">Search for {displayedText}</p>
                 </div>
                 <Image src={"/Ayatrio updated icon/camera.svg"} width={20} height={20} className="mr-[10px] ml-[10px]" />
               </div>
@@ -444,7 +447,7 @@ function Header({ setIsHeaderMounted }) {
           >
             <div className="flex justify-between items-center py-[5px] w-full h-fit mb-4">
               <div className=" flex items-center">
-                <Image src={"/Ayatrio updated icon/backarrow.svg"} height={20} width={20} className="rotate-180" />
+                {/* <Image src={"/Ayatrio updated icon/backarrow.svg"} height={20} width={20} className="rotate-180" /> */}
                 <div className="mainlogo">
                   <Link href="/">
                     <Image
@@ -474,7 +477,7 @@ function Header({ setIsHeaderMounted }) {
                 // onClick={() => handleClick(idx)}
                 >
                   <Link
-                    className={`text-md  font-semibold  ${isOpen ? "border-b-2 border-black" : ""
+                    className={`text-md  font-semibold flex items-center justify-between  ${isOpen ? "border-b-2 border-black" : ""
                       }`}
                     href="#"
                     onClick={toggleDropdown}
@@ -487,27 +490,30 @@ function Header({ setIsHeaderMounted }) {
                     >
                       {value.label}
                     </p>
-                  </Link>
+                    <div className="pr-[14px]">
+                      <Image src={"/Ayatrio updated icon/backarrow.svg"} height={15} width={15} />
+
+                    </div>                  </Link>
                   {idx < 3 && hoveredIndex === idx && (
-                    <Asidebox hoveredIndex={hoveredIndex} />
+                    <Asidebox hoveredIndex={hoveredIndex} selectedItem={"Home decor"} />
                   )}
                   {idx === 3 && hoveredIndex === idx && <Midsection />}
                 </div>
               ))}
             </div>
-            <div className="border-t-2 pt-6 pl-2">
-              <div className="flex flex-col gap-1">
+            <div className="border-t pt-6 pl-2">
+              <div className="flex flex-col">
                 <div onClick={() => handleClick("category/virtualexperience")} className="">
-                  <p className="text-[14px] font-medium">Live shopping</p>
+                  <p className="text-[14px] py-[8px] font-normal">Live shopping</p>
                 </div>
                 <div onClick={() => handleClick("category/freedesign")}>
-                  <p className="text-[14px] font-medium">Designer request</p>
+                  <p className="text-[14px] py-[8px] font-normal">Designer request</p>
                 </div>
                 <div onClick={() => handleClick("category/freesample")} >
-                  <p className="text-[14px] font-medium">Free sample request</p>
+                  <p className="text-[14px] py-[8px] font-normal">Free sample request</p>
                 </div>
                 <div onClick={() => handleClick("/customerservice")}>
-                  <p className="text-[14px] font-medium">Help</p>
+                  <p className="text-[14px] py-[8px] font-normal">Help</p>
                 </div>
                 {
                   loginStatus === true ? <p className="text-[14px] font-medium" onClick={handleLogoutClick}>Logout</p> : <p className="text-[14px] font-medium" onClick={handleLoginClick}>Login</p>

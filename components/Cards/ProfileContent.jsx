@@ -60,7 +60,7 @@ const ProfileContent = ({ initialData }) => {
         }}
       >
         {profileData.map((person, index) => (
-          <SwiperSlide className="bg-[#fafafa] my-slider pr-3" key={index}>
+          <SwiperSlide className="bg-[#fafafa]  pr-3" key={index}>
             <div className="flex flex-col items-center">
               <div className="parent flex flex-col items-center relative bg-black rounded-full md:h-36 h-28 md:w-36 w-28 mb-2 md:mt-8 mt-4">
                 <Image

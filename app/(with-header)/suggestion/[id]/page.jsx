@@ -29,6 +29,7 @@ const SuggestionPage = ({ params }) => {
   const suggestion = useSelector(selectSuggestionData);
   const suggestionStatus = useSelector(selectSuggestionStatus);
   // const [relatedProducts, setRelatedProducts] = useState([]);
+  const swiper1Ref = useRef(null)
 
   useEffect(() => {
     if (suggestionStatus === "idle" || suggestionStatus === "failed") {
@@ -185,7 +186,7 @@ const SuggestionPage = ({ params }) => {
                         className="h-[70px] object-cover"
                       />
                     </div>
-                    <h2 className="text-[#333333] text-[14px] hover:underline line-clamp-1">
+                    <h2 className="text-[#333333] text-[14px] hover:underline line-clamp-1 ">
                       {item.label}
                     </h2>
                   </div>
@@ -208,7 +209,7 @@ const SuggestionPage = ({ params }) => {
                 <h1 className="text-2xl font-semibold">
                   {subHeadingItem.title}
                 </h1>
-                <p className="text-gray-700 mt-5 line-clamp-3 lg:line-clamp-none ">
+                <p className="text-gray-700 mt-5 lg:w-[70%] line-clamp-3 lg:line-clamp-none ">
                   {subHeadingItem.subHeadingSummary}
                 </p>
                 <div className="mt-6 flex flex-col md:flex-row gap-3  items-center justify-between mx-auto">

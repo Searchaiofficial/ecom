@@ -117,7 +117,7 @@ const ShopByRoomSlider = () => {
                     slideNextClass="custom-next-button"
                     slidePrevClass="custom-prev-button"
                     // onSwiper={setSwiperRef}
-                    className="px-10 min-h-[600px]"
+                    className="px-10 lg:min-h-[750px] min-h-[600px]"
                 >
                     {!RoomDataSlider ? (
                         <SwiperSlide>

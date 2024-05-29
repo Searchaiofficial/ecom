@@ -30,6 +30,7 @@ import DataSliderWrapper from "./DataSliderWrapper";
 import MainSliderWrapper from "../MainSlider/MainSliderWrapper";
 import CategoriesSlider from "./categorySlider";
 import OfferSlider from "./OfferSlider";
+import UserReviewPosts from "./UserReviewPosts";
 
 function Cards() {
   // useEffect(() => {
@@ -59,6 +60,7 @@ function Cards() {
       <ShopByRoomSlider />
       <Profile />
       <Suggestion />
+      <UserReviewPosts />
       <MulticardService />
 
       <div className="lg:px-[52px]">
