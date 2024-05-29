@@ -1,5 +1,37 @@
-import React from "react";
+"use client";
+import axios from "axios";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
 const Phone = () => {
+  const [categories, setCategories] = useState([]);
+  const fetchCategory = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/trendingCategories`
+      );
+      console.log("categories", response.data);
+
+      if (response.data && response.data.length > 0) {
+        setCategories(response.data);
+      }
+    } catch (error) {
+      console.error("Error fetching reviews:", error);
+    }
+  };
+
+  const handleIncrementCategoryPopularity = async (categoryName) => {
+    try {
+      await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/incrementCategoryPopularity?category=${categoryName}`
+      );
+    } catch (error) {
+      console.error("Error incrementing category popularity:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCategory();
+  }, []);
   return (
     <div className="lg:px-[15px] px-[20px] sm:px-[50px] ">
       <h1 className="font-bold xl:text-4xl text-2xl py-4">
@@ -29,10 +61,28 @@ const Phone = () => {
       </p>
 
       <p className=" w-5/6 font-semibold text-md sm:text-xl  py-4">
-        Wallpaper | Flooring | curtain | blinds | Mattresses | Seating | Coffee
+        {/* Wallpaper | Flooring | curtain | blinds | Mattresses | Seating | Coffee
         tables | Wardrobes Storage | Bookshelves | Shoe racks | Décor | Bathroom
         | Textiles | Pots & plants Home electronics | Home improvement |
-        Lighting
+        Lighting */}
+
+        {categories.map((category) => (
+          <span key={category.id}>
+            <span className="cursor-pointer hover:underline">
+              <Link
+                href={`/category/${category.name.replace(/ /g, "-")}/all`}
+                onClick={() =>
+                  handleIncrementCategoryPopularity(category.name)
+                }
+              >
+                {category.name}
+              </Link>
+            </span>
+            {categories.indexOf(category) !== categories.length - 1 && (
+              <span> | </span>
+            )}
+          </span>
+        ))}
       </p>
 
       {/* <div>

@@ -63,8 +63,7 @@ function Cards() {
 
       <div className="lg:px-[52px]">
         <TabsWrapper />
-        {/* <Phone /> */}
-        <CategoriesSlider />
+         <Phone /> 
       </div>
 
       <Footer />
