@@ -135,17 +135,20 @@ const ProductPage = ({ params }) => {
       };
       fetchAllDemandType();
     } else if (params.parentCategory === "virtualexperience") {
+      console.log(x, "x")
       if (x.length > 0) {
-        router.push("/virtualexperience/category");
+        router.push("/virtualexperience");
       }
       const fetchVeProducts = async () => {
         try {
           const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getVEFilter`;
+          console.log("apiUrl", apiUrl);
           const response = await axios.post(apiUrl, x, {
             headers: {
               "Content-Type": "application/json",
             },
           });
+          console.log("response", response.data);
           setFilteredProducts(response.data); // Save the filtered products in state
         } catch (error) {
           console.error("Error fetching filtered products:", error);

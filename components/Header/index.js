@@ -31,8 +31,6 @@ function Header({ setIsHeaderMounted }) {
   const [sidebarNavigationItem, setSidebarNavigationItem] = useState("")
 
 
-  console.log(pathname)
-
   // Filter
 
   const searchParams = useSearchParams();
