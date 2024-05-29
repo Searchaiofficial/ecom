@@ -29,7 +29,6 @@ const SuggestionPage = ({ params }) => {
   const suggestion = useSelector(selectSuggestionData);
   const suggestionStatus = useSelector(selectSuggestionStatus);
   // const [relatedProducts, setRelatedProducts] = useState([]);
-  const swiper1Ref = useRef(null)
 
   useEffect(() => {
     if (suggestionStatus === "idle" || suggestionStatus === "failed") {
