@@ -31,7 +31,7 @@ function SuggestionCard(props) {
             <div className={`text-sm overflow-hidden text-ellipsis `}>
               {props.desc}
             </div>
-            <div className="bg-[#333336] rounded-full max-w-fit p-2 mt-[30px] lg:mt-[60px]">
+            <div className="bg-[#333336] rounded-full max-w-fit p-2 mt-[60px] lg:mt-[90px]">
               <Image src={"/Ayatrio updated icon/Back_arrow_white.svg"} height={25} width={25} className="p-1" />
             </div>
           </div>

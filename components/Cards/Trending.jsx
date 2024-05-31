@@ -61,6 +61,13 @@ const Trending = () => {
   const swiper1Ref = useRef(null);
   const swiper2Ref = useRef(null);
 
+  console.log(newTrendingData)
+
+
+
+
+
+
   return (
     <div>
       <div className="mb-20  bg-white px-[15px]">
@@ -95,7 +102,7 @@ const Trending = () => {
             invert: false,
           }}
           freeMode={{
-            enabled: true,
+            enabled: false,
             sticky: true,
             momentum: true,
             momentumRatio: 0.5, // Adjust this value for softer scrolling
@@ -121,6 +128,8 @@ const Trending = () => {
           slideNextClass="custom-next-button"
           slidePrevClass="custom-prev-button"
           onSwiper={setSwiperRef}
+          // allowTouchMove={false}
+          noSwiping={true}
         >
           {!newTrendingData ? (
             <SwiperSlide>
@@ -128,12 +137,14 @@ const Trending = () => {
             </SwiperSlide>
           ) : (
             newTrendingData.map((product, idx) => {
+              console.log(product.specialprice)
               return (
                 <SwiperSlide key={idx} className="ml-0">
                   <div className="grid grid-cols-1 w-full h-full fade-in ">
                     <Card
                       title={product.productTitle}
                       // date={product.date}
+                      specialPrice={product?.specialprice}
                       price={product.perUnitPrice}
                       desc={product.productTitle}
                       demandtype={product.demandtype}

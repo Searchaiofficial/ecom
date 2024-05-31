@@ -10,11 +10,11 @@ function UserReviewPostsCard(props) {
 
     return (
         <>
-            <div key={props.cardkey} className="pb-8  cursor-pointer group ">
-                <Link href={`/suggestion/${props.id}`}>
-                    <div className="absolute top-4 left-4 p-2 bg-white/70 rounded-full flex items-center gap-2 ">
-                        <Image src={"/Ayatrio updated icon/instagram-white-icon.svg"} height={20} width={20} />
-                        <p className="text-[12px] font-semibold text-[#111111] hidden opacity-0 transition-all duration-300 group-hover:block group-hover:opacity-100">Deepanshu</p>
+            <div key={props.cardkey} className="cursor-pointer group h-[449px] lg:pb-[48px] lg:h-[600px] ">
+                <div className="h-full">
+                    <div className="absolute top-4 left-4 p-2  rounded-full flex items-center gap-2 ">
+                        <Image src={"/Ayatrio updated icon/instagram-white-icon.svg"} height={25} width={25} />
+                        <p className="text-[14px] font-semibold text-white transition-all duration-300 ">@{props.username}</p>
                     </div>
 
 
@@ -24,11 +24,11 @@ function UserReviewPostsCard(props) {
                             alt={props.title}
                             height={600}
                             width={600}
-                            className={"aspect-square w-full lg:h-[500px] object-cover "}
+                            className={"aspect-square w-full h-[100%] lg:h-[100%] object-cover "}
                         />
                     </div>
 
-                </Link>
+                </div>
             </div>
         </>
     );

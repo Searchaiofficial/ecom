@@ -98,7 +98,7 @@ const CategoriesSlider = () => {
 
     return (
         <div className="flex items-center justify-start">
-            <div className=" pt-[2rem] lg:pt-[5rem] pl-[15px]  overflow-x-auto  relative">
+            <div className=" pt-[2rem] lg:pt-[52px] pl-[15px]  overflow-x-auto  relative">
                 {
                     categories.length > 0 && (
                         <div className="flex flex-row group items-center justify-end gap-2 mb-4">
@@ -139,7 +139,7 @@ const CategoriesSlider = () => {
                                 {categories?.map((curElement, idx) => {
                                     return (
                                         <SwiperSlide className=" max-w-[100px] lg:max-w-[140px] mr-[10px] min-h-[148px] " key={idx}>
-                                            <Link href={`/category/${curElement.name.replace(/ /g, "-")}/all`} 
+                                            <Link href={`/category/${curElement.name.replace(/ /g, "-")}/all`}
                                                 onClick={() => handleIncrementCategoryPopularity(curElement.name)}
                                             >
                                                 <div className="flex flex-col py-[16px] ">

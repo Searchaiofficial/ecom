@@ -9,7 +9,7 @@ import { Scrollbar } from "swiper/modules";
 import { roomOptions } from "@/Model/Dropdown/SliderData/SliderData";
 import axios from "axios";
 
-const SwiperComponent = ({ hoveredIndex , setHoveredIndex}) => {
+const SwiperComponent = ({ hoveredIndex, setHoveredIndex }) => {
   const [allOffers, setAllOffers] = useState([]);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const SwiperComponent = ({ hoveredIndex , setHoveredIndex}) => {
       slidesPerView={7}
       mousewheel={{ invert: true }}
       scrollbar={{
-        hide: true,
+        hide: false,
         draggable: true,
       }}
       modules={[Scrollbar]}
@@ -42,7 +42,7 @@ const SwiperComponent = ({ hoveredIndex , setHoveredIndex}) => {
               <Link
                 key={index}
                 href={`/rooms/${data.room.replace(/\s+/g, "-")}`}
-                onClick={()=>setHoveredIndex(null)}
+                onClick={() => setHoveredIndex(null)}
                 passHref
               >
                 <div className="parent w-[10rem] h-[5rem] ">
@@ -70,7 +70,7 @@ const SwiperComponent = ({ hoveredIndex , setHoveredIndex}) => {
                 href={`/heading/offers/${offer.type.replace(/ /g, "-")}`}
                 passHref
 
-                onClick={()=>setHoveredIndex(null)}
+                onClick={() => setHoveredIndex(null)}
               >
                 <h3 className="text-[14px] text-center font-semibold  py-2 text-gray-900 hover:underline">
                   {offer.type}

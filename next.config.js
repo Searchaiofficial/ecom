@@ -97,6 +97,18 @@ const nextConfig = {
         protocol: "https",
         hostname: "scontent.cdninstagram.com",
       },
+      {
+        protocol: "https",
+        hostname: "scontent-del1-2.cdninstagram.com",
+      },
+      {
+        protocol: "https",
+        hostname: "scontent-del2-1.cdninstagram.com",
+      },
+      {
+        protocol: "https",
+        hostname: "scontent-del1-1.cdninstagram.com",
+      },
     ],
     // domains: ["images.unsplash.com"],
   },

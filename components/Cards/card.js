@@ -38,13 +38,29 @@ function Card(props) {
   // useEffect(() => {
 
   // }, [dispatch]);
+  const startDate = new Date(props?.specialPrice?.startDate);
+  const endDate = new Date(props?.specialPrice?.endDate);
+
+  const formattedStartDate = startDate.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+  });
+  const formattedEndDate = endDate.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+  });
+
+  // const [formattedDate, setFormattedDate] = useState({
+  //   startDate: "",
+  //   endDate: "",
+  // });
 
 
   return (
     <>
       <div
         key={props.cardkey}
-        className="card pb-12"
+        className="card pb-12 "
         style={{
           width: "100%",
           height: "100%",
@@ -142,9 +158,26 @@ function Card(props) {
         </div>
         <div className="card-date text-sm text-[#757575]">{props.desc}</div>
         <div className="card-price">
-          <span className="font-medium pr-[3px] pt-[3px]">Rs.</span>
-          <h2 className="text-xl font-medium tracking-wide">{props.price}</h2>
+          {/* <span className="font-medium pr-[3px] pt-[3px]">Rs.</span>
+          <h2 className="text-xl font-medium tracking-wide">{props.price}</h2> */}
+          <h2 className={`text-3xl flex font-semibold leading-[0.5]  tracking-wide ${props.specialPrice ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg" : ""} `} style={props?.specialPrice ? { boxShadow: '3px 3px #ad3535' } : {}}>
+            <span className={`text-sm ${props?.specialPrice?.price ? "" : "pt-3.5"}`}>Rs. &nbsp;</span>{" "}
+            {props?.specialPrice?.price ? props?.specialPrice.price : <p className="pt-3">{props.price}</p>}
+          </h2>{" "}
         </div>
+        {
+          props?.specialPrice && (
+            <div className="flex flex-col mt-2">
+              <p className="text-[#757575] text-[12px] pt-[3px]">Regular price: Rs.{props?.price} (incl. of all taxes)</p>
+              {/* {
+                props?.specialPrice?.startDate && props?.specialPrice?.endDate && (
+                  <p className="text-[#757575] text-[12px] pb-[10px]">Price valid {formattedStartDate} - {formattedEndDate} or while supply lasts</p>
+                )
+              } */}
+              {/* <p className="text-[#757575] text-[12px] pb-[10px]">Price valid May 02 - May 29 or while supply lasts</p> */}
+            </div>
+          )
+        }
         <div className="card-rating">
           {/* <img src="/svg/star-full-icon.svg" className="w-6 h-6" alt="" /> */}
 

@@ -17,6 +17,7 @@ import {
 import axios from "axios";
 import Carous from "@/components/Carousel/Carous";
 import { useParams } from "next/navigation";
+import UserReviewPosts from "@/components/Cards/UserReviewPosts";
 import Link from "next/link";
 const RoomPage = () => {
   const dispatch = useDispatch();
@@ -64,7 +65,7 @@ const RoomPage = () => {
     }
   }, [selectedData, dispatch]);
 
-  console.log(data);
+  console.log("data", data);
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -107,11 +108,11 @@ const RoomPage = () => {
 
   return (
     <>
-      <div className=" overflow-y-auto container-rooms flex sm:block items-center px-[20px] sm:px-[50px] lg:px-[27px] ">
-        <div className="mt-[65px]">
-          <div className="sm:flex-row gap-8 flex-col flex">
+      <div className="overflow-y-auto overflow-x-hidden container-rooms flex sm:block items-center px-[20px] sm:px-[50px] lg:px-[27px] ">
+        <div className="mt-[65px] w-full">
+          <div className=" sm:flex-row gap-8 flex-col flex overflow-hidden">
             <div className="relative sm:basis-2/3 flex lg:pl-[40px] mt-[50px] sm:mt-[40px] flex-col sm:flex-grow">
-              <div className=" font-sans font-normal text-xs sm:text-sm pb-2 sticky top-24">
+              <div className=" font-sans font-normal text-xs sm:text-sm pb-2 sticky top-10">
                 <Link href="/">
                   <span className="hover:text-gray-600 cursor-pointer ">
                     Home
@@ -148,6 +149,10 @@ const RoomPage = () => {
               </div>
               <RoomInfo data={data} />
               <Reviews productId={data._id} data={data} />
+              {/* <div className="w-[77%]">
+                <UserReviewPosts />
+              </div> */}
+
             </div>
             <div className="md:basis-2/3 hidden md:flex flex-col">
               <div className="md:relative flex top-14 mb-16 ml-0">
@@ -155,11 +160,15 @@ const RoomPage = () => {
               </div>
             </div>
           </div>
-          <div className="lg:ml-[40px]">
+          <div className="lg:pl-[40px] w-full lg:w-[66%]">
+            <UserReviewPosts slidesPerView={2.2} SubcategoryName={data.subcategory} />
+          </div>
+          <div className="lg:ml-[40px] w-full">
             <Carous data={data} />
           </div>
         </div>
       </div>
+
     </>
   );
 };

@@ -24,7 +24,10 @@ const Display = async () => {
                 )}`}
               >
 
-                <p class="px-6 text-[12px] font-semibold">For more floor inspiration</p>
+                <div className="flex items-center px-6 gap-5">
+                  <p class="text-[12px] font-semibold">For more floor inspiration</p>
+                  <Image src={"/Ayatrio updated icon/Back_arrow.svg"} height={15} width={15} />
+                </div>
               </Link>
             </div>
 
@@ -36,7 +39,7 @@ const Display = async () => {
           {apiData && apiData.length > 0 ? (
             <>
               <div
-                className={`relative w-full h-[449px] screen  lg:min-h-[730px] max-w-1/2`}
+                className={`relative w-full h-[492px] screen  lg:min-h-[730px] max-w-1/2`}
               >
                 <TabImage
                   src={apiData[0].room.imgSrc}
@@ -79,7 +82,7 @@ const Display = async () => {
           {apiData && apiData.length > 0 ? (
             <>
               <div
-                className={`relative w-full h-[449px] screen lg:min-h-[730px]  max-w-1/2 `}
+                className={`relative w-full h-[492px] screen lg:min-h-[730px]  max-w-1/2 `}
               >
                 <TabImage
                   src={apiData[1].room.imgSrc}

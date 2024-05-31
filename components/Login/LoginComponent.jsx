@@ -58,7 +58,7 @@ const LoginComponent = () => {
 
   return (
     <>
-      <div className="flex flex-wrap justify-around w-full">
+      <div className="flex lg:flex-wrap flex-wrap-reverse  justify-around w-full">
         <div className="flex p-8 w-[430px]">
           <div className="w-full">
             <div className="img__con111 sm:block flex items-center justify-center">

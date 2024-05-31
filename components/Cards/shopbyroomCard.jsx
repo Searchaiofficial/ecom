@@ -14,9 +14,9 @@ function ShopByRoomCard(props) {
 
     return (
         <>
-            <div key={props.cardkey} className="pb-8 min-w-[322px] lg:min-w-[404px] cursor-pointer ">
+            <div key={props.cardkey} className="pb-8  cursor-pointer ">
                 <Link href={`/rooms/${props.id}`}>
-                    <div className="flex h-full w-full items-center justify-center cursor-pointer ">
+                    <div className="flex h-full w-full items-center justify-center cursor-pointer overflow-hidden ">
                         <Image
                             src={props.imgSrc}
                             alt={props.title}
@@ -35,7 +35,7 @@ function ShopByRoomCard(props) {
                         <div className={` line-clamp-4 text-sm overflow-hidden text-ellipsis`}>
                             {props.summary}
                         </div>
-                        <div className="bg-[#333336] rounded-full max-w-fit p-2 mt-[30px]  lg:mt-[60px]">
+                        <div className="bg-[#333336] rounded-full max-w-fit p-2 mt-[60px]  lg:mt-[90px]">
                             <Image src={"/Ayatrio updated icon/Back_arrow_white.svg"} height={25} width={25} className="p-1" />
                         </div>
                     </div>

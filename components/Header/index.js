@@ -340,48 +340,50 @@ function Header({ setIsHeaderMounted }) {
                     />
                   </Link>
                 </div>
-                <div className="w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer">
-                  <Link href={"/cart"}>
-                    <Image
-                      src="/svg/icon/adtocart.svg"
-                      alt="Cart Icon"
-                      className="header-div-icon"
-                      width={22}
-                      height={22}
-                    />
-                  </Link>
-                  {
-                    quantity > 0 && <div className="cart-notification">{quantity}</div>
-                  }
+                <div className="flex items-center flex-row-reverse lg:flex-row">
+                  <div className="w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer">
+                    <Link href={"/cart"}>
+                      <Image
+                        src="/svg/icon/adtocart.svg"
+                        alt="Cart Icon"
+                        className="header-div-icon"
+                        width={22}
+                        height={22}
+                      />
+                    </Link>
+                    {
+                      quantity > 0 && <div className="cart-notification">{quantity}</div>
+                    }
+                  </div>
+                  {loginStatus === "true" ? (
+                    <div
+                      className="pro w-10 h-10 flex p-[9px] hover:bg-zinc-100 hover:rounded-full whitespace-nowrap "
+                      onClick={handleProfileNav}
+                    >
+                      <Image
+                        src="/svg/icon/profile.svg"
+                        alt="Profile Icon"
+                        className="header-div-icon"
+                        width={22}
+                        height={22}
+                      />
+                    </div>
+                  ) : (
+                    <div
+                      className="pro w-10 h-10 flex p-[9px] hover:bg-zinc-100 hover:rounded-full whitespace-nowrap cursor-pointer "
+                      onClick={handleProfileNav}
+                    >
+                      <Image
+                        src="/svg/icon/profile.svg"
+                        onClick={handleLoginNav}
+                        alt="Profile Icon"
+                        width={18}
+                        height={18}
+                        className="header-div-icon"
+                      />
+                    </div>
+                  )}
                 </div>
-                {loginStatus === "true" ? (
-                  <div
-                    className="pro w-10 h-10 flex p-[9px] hover:bg-zinc-100 hover:rounded-full whitespace-nowrap "
-                    onClick={handleProfileNav}
-                  >
-                    <Image
-                      src="/svg/icon/profile.svg"
-                      alt="Profile Icon"
-                      className="header-div-icon"
-                      width={22}
-                      height={22}
-                    />
-                  </div>
-                ) : (
-                  <div
-                    className="pro w-10 h-10 flex p-[9px] hover:bg-zinc-100 hover:rounded-full whitespace-nowrap cursor-pointer "
-                    onClick={handleProfileNav}
-                  >
-                    <Image
-                      src="/svg/icon/profile.svg"
-                      onClick={handleLoginNav}
-                      alt="Profile Icon"
-                      width={18}
-                      height={18}
-                      className="header-div-icon"
-                    />
-                  </div>
-                )}
 
                 <div className="w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer md:hidden">
                   {/* <MenuIcon onClick={toggleMobileMenu} /> */}

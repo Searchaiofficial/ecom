@@ -356,7 +356,7 @@ const Reviews = ({ productId, data }) => {
             )}
           </>
         )}
-        <Carous data={data} />
+        {/* <Carous data={data} /> */}
       </div>
     </>
   );

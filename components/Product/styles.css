@@ -231,8 +231,8 @@ input[type="radio"] {
 }
 
 
-.swiper-scrollbar-drag {
-  width: 40% !important; /* For small screens */
+/* .swiper-scrollbar-drag {
+  width: 40% !important; 
   background-color: #000 !important;
   border-radius: 0px !important;
 }
@@ -240,9 +240,9 @@ input[type="radio"] {
 
 @media screen and (min-width: 800px) {
   .swiper-scrollbar-drag {
-    width: 70% !important; /* For large screens (at least 1200px wide) */
+    width: 70% !important; 
   }
-}
+} */
 
 .swiper-wrapper{
   display: flex;
