@@ -10,7 +10,7 @@ const Expandedbar = dynamic(() =>
   import("../Header/Expandedbar").catch((err) => console.error(err))
 );
 
-const SearchBarWrapper = ({}) => {
+const SearchBarWrapper = ({ }) => {
   const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);
 
   // const { isVisible } = useScrollVisibility();

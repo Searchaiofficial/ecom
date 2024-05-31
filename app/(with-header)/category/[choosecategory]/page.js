@@ -65,7 +65,7 @@ const page = ({ params }) => {
           },
         ]}
       />
-      <div className="py-20 text-center ">
+      <div className="py-[120px] h-screen text-center">
         <h1>Choose Your Category</h1>
         {/* <div className="flex flex-wrap items-center justify-center gap-4 mt-10">
         <div

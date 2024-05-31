@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import "../styles/virtualexperience.css";
@@ -17,38 +17,81 @@ import {
   setSelectedRoom,
   setSelectedStyle,
   setSelectedSubcategory,
+  setCategory,
 } from "../Features/Slices/virtualDataSlice";
+
+// import { handleSetStep } from "@/components/Features/Slices/ayatrioSlice";
 
 const FreeSample = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const dispatch = useDispatch();
-  const [catDatas, setcatDatas] = useState([]);
+
+  const [dataStep, setDataStep] = useState({ step: 1 });
+
+  const steps = [
+    {
+      step: 1,
+      selected: dataStep.step > 0,
+    },
+    {
+      step: 2,
+      selected: dataStep.step > 1,
+    },
+    {
+      step: 3,
+      selected: dataStep.step > 2,
+    },
+    {
+      step: 4,
+      selected: dataStep.step > 3,
+    },
+    // {
+    //   step: 5,
+    //   selected: dataStep.step > 4,
+    // },
+  ];
+  const handleNextButton = () => {
+    if (dataStep.step === 4) {
+      handleNext();
+      // } else dispatch(handleSetStep(dataStep.step + 1));
+    } else setDataStep({ step: dataStep.step + 1 });
+  };
+
+  const handlePreviousButton = () => {
+    // dispatch(handleSetStep(dataStep.step - 1));
+    setDataStep({ step: dataStep.step - 1 });
+  };
+
+  // const [catDatas, setcatDatas] = useState([]);
   const dataSelector = useSelector(selectVirtualData);
   console.log({ dataSelector });
   const [selectedActivity, setSelectedActivity] = useState({});
 
   const [status, setStatus] = useState("");
   const [showCircle, setShowCircle] = useState(false);
+  const [serviceState, setServiceState] = useState(-1);
+  const [categoryState, setCategoryState] = useState(-1);
   const [subCategoryState, setSubCategoryState] = useState("");
-  const [roomstate, setRoomstate] = useState("");
+  const [roomstate, setRoomstate] = useState(-1);
   const [colorstate, setColorstate] = useState("");
   const [stylestate, setStylestate] = useState("");
-  const [priceState, setPriceState] = useState("");
+  const [priceState, setPriceState] = useState(-1);
   const [filters, setFilters] = useState([]);
 
   const search = useSearchParams();
 
   const searchparams = useSearchParams();
-  const category = searchparams.get("category");
+  // const category = searchparams.get("category");
 
-  useEffect(() => {
-    if (dataSelector && search.get("category")) {
-      let tempData = dataSelector?.filter(
-        (item) => item.category === search.get("category")
-      );
-      setcatDatas(tempData);
-    }
-  }, [dataSelector]);
+  // useEffect(() => {
+  //   if (dataSelector && search.get("category")) {
+  //     let tempData = dataSelector?.filter(
+  //       (item) => item.category === search.get("category")
+  //     );
+  //     setcatDatas(tempData);
+  //   }
+  // }, [dataSelector]);
 
   const handleAddress = () => {
     router.push("/cart");
@@ -58,38 +101,16 @@ const FreeSample = () => {
     setShowCircle(!showCircle);
   };
 
-  // const handleClick = (roomId, roomPrice, roomTitle, roomImage) => {
-  //   setSelectedActivity((prevSelectedRooms) => {
-  //     if (prevSelectedRooms[roomId]) {
-  //       const updatedSelectedRooms = { ...prevSelectedRooms };
-  //       delete updatedSelectedRooms[roomId];
-  //       return updatedSelectedRooms;
-  //     } else {
-  //       return {
-  //         ...prevSelectedRooms,
-  //         [roomId]: {
-  //           id: roomId,
-  //           price: roomPrice,
-  //           title: roomTitle,
-  //           image: roomImage,
-  //         },
-  //       };
-  //     }
-  //   });
-
-  // Toggle showCircle state
-  //   setShowCircle((prevShowCircle) => !prevShowCircle);
-  //   // Toggle showButtonContent state
-  //   setShowbuttoncontent((prevShowButtonContent) => !prevShowButtonContent);
-
-  //   // Update selectedImage state
-  //   setSelectedImage((prevSelectedImage) =>
-  //     prevSelectedImage === roomImage ? null : roomImage
-  //   );
-  // };
-
   const handleSelectValue = (section, value) => {
     switch (section) {
+      case "category": {
+        const data = {
+          [value]: true,
+        };
+        dispatch(setCategory(value));
+        setSelectedCategory(value);
+        break;
+      }
       case "room": {
         const data = {
           [value]: true,
@@ -126,100 +147,18 @@ const FreeSample = () => {
     }
   };
 
-  const [count, setCount] = useState(0);
-  const handleres = (roomId, roomPrice, roomTitle, roomImage) => {
-    setSelectedActivity((prevSelectedRooms) => {
-      if (prevSelectedRooms[roomId]) {
-        // Unselect the room
-        const updatedSelectedRooms = { ...prevSelectedRooms };
-        delete updatedSelectedRooms[roomId];
-
-        // Decrease the count
-        setCount((prev) => prev - 1);
-        return updatedSelectedRooms;
-      } else {
-        // Select the room
-        setCount((prev) => prev + 1);
-
-        return {
-          ...prevSelectedRooms,
-          [roomId]: {
-            id: roomId,
-            price: roomPrice,
-            title: roomTitle,
-            image: roomImage,
-          },
-        };
-      }
-    });
-    console.log({ selectedActivity });
-
-    // Toggle showCircle state
-    setShowCircle((prevShowCircle) => !prevShowCircle);
-
-    // Toggle showButtonContent state
-  };
-
-  //posting to order api
-
-  const [variant, setVariant] = useState("subcategory");
-
-  let url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/categories`;
-  const [subCategory, setSubCategory] = useState([]);
-  // useEffect(() => {
-  //   const fetchSubCategory = async () => {
-  //     try {
-  //       setStatus("loading");
-
-  //       const response = await axios.get(url);
-
-  //       if (response.status !== 200) {
-  //         throw new Error("HTTP status " + response.status);
-  //       }
-
-  //       const responseData = response.data;
-
-  //       const filteredData = responseData.filter(
-  //         (item) => item.name.toLowerCase() === searchparams.get("category")
-  //       );
-
-  //       if (filteredData.length > 0) {
-  //         const newSubCategories = filteredData[0].subcategories;
-  //         setSubCategory(newSubCategories); // Update subCategory state with new data
-  //         setVariant("subcategory");
-  //         setStatus("succeeded");
-  //       } else {
-  //         setVariant("rooms");
-  //       }
-  //     } catch (error) {
-  //       console.error("Error occurred:", error);
-  //       setStatus("failed");
-  //     }
-  //   };
-
-  //   fetchSubCategory(); // Call fetchSubCategory when component mounts
-  // }, []); // Empty dependency array ensures this effect runs only once on mount
-
-  let url2 = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/fetchProductsByCategory/${searchparams.get("category")}`;
-  // let url2 = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/products`;
-  const [datastat, setDatastat] = useState("");
-
-  const [subCatImg, setSubCatImg] = useState([]);
+  let url2 = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/products`;
   const [products, setProducts] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState([]);
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        setDatastat("loading");
         const response1 = await axios.get(
           `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/categories`
         );
         console.log(response1.data);
-        const Subcat = response1.data.filter(
-          (item) => item.name === searchparams.get("category")
-        );
-        console.log(Subcat[0].subcategories);
         const response = await axios.get(url2);
-        // const response = await axios.get(url2);
         if (response.status !== 200) {
           throw new Error("HTTP status" + response.status);
         }
@@ -227,22 +166,9 @@ const FreeSample = () => {
         const responseData = response.data;
 
         const filteredData = responseData.filter(
-          (item) => item.category === searchparams.get("category")
+          (item) => item.category === selectedCategory
         );
         console.log("filteredData", filteredData);
-
-        // pick all subcategory from filtered data
-        const subcategory = filteredData.map((item) => item.subcategory);
-        const uniqueSubcategory = [...new Set(subcategory)];
-        console.log(uniqueSubcategory);
-        const x = Subcat[0].subcategories.filter((subcategory) => {
-          return uniqueSubcategory.includes(subcategory.name);
-        });
-
-        console.log(x);
-        setSubCategory(x);
-        // console.log("subcategory", subcategory);
-
         setProducts((prevData) => {
           const newData = filteredData;
           if (JSON.stringify(newData) !== JSON.stringify(prevData)) {
@@ -251,15 +177,32 @@ const FreeSample = () => {
             return prevData;
           }
         });
-
-        setDatastat("succeeded");
       } catch (error) {
         console.error("Error ocurrs here", error);
-        setDatastat("failed");
       }
     };
 
     fetchProducts();
+  }, [selectedCategory]);
+
+  const [allCategories, setAllCategories] = useState([]);
+  useEffect(() => {
+    const fetchAllCategories = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/categories`
+        );
+        if (response.status !== 200) {
+          throw new Error("HTTP status" + response.status);
+        }
+        console.log(response.data);
+        setAllCategories(response.data);
+      } catch (error) {
+        console.error("Error occured:", error);
+      }
+    };
+
+    fetchAllCategories();
   }, []);
 
   const [rooms, setRooms] = useState([]);
@@ -267,7 +210,7 @@ const FreeSample = () => {
   const getRooms = async () => {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/rooms`
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getAllRooms`
       );
       console.log(response.data);
       const uniqueResponseRooms = response.data.filter(
@@ -276,15 +219,30 @@ const FreeSample = () => {
       );
       console.log({ products });
       const fetchAllRooms = products.map((item) => item.roomCategory);
-      console.log({ fetchAllRooms });
+      // console.log({ fetchAllRooms });
       const allRooms = fetchAllRooms.flat();
       const uniqueRooms = [...new Set(allRooms)];
       console.log(uniqueRooms);
-      const x = uniqueResponseRooms
-        .filter((room) => uniqueRooms.includes(room.roomType))
-        .map(({ roomType, imgSrc }) => ({ roomType, imgSrc }));
+
+      const roomMap = uniqueResponseRooms.map(({ roomType, imgSrc }) => ({
+        roomType,
+        imgSrc,
+      }));
+      console.log(roomMap);
+      const x = uniqueRooms.map((roomResponse) => {
+        const imgSrc =
+          roomMap.find((room) => room.roomType === roomResponse)?.imgSrc ||
+          "https://ayatrio-bucket.s3.ap-south-1.amazonaws.com/1715509176918_image_x2.jpg";
+        return {
+          roomType: roomResponse,
+          imgSrc,
+        };
+      });
+
+      // const x = uniqueResponseRooms
+      //   .filter((room) => uniqueRooms.includes(room.roomType))
+      //   .map(({ roomType, imgSrc }) => ({ roomType, imgSrc }));
       setRooms(x);
-      console.log(x);
     } catch (error) {
       console.error("Error ocurrs here", error);
     }
@@ -292,7 +250,7 @@ const FreeSample = () => {
 
   useEffect(() => {
     getRooms();
-  }, [subCategory]);
+  }, [products]);
 
   const [colors, setColors] = useState([]);
   useEffect(() => {
@@ -489,7 +447,9 @@ const FreeSample = () => {
   };
 
   const handleNext = () => {
-    router.push("/products/virtualexperience/ayatrio");
+    if (pathname === "/freesample" || pathname === "/freedesign")
+      router.push(`/products/virtualexperience/${selectedCategory}`);
+    else if (pathname === "/virtualexperience") router.push("/liveroom");
     // router.push("/liveroom")
   };
   const usersfilters = useSelector(allSelectedData);
@@ -499,520 +459,344 @@ const FreeSample = () => {
     console.log("Selected Product:", selectedProduct);
   }, [selectedProduct]);
 
+  const stepOneData = [
+    {
+      icon: "/Ayatrio updated icon/payment.svg",
+      label: "Furnituring",
+    },
+    {
+      icon: "/Ayatrio updated icon/payment.svg",
+      label: "Furnishing",
+    },
+    {
+      icon: "/Ayatrio updated icon/payment.svg",
+      label: "Storage plan",
+    },
+  ];
+
   return (
-    <div className="sm:m-[4rem] m-0 px-[20px]">
-      <div>
-        {variant === "subcategory" &&
-          (catDatas && catDatas[0] ? (
-            <>
-              <div className="text-3xl font-bold flex justify-center items-center mt-12">
-                Choose a Subcategory
-              </div>
-              <div className="py-4 relative w-full h-full flex flex-col  justify-center">
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-3 gap-y-1 mb-4 my-0 mx-2">
-                  {subCategory.map((item, index) => (
-                    <div
-                      key={index}
-                      className=" relative  overflow-hidden m-1  group rounded-2xl"
-                    >
-                      <div
-                        onClick={() => {
-                          handleSelectValue("subcategory", item.name);
-                          setSubCategoryState(item.name);
-                        }}
-                        style={{ width: "272px", height: "150px" }}
-                        className={`parent relative rounded-2xl object-cover w-full opactiy-100 h-full block bg-gray-500 
-                        ${subCategoryState === item.name
-                            ? " border-2 border-black"
-                            : ""
-                          }`}
-                      >
-                        <img
-                          className="child absolute object-cover w-full h-full"
-                          src={item.img}
-                          alt={item.name}
-                        />
-                        <h3 className="child absolute right-0 bottom-0 bg-white text-black">
-                          {" "}
-                          {item.name}
-                        </h3>
-                      </div>
+    <div className="pt-[120px] relative h-content  md:min-h-screen">
+      {dataStep.step === 1 && (
+        <div className="px-[20px] md:px-[100px] flex flex-col md:flex-row  justify-between">
+          <div>
+            <h1 className="text-2xl font-medium">Step 1</h1>
+            <h2 className="mt-8 text-2xl font-medium">
+              Tell us about what service looking for
+            </h2>
+            <p className="my-2 text-lg">
+              in this step, we'll ask you what are type service you looking at .
+            </p>
 
-                      {subCategoryState === item.name && (
-                        <div className="room-item absolute top-2 right-2 z-10  flex items-center opacity-50 justify-center">
-                          <div className="circle-container relative flex justify-center items-center rounded-full bg-none">
-                            <Image
-                              src="/svg/icon/tick.svg"
-                              alt="tick"
-                              width={30}
-                              height={30}
-                              className=" opacity-100 rounded-full"
-                            />
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                  <button
-                    onClick={() => {
-                      setSubCategoryState("");
-                    }}
+            <div className="flex flex-wrap gap-4 mt-10 ">
+              {stepOneData.map((data, index) => {
+                return (
+                  <div
+                    key={data.label + index}
+                    onClick={() => setServiceState(index)}
+                    className={`flex flex-col w-48 border-2 border-neutral-600 p-4 cursor-pointer ${
+                      serviceState === index
+                        ? "border-black text-black border-4"
+                        : "text-neutral-500 border-neutral-500"
+                    }`}
                   >
-                    Remove category Filter
-                  </button>
-                </div>
-                <div className="flex justify-end gap-4">
-                  <button
-                    className="bg-green-500 text-white px-4 py-2 rounded"
-                    onClick={() => router.push("/category/freesample")}
-                  >
-                    Back
-                  </button>
-                  <button
-                    className="bg-blue-500 text-white px-4 py-2 rounded"
-                    onClick={() =>
-                      nextVariant("rooms", "subcategory", subCategoryState)
-                    }
-                  >
-                    Next
-                  </button>
+                    <Image src={data.icon} width={50} height={50} />
+                    <span>{data.label}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          {pathname === "/freesample" && (
+            <div className="bg-zinc-50 md:w-[22rem]  px-6 py-10">
+              <div className="flex gap-4 items-center mb-6">
+                <Image
+                  src="/Ayatrio updated icon/payment.svg"
+                  width={40}
+                  height={40}
+                />
+                <div className="flex flex-col">
+                  <h1 className="font-semibold">Select your personal choice</h1>
+                  <p className="text-sm">
+                    Add 1 to 5 designs that catch your eye to your Try At Home
+                    cart.
+                  </p>
                 </div>
               </div>
-              {console.log(subCategoryState)}
-            </>
-          ) : (
-            <p>No data found</p>
-          ))}
-
-        {variant === "rooms" &&
-          (rooms ? (
-            <>
-              <div className="text-3xl font-bold flex justify-center items-center mt-12">
-                Shop by Room
+              <div className="flex gap-4 items-center mb-6">
+                <Image
+                  src="/Ayatrio updated icon/payment.svg"
+                  width={40}
+                  height={40}
+                />
+                <div className="flex flex-col">
+                  <h1 className="font-semibold">Select your personal choice</h1>
+                  <p className="text-sm">
+                    Add 1 to 5 designs that catch your eye to your Try At Home
+                    cart.
+                  </p>
+                </div>
               </div>
-              <div className="py-4 relative w-full h-full flex flex-col  justify-center">
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-3 gap-y-1 mb-4 my-0 mx-2">
-                  {rooms.map((room, index) => (
+              <div className="flex gap-4 items-center mb-6">
+                <Image
+                  src="/Ayatrio updated icon/payment.svg"
+                  width={40}
+                  height={40}
+                />
+                <div className="flex flex-col">
+                  <h1 className="font-semibold">Schedule your try at home</h1>
+                  <p className="text-sm">
+                    We'll be there anytime between Monday to Sunday, at home or
+                    office.
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-4 items-center mb-6">
+                <Image
+                  src="/Ayatrio updated icon/payment.svg"
+                  width={40}
+                  height={40}
+                />
+                <div className="flex flex-col">
+                  <h1 className="font-semibold">We respect your choice</h1>
+                  <p className="text-sm">
+                    Try At Home stress-free, with no obligation to purchas
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+          {pathname === "/freedesign" && (
+            <div className="bg-zinc-50 md:w-[22rem]  px-6 py-10">
+              <div className="flex gap-4 items-center mb-6">
+                <Image
+                  src="/Ayatrio updated icon/payment.svg"
+                  width={40}
+                  height={40}
+                />
+                <div className="flex flex-col">
+                  <h1 className="font-semibold">
+                    Book a free virtual interior design appointment for home
+                  </h1>
+                  <p className="text-sm">
+                    Please fill out the online questionnaire about your project
+                    needs so that we can prepare for our first meeting together.
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-4 items-center mb-6">
+                <Image
+                  src="/Ayatrio updated icon/payment.svg"
+                  width={40}
+                  height={40}
+                />
+                <div className="flex flex-col">
+                  <h1 className="font-semibold">
+                    We understand your project needs to build a vision for you
+                  </h1>
+                  <p className="text-sm">
+                    We will share a mood board and rough plans based on your
+                    online questionnaire to create alignment on the vision for
+                    your space.
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-4 items-center mb-6">
+                <Image
+                  src="/Ayatrio updated icon/payment.svg"
+                  width={40}
+                  height={40}
+                />
+                <div className="flex flex-col">
+                  <h1 className="font-semibold">On-site measurement</h1>
+                  <p className="text-sm">
+                    Meet with your interior designer to approve floor plans,
+                    elevations, and product selections to move toward your final
+                    design solution.
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-4 items-center mb-6">
+                <Image
+                  src="/Ayatrio updated icon/payment.svg"
+                  width={40}
+                  height={40}
+                />
+                <div className="flex flex-col">
+                  <h1 className="font-semibold">Final design solution</h1>
+                  <p className="text-sm">
+                  Your final design package contains a mood board, floor plan, product selection, detailed drawings, material suggestions, and services offer.  
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-4 items-center mb-6">
+                <Image
+                  src="/Ayatrio updated icon/payment.svg"
+                  width={40}
+                  height={40}
+                />
+                <div className="flex flex-col">
+                  <h1 className="font-semibold">Delivery and installation</h1>
+                  <p className="text-sm">
+                  Once the design is confirmed, we will provide fast and convenient delivery as time conform and installation services.</p>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {dataStep.step === 2 && (
+        <div className="px-[20px] md:px-[100px] flex flex-col md:flex-row  justify-between">
+          <div>
+            <h1 className="text-2xl font-medium">Step 2</h1>
+            <h2 className="mt-8 text-2xl font-medium">
+              Tell us about what category looking for
+            </h2>
+            <p className="my-2 text-lg">
+              in this step, we'll ask you what type of category you looking at .
+            </p>
+
+            <div className="flex flex-wrap gap-4 mt-10 ">
+              {allCategories.map((item, index) => {
+                return (
+                  <div key={index} className=" relative  overflow-hidden ">
                     <div
-                      key={index}
-                      className=" relative  overflow-hidden m-1  group rounded-2xl"
+                      onClick={() => {
+                        handleSelectValue("category", item.name);
+                        setCategoryState(index);
+                      }}
+                      className={`relative flex flex-col  w-full opacity-100 h-full cursor-pointer `}
                     >
-                      <div
-                        onClick={() => {
-                          handleSelectValue("room", room.roomType);
-                          setRoomstate(room.roomType);
-                        }}
-                        style={{ width: "272px", height: "150px" }}
-                        className={` rounded-2xl object-cover w-full opactiy-100 h-full block bg-gray-500 
-                        ${roomstate === room ? " border-2 border-black" : ""}`}
-                      >
-                        <img
-                          className="child absolute object-cover w-full h-full"
-                          src={room.imgSrc}
-                          alt={room.roomType}
-                        />
-                        <h3 className="child absolute right-0 bottom-0 bg-white text-black">
-                          {" "}
-                          {room.roomType}
-                        </h3>
-                      </div>
-                      {/* <h3
-                        className={` p-1 rounded-sm absolute right-0 bottom-0 ${
-                          roomstate === room.roomType
-                            ? "font-semibold text-white absolute left-2 bottom-2 bg-transparent"
-                            : "bg-white"
+                      <Image
+                        className={`object-cover w-[272px] h-[150px]  ${
+                          categoryState === index && "border-black border-4"
                         }`}
-                      >
-                        {room.roomType}
-                      </h3> */}
-
-                      {roomstate === room.roomType && (
-                        <div className="room-item absolute top-2 right-2 z-10  flex items-center opacity-50 justify-center">
-                          <div className="circle-container relative flex justify-center items-center rounded-full bg-none">
-                            <Image
-                              src="/svg/icon/tick.svg"
-                              alt="tick"
-                              width={30}
-                              height={30}
-                              className=" opacity-100 rounded-full"
-                            />
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                  <button
-                    onClick={() => {
-                      setRoomstate("");
-                    }}
-                  >
-                    Remove Room Filter
-                  </button>
-                </div>
-                <div className="flex justify-end gap-4">
-                  <button
-                    className="bg-green-500 text-white px-4 py-2 rounded disabled:bg-gray-500 disabled:cursor-not-allowed"
-                    onClick={() => previousVariant("subcategory", "room")}
-                    disabled={variant === "subcategory"}
-                  >
-                    Previous
-                  </button>
-                  <button
-                    className="bg-blue-500 text-white px-4 py-2 rounded"
-                    onClick={() => nextVariant("color", "room", roomstate)}
-                  >
-                    Next
-                  </button>
-                </div>
-              </div>
-            </>
-          ) : (
-            <p>No data found</p>
-          ))}
-
-        {variant === "color" &&
-          (colors ? (
-            <>
-              <div className="text-3xl font-bold flex justify-center items-center mt-12">
-                Shop by Color
-              </div>
-              <div className="py-4 relative w-full h-full flex flex-col  justify-center">
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-3 gap-y-1 mb-4 my-0 mx-2">
-                  {colors.map((color) => (
-                    <div
-                      key={color}
-                      className=" relative  overflow-hidden m-1  group rounded-2xl"
-                    >
-                      <div
-                        onClick={() => {
-                          handleSelectValue("color", color);
-                          setColorstate(color);
-                        }}
-                        style={{ width: "272px", height: "150px" }}
-                        className={` rounded-2xl object-cover w-full opactiy-100 h-full block p-1 bg-gray-500 
-                        ${colorstate === color ? " border-2 border-black" : ""
-                          }`}
-                      ></div>
-                      <h3
-                        className={` p-1 rounded-sm absolute right-0 bottom-0 ${colorstate === color
-                            ? "font-semibold text-white absolute left-2 bottom-2 bg-transparent"
-                            : "bg-white"
-                          }`}
-                      >
-                        {color}
+                        width={300}
+                        height={300}
+                        src={item.image}
+                        alt={item.name}
+                      />
+                      <h3 className=" text-xl text-center mt-2 font-medium">
+                        {item.name}
                       </h3>
-
-                      {colorstate === color && (
-                        <div className="room-item absolute top-2 right-2 z-10  flex items-center opacity-50 justify-center">
-                          <div className="circle-container relative flex justify-center items-center rounded-full bg-none">
-                            <Image
-                              src="/svg/icon/tick.svg"
-                              alt="tick"
-                              width={30}
-                              height={30}
-                              className=" opacity-100 rounded-full"
-                            />
-                          </div>
-                        </div>
-                      )}
                     </div>
-                  ))}
-                  <button
-                    onClick={() => {
-                      setColorstate("");
-                    }}
-                  >
-                    Remove Room Filter
-                  </button>
-                </div>
-                <div className="flex justify-end gap-4">
-                  <button
-                    className="bg-green-500 text-white px-4 py-2 rounded disabled:bg-gray-500 disabled:cursor-not-allowed"
-                    onClick={() => previousVariant("rooms", "color")}
-                  >
-                    Previous
-                  </button>
-                  <button
-                    className="bg-blue-500 text-white px-4 py-2 rounded"
-                    onClick={() => nextVariant("style", "color", colorstate)}
-                  >
-                    Next
-                  </button>
-                </div>
-              </div>
-            </>
-          ) : (
-            <p>No data found</p>
-          ))}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
 
-        {variant === "style" &&
-          (styles ? (
-            <>
-              <div className="text-3xl font-bold flex justify-center items-center mt-12">
-                Shop by style
-              </div>
-              <div className="py-4 relative w-full h-full flex flex-col  justify-center">
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-3 gap-y-1 mb-4 my-0 mx-2">
-                  {styles.map((style) => (
+      {dataStep.step === 3 && (
+        <div className="px-[20px] md:px-[100px] flex flex-col md:flex-row  justify-between">
+          <div>
+            <h1 className="text-2xl font-medium">Step 3</h1>
+            <h2 className="mt-8 text-2xl font-medium">
+              Tell us about your place
+            </h2>
+            <p className="my-2 text-lg">
+              in this step, we'll ask you what type of room you want to design.
+            </p>
+
+            <div className="flex flex-wrap gap-4 mt-10 ">
+              {rooms.map((item, index) => {
+                return (
+                  <div key={index} className=" relative  overflow-hidden ">
                     <div
-                      key={style}
-                      className=" relative  overflow-hidden m-1  group rounded-2xl"
+                      onClick={() => {
+                        handleSelectValue("room", item.roomType);
+                        setRoomstate(index);
+                      }}
+                      className={`relative flex flex-col  w-full opacity-100 h-full cursor-pointer `}
                     >
-                      <div
-                        onClick={() => {
-                          handleSelectValue("style", style);
-                          setStylestate(style);
-                        }}
-                        style={{ width: "272px", height: "150px" }}
-                        className={` rounded-2xl object-cover w-full opactiy-100 h-full block p-1 bg-gray-500 
-                        ${stylestate === style ? " border-2 border-black" : ""
-                          }`}
-                      ></div>
-                      <h3
-                        className={` p-1 rounded-sm absolute right-0 bottom-0 ${stylestate === style
-                            ? "font-semibold text-white absolute left-2 bottom-2 bg-transparent"
-                            : "bg-white"
-                          }`}
-                      >
-                        {style}
+                      <Image
+                        className={`object-cover w-[272px] h-[150px]  ${
+                          roomstate === index && "border-black border-4"
+                        }`}
+                        width={300}
+                        height={300}
+                        src={item.imgSrc}
+                        alt={item.name}
+                      />
+                      <h3 className=" text-xl text-center mt-2 font-medium">
+                        {item.roomType}
                       </h3>
-
-                      {stylestate === style && (
-                        <div className="room-item absolute top-2 right-2 z-10  flex items-center opacity-50 justify-center">
-                          <div className="circle-container relative flex justify-center items-center rounded-full bg-none">
-                            <Image
-                              src="/svg/icon/tick.svg"
-                              alt="tick"
-                              width={30}
-                              height={30}
-                              className=" opacity-100 rounded-full"
-                            />
-                          </div>
-                        </div>
-                      )}
                     </div>
-                  ))}
-                  <button
-                    onClick={() => {
-                      setStylestate("");
-                    }}
-                  >
-                    Remove color Filter
-                  </button>
-                </div>
-                <div className="flex justify-end gap-4">
-                  <button
-                    className="bg-green-500 text-white px-4 py-2 rounded disabled:bg-gray-500 disabled:cursor-not-allowed"
-                    onClick={() => previousVariant("color", "style")}
-                  >
-                    Previous
-                  </button>
-                  <button
-                    className="bg-blue-500 text-white px-4 py-2 rounded"
-                    onClick={() => nextVariant("price", "style", stylestate)}
-                  >
-                    Next
-                  </button>
-                </div>
-              </div>
-            </>
-          ) : (
-            <p>No data found</p>
-          ))}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
+      {dataStep.step === 4 && (
+        <div className="px-[20px] md:px-[100px] flex flex-col md:flex-row  justify-between">
+          <div>
+            <h1 className="text-2xl font-medium">Step 4</h1>
+            <h2 className="mt-8 text-2xl font-medium">
+              Tell us about how much finance
+            </h2>
+            <p className="my-2 text-lg">
+              in this step, we'll ask you what are type room do you want design.
+            </p>
 
-        {variant === "price" &&
-          (price ? (
-            <>
-              <div className="text-3xl font-bold flex justify-center items-center mt-12">
-                Shop by price
-              </div>
-              <div className="py-4 relative w-full h-full flex flex-col  justify-center">
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-3 gap-y-1 mb-4 my-0 mx-2">
-                  {price.map((item, index) => (
+            <div className="flex flex-wrap gap-4 mt-10 ">
+              {price.map((item, index) => {
+                return (
+                  <div key={index} className=" relative  overflow-hidden ">
                     <div
-                      key={index}
-                      className=" relative  overflow-hidden m-1  group rounded-2xl"
+                      onClick={() => {
+                        handleSelectValue("price", item.price);
+                        setPriceState(index);
+                      }}
+                      className={`relative w-[272px] h-[150px] flex flex-col border-2  justify-center  opacity-100 cursor-pointer ${
+                        priceState === index && "border-black border-4"
+                      }`}
                     >
-                      <div
-                        onClick={() => {
-                          handleSelectValue("price", item.price);
-                          setPriceState(item.price);
-                        }}
-                        style={{ width: "272px", height: "150px" }}
-                        className={` rounded-2xl object-cover w-full opactiy-100 h-full block p-1 bg-gray-500 
-                        ${priceState === item.price
-                            ? " border-2 border-black"
-                            : ""
-                          }`}
-                      ></div>
-                      <h3
-                        className={` p-1 rounded-sm absolute right-0 bottom-0 ${priceState === item.price
-                            ? "font-semibold text-white absolute left-2 bottom-2 bg-transparent"
-                            : "bg-white"
-                          }`}
-                      >
+                      <h3 className=" text-xl text-center mt-2 font-medium">
                         {item.price}
                       </h3>
-
-                      {priceState === item.price && (
-                        <div className="room-item absolute top-2 right-2 z-10  flex items-center opacity-50 justify-center">
-                          <div className="circle-container relative flex justify-center items-center rounded-full bg-none">
-                            <Image
-                              src="/svg/icon/tick.svg"
-                              alt="tick"
-                              width={30}
-                              height={30}
-                              className=" opacity-100 rounded-full"
-                            />
-                          </div>
-                        </div>
-                      )}
                     </div>
-                  ))}
-                  <button
-                    onClick={() => {
-                      setPriceState("");
-                    }}
-                  >
-                    Remove color Filter
-                  </button>
-                </div>
-                <div className="flex justify-end gap-4">
-                  <button
-                    className="bg-green-500 text-white px-4 py-2 rounded disabled:bg-gray-500 disabled:cursor-not-allowed"
-                    onClick={() => previousVariant("style", "price")}
-                  >
-                    Previous
-                  </button>
-                  <button
-                    className="bg-blue-500 text-white px-4 py-2 rounded"
-                    // onClick={() => nextVariant("products", "price", priceState)}
-                    onClick={() => handleNext()}
-                  >
-                    Next
-                  </button>
-                </div>
-              </div>
-            </>
-          ) : (
-            <p>No data found</p>
-          ))}
-
-        {variant === "products" && (
-          <>
-            <div>
-              {filters.length > 0 && (
-                <div>
-                  <h1>Your Filters</h1>
-                  {filters.map((item) => (
-                    <div key={item.title} className="bg-yellow-200">
-                      <span>{item.title} : </span>
-                      <span>{item.value}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-              <button
-                className="bg-green-500 text-white px-4 py-2 rounded disabled:bg-gray-500 disabled:cursor-not-allowed"
-                onClick={() => previousVariant("color", "color")}
-              >
-                Previous
-              </button>
-              <button
-                className="bg-blue-500 text-white ml-4 px-4 py-2 rounded disabled:bg-gray-500 disabled:cursor-not-allowed"
-                onClick={() => handleNext()}
-              >
-                Next
-              </button>
-              <h1 className="mt-20">Choose a Product</h1>
-              {filteredProducts?.length > 0 ? (
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-3 gap-y-1 mb-4 my-0 mx-2">
-                  {filteredProducts?.map((item) => (
-                    <div
-                      key={item._id}
-                      className=" relative  overflow-hidden m-1 aspect-w-16 aspect-h-9 group"
-                    >
-                      <img
-                        src={item.images}
-                        alt={item.productTitle}
-                        onClick={() => {
-                          console.log({ item });
-                          // handleres(
-                          //   item.productId,
-                          //   item.images[0],
-                          //   item.perUnitPrice,
-                          //   item.productTitle
-                          // );
-                          handleSelectProduct(item.productId);
-                          handleSelect();
-
-                          console.log(
-                            selectedProduct.productId === item.productId
-                          );
-                        }}
-                        className={`room-item rounded-2xl object-cover w-full opactiy-100 h-full block p-1
-                    ${selectedProduct.productId === item.productId
-                            ? " "
-                            : "overlay z-10 "
-                          }  ${selectedProduct.productId === item.productId
-                            ? " border-2 border-black "
-                            : ""
-                          }
-                  `}
-                      />
-
-                      {/* Your existing code for displaying product title */}
-                      <h3
-                        className={` p-1 rounded-sm absolute right-0 bottom-0
-                    ${selectedProduct.productId === item.productId
-                            ? "font-semibold text-white absolute left-2 bottom-2 bg-transparent"
-                            : "bg-white"
-                          }
-                  `}
-                      >
-                        {item.productTitle}
-                      </h3>
-
-                      {/* Your existing code for displaying the tick icon */}
-                      {selectedProduct.productId === item.productId && (
-                        <div className="room-item absolute top-2 right-2 z-10  flex items-center opacity-50 justify-center">
-                          <div className="circle-container relative flex justify-center items-center">
-                            <Image
-                              src="/svg/icon/tick.svg"
-                              alt="tick"
-                              width={30}
-                              height={30}
-                              className=" opacity-100"
-                            />
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div>No products found based on selected filters.</div>
-              )}
+                  </div>
+                );
+              })}
             </div>
-            <Link
-              href={{
-                pathname: "/checkout",
-                query: {
-                  search: "freesample",
-                },
-              }}
-              className="memberCheckout my-4 flex items-center justify-center"
-            >
-              <button
-                onClick={() => handleClickDB()}
-                className="bg-black text-white sm:w-40 w-40 sm:h-16 h-8 rounded-full hover:bg-gray-900 transition duration-300"
-              >
-                Free Sample
-              </button>
-            </Link>
-          </>
-        )}
-      </div>
+          </div>
+        </div>
+      )}
+
+      <section className=" fixed w-full mt-16 h-20  bottom-0 bg-white">
+        <div className="flex items-center gap-2 w-full">
+          {steps.map((step, index) => {
+            return (
+              <div
+                key={step.step + index}
+                className={` h-2 w-full rounded ${
+                  step.selected ? "bg-black" : "bg-gray-300"
+                } `}
+              ></div>
+            );
+          })}
+        </div>
+        <div className="h-14 flex justify-between items-center  container mx-auto ">
+          <button
+            className="text-lg font-bold border-2 border-transparent hover:border-black  py-1 px-6 rounded-full"
+            disabled={dataStep.step === 1}
+            onClick={() => handlePreviousButton()}
+          >
+            Back
+          </button>
+          <button
+            className="text-lg font-bold bg-black text-white py-1 px-6 rounded-full hover:bg-gray-800 disabled:bg-gray-300 disabled:text-black disabled:cursor-not-allowed"
+            // disabled={dataStep.step === 4}
+            disabled = {dataStep.step === 2 && categoryState < 0 || dataStep.step === 3 && roomstate < 0 || dataStep.step === 4 && priceState < 0}
+            onClick={() => handleNextButton()}
+          >
+            Next
+          </button>
+        </div>
+      </section>
     </div>
   );
 };

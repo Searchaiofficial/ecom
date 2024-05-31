@@ -97,7 +97,7 @@ const Multicard = () => {
               width={20}
               height={20}
               alt="Arrow"
-              className="right mr-16   rounded-full h-7 w-7"
+              className="right lg:mr-16 mr-6   rounded-full h-7 w-7"
             />
           </div>
         </Swiper>

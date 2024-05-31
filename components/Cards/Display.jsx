@@ -11,6 +11,26 @@ const Display = async () => {
 
   return (
     <>
+      <div className="px-[15px] mt-[20px] lg:mt-0 pt-[30px] mb-[32px]">
+        <div>
+          <h1 className="mb-[8px] text-2xl font-semibold">{apiData[0]?.mainHeading}</h1>
+          <div className="flex items-center justify-between">
+            <p className="text-[14px] lg:w-[70%] line-clamp-2 lg:line-clamp-none font-normal">{apiData[0]?.description}</p>
+            <div class="border hidden border-black rounded-full lg:flex items-center justify-center h-[40px] cursor-pointer hover:border-gray-700 transition-colors">
+              <Link
+                href={`/rooms/${apiData[0].room.roomType.replace(
+                  / /g,
+                  "-"
+                )}`}
+              >
+
+                <p class="px-6 text-[12px] font-semibold">For more floor inspiration</p>
+              </Link>
+            </div>
+
+          </div>
+        </div>
+      </div>
       <div className="px-[15px] flex flex-col  lg:grid lg:grid-cols-2 md:flex-row gap-4  items-center justify-between mx-auto my-8">
         <div className="w-full">
           {apiData && apiData.length > 0 ? (
@@ -98,6 +118,18 @@ const Display = async () => {
             </>
           )}
         </div>
+      </div>
+      <div className="flex h-[60px] border-b px-[15px] items-center justify-between lg:hidden">
+        <Link
+          href={`/rooms/${apiData[0].room.roomType.replace(
+            / /g,
+            "-"
+          )}`}
+        >
+
+          <p class="text-[14px] font-semibold">For more floor inspiration</p>
+        </Link>
+        <Image src={"Ayatrio updated icon/backarrow.svg"} width={15} height={15} className="" />
       </div>
     </>
   );

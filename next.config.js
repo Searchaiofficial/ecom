@@ -79,7 +79,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "images.unsplash.com",
+        hostname: "scontent.cdninstagram.com",
       },
       {
         protocol: "https",
@@ -92,6 +92,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "source.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "scontent.cdninstagram.com",
       },
     ],
     // domains: ["images.unsplash.com"],

@@ -13,8 +13,12 @@ const FooterContent = dynamic(() => import('../molecules/FooterContent'), {
 const Footer = () => {
   const pathname = usePathname();
   const liveRoomRoute = "/liveroom"
+  const virtualRoomRoute = "/virtualexperience"
+  const freeDesignRoute = "/freedesign"
+  const freeSamplesRoute = "/freesample"
+
   return (
-    <div className={`${liveRoomRoute === pathname && "hidden"} bg-gray-100 lg:px-[67px] sm:px-[50px] px-[20px] p mt-20 pt-[70px]`}>
+    <div className={`${(liveRoomRoute === pathname || virtualRoomRoute === pathname || freeDesignRoute === pathname || freeSamplesRoute === pathname ) && "hidden"} bg-gray-100 lg:px-[67px] sm:px-[50px] px-[20px] p mt-20 pt-[70px]`}>
       <div className="grid md:grid-cols-6 grid-cols-1 pb-9">
         <div className="md:col-span-2 row-span-1 col-span-1 mr-12 mb-5">
           <JoinAyatrioFamily />

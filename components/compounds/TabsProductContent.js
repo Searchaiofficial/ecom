@@ -21,7 +21,6 @@ const TabsProductContent = (props) => {
     stickyDrop,
   } = props;
 
-  console.log(filterArr)
 
   return (
     <>

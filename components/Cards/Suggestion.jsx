@@ -111,7 +111,7 @@ const Suggestion = () => {
           slideNextClass="custom-next-button"
           slidePrevClass="custom-prev-button"
           // onSwiper={setSwiperRef}
-          className="px-10 min-h-[600px]"
+          className="px-10 min-h-[600px] lg:min-h-[750px]"
         >
           {!suggestionSlider ? (
             <SwiperSlide>

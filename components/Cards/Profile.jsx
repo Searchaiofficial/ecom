@@ -39,7 +39,7 @@ const Profile = async () => {
             <button className=" bg-black pt-3 pb-3 pr-[25px] pl-[25px] mb-5 lg:mb-12 rounded-full flex justify-center items-center text-white">
               <p>Book an appointment</p>
               <div className="ml-5">
-                <Image src={"/Ayatrio updated icon/Back_arrow_white.svg"} alt="arrow profile" height={20} width={20} />
+                <Image src={"/Ayatrio updated icon/Back_arrow_white.svg"} alt="arrow profile" height={15} width={15} />
               </div>
             </button>
           </div>

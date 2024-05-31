@@ -8,8 +8,28 @@ const RoomCard = async () => {
   const gallery = await fetchGalleryData();
   return (
     <>
+      <div className="px-[15px] mb-[32px]">
+        <div>
+          <h1 className="mb-[8px] text-2xl font-semibold">{gallery.items[0]?.mainHeading}</h1>
+          <div className="flex items-center justify-between">
+            <p className="text-[14px] lg:w-[70%] line-clamp-2 font-normal">{gallery.items[0]?.description}</p>
+            <div class="border hidden border-black rounded-full lg:flex items-center justify-center h-[40px] cursor-pointer hover:border-gray-700 transition-colors">
+              <Link
+                href={`heading/offers/${gallery.items[0].offer.replace(
+                  / /g,
+                  "-"
+                )}`}
+              >
+
+                <p class="px-6 text-[12px] font-semibold">Shop all New lower price</p>
+              </Link>
+            </div>
+
+          </div>
+        </div>
+      </div>
       {gallery && (
-        <div className="px-[15px] flex justify-between mx-auto mb-10 ">
+        <div className="px-[15px] flex justify-between mx-auto mb-[12px] lg:mb-10 ">
           <div className=" w-full flex justify-center max-h-[915px] screens ">
             <div className="w-full  lg:h-[730px] grid grid-cols-2 lg:grid-cols-12 gap-y-4  gap-x-4 auto-rows-fr">
               {/* 1 */}
@@ -154,6 +174,17 @@ const RoomCard = async () => {
           </div>
         </div>
       )}
+      <Link
+        href={`heading/offers/${gallery.items[0].offer.replace(
+          / /g,
+          "-"
+        )}`}
+      >
+        <div className="flex mb-[20px] h-[60px] border-b px-[15px] items-center justify-between lg:hidden">
+          <p class="text-[14px] font-semibold">Shop all New lower price</p>
+          <Image src={"Ayatrio updated icon/backarrow.svg"} width={15} height={15} className="" />
+        </div>
+      </Link>
     </>
   );
 };

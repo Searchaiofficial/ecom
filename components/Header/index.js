@@ -28,6 +28,8 @@ function Header({ setIsHeaderMounted }) {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const quantity = useSelector(selectQuantity);
+  const [sidebarNavigationItem, setSidebarNavigationItem] = useState("")
+
 
   // Filter
 
@@ -42,13 +44,30 @@ function Header({ setIsHeaderMounted }) {
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+
+    if (document.body.style.overflow != "hidden") {
+      document.body.style.overflow = "hidden"
+    }
+    else if (document.body.style.overflow = "hidden") {
+      document.body.style.overflow = "auto";
+    }
+
+    if (pathname !== "/") {
+      if (document.body.style.overflow = "visible") {
+        document.body.style.overflow = "visible"
+      }
+    }
+
   };
 
-  const toggleDropdown = () => {
+  const toggleDropdown = (item) => {
+    setSidebarNavigationItem(item)
     setIsOpen(!isOpen);
   };
+
 
   const handleMouseEnter = (index) => {
     setHoveredIndex(index);
@@ -111,10 +130,15 @@ function Header({ setIsHeaderMounted }) {
 
   const handleModalOpen = () => {
     setModalOpen(true);
+    // document.body.style.overflow = "hidden";
+    if (window.matchMedia("(max-width: 768px)").matches) {
+      document.body.style.overflow = "hidden";
+    }
   };
   const handleModalClose = (event) => {
     event.stopPropagation();
     setModalOpen(false);
+    document.body.style.overflow = "auto";
     onClose();
   };
 
@@ -127,14 +151,70 @@ function Header({ setIsHeaderMounted }) {
     };
 
     window.addEventListener('scroll', handleScroll);
-
-    // Cleanup the event listener on component unmount
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   const homeRoute = "/";
+
+  const [displayedText, setDisplayedText] = useState("");
+  const phrases = [` ' Wallpapers '`, ` ' Curtains '`, ` ' Blinds '`];
+
+  useEffect(() => {
+    let currentPhraseIndex = 0;
+    let index = 0;
+    let typingTimeout;
+    let phraseTimeout;
+
+    const typeWriter = () => {
+      if (index < phrases[currentPhraseIndex].length) {
+        setDisplayedText(`${phrases[currentPhraseIndex].slice(0, index + 1)}`);
+        index++;
+        typingTimeout = setTimeout(typeWriter, 50);
+      } else {
+        phraseTimeout = setTimeout(() => {
+          index = 0;
+          currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+          typeWriter();
+        }, 1000);
+      }
+    };
+
+    if (searchQuery) {
+      setDisplayedText(`Search for ${searchQuery}`);
+      clearTimeout(typingTimeout);
+      clearTimeout(phraseTimeout);
+    } else {
+      typeWriter();
+    }
+
+    return () => {
+      clearTimeout(typingTimeout);
+      clearTimeout(phraseTimeout);
+    };
+  }, [searchQuery]);
+
+
+  const handleLoginClick = () => {
+    router.push("/login")
+  }
+
+  const handleLogoutClick = () => {
+    localStorage?.removeItem("token");
+    window?.open(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/logout", "_self"`
+    );
+  }
+
+
+  const handleClick = (link) => {
+
+    toggleMobileMenu()
+    // router.push("/customerservice")
+    router.push(link)
+  }
+
 
   return (
     <div className="">
@@ -196,7 +276,7 @@ function Header({ setIsHeaderMounted }) {
                               ? "/heading/offers/all"
                               : "#"
                           }
-                          onClick={toggleDropdown}
+                          onClick={() => toggleDropdown(value.label)}
                         >
                           <p
                             className={`block font-medium py-[15px] px-[5px] border-b-2  ${hoveredIndex === idx
@@ -209,7 +289,7 @@ function Header({ setIsHeaderMounted }) {
                         </Link>
                         {hoveredIndex === idx && (
                           // <Asidebox asideSectionList={value.asideSectionList} />
-                          <Asidebox hoveredIndex={hoveredIndex} setHoveredIndex={setHoveredIndex} label={value.label}/>
+                          <Asidebox hoveredIndex={hoveredIndex} setHoveredIndex={setHoveredIndex} label={value.label} />
                         )}
                         {/* {value.label === "Rooms" && hoveredIndex === idx && (
                           <Midsection />
@@ -224,7 +304,7 @@ function Header({ setIsHeaderMounted }) {
               <div className="flex flex-row items-center justify-between  lg:gap-2">
                 <div
                   onClick={handleModalOpen}
-                  className="bg-[#f5f5f5] justify-end rounded-full w-[11rem] h-10 p-[9px] hover:bg-[#e5e5e5] hover:rounded-full cursor-pointer lg:block hidden"
+                  className="bg-[#f5f5f5] items-center justify-end rounded-full w-[13rem] h-10 p-[9px] hover:bg-[#e5e5e5] hover:rounded-full cursor-pointer lg:block hidden"
                 >
                   <span>
                     <Image
@@ -235,7 +315,7 @@ function Header({ setIsHeaderMounted }) {
                       height={27}
                     />
                   </span>
-                  <p className="ml-6  text-gray-400">Search</p>
+                  <p className="ml-7 self-center lg:text-[13px] text-[12px] mt-0.5   text-gray-400"> Search for {displayedText}</p>
                 </div>
                 {/* <div
                   className="md:hidden block w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer"
@@ -338,9 +418,9 @@ function Header({ setIsHeaderMounted }) {
                     height={20}
                     className="ml-[10px]"
                   />
-                  <p className="ml-3  text-gray-400">Search</p>
+                  <p className="ml-3 line-clamp-1 text-[13px] mt-[2px]  text-gray-400">Search for {displayedText}</p>
                 </div>
-                <Image src={"/ayatrio icon/camera.svg"} width={20} height={20} className="mr-[10px]" />
+                <Image src={"/Ayatrio updated icon/camera.svg"} width={20} height={20} className="mr-[10px] ml-[10px]" />
               </div>
             </div>}
           </>
@@ -364,7 +444,8 @@ function Header({ setIsHeaderMounted }) {
             className="fixed inset-0 flex flex-col px-[10px] overflow-y-hidden bg-white z-[9998] md:hidden"
           >
             <div className="flex justify-between items-center py-[5px] w-full h-fit mb-4">
-              <div className=" flex items-center justify-start ">
+              <div className=" flex items-center">
+                {/* <Image src={"/Ayatrio updated icon/backarrow.svg"} height={20} width={20} className="rotate-180" /> */}
                 <div className="mainlogo">
                   <Link href="/">
                     <Image
@@ -373,7 +454,7 @@ function Header({ setIsHeaderMounted }) {
                       width={300}
                       height={40}
                       priority
-                      className="p-2  sm:w-44"
+                      className="py-2 pr-2  sm:w-44"
                     />
                   </Link>
                 </div>
@@ -385,7 +466,7 @@ function Header({ setIsHeaderMounted }) {
             </div>
 
             {/* <div className="flex"> */}
-            <div className="flex flex-col space-y-2 ">
+            <div className="flex flex-col space-y-2  ">
               {headerLinks.map((value, idx) => (
                 <div
                   key={idx}
@@ -394,7 +475,7 @@ function Header({ setIsHeaderMounted }) {
                 // onClick={() => handleClick(idx)}
                 >
                   <Link
-                    className={`text-md  font-semibold  ${isOpen ? "border-b-2 border-black" : ""
+                    className={`text-md  font-semibold flex items-center justify-between  ${isOpen ? "border-b-2 border-black" : ""
                       }`}
                     href="#"
                     onClick={toggleDropdown}
@@ -407,13 +488,35 @@ function Header({ setIsHeaderMounted }) {
                     >
                       {value.label}
                     </p>
-                  </Link>
+                    <div className="pr-[14px]">
+                      <Image src={"/Ayatrio updated icon/backarrow.svg"} height={15} width={15} />
+
+                    </div>                  </Link>
                   {idx < 3 && hoveredIndex === idx && (
-                    <Asidebox hoveredIndex={hoveredIndex} />
+                    <Asidebox hoveredIndex={hoveredIndex} selectedItem={"Home decor"} />
                   )}
                   {idx === 3 && hoveredIndex === idx && <Midsection />}
                 </div>
               ))}
+            </div>
+            <div className="border-t pt-6 pl-2">
+              <div className="flex flex-col">
+                <div onClick={() => handleClick("category/virtualexperience")} className="">
+                  <p className="text-[14px] py-[8px] font-normal">Live shopping</p>
+                </div>
+                <div onClick={() => handleClick("category/freedesign")}>
+                  <p className="text-[14px] py-[8px] font-normal">Designer request</p>
+                </div>
+                <div onClick={() => handleClick("category/freesample")} >
+                  <p className="text-[14px] py-[8px] font-normal">Free sample request</p>
+                </div>
+                <div onClick={() => handleClick("/customerservice")}>
+                  <p className="text-[14px] py-[8px] font-normal">Help</p>
+                </div>
+                {
+                  loginStatus === true ? <p className="text-[14px] font-medium" onClick={handleLogoutClick}>Logout</p> : <p className="text-[14px] font-medium" onClick={handleLoginClick}>Login</p>
+                }
+              </div>
             </div>
             {/* </div> */}
           </div>

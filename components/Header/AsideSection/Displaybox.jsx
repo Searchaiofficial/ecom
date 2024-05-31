@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ListContent from "./ListContent";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 const Displaybox = (props) => {
   const router = useRouter();
@@ -9,6 +10,7 @@ const Displaybox = (props) => {
 
   const handleClick = (value) => {
     // const category = value.replace(/\s+/g, "-").toLowerCase();
+    handleIncrementCategoryPopularity();
     const category = value.toLowerCase().replace(/ /g, "-");
     const newPath = `/${props.parentCategory}/${currentCategory}/${category}`;
     router.push(newPath);
@@ -22,16 +24,27 @@ const Displaybox = (props) => {
     }
   }, [props.data.name]);
 
+  const handleIncrementCategoryPopularity = async () => {
+    try {
+        await axios.get(
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/incrementCategoryPopularity?category=${currentCategory}`
+        );
+    } catch (error) {
+        console.error("Error incrementing category popularity:", error);
+    }
+};
+  
+
   return (
-    <main className="w-full p-4 noto-sans-200">
-      <h1 className="text-[14px] mb-4 font-semibold w-full">
+    <main className="w-full  noto-sans-200">
+      <h1 className="lg:text-[14px] text-[18px] p-2 mb-2 font-semibold w-full">
         {props.data?.name}
       </h1>
-      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 lg:gap-8 sm:grid-cols-2 lg:grid-cols-4 ">
         {props.data?.subcategories && props.data.subcategories.length > 0 ? (
           props.data.subcategories.map((item) => (
             <div
-              className="flex gap-4 p-2 items-center cursor-pointer hover:bg-[#e5e5e5]"
+              className="flex lg:flex-row flex-col gap-1 lg:gap-4 p-2  sm:items-center cursor-pointer hover:bg-[#e5e5e5]"
               onClick={() => handleClick(item.name)}
             >
               <Image

@@ -26,15 +26,16 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const cachedData = sessionStorage.getItem("cachedData");
+      // const cachedData = sessionStorage.getItem("cachedData");
       const cachedSearchText = sessionStorage.getItem("cachedSearchText");
+
 
       if (debouncedSearchQuery !== cachedSearchText) {
         // Perform the search and update the cache
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/products?search=${searchQuery}`
         );
-        sessionStorage.setItem("cachedData", JSON.stringify(response.data));
+        // sessionStorage.setItem("cachedData", JSON.stringify(response.data));
         sessionStorage.setItem("cachedSearchText", debouncedSearchQuery);
 
         setData(response.data);
@@ -52,6 +53,17 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
       setLoading(false);
     }
   };
+
+
+
+
+  useEffect(() => {
+    if (searchQuery === "") {
+      setData([])
+    }
+  }, [searchQuery])
+
+
 
   // console.log("cached data is ", JSON.parse(cacheddata));
   useEffect(() => {
@@ -74,7 +86,7 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
     // router.push(`/product`);
     // router.push("/room/" + item.id);
   };
-  const handleclick = async (id, category) => {};
+  const handleclick = async (id, category) => { };
   const path = usePathname();
   // useEffect(() => {
   //   console.log("mounts")
@@ -88,24 +100,43 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
   //   })
   // }, [Router,router]);
 
+  const [overflowStyle, setOverflowStyle] = useState({});
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setOverflowStyle({ overflowY: "auto" });
+      } else {
+        setOverflowStyle({});
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+
   return (
     <>
       <div
-        className={`expanded-search-box block pt-[10px] bg-white sm:h-310px h-full  sm:w-full w-[100vw]  absolute right-0 top-0 sm:shadow-[0_350px_60px_500px_rgba(0,0,0,0.5)] z-[9999] ${
-          path == "/" ? "sm:mt-[-36px]" : ""
-        } `}
+        className={`expanded-search-box block pt-[12px]  bg-white sm:h-310px h-full  sm:w-full w-[100vw]  absolute right-0 top-0  z-[9999] ${path == "/" ? "sm:mt-[-36px]" : ""
+          } `} style={overflowStyle}
       >
-        <div className="flex flex-row gapofsearchclose  justify-between bg-white rounded-lg w-full absolute left-0">
-          <div className="logo hidden sm:block pl-[50px]">
-            <Image src={ayatrioLogo} className="w-40 z-30" alt="Ayatrio Logo" />
+        <div className="flex flex-row pl-[24px] lg:pl-[0px] items-center  justify-between bg-white  w-full absolute left-0">
+          <div className="logo hidden sm:block pl-[48px]">
+            <Image src={ayatrioLogo} className="w-36 z-30" alt="Ayatrio Logo" />
           </div>
-          <div className="searchDiv  flex flex-col">
-            <div className="searchCon relative sm:w-[600px] w-[60vw] bg-zinc-100 p-2 rounded-none">
+          <div className="searchDiv lg:px-40 lg:mr-[100px] h-[36px] lg:h-[45px] flex-1 rounded-full  flex flex-col">
+            <div className="searchCon rounded-full relative w-full bg-zinc-100 p-2 ">
               <input
                 ref={inputRef}
                 type="text"
                 placeholder="Search"
-                className="search-input bg-transparent h-full sm:w-full w-[60vw] pl-10 border-0 focus:outline-none"
+                className="search-input rounded bg-transparent h-full sm:w-full w-full pl-10 border-0 focus:outline-none"
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
@@ -121,82 +152,82 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
             </div>
           </div>
           <div
-            className="close text-base font-medium mr-4 pt-2.5 mr-[80px] cursor-pointer"
+            className="close text-base font-medium pr-[24px] pl-[10px] lg:pl-[0px]  lg:pr-[48px]  cursor-pointer"
             onClick={onClose}
           >
             Close
           </div>
         </div>
         <div
-          className={`dropdown   sm:pt-20 pt-0 sm:pb-[50px] pb-0 flex sm:flex-row flex-col justify-center gap-4 max-w-full bg-white ${
-            searchQuery
-              ? "sm:pl-[50px] pl-0 "
-              : "items-center sm:pr-[50px] pr-0 sm:pl-[50px] pl-0 "
-          }`}
+          className={`dropdown lg:mt-[48px] lg:pt-[32px] pb-[60px] mt-[60px]  sm:pb-[50px]  flex sm:flex-row flex-col   max-w-full bg-white ${searchQuery
+            ? "sm:px-[48px] pl-0"
+            : "sm:pr-[48px] sm:pl-[360px]"
+            }`}
         >
           <div
-            className={`items flex cursor-pointer sm:w-70 w-[200px]  flex-col 
+            className={`items-start flex cursor-pointer pl-[24px] sm:pl-[0px] flex-col 
            
           `}
           >
-            <div className="dropdown-item sm:font-medium font-base py-2 sm:text-xl text-lg  text-black">
+            <div className="dropdown-item sm:font-medium  pb-2 text-[14px]  text-[#707072]">
               Popular Searches
             </div>
-            <div className="dropdown-item sm:font-medium font-base py-2 sm:text-lg  text-lg text-[#707072]">
+            <div className="dropdown-item sm:font-medium  py-2   text-[20px] font-medium ">
               Engineering flooring
             </div>
-            <div className="dropdown-item sm:font-medium font-base py-2 sm:text-lg  text-lg text-[#707072]">
+            <div className="dropdown-item sm:font-medium  py-2  text-[20px] font-medium  ">
               Luxurious curtains
             </div>
-            <div className="dropdown-item sm:font-medium font-base py-2 sm:text-lg  text-lg text-[#707072]">
+            <div className="dropdown-item sm:font-medium  py-2   text-[20px] font-medium ">
               Wallpaper for home
             </div>
-            <div className="dropdown-item sm:font-medium font-base py-2 sm:text-lg  text-lg text-[#707072]">
+            <div className="dropdown-item sm:font-medium hidden sm:flex  py-2  text-[20px] font-medium ">
               Vinyl
             </div>
           </div>
 
-          <div className="grid sm:grid-cols-5 grid-cols-2 gap-6 sm:ml-32 ml-5 mt-3">
-            {(!cacheddata && !data) || isLoading ? (
-              <p className="flex flex-row justify-center items-center">
-                No results found
-              </p>
-            ) : (
-              (data && data.length > 0
-                ? data
-                : cacheddata && cacheddata.length > 0
-                ? cacheddata
-                : []
-              ).map((item) => (
-                <Link href={`/product/${item.productTitle}`} onClick={onClose}>
-                  <div
-                    key={item.id}
-                    className="col-span-1"
-                    onClick={() => handleRoute(item)}
-                  >
-                    <div className="w-[170px] h-[170px]">
-                      <Image
-                        src={item.images[0]}
-                        width={170}
-                        height={170}
-                        alt="Product"
-                        className="w-[100%] h-[100%] object-fill"
-                      />
+          {
+            data &&
+            <div className="grid sm:grid-cols-5 grid-cols-2 gap-4 sm:ml-32 px-[24px] lg:px-[0px] lg:mt-0 mt-10">
+              {(!data) || isLoading ? (
+                <p className="flex flex-row justify-center items-center">
+                  No results found
+                </p>
+              ) : (
+                (data && data.length > 0
+                  ? data
+                  : []
+                ).map((item) => (
+                  <Link href={`/product/${item.productTitle}`} onClick={onClose}>
+                    <div
+                      key={item.id}
+                      className="col-span-1"
+                      onClick={() => handleRoute(item)}
+                    >
+                      <div className="lg:w-[170px] w-[150px] h-[150px] lg:h-[170px]">
+                        <Image
+                          src={item.images[0]}
+                          width={170}
+                          height={170}
+                          alt="Product"
+                          className="w-[100%] h-[100%] object-fill"
+                        />
+                      </div>
+                      <div className="lg:text-[16px] text-[14px] font-medium text-black pt-[20px] ">
+                        {item.category}
+                      </div>
+                      <div className="lg:text-[16px] text-[14px]  font-normal leading-6   text-[#707072]">
+                        {item.collectionName}
+                      </div>
+                      <div className="lg:text-[16px] text-[14px]  font-medium pt-[7px]  text-black">
+                        {item.totalPrice}₹
+                      </div>
                     </div>
-                    <div className="text-sm leading-6 text-black pt-[20px] text-[#000000]">
-                      {item.category}
-                    </div>
-                    <div className="text-sm leading-6 text-black  text-[#707072]">
-                      {item.collectionName}
-                    </div>
-                    <div className="text-sm leading-6 pt-[7px] font-medium text-black">
-                      {item.totalPrice}₹
-                    </div>
-                  </div>
-                </Link>
-              ))
-            )}
-          </div>
+                  </Link>
+                ))
+              )}
+            </div>
+          }
         </div>
       </div>
     </>
