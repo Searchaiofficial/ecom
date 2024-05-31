@@ -11,19 +11,17 @@ import axios from "axios";
 
 import { FcOk } from "react-icons/fc";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import { updateFormData, selectFormData } from "../Features/Slices/formSlice";
 
 import { selecteddbItems } from "../Features/Slices/cartSlice";
-import PaymentModal from "./PaymentModal";
+import { BASE_URL } from "@/constants/base-url";
 
 const Details = () => {
   const dispatch = useDispatch();
   const [CartData, setCartData] = useState([]);
   const [DeliverCost, setDeliveryCost] = useState(99);
-
-  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
 
   const closePaymentModal = () => {
     setIsPaymentModalOpen(false);
@@ -146,6 +144,8 @@ const Details = () => {
   };
   console.log(updatedForm);
 
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+
   const handleData = async (event) => {
     event.preventDefault();
 
@@ -153,6 +153,8 @@ const Details = () => {
     if (postalValidation !== "valid" || numberValidation !== "valid") {
       return;
     }
+
+    const id = localStorage.getItem("deviceId");
 
     dispatch(updateFormData(updatedForm));
     console.log("form-dispatch", updatedForm);
@@ -179,16 +181,30 @@ const Details = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ address, deviceId, cartId }),
+          body: JSON.stringify({ address, deviceId: id, cartId }),
         }
       );
 
       if (response.ok) {
         const data = await response.json();
-        console.log("Dataaaa", data);
+        // console.log("Dataaaa", data);
 
         // if the API response is 200
-        // router.push(`/payment`);
+
+        const paymentResponse = await axios.request({
+          method: "POST",
+          url: `${apiBaseUrl}/api/makepayment`,
+          data: {
+            amount: (totalPrice + DeliverCost || deliveryPrice) * 100,
+            callbackUrl: `${BASE_URL}/success`,
+            redirectUrl: `${BASE_URL}/success`,
+          },
+        });
+
+        const redirectUrl =
+          paymentResponse.data.data.data.instrumentResponse.redirectInfo.url;
+
+        router.push(redirectUrl);
       } else {
         console.error("Error:", response.status);
       }
@@ -200,12 +216,6 @@ const Details = () => {
 
   return (
     <>
-      {isPaymentModalOpen ? (
-        <PaymentModal
-          closeModal={closePaymentModal}
-          totalPrice={totalPrice + DeliverCost || deliveryPrice}
-        />
-      ) : null}
       <div className=" px-2 lg:px-20 lg:py-16">
         <div className="grid lg:grid-cols-12 lg:gap-10 border-b-2">
           <div className="lg:col-span-8 lg:order-1 order-2 ">
@@ -435,7 +445,7 @@ const Details = () => {
                       // onClick={() => setIsPaymentModalOpen(true)}
                       className="bg-[#0058a3] text-white flex justify-center items-center border-solid border border-gray-300 p-8 h-12 rounded-full my-4 text-md font-bold w-full m-auto"
                     >
-                      Select payment method{" "}
+                      Continue to payment{" "}
                     </button>
                     {/* </Link> */}
                   </div>
