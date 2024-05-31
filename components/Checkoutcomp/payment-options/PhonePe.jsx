@@ -2,57 +2,28 @@
 
 import { BASE_URL } from "@/constants/base-url";
 import axios from "axios";
-import { SHA256 } from "crypto-js";
-import { v4 as uuid } from "uuid";
+import { useRouter } from "next/navigation";
 
 const { ChevronRight } = require("lucide-react");
 
 const PhonePe = ({ totalPrice }) => {
-  const apiEndpoint = "/pg/v1/pay";
-  const phonePeBaseUrl = process.env.NEXT_PUBLIC_PHONEPE_API_BASE_URL;
-  const saltKey = process.env.NEXT_PUBLIC_PHONEPE_MERCHANT_KEY;
-  const saltIndex = process.env.NEXT_PUBLIC_PHONEPE_KEY_INDEX;
-  const merchantId = process.env.NEXT_PUBLIC_PHONEPE_MERCHANT_ID;
+  const router = useRouter();
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   const makePayment = async () => {
-    const transactionId = "T-" + uuid().toString(36).slice(-8); // Link this to database in future
-
-    const payload = {
-      merchantId: merchantId,
-      merchantTransactionId: transactionId,
-      merchantUserId: "MUID123",
-      amount: +totalPrice,
-      redirectUrl: `${BASE_URL}/success`,
-      redirectMode: "REDIRECT",
-
-      callbackUrl: `${BASE_URL}/success`,
-      paymentInstrument: {
-        type: "PAY_PAGE",
-      },
-    };
-
-    const encodedPayload = Buffer.from(JSON.stringify(payload)).toString(
-      "base64"
-    );
-
-    const fullUrl = encodedPayload + apiEndpoint + saltKey;
-
-    const checksum = SHA256(fullUrl) + "###" + saltIndex;
-
     try {
       const response = await axios.request({
         method: "POST",
-        url: `${phonePeBaseUrl}${apiEndpoint}`,
-        headers: {
-          "Content-Type": "application/json",
-          "X-VERIFY": checksum,
-        },
+        url: `${apiBaseUrl}/api/makepayment`,
         data: {
-          request: encodedPayload,
+          amount: +totalPrice * 100,
         },
       });
 
-      console.log(response.data);
+      const redirectUrl =
+        response.data.data.data.instrumentResponse.redirectInfo.url;
+
+      router.push(redirectUrl);
     } catch (error) {
       console.error(error);
     }
