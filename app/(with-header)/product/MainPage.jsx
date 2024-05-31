@@ -17,6 +17,7 @@ import {
 import axios from "axios";
 import Carous from "@/components/Carousel/Carous";
 import { useParams } from "next/navigation";
+import Link from "next/link";
 const RoomPage = () => {
   const dispatch = useDispatch();
   const quantity = useSelector(selectQuantity);
@@ -106,10 +107,40 @@ const RoomPage = () => {
 
   return (
     <>
-      <div className="overflow-y-auto container-rooms flex sm:block items-center px-[20px] sm:px-[50px] lg:px-[27px] ">
+      <div className=" overflow-y-auto container-rooms flex sm:block items-center px-[20px] sm:px-[50px] lg:px-[27px] ">
         <div className="mt-[65px]">
           <div className="sm:flex-row gap-8 flex-col flex">
-            <div className="sm:basis-2/3 flex lg:pl-[40px] flex-col sm:flex-grow">
+            <div className="relative sm:basis-2/3 flex lg:pl-[40px] mt-[50px] sm:mt-[40px] flex-col sm:flex-grow">
+              <div className=" font-sans font-normal text-xs sm:text-sm pb-2 sticky top-24">
+                <Link href="/">
+                  <span className="hover:text-gray-600 cursor-pointer ">
+                    Home
+                  </span>
+                </Link>
+                <span> &gt; </span>
+                <Link
+                  href={`/category/${data?.category?.replace(/ /g, "-")}/all`}
+                >
+                  <span className="hover:text-gray-500 cursor-pointer ">
+                    {data?.category}
+                  </span>
+                </Link>
+                <span> &gt; </span>
+                <Link
+                  href={`/category/${data?.category?.replace(
+                    / /g,
+                    "-"
+                  )}/${data?.subcategory?.replace(/ /g, "-")}`}
+                >
+                  <span className="hover:text-gray-500 cursor-pointer ">
+                    {data?.subcategory}
+                  </span>
+                </Link>
+                <span> &gt; </span>
+                <span className="text-gray-500 cursor-pointer ">
+                  {data?.productTitle}
+                </span>
+              </div>
               <RoomImageList images={data?.images} />
               <ImageCaresoul images={data?.images} />
               <div className="block md:hidden">
@@ -119,7 +150,7 @@ const RoomPage = () => {
               <Reviews productId={data._id} data={data} />
             </div>
             <div className="md:basis-2/3 hidden md:flex flex-col">
-              <div className="md:relative flex top-9 mb-16 ml-0">
+              <div className="md:relative flex top-14 mb-16 ml-0">
                 <Card data={data} productId={data._id} />
               </div>
             </div>
