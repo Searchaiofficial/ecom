@@ -159,6 +159,18 @@ const Details = () => {
     console.log("deviceId", deviceId);
     console.log("cartId", cartId);
 
+    const address = {
+      firstName: updatedForm.first,
+      lastName: updatedForm.last,
+      address: updatedForm.address,
+      postalCode: updatedForm.postal,
+      city: updatedForm.local,
+      country: updatedForm.country,
+      state: updatedForm.state,
+      email: updatedForm.email,
+      phone: updatedForm.number,
+    };
+
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/order`,
@@ -167,7 +179,7 @@ const Details = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ updatedForm, deviceId, cartId }),
+          body: JSON.stringify({ address, deviceId, cartId }),
         }
       );
 
@@ -185,23 +197,6 @@ const Details = () => {
       console.error("Error:", error);
     }
   };
-
-  const incompleteForm =
-    !form.first ||
-    !form.last ||
-    !form.add1 ||
-    !form.postal ||
-    !form.local ||
-    !form.state ||
-    !form.country ||
-    !form.number;
-  const buttonClass = incompleteForm
-    ? "bg-gray-300 text-white"
-    : "bg-black text-white";
-
-  const searchParams = useSearchParams();
-  // console.log(searchParams.get("search")); // Logs "search"
-  const properties = searchParams.get("search");
 
   return (
     <>
@@ -291,47 +286,15 @@ const Details = () => {
                   </div>
                   <div className="mb-4">
                     <label
-                      htmlFor="add1"
+                      htmlFor="address"
                       className="block text-md text-gray-700 mb-1 "
                     >
-                      Address 1 <span className="text-red-500">*</span>
+                      Address <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
-                      id="add1"
-                      name="add1"
-                      onChange={handlefunc}
-                      className="w-full border border-gray-700 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
-                      required
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <label
-                      htmlFor="add2"
-                      className="block text-md text-gray-700 mb-1 "
-                    >
-                      Address 2 <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="add2"
-                      name="add2"
-                      onChange={handlefunc}
-                      className="w-full border border-gray-700 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
-                      required
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <label
-                      htmlFor="add3"
-                      className="block text-md text-gray-700 mb-1 "
-                    >
-                      Address 3 <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="add3"
-                      name="add3"
+                      id="address"
+                      name="address"
                       onChange={handlefunc}
                       className="w-full border border-gray-700 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
                       required
@@ -343,7 +306,7 @@ const Details = () => {
                       htmlFor="postal"
                       className="block text-md text-gray-700 mb-1"
                     >
-                      pin code <span className="text-red-500">*</span>
+                      Pin code <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="number"
@@ -364,7 +327,7 @@ const Details = () => {
                       htmlFor="local"
                       className="block text-md text-gray-700 mb-1"
                     >
-                      city <span className="text-red-500">*</span>
+                      City <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
@@ -431,7 +394,7 @@ const Details = () => {
                     />
                   </div>
 
-                  <div className="mb-4">
+                  {/* <div className="mb-4">
                     <label
                       htmlFor="pan"
                       className="block text-md text-gray-700 mb-1"
@@ -447,7 +410,7 @@ const Details = () => {
                       className="w-full border border-gray-700 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
                       required
                     />
-                  </div>
+                  </div> */}
 
                   <div className="mb-4">
                     <label
@@ -468,8 +431,8 @@ const Details = () => {
                   <div className=" pt-6 lg:pt-10">
                     {/* <Link href={"/payment"}> */}
                     <button
-                      type="button"
-                      onClick={() => setIsPaymentModalOpen(true)}
+                      type="submit"
+                      // onClick={() => setIsPaymentModalOpen(true)}
                       className="bg-[#0058a3] text-white flex justify-center items-center border-solid border border-gray-300 p-8 h-12 rounded-full my-4 text-md font-bold w-full m-auto"
                     >
                       Select payment method{" "}
