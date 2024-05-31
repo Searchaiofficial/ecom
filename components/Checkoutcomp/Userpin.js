@@ -7,6 +7,7 @@ import { selectQuantity } from "../Features/Slices/calculationSlice";
 import { setDbItems } from "../Features/Slices/cartSlice";
 import Link from "next/link";
 import axios from "axios";
+import { getPinFromCoordinates } from "@/utils/getPinFromCoordinates";
 
 const Userpin = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,26 @@ const Userpin = () => {
     var id = localStorage.getItem("deviceId");
     console.log(id);
   }
+
+  const [userCoordinates, setUserCoordinates] = useState(null);
+  const [userPincode, setUserPincode] = useState(null);
+
+  useEffect(() => {
+    localStorage?.getItem("userCoordinates") &&
+      setUserCoordinates(JSON.parse(localStorage.getItem("userCoordinates")));
+  }, []);
+
+  useEffect(() => {
+    if (userCoordinates) {
+      getPinFromCoordinates(userCoordinates.lat, userCoordinates.lng).then(
+        (data) => {
+          if (data) {
+            setUserPincode(data);
+          }
+        }
+      );
+    }
+  }, [userCoordinates]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -107,43 +128,53 @@ const Userpin = () => {
               </div>
             </div>
             {/* <!-- Address pin  --> */}
-            <div className="flex h-11 w-48">
-              <svg
-                focusable="false"
-                viewBox="0 0 24 24"
-                width="24"
-                height="24"
-                class="cart-ingka-svg-icon"
-                aria-hidden="true"
-              >
-                <path d="M12.0001 11.2157c1.1046 0 2-.8954 2-2s-.8954-2-2-2c-1.1045 0-2 .8954-2 2s.8955 2 2 2z"></path>
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M12.0001 21.3736c3.7444-2.5044 7.4025-6.5319 7.4025-11.288 0-4.0031-3.4051-7.4606-7.4121-7.4606-4.0108 0-7.3928 3.4614-7.3928 7.4606 0 4.7571 3.6584 8.7823 7.4024 11.288zm-5.4024-11.288c0-2.9193 2.511-5.4606 5.3928-5.4606 2.8856 0 5.4121 2.5452 5.4121 5.4606 0 3.6054-2.69 6.7393-5.4025 8.8443-2.7125-2.105-5.4024-5.2389-5.4024-8.8443z"
-                ></path>
-                <path d="M14.0001 9.2157c0 1.1046-.8954 2-2 2-1.1045 0-2-.8954-2-2s.8955-2 2-2c1.1046 0 2 .8954 2 2z"></path>
-              </svg>
-              <p className="w-full ml-3 font-[300] text-[15.5px]">
-                Your pincode <span className="underline">843146</span>
-              </p>
-            </div>
+            {!!userPincode ? (
+              <div className="flex h-11 w-48">
+                <svg
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                  class="cart-ingka-svg-icon"
+                  aria-hidden="true"
+                >
+                  <path d="M12.0001 11.2157c1.1046 0 2-.8954 2-2s-.8954-2-2-2c-1.1045 0-2 .8954-2 2s.8955 2 2 2z"></path>
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.0001 21.3736c3.7444-2.5044 7.4025-6.5319 7.4025-11.288 0-4.0031-3.4051-7.4606-7.4121-7.4606-4.0108 0-7.3928 3.4614-7.3928 7.4606 0 4.7571 3.6584 8.7823 7.4024 11.288zm-5.4024-11.288c0-2.9193 2.511-5.4606 5.3928-5.4606 2.8856 0 5.4121 2.5452 5.4121 5.4606 0 3.6054-2.69 6.7393-5.4025 8.8443-2.7125-2.105-5.4024-5.2389-5.4024-8.8443z"
+                  ></path>
+                  <path d="M14.0001 9.2157c0 1.1046-.8954 2-2 2-1.1045 0-2-.8954-2-2s.8955-2 2-2c1.1046 0 2 .8954 2 2z"></path>
+                </svg>
+                <p className="w-full ml-3 font-[300] text-[15.5px]">
+                  Your pincode <span className="underline">{userPincode}</span>
+                </p>
+              </div>
+            ) : null}
 
             {/* <!-- order text --> */}
             <div className="tracking-wide font-[700] text-[1.09rem] leading-6 mb-4">
               How would you like to receive your order?
             </div>
+
             {/*devivery PIN CODE  */}
             <div className="w-full">
-
               <div className="pt-[15px]">
                 <h3 className="text-sm text-gray-800  mb-4">
-                  Enter your pincode to see delivery options available in your
-                  area.
-                </h3>
-                <h3 className="text-sm text-gray-800   mb-4">
-                  Enter a pincode to see product availability and delivery
-                  options.
+                  {!!userPincode ? (
+                    <span>
+                      Not <span className="underline">{userPincode}</span>?{" "}
+                      <span>
+                        Enter another pincode to see the delivery options
+                        available
+                      </span>
+                    </span>
+                  ) : (
+                    <span>
+                      Enter your pincode to see delivery options available in
+                      your area.
+                    </span>
+                  )}
                 </h3>
                 <div className="mb-8 mt-4">
                   <input className="w-full h-10  border-solid border border-gray-400 rounded-sm focus:border-blue-800 outline-none px-4 " />
@@ -154,7 +185,6 @@ const Userpin = () => {
                     View delivery options
                   </button>
                 </Link>
-
                 <hr></hr>
                 <h3 className="text-md font-bold text-gray-500 my-4 py-4">
                   Your details
@@ -272,7 +302,7 @@ const Userpin = () => {
             <span className="font-[700] text-black">Rs. {totalPrice}</span>
           </div>
           <div className="flex items-center justify-between ">
-            <span className="text-[#767677]" >Delivery charge </span>
+            <span className="text-[#767677]">Delivery charge </span>
             <span>-</span>
           </div>
           <p className="text-xs text-[#767677] border-b-2 lg:border-b-4 border-black pb-6">
@@ -289,8 +319,12 @@ const Userpin = () => {
             <span className="text-[#767677] font-[700]">1.9 kg</span>
           </div>
           <div className="border border-[#e5e5e5] p-[20px] w-[100%] h-auto">
-            <p className="text-black font-[600] ">Make the most of delivery charges</p>
-            <p className="text-[#757575] text-[12px] pt-[5px]">The current delivery price of your order is Rs. 99 for up to 5 kg.</p>
+            <p className="text-black font-[600] ">
+              Make the most of delivery charges
+            </p>
+            <p className="text-[#757575] text-[12px] pt-[5px]">
+              The current delivery price of your order is Rs. 99 for up to 5 kg.
+            </p>
           </div>
 
           {/* <div className="flex items-center justify-between py-4 font-bold">
