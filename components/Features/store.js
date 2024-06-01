@@ -31,7 +31,6 @@ import offerProductsSlice from "./Slices/offerProductsSlice";
 
 import filteredProductReducer from "./Slices/FilteredProduct";
 import roomCardReducer from "./Slices/roomCardSlice";
-import mobileSliderReducer from "./Slices/MobileSliderSlice";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -59,7 +58,6 @@ export const store = configureStore({
     virtual: virtualReducer,
     recommendedProduct: recommendationReducer,
     slider: sliderReducer,
-    mobileSlider : mobileSliderReducer,
     FirstCard: FirstCardReducer,
     productWithSearch: searchReducer,
     auth: authReducer,

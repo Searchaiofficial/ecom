@@ -66,11 +66,23 @@ export default function NewMainSlider({ initialData }) {
     return <Splashscreen />;
   }
 
+  const [windowWidth, setWindowWidth] = useState(0);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setWindowWidth(window.innerWidth);
+    }
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [windowWidth]);
+
+
   return (
     <div
       onMouseEnter={() => setNavigationVisible(true)}
       onMouseLeave={() => setNavigationVisible(false)}
-      className="hidden sm:block"
     >
       <Swiper
         className="swiper-slider h-[78vh]"
@@ -124,7 +136,7 @@ export default function NewMainSlider({ initialData }) {
             <SwiperSlide key={data?._id}>
               <div className={`relative mt-[60px] sm:mt-0 group h-[78vh] lg:-translate-x-[5px] -translate-x-[10px] translate-r md:translate-x-0`}>
                 <Image
-                  src={data?.imgSrc}
+                    src={windowWidth > 450 ? data?.desktopImgSrc : data?.mobileImgSrc}
                   fill
                   alt={data.imgTitle || "Swiper image"}
                   priority

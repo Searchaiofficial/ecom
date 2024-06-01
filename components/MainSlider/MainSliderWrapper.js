@@ -1,14 +1,11 @@
-import { fetchDefaultSliderData, fetchMobileSliderData } from "@/actions/fetchSliderData";
+import { fetchSliderData } from "@/actions/fetchSliderData";
 import NewMainSlider from "./NewMainSlider";
-import MobileSlider from "./MobileSlider";
 
 const MainSliderWrapper = async () => {
-  const largeDeviceSliderData = await fetchDefaultSliderData();
-  const mobileDeviceSliderData = await fetchMobileSliderData();
+  const sliderData = await fetchSliderData();
   return (
     <>
-      <NewMainSlider initialData={largeDeviceSliderData} />
-      <MobileSlider initialData={mobileDeviceSliderData} />
+      <NewMainSlider initialData={sliderData} />\
     </>
   )
 };
