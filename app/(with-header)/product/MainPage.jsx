@@ -19,6 +19,7 @@ import Carous from "@/components/Carousel/Carous";
 import { useParams } from "next/navigation";
 import UserReviewPosts from "@/components/Cards/UserReviewPosts";
 import Link from "next/link";
+import Image from "next/image";
 
 const RoomPage = () => {
   const [navigationItemData, setNavigationItemData] = useState(null);
@@ -128,13 +129,19 @@ const RoomPage = () => {
         <div className="mt-[65px] w-full">
           <div className=" sm:flex-row gap-8 flex-col flex overflow-hidden">
             <div className="relative sm:basis-2/3 flex lg:pl-[40px] mt-[50px] sm:mt-[40px] flex-col sm:flex-grow">
-              <div className=" font-sans font-normal text-xs sm:text-sm pb-2 sticky top-10">
+              <div className=" font-sans font-normal text-xs sm:text-sm pb-2 sticky top-10 flex items-center gap-1">
                 <Link href="/">
                   <span className="hover:text-gray-600 cursor-pointer ">
                     Home
                   </span>
                 </Link>
-                <span> &gt; </span>
+                <Image
+                  src="/ayatrio icon/backarrow.svg"
+                  alt="tick"
+                  width={10}
+                  height={10}
+                  className="opacity-100 h-[12px] "
+                />
                 {navigationItemData && (
                   <>
                     <Link href={`${navigationItemData.href}`}>
@@ -142,7 +149,13 @@ const RoomPage = () => {
                         {navigationItemData.label}
                       </span>
                     </Link>
-                    <span> &gt; </span>
+                    <Image
+                      src="/ayatrio icon/backarrow.svg"
+                      alt="tick"
+                      width={10}
+                      height={10}
+                      className="opacity-100 h-[12px] "
+                    />
                   </>
                 )}
                 <Link
@@ -152,7 +165,13 @@ const RoomPage = () => {
                     {data?.category}
                   </span>
                 </Link>
-                <span> &gt; </span>
+                <Image
+                  src="/ayatrio icon/backarrow.svg"
+                  alt="tick"
+                  width={10}
+                  height={10}
+                  className="opacity-100 h-[12px] "
+                />
                 <Link
                   href={`/category/${data?.category?.replace(
                     / /g,
@@ -163,7 +182,13 @@ const RoomPage = () => {
                     {data?.subcategory}
                   </span>
                 </Link>
-                <span> &gt; </span>
+                <Image
+                  src="/ayatrio icon/backarrow.svg"
+                  alt="tick"
+                  width={10}
+                  height={10}
+                  className="opacity-100 h-[12px] "
+                />
                 <span className="text-gray-500 cursor-pointer ">
                   {data?.productTitle}
                 </span>
@@ -178,7 +203,6 @@ const RoomPage = () => {
               {/* <div className="w-[77%]">
                 <UserReviewPosts />
               </div> */}
-
             </div>
             <div className="md:basis-2/3 hidden md:flex flex-col">
               <div className="md:relative flex top-14 mb-16 ml-0">
@@ -187,14 +211,16 @@ const RoomPage = () => {
             </div>
           </div>
           <div className="lg:pl-[40px] w-full lg:w-[66%]">
-            <UserReviewPosts slidesPerView={2.2} SubcategoryName={data.subcategory} />
+            <UserReviewPosts
+              slidesPerView={2.2}
+              SubcategoryName={data.subcategory}
+            />
           </div>
           <div className="lg:ml-[40px] w-full">
             <Carous data={data} />
           </div>
         </div>
       </div>
-
     </>
   );
 };
