@@ -19,7 +19,22 @@ import Carous from "@/components/Carousel/Carous";
 import { useParams } from "next/navigation";
 import UserReviewPosts from "@/components/Cards/UserReviewPosts";
 import Link from "next/link";
+
 const RoomPage = () => {
+  const [navigationItemData, setNavigationItemData] = useState(null);
+
+  useEffect(() => {
+    if (window !== undefined) {
+      const navigationItem = JSON.parse(
+        window.sessionStorage.getItem("navigationItem")
+      );
+      if (navigationItem) {
+        setNavigationItemData(navigationItem);
+        sessionStorage.removeItem("navigationItem");
+      }
+    }
+  }, []);
+
   const dispatch = useDispatch();
   const quantity = useSelector(selectQuantity);
   const { title } = useParams();
@@ -27,9 +42,9 @@ const RoomPage = () => {
   const [howMuchScrolled, setHowMuchScrolled] = useState(0);
   const [data, setData] = useState([]);
   const selectedData = useSelector(selectRoomData);
-  console.log("selectedData", selectedData);
 
   useEffect(() => {
+    // handleResetItem();
     const fetchData = async () => {
       const cachedData = sessionStorage?.getItem("roomData");
       if (cachedData) {
@@ -65,7 +80,8 @@ const RoomPage = () => {
     }
   }, [selectedData, dispatch]);
 
-  console.log("data", data);
+  console.log(data);
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -119,6 +135,16 @@ const RoomPage = () => {
                   </span>
                 </Link>
                 <span> &gt; </span>
+                {navigationItemData && (
+                  <>
+                    <Link href={`${navigationItemData.href}`}>
+                      <span className="hover:text-gray-600 cursor-pointer ">
+                        {navigationItemData.label}
+                      </span>
+                    </Link>
+                    <span> &gt; </span>
+                  </>
+                )}
                 <Link
                   href={`/category/${data?.category?.replace(/ /g, "-")}/all`}
                 >

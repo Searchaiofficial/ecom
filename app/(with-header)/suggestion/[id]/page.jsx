@@ -20,29 +20,27 @@ import {
 } from "@/components/Features/Slices/suggestionDataSlice";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { A11y, FreeMode, Mousewheel, Navigation, Pagination, Scrollbar } from "swiper/modules";
+import { usePathname } from "next/navigation";
 
 const SuggestionPage = ({ params }) => {
   const id = params.id;
+  const pathname = usePathname();
 
   const dispatch = useDispatch();
   const selectData = useSelector(selectRecommendedProduct);
   const suggestion = useSelector(selectSuggestionData);
   const suggestionStatus = useSelector(selectSuggestionStatus);
-  // const [relatedProducts, setRelatedProducts] = useState([]);
+
+  const handleSetItem = () => {
+    const newItem = { label: "Blog", href: pathname };
+    sessionStorage.setItem("navigationItem", JSON.stringify(newItem));
+  };
 
   useEffect(() => {
+    handleSetItem();
     if (suggestionStatus === "idle" || suggestionStatus === "failed") {
       dispatch({ type: "FETCH_SUGGESTION_DATA", payload: id });
     }
-    // if (suggestion?.category?.length > 0) {
-    //   const fetchRelatedProducts = async () => {
-    //     const response = await axios.get(
-    //       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/relatedProducts?category=${suggestion.category[0]}`
-    //     );
-    //     setRelatedProducts(response.data);
-    //   };
-    //   fetchRelatedProducts();
-    // }
   }, [id, suggestion]);
 
   const [recommended, setRecommended] = useState([]);

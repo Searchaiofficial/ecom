@@ -37,6 +37,10 @@ function Cards() {
   //   window.scrollTo(0, 0);
   // }, []);
 
+  if(typeof window !== "undefined"){
+    sessionStorage.removeItem("navigationItem");
+  } 
+
   return (
     <div className="w-full h-auto">
       <MainSliderWrapper />
