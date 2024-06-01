@@ -506,10 +506,10 @@ function Header({ setIsHeaderMounted }) {
                 <div onClick={() => handleClick("category/virtualexperience")} className="">
                   <p className="text-[14px] py-[8px] font-normal">Live shopping</p>
                 </div>
-                <div onClick={() => handleClick("category/freedesign")}>
+                <div onClick={() => handleClick("/freedesign")}>
                   <p className="text-[14px] py-[8px] font-normal">Designer request</p>
                 </div>
-                <div onClick={() => handleClick("category/freesample")} >
+                <div onClick={() => handleClick("/freesample")} >
                   <p className="text-[14px] py-[8px] font-normal">Free sample request</p>
                 </div>
                 <div onClick={() => handleClick("/customerservice")}>

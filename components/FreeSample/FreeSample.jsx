@@ -477,189 +477,208 @@ const FreeSample = () => {
   return (
     <div className="pt-[120px] relative h-content  md:min-h-screen">
       {dataStep.step === 1 && (
-        <div className="px-[20px] md:px-[100px] flex flex-col md:flex-row  justify-between">
+        <div className="px-[20px] md:px-[67px] justify-between  flex flex-col md:flex-row  ">
           <div>
-            <h1 className="text-2xl font-medium">Step 1</h1>
-            <h2 className="mt-8 text-2xl font-medium">
+            <h1 className="md:text-[18px] text-[16px] font-semibold">Step 1</h1>
+            <h2 className="mt-6 md:text-[32px] text-[20px] font-medium">
               Tell us about what service looking for
             </h2>
-            <p className="my-2 text-lg">
+            <p className="md:text-[16px] text-[14px]">
               in this step, we'll ask you what are type service you looking at .
             </p>
 
-            <div className="flex flex-wrap gap-4 mt-10 ">
+            <div className="md:flex md:flex-wrap gap-4 mt-10 grid grid-cols-2 ">
               {stepOneData.map((data, index) => {
                 return (
                   <div
                     key={data.label + index}
                     onClick={() => setServiceState(index)}
-                    className={`flex flex-col w-48 border-2 border-neutral-600 p-4 cursor-pointer ${
-                      serviceState === index
-                        ? "border-black text-black border-4"
-                        : "text-neutral-500 border-neutral-500"
-                    }`}
+                    className={`flex flex-col md:w-48 border hover:border-black hover:border-2 p-2 md:p-4 cursor-pointer ${serviceState === index
+
+                      ? "border-black text-black border-2"
+                      : "text-neutral-500 border-neutral-300"
+
+                      }`}
                   >
-                    <Image src={data.icon} width={50} height={50} />
-                    <span>{data.label}</span>
+                    <Image src={data.icon} width={45} height={45} />
+                    <span className="text-[16px] font-medium">{data.label}</span>
                   </div>
                 );
               })}
             </div>
           </div>
-          {pathname === "/freesample" && (
-            <div className="bg-zinc-50 md:w-[22rem]  px-6 py-10">
-              <div className="flex gap-4 items-center mb-6">
-                <Image
-                  src="/Ayatrio updated icon/payment.svg"
-                  width={40}
-                  height={40}
-                />
-                <div className="flex flex-col">
-                  <h1 className="font-semibold">Select your personal choice</h1>
-                  <p className="text-sm">
-                    Add 1 to 5 designs that catch your eye to your Try At Home
-                    cart.
-                  </p>
+          <div className="md:absolute md:right-[67px] mt-10 md:mt-0">
+            {pathname === "/freesample" && (
+              <div className="bg-zinc-50 md:w-[22rem]  px-6 py-6">
+                <div className="flex gap-4 items-center mb-6">
+                  <Image
+                    src="/Ayatrio updated icon/payment.svg"
+                    width={40}
+                    height={40}
+                  />
+                  <div className="flex flex-col">
+                    <h1 className="font-semibold text-[16px]">Select your personal choice</h1>
+                    <p className="text-sm font-normal mt-2 text-[#666666]">
+                      Add 1 to 5 designs that catch your eye to your Try At Home
+                      cart.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-4 items-center mb-6">
+                  <Image
+                    src="/Ayatrio updated icon/payment.svg"
+                    width={40}
+                    height={40}
+                  />
+                  <div className="flex flex-col">
+                    <h1 className="font-semibold text-[16px]">Select your personal choice</h1>
+                    <p className="text-sm font-normal mt-2 text-[#666666]">
+                      Add 1 to 5 designs that catch your eye to your Try At Home
+                      cart.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-4 items-center mb-6">
+                  <Image
+                    src="/Ayatrio updated icon/payment.svg"
+                    width={40}
+                    height={40}
+                  />
+                  <div className="flex flex-col">
+                    <h1 className="font-semibold text-[16px]">Schedule your try at home</h1>
+                    <p className="text-sm font-normal mt-2 text-[#666666]">
+                      We'll be there anytime between Monday to Sunday, at home or
+                      office.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-4 items-center mb-6">
+                  <Image
+                    src="/Ayatrio updated icon/payment.svg"
+                    width={40}
+                    height={40}
+                  />
+                  <div className="flex flex-col">
+                    <h1 className="font-semibold text-[16px]">We respect your choice</h1>
+                    <p className="text-sm font-normal mt-2 text-[#666666]">
+                      Try At Home stress-free, with no obligation to purchas
+                    </p>
+                  </div>
                 </div>
               </div>
-              <div className="flex gap-4 items-center mb-6">
-                <Image
-                  src="/Ayatrio updated icon/payment.svg"
-                  width={40}
-                  height={40}
-                />
-                <div className="flex flex-col">
-                  <h1 className="font-semibold">Select your personal choice</h1>
-                  <p className="text-sm">
-                    Add 1 to 5 designs that catch your eye to your Try At Home
-                    cart.
-                  </p>
+            )}
+          </div>
+          <div className="mt-6 mb-[80px]  ">
+            {pathname === "/freedesign" && (
+              <div className="bg-zinc-50 md:w-[22rem]  px-6 py-6">
+                <div className="flex gap-4 items-center mb-6">
+                  <Image
+                    src="/Ayatrio updated icon/payment.svg"
+                    width={40}
+                    height={40}
+                  />
+                  <div className="flex flex-col">
+                    <h1 className="font-semibold text-[16px]">
+                      Book a free virtual interior design appointment for home
+                    </h1>
+                    <p className="text-sm font-normal mt-2 text-[#666666]">
+                      Please fill out the online questionnaire about your project
+                      needs so that we can prepare for our first meeting together.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-4 items-center mb-6">
+                  <Image
+                    src="/Ayatrio updated icon/payment.svg"
+                    width={40}
+                    height={40}
+                  />
+                  <div className="flex flex-col">
+                    <h1 className="font-semibold text-[16px]">
+                      We understand your project needs to build a vision for you
+                    </h1>
+                    <p className="text-sm font-normal mt-2 text-[#666666]">
+                      We will share a mood board and rough plans based on your
+                      online questionnaire to create alignment on the vision for
+                      your space.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-4 items-center mb-6">
+                  <Image
+                    src="/Ayatrio updated icon/payment.svg"
+                    width={40}
+                    height={40}
+                  />
+                  <div className="flex flex-col">
+                    <h1 className="font-semibold text-[16px]">On-site measurement</h1>
+                    <p className="text-sm font-normal mt-2 text-[#666666]">
+                      Meet with your interior designer to approve floor plans,
+                      elevations, and product selections to move toward your final
+                      design solution.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-4 items-center mb-6">
+                  <Image
+                    src="/Ayatrio updated icon/payment.svg"
+                    width={40}
+                    height={40}
+                  />
+                  <div className="flex flex-col">
+                    <h1 className="font-semibold text-[16px]">Final design solution</h1>
+                    <p className="text-sm font-normal mt-2 text-[#666666]">
+                      Your final design package contains a mood board, floor plan, product selection, detailed drawings, material suggestions, and services offer.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-4 items-center mb-6">
+                  <Image
+                    src="/Ayatrio updated icon/payment.svg"
+                    width={40}
+                    height={40}
+                  />
+                  <div className="flex flex-col">
+                    <h1 className="font-semibold text-[16px]">Delivery and installation</h1>
+                    <p className="text-sm font-normal mt-2 text-[#666666]">
+                      Once the design is confirmed, we will provide fast and convenient delivery as time conform and installation services.</p>
+                  </div>
                 </div>
               </div>
-              <div className="flex gap-4 items-center mb-6">
-                <Image
-                  src="/Ayatrio updated icon/payment.svg"
-                  width={40}
-                  height={40}
-                />
-                <div className="flex flex-col">
-                  <h1 className="font-semibold">Schedule your try at home</h1>
-                  <p className="text-sm">
-                    We'll be there anytime between Monday to Sunday, at home or
-                    office.
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-4 items-center mb-6">
-                <Image
-                  src="/Ayatrio updated icon/payment.svg"
-                  width={40}
-                  height={40}
-                />
-                <div className="flex flex-col">
-                  <h1 className="font-semibold">We respect your choice</h1>
-                  <p className="text-sm">
-                    Try At Home stress-free, with no obligation to purchas
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-          {pathname === "/freedesign" && (
-            <div className="bg-zinc-50 md:w-[22rem]  px-6 py-10">
-              <div className="flex gap-4 items-center mb-6">
-                <Image
-                  src="/Ayatrio updated icon/payment.svg"
-                  width={40}
-                  height={40}
-                />
-                <div className="flex flex-col">
-                  <h1 className="font-semibold">
-                    Book a free virtual interior design appointment for home
-                  </h1>
-                  <p className="text-sm">
-                    Please fill out the online questionnaire about your project
-                    needs so that we can prepare for our first meeting together.
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-4 items-center mb-6">
-                <Image
-                  src="/Ayatrio updated icon/payment.svg"
-                  width={40}
-                  height={40}
-                />
-                <div className="flex flex-col">
-                  <h1 className="font-semibold">
-                    We understand your project needs to build a vision for you
-                  </h1>
-                  <p className="text-sm">
-                    We will share a mood board and rough plans based on your
-                    online questionnaire to create alignment on the vision for
-                    your space.
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-4 items-center mb-6">
-                <Image
-                  src="/Ayatrio updated icon/payment.svg"
-                  width={40}
-                  height={40}
-                />
-                <div className="flex flex-col">
-                  <h1 className="font-semibold">On-site measurement</h1>
-                  <p className="text-sm">
-                    Meet with your interior designer to approve floor plans,
-                    elevations, and product selections to move toward your final
-                    design solution.
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-4 items-center mb-6">
-                <Image
-                  src="/Ayatrio updated icon/payment.svg"
-                  width={40}
-                  height={40}
-                />
-                <div className="flex flex-col">
-                  <h1 className="font-semibold">Final design solution</h1>
-                  <p className="text-sm">
-                  Your final design package contains a mood board, floor plan, product selection, detailed drawings, material suggestions, and services offer.  
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-4 items-center mb-6">
-                <Image
-                  src="/Ayatrio updated icon/payment.svg"
-                  width={40}
-                  height={40}
-                />
-                <div className="flex flex-col">
-                  <h1 className="font-semibold">Delivery and installation</h1>
-                  <p className="text-sm">
-                  Once the design is confirmed, we will provide fast and convenient delivery as time conform and installation services.</p>
-                </div>
-              </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       )}
 
       {dataStep.step === 2 && (
         <div className="px-[20px] md:px-[100px] flex flex-col md:flex-row  justify-between">
           <div>
-            <h1 className="text-2xl font-medium">Step 2</h1>
+            {/* <h1 className="text-[18px] font-semibold">Step 2</h1>
+            <h2 className="mt-6 text-[32px] font-medium">
+              Tell us about what category looking for
+            </h2>
+            <p className="text-[16px]">
+              in this step, we'll ask you what type of category you looking at .
+            </p> */}
+            <h1 className="md:text-[18px] text-[16px] font-semibold">Step 2</h1>
+            <h2 className="mt-6 md:text-[32px] text-[20px] font-medium">
+              Tell us about what category looking for
+            </h2>
+            <p className="md:text-[16px] text-[14px]">
+              in this step, we'll ask you what type of category you looking at .
+            </p>
+            {/* <h1 className="text-2xl font-medium">Step 2</h1>
             <h2 className="mt-8 text-2xl font-medium">
               Tell us about what category looking for
             </h2>
             <p className="my-2 text-lg">
               in this step, we'll ask you what type of category you looking at .
-            </p>
+            </p> */}
 
-            <div className="flex flex-wrap gap-4 mt-10 ">
+            <div className="md:flex md:flex-wrap gap-4 mt-10 grid grid-cols-2 mb-[80px] md:mb-0  ">
               {allCategories.map((item, index) => {
                 return (
-                  <div key={index} className=" relative  overflow-hidden ">
+                  <div key={index} className=" relative group  overflow-hidden ">
                     <div
                       onClick={() => {
                         handleSelectValue("category", item.name);
@@ -667,16 +686,17 @@ const FreeSample = () => {
                       }}
                       className={`relative flex flex-col  w-full opacity-100 h-full cursor-pointer `}
                     >
-                      <Image
-                        className={`object-cover w-[272px] h-[150px]  ${
-                          categoryState === index && "border-black border-4"
-                        }`}
-                        width={300}
-                        height={300}
-                        src={item.image}
-                        alt={item.name}
-                      />
-                      <h3 className=" text-xl text-center mt-2 font-medium">
+                      <div className="hover:border-2 border border-black">
+                        <Image
+                          className={`object-cover w-[272px]  h-[150px]  ${categoryState === index && "border-black border-[3px]"
+                            }`}
+                          width={300}
+                          height={300}
+                          src={item.image}
+                          alt={item.name}
+                        />
+                      </div>
+                      <h3 className={` text-[16px] text-[#666666] group-hover:text-black text-center mt-2 font-medium ${categoryState === index && "text-black"}`}>
                         {item.name}
                       </h3>
                     </div>
@@ -691,15 +711,25 @@ const FreeSample = () => {
       {dataStep.step === 3 && (
         <div className="px-[20px] md:px-[100px] flex flex-col md:flex-row  justify-between">
           <div>
-            <h1 className="text-2xl font-medium">Step 3</h1>
-            <h2 className="mt-8 text-2xl font-medium">
+            {/* <h1 className="text-[18px] font-semibold">Step 3</h1>
+            <h2 className="mt-6 text-[32px] font-medium">
               Tell us about your place
             </h2>
-            <p className="my-2 text-lg">
+            <p className="text-[16px]">
+              in this step, we'll ask you what type of room you want to design.
+            </p> */}
+
+
+            <h1 className="md:text-[18px] text-[16px] font-semibold">Step 3</h1>
+            <h2 className="mt-6 md:text-[32px] text-[20px] font-medium">
+              Tell us about your place
+            </h2>
+            <p className="md:text-[16px] text-[14px]">
               in this step, we'll ask you what type of room you want to design.
             </p>
 
-            <div className="flex flex-wrap gap-4 mt-10 ">
+
+            <div className="md:flex md:flex-wrap gap-4 mt-10 grid grid-cols-2 mb-[80px] md:mb-0  ">
               {rooms.map((item, index) => {
                 return (
                   <div key={index} className=" relative  overflow-hidden ">
@@ -710,16 +740,18 @@ const FreeSample = () => {
                       }}
                       className={`relative flex flex-col  w-full opacity-100 h-full cursor-pointer `}
                     >
-                      <Image
-                        className={`object-cover w-[272px] h-[150px]  ${
-                          roomstate === index && "border-black border-4"
-                        }`}
-                        width={300}
-                        height={300}
-                        src={item.imgSrc}
-                        alt={item.name}
-                      />
-                      <h3 className=" text-xl text-center mt-2 font-medium">
+                      <div className="hover:border-2 border border-black">
+
+                        <Image
+                          className={`object-cover w-[272px] h-[150px]  ${roomstate === index && "border-black border-[3px]"
+                            }`}
+                          width={300}
+                          height={300}
+                          src={item.imgSrc}
+                          alt={item.name}
+                        />
+                      </div>
+                      <h3 className=" md:text-xl text-[16px] text-center mt-2 font-medium">
                         {item.roomType}
                       </h3>
                     </div>
@@ -733,26 +765,41 @@ const FreeSample = () => {
       {dataStep.step === 4 && (
         <div className="px-[20px] md:px-[100px] flex flex-col md:flex-row  justify-between">
           <div>
-            <h1 className="text-2xl font-medium">Step 4</h1>
+            {/* <h1 className="text-2xl font-medium">Step 4</h1>
             <h2 className="mt-8 text-2xl font-medium">
               Tell us about how much finance
             </h2>
             <p className="my-2 text-lg">
               in this step, we'll ask you what are type room do you want design.
+            </p> */}
+
+            {/* <h1 className="text-[18px] font-semibold">Step 4</h1>
+            <h2 className="mt-6 text-[32px] font-medium">
+              Tell us about how much finance
+            </h2>
+            <p className="text-[16px]">
+              in this step, we'll ask you what are type room do you want design.
+            </p> */}
+
+            <h1 className="md:text-[18px] text-[16px] font-semibold">Step 4</h1>
+            <h2 className="mt-6 md:text-[32px] text-[20px] font-medium">
+              Tell us about how much finance
+            </h2>
+            <p className="md:text-[16px] text-[14px]">
+              in this step, we'll ask you what are type room do you want design.
             </p>
 
-            <div className="flex flex-wrap gap-4 mt-10 ">
+            <div className="md:flex md:flex-wrap gap-4 mt-10 grid grid-cols-2 ">
               {price.map((item, index) => {
                 return (
-                  <div key={index} className=" relative  overflow-hidden ">
+                  <div key={index} className=" relative md:w-48   overflow-hidden ">
                     <div
                       onClick={() => {
                         handleSelectValue("price", item.price);
                         setPriceState(index);
                       }}
-                      className={`relative w-[272px] h-[150px] flex flex-col border-2  justify-center  opacity-100 cursor-pointer ${
-                        priceState === index && "border-black border-4"
-                      }`}
+                      className={`relative  flex flex-col p-2 md:p-4 min-h-[86px] md:max-h-[102px]  hover:border-2 border hover:border-black  justify-center  opacity-100 cursor-pointer ${priceState === index && "border-black border-2"
+                        }`}
                     >
                       <h3 className=" text-xl text-center mt-2 font-medium">
                         {item.price}
@@ -772,25 +819,24 @@ const FreeSample = () => {
             return (
               <div
                 key={step.step + index}
-                className={` h-2 w-full rounded ${
-                  step.selected ? "bg-black" : "bg-gray-300"
-                } `}
+                className={` h-[3px] w-full rounded ${step.selected ? "bg-black" : "bg-gray-300"
+                  } `}
               ></div>
             );
           })}
         </div>
-        <div className="h-14 flex justify-between items-center  container mx-auto ">
+        <div className="h-14 flex justify-between items-center  container mx-auto px-[10px] md:px-0 ">
           <button
-            className="text-lg font-bold border-2 border-transparent hover:border-black  py-1 px-6 rounded-full"
+            className="text-lg font-medium underline border-transparent hover:border-black  py-1 px-6 hover:bg-gray-100 cursor-pointer"
             disabled={dataStep.step === 1}
             onClick={() => handlePreviousButton()}
           >
             Back
           </button>
           <button
-            className="text-lg font-bold bg-black text-white py-1 px-6 rounded-full hover:bg-gray-800 disabled:bg-gray-300 disabled:text-black disabled:cursor-not-allowed"
+            className="text-lg font-medium bg-black text-white py-1 px-6 rounded-full hover:bg-gray-800 disabled:bg-gray-300 disabled:text-black disabled:cursor-not-allowed"
             // disabled={dataStep.step === 4}
-            disabled = {dataStep.step === 2 && categoryState < 0 || dataStep.step === 3 && roomstate < 0 || dataStep.step === 4 && priceState < 0}
+            disabled={dataStep.step === 2 && categoryState < 0 || dataStep.step === 3 && roomstate < 0 || dataStep.step === 4 && priceState < 0}
             onClick={() => handleNextButton()}
           >
             Next

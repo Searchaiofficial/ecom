@@ -318,7 +318,7 @@ const Card = ({ data, productId }) => {
                         Starts
                       }
                     </div>
-                    <p className="text-gray-800 underline w-[31px] h-[20px] cursor-pointer">{reviews.length}</p>
+                    <p className="text-gray-800 underline  h-[20px] cursor-pointer">{reviews.length}</p>
                   </div>
                 </div>
               )
@@ -335,7 +335,7 @@ const Card = ({ data, productId }) => {
                         Starts
                       }
                     </div>
-                    <p className="text-gray-800 underline w-[31px] h-[20px] cursor-pointer">{reviews.length}</p>
+                    <p className="text-gray-800 underline  h-[20px] cursor-pointer">{reviews.length}</p>
                   </div>
                 </div>
               ) :

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import "./imagecaresoul.css"; 
+import "./imagecaresoul.css";
 import Image from "next/image";
+
 const Carousel = ({ images }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -30,14 +31,13 @@ const Carousel = ({ images }) => {
     goToSlide(index);
   };
 
-  const [touchPosition, setTouchPosition] = useState(null); // New state for tracking touch position
-  // Function to handle the start of a touch
+  const [touchPosition, setTouchPosition] = useState(null);
+
   const handleTouchStart = (e) => {
     const touchDown = e.touches[0].clientX;
     setTouchPosition(touchDown);
   };
 
-  // Function to handle the end of a touch
   const handleTouchMove = (e) => {
     const touchDown = touchPosition;
 
@@ -60,21 +60,20 @@ const Carousel = ({ images }) => {
   };
 
   return (
-    <section aria-label="Newest Photos" className="sm:hidden h-fit ">
+    <section aria-label="Newest Photos" className="sm:hidden h-fit">
       <div
-        className=" relative aspect-square w-full  overflow-hidden"
+        className="relative aspect-square w-full overflow-hidden"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
       >
-        <div className="relative flex h-full w-full items-center justify-center  aspect-square">
+        <div className="relative flex h-full w-full items-center justify-center aspect-square">
           {images && images.length > 1 ? (
             images?.map((src, idx) => {
               return (
-                <div>
+                <div key={idx}>
                   <Image
                     src={src}
                     alt="NA"
-                    key={idx}
                     height={400}
                     width={400}
                     className={
@@ -105,6 +104,34 @@ const Carousel = ({ images }) => {
               );
             })}
           </span>
+
+
+          <div className="z-50" onClick={goToPrevSlide}>
+
+            <Image
+              src="/ayatrio icon/left-card.svg"
+              height={20}
+              width={20}
+              alt="arrow"
+
+              className="absolute left-3 h-8 w-8 top-1/2 opacity-70"
+            // className="absolute filter drop-shadow-sm w-7 h-7  text-white opacity-85 group hover:cursor-pointer hover:opacity-100 hover:scale-104 hover:filter-drop-shadow-lg  arrow-left"
+            />
+          </div>
+
+
+          <div className="z-50" onClick={goToNextSlide}>
+            <Image
+              src="/ayatrio icon/right-card.svg"
+              height={30}
+              width={30}
+              alt="arrow"
+
+              className="absolute right-3 top-1/2 h-8 w-8  opacity-70"
+            // className="absolute filter drop-shadow-sm w-7 h-7 -mt-[13px] text-white opacity-85 group hover:cursor-pointer hover:opacity-100 hover:scale-104 hover:filter-drop-shadow-lg arrow-right"
+            />
+
+          </div>
         </div>
       </div>
     </section>

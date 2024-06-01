@@ -137,13 +137,14 @@ const Trending = () => {
             </SwiperSlide>
           ) : (
             newTrendingData.map((product, idx) => {
-              console.log(product.specialprice)
+              {/* console.log(product.ratings) */ }
               return (
                 <SwiperSlide key={idx} className="ml-0">
                   <div className="grid grid-cols-1 w-full h-full fade-in ">
                     <Card
                       title={product.productTitle}
                       // date={product.date}
+                      productImages={product?.productImages}
                       specialPrice={product?.specialprice}
                       price={product.perUnitPrice}
                       desc={product.productTitle}

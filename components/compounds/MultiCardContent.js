@@ -26,14 +26,14 @@ const MultiCardContent = (props) => {
           alt="add"
         />
       </div> */}
-      <div className="flex flex-col  xl:pt-[32px] pt-[32px] pl-[18px]  lg:pl-[24px]  xl:pl-[32px] pr-[18px] lg:pr-[24px] xl:pr-[77px] ">
+      <div className="flex flex-col  xl:pt-[32px] pt-[24px] pl-[18px]  lg:pl-[24px]  xl:pl-[32px] pr-[18px] lg:pr-[24px] xl:pr-[77px] ">
         <div className="pb-[9px]  h-[56px]">
           <Image src={iconPath} width={iconSize} height={iconSize} alt={title} className="" />
         </div>
         <h2 className=" text-[21px] lg:text-[25px]  text-[#333333] font-semibold mb-[1em] ">{title}</h2>
         <div className=" text-[14px] lg:text-[15px] font-normal ">{text}</div>
       </div>
-      <div className=" ml-[24px] max-w-fit  bg-[#333336] rounded-full">
+      <div className=" ml-[24px] mb-[24px] max-w-fit  bg-[#333336] rounded-full">
         <Image
           className="min-w-[25px] min-h-[25px] p-1 m-2"
           src="/Ayatrio updated icon/Back_arrow_white.svg"

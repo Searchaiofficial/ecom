@@ -55,6 +55,22 @@ function Card(props) {
   //   endDate: "",
   // });
 
+  console.log(props)
+
+  const imageData = props.productImages?.map((item) => {
+    return {
+      color: item.color,
+      image: item.images[0],
+    };
+  });
+
+  console.log(imageData)
+  const [selectedColor, setSelectedColor] = useState("");
+
+  const handleColor = () => {
+    console.log("")
+  }
+
 
   return (
     <>
@@ -147,42 +163,107 @@ function Card(props) {
             </span>
           </div>
         </div>
-        <div className="card-title flex flex-col">
+        <div>
           {
-            props.demandtype === "Ayatrio Member Favorite" && (
+            imageData?.length > 0 && isHovered && (
 
-              <p className="font-medium text-[#0076D3] mt-[14px] mb-[3px] text-[12px]">{props.demandtype}</p>
+              <div className="colorContainer flex flex-col sm:w-auto w-[80vw] ">
+                <div className="w-full flex justify-between mb-2">
+                  {/* <h1 className="] text-[14px] font-medium">Colours</h1> */}
+                </div>
+                {
+                  <>
+                    <div className="colors flex gap-1.5">
+                      {imageData?.map((item, index) => (
+                        <div
+                          key={index}
+                          onClick={() => handleColor(item.color)}
+                          className={`parent relative w-[40px] h-[40px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
+            ${selectedColor === item.color ||
+                              (index === 0 && selectedColor === "")
+                              ? " border-black "
+                              : " border-black"
+                            }   
+          `}
+                        >
+                          <Image
+                            className="relative w-full h-full object-cover"
+                            src={item.image}
+                            alt={item.color}
+                            width={0}
+                            height={0}
+                            layout="fill"
+                            objectFit="cover"
+                          />
+                          {/* {
+                            selectedColor === item.color ||
+                              (index === 0 && selectedColor === "") ? (
+                              <div className="w-[100%] h-[4px] bg-black mt-[70px]" />
+                            ) : ""
+                          } */}
+
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                }
+              </div>
             )
           }
-          <div className={` ${props.demandtype === "Ayatrio Member Favorite" ? "" : "pt-[14px]"}`}>{props.title}</div>
-        </div>
-        <div className="card-date text-sm text-[#757575]">{props.desc}</div>
-        <div className="card-price">
-          {/* <span className="font-medium pr-[3px] pt-[3px]">Rs.</span>
-          <h2 className="text-xl font-medium tracking-wide">{props.price}</h2> */}
-          <h2 className={`text-3xl flex font-semibold leading-[0.5]  tracking-wide ${props.specialPrice ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg" : ""} `} style={props?.specialPrice ? { boxShadow: '3px 3px #ad3535' } : {}}>
-            <span className={`text-sm ${props?.specialPrice?.price ? "" : "pt-3.5"}`}>Rs. &nbsp;</span>{" "}
-            {props?.specialPrice?.price ? props?.specialPrice.price : <p className="pt-3">{props.price}</p>}
-          </h2>{" "}
-        </div>
-        {
-          props?.specialPrice && (
-            <div className="flex flex-col mt-2">
-              <p className="text-[#757575] text-[12px] pt-[3px]">Regular price: Rs.{props?.price} (incl. of all taxes)</p>
-              {/* {
-                props?.specialPrice?.startDate && props?.specialPrice?.endDate && (
-                  <p className="text-[#757575] text-[12px] pb-[10px]">Price valid {formattedStartDate} - {formattedEndDate} or while supply lasts</p>
-                )
-              } */}
-              {/* <p className="text-[#757575] text-[12px] pb-[10px]">Price valid May 02 - May 29 or while supply lasts</p> */}
-            </div>
-          )
-        }
-        <div className="card-rating">
-          {/* <img src="/svg/star-full-icon.svg" className="w-6 h-6" alt="" /> */}
+          <div className="flex items-center justify-between pt-2 ">
+            <div className="card-title flex flex-col">
+              {
+                props.demandtype === "Ayatrio Member Favorite" && (
 
-          {props.rating}
+                  <p className="font-medium text-[#0076D3]  mb-[3px] text-[12px]">{props.demandtype}</p>
+                )
+              }
+              <div className={` ${props.demandtype === "Ayatrio Member Favorite" ? "" : ""}`}>{props.title}</div>
+            </div>
+
+          </div>
+          {/* {!isHovered && <div className="card-date text-sm text-[#757575]">{props.desc}</div>} */}
+          <div className="card-date text-sm text-[#757575]">{props.desc}</div>
+          {
+            imageData?.length > 0 && (
+              <div className="card-date text-sm text-[#757575]">{imageData?.length} Colours</div>
+            )
+          }
+
+          <div className="card-price">
+            {/* <span className="font-medium pr-[3px] pt-[3px]">Rs.</span>
+          <h2 className="text-xl font-medium tracking-wide">{props.price}</h2> */}
+            <h2 className={`text-3xl flex font-semibold leading-[0.5]  tracking-wide ${props.specialPrice ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg" : ""} `} style={props?.specialPrice ? { boxShadow: '3px 3px #ad3535' } : {}}>
+              <span className={`text-sm ${props?.specialPrice?.price ? "" : "pt-3.5"}`}>Rs. &nbsp;</span>{" "}
+              {props?.specialPrice?.price ? props?.specialPrice.price : <p className="pt-3 ">{props.price}</p>}
+            </h2>{" "}
+          </div>
+          {
+            props?.specialPrice && (
+              <div className="flex flex-col mt-2">
+                <p className="text-[#757575] text-[12px] pt-[3px]">Regular price: Rs.{props?.price} (incl. of all taxes)</p>
+                {
+                  props?.specialPrice?.startDate && props?.specialPrice?.endDate && (
+                    <p className="text-[#757575] text-[12px] ">Price valid {formattedStartDate} - {formattedEndDate} or while supply lasts</p>
+                  )
+                }
+              </div>
+            )
+          }
+          <div className="card-rating">
+            {/* <img src="/svg/star-full-icon.svg" className="w-6 h-6" alt="" /> */}
+
+            {props.rating}
+          </div>
+          <div className="flex lg:gap-2 gap-1 mt-2 ">
+            <Image src={"/svg/icon/adtocart.svg"} height={25} width={25} className="mr-2 cursor-pointer" />
+            <Image src={"/svg/icon/like.svg"} height={30} width={25} className=" cursor-pointer" />
+          </div>
+
+
         </div>
+
+
       </div>
       {props.isPopupVisible && (
         <PopUp
