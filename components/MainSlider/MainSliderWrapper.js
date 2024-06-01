@@ -3,11 +3,8 @@ import NewMainSlider from "./NewMainSlider";
 
 const MainSliderWrapper = async () => {
   const sliderData = await fetchSliderData();
-  return (
-    <>
-      <NewMainSlider initialData={sliderData} />\
-    </>
-  )
+
+  return <NewMainSlider initialData={sliderData} />;
 };
 
 export default MainSliderWrapper;
