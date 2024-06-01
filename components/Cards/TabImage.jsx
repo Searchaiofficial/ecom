@@ -4,7 +4,8 @@ import React, { useState } from "react";
 import "./tabs.css";
 import Image from "next/image";
 import Label from "../Label/Label";
-const TabImage = ({ src, alt, width, height, labelData }) => {
+import Link from "next/link";
+const TabImage = ({ src, alt, width, height, labelData, href }) => {
   const circledData = Array.isArray(labelData) ? labelData : [labelData];
 
   const [openData, setOpenData] = useState(
@@ -13,13 +14,25 @@ const TabImage = ({ src, alt, width, height, labelData }) => {
 
   return (
     <div className="child w-full h-full row-span-2 relative">
-      <Image
-        className="h-full w-full object-cover"
-        src={src}
-        alt={alt}
-        width={width}
-        height={height}
-      />
+      {href ? (
+        <Link href={href} className="h-full w-full">
+          <Image
+            className="h-full w-full object-cover"
+            src={src}
+            alt={alt}
+            width={width}
+            height={height}
+          />
+        </Link>
+      ) : (
+        <Image
+          className="h-full w-full object-cover"
+          src={src}
+          alt={alt}
+          width={width}
+          height={height}
+        />
+      )}
       <div className="cursor-pointer">
         {circledData.map((data, idx) => (
           <div
