@@ -66,7 +66,7 @@ const ShopByRoomSlider = () => {
     const swiper1Ref = useRef(null);
     return (
         <div className="">
-            <div className="pt-12 mb-20  bg-white sm:px-[50px] px-[20px] lg:px-[67px] ">
+            <div className="pt-12 mb-20  bg-white sm:pl-[50px] pl-[20px] lg:pl-[67px] ">
                 <div className="mb-2 w-full flex justify-between items-center">
                     <h2 className="font-semibold text-2xl py-[15px]">
                         Room discovery
@@ -126,7 +126,7 @@ const ShopByRoomSlider = () => {
                     ) : (
                         RoomDataSlider.map((roomData, idx) => {
                             return (
-                                <SwiperSlide key={idx} className="ml-0">
+                                <SwiperSlide key={idx} className="ml-0 min-w-[322px] sm:min-w-0">
                                     <div className="">
                                         <ShopByRoomCard
                                             title={roomData.roomType}

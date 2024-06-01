@@ -11,7 +11,7 @@ export default function RoomImageList() {
 
   return (
     <div className="flex flex-col">
-      <div className="imggallery mt-[50px] w-[60vw]">
+      <div className="imggallery w-[60vw]">
         <div className="sm:grid hidden sm:grid-cols-2 sm:grid-rows-2 gap-3">
           {data[0]?.images?.map((image, index) => (
             <div

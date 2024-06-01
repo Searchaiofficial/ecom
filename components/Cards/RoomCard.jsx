@@ -24,9 +24,11 @@ const RoomCard = async () => {
                   "-"
                 )}`}
               >
-                <p class="px-6 text-[12px] font-semibold">
-                  Shop all New lower price
-                </p>
+
+                <div className="flex items-center gap-5 px-5">
+                  <p class="text-[12px] font-semibold">Shop all New lower price</p>
+                  <Image src={"/Ayatrio updated icon/Back_arrow.svg"} height={15} width={15} />
+                </div>
               </Link>
             </div>
           </div>
@@ -34,7 +36,7 @@ const RoomCard = async () => {
       </div>
       {gallery && (
         <div className="px-[15px] flex justify-between mx-auto mb-[12px] lg:mb-10 ">
-          <div className=" w-full flex justify-center max-h-[915px] screens ">
+          <div className=" w-full flex justify-center max-h-[1000px] screens ">
             <div className="w-full  lg:h-[730px] grid grid-cols-2 lg:grid-cols-12 gap-y-4  gap-x-4 auto-rows-fr">
               {/* 1 */}
               <div
@@ -55,10 +57,13 @@ const RoomCard = async () => {
                       layout="fill"
                       alt="Image"
                     />
-                    <div className="absolute md:top-[20rem] left-3  lg:left-16 lg:-bottom-60  bottom-8 flex flex-col justify-center items-center p-2">
-                      <h2 className="text-white text-center text-xl lg:text-3xl">
-                        {gallery.items[0].heading}
-                      </h2>
+                    <div className="absolute md:top-[20rem] left-3  lg:left-20 lg:-bottom-72  bottom-8 flex flex-col justify-center items-center p-2">
+                      <div>
+                        <h2 className="text-white text-center text-[12px]">
+                          {gallery.items[0].heading}
+                        </h2>
+                        <p className="text-[12px] font-semibold text-blue-500">View More</p>
+                      </div>
                       {/* <button className="bg-black hover:bg-zinc-300 text-white  py-2 px-10 h-12 rounded-full">
                         {gallery.items[0].buttonText}
                       </button> */}

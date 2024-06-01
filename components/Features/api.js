@@ -48,6 +48,7 @@ export const fetchSliderView = async (page, limit) => {
   }
 };
 
+
 export const fetchProductsWithSearch = async (searchQuery) => {
   try {
     const response = await axios.get(createApiEndpoint("products"), {

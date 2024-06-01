@@ -37,6 +37,10 @@ function Cards() {
   //   window.scrollTo(0, 0);
   // }, []);
 
+  if(typeof window !== "undefined"){
+    sessionStorage.removeItem("navigationItem");
+  } 
+
   return (
     <div className="w-full h-auto">
       <MainSliderWrapper />
@@ -60,12 +64,18 @@ function Cards() {
       <ShopByRoomSlider />
       <Profile />
       <Suggestion />
-      <UserReviewPosts />
+
+      <div className="sm:px-[50px]  px-[20px]  lg:px-[67px]">
+
+        <UserReviewPosts slidesPerView={3.2} />
+      </div>
+
+
       <MulticardService />
 
       <div className="lg:px-[52px]">
         <TabsWrapper />
-         <Phone /> 
+        <Phone />
       </div>
 
       <Footer />

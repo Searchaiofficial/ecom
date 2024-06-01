@@ -36,8 +36,12 @@ import Link from "next/link";
 import axios from "axios";
 import Tabs from "../Cards/Tabs";
 import BlogRelatedProducts from "../Cards/BlogRelatedProducts";
+import { usePathname } from "next/navigation";
+
 
 export const RoomsPage = ({ params }) => {
+  const pathname = usePathname();
+
   const [productData, setProductData] = useState([]);
   const [roomData, setRoomData] = useState([]);
   const [swiperRef, setSwiperRef] = useState(null);
@@ -50,12 +54,12 @@ export const RoomsPage = ({ params }) => {
   const productSelect = useSelector(selectProductData);
   const roomMainSelect = useSelector(selectRoomMain);
 
-  const fetchRoomMain = async () => {
-    const url = `${process.env.NEXT_PUBLIC_API_BASE_URL
-      }/api/getRoommain?roomType=${params.replace(/-/g, " ")}`;
-    const response = await axios.get(url);
-    setRoomMain(response.data);
-  };
+  // const fetchRoomMain = async () => {
+  //   const url = `${process.env.NEXT_PUBLIC_API_BASE_URL
+  //     }/api/getRoommain?roomType=${params.replace(/-/g, " ")}`;
+  //   const response = await axios.get(url);
+  //   setRoomMain(response.data);
+  // };
 
   const [reviewRoom, setReviewRoom] = useState({});
   const [reviewData, setReviewData] = useState([]);
@@ -87,7 +91,13 @@ export const RoomsPage = ({ params }) => {
     }
   };
 
+  const handleSetItem = () => {
+    const newItem = { label: params.replace(/-/g, " "), href: pathname };
+    sessionStorage.setItem("navigationItem", JSON.stringify(newItem));
+  };
+
   useEffect(() => {
+    handleSetItem();
     fetchRoomData();
     fetchReviewData();
   }, [params]);
@@ -129,18 +139,18 @@ export const RoomsPage = ({ params }) => {
   const swiper1Ref = useRef(null);
   const swiper2Ref = useRef(null);
 
-  console.log(roomMain)
+  console.log(roomMain);
 
   return (
     // <div className="pt-12 bg-white sm:px-[50px] px-[20px]">
     <div className="w-full">
       <div className=" px-[20px] sm:px-[50px] lg:px-[67px] flex justify-center ">
         <div className="mt-36 w-full flex flex-col">
-          <h1 className="lg:text-[30px] text-[24px] font-semibold">{roomMain?.title}</h1>
+          <h1 className="lg:text-[30px] text-[24px] font-semibold">
+            {roomMain?.title}
+          </h1>
           <div className="mt-5 lg:w-[70%] w-full">
-            <p className="line-clamp-3 mb-5">
-              {roomMain?.description}
-            </p>
+            <p className="line-clamp-3 mb-5">{roomMain?.description}</p>
           </div>
           <a className="my-5" href="/">
             click here for size guide
@@ -181,8 +191,7 @@ export const RoomsPage = ({ params }) => {
                   <div className=" w-full flex justify-center max-h-[915px] screens">
                     <div className="w-full  lg:h-[730px] grid grid-cols-2 lg:grid-cols-12 gap-y-4  gap-x-4 auto-rows-fr">
                       {/* 1 */}
-                      <div
-                        className="parent col-start-1 col-end-3 row-start-1 lg:mb-0 row-end-6 lg:col-start-1 lg:col-end-7 lg:row-start-1 lg:row-end-12">
+                      <div className="parent col-start-1 col-end-3 row-start-1 lg:mb-0 row-end-6 lg:col-start-1 lg:col-end-7 lg:row-start-1 lg:row-end-12">
                         <div className="parent relative w-full h-full">
                           <>
                             <TabImage

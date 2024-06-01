@@ -10,7 +10,7 @@ import "./../Imagechanger/styles.css";
 const MultiCardContent = (props) => {
   const { iconPath, iconSize, title, text } = props;
   return (
-    <div className="bg-white flex flex-col  md:flex-row h-auto min-h-[350px] mb-[60px] p-3">
+    <div className="bg-white flex flex-col justify-between md:flex-col h-auto md:min-h-[370px] min-h-[350px] mb-[60px] p-3">
       {/* <div className="mt-8 ml-6">
         <Image src={iconPath} width={iconSize} height={iconSize} alt="image" />
       </div>
@@ -26,14 +26,14 @@ const MultiCardContent = (props) => {
           alt="add"
         />
       </div> */}
-      <div className="flex flex-col  xl:pt-[32px] pt-[32px] pl-[18px]  lg:pl-[24px]  xl:pl-[32px] pr-[18px] lg:pr-[24px] xl:pr-[77px] pb-[50px]">
+      <div className="flex flex-col  xl:pt-[32px] pt-[32px] pl-[18px]  lg:pl-[24px]  xl:pl-[32px] pr-[18px] lg:pr-[24px] xl:pr-[77px] ">
         <div className="pb-[9px]  h-[56px]">
           <Image src={iconPath} width={iconSize} height={iconSize} alt={title} className="" />
         </div>
-        <h2 className=" text-[21px] lg:text-[25px] trackinh-[0.007em] text-[#333333] font-semibold mb-[1em] ">{title}</h2>
-        <div className=" text-[14px] lg:text-[15px] h-[42px] font-normal -tracking-[-0.374px]">{text}</div>
+        <h2 className=" text-[21px] lg:text-[25px]  text-[#333333] font-semibold mb-[1em] ">{title}</h2>
+        <div className=" text-[14px] lg:text-[15px] font-normal ">{text}</div>
       </div>
-      <div className="lg:self-end absolute bottom-20 left-10 bg-[#333336] rounded-full">
+      <div className=" ml-[24px] max-w-fit  bg-[#333336] rounded-full">
         <Image
           className="min-w-[25px] min-h-[25px] p-1 m-2"
           src="/Ayatrio updated icon/Back_arrow_white.svg"

@@ -4,7 +4,7 @@ import "@/components/Product/styles.css";
 import Tabproduct from "@/components/Product/TabsProducts";
 import axios from "axios";
 import { allSelectedData } from "@/components/Features/Slices/virtualDataSlice";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { selectedFilteredProduct } from "@/components/Features/Slices/FilteredProduct";
 
@@ -20,6 +20,7 @@ import {
 
 // const hideheader=
 const ProductPage = ({ params }) => {
+  const pathname = usePathname();
   const [type, setType] = useState(
     params.cat.replace(/-/g, " ")
     // params.cat.replace(/percent-/g, "% ")
@@ -106,8 +107,15 @@ const ProductPage = ({ params }) => {
     }
   }, []);
 
+  const handleSetItem = (label) => {
+    const newItem = { label: label, href: pathname };
+    console.log("newItem", newItem);
+    sessionStorage.setItem("navigationItem", JSON.stringify(newItem));
+  };
+
   useEffect(() => {
     if (params.parentCategory === "offers") {
+      handleSetItem("Offers");
       const encodedType = encodeURI(type);
       dispatch({
         type: "FETCH_PRODUCTS_FROM_OFFER",
@@ -122,6 +130,7 @@ const ProductPage = ({ params }) => {
 
       fetchAllOfferAndProducts();
     } else if (params.parentCategory === "demandtype") {
+      handleSetItem("Demand Type");
       const encodedType = encodeURI(type);
       dispatch({
         type: "FETCH_PRODUCTS_FROM_DEMAND_TYPE",
@@ -135,7 +144,8 @@ const ProductPage = ({ params }) => {
       };
       fetchAllDemandType();
     } else if (params.parentCategory === "virtualexperience") {
-      console.log(x, "x")
+      handleSetItem("Free Sample");
+      console.log(x, "x");
       if (x.length > 0) {
         router.push("/virtualexperience");
       }
@@ -157,6 +167,7 @@ const ProductPage = ({ params }) => {
       fetchVeProducts();
       console.log("ve products");
     } else if (params.heading === "category" && type === "all") {
+      handleSetItem("Products")
       dispatch({
         type: "FETCH_FILTER_PRODUCTS",
         payload: {
@@ -177,6 +188,7 @@ const ProductPage = ({ params }) => {
         fetchCategoryData();
       }
     } else {
+      handleSetItem("Products")
       if (!category.name) {
         const fetchCategoryData = async () => {
           const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getCategoryByName/${params.parentCategory}`;
