@@ -48,6 +48,17 @@ export const fetchSliderView = async (page, limit) => {
   }
 };
 
+export const fetchMobileSliderView = async (page, limit) => {
+  try {
+    const response = await axios.get(
+      createApiEndpoint("getMobileSlider?limit=" + limit + "&page=" + page)
+    );
+    return response.data;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const fetchProductsWithSearch = async (searchQuery) => {
   try {
     const response = await axios.get(createApiEndpoint("products"), {

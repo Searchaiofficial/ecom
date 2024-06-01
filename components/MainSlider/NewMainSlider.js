@@ -70,6 +70,7 @@ export default function NewMainSlider({ initialData }) {
     <div
       onMouseEnter={() => setNavigationVisible(true)}
       onMouseLeave={() => setNavigationVisible(false)}
+      className="hidden sm:block"
     >
       <Swiper
         className="swiper-slider h-[78vh]"

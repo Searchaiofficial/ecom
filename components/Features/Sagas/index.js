@@ -24,6 +24,7 @@ import { watchFetchSuggestionData } from "./suggestionDataSaga";
 import { watchFetchRoomMainData } from "./roomMainSaga";
 import { watchFetchProductsFromDemandType } from "./demandTypeProductsSaga";
 import { watchFetchProductsFromOffers } from "./offerProductsSaga";
+import { watchFetchMobileSliderView } from "./MobileSliderSaga";
 
 export default function* rootSaga() {
   yield all([
@@ -51,5 +52,6 @@ export default function* rootSaga() {
     watchFetchRoomMainData(),
     watchFetchProductsFromDemandType(),
     watchFetchProductsFromOffers(),
+    watchFetchMobileSliderView(),
   ]);
 }

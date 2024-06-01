@@ -130,23 +130,26 @@ const RoomPage = () => {
           <div className=" sm:flex-row gap-8 flex-col flex overflow-hidden">
             <div className="relative sm:basis-2/3 flex lg:pl-[40px] mt-[50px] sm:mt-[40px] flex-col sm:flex-grow">
               <div className=" font-sans font-normal text-xs sm:text-sm pb-2 sticky top-10 flex items-center gap-1">
-                <Link href="/">
-                  <span className="hover:text-gray-600 cursor-pointer ">
-                    Home
-                  </span>
-                </Link>
-                <Image
-                  src="/ayatrio icon/backarrow.svg"
-                  alt="tick"
-                  width={10}
-                  height={10}
-                  className="opacity-100 h-[12px] "
-                />
-                {navigationItemData && (
+                {navigationItemData ? (
                   <>
                     <Link href={`${navigationItemData.href}`}>
                       <span className="hover:text-gray-600 cursor-pointer ">
                         {navigationItemData.label}
+                      </span>
+                    </Link>
+                    <Image
+                      src="/ayatrio icon/backarrow.svg"
+                      alt="tick"
+                      width={10}
+                      height={10}
+                      className="opacity-100 h-[12px] "
+                    />
+                  </>
+                ) : (
+                  <>
+                    <Link href="/">
+                      <span className="hover:text-gray-600 cursor-pointer ">
+                        Home
                       </span>
                     </Link>
                     <Image
