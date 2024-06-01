@@ -10,9 +10,13 @@ const RoomCard = async () => {
     <>
       <div className="px-[15px] mb-[32px]">
         <div>
-          <h1 className="mb-[8px] text-2xl font-semibold">{gallery.items[0]?.mainHeading}</h1>
+          <h1 className="mb-[8px] text-2xl font-semibold">
+            {gallery.items[0]?.mainHeading}
+          </h1>
           <div className="flex items-center justify-between">
-            <p className="text-[14px] lg:w-[70%] line-clamp-2 font-normal">{gallery.items[0]?.description}</p>
+            <p className="text-[14px] lg:w-[70%] line-clamp-2 font-normal">
+              {gallery.items[0]?.description}
+            </p>
             <div class="border hidden border-black rounded-full lg:flex items-center justify-center h-[40px] cursor-pointer hover:border-gray-700 transition-colors">
               <Link
                 href={`heading/offers/${gallery.items[0].offer.replace(
@@ -20,11 +24,11 @@ const RoomCard = async () => {
                   "-"
                 )}`}
               >
-
-                <p class="px-6 text-[12px] font-semibold">Shop all New lower price</p>
+                <p class="px-6 text-[12px] font-semibold">
+                  Shop all New lower price
+                </p>
               </Link>
             </div>
-
           </div>
         </div>
       </div>
@@ -71,20 +75,17 @@ const RoomCard = async () => {
                 {
                   <>
                     {gallery.mode == "room" && (
-                      <Link
+                      <TabImage
+                        src={gallery.rooms[0].imgSrc}
                         href={`/rooms/${gallery.rooms[0].roomType.replace(
                           / /g,
                           "-"
                         )}`}
-                      >
-                        <TabImage
-                          src={gallery.rooms[0].imgSrc}
-                          alt={`Image  of Children`}
-                          width={1000}
-                          height={338}
-                          labelData={gallery.rooms[0].children}
-                        />
-                      </Link>
+                        alt={`Image  of Children`}
+                        width={1000}
+                        height={338}
+                        labelData={gallery.rooms[0].children}
+                      />
                     )}
                   </>
                 }
@@ -98,20 +99,17 @@ const RoomCard = async () => {
                 {
                   <>
                     {gallery.mode === "room" && (
-                      <Link
+                      <TabImage
+                        src={gallery.rooms[1].imgSrc}
+                        alt={`Image  of Children`}
                         href={`/rooms/${gallery.rooms[1].roomType.replace(
                           / /g,
                           "-"
                         )}`}
-                      >
-                        <TabImage
-                          src={gallery.rooms[1].imgSrc}
-                          alt={`Image  of Children`}
-                          width={1000}
-                          height={338}
-                          labelData={gallery.rooms[1].children}
-                        />
-                      </Link>
+                        width={1000}
+                        height={338}
+                        labelData={gallery.rooms[1].children}
+                      />
                     )}
                   </>
                 }
@@ -125,20 +123,17 @@ const RoomCard = async () => {
                 {
                   <>
                     {gallery.mode === "room" && (
-                      <Link
+                      <TabImage
+                        src={gallery.rooms[2].imgSrc}
+                        alt={`Image  of Children`}
                         href={`/rooms/${gallery.rooms[2].roomType.replace(
                           / /g,
                           "-"
                         )}`}
-                      >
-                        <TabImage
-                          src={gallery.rooms[2].imgSrc}
-                          alt={`Image  of Children`}
-                          width={1000}
-                          height={338}
-                          labelData={gallery.rooms[2].children}
-                        />
-                      </Link>
+                        width={1000}
+                        height={338}
+                        labelData={gallery.rooms[2].children}
+                      />
                     )}
                   </>
                 }
@@ -152,20 +147,17 @@ const RoomCard = async () => {
                 {
                   <>
                     {gallery.mode === "room" && (
-                      <Link
+                      <TabImage
+                        src={gallery.rooms[3].imgSrc}
                         href={`/rooms/${gallery.rooms[3].roomType.replace(
                           / /g,
                           "-"
                         )}`}
-                      >
-                        <TabImage
-                          src={gallery.rooms[3].imgSrc}
-                          alt={`Image  of Children`}
-                          width={1000}
-                          height={338}
-                          labelData={gallery.rooms[3].children}
-                        />
-                      </Link>
+                        alt={`Image  of Children`}
+                        width={1000}
+                        height={338}
+                        labelData={gallery.rooms[3].children}
+                      />
                     )}
                   </>
                 }
@@ -175,14 +167,16 @@ const RoomCard = async () => {
         </div>
       )}
       <Link
-        href={`heading/offers/${gallery.items[0].offer.replace(
-          / /g,
-          "-"
-        )}`}
+        href={`heading/offers/${gallery.items[0].offer.replace(/ /g, "-")}`}
       >
         <div className="flex mb-[20px] h-[60px] border-b px-[15px] items-center justify-between lg:hidden">
           <p class="text-[14px] font-semibold">Shop all New lower price</p>
-          <Image src={"Ayatrio updated icon/backarrow.svg"} width={15} height={15} className="" />
+          <Image
+            src={"Ayatrio updated icon/backarrow.svg"}
+            width={15}
+            height={15}
+            className=""
+          />
         </div>
       </Link>
     </>
