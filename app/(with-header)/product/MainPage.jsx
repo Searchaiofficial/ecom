@@ -199,7 +199,7 @@ const RoomPage = () => {
               <RoomImageList images={data?.images} />
               <ImageCaresoul images={data?.images} />
               <div className="block md:hidden">
-                <Card data={data} />
+                <Card data={data}  productId={data._id}/>
               </div>
               <RoomInfo data={data} />
               <Reviews productId={data._id} data={data} />
@@ -222,7 +222,7 @@ const RoomPage = () => {
           <div className="lg:ml-[40px] w-full">
             <Carous data={data} />
           </div>
-        </div>
+        </div>c
       </div>
     </>
   );

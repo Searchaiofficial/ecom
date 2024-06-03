@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import "./imagecaresoul.css";
 import Image from "next/image";
 
-const Carousel = ({ images }) => {
+import { selectProductImages } from "../Features/Slices/imageDataSlice";
+import { useSelector } from "react-redux";
+const Carousel = () => {
+  const data = useSelector(selectProductImages);
+  const images = data[0]?.images;
+  console.log(data)
   const [activeIndex, setActiveIndex] = useState(0);
 
   const goToSlide = (index) => {

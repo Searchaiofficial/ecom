@@ -11,6 +11,83 @@ function TabsProductCard(props) {
 
   const dispatch = useDispatch();
 
+  const [reviews, setReviews] = useState([]);
+  const [stars, setStars] = useState([]);
+
+  const fetchReviews = async () => {
+    try {
+      console.log("props.id", props.id);
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getReview?productId=${props.id}`
+      );
+
+      console.log("reviews", response.data);
+
+      if (Array.isArray(response.data) && response.data.length > 0) {
+        setReviews(response.data);
+      } else {
+        console.error("Empty or invalid response data:", response.data);
+      }
+    } catch (error) {
+      console.error("Error fetching reviews:", error);
+    }
+  };
+
+  function renderStars(averageRating) {
+    const maxStars = 5;
+    const fullStars = Math.floor(averageRating);
+    const halfStar = averageRating - fullStars >= 0.5 ? 1 : 0;
+    const emptyStars = maxStars - fullStars - halfStar;
+
+    const starsArray = [];
+    for (let i = 0; i < fullStars; i++) {
+      starsArray.push(
+        <img
+          key={i}
+          src={"/icon/star.svg"}
+          height={20}
+          width={20}
+          alt="star"
+          className="h-[1em] w-[1em] hover:text-gray-600"
+        />
+      );
+    }
+
+    if (halfStar === 1) {
+      starsArray.push(
+        <img
+          key={fullStars}
+          src={"/icon/half-star.svg"}
+          height={20}
+          width={20}
+          alt="half-star"
+          className="h-[1em] w-[1em] hover:text-gray-600"
+        />
+      );
+    }
+
+    for (let i = 0; i < emptyStars; i++) {
+      starsArray.push(
+        <img
+          key={fullStars + halfStar + i}
+          src={"/ayatrio icon/no fill star.svg"}
+          height={20}
+          width={20}
+          alt="empty-star"
+          className="h-[0.85em] w-[0.85em] hover:text-gray-600"
+        />
+      );
+    }
+
+    return starsArray;
+  }
+
+  useEffect(() => {
+    fetchReviews();
+    const stars = renderStars(3.6);
+    setStars(stars);
+  }, [props.id]);
+
   const handleclick = async (id) => {
     const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getSingleProduct?id=${id}`;
     const response = await axios.get(url);
@@ -197,13 +274,21 @@ function TabsProductCard(props) {
             Rs.<span className="text-3xl">{props.totalPrice}</span>
           </p>
         )}
-        {props.ratings?.length > 0 && (
+        {/* {props.ratings?.length > 0 && (
           <p className="flex flex-row items-center gap-1 text-sm text-black">
             {props.stars.map((star, index) => (
               <Image key={index} src={star} alt="star" width={15} height={15} />
             ))}
             ({props.ratings?.length})
           </p>
+        )} */}
+        {reviews.length > 0 && (
+          <div className="flex gap-2">
+            <div className="flex items-center">{stars}</div>
+            <p className="text-gray-800 underline w-[31px] h-[20px] cursor-pointer">
+              {reviews.length}
+            </p>
+          </div>
         )}
       </div>
     </>

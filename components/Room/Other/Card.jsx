@@ -21,7 +21,7 @@ import { colorsData } from "../../../Model/ColorsData/Colors.js";
 
 const Card = ({ data, productId }) => {
   const quantity = useSelector(selectQuantity);
-  const [Starts, setStars] = useState()
+  const [Stars, setStars] = useState()
   const router = useRouter();
   const [reviews, setReviews] = useState([]);
   const [widthstate, setwidthstate] = useState(0);
@@ -111,20 +111,13 @@ const Card = ({ data, productId }) => {
 
   useEffect(() => {
     fetchReviews();
+
     const stars = renderStars(3.6);
     setStars(stars)
 
   }, [productId]);
 
   console.log("Reviews Data", reviews)
-
-
-
-
-
-
-
-
 
 
   const [sidebarContect, setsidebarContent] = useState(null)
@@ -197,6 +190,7 @@ const Card = ({ data, productId }) => {
       type: "FETCH_IMAGE_DATA",
       payload: color,
     });
+    console.log(color)
   };
 
   const postUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`;
@@ -315,7 +309,7 @@ const Card = ({ data, productId }) => {
                   <div className="flex gap-2">
                     <div className="flex items-center">
                       {
-                        Starts
+                        Stars
                       }
                     </div>
                     <p className="text-gray-800 underline  h-[20px] cursor-pointer">{reviews.length}</p>
@@ -332,7 +326,7 @@ const Card = ({ data, productId }) => {
                   <div className="flex gap-2">
                     <div className="flex items-center">
                       {
-                        Starts
+                        Stars
                       }
                     </div>
                     <p className="text-gray-800 underline  h-[20px] cursor-pointer">{reviews.length}</p>
