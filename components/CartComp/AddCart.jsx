@@ -75,8 +75,6 @@ const AddCart = () => {
 
   const quantityCart = useSelector(selectQuantity);
 
-
-
   const handleDelete = async (itemid) => {
     console.log(itemid);
     try {
@@ -98,11 +96,12 @@ const AddCart = () => {
         ...prevstate,
         items: updatedItems,
       }));
-      dispatch(updateQuantity(quantityCart - 1))
+      dispatch(updateQuantity(quantityCart - 1));
     } catch (error) {
       console.error("Error deleting item", error);
     }
   };
+  console.log(cartdata);
 
   return (
     <div className="">
@@ -112,31 +111,33 @@ const AddCart = () => {
         {cartStatus === "succeeded" && cartdata ? (
           <div>
             <h1 className="sm:text-4xl text-2xl mb-6 font-semibold">Bag</h1>
-            {cartdata.items.map((item) => (
+            {cartdata && cartdata.items && cartdata.items.map((item) => (
               <div key={item._id}>
                 <div className="left-cart flex-col flex sm:w-2/3 w-[90vw] pr-8">
                   <div className="bagContainer w-72">
                     <div className="cartitem flex mb-6 border-b pb-4">
                       <div className="img w-48 h-48 mr-8">
-                        <Image
-                          src={item.productId.images[0]}
-                          className="w-full h-full object-cover rounded-md"
-                          alt="Product"
-                          width={150}
-                          height={150}
-                        />
+                        {item?.productId?.images && item?.productId?.images[0] && (
+                          <Image
+                            src={item.productId.images[0]}
+                            className="w-full h-full object-cover rounded-md"
+                            alt="Product"
+                            width={150}
+                            height={150}
+                          />
+                        )}
                       </div>
                       <div className="cartContent flex flex-col justify-between">
                         <div className="mainright">
                           <div className="leftContent flex flex-col">
                             <h2 className="sm:text-xl text-lg sm:font-semibold font-medium  mb-2">
-                              {item.productId.productTitle}
+                              {item?.productId?.productTitle}
                             </h2>
                             <h3 className="text-gray-600">
-                              {item.productId.category}
+                              {item?.productId?.category}
                             </h3>
                             <h3 className="text-gray-600">
-                              Quantity: &nbsp;{item.quantity}
+                              Quantity: &nbsp;{item?.quantity}
                             </h3>
                           </div>
                           <div className="rightContent sm:text-xl text-lg sm:font-semibold font-medium">
@@ -149,7 +150,7 @@ const AddCart = () => {
                               height={25}
                               alt="delete"
                               className="hover:text-slate-500 cursor-pointer"
-                              onClick={() => handleDelete(item.productId._id)}
+                              onClick={() => handleDelete(item?.productId?._id)}
                             />
                             <Image
                               src="/CartIcons/broken-heart-icon.svg"
@@ -225,34 +226,34 @@ const AddCart = () => {
         )}
       </div>
       <div className="middle-cart">
-        {Object.values(selectedItems).map((item) => (
+        {selectedItems && Object.values(selectedItems).map((item) => (
           <div key={item.id} className="cartitem flex mb-6 border-b pb-4">
             <div className="img w-48 h-48 mr-8">
               <img
-                src={item.image}
+                src={item?.image}
                 className="w-full h-full object-cover rounded-md"
-                alt={item.title}
+                alt={item?.title}
               />
             </div>
             <div className="cartContent flex flex-col justify-between">
               <div className="mainright">
                 <div className="leftContent flex flex-col">
                   <h2 className="sm:text-xl text-lg sm:font-semibold font-medium  mb-2">
-                    {item.title}
+                    {item?.title}
                   </h2>
-                  <h3 className="text-gray-600">{item.category}</h3>
+                  <h3 className="text-gray-600">{item?.category}</h3>
                 </div>
                 <div className="rightContent sm:text-xl text-lg sm:font-semibold font-medium">
-                  ₹{item.price}
+                  ₹{item?.price}
                 </div>
                 <div className="icons flex items-center space-x-2 mt-4">
                   <img
-                    src={Delete}
+                    src="/CartIcons/delete-icon.svg"
                     alt=""
                     className="w-6 h-6 hover:text-slate-500 cursor-pointer "
                   />
                   <img
-                    src={HeartBroken}
+                    src="/CartIcons/broken-heart-icon.svg"
                     alt=""
                     className="text-red-700 hover:text-red-500 cursor-pointer w-6 h-6"
                   />
