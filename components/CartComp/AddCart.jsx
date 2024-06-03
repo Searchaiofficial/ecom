@@ -73,6 +73,7 @@ const AddCart = () => {
   }
   //delete items from DB
   const postUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`;
+  console.log(postUrl)
   const postData = {
     deviceId: id,
     productId: roomData._id,
@@ -138,13 +139,15 @@ const AddCart = () => {
   // };
 
   const handleDelete = async (itemid) => {
+    console.log(itemid)
     try {
       const response = await axios.delete(postUrl, {
         params: {
-          deviceId: id,
+          owner: id,
           productId: itemid,
         },
       });
+
       if (response.statusCode !== 200) {
         console.error("HTTP status", response.status);
       }

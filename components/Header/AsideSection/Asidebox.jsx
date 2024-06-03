@@ -107,7 +107,7 @@ const Asidebox = (props) => {
           </div>
         </div>
       )}
-      {(props.hoveredIndex === 3 || props.hoveredIndex == 4) && (
+      {(props.hoveredIndex === 3 || props.hoveredIndex == 4 || props.hoveredIndex == 5) && (
         <div
           initial={
             typeof window !== "undefined" &&

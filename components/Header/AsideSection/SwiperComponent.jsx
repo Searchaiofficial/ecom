@@ -9,6 +9,37 @@ import { Scrollbar } from "swiper/modules";
 import { roomOptions } from "@/Model/Dropdown/SliderData/SliderData";
 import axios from "axios";
 
+const servicedData = [
+  {
+    image: "/Ayatrio updated icon/10 year warrante.svg",
+    label: "Measuring service"
+  },
+  {
+    image: "/Ayatrio updated icon/10 year warrante.svg",
+    label: "Installation Services"
+  },
+  {
+    image: "/Ayatrio updated icon/10 year warrante.svg",
+    label: "Kitchen planning service"
+  },
+  {
+    image: "/Ayatrio updated icon/10 year warrante.svg",
+    label: "Interior design service"
+  },
+  {
+    image: "/Ayatrio updated icon/10 year warrante.svg",
+    label: "Design your room"
+  },
+  {
+    image: "/Ayatrio updated icon/10 year warrante.svg",
+    label: "Delivery and transport"
+  },
+  {
+    image: "/Ayatrio updated icon/10 year warrante.svg",
+    label: "Returns and exchanges"
+  }
+]
+
 const SwiperComponent = ({ hoveredIndex, setHoveredIndex }) => {
   const [allOffers, setAllOffers] = useState([]);
 
@@ -19,7 +50,7 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex }) => {
       );
       setAllOffers(response.data);
     };
-    if (hoveredIndex === 4) {
+    if (hoveredIndex === 5) {
       fetchAllOffers();
     }
   }, []);
@@ -61,7 +92,30 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex }) => {
             </div>
           </SwiperSlide>
         ))}
-      {hoveredIndex === 4 && (
+
+      {
+        hoveredIndex === 4 && (
+          servicedData.map((service, index) => (
+            <SwiperSlide className="bg-white  parent ">
+              <div className=" child  h-full pt-10 flex px-2 justify-start ">
+                <div
+                  key={index}
+                  passHref
+                  className="flex flex-col items-start"
+                  onClick={() => setHoveredIndex(null)}
+                >
+                  <Image src={service.image} height={100} width={100} alt="service" />
+                  <h3 className="text-[14px]  font-semibold  py-2 text-gray-900 hover:underline">
+                    {service.label}
+                  </h3>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))
+        )
+      }
+
+      {hoveredIndex === 5 && (
         allOffers.map((offer, index) => (
           <SwiperSlide className="bg-white  parent ">
             <div className=" child  h-full pt-10 flex px-2 justify-start ">

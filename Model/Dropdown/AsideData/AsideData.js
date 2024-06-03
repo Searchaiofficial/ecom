@@ -12,10 +12,10 @@ export const headerLinks = [
     label: "Rooms",
   },
   {
-    label: "Offers",
+    label: "Services",
   },
   {
-    label: "New",
-  },
+    label: "Offers",
+  }
 ];
 

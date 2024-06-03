@@ -127,6 +127,7 @@
 .swiper-container {
   width: 100%;
   height: 100%;
+  
 }
 
 .swiper-button-prev,
@@ -234,6 +235,7 @@
 }
 
 
+
 /* styles.css */
 .background-overlay {
   position: fixed;
@@ -251,3 +253,7 @@
   opacity: 1;
   pointer-events: auto; /* Enable interaction with the overlay */
 }
+
+/* .swiper .swiper-initialized .swiper-horizontal .swiper-backface-hidden{
+  padding-right: 10px;
+} */

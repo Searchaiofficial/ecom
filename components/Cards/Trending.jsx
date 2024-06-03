@@ -130,6 +130,7 @@ const Trending = () => {
           onSwiper={setSwiperRef}
           // allowTouchMove={false}
           noSwiping={true}
+          style={{ paddingRight: "10px" }}
         >
           {!newTrendingData ? (
             <SwiperSlide>

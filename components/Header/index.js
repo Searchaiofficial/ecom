@@ -456,7 +456,7 @@ function Header({ setIsHeaderMounted }) {
                       width={300}
                       height={40}
                       priority
-                      className="py-2 pr-2  sm:w-44"
+                      className=" max-w-[135px] mt-[10px] ml-[10px] object-cover  sm:w-44"
                     />
                   </Link>
                 </div>
