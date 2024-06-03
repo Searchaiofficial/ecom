@@ -18,27 +18,27 @@ function Card(props) {
     props.setPopupVisible(true);
   };
 
-  const [reviews, setReviews] = useState([]);
-  const [stars, setStars] = useState([]);
+  // const [reviews, setReviews] = useState([]);
+  // const [stars, setStars] = useState([]);
 
-  const fetchReviews = async () => {
-    try {
-      console.log("props.id", props.id);
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getReview?productId=${props.id}`
-      );
+  // const fetchReviews = async () => {
+  //   try {
+  //     console.log("props.id", props.id);
+  //     const response = await axios.get(
+  //       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getReview?productId=${props.id}`
+  //     );
 
-      console.log("reviews", response.data);
+  //     console.log("reviews", response.data);
 
-      if (Array.isArray(response.data) && response.data.length > 0) {
-        setReviews(response.data);
-      } else {
-        console.error("Empty or invalid response data:", response.data);
-      }
-    } catch (error) {
-      console.error("Error fetching reviews:", error);
-    }
-  };
+  //     if (Array.isArray(response.data) && response.data.length > 0) {
+  //       setReviews(response.data);
+  //     } else {
+  //       console.error("Empty or invalid response data:", response.data);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching reviews:", error);
+  //   }
+  // };
 
   function renderStars(averageRating) {
     const maxStars = 5;
