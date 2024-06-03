@@ -8,8 +8,9 @@ import PopUp from "../Reviews/PopUp";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Image from "next/image";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
+import { selectQuantity, updateQuantity } from "../Features/Slices/calculationSlice";
 
 function Card(props) {
   const dispatch = useDispatch();
@@ -254,14 +255,22 @@ function Card(props) {
 
   }, [Reviews]);
 
+  const quantity = useSelector(selectQuantity);
+
   const addProductToCart = async () => {
     const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`, {
       deviceId: localStorage.getItem("deviceId"),
       productId: props.id,
       quantity: 1
     })
+    if (response.status === 200) {
+      dispatch(updateQuantity(quantity + 1))
+    }
     console.log(response.data)
   }
+
+
+  const [showCart, SetShowCart] = useState(false)
 
 
 
@@ -291,9 +300,9 @@ function Card(props) {
             ""
           )}
 
-          <div className="absolute z-10 top-2 right-2 opacity-85 hover:opacity-100 bg-white p-[6px] hover:scale-105 transition-transform rounded-full" style={{ boxShadow: '0 2px 6px 0 rgba(0, 0, 0, 0.12)' }}>
+          {/* <div className="absolute z-10 top-2 right-2 opacity-85 hover:opacity-100 bg-white p-[6px] hover:scale-105 transition-transform rounded-full" style={{ boxShadow: '0 2px 6px 0 rgba(0, 0, 0, 0.12)' }}>
             <Image src={"/svg/icon/like.svg"} height={20} width={20} className="cursor-pointer" />
-          </div>
+          </div> */}
 
           <div
             className="relative flex h-full w-full items-center justify-center cursor-pointer aspect-square"
@@ -362,7 +371,7 @@ function Card(props) {
             </span>
           </div>
         </div>
-        <div>
+        <div onMouseEnter={() => SetShowCart(true)} onMouseLeave={() => SetShowCart(false)}>
 
           <div className="flex items-center justify-between pt-2 ">
             <div className="card-title flex flex-col">
@@ -379,24 +388,28 @@ function Card(props) {
           {/* {!isHovered && <div className="card-date text-sm text-[#757575]">{props.desc}</div>} */}
           <div className="card-date font-normal text-sm text-[#757575]">{props.desc}</div>
 
-          <div className="card-price flex items-center justify-between">
+          <div className="card-price flex h-[40px] items-center justify-between">
             {/* <span className="font-medium pr-[3px] pt-[3px]">Rs.</span>
             <h2 className="text-xl font-medium tracking-wide">{props.price}</h2> */}
             <h2 className={`text-3xl flex font-semibold leading-[0.5]  tracking-wide ${props.specialPrice ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg" : ""} `} style={props?.specialPrice ? { boxShadow: '3px 3px #ad3535' } : {}}>
               <span className={`text-sm ${props?.specialPrice?.price ? "" : "pt-3.5"}`}>Rs. &nbsp;</span>{" "}
               {props?.specialPrice?.price ? props?.specialPrice.price : <p className="pt-3 ">{props.price}</p>}
             </h2>{" "}
-            <div className="bg-black p-2  mr-2 rounded-full" onClick={addProductToCart}>
-              <Image src={"/Ayatrio updated icon/ad-to-cart.svg"} height={24} width={24} className=" cursor-pointer rounded-full" />
-            </div>
+            {
+              showCart && (
+                <div className="bg-black p-[7px]   mr-2 rounded-full" onClick={addProductToCart}>
+                  <Image src={"/Ayatrio updated icon/ad-to-cart.svg"} height={24} width={24} className=" cursor-pointer rounded-full" />
+                </div>
+              )
+            }
           </div>
           {
             props?.specialPrice && (
-              <div className="flex flex-col mt-1">
+              <div className="flex flex-col mt-[6px]">
                 <p className="text-[#757575] text-[12px] pt-[3px]">Regular price: Rs.{props?.price} (incl. of all taxes)</p>
                 {
                   props?.specialPrice?.startDate && props?.specialPrice?.endDate && (
-                    <p className="text-[#757575] text-[12px] ">Price valid {formattedStartDate} - {formattedEndDate} or while supply lasts</p>
+                    <p className="text-[#757575] text-[12px] ">Price valid {formattedStartDate} - {formattedEndDate}</p>
                   )
                 }
               </div>

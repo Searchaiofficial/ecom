@@ -15,7 +15,7 @@ const Label = ({ data }) => {
       <div
         className={`flex-row z-10 mt-5 box-container-product w-fit h-auto flex items-center  bg-white cursor-pointer`}
       >
-        <div className="flex absolute bg-white">
+        <div className="flex absolute bg-white" style={{ boxShadow: '0 1px 4px rgba(var(--colour-static-black, 17, 17, 17), 0.55)' }}>
           <div className="flex flex-row relative">
             <div
               className="flex flex-col basis-3/4 lg:w-28  flex-grow relative p-2 lg:p-2.5 mr-1 gap-2"

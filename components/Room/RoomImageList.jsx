@@ -4,6 +4,7 @@ import Image from "next/image";
 import "./styles.css";
 import { useSelector } from "react-redux";
 import { selectProductImages } from "../Features/Slices/imageDataSlice";
+import Link from "next/link";
 
 export default function RoomImageList() {
   const data = useSelector(selectProductImages);
@@ -13,6 +14,9 @@ export default function RoomImageList() {
     <div className="flex flex-col">
       <div className="imggallery w-[60vw]">
         <div className="sm:grid hidden sm:grid-cols-2 sm:grid-rows-2 gap-3">
+          <Link href={"/login"} className="absolute z-10 top-12 right-3 opacity-85 hover:opacity-100 bg-white p-[6px] hover:scale-105 transition-transform rounded-full" style={{ boxShadow: '0 2px 6px 0 rgba(0, 0, 0, 0.12)' }}>
+            <Image src={"/svg/icon/like.svg"} height={20} width={20} className="cursor-pointer" />
+          </Link>
           {data[0]?.images?.map((image, index) => (
             <div
               key={index}

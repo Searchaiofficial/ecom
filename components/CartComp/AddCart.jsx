@@ -3,10 +3,11 @@ import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectRoomData } from "../Features/Slices/roomSlice";
-import { selectQuantity } from "../Features/Slices/calculationSlice";
+import { selectQuantity, updateQuantity } from "../Features/Slices/calculationSlice";
 import { setDbItems } from "../Features/Slices/cartSlice";
 import Link from "next/link";
 import axios from "axios";
+
 const AddCart = () => {
   const dispatch = useDispatch();
   const selectedItems = useSelector((state) => state.rooms.selectedActivity);
@@ -16,10 +17,13 @@ const AddCart = () => {
   const [cartdata, setcartdata] = useState("");
   const [cartStatus, setCartStaus] = useState("");
   const dbItems = useSelector((state) => state.cart.dbItems);
+
+  let id;
   if (typeof window !== "undefined") {
-    var id = localStorage.getItem("deviceId");
+    id = localStorage.getItem("deviceId");
     console.log(id);
   }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -32,114 +36,49 @@ const AddCart = () => {
             },
           }
         );
-        // console.log(response);
         if (response.status !== 200) {
           throw new Error("HTTP status " + response.status);
         }
-        const data = response.data; // Extract JSON from the response
-        // console.log("response from DB", data);
-
+        const data = response.data;
         setcartdata(data);
-        // console.log("response from DB", cartdata);
         setCartStaus("succeeded");
-        // console.log("cartStatus", cartStatus);
         dispatch(setDbItems(data));
-        // console.log("this is data from redux (db)", dbItems);
       } catch (error) {
-        // console.error("Error Fetching data from DB : ", error);
-
         setCartStaus("failed");
       }
     };
     fetchData();
   }, [dispatch]);
+
   useEffect(() => {
     console.log("Updated cartdata", cartdata);
     console.log("Updated cartStatus", cartStatus);
   }, [cartdata, cartStatus]);
+
   let totalPrice = 0;
-  if (cartStatus === "succeeded" && cartdata) {
-    totalPrice = cartdata.items.reduce(
-      (total, item) => total + item.productId.totalPrice * item.quantity,
-      0
-    );
-  }
   let quantities = 0;
-  if (cartStatus === "succeeded" && cartdata) {
-    quantities = cartdata.items.reduce(
-      (total, item) => total + item.quantity,
-      0
-    );
+  if (cartStatus === "succeeded" && cartdata && cartdata.items) {
+    totalPrice = cartdata.items.reduce((total, item) => {
+      return total + (item?.productId?.totalPrice || 0) * (item?.quantity || 0);
+    }, 0);
+    quantities = cartdata.items.reduce((total, item) => {
+      return total + (item?.quantity || 0);
+    }, 0);
   }
-  //delete items from DB
+
   const postUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`;
-  console.log(postUrl)
   const postData = {
     deviceId: id,
     productId: roomData._id,
     quantity: quantity,
   };
-  // const handleDelete = async (itemid) => {
-  //   try {
-  //     const response = await axios.get(
-  //       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
-  //       {
-  //         params: {
-  //           deviceId: id,
-  //         },
-  //       }
-  //     );
-  //     if (response.status !== 200) {
-  //       throw new Error("HTTP status" + response.status);
-  //     }
-  //     const updatedItems = response.data.items.filter(
-  //       (item) => item._id !== itemid
-  //     );
-  //     setcartdata((prevstate) => ({
-  //       ...prevstate,
-  //       items: updatedItems,
-  //     }));
-  //     //update data in DB
-  //     const responsed = await axios.post(postUrl, {
-  //       deviceId: id,
-  //       items: updatedItems,
-  //     });
-  //     // console.log("Server Response:", responsed);
-  //     // console.log("Data posted successfully:", postData);
-  //   } catch (error) {
-  //     console.error("Error deleting item: ", error);
-  //   }
-  // };
 
-  // const handleDelete = async (itemid) => {
-  //   try {
-  //     const response = await axios.delete(
-  //       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
-  //       {
-  //         params: {
-  //           productId: itemid,
-  //           owner: id,
-  //         },
-  //       }
-  //     );
-  //     if (response.status !== 200) {
-  //       throw new Error("HTTP status" + response.status);
-  //     }
-  //     // After successful deletion, update the local state
-  //     const updatedItems = cartdata.items.filter(
-  //       (item) => item.productId._id !== itemid
-  //     );
-  //     setcartdata((prevstate) => ({
-  //       ...prevstate,
-  //       items: updatedItems,
-  //     }));
-  //   } catch (error) {
-  //     console.error("Error deleting item: ", error);
-  //   }
-  // };
+  const quantityCart = useSelector(selectQuantity);
+
+
 
   const handleDelete = async (itemid) => {
-    console.log(itemid)
+    console.log(itemid);
     try {
       const response = await axios.delete(postUrl, {
         params: {
@@ -148,33 +87,23 @@ const AddCart = () => {
         },
       });
 
-      if (response.statusCode !== 200) {
+      if (response.status !== 200) {
         console.error("HTTP status", response.status);
       }
+
       const updatedItems = cartdata.items.filter(
-        (item) => item.productId._id !== itemid,
-        console.log("productId", item.productId._id)
+        (item) => item.productId._id !== itemid
       );
       setcartdata((prevstate) => ({
         ...prevstate,
         items: updatedItems,
       }));
+      dispatch(updateQuantity(quantityCart - 1))
     } catch (error) {
-      console.error("Error indeleting item", error);
+      console.error("Error deleting item", error);
     }
   };
 
-  // const s1 = id;
-  // const s2 =
-  //   "TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzEyMS4wLjAuMCBTYWZhcmkvNTM3LjM2ZW4tVVNXaW4zMg==";
-
-  // if (s1 === s2) {
-  //   console.log("Strings Are Equal");
-  // } else {
-  //   console.log("Strings Are Not Equal");
-  // }
-
-  //delete handle function
   return (
     <div className="">
       <div className="main-cart flex justify-center sm:flex-row flex-col sm:gap-80 gap-10  sm:items-start items-center min-h-screen relative top-32 pb-20">
@@ -211,7 +140,7 @@ const AddCart = () => {
                             </h3>
                           </div>
                           <div className="rightContent sm:text-xl text-lg sm:font-semibold font-medium">
-                            ₹ &nbsp;{item.productId.totalPrice * item.quantity}
+                            ₹ &nbsp;{(item?.productId?.totalPrice || 0) * (item?.quantity || 0)}
                           </div>
                           <div className="icons flex items-center space-x-2 mt-4">
                             <Image
@@ -222,7 +151,6 @@ const AddCart = () => {
                               className="hover:text-slate-500 cursor-pointer"
                               onClick={() => handleDelete(item.productId._id)}
                             />
-
                             <Image
                               src="/CartIcons/broken-heart-icon.svg"
                               width={25}
@@ -240,17 +168,15 @@ const AddCart = () => {
             ))}
           </div>
         ) : (
-          <p>No data is available here.Please add some item in cart page</p>
+          <p>No data is available here. Please add some item in cart page.</p>
         )}
-        {cartStatus === "loading" && <p>Loading...</p>}
-        {cartStatus === "failed" && <p>Error loading data from DB.</p>}
         {cartStatus === "succeeded" && cartdata && (
           <div className="right-cart flex flex-col  sm:w-1/3 w-[80vw]">
             <h1 className="lg:text-4xl text-[16px] font-semibold mb-6">
               Order Summary
             </h1>
             <div className="subtotal flex justify-between items-center mb-4">
-              <div className="lg:text-lg text-[14px] ">Subtotal</div>
+              <div className="lg:text-lg text-[14px]">Subtotal</div>
               <div className="text-lg sm:font-semibold font-medium">
                 ₹ &nbsp;{totalPrice}
               </div>
@@ -278,7 +204,7 @@ const AddCart = () => {
               }}
               className="memberCheckout my-4 flex items-center justify-center"
             >
-              <button className="bg-black text-white sm:w-full w-[40vw] sm:h-14 h-9 rounded-full	 hover:bg-gray-900 transition duration-300">
+              <button className="bg-black text-white sm:w-full w-[40vw] sm:h-14 h-9 rounded-full hover:bg-gray-900 transition duration-300">
                 Guest Checkout
               </button>
             </Link>
@@ -291,7 +217,7 @@ const AddCart = () => {
               }}
               className="memberCheckout my-4 flex items-center justify-center"
             >
-              <button className="bg-black text-white sm:w-full w-[40vw] sm:h-14 h-9 rounded-full	 hover:bg-gray-900 transition duration-300">
+              <button className="bg-black text-white sm:w-full w-[40vw] sm:h-14 h-9 rounded-full hover:bg-gray-900 transition duration-300">
                 Member Checkout
               </button>
             </Link>
@@ -312,12 +238,12 @@ const AddCart = () => {
               <div className="mainright">
                 <div className="leftContent flex flex-col">
                   <h2 className="sm:text-xl text-lg sm:font-semibold font-medium  mb-2">
-                    {item.title}{" "}
+                    {item.title}
                   </h2>
-                  <h3 className="text-gray-600">{item.category} </h3>
+                  <h3 className="text-gray-600">{item.category}</h3>
                 </div>
                 <div className="rightContent sm:text-xl text-lg sm:font-semibold font-medium">
-                  ₹{item.price}{" "}
+                  ₹{item.price}
                 </div>
                 <div className="icons flex items-center space-x-2 mt-4">
                   <img

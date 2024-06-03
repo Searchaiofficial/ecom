@@ -10,13 +10,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import TopHeader from "./TopHeader";
-import { selectQuantity } from "../Features/Slices/calculationSlice";
+import { selectQuantity, updateQuantity } from "../Features/Slices/calculationSlice";
 import { headerLinks } from "@/Model/Dropdown/AsideData/AsideData";
 import Midsection from "./Midsection/Midsection";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { MenuIcon, X } from "lucide-react";
 import TopHeaderWrapper from "./TopHeaderWrapper";
 import { useScrollVisibility } from "@/hooks/useScrollVisibility";
+import axios from "axios";
 
 function Header({ setIsHeaderMounted }) {
   useEffect(() => {
@@ -29,6 +30,33 @@ function Header({ setIsHeaderMounted }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const quantity = useSelector(selectQuantity);
   const [sidebarNavigationItem, setSidebarNavigationItem] = useState("")
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
+          {
+            params: {
+              deviceId: localStorage.getItem("deviceId"),
+            },
+          }
+        );
+        if (response.status !== 200) {
+          throw new Error("HTTP status " + response.status);
+        }
+        const data = response.data;
+
+        dispatch(updateQuantity(data?.items.length))
+
+      } catch (error) {
+
+      }
+    };
+    fetchData();
+  }, []);
 
 
   // Filter
@@ -352,7 +380,7 @@ function Header({ setIsHeaderMounted }) {
                       />
                     </Link>
                     {
-                      quantity > 0 && <div className="cart-notification">{quantity}</div>
+                      quantity > 0 && <div className="cart-notification bg-black">{quantity}</div>
                     }
                   </div>
                   {loginStatus === "true" ? (

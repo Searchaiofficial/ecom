@@ -4,6 +4,7 @@ import Image from "next/image";
 
 import { selectProductImages } from "../Features/Slices/imageDataSlice";
 import { useSelector } from "react-redux";
+import Link from "next/link";
 const Carousel = () => {
   const data = useSelector(selectProductImages);
   const images = data[0]?.images;
@@ -71,6 +72,9 @@ const Carousel = () => {
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
       >
+        <Link href={"/login"} className="absolute z-10 top-2 right-2 opacity-85 hover:opacity-100 bg-white p-[6px] hover:scale-105 transition-transform rounded-full" style={{ boxShadow: '0 2px 6px 0 rgba(0, 0, 0, 0.12)' }}>
+          <Image src={"/svg/icon/like.svg"} height={20} width={20} className="cursor-pointer" />
+        </Link>
         <div className="relative flex h-full w-full items-center justify-center aspect-square">
           {images && images.length > 1 ? (
             images?.map((src, idx) => {
