@@ -90,6 +90,7 @@ const RoomCard = async () => {
                         width={1000}
                         height={338}
                         labelData={gallery.rooms[0].children}
+                        firstData
                       />
                     )}
                   </>

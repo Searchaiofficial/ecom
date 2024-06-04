@@ -46,6 +46,7 @@ const Display = async () => {
                   alt={`Image  of Children`}
                   width={1000}
                   height={338}
+                  firstData
                   labelData={apiData[0].room.children}
                   className="w-full h-full"
                 />
