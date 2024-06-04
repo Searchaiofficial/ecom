@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Card from "./card";
 import React, { useEffect, useRef, useState } from "react";
@@ -19,28 +19,61 @@ import {
   FreeMode,
   A11y,
 } from "swiper/modules";
-// import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { selectTrendingData } from "../Features/Slices/trendingSlice";
+import axios from "axios";
 
 const Trending = () => {
   const [newTrendingData, setNewTrendingData] = useState([]);
+  const [cartData, setCartData] = useState([]);
   const trendingData = useSelector(selectTrendingData);
   const dispatch = useDispatch();
   const [swiperRef, setSwiperRef] = useState(null);
   const [isPopupVisible, setPopupVisible] = useState(false);
+
   const handleImageClick = () => {
     setPopupVisible(true);
   };
+
   useEffect(() => {
     if (trendingData.length === 0) {
       dispatch({ type: "FETCH_TRENDING_DATA", payload: "trending" });
-      //console.log("trendingData fetched")
     }
     if (trendingData) {
       setNewTrendingData(trendingData);
     }
   }, [trendingData]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
+          {
+            params: {
+              deviceId: localStorage.getItem("deviceId"),
+            },
+          }
+        );
+        if (response.status !== 200) {
+          throw new Error("HTTP status " + response.status);
+        }
+        const data = response.data;
+        console.log("Fetched cart data:", data);
+
+        // Ensure cartData is an array
+        if (data && Array.isArray(data.items)) {
+          setCartData(data.items);
+        } else {
+          console.error("Cart data items are not an array:", data);
+          setCartData([]);
+        }
+      } catch (error) {
+        console.log("Error fetching cart data:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const swiperOptions2 = {
     slidesPerView: 4.08,
@@ -55,36 +88,39 @@ const Trending = () => {
     allowSlidePrev: true,
     allowSlideNext: true,
   };
+
   const closePopup = () => {
     setPopupVisible(false);
   };
+
   const swiper1Ref = useRef(null);
   const swiper2Ref = useRef(null);
 
-  console.log(newTrendingData)
-
-
-
-
-
+  const isProductInCart = (productId) => {
+    console.log("Checking product ID:", productId);
+    return cartData.some((cartItem) => {
+      console.log("Comparing with cart item product ID:", cartItem.productId._id);
+      return cartItem.productId._id === productId;
+    });
+  };
 
   return (
     <div>
-      <div className="mb-20  bg-white px-[15px]">
+      <div className="mb-20 bg-white px-[15px]">
         <div className="mb-2 w-full flex justify-between items-center">
-          <h2 className="Blinds font-semibold text-2xl pb-[30px] lg:pt-[30px]">
+          <h2 className="Blinds font-semibold text-2xl pb-[20px] lg:pt-[30px]">
             {newTrendingData && newTrendingData.length === 0
               ? "Most Family Choice(Empty)"
               : "Most Family Choice"}
           </h2>
-          <div className="Slidenav flex  bg-white text-2xl cursor-pointer  text-white rounded-full gap-2">
+          <div className="Slidenav flex bg-white text-2xl cursor-pointer text-white rounded-full gap-2">
             <div
               onClick={() => swiper1Ref.current.swiper.slidePrev()}
-              className="custom-prev-button bg-slate-500  rounded-full  hover:bg-400 hover:scale-110 hover:text-slate-100"
+              className="custom-prev-button bg-slate-500 rounded-full hover:bg-400 hover:scale-110 hover:text-slate-100"
             ></div>
             <div
               onClick={() => swiper1Ref.current.swiper.slideNext()}
-              className="custom-next-button bg-slate-500  rounded-full hover:bg-400 hover:scale-110 hover:text-slate-100"
+              className="custom-next-button bg-slate-500 rounded-full hover:bg-400 hover:scale-110 hover:text-slate-100"
             ></div>
           </div>
         </div>
@@ -105,7 +141,7 @@ const Trending = () => {
             enabled: false,
             sticky: true,
             momentum: true,
-            momentumRatio: 0.5, // Adjust this value for softer scrolling
+            momentumRatio: 0.5,
             momentumBounceRatio: 0.5,
           }}
           breakpoints={{
@@ -113,7 +149,6 @@ const Trending = () => {
               slidesPerView: 1.2,
               spaceBetween: 10,
             },
-
             640: {
               slidesPerView: 2,
               spaceBetween: 10,
@@ -128,9 +163,8 @@ const Trending = () => {
           slideNextClass="custom-next-button"
           slidePrevClass="custom-prev-button"
           onSwiper={setSwiperRef}
-          // allowTouchMove={false}
           noSwiping={true}
-          style={{ paddingRight: "10px" }}
+          style={{ paddingRight: "10px", minHeight: "550px" }}
         >
           {!newTrendingData ? (
             <SwiperSlide>
@@ -138,13 +172,13 @@ const Trending = () => {
             </SwiperSlide>
           ) : (
             newTrendingData.map((product, idx) => {
-              {/* console.log(product.ratings) */ }
+              const inCart = isProductInCart(product._id);
+              console.log("Product in cart prop for Card:", inCart);
               return (
                 <SwiperSlide key={idx} className="ml-0">
-                  <div className="grid grid-cols-1 w-full h-full fade-in ">
+                  <div className="grid grid-cols-1 w-full h-full fade-in">
                     <Card
                       title={product.productTitle}
-                      // date={product.date}
                       productImages={product?.productImages}
                       specialPrice={product?.specialprice}
                       price={product.perUnitPrice}
@@ -158,6 +192,7 @@ const Trending = () => {
                       productId={product.productId}
                       setPopupVisible={setPopupVisible}
                       cssClass={"card1flex"}
+                      inCart={inCart}  // Send the inCart prop to Card component
                     />
                   </div>
                 </SwiperSlide>

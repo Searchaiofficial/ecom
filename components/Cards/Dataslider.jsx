@@ -39,7 +39,7 @@ const Dataslider = ({ category, data, sliderIndex }) => {
     <div>
       <div className=" bg-white mt-[30px] lg:mt-0  px-[15px] ">
         <div className="w-full flex justify-between items-center">
-          <h2 className="font-semibold text-2xl py-[30px]">{category}</h2>
+          <h2 className="font-semibold text-2xl pb-[20px] pt-[30px]">{category}</h2>
           <div className="Slidenav flex text-2xl cursor-pointer text-white rounded-full gap-2">
             <div
               onClick={() => swiperRef.current.swiper.slidePrev()}

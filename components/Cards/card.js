@@ -185,11 +185,11 @@ function Card(props) {
       starsArray.push(
         <img
           key={i}
-          src={"/icon/star.svg"}
-          height={20}
-          width={20}
+          src={"/Ayatrio updated icon/full black.svg"}
+          height={15}
+          width={15}
           alt="star"
-          className="h-[1em] w-[1em] mr-[2px] hover:text-gray-600"
+          className=" mr-[2px]  hover:text-gray-600"
         />
       );
     }
@@ -198,11 +198,11 @@ function Card(props) {
       starsArray.push(
         <img
           key={fullStars}
-          src={"/icon/half-star.svg"}
-          height={20}
-          width={20}
+          src={"/Ayatrio updated icon/half black half white.svg"}
+          height={15}
+          width={15}
           alt="half-star"
-          className="h-[1em] w-[1em] mr-[2px] hover:text-gray-600"
+          className=" mr-[2px] hover:text-gray-600"
         />
       );
     }
@@ -211,11 +211,11 @@ function Card(props) {
       starsArray.push(
         <img
           key={fullStars + halfStar + i}
-          src={"/ayatrio icon/no fill star.svg"}
-          height={20}
-          width={20}
+          src={"/Ayatrio updated icon/full white.svg"}
+          height={15}
+          width={15}
           alt="empty-star"
-          className="h-[0.85em] w-[0.85em] mr-[2px] hover:text-gray-600"
+          className=" mr-[2px]  hover:text-gray-600"
         />
       );
     }
@@ -233,7 +233,7 @@ function Card(props) {
 
   }, [props.id]);
 
-  console.log(Reviews)
+  // console.log(Reviews)
 
   function calculateAverageRating(reviews) {
     if (reviews.length > 0) {
@@ -246,10 +246,15 @@ function Card(props) {
   }
 
 
+
+
+  const [inCart, setInCart] = useState(props?.inCart)
+
+
   useEffect(() => {
 
     const averageRating = calculateAverageRating(Reviews);
-    console.log(averageRating);
+    // console.log(averageRating);
     const stars = renderStars(averageRating); // Assuming renderStars is defined somewhere
     setStars(stars);
 
@@ -264,14 +269,20 @@ function Card(props) {
       quantity: 1
     })
     if (response.status === 200) {
+      setInCart(true)
       dispatch(updateQuantity(quantity + 1))
+
     }
-    console.log(response.data)
+    // console.log(response.data)
   }
 
 
   const [showCart, SetShowCart] = useState(false)
 
+  useEffect(() => {
+    setInCart(props.inCart);
+    // console.log(inCart)
+  }, [props.inCart]);
 
 
 
@@ -378,7 +389,7 @@ function Card(props) {
               {
                 props.demandtype === "Ayatrio Member Favorite" && (
 
-                  <p className="font-medium text-[#0076D3]  mb-[3px] text-[12px]">{props.demandtype}</p>
+                  <p className="font-medium text-[#0152be]  mb-[3px] text-[12px]">{props.demandtype}</p>
                 )
               }
               <div className={` text-[14px] font-semibold ${props.demandtype === "Ayatrio Member Favorite" ? "" : ""}`}>{props.title}</div>
@@ -386,22 +397,27 @@ function Card(props) {
 
           </div>
           {/* {!isHovered && <div className="card-date text-sm text-[#757575]">{props.desc}</div>} */}
-          <div className="card-date font-normal text-sm text-[#757575]">{props.desc}</div>
+          <div className="card-date font-normal text-[12px] text-[#757575]">{props.desc}</div>
 
-          <div className="card-price flex h-[40px] items-center justify-between">
+          <div className="card-price flex h-[40px] pb-[6px] items-center justify-between">
             {/* <span className="font-medium pr-[3px] pt-[3px]">Rs.</span>
             <h2 className="text-xl font-medium tracking-wide">{props.price}</h2> */}
-            <h2 className={`text-3xl flex font-semibold leading-[0.5]  tracking-wide ${props.specialPrice ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg" : ""} `} style={props?.specialPrice ? { boxShadow: '3px 3px #ad3535' } : {}}>
+            <h2 className={`text-3xl flex font-semibold leading-[0.5]  tracking-wide ${props.specialPrice ? "bg-[#FFC21F] px-2 pt-3 pb-1 w-fit shadow-lg" : ""} `} style={props?.specialPrice ? { boxShadow: '3px 3px #C31952' } : {}}>
               <span className={`text-sm ${props?.specialPrice?.price ? "" : "pt-3.5"}`}>Rs. &nbsp;</span>{" "}
               {props?.specialPrice?.price ? props?.specialPrice.price : <p className="pt-3 ">{props.price}</p>}
             </h2>{" "}
-            {
-              showCart && (
-                <div className="bg-black p-[7px]   mr-2 rounded-full" onClick={addProductToCart}>
-                  <Image src={"/Ayatrio updated icon/ad-to-cart.svg"} height={24} width={24} className=" cursor-pointer rounded-full" />
-                </div>
-              )
-            }
+
+            {showCart && !inCart && (
+              <div className="bg-[#0152be] p-[6px] mr-2 rounded-full" onClick={addProductToCart}>
+                <Image src={"/Ayatrio updated icon/ad-to-cart.svg"} height={20} width={20} className="cursor-pointer rounded-full" />
+              </div>
+            )}
+            {inCart && (
+              <div className="bg-[#507A57] p-[6px] mr-2 rounded-full">
+                <Image src={"/Ayatrio updated icon/ad-to-cart.svg"} height={20} width={20} className="cursor-pointer rounded-full" />
+              </div>
+            )}
+
           </div>
           {
             props?.specialPrice && (
@@ -427,9 +443,9 @@ function Card(props) {
 
           {
             Starts &&
-            <div className="flex items-center mt-2">
+            <div className="flex items-center mt-1">
               {Starts}
-              <p className="pl-2 text-[14px] mt-1">({Reviews.length})</p>
+              <p className="text-[14px] mt-1 ml-2">({Reviews.length})</p>
             </div>
           }
 
@@ -438,7 +454,7 @@ function Card(props) {
           {
             imageData?.length > 0 && (
 
-              <div className="colorContainer flex flex-col sm:w-auto w-[80vw] mt-2 ">
+              <div className="colorContainer flex flex-col sm:w-auto w-[80vw] mt-1 ">
                 <div className="w-full flex justify-between mb-1">
                   <h1 className="] text-[12px] font-medium">Colours</h1>
                 </div>
