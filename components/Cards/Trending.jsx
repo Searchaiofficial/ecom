@@ -99,8 +99,8 @@ const Trending = () => {
   const isProductInCart = (productId) => {
     console.log("Checking product ID:", productId);
     return cartData.some((cartItem) => {
-      console.log("Comparing with cart item product ID:", cartItem.productId._id);
-      return cartItem.productId._id === productId;
+      console.log("Comparing with cart item product ID:", cartItem?.productId?._id);
+      return cartItem?.productId?._id === productId;
     });
   };
 
@@ -172,7 +172,7 @@ const Trending = () => {
             </SwiperSlide>
           ) : (
             newTrendingData.map((product, idx) => {
-              const inCart = isProductInCart(product._id);
+              const inCart = isProductInCart(product?._id);
               console.log("Product in cart prop for Card:", inCart);
               return (
                 <SwiperSlide key={idx} className="ml-0">
