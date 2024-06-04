@@ -1,12 +1,37 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./tabs.css";
 import Image from "next/image";
 import Label from "../Label/Label";
 import Link from "next/link";
-const TabImage = ({ src, alt, width, height, labelData, href }) => {
+const TabImage = ({ src, alt, width, height, labelData, href, firstData }) => {
   const circledData = Array.isArray(labelData) ? labelData : [labelData];
+
+  const [windowWidth, setWindowWidth] = useState(0);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setWindowWidth(window.innerWidth);
+    }
+    if (windowWidth > 600 && firstData) {
+      setOpenData((prev) => {
+        const next = [...prev];
+        next[0] = true;
+        return next;
+      });
+    } else {
+      setOpenData((prev) => {
+        const next = [...prev];
+        next[0] = false;
+        return next;
+      });
+    }
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [windowWidth]);
 
   const [openData, setOpenData] = useState(
     new Array(circledData.length).fill(false)
@@ -44,7 +69,9 @@ const TabImage = ({ src, alt, width, height, labelData, href }) => {
                 return next;
               });
             }}
-            style={{ boxShadow: `0 1px 4px rgba(var(--colour-static-black, 17, 17, 17), 0.55)` }}
+            style={{
+              boxShadow: `0 1px 4px rgba(var(--colour-static-black, 17, 17, 17), 0.55)`,
+            }}
             className="border-2 border-neutral-300 bg-black/40 hover:border-white top-16 left-16 absolute hover:bg-black/70 rounded-full size-[30px] flex items-center justify-center transition-all duration-200 before:content-[''] before:size-3 before:bg-white  before:rounded-full before:hover:size-2 before:transition-all before:duration-200"
           >
             {openData[idx] ? <Label data={data} /> : null}
