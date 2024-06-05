@@ -77,6 +77,12 @@ const RoomPage = () => {
           type: "FETCH_IMAGE_DATA",
           payload: selectedData?.productImages[0]?.color,
         });
+      } else {
+        dispatch({
+          type: "FETCH_IMAGE_DATA",
+          payload: selectedData?.images,
+        });
+
       }
     }
   }, [selectedData, dispatch]);
@@ -122,6 +128,8 @@ const RoomPage = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  console.log("11111", data);
 
   return (
     <>
