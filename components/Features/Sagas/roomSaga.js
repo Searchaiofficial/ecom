@@ -12,6 +12,11 @@ function* fetchRoomData(action) {
 
     // Dispatch action to set room data
     yield put(setRoomData({ roomData: response.data, status: "succeeded" }));
+    if(response.data.productImages && response.data.productImages.length > 0) {
+      yield put({ type: "FETCH_IMAGE_DATA", payload: response.data.productImages[0].color});
+    } else {
+      yield put({type: "FETCH_IMAGE_DATA",payload: response.data.images});
+    }
 
     // Extract product ID and update popularity
     const productTitle = action.payload;
