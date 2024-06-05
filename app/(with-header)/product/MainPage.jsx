@@ -57,6 +57,12 @@ const RoomPage = () => {
             type: "FETCH_IMAGE_DATA",
             payload: parsedData?.productImages[0]?.color,
           });
+        }else {
+          dispatch({
+            type: "FETCH_IMAGE_DATA",
+            payload: selectedData?.images,
+          });
+  
         }
       } else {
         // Fetch data if there's no cached data
