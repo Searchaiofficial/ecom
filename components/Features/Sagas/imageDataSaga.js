@@ -15,15 +15,14 @@ function* fetchImageData(action) {
     const color = action.payload;
 
     let filteredImages;
-    if (roomData.productImages && roomData.productImages.length > 0) {
-      if (color) {
-        filteredImages = yield call(filterData, roomData, color);
-      } else {
-        filteredImages = roomData.images;
-      }
+    if (roomData.productImages && roomData.productImages.length > 0 && color) {
+      filteredImages = yield call(filterData, roomData, color);
       yield put(setProductImages(filteredImages));
     } else {
+      filteredImages = roomData.images;
       yield put(setImages(roomData.images));
+      yield put(setProductImages([]));
+
     }
   } catch (error) {
     console.error("Error fetching image data:", error);

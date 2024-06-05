@@ -43,13 +43,12 @@ const RoomPage = () => {
   const [howMuchScrolled, setHowMuchScrolled] = useState(0);
   const [data, setData] = useState([]);
   const selectedData = useSelector(selectRoomData);
-  console.log("0000",selectedData);
 
   useEffect(() => {
     // Fetch room data based on the title
     dispatch({ type: "FETCH_ROOM_REQUEST", payload: title });
   }, [title, dispatch]);
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -66,7 +65,7 @@ const RoomPage = () => {
           } else {
             dispatch({
               type: "FETCH_IMAGE_DATA",
-              payload: selectedData?.images,
+              payload: null,
             });
           }
         }
@@ -74,10 +73,10 @@ const RoomPage = () => {
         console.error("Error fetching cached data:", error);
       }
     };
-  
+
     fetchData();
   }, [dispatch]); // Fetch cached data only once when component mounts
-  
+
   useEffect(() => {
     if (selectedData && Object.keys(selectedData).length !== 0) {
       // Update cached data with selected data
@@ -91,12 +90,12 @@ const RoomPage = () => {
       } else {
         dispatch({
           type: "FETCH_IMAGE_DATA",
-          payload: selectedData?.images,
+          payload: null,
         });
       }
     }
   }, [selectedData, dispatch]);
-  
+
 
   console.log(data);
 
@@ -218,7 +217,7 @@ const RoomPage = () => {
               <RoomImageList images={data?.images} />
               <ImageCaresoul images={data?.images} />
               <div className="block md:hidden">
-                <Card data={data}  productId={data._id}/>
+                <Card data={data} productId={data._id} />
               </div>
               <RoomInfo data={data} />
               <Reviews productId={data._id} data={data} />

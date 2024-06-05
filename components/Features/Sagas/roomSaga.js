@@ -15,7 +15,7 @@ function* fetchRoomData(action) {
     if(response.data.productImages && response.data.productImages.length > 0) {
       yield put({ type: "FETCH_IMAGE_DATA", payload: response.data.productImages[0].color});
     } else {
-      yield put({type: "FETCH_IMAGE_DATA",payload: response.data.images});
+      yield put({type: "FETCH_IMAGE_DATA",payload: null});
     }
 
     // Extract product ID and update popularity
