@@ -7,23 +7,17 @@ import Image from "next/image";
 
 const Asidebox = (props) => {
   const [asideCategory, setAsideCategory] = useState(null);
-  // let asideCategory;
   let parentCategory;
   switch (props.hoveredIndex) {
     case 0:
       parentCategory = "homedecor";
-      // asideCategory = homeDecorCategoryData;
       break;
     case 1:
       parentCategory = "walldecor";
-      // asideCategory = wallDecorCategoryData;
       break;
     case 2:
       parentCategory = "flooring";
-      // asideCategory = flooringCategoryData;
       break;
-    // default:
-    //   setAsideCategory(null);
   }
 
   useEffect(() => {
@@ -54,6 +48,11 @@ const Asidebox = (props) => {
     setSelectedData(data);
   };
 
+  const handleItemClick = (data) => {
+    props.onItemClick(data); // Call the parent component's function with the data
+    setInnerData(true);
+  };
+
   const [innerData, setInnerData] = useState(false);
 
   return (
@@ -81,24 +80,23 @@ const Asidebox = (props) => {
               <Link
                 key={idx}
                 onMouseEnter={() => handleMouseEnter(idx, value)}
-                className={`lg:block flex items-center justify-between w-full   lg:text-[14px] text-[18px] font-semibold ${defaultLinkIndex === idx ? "text-blue-600" : ""
+                className={`lg:block flex items-center justify-between w-full lg:text-[14px] text-[18px] font-semibold ${defaultLinkIndex === idx ? "text-blue-600" : ""
                   }`}
                 href="#"
-                onClick={() => setInnerData(true)}
+                onClick={() => handleItemClick(value)} // Handle click event
               >
                 <span className="p-2">{value.name}</span>
                 <div className="pr-[24px] sm:hidden">
                   <Image src={"/Ayatrio updated icon/backarrow.svg"} height={15} width={15} />
-
                 </div>
               </Link>
             ))}
           </aside>
           <div
-            className={`${innerData ? "block" : "hidden"
-              } md:block absolute w-full  bg-white md:h-auto md:w-auto md:static z-[99]`}
+            className={`${innerData ? "block" : "hidden"} md:block absolute w-full bg-white md:h-auto md:w-auto md:static z-[99]`}
           >
             <Displaybox
+              toggleMobileMenu={props.toggleMobileMenu}
               parentCategory={parentCategory}
               defaultLinkIndex={defaultLinkIndex}
               data={selectedData}
@@ -114,7 +112,7 @@ const Asidebox = (props) => {
             window.innerWidth > 800 && { y: -10, opacity: 0 }
           }
           whileInView={{ y: 0, opacity: 1 }}
-          className="absolute top-[2.7rem]  p-4 bg-white flex flex-col mt-[15px] md:flex-row noto-sans-200 transition-all duration-300 ease-linear w-full md:left-0 min-h-[10rem] md:h-auto md:px-10"
+          className="absolute top-[2.7rem] p-4 bg-white flex flex-col mt-[15px] md:flex-row noto-sans-200 transition-all duration-300 ease-linear w-full md:left-0 min-h-[10rem] md:h-auto md:px-10"
         >
           <SwiperComponent
             setHoveredIndex={props.setHoveredIndex}

@@ -19,10 +19,10 @@ const PlaceInfo = (data) => {
               </div>
               <div>
                 <h4 className="font-semibold">
-                  {data?.data.coreValues[0].heading}
+                  {data?.data.coreValues[0]?.heading}
                 </h4>
                 <span className="mt-1 text-gray-500">
-                  {data?.data.coreValues[0].text}
+                  {data?.data.coreValues[0]?.text}
                 </span>
               </div>
             </div>
@@ -41,10 +41,10 @@ const PlaceInfo = (data) => {
               </div>
               <div className="ml-4">
                 <h4 className="font-semibold">
-                  {data?.data.coreValues[1].heading}
+                  {data?.data.coreValues[1]?.heading}
                 </h4>
                 <span className="mt-1 text-gray-500">
-                  {data?.data.coreValues[1].text}
+                  {data?.data.coreValues[1]?.text}
                 </span>
               </div>
             </div>
@@ -63,10 +63,10 @@ const PlaceInfo = (data) => {
               </div>
               <div className="ml-4">
                 <h4 className="font-semibold">
-                  {data?.data.coreValues[2].heading}
+                  {data?.data.coreValues[2]?.heading}
                 </h4>
                 <span className="mt-1 text-gray-500">
-                  {data?.data.coreValues[2].text}
+                  {data?.data.coreValues[2]?.text}
                 </span>
               </div>
             </div>

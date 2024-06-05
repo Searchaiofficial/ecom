@@ -397,7 +397,7 @@ function Card(props) {
 
           </div>
           {/* {!isHovered && <div className="card-date text-sm text-[#757575]">{props.desc}</div>} */}
-          <div className="card-date font-normal text-[12px] text-[#757575]">{props.desc}</div>
+          <div className="card-date font-normal mb-[4px] text-[12px] text-[#757575]">{props.desc}</div>
 
           <div className="card-price flex h-[40px] pb-[6px] items-center justify-between">
             {/* <span className="font-medium pr-[3px] pt-[3px]">Rs.</span>
@@ -407,16 +407,16 @@ function Card(props) {
               {props?.specialPrice?.price ? props?.specialPrice.price : <p className="pt-3 ">{props.price}</p>}
             </h2>{" "}
 
-            {showCart && !inCart && (
+            {showCart && (
               <div className="bg-[#0152be] p-[6px] mr-2 rounded-full" onClick={addProductToCart}>
                 <Image src={"/Ayatrio updated icon/ad-to-cart.svg"} height={20} width={20} className="cursor-pointer rounded-full" />
               </div>
             )}
-            {inCart && (
+            {/* {inCart && (
               <div className="bg-[#507A57] p-[6px] mr-2 rounded-full">
                 <Image src={"/Ayatrio updated icon/ad-to-cart.svg"} height={20} width={20} className="cursor-pointer rounded-full" />
               </div>
-            )}
+            )} */}
 
           </div>
           {

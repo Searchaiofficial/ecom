@@ -61,7 +61,7 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex }) => {
       slidesPerView={7}
       mousewheel={{ invert: true }}
       scrollbar={{
-        hide: false,
+        hide: true,
         draggable: true,
       }}
       modules={[Scrollbar]}

@@ -104,6 +104,20 @@ const Trending = () => {
     });
   };
 
+  const [minHeight, setMinHeight] = useState('600px');
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setMinHeight('550px');
+      } else {
+        setMinHeight('600px');
+      }
+    };
+    handleResize()
+  }, [])
+
+
   return (
     <div>
       <div className="mb-20 bg-white px-[15px]">
@@ -164,7 +178,7 @@ const Trending = () => {
           slidePrevClass="custom-prev-button"
           onSwiper={setSwiperRef}
           noSwiping={true}
-          style={{ paddingRight: "10px", minHeight: "550px" }}
+          style={{ paddingRight: "10px", minHeight }}
         >
           {!newTrendingData ? (
             <SwiperSlide>

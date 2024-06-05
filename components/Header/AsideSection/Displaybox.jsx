@@ -10,6 +10,9 @@ const Displaybox = (props) => {
 
   const handleClick = (value) => {
     // const category = value.replace(/\s+/g, "-").toLowerCase();
+    if (window.innerWidth < 800) {
+      props.toggleMobileMenu()
+    }
     handleIncrementCategoryPopularity();
     const category = value.toLowerCase().replace(/ /g, "-");
     const newPath = `/${props.parentCategory}/${currentCategory}/${category}`;
@@ -26,14 +29,14 @@ const Displaybox = (props) => {
 
   const handleIncrementCategoryPopularity = async () => {
     try {
-        await axios.get(
-            `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/incrementCategoryPopularity?category=${currentCategory}`
-        );
+      await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/incrementCategoryPopularity?category=${currentCategory}`
+      );
     } catch (error) {
-        console.error("Error incrementing category popularity:", error);
+      console.error("Error incrementing category popularity:", error);
     }
-};
-  
+  };
+
 
   return (
     <main className="w-full  noto-sans-200">

@@ -378,6 +378,47 @@ const Tabs = ({
     allowSlideNext: true,
   };
 
+  const [cartData, setCartData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
+          {
+            params: {
+              deviceId: localStorage.getItem("deviceId"),
+            },
+          }
+        );
+        if (response.status !== 200) {
+          throw new Error("HTTP status " + response.status);
+        }
+        const data = response.data;
+        console.log("Fetched cart data:", data);
+
+        // Ensure cartData is an array
+        if (data && Array.isArray(data.items)) {
+          setCartData(data.items);
+        } else {
+          console.error("Cart data items are not an array:", data);
+          setCartData([]);
+        }
+      } catch (error) {
+        console.log("Error fetching cart data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const isProductInCart = (productId) => {
+    console.log("Checking product ID:", productId);
+    return cartData.some((cartItem) => {
+      console.log("Comparing with cart item product ID:", cartItem?.productId?._id);
+      return cartItem?.productId?._id === productId;
+    });
+  };
+
   return (
     <>
       <div className="lg:px-[67px] sm:px-[50px] px-[20px]">
@@ -498,7 +539,7 @@ const Tabs = ({
         <p className="leading-2 mb-4 text-[14px] pt-[5px] text-[#484848] lg:w-[70%] line-clamp-2">
           {description}
         </p>
-        <div className="flex sticky top-0 z-20 bg-white py-5 scrollbar">
+        <div className="flex sticky top-0 z-20 bg-white py-5 overflow-x-auto scrollbar">
           <TabsProductContent
             filterName={"Sort"}
             commonClasses={commonClasses}
@@ -611,16 +652,14 @@ const Tabs = ({
                 handleTabClick();
               }}
               className={`Tabbtn z-0 bg-gray-100
-                  ${
-                    openAll
-                      ? `active-tabs  border border-black ${commonClasses}`
-                      : `tabS  border border-white ${commonClasses}`
-                  }
-                  ${
-                    typeof window !== "undefined" && window.innerWidth <= 450
-                      ? " justify-center"
-                      : " justify-between"
-                  }
+                  ${openAll
+                  ? `active-tabs  border border-black ${commonClasses}`
+                  : `tabS  border border-white ${commonClasses}`
+                }
+                  ${typeof window !== "undefined" && window.innerWidth <= 450
+                  ? " justify-center"
+                  : " justify-between"
+                }
                   `}
             >
               All Filters &nbsp;
@@ -856,9 +895,8 @@ const Tabs = ({
 
                           <button
                             onClick={handleContent}
-                            className={`text-left underline ${
-                              openContent ? "block" : "hidden"
-                            }`}
+                            className={`text-left underline ${openContent ? "block" : "hidden"
+                              }`}
                           >
                             Less
                           </button>
@@ -896,28 +934,33 @@ const Tabs = ({
           </div>
           <div className=" grid md:grid-cols-4 cursor-pointer grid-cols-2  gap-4 ">
             {filterData && filterData.length > 0 ? (
-              filterData.map((text, idx) => (
-                <TabsProductCard
-                  id={text._id}
-                  text={text}
-                  totalPrice={text.totalPrice}
-                  discountedprice={text.discountedprice}
-                  specialprice={text.specialprice}
-                  productDescription={text.productDescription}
-                  productTitle={text.productTitle}
-                  images={text.images}
-                  idx={idx}
-                  handlenav={handlenav}
-                  selectedpdt={selectedpdt}
-                  handleCheckbox={handleCheckbox}
-                  setShowcompare={setShowcompare}
-                  demandtype={text.demandtype}
-                  ratings={text.ratings}
-                  stars={stars}
-                  parentCategory={parentCategory}
-                  offer={text.offer}
-                />
-              ))
+              filterData.map((text, idx) => {
+                const inCart = isProductInCart(text?._id);
+                return (
+
+                  <TabsProductCard
+                    id={text._id}
+                    text={text}
+                    totalPrice={text.totalPrice}
+                    discountedprice={text.discountedprice}
+                    specialprice={text.specialprice}
+                    productDescription={text.productDescription}
+                    productTitle={text.productTitle}
+                    images={text.images}
+                    idx={idx}
+                    handlenav={handlenav}
+                    selectedpdt={selectedpdt}
+                    handleCheckbox={handleCheckbox}
+                    setShowcompare={setShowcompare}
+                    demandtype={text.demandtype}
+                    ratings={text.ratings}
+                    stars={stars}
+                    parentCategory={parentCategory}
+                    offer={text.offer}
+                    inCart={inCart}
+                  />
+                )
+              })
             ) : (
               <div className="flex justify-center items-center h-[50vh] w-full">
                 <h1 className="text-2xl">No Products Found</h1>

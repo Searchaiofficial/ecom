@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./styles.css";
 import axios from "axios";
+import { selectQuantity, updateQuantity } from "../Features/Slices/calculationSlice";
 
 function TabsProductCard(props) {
   const [slide, setSlide] = useState(0);
@@ -11,23 +12,26 @@ function TabsProductCard(props) {
 
   const dispatch = useDispatch();
 
-  const [reviews, setReviews] = useState([]);
-  const [stars, setStars] = useState([]);
+  // const [reviews, setReviews] = useState([]);
+  const [Reviews, setReviews] = useState([])
+
+  // const [stars, setStars] = useState([]);
+  const [Starts, setStars] = useState()
 
   const fetchReviews = async () => {
     try {
-      console.log("props.id", props.id);
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getReview?productId=${props.id}`
       );
-
       console.log("reviews", response.data);
 
-      if (Array.isArray(response.data) && response.data.length > 0) {
-        setReviews(response.data);
-      } else {
-        console.error("Empty or invalid response data:", response.data);
-      }
+      // if (Array.isArray(response.data) && response.data.length > 0) {
+      //   setReviews(response.data);
+      // } else {
+      //   console.error("Empty or invalid response data:", response.data);
+      // }
+
+      setReviews(response.data)
     } catch (error) {
       console.error("Error fetching reviews:", error);
     }
@@ -44,11 +48,11 @@ function TabsProductCard(props) {
       starsArray.push(
         <img
           key={i}
-          src={"/icon/star.svg"}
-          height={20}
-          width={20}
+          src={"/Ayatrio updated icon/full black.svg"}
+          height={15}
+          width={15}
           alt="star"
-          className="h-[1em] w-[1em] hover:text-gray-600"
+          className=" mr-[2px]  hover:text-gray-600"
         />
       );
     }
@@ -57,11 +61,11 @@ function TabsProductCard(props) {
       starsArray.push(
         <img
           key={fullStars}
-          src={"/icon/half-star.svg"}
-          height={20}
-          width={20}
+          src={"/Ayatrio updated icon/half black half white.svg"}
+          height={15}
+          width={15}
           alt="half-star"
-          className="h-[1em] w-[1em] hover:text-gray-600"
+          className=" mr-[2px] hover:text-gray-600"
         />
       );
     }
@@ -70,11 +74,11 @@ function TabsProductCard(props) {
       starsArray.push(
         <img
           key={fullStars + halfStar + i}
-          src={"/ayatrio icon/no fill star.svg"}
-          height={20}
-          width={20}
+          src={"/Ayatrio updated icon/full white.svg"}
+          height={15}
+          width={15}
           alt="empty-star"
-          className="h-[0.85em] w-[0.85em] hover:text-gray-600"
+          className=" mr-[2px]  hover:text-gray-600"
         />
       );
     }
@@ -82,11 +86,42 @@ function TabsProductCard(props) {
     return starsArray;
   }
 
+
+
   useEffect(() => {
     fetchReviews();
-    const stars = renderStars(3.6);
-    setStars(stars);
+
+    // const stars = renderStars(3.6);
+    // setStars(stars)
+
   }, [props.id]);
+
+  // console.log(Reviews)
+
+  function calculateAverageRating(reviews) {
+    if (reviews.length > 0) {
+      const totalRatings = reviews.reduce((acc, review) => acc + review.rating, 0);
+      const averageRating = totalRatings / reviews.length;
+      return averageRating;
+    }
+
+    return 0
+  }
+
+
+
+
+  const [inCart, setInCart] = useState(props?.inCart)
+
+
+  useEffect(() => {
+
+    const averageRating = calculateAverageRating(Reviews);
+    // console.log(averageRating);
+    const stars = renderStars(averageRating); // Assuming renderStars is defined somewhere
+    setStars(stars);
+
+  }, [Reviews]);
 
   const handleclick = async (id) => {
     const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getSingleProduct?id=${id}`;
@@ -122,19 +157,70 @@ function TabsProductCard(props) {
   const prevSlide = () => {
     setSlide(slide === 0 ? props.images.length - 1 : slide - 1);
   };
+
+
+  const startDate = new Date(props?.specialPrice?.startDate);
+  const endDate = new Date(props?.specialPrice?.endDate);
+
+  const formattedStartDate = startDate.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+  });
+  const formattedEndDate = endDate.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+  });
+
+  const [selectedColor, setSelectedColor] = useState("");
+  const [colorImage, setColorImage] = useState("")
+  const [showCart, SetShowCart] = useState(false)
+
+  useEffect(() => {
+    setInCart(props.inCart);
+    // console.log(inCart)
+  }, [props.inCart]);
+
+
+
+  const imageData = props?.text?.productImages?.map((item) => {
+    return {
+      color: item.color,
+      image: item.images[0],
+    };
+  });
+
+  const handleColor = (imagesrc) => {
+    console.log(imagesrc)
+    setColorImage(imagesrc)
+  }
+
+  const quantity = useSelector(selectQuantity);
+
+  const addProductToCart = async () => {
+    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`, {
+      deviceId: localStorage.getItem("deviceId"),
+      productId: props.id,
+      quantity: 1
+    })
+    if (response.status === 200) {
+      setInCart(true)
+      dispatch(updateQuantity(quantity + 1))
+
+    }
+    // console.log(response.data)
+  }
   return (
     <>
       <div
         key={props.idx}
-        className="flex flex-col gap-3 border-b border-r  sm:border-none "
+        className="flex flex-col  border-b border-r  sm:border-none "
         onClick={() => props.handlenav(props.text._id)}
       >
         <div className="relative z[-999999] w-fit">
           <div
             onClick={(event) => event.stopPropagation()}
-            className={`flex justify-between text-black   checkbox-div absolute top-0 right-0 z-10 ${
-              props.selectedpdt.includes(props.text) ? "visible" : ""
-            }`}
+            className={`flex justify-between text-black   checkbox-div absolute top-0 right-0 z-10 ${props.selectedpdt.includes(props.text) ? "visible" : ""
+              }`}
           >
             <input
               type="checkbox"
@@ -191,7 +277,7 @@ function TabsProductCard(props) {
                   onClick={() => handleclick(props.productTitle)}
                 >
                   <Image
-                    src={isHovered ? props.images[2] : item}
+                    src={isHovered ? props.images[2] : colorImage ? colorImage : item}
                     alt="NA"
                     key={idx}
                     height={300}
@@ -233,17 +319,126 @@ function TabsProductCard(props) {
             </span>
           </div>
         </div>
-        {props.demandtype === "Ayatrio Member Favorite" && (
+        {/* {props.demandtype === "Ayatrio Member Favorite" && (
           <p className="font-medium text-blue-500 mt-[10px] text-[12px]">
             {props.demandtype}
           </p>
-        )}
-        <p className="text-lg font-semibold hover:underline">
+        )} */}
+        {/* <p className="text-lg font-semibold hover:underline">
           {props.productTitle}
-        </p>
-        <p className="text-sm">{props.productDescription}</p>
+        </p> */}
+        <div onMouseEnter={() => SetShowCart(true)} onMouseLeave={() => SetShowCart(false)}>
+          <div className="flex items-center justify-between pt-2 ">
+            <div className="card-title flex flex-col">
+              {
+                props.demandtype === "Ayatrio Member Favorite" && (
 
-        {props.discountedprice ? (
+                  <p className="font-medium text-[#0152be]  mb-[3px] text-[12px]">{props.demandtype}</p>
+                )
+              }
+              <div className={` text-[14px] font-semibold ${props.demandtype === "Ayatrio Member Favorite" ? "" : ""}`}>{props.productTitle}</div>
+            </div>
+
+          </div>
+          {/* <p className="text-sm">{props.productDescription}</p> */}
+          <div className="card-date font-normal mb-[4px] text-[12px] text-[#757575]">{props.productDescription}</div>
+          <div className="card-price flex h-[40px] pb-[6px] items-center justify-between">
+            {/* <span className="font-medium pr-[3px] pt-[3px]">Rs.</span>
+            <h2 className="text-xl font-medium tracking-wide">{props.price}</h2> */}
+            <h2 className={`text-3xl flex font-semibold leading-[0.5]  tracking-wide ${props.discountedprice ? "bg-[#FFC21F] px-2 pt-3 pb-1 w-fit shadow-lg" : ""} `} style={props?.discountedprice ? { boxShadow: '3px 3px #C31952' } : {}}>
+              <span className={`text-sm ${props?.discountedprice ? "" : "pt-3.5"}`}>Rs. &nbsp;</span>{" "}
+              {props?.discountedprice ? props?.discountedprice : <p className="pt-3 ">{props.totalPrice}</p>}
+            </h2>{" "}
+
+            {showCart && (
+              <div className="bg-[#0152be] p-[6px] mr-2 rounded-full" onClick={addProductToCart} >
+                <Image src={"/Ayatrio updated icon/ad-to-cart.svg"} height={20} width={20} className="cursor-pointer rounded-full" />
+              </div>
+            )}
+            {/* {inCart && (
+              <div className="bg-[#507A57] p-[6px] mr-2 rounded-full">
+                <Image src={"/Ayatrio updated icon/ad-to-cart.svg"} height={20} width={20} className="cursor-pointer rounded-full" />
+              </div>
+            )} */}
+
+          </div>
+
+          {
+            props?.specialprice && (
+              <div className="flex flex-col mt-[6px]">
+                <p className="text-[#757575] text-[12px] pt-[3px]">Regular price: Rs.{props?.specialprice.price} (incl. of all taxes)</p>
+                {
+                  props?.specialPrice?.startDate && props?.specialPrice?.endDate && (
+                    <p className="text-[#757575] text-[12px] ">Price valid {formattedStartDate} - {formattedEndDate}</p>
+                  )
+                }
+              </div>
+            )
+          }
+
+          {
+            Starts &&
+            <div className="flex items-center mt-1">
+              {Starts}
+              <p className="text-[14px] mt-1 ml-2">({Reviews.length})</p>
+            </div>
+          }
+          {
+            imageData?.length > 0 && (
+
+              <div className="colorContainer flex flex-col sm:w-auto w-[80vw] mt-1 ">
+                <div className="w-full flex justify-between mb-1">
+                  <h1 className="] text-[12px] font-medium">Colours</h1>
+                </div>
+                {
+                  <>
+                    <div className="colors flex gap-1.5">
+                      {imageData?.map((item, index) => (
+                        <div
+                          key={index}
+                          onClick={() => handleColor(item.image)}
+                          // onMouseLeave={() => setColorImage(null)}
+
+                          className={`parent relative w-[40px] h-[40px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
+            ${selectedColor === item.color ||
+                              (index === 0 && selectedColor === "")
+                              ? " border-black "
+                              : " border-black"
+                            }   
+          `}
+                        >
+                          <Image
+                            className="relative w-full h-full object-cover"
+                            src={item.image}
+                            alt={item.color}
+                            width={0}
+                            height={0}
+                            layout="fill"
+                            objectFit="cover"
+                          />
+                          {
+                            colorImage === item.image && (
+
+                              <div className="w-[100%] h-[2.5px] bg-black mt-[50px]" />
+                            )
+
+
+                          }
+
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                }
+              </div>
+            )
+          }
+
+        </div>
+
+
+
+        {/* {props.discountedprice ? (
           <div>
             <p className="text-sm my-2 text-gray-500">Offer price</p>
             <p className=" text-sm font-semibold bg-yellow-400 price-box w-fit px-2 py-1">
@@ -273,7 +468,7 @@ function TabsProductCard(props) {
           <p className="text-sm font-semibold">
             Rs.<span className="text-3xl">{props.totalPrice}</span>
           </p>
-        )}
+        )} */}
         {/* {props.ratings?.length > 0 && (
           <p className="flex flex-row items-center gap-1 text-sm text-black">
             {props.stars.map((star, index) => (
@@ -282,14 +477,14 @@ function TabsProductCard(props) {
             ({props.ratings?.length})
           </p>
         )} */}
-        {reviews.length > 0 && (
+        {/* {reviews.length > 0 && (
           <div className="flex gap-2">
             <div className="flex items-center">{stars}</div>
             <p className="text-gray-800 underline w-[31px] h-[20px] cursor-pointer">
               {reviews.length}
             </p>
           </div>
-        )}
+        )} */}
       </div>
     </>
   );

@@ -75,6 +75,12 @@ function Header({ setIsHeaderMounted }) {
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+    // setSidebarNavigationItem("")
+    // setIsOpen(false)
+    setHoveredIndex(null)
+    if (toptext !== "") {
+      setTopText("")
+    }
 
     if (document.body.style.overflow != "hidden") {
       document.body.style.overflow = "hidden"
@@ -92,8 +98,10 @@ function Header({ setIsHeaderMounted }) {
   };
 
   const toggleDropdown = (item) => {
+    console.log(item)
     setSidebarNavigationItem(item)
     setIsOpen(!isOpen);
+
   };
 
 
@@ -242,7 +250,24 @@ function Header({ setIsHeaderMounted }) {
     // router.push("/customerservice")
     router.push(link)
   }
+  const [toptext, setTopText] = useState([])
 
+  const handlebackArraowClick = () => {
+    setTopText([])
+  }
+
+  const handleTopValue = (text) => {
+    setTopText(prev => [...prev, text])
+  }
+
+  // console.log(toptext)
+
+  const handleItemClick = (data) => {
+    console.log(data)
+    setTopText(prev => [...prev, data.name])
+  }
+
+  const [selectedValue, setSelectedValue] = useState('');
 
   return (
     <div className="">
@@ -476,18 +501,27 @@ function Header({ setIsHeaderMounted }) {
             <div className="flex justify-between items-center py-[5px] w-full h-fit mb-4">
               <div className=" flex items-center">
                 {/* <Image src={"/Ayatrio updated icon/backarrow.svg"} height={20} width={20} className="rotate-180" /> */}
-                <div className="mainlogo">
-                  <Link href="/">
-                    <Image
-                      src="/images/ayatriologo.webp"
-                      alt="logo"
-                      width={300}
-                      height={40}
-                      priority
-                      className=" max-w-[135px] mt-[10px] ml-[10px] object-cover  sm:w-44"
-                    />
-                  </Link>
-                </div>
+                {
+                  toptext && toptext.length > 0 ? (
+                    <div className="flex  items-center">
+                      <Image src={"/Ayatrio updated icon/backarrow.svg"} height={18} width={18} className="rotate-180" onClick={handlebackArraowClick} />
+                      <p className="text-[18px] ml-[10px] font-semibold">{toptext[toptext.length - 1]}</p>
+                    </div>
+                  ) : (
+                    <div className="mainlogo">
+                      <Link href="/">
+                        <Image
+                          src="/images/ayatriologo.webp"
+                          alt="logo"
+                          width={300}
+                          height={40}
+                          priority
+                          className=" max-w-[135px] mt-[10px] ml-[10px] object-cover  sm:w-44"
+                        />
+                      </Link>
+                    </div>
+                  )
+                }
               </div>
 
               <div className="w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer md:hidden">
@@ -498,6 +532,7 @@ function Header({ setIsHeaderMounted }) {
             {/* <div className="flex"> */}
             <div className="flex flex-col space-y-2  ">
               {headerLinks.map((value, idx) => (
+
                 <div
                   key={idx}
                   onMouseEnter={() => handleMouseEnter(idx)}
@@ -508,13 +543,14 @@ function Header({ setIsHeaderMounted }) {
                     className={`text-md  font-semibold flex items-center justify-between  ${isOpen ? "border-b-2 border-black" : ""
                       }`}
                     href="#"
-                    onClick={toggleDropdown}
+                    onClick={() => toggleDropdown(value.label)}
                   >
                     <p
                       className={`block p-2 text-lg font-medium border-b-2 ${hoveredIndex === idx
                         ? "border-black"
                         : "border-transparent"
                         }`}
+                      onClick={() => handleTopValue(value.label)}
                     >
                       {value.label}
                     </p>
@@ -523,7 +559,7 @@ function Header({ setIsHeaderMounted }) {
 
                     </div>                  </Link>
                   {idx < 3 && hoveredIndex === idx && (
-                    <Asidebox hoveredIndex={hoveredIndex} selectedItem={"Home decor"} />
+                    <Asidebox hoveredIndex={hoveredIndex} toggleMobileMenu={toggleMobileMenu} onItemClick={handleItemClick} />
                   )}
                   {idx === 3 && hoveredIndex === idx && <Midsection />}
                 </div>

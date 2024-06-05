@@ -414,7 +414,11 @@ const Card = ({ data, productId }) => {
           {/* color-container */}
           <div className="colorContainer flex flex-col mt-[30px] sm:w-auto w-[80vw]">
             <div className="w-full flex justify-between">
-              <h1 className="mb-2 font-bold">Colours</h1>
+              {
+                imageData && imageData?.length > 0 && (
+                  <h1 className="mb-2 font-bold">Colours</h1>
+                )
+              }
             </div>
             {
               <>
