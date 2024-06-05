@@ -3,7 +3,7 @@ import Card from "@/components/Room/Other/Card";
 import Reviews from "@/components/Room/Other/Reviews";
 import RoomImageList from "@/components/Room/RoomImageList";
 import RoomInfo from "@/components/Room/RoomInfo";
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import ImageCaresoul from "@/components/Room/imagecaresoul";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -43,39 +43,44 @@ const RoomPage = () => {
   const [howMuchScrolled, setHowMuchScrolled] = useState(0);
   const [data, setData] = useState([]);
   const selectedData = useSelector(selectRoomData);
+  console.log("0000",selectedData);
 
   useEffect(() => {
-    // handleResetItem();
-    const fetchData = async () => {
-      const cachedData = sessionStorage?.getItem("roomData");
-      if (cachedData) {
-        const parsedData = JSON.parse(cachedData);
-        setData(parsedData);
-        dispatch(setRoomData({ roomData: parsedData }));
-        if (parsedData?.productImages?.[0]?.color) {
-          dispatch({
-            type: "FETCH_IMAGE_DATA",
-            payload: parsedData?.productImages[0]?.color,
-          });
-        }else {
-          dispatch({
-            type: "FETCH_IMAGE_DATA",
-            payload: selectedData?.images,
-          });
+    // Fetch room data based on the title
+    dispatch({ type: "FETCH_ROOM_REQUEST", payload: title });
+  }, [title, dispatch]);
   
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const cachedData = sessionStorage?.getItem("roomData");
+        if (cachedData) {
+          const parsedData = JSON.parse(cachedData);
+          setData(parsedData);
+          dispatch(setRoomData({ roomData: parsedData }));
+          if (parsedData?.productImages?.[0]?.color) {
+            dispatch({
+              type: "FETCH_IMAGE_DATA",
+              payload: parsedData?.productImages[0]?.color,
+            });
+          } else {
+            dispatch({
+              type: "FETCH_IMAGE_DATA",
+              payload: selectedData?.images,
+            });
+          }
         }
-      } else {
-        // Fetch data if there's no cached data
-        dispatch({ type: "FETCH_ROOM_REQUEST", payload: title });
+      } catch (error) {
+        console.error("Error fetching cached data:", error);
       }
     };
-
+  
     fetchData();
-  }, [dispatch, title]);
-
-  // Use another useEffect hook to update the selectedData after dispatching FETCH_ROOM_REQUEST
+  }, [dispatch]); // Fetch cached data only once when component mounts
+  
   useEffect(() => {
     if (selectedData && Object.keys(selectedData).length !== 0) {
+      // Update cached data with selected data
       sessionStorage?.setItem("roomData", JSON.stringify(selectedData));
       setData(selectedData); // Update component state with selectedData
       if (selectedData?.productImages?.[0]?.color) {
@@ -88,10 +93,10 @@ const RoomPage = () => {
           type: "FETCH_IMAGE_DATA",
           payload: selectedData?.images,
         });
-
       }
     }
   }, [selectedData, dispatch]);
+  
 
   console.log(data);
 
