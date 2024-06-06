@@ -18,7 +18,7 @@ export default function RoomImageList() {
           <Link href={"/login"} className="absolute z-10 top-12 right-3 opacity-85 hover:opacity-100 bg-white p-[6px] hover:scale-105 transition-transform rounded-full" style={{ boxShadow: '0 2px 6px 0 rgba(0, 0, 0, 0.12)' }}>
             <Image src={"/svg/icon/like.svg"} height={20} width={20} className="cursor-pointer" />
           </Link>
-          {imagesToDisplay.map((image, index) => (
+          {imagesToDisplay?.map((image, index) => (
             <div
               key={index}
               className={`sm:col-span-1 sm:row-start-${index + 1}`}

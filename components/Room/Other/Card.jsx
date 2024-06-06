@@ -415,12 +415,13 @@ const Card = ({ data, productId }) => {
           <div className="colorContainer flex flex-col mt-[30px] sm:w-auto w-[80vw]">
             <div className="w-full flex justify-between">
               {
-                imageData && imageData?.length > 0 && (
+                imageData && imageData?.length > 1 && (
                   <h1 className="mb-2 font-bold">Colours</h1>
                 )
               }
             </div>
             {
+              imageData?.length > 1 &&
               <>
                 <div className="colors flex gap-3">
                   {imageData?.map((item, index) => (

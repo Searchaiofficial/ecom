@@ -329,7 +329,7 @@ function TabsProductCard(props) {
         </p> */}
         <div onMouseEnter={() => SetShowCart(true)} onMouseLeave={() => SetShowCart(false)}>
           <div className="flex items-center justify-between pt-2 ">
-            <div className="card-title flex flex-col">
+            <div className=" flex flex-col">
               {
                 props.demandtype === "Ayatrio Member Favorite" && (
 
@@ -341,8 +341,8 @@ function TabsProductCard(props) {
 
           </div>
           {/* <p className="text-sm">{props.productDescription}</p> */}
-          <div className="card-date font-normal mb-[4px] text-[12px] text-[#757575]">{props.productDescription}</div>
-          <div className="card-price flex h-[40px] pb-[6px] items-center justify-between">
+          <div className=" font-normal mb-[4px] text-[12px] text-[#757575]">{props.productDescription}</div>
+          <div className=" flex h-[40px] pb-[6px] items-center justify-between">
             {/* <span className="font-medium pr-[3px] pt-[3px]">Rs.</span>
             <h2 className="text-xl font-medium tracking-wide">{props.price}</h2> */}
             <h2 className={`text-3xl flex font-semibold leading-[0.5]  tracking-wide ${props.discountedprice ? "bg-[#FFC21F] px-2 pt-3 pb-1 w-fit shadow-lg" : ""} `} style={props?.discountedprice ? { boxShadow: '3px 3px #C31952' } : {}}>
@@ -384,7 +384,7 @@ function TabsProductCard(props) {
             </div>
           }
           {
-            imageData?.length > 0 && (
+            imageData?.length > 1 && (
 
               <div className="colorContainer flex flex-col sm:w-auto w-[80vw] mt-1 ">
                 <div className="w-full flex justify-between mb-1">

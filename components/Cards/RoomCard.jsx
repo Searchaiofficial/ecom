@@ -6,6 +6,10 @@ import Link from "next/link";
 
 const RoomCard = async () => {
   const gallery = await fetchGalleryData();
+  console.log(gallery)
+  if (!gallery) {
+    return
+  }
   return (
     <>
       <div className="px-[15px] mb-[32px]">
@@ -58,8 +62,8 @@ const RoomCard = async () => {
                       alt="Image"
                     />
                     <div className="absolute md:top-[20rem] left-3  lg:left-20 lg:-bottom-72  bottom-8 flex flex-col justify-center items-center p-2">
-                      <div>
-                        <h2 className="text-white text-center text-[12px]">
+                      <div className="flex flex-col">
+                        <h2 className="text-white  text-[12px]">
                           {gallery.items[0].heading}
                         </h2>
                         <p className="text-[12px] font-semibold text-blue-500">View More</p>
@@ -81,15 +85,15 @@ const RoomCard = async () => {
                   <>
                     {gallery.mode == "room" && (
                       <TabImage
-                        src={gallery.rooms[0].imgSrc}
-                        href={`/rooms/${gallery.rooms[0].roomType.replace(
+                        src={gallery?.rooms[0]?.imgSrc}
+                        href={`/rooms/${gallery?.rooms[0]?.roomType.replace(
                           / /g,
                           "-"
                         )}`}
                         alt={`Image  of Children`}
                         width={1000}
                         height={338}
-                        labelData={gallery.rooms[0].children}
+                        labelData={gallery?.rooms[0]?.children}
                         firstData
                       />
                     )}
@@ -106,15 +110,15 @@ const RoomCard = async () => {
                   <>
                     {gallery.mode === "room" && (
                       <TabImage
-                        src={gallery.rooms[1].imgSrc}
+                        src={gallery?.rooms[1]?.imgSrc}
                         alt={`Image  of Children`}
-                        href={`/rooms/${gallery.rooms[1].roomType.replace(
+                        href={`/rooms/${gallery?.rooms[1]?.roomType.replace(
                           / /g,
                           "-"
                         )}`}
                         width={1000}
                         height={338}
-                        labelData={gallery.rooms[1].children}
+                        labelData={gallery?.rooms[1]?.children}
                       />
                     )}
                   </>
@@ -130,15 +134,15 @@ const RoomCard = async () => {
                   <>
                     {gallery.mode === "room" && (
                       <TabImage
-                        src={gallery.rooms[2].imgSrc}
+                        src={gallery?.rooms[2]?.imgSrc}
                         alt={`Image  of Children`}
-                        href={`/rooms/${gallery.rooms[2].roomType.replace(
+                        href={`/rooms/${gallery?.rooms[2]?.roomType.replace(
                           / /g,
                           "-"
                         )}`}
                         width={1000}
                         height={338}
-                        labelData={gallery.rooms[2].children}
+                        labelData={gallery?.rooms[2]?.children}
                       />
                     )}
                   </>
@@ -154,15 +158,15 @@ const RoomCard = async () => {
                   <>
                     {gallery.mode === "room" && (
                       <TabImage
-                        src={gallery.rooms[3].imgSrc}
-                        href={`/rooms/${gallery.rooms[3].roomType.replace(
+                        src={gallery?.rooms[3]?.imgSrc}
+                        href={`/rooms/${gallery?.rooms[3]?.roomType.replace(
                           / /g,
                           "-"
                         )}`}
                         alt={`Image  of Children`}
                         width={1000}
                         height={338}
-                        labelData={gallery.rooms[3].children}
+                        labelData={gallery?.rooms[3]?.children}
                       />
                     )}
                   </>
@@ -173,7 +177,7 @@ const RoomCard = async () => {
         </div>
       )}
       <Link
-        href={`heading/offers/${gallery.items[0].offer.replace(/ /g, "-")}`}
+        href={`heading/offers/${gallery?.items[0].offer.replace(/ /g, "-")}`}
       >
         <div className="flex mb-[20px] h-[60px] border-b px-[15px] items-center justify-between lg:hidden">
           <p class="text-[14px] font-semibold">Shop all New lower price</p>
