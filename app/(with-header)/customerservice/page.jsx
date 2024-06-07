@@ -43,9 +43,9 @@ const CustomerServicePage = () => {
   };
 
   return (
-    <div>
-      <div className="mt-20 sm:px-[50px] px-[20px] sm:space-y-10 space-y-5 ">
-        <div className="space-y-6">
+    <div className="w-full">
+      <div className="pt-36 sm:px-[50px] px-[20px] sm:space-y-10 space-y-5 ">
+        <div className="space-y-6 ">
           <h1 className="font-bold text-4xl">Customer Service</h1>
           <div className="service-container">
             {servicesData.map((option, id) => {

@@ -275,7 +275,7 @@ function Header({ setIsHeaderMounted }) {
         <TopHeader />
       </TopHeaderWrapper>
       <div
-        className={`fixed w-full sm:bg-none ${!pathname.includes("/checkout")
+        className={`fixed w-full sm:bg-none ${(!pathname.includes("/checkout") && !pathname.includes("/ayatrio-map"))
           ? typeof window !== "undefined" && window.scrollY < 20
             ? "md:top-[35px] top-[0px]"
             : "top-0"
