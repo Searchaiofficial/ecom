@@ -71,8 +71,10 @@ const TabImage = ({ src, alt, width, height, labelData, href, firstData }) => {
             }}
             style={{
               boxShadow: `0 1px 4px rgba(var(--colour-static-black, 17, 17, 17), 0.55)`,
+              top: `${data?.topPosition}%`,
+              left: `${data?.leftPosition}%`,
             }}
-            className="border-2 border-neutral-300 bg-black/40 hover:border-white top-16 left-16 absolute hover:bg-black/70 rounded-full size-[30px] flex items-center justify-center transition-all duration-200 before:content-[''] before:size-3 before:bg-white  before:rounded-full before:hover:size-2 before:transition-all before:duration-200"
+            className="border-2 border-neutral-300 bg-black/40 hover:border-white  absolute hover:bg-black/70 rounded-full size-[30px] flex items-center justify-center transition-all duration-200 before:content-[''] before:size-3 before:bg-white  before:rounded-full before:hover:size-2 before:transition-all before:duration-200"
           >
             {openData[idx] ? <Label data={data} /> : null}
           </div>
