@@ -43,7 +43,7 @@ const CustomerServicePage = () => {
   };
 
   return (
-    <div className="w-full">
+    <div className="">
       <div className="pt-36 sm:px-[50px] px-[20px] sm:space-y-10 space-y-5 ">
         <div className="space-y-6 ">
           <h1 className="font-bold text-4xl">Customer Service</h1>

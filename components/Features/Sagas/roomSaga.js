@@ -20,6 +20,7 @@ function* fetchRoomData(action) {
 
     // Extract product ID and update popularity
     const productTitle = action.payload;
+    console.log("Product title:", productTitle);
     yield call(updateProductPopularity, productTitle);
 
     // Send preferences to the server

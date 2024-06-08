@@ -86,6 +86,7 @@ function TabsProductCard(props) {
     return starsArray;
   }
 
+ 
 
 
   useEffect(() => {
@@ -123,11 +124,9 @@ function TabsProductCard(props) {
 
   }, [Reviews]);
 
-  const handleclick = async (id) => {
-    const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getSingleProduct?id=${id}`;
-    const response = await axios.get(url);
-    const data = response.data;
-    dispatch({ type: "FETCH_ROOM_REQUEST", payload: id });
+  const handleclick = async (title) => {
+    console.log(title)
+    dispatch({ type: "FETCH_ROOM_REQUEST", payload: title });
   };
 
   const [formattedDate, setFormattedDate] = useState({

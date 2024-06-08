@@ -15,7 +15,7 @@ import { useDebounceValue } from "usehooks-ts";
 const Expandedbar = ({ searchText, onClose, onSearch }) => {
   const [searchQuery, setSearchQuery] = useState(searchText);
   const [debouncedSearchQuery] = useDebounceValue(searchQuery, 500);
-
+  const [popularSearchProducts, setPopularSearchProducts] = useState([]);
   const router = useRouter();
 
   const [data, setData] = useState([]);
@@ -54,6 +54,20 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
     }
   };
 
+  const fetchPopularSearchProducts = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/popularSearchProducts`
+      );
+      setPopularSearchProducts(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPopularSearchProducts();
+  }, []);
 
 
 
@@ -172,18 +186,16 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
             <div className="dropdown-item sm:font-medium  pb-2 text-[14px]  text-[#707072]">
               Popular Searches
             </div>
-            <div className="dropdown-item sm:font-medium  py-2   text-[20px] font-medium ">
-              Engineering flooring
-            </div>
-            <div className="dropdown-item sm:font-medium  py-2  text-[20px] font-medium  ">
-              Luxurious curtains
-            </div>
-            <div className="dropdown-item sm:font-medium  py-2   text-[20px] font-medium ">
-              Wallpaper for home
-            </div>
-            <div className="dropdown-item sm:font-medium hidden sm:flex  py-2  text-[20px] font-medium ">
-              Vinyl
-            </div>
+            {popularSearchProducts.map((item) => (
+              <Link
+                key={item._id}
+                className="dropdown-item sm:font-medium  py-2  text-[20px] font-medium "
+                href={`/product/${item.category.replace(/\s/g, "-")}/${item.subcategory.replace(/\s/g, "-")}`}
+              >
+                {item.productTitle}
+              </Link>
+            ))
+            }
           </div>
 
           {
@@ -214,13 +226,13 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
                         />
                       </div>
                       <div className="lg:text-[16px] text-[14px] font-medium text-black pt-[20px] ">
-                        {item.category}
+                        {item.productTitle}
                       </div>
                       <div className="lg:text-[16px] text-[14px]  font-normal leading-6   text-[#707072]">
-                        {item.collectionName}
+                        {item.category}
                       </div>
                       <div className="lg:text-[16px] text-[14px]  font-medium pt-[7px]  text-black">
-                        {item.totalPrice}₹
+                        Rs. {item.totalPrice}
                       </div>
                     </div>
                   </Link>

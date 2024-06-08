@@ -134,7 +134,6 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex }) => {
           </SwiperSlide>
         ))
       )}
-      <div className="swiper-scrollbar child w-full h-full bg-black rounded-full" />
     </Swiper>
   );
 };

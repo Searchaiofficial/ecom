@@ -412,7 +412,6 @@ const Tabs = ({
   }, []);
 
   const isProductInCart = (productId) => {
-    console.log("Checking product ID:", productId);
     return cartData.some((cartItem) => {
       console.log("Comparing with cart item product ID:", cartItem?.productId?._id);
       return cartItem?.productId?._id === productId;
