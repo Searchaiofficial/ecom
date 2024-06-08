@@ -285,7 +285,7 @@ function Card(props) {
   }, [props.inCart]);
 
   useEffect(() => {
-    if (imageData.length > 0) {
+    if (imageData?.length > 0) {
 
       setColorImage(imageData[0]?.image)
     }

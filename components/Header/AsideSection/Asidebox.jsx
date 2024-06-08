@@ -51,9 +51,17 @@ const Asidebox = (props) => {
   const handleItemClick = (data) => {
     props.onItemClick(data); // Call the parent component's function with the data
     setInnerData(true);
+
   };
 
   const [innerData, setInnerData] = useState(false);
+
+  const HandleClick = (item) => {
+    console.log(item)
+    props.setHoveredIndex(item)
+    // props.setIsHovered(false)
+    // console.log(props.)
+  }
 
   return (
     <>
@@ -101,6 +109,8 @@ const Asidebox = (props) => {
               defaultLinkIndex={defaultLinkIndex}
               data={selectedData}
               setAsideCategory={setAsideCategory}
+              HandleClick={HandleClick}
+              handleChange={props.handleChange}
             />
           </div>
         </div>
@@ -115,6 +125,7 @@ const Asidebox = (props) => {
           className="absolute top-[2.7rem] p-4 bg-white flex flex-col mt-[15px] md:flex-row noto-sans-200 transition-all duration-300 ease-linear w-full md:left-0 min-h-[10rem] md:h-auto md:px-10"
         >
           <SwiperComponent
+            handleChange={props.handleChange}
             setHoveredIndex={props.setHoveredIndex}
             hoveredIndex={props.hoveredIndex}
           />

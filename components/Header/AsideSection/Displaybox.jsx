@@ -18,6 +18,8 @@ const Displaybox = (props) => {
     const newPath = `/${props.parentCategory}/${currentCategory}/${category}`;
     router.push(newPath);
     props.setAsideCategory(null);
+    props.HandleClick(false)
+    props.handleChange(false)
   };
 
   useEffect(() => {

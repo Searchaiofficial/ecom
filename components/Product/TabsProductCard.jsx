@@ -86,7 +86,7 @@ function TabsProductCard(props) {
     return starsArray;
   }
 
- 
+
 
 
   useEffect(() => {
@@ -210,7 +210,7 @@ function TabsProductCard(props) {
 
     console.log(imageData)
     useEffect(() => {
-      if (imageData.length > 0) {
+      if (imageData?.length > 0) {
 
         setColorImage(imageData[0]?.image)
       }

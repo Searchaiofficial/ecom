@@ -47,8 +47,12 @@ const servicedData = [
   }
 ]
 
-const SwiperComponent = ({ hoveredIndex, setHoveredIndex }) => {
+const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
   const [allOffers, setAllOffers] = useState([]);
+
+  const handleClick = () => {
+    handleChange(false)
+  }
 
   useEffect(() => {
     const fetchAllOffers = async () => {
@@ -75,7 +79,7 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex }) => {
     >
       {hoveredIndex === 3 &&
         roomOptions.map((data, index) => (
-          <SwiperSlide className="bg-white parent ">
+          <SwiperSlide className="bg-white parent " onClick={handleClick}>
             <div className=" child w-full h-full pt-10 flex flex-col px-2 justify-start ">
               <Link
                 key={index}
@@ -103,7 +107,7 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex }) => {
       {
         hoveredIndex === 4 && (
           servicedData.map((service, index) => (
-            <SwiperSlide className="bg-white  parent ">
+            <SwiperSlide className="bg-white  parent " onClick={handleClick}>
               <div className=" child  h-full pt-10 flex px-2 justify-start ">
                 <Link
 
@@ -126,7 +130,7 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex }) => {
 
       {hoveredIndex === 5 && (
         allOffers.map((offer, index) => (
-          <SwiperSlide className="bg-white  parent ">
+          <SwiperSlide className="bg-white  parent " onClick={handleClick}>
             <div className=" child  h-full pt-10 flex px-2 justify-start ">
               <Link
                 key={index}

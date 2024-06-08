@@ -107,6 +107,8 @@ function Header({ setIsHeaderMounted }) {
   const [isHovered, setIsHovered] = useState(false);
 
 
+
+
   const handleMouseEnter = (index) => {
     setHoveredIndex(index);
     setIsOpen(true);
@@ -120,6 +122,8 @@ function Header({ setIsHeaderMounted }) {
 
   // const handleClick = (idx) => {
   //   if (idx === 3) router.push("/customerservice");
+
+
   // };
 
   const handleSearchChange = (event) => {
@@ -280,6 +284,11 @@ function Header({ setIsHeaderMounted }) {
 
   const [selectedValue, setSelectedValue] = useState('');
 
+  const handleChange = (value) => {
+    console.log(value)
+    setIsHovered(value)
+  }
+
   return (
     <div className="">
       <TopHeaderWrapper>
@@ -354,7 +363,7 @@ function Header({ setIsHeaderMounted }) {
                         </Link>
                         {hoveredIndex === idx && (
                           // <Asidebox asideSectionList={value.asideSectionList} />
-                          <Asidebox hoveredIndex={hoveredIndex} setHoveredIndex={setHoveredIndex} label={value.label} />
+                          <Asidebox handleChange={handleChange} hoveredIndex={hoveredIndex} setHoveredIndex={setHoveredIndex} label={value.label} />
                         )}
                         {/* {value.label === "Rooms" && hoveredIndex === idx && (
                           <Midsection />
