@@ -5,16 +5,21 @@ import { mapStyles } from "./mapStyles";
 import MapMarker from "./MapMarker";
 import { REACT_APP_GMAP_API_KEY } from "./config.js";
 import Search from "./Search";
+import { useSelector } from "react-redux";
+import { selectMapDataCoords, selectMapDataZoom } from "@/components/Features/Slices/mapSlice"
 const Map = ({ setBoundaries, coords, places, PlacesData }) => {
   // console.log(PlacesData);
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: REACT_APP_GMAP_API_KEY,
   });
+  const newZoom = useSelector(selectMapDataZoom)
+  const newCoords = useSelector(selectMapDataCoords)
+  // console.log(newZoom)
   const india_zoom = 5;
   const hotels_zoom = 11;
   const [zoom, setZoom] = useState(india_zoom);
   const [map, setMap] = useState(null);
-  const [selectedCoords, setSelectedCoords] = useState(coords);
+  // const [selectedCoords, setSelectedCoords] = useState(coords);
   const handleResultClick = ({ lat, lng }) => {
     if (lat && lng && lat !== null && lng !== null) {
       const latitude = parseFloat(lat);
@@ -45,7 +50,7 @@ const Map = ({ setBoundaries, coords, places, PlacesData }) => {
     </OverlayView>
   );
   // console.log("hi")
-// console.log(PlacesData)
+  // console.log(PlacesData)
   // const handleBoundsChanged = () => {
   //   if (map) {
   //     const bounds = map.getBounds();
@@ -73,15 +78,15 @@ const Map = ({ setBoundaries, coords, places, PlacesData }) => {
           <GoogleMap
             mapContainerClassName="map-container"
             onLoad={onLoad}
-            center={selectedCoords || coords}
-            zoom={zoom} // initial zoom level
+            center={newCoords || coords}
+            zoom={newZoom} // initial zoom level
             options={{
               disableDefaultUI: true,
               zoomControl: true,
               styles: mapStyles,
               mapId: "2d6636895d6a199d",
             }}
-            // onBoundsChanged={handleBoundsChanged}
+          // onBoundsChanged={handleBoundsChanged}
           >
             {PlacesData &&
               PlacesData.map((place, i) => (

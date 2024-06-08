@@ -109,6 +109,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "scontent-del1-1.cdninstagram.com",
       },
+      {
+        protocol: "https",
+        hostname: "bolt-gcdn.sc-cdn.net",
+      },
     ],
     // domains: ["images.unsplash.com"],
   },

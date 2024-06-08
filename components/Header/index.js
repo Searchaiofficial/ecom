@@ -32,6 +32,7 @@ function Header({ setIsHeaderMounted }) {
   const [sidebarNavigationItem, setSidebarNavigationItem] = useState("")
   const dispatch = useDispatch()
 
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -103,15 +104,18 @@ function Header({ setIsHeaderMounted }) {
     setIsOpen(!isOpen);
 
   };
+  const [isHovered, setIsHovered] = useState(false);
 
 
   const handleMouseEnter = (index) => {
     setHoveredIndex(index);
     setIsOpen(true);
+    setIsHovered(true);
   };
   const handleMouseLeave = () => {
     setHoveredIndex(null);
     setIsOpen(false);
+    setIsHovered(false);
   };
 
   // const handleClick = (idx) => {
@@ -172,7 +176,7 @@ function Header({ setIsHeaderMounted }) {
     }
   };
   const handleModalClose = (event) => {
-    event.stopPropagation();
+    // event.stopPropagation();
     setModalOpen(false);
     document.body.style.overflow = "auto";
     onClose();
@@ -194,8 +198,11 @@ function Header({ setIsHeaderMounted }) {
 
   const homeRoute = "/";
 
+
   const [displayedText, setDisplayedText] = useState("");
-  const phrases = [` ' Wallpapers '`, ` ' Curtains '`, ` ' Blinds '`];
+  const phrases = pathname !== "/ayatrio-map" ? [` ' Wallpapers '`, ` ' Curtains '`, ` ' Blinds '`] : [` ' Bengaluru '`, ` ' Kolkata '`, ` ' Mumbai '`];;
+
+
 
   useEffect(() => {
     let currentPhraseIndex = 0;
@@ -274,6 +281,7 @@ function Header({ setIsHeaderMounted }) {
       <TopHeaderWrapper>
         <TopHeader />
       </TopHeaderWrapper>
+      {isHovered && <div className="overlay"></div>}
       <div
         className={`fixed w-full sm:bg-none ${(!pathname.includes("/checkout") && !pathname.includes("/ayatrio-map"))
           ? typeof window !== "undefined" && window.scrollY < 20
@@ -352,6 +360,7 @@ function Header({ setIsHeaderMounted }) {
                   </nav>
                 </div>
               </div>
+
               {/* search-bar */}
 
               <div className="flex flex-row items-center justify-between  lg:gap-2">

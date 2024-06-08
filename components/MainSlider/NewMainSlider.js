@@ -78,6 +78,8 @@ export default function NewMainSlider({ initialData }) {
     return () => window.removeEventListener("resize", handleResize);
   }, [windowWidth]);
 
+  console.log(sliderApiData)
+
 
   return (
     <div
@@ -115,7 +117,7 @@ export default function NewMainSlider({ initialData }) {
             spaceBetween: 5,
           },
           1024: {
-            slidesPerView: 1.5,
+            slidesPerView: 1.36,
             spaceBetween: 5,
           },
         }}
@@ -136,7 +138,7 @@ export default function NewMainSlider({ initialData }) {
             <SwiperSlide key={data?._id}>
               <div className={`relative mt-[60px] sm:mt-0 group h-[78vh] lg:-translate-x-[5px] -translate-x-[10px] translate-r md:translate-x-0`}>
                 <Image
-                    src={windowWidth > 450 ? data?.desktopImgSrc : data?.mobileImgSrc}
+                  src={windowWidth > 450 ? data?.desktopImgSrc : data?.mobileImgSrc}
                   fill
                   alt={data.imgTitle || "Swiper image"}
                   priority

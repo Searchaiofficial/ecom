@@ -9,6 +9,8 @@ import "./styles.css";
 const Display = async () => {
   const apiData = await fetchDisplayData();
 
+
+
   return (
     <>
       <div className="px-[15px] mt-[20px] lg:mt-0 pt-[30px] mb-[32px]">

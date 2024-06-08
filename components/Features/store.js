@@ -31,6 +31,7 @@ import offerProductsSlice from "./Slices/offerProductsSlice";
 
 import filteredProductReducer from "./Slices/FilteredProduct";
 import roomCardReducer from "./Slices/roomCardSlice";
+import mapSlice from "./Slices/mapSlice";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -83,7 +84,8 @@ export const store = configureStore({
     roomCard: roomCardReducer,
     roomMainDetails: roomMainReducer,
     demandTypeProducts: demandTypeProductsSlice,
-    offerProducts: offerProductsSlice, 
+    offerProducts: offerProductsSlice,
+    map: mapSlice
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(sagaMiddleware),

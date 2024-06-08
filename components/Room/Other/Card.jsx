@@ -109,15 +109,44 @@ const Card = ({ data, productId }) => {
   }
 
 
+  // useEffect(() => {
+  //   fetchReviews();
+
+  //   const stars = renderStars(0);
+  //   setStars(stars)
+
+  // }, [productId]);
+
+  // console.log("Reviews Data", reviews)
+
   useEffect(() => {
     fetchReviews();
 
-    const stars = renderStars(3.6);
-    setStars(stars)
+    // const stars = renderStars(3.6);
+    // setStars(stars)
 
   }, [productId]);
 
-  console.log("Reviews Data", reviews)
+  // console.log(Reviews)
+
+  function calculateAverageRating(reviews) {
+    if (reviews.length > 0) {
+      const totalRatings = reviews.reduce((acc, review) => acc + review.rating, 0);
+      const averageRating = totalRatings / reviews.length;
+      return averageRating;
+    }
+
+    return 0
+  }
+
+  useEffect(() => {
+
+    const averageRating = calculateAverageRating(reviews);
+    // console.log(averageRating);
+    const stars = renderStars(averageRating); // Assuming renderStars is defined somewhere
+    setStars(stars);
+
+  }, [reviews]);
 
 
   const [sidebarContect, setsidebarContent] = useState(null)

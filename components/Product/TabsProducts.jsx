@@ -418,6 +418,21 @@ const Tabs = ({
     });
   };
 
+  const breakpoints = {
+    300: {
+      slidesPerView: Math.min(subCategory?.length, 2.5),
+      spaceBetween: 10,
+    },
+    768: {
+      slidesPerView: Math.min(subCategory?.length, 3),
+      spaceBetween: 10,
+    },
+    1024: {
+      slidesPerView: Math.min(subCategory?.length, 7),
+      spaceBetween: 10,
+    },
+  };
+
   return (
     <>
       <div className="lg:px-[67px] sm:px-[50px] px-[20px]">
@@ -454,20 +469,7 @@ const Tabs = ({
                     enabled: false,
                     sticky: true,
                   }}
-                  breakpoints={{
-                    400: {
-                      slidesPerView: 2.5,
-                      spaceBetween: 10,
-                    },
-                    768: {
-                      slidesPerView: 3,
-                      spaceBetween: 10,
-                    },
-                    1024: {
-                      slidesPerView: 7,
-                      spaceBetween: 10,
-                    },
-                  }}
+                  breakpoints={breakpoints}
                 >
                   {subCategory?.map((curElement, idx) => {
                     return (
@@ -957,6 +959,7 @@ const Tabs = ({
                     parentCategory={parentCategory}
                     offer={text.offer}
                     inCart={inCart}
+                    shortDescription={text.shortDescription}
                   />
                 )
               })

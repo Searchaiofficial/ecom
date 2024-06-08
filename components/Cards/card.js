@@ -284,6 +284,13 @@ function Card(props) {
     // console.log(inCart)
   }, [props.inCart]);
 
+  useEffect(() => {
+    if (imageData.length > 0) {
+
+      setColorImage(imageData[0]?.image)
+    }
+  }, [])
+
 
 
   return (
@@ -397,7 +404,7 @@ function Card(props) {
 
           </div>
           {/* {!isHovered && <div className="card-date text-sm text-[#757575]">{props.desc}</div>} */}
-          <div className="font-normal mb-[4px] text-[12px] text-[#757575]">{props.desc}</div>
+          <div className="font-normal mb-[4px] text-[12px] text-[#757575]">{props?.shortDescription}</div>
 
           <div className=" flex h-[40px] pb-[6px] items-center justify-between mt-2">
             {/* <span className="font-medium pr-[3px] pt-[3px]">Rs.</span>
@@ -484,13 +491,20 @@ function Card(props) {
                             layout="fill"
                             objectFit="cover"
                           />
-                          {
-                            colorImage === item.image && (
+                          {/* {
+                            colorImage === item.image || (index === 0 && selectedColor === "") && (
 
                               <div className="w-[100%] h-[2.5px] bg-black mt-[50px]" />
                             )
 
 
+                          } */}
+
+                          {
+                            colorImage === item.image ||
+                              (index === 0 && colorImage === "") ? (
+                              <div className="w-[100%] h-[4px] bg-black mt-[50px]" />
+                            ) : ""
                           }
 
                         </div>

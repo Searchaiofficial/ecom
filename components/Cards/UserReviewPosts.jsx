@@ -150,7 +150,7 @@ const UserReviewPosts = ({ slidesPerView, SubcategoryName }) => {
                     allowSlidePrev={true}
                     slideNextClass="custom-next-button"
                     slidePrevClass="custom-prev-button"
-                    className="px-10 min-h-[520px]  lg:min-h-[650px]"
+                    className="px-10 min-h-[520px]  lg:min-h-[600px]"
                 >
                     {!postsToRender ? (
                         <SwiperSlide>

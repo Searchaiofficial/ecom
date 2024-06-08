@@ -75,8 +75,8 @@ const Search = ({ places, onResultClick }) => {
   const handleResultClick = (item) => {
     if (onResultClick && item) {
       onResultClick({
-        lat: item.geo_location.latitude,
-        lng: item.geo_location.longitude,
+        lat: item.lat,
+        lng: item.lng,
       });
     } else {
       onResultClick({ lat: 20.593, lng: 78.96 });
@@ -102,6 +102,46 @@ const Search = ({ places, onResultClick }) => {
     };
   }, []);
 
+
+  const [displayedText, setDisplayedText] = useState("");
+  const phrases = [` ' Bengaluru '`, ` ' Ahmedabad '`, ` ' Mumbai '`];
+
+  useEffect(() => {
+    let currentPhraseIndex = 0;
+    let index = 0;
+    let typingTimeout;
+    let phraseTimeout;
+
+    const typeWriter = () => {
+      if (index < phrases[currentPhraseIndex].length) {
+        setDisplayedText(`${phrases[currentPhraseIndex].slice(0, index + 1)}`);
+        index++;
+        typingTimeout = setTimeout(typeWriter, 50);
+      } else {
+        phraseTimeout = setTimeout(() => {
+          index = 0;
+          currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+          typeWriter();
+        }, 1000);
+      }
+    };
+
+    if (searchQuery) {
+      setDisplayedText(`Search for ${searchQuery}`);
+      clearTimeout(typingTimeout);
+      clearTimeout(phraseTimeout);
+    } else {
+      typeWriter();
+    }
+
+    return () => {
+      clearTimeout(typingTimeout);
+      clearTimeout(phraseTimeout);
+    };
+  }, [searchQuery]);
+
+
+
   return (
     <>
       {isMobile ? (
@@ -116,34 +156,35 @@ const Search = ({ places, onResultClick }) => {
             <Menu />
           </div>
           <div
-            className="main-search absolute shadow-lg z-20 top-[14%] right-3 ml-[20px]"
+            className="w-full absolute shadow-lg z-20 top-[20%] "
             style={{
               backgroundColor: "transparent",
               background: "transparent",
             }}
           >
-            <div
-              className="flex items-center bg-white border-none search"
-              style={{
-                borderRadius: "20px 20px 20px 20px",
-              }}
-            >
-              <input
-                type="text"
-                placeholder="Search Ayatrio Maps"
-                className="searchTerm w-[17rem] h-10 border-white p-4 active:border-none focus:outline-none"
-                style={{
-                  borderRadius: "20px 20px 20px 20px",
-                }}
-              />
-              <div className="searchIcon absolute right-1 bg-white flex justify-center items-center w-[2rem]">
+            <div className="px-[20px] absolute  -top-[73px] right-0 left-0 bg-white pb-[10px]">
+              <div
+                className="flex items-center bg-zinc-100 border-none search w-full py-[8px] px-[9px] rounded-full h-[45px]"
+
+              >
+
                 <Image
                   src="/svg/icon/search.svg"
+                  alt="Search Icon"
                   width={20}
                   height={20}
-                  alt="search"
-                  className="text-xl text-gray-400"
+                  className="ml-[10px]"
                 />
+
+                <input
+                  type="text"
+                  placeholder={`Search for ${displayedText}`}
+                  className="searchTerm w-full text-[13px] ml-[12px]  bg-transparent rounded-full  active:border-none focus:outline-none"
+
+                />
+
+                <Image src={"/Ayatrio updated icon/camera.svg"} width={20} height={20} className="mr-[10px] ml-[10px]" />
+
               </div>
             </div>
 
@@ -199,11 +240,8 @@ const Search = ({ places, onResultClick }) => {
         </div>
       ) : (
         <div className="main-search absolute shadow-lg z-20 top-[14%] left-3">
-          <div
+          {/* <div
             className="flex items-center bg-white border-none search "
-            // style={{
-            //   borderRadius: "300px 300px  300px 300px",
-            // }}
           >
             <input
               type="text"
@@ -212,9 +250,8 @@ const Search = ({ places, onResultClick }) => {
               onChange={handleSearchChange}
               className="searchTerm w-[17rem] h-10 border-white p-4 active:border-none focus:outline-none rounded-full "
               style={{
-                borderRadius: ` ${
-                  searchQuery.length > 0 ? "0px 0px" : "0px 0px"
-                }`,
+                borderRadius: ` ${searchQuery.length > 0 ? "0px 0px" : "0px 0px"
+                  }`,
               }}
             />
             <div className="searchIcon bg-white flex justify-center items-center w-[1rem] mr-3">
@@ -226,14 +263,14 @@ const Search = ({ places, onResultClick }) => {
                 className="text-xl text-gray-400"
               />
             </div>
-          </div>
+          </div> */}
 
           {searchQuery && (
             <div
               className="dropdown-container custom-scrollbar bg-white w-[19rem] h-44 border border-gray-200 shadow-md  overflow-y-scroll "
-              // style={{
-              //   borderRadius: "0px 0px 10px 10px",
-              // }}
+            // style={{
+            //   borderRadius: "0px 0px 10px 10px",
+            // }}
             >
               {places.map((item, index) => (
                 <div

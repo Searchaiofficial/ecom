@@ -108,6 +108,8 @@ const Trending = () => {
 
 
 
+
+
   return (
     <div>
       <div className="mb-20 bg-white px-[15px]">
@@ -187,6 +189,7 @@ const Trending = () => {
                       specialPrice={product?.specialprice}
                       price={product.perUnitPrice}
                       desc={product.productTitle}
+                      shortDescription={product.shortDescription}
                       demandtype={product.demandtype}
                       imgSrc={product.images}
                       rating={product.ratings}

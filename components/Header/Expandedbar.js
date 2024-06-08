@@ -11,6 +11,9 @@ import Link from "next/link";
 import { useDebounceValue } from "usehooks-ts";
 // import search from "../../assets/icon/search.svg";
 // import mainlogo from "../../assets/ayatriologo.png";
+import { searchProductsRequest } from "../Features/search/searchSlice"
+import { STORE_MAP_DATA } from "@/constants/store-map-data";
+import { updateCoords, updateZoom } from "../Features/Slices/mapSlice";
 
 const Expandedbar = ({ searchText, onClose, onSearch }) => {
   const [searchQuery, setSearchQuery] = useState(searchText);
@@ -21,7 +24,14 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
   const [data, setData] = useState([]);
   const [isLoading, setLoading] = useState(false);
 
+  console.log(STORE_MAP_DATA)
+
+
+
+
   let cacheddata = JSON.parse(sessionStorage.getItem("cachedData"));
+
+  console.log(searchQuery)
 
   const fetchData = async () => {
     try {
@@ -36,6 +46,7 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
           `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/products?search=${searchQuery}`
         );
         // sessionStorage.setItem("cachedData", JSON.stringify(response.data));
+        console.log(response.data)
         sessionStorage.setItem("cachedSearchText", debouncedSearchQuery);
 
         setData(response.data);
@@ -78,6 +89,12 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
   }, [searchQuery])
 
 
+  useEffect(() => {
+    setSearchQuery("")
+    // onClose()
+  }, [])
+
+
 
   // console.log("cached data is ", JSON.parse(cacheddata));
   useEffect(() => {
@@ -117,6 +134,12 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
   const [overflowStyle, setOverflowStyle] = useState({});
 
   useEffect(() => {
+    dispatch(searchProductsRequest(searchQuery));
+    // console.log("search called");
+  }, [dispatch, searchQuery]);
+
+
+  useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 640) {
         setOverflowStyle({ overflowY: "auto" });
@@ -132,6 +155,50 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+  console.log(STORE_MAP_DATA)
+  console.log(path)
+  const india_zoom = 5;
+  const hotels_zoom = 11;
+  const [zoom, setZoom] = useState(india_zoom);
+  const [selectedCoords, setSelectedCoords] = useState({ lat: 20.5937, lng: 78.9629 });
+
+  // const handleResultClick = ({ lat, lng }) => {
+
+  //   if (lat && lng && lat !== null && lng !== null) {
+  //     console.log(lat, lng)
+  //     const latitude = parseFloat(lat);
+  //     const longitude = parseFloat(lng);
+  //     setSelectedCoords({ lat: 20.593, lng: 78.96 });
+  //     // console.log(selectedCoords);
+  //     if (selectedCoords.lat === 20.593 && selectedCoords.lng === 78.96) {
+  //       setZoom(india_zoom);
+  //     } else {
+  //       setZoom(hotels_zoom);
+  //     }
+  //   }
+  //   onClose()
+
+  // };
+
+  const handleResultClick = ({ lat, lng }) => {
+    onClose();
+    if (lat && lng && lat !== null && lng !== null) {
+      const latitude = parseFloat(lat);
+      const longitude = parseFloat(lng);
+      const newCoords = { lat: latitude, lng: longitude };
+      setSelectedCoords(newCoords);
+      dispatch(updateCoords(newCoords))
+      if (newCoords.lat === 20.593 && newCoords.lng === 78.96) {
+        setZoom(india_zoom);
+        dispatch(updateZoom(india_zoom))
+      } else {
+        setZoom(hotels_zoom);
+        dispatch(updateZoom(hotels_zoom))
+
+      }
+    }
+
+  };
 
 
   return (
@@ -179,28 +246,70 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
             }`}
         >
           <div
-            className={`items-start flex cursor-pointer pl-[24px] sm:pl-[0px] flex-col 
+            className={`items-start min-w-fit flex cursor-pointer pl-[24px] sm:pl-[0px] flex-col 
            
           `}
           >
-            <div className="dropdown-item sm:font-medium  pb-2 text-[14px]  text-[#707072]">
-              Popular Searches
-            </div>
-            {popularSearchProducts.map((item) => (
-              <Link
-                key={item._id}
-                className="dropdown-item sm:font-medium  py-2  text-[20px] font-medium "
-                href={`/product/${item.category.replace(/\s/g, "-")}/${item.subcategory.replace(/\s/g, "-")}`}
-                onClick={onClose}
-              >
-                {item.productTitle}
-              </Link>
-            ))
+            {
+              path === "/ayatrio-map" ? (
+                <>
+                  <div className="dropdown-item sm:font-medium  pb-2 text-[14px]  text-[#707072]">
+                    Popular Searches
+                  </div>
+                  <div className="dropdown-item sm:font-medium  py-2   text-[20px] font-medium ">
+                    Delhi
+                  </div>
+                  <div className="dropdown-item sm:font-medium  py-2  text-[20px] font-medium  ">
+                    Bengaluru
+                  </div>
+                  <div className="dropdown-item sm:font-medium  py-2   text-[20px] font-medium ">
+                    Hyderabad
+                  </div>
+                  <div className="dropdown-item sm:font-medium hidden sm:flex  py-2  text-[20px] font-medium ">
+                    Kolkata
+                  </div>
+                </>
+              )
+                :
+                (
+                  <>
+                    {/* <div className="dropdown-item sm:font-medium  pb-2 text-[14px]  text-[#707072]">
+                      Popular Searches
+                    </div>
+                    <div className="dropdown-item sm:font-medium  py-2   text-[20px] font-medium ">
+                      Engineering flooring
+                    </div>
+                    <div className="dropdown-item sm:font-medium  py-2  text-[20px] font-medium  ">
+                      Luxurious curtains
+                    </div>
+                    <div className="dropdown-item sm:font-medium  py-2   text-[20px] font-medium ">
+                      Wallpaper for home
+                    </div>
+                    <div className="dropdown-item sm:font-medium hidden sm:flex  py-2  text-[20px] font-medium ">
+                      Vinyl
+                    </div> */}
+
+                    <div className="dropdown-item sm:font-medium  pb-2 text-[14px]  text-[#707072]">
+                      Popular Searches
+                    </div>
+                    {popularSearchProducts.map((item) => (
+                      <Link
+                        key={item._id}
+                        className="dropdown-item sm:font-medium  py-2  text-[20px] font-medium "
+                        href={`/product/${item.category.replace(/\s/g, "-")}/${item.subcategory.replace(/\s/g, "-")}`}
+                        onClick={onClose}
+                      >
+                        {item.productTitle}
+                      </Link>
+                    ))
+                    }
+                  </>
+                )
             }
           </div>
 
           {
-            data &&
+            data && path !== "/ayatrio-map" &&
             <div className="grid sm:grid-cols-5 grid-cols-2 gap-4 sm:ml-32 px-[24px] lg:px-[0px] lg:mt-0 mt-10">
               {(!data) || isLoading ? (
                 <p className="flex flex-row justify-center items-center">
@@ -240,6 +349,55 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
                 ))
               )}
             </div>
+          }
+
+          {
+            path === "/ayatrio-map" && searchQuery && (
+
+              <div className="grid sm:grid-cols-5 grid-cols-2 gap-2 sm:ml-44 px-[24px] lg:px-[0px] lg:mt-0 mt-10 ">
+                {(!STORE_MAP_DATA) ? (
+                  <p className="flex flex-row justify-center items-center">
+                    No results found
+                  </p>
+                ) : (
+                  (STORE_MAP_DATA && STORE_MAP_DATA?.length > 0
+                    ? STORE_MAP_DATA
+                    : []
+                  ).map((item) => (
+                    <div >
+                      <div
+                        key={item.id}
+                        className="col-span-1"
+                        // onClick={() => handleRoute(item)}
+                        onClick={() => handleResultClick({
+                          lat: item.lat,
+                          lng: item.lng,
+                        })}
+                      >
+                        <div className="lg:w-[170px] w-[150px] h-[150px] lg:h-[170px]">
+                          <Image
+                            src={"https://bolt-gcdn.sc-cdn.net/3/Z2i0CKb1i5GtNvg8xNoP7.256.IRZXSOY?mo=GlgaFhoAGgAyAX06AQRCBgjm_5mrBlBJYAFaEERmTGFyZ2VUaHVtYm5haWyiARQIgAIiDwoCSAISACoHSVJaWFNPWaIBFAiaCiIPCgJIAxIAKgdJUlpYU09Z&uc=73"}
+                            width={170}
+                            height={170}
+                            alt="Product"
+                            className="w-[100%] h-[100%] object-fill"
+                          />
+                        </div>
+                        <div className="lg:text-[16px] text-[14px] font-medium text-black pt-2 ">
+                          {item.name}
+                        </div>
+                        <div className="lg:text-[12px] text-[12px]  font-normal py-[2px] line-clamp-2 text-[#707072]">
+                          {item.address}
+                        </div>
+                        <div className="lg:text-[12px] text-[12px]  font-semibold  text-black">
+                          {item.phone}
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            )
           }
         </div>
       </div>
