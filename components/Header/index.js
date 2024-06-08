@@ -198,6 +198,10 @@ function Header({ setIsHeaderMounted }) {
 
   const homeRoute = "/";
 
+  console.log(pathname)
+
+
+
 
   const [displayedText, setDisplayedText] = useState("");
   const phrases = pathname !== "/ayatrio-map" ? [` ' Wallpapers '`, ` ' Curtains '`, ` ' Blinds '`] : [` ' Bengaluru '`, ` ' Kolkata '`, ` ' Mumbai '`];;
@@ -236,7 +240,7 @@ function Header({ setIsHeaderMounted }) {
       clearTimeout(typingTimeout);
       clearTimeout(phraseTimeout);
     };
-  }, [searchQuery]);
+  }, [searchQuery, pathname]);
 
 
   const handleLoginClick = () => {

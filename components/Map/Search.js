@@ -162,9 +162,9 @@ const Search = ({ places, onResultClick }) => {
               background: "transparent",
             }}
           >
-            <div className="px-[20px] absolute  -top-[73px] right-0 left-0 bg-white pb-[10px]">
+            {/* <div className="px-[20px] absolute  -top-[73px] right-0 left-0 bg-white pb-[10px]">
               <div
-                className="flex items-center bg-zinc-100 border-none search w-full py-[8px] px-[9px] rounded-full h-[45px]"
+                className="flex items-center bg-zin c-100 border-none search w-full py-[8px] px-[9px] rounded-full h-[45px]"
 
               >
 
@@ -186,7 +186,7 @@ const Search = ({ places, onResultClick }) => {
                 <Image src={"/Ayatrio updated icon/camera.svg"} width={20} height={20} className="mr-[10px] ml-[10px]" />
 
               </div>
-            </div>
+            </div> */}
 
             <div
               className="dropdown-container bg-white hidden  w-[19rem] h-44 border border-gray-200 shadow-md overflow-auto"
