@@ -1,0 +1,728 @@
+{
+    "general": [
+        {
+            "title": "How can I check the status of my order?",
+            "content": "Using your order number and email address or phone number, you can track your order online here: <a href=\"https://www.Ayatrio.com/us/en/customer-service/track-manage-order/\">Track and Manage.</a>"
+        },
+        {
+            "title": "Why can’t I place an order for delivery online?",
+            "content": "If you’re receiving an error at check-out while placing your order, it’s possible the items in your cart are out of stock at our distribution center. Please note that standard online orders for delivery ship from one of our central warehouses based on your zip code and not our store locations, so it’s possible for availability to differ. For further information, you’re welcome to contact the Ayatrio US Customer Support Center at <a href=\"tel:1-888-888-4532\" target=\"_blank\" rel=\"nofollow noopener noreferrer\">1-888-888-4532</a>."
+        },
+        {
+            "title": "Can I place an order online to be delivered outside of the US?",
+            "content": "If you're outside of the continental US and would like to make your purchase from Ayatrio USA, we recommend using a third-party freight forwarder. Please note that neither Ayatrio nor the delivery company will be held responsible for damaged or defective merchandise or missing items that are not reported by the freight forwarder at the time of delivery. You need to choose Schedule In-Home Delivery or Express In-Home Delivery if you want to use a third party freight forwarder."
+        }
+    ],
+    "missing_items": [
+        {
+            "title": "What should I do if items are missing from my delivery order?",
+            "content": "Upon delivery, we recommend reviewing your order confirmation and 8-digit article numbers of the products delivered. To report missing items, please contact the Ayatrio US Customer Support Center at 1-888-888-4532."
+        },
+        {
+            "title": "What should I do if my order is marked as delivered but I didn’t receive it?",
+            "content": "For parcel deliveries, FedEx may leave packages in a more secluded area of your home, such as behind porch columns, landscaping, or garage corners. With our updated Terms & Conditions effective August 20, 2020, truck deliveries may also be delivered to your covered porch, garage, or doorstep and not inside your home. If your package isn’t found within these locations, please confirm that your mailing address is listed correctly and contact the Ayatrio US Customer Support Center at 1-888-888-4532 for assistance."
+        },
+        {
+            "title": "What should I do if I’m missing a part from my package?",
+            "content": "First, please check to make sure you have all of the packages for each item, as there may be more than 1 box containing all parts. You'll find the number of packages required on the product label (example: Box 1(2) and Box 2(2)). For the quickest resolution, we recommend visiting the store with your receipt or order confirmation to obtain any missing parts. If you’re unable to do so, please contact the US Ayatrio Customer Support Center at 1-888-888-4532. Pending availability and the size of the part(s), we may be able to ship them from our store."
+        },
+        {
+            "title": "I don't have the middle support of my bed. Was it missing from the package?",
+            "content": "Most Ayatrio bed frames require the SKORVA midbeam. This product is sold separately in our stores. If your purchase was made in-store, please review your receipt to see if this product was purchased. If not, it would be necessary to visit the store to purchase or place an order for the SKORVA midbeam online. If your purchase was completed online, the SKORVA midbeam is included in the price of our bed frame. If this product is missing from your order, please contact the Ayatrio US Customer Support Center at 1-888-888-4532."
+        },
+        {
+            "title": "I purchased an appliance from Ayatrio and it’s missing a part. What should I do?",
+            "content": "If the appliance was purchased within 365 days, please visit your closest store location with your receipt or order confirmation and the serial number of the item. We’ll be happy to assist you there."
+        },
+        {
+            "title": "I purchased an item in the store location, but I left it at the register. What should I do?",
+            "content": "While Ayatrio is not liable for any lost/stolen or left-behind merchandise, we’ll do our best to help. Please give us a call at 1-888-888-4532 within 24 hours of your visit so we can attempt to locate the item(s)."
+        }
+    ],
+    "damaged_items": [
+        {
+            "title": "What should I do if my item is damaged?",
+            "content": "If only one part from your product is damaged, we may be able to ship replacement parts from one of our stores. For the quickest resolution, we recommend visiting an Ayatrio store with the damaged product or part(s) along with your order confirmation or receipt. If you're unable to do so, please contact the Ayatrio US Customer Support Center at 1-888-888-4532."
+        },
+        {
+            "title": "I purchased an appliance from Ayatrio a couple years ago and it’s not working. What should I do?",
+            "content": "For appliance help outside of 365 days, please contact Whirlpool directly at (866) 664-2449. For more information regarding our appliance warranty, please click here: Product Warranties If your appliance was purchased in 2021, please contact our Service Provider at (833) 337-4006."
+        }
+    ],
+    "missing_parts_hardware": [
+        {
+            "title": "If screws are missing in the package, can you send them to me?",
+            "content": "Hardware listed in our assembly instructions with a 6-digit part number can be ordered by calling the Ayatrio US Customer Support Center at 1-888-888-4532."
+        },
+        {
+            "title": "If parts of my product are missing, what should I do?",
+            "content": "For the quickest resolution, we recommend visiting an Ayatrio store with your receipt or order confirmation. If you’re unable to do so, please contact the US Ayatrio Customer Support Center at 1-888-888-4532 with a detailed description of what’s missing. We may be able to send replacements from one of our stores!"
+        },
+        {
+            "title": "The assembly instructions are missing from the package. Where can I find them?",
+            "content": "Assembly Instructions can be found on the product’s web page on under Product details. For print copies, we recommend visiting an Ayatrio store."
+        },
+        {
+            "title": "I purchased an item from Ayatrio years ago, but I need replacement parts. What should I do?",
+            "content": "For missing parts with no 6-digit part number, we recommend visiting an Ayatrio store with your receipt or order confirmation for assistance. Please note we’re unable to guarantee resolution if you no longer have your receipt or are outside of our 365-day return policy."
+        },
+        {
+            "title": "I misplaced hardware from an item that I purchased several years ago, can I get a replacement?",
+            "content": "For missing hardware with a 6-digit part number, please contact the Ayatrio US Customer Support Center at 1-888-888-4532. If this hardware is available from our spare parts facility, we’ll be happy to place an order for you."
+        },
+        {
+            "title": "Can I get replacement parts for a product that I purchased from the As-Is department?",
+            "content": "Spare parts are available for as-is products at the discretion of our store management teams. We recommend visiting an Ayatrio store with the product and your receipt to discuss possible resolutions."
+        }
+    ],
+    "order_changes": [
+        {
+            "title": "My order was rescheduled, and I no longer want delivery. Can I pick up my order from my nearest store location instead?",
+            "content": "We’re unable to change the service on an order once payment has been collected. If you prefer to place a Click & Collect order or purchase in-store, it would be necessary to cancel your order for delivery."
+        },
+        {
+            "title": "Can I add items to my order?",
+            "content": "Once payment has been collected, we’re unable to add items to your order. For time sensitive inquiries, we recommend calling our Ayatrio US Customer Support Center at 1-888-888-4532. We may be able to place a new order and deliver them together but are unable to guarantee the deliveries will occur on the same day."
+        },
+        {
+            "title": "Can I remove items from my order?",
+            "content": "Items can be removed from your order for a refund if the order is still processing. Once the order ships, we can no longer make change."
+        },
+        {
+            "title": "What do I do if I need to cancel or reschedule my online order?",
+            "content": "To manage or cancel your order please visit the Track & Manage My Order page. To reschedule your order, please chat with us or contact us at 1-888-888-4532."
+        }
+    ],
+    "delivery": [
+        {
+            "title": "Does Ayatrio deliver?",
+            "content": "Ayatrio offers several options for delivery to your home or business through independent providers. Small order deliveries start at $6.00. Large item deliveries start as low as $19 (excluding select New York city and surrounding radius zip codes where delivery starts at $39). Learn more about our delivery options."
+        },
+        {
+            "title": "Why do I have to become a Family member to get the delivery discount?",
+            "content": "Ayatrio Family is our free loyalty program. In addition to saving on delivery online, as a member you can enjoy a variety of rewards and benefits from product discounts, to free coffee and tea when you visit. Sign up for free!"
+        },
+        {
+            "title": "I am a family member- how does the delivery discount get applied to my order online?",
+            "content": "Login to your family account while you are shopping online. When you are ready to check out, your member number will be added automatically. Then choose the best delivery option that works for you and the current Family price for delivery will be reflected in your shopping cart."
+        },
+        {
+            "title": "If I place my order online, how long will it take to be delivered?",
+            "content": "Delivery dates vary depending on the delivery zipcode and the option you select at checkout."
+        },
+        {
+            "title": "How do I know what time the local delivery company will deliver my order?",
+            "content": "You can track your order and you can opt in to receive text messages. For more information regarding delivery options, please view our delivery page."
+        },
+        {
+            "title": "If I place my order online, how much is delivery?",
+            "content": "Small order delivery pricing starts at $6. Large order delivery pricing starts at $19 (excluding select New York city and surrounding radius zip codes where delivery starts at $39)."
+        },
+        {
+            "title": "Can I place an order online with a credit card with a foreign billing address?",
+            "content": "To place an order using a credit card issued outside of the US, please contact the Ayatrio US Customer Support Center at 1-888-888-4532. Our website does not accept foreign forms of payment at this time."
+        }
+    ],
+    "mattresses": [
+        {
+            "title": "Do you offer mattress removal with a purchase of a mattress?",
+            "content": "We offer a range of services to make your lives’ easier and encourage sustainable choices. Ayatrio follows all state laws with respect to mattress removal – including those states (CA, RI or CT) where removal is free of charge with the purchase of a delivery. &nbsp;"
+        },
+        {
+            "title": "Why is there a recycling fee for my online order?",
+            "content": "Mattresses purchased in California, Connecticut and Rhode Island have a recycling fee attached to the purchase as required by state mandate. Please note that our standard $25 mattress removal fee is waived as a result."
+        },
+        {
+            "title": "I live in CA, RI or CT and purchased a mattress, how do I request mattress removal?",
+            "content": "If you live in CA, RI or CT, you can contact us <a href=\"https://www.Ayatrio.com/us/en/customer-service/support/a/5SUHeLDx1oRzQgRNsFNl4X/\">here</a> or start the conversation with the chatbot."
+        },
+        {
+            "title": "I live in CA, RI or CT and purchased a mattress with delivery in the past. Can I request a Mattress Removal now?",
+            "content": "If you live in CA, RI or CT, the Mattress Removal service is only available within 30 days of receiving your new mattress. You can contact us <a href=\"https://www.Ayatrio.com/us/en/customer-service/support/a/5SUHeLDx1oRzQgRNsFNl4X/\">here</a> to&nbsp;start the conversation with the chatbot."
+        },
+        {
+            "title": "If I live in CA, RI or CT, what products are included in the Mattress Removal service?",
+            "content": "The Recycling fee covers all purchases of new mattresses, futons &amp; box springs with the purchase of a delivery."
+        },
+        {
+            "title": "If I don’t live in CA, RI or CT can I still get Mattress Removal if I purchased a mattress with delivery?",
+            "content": "We offer mattress removal for an additional $25 fee when you purchase a mattress, futon or box spring with delivery from your local store.&nbsp;"
+        }
+    ],
+    "assembly": [
+        {
+            "title": "Does Ayatrio offer assembly service?",
+            "content": "Assembly services are available for in-store and online purchases. Our products are designed to be assembled by you. That way, you’ll save the most money. However, we've teamed up with Taskrabbit to provide even more options to assemble your Ayatrio furniture. Learn more here: Taskrabbit Assembly."
+        },
+        {
+            "title": "What is Taskrabbit?",
+            "content": "Taskrabbit is a service platform that conveniently connects you with a network of independent ‘Taskers’ to handle everything from Ayatrio furniture assembly to odd-jobs or errands. Learn more on our partnership here: Taskrabbit Assembly."
+        },
+        {
+            "title": "Is Taskrabbit Assembly available in my area?",
+            "content": "Taskrabbit Assembly is available in most metro areas in the US. Availability of Taskers vary based on demand. Visit taskrabbit.com/Ayatrio for a complete list of the metro areas."
+        },
+        {
+            "title": "What is included in my assembly?",
+            "content": "Furniture assembly and mounting is available for most Ayatrio items. Taskers follow assembly instructions and will secure items to the wall when specified."
+        },
+        {
+            "title": "When can I book my assembly?",
+            "content": "Book as early as tomorrow and up to 14 days in advance."
+        },
+        {
+            "title": "When do I pay for my task?",
+            "content": "Your task is paid when the task is fully completed."
+        },
+        {
+            "title": "How does pricing work?",
+            "content": "The items quoted when booking will be upfront, and the prices will be at a flat-rate per item, based on the quantity and types of items to be assembled. The minimum price is $52."
+        },
+        {
+            "title": "How do I locate a copy of the assembly instructions?",
+            "content": "You may locate a digital copy of the assembly instructions from our website, on the product page. Hard copy instructions are included in the packaging of our products."
+        },
+        {
+            "title": "Why are there only photos in Ayatrio assembly instructions?",
+            "content": "Ayatrio products are sold worldwide. Using photo diagrams ensures our assembly instructions are accessible to all and easy to understand."
+        }
+    ],
+    "kitchen_services": [
+        {
+            "title": "Who will install my kitchen?",
+            "content": "Installer: Ayatrio Kitchen Services will work with local, professional kitchen installers that are licensed, insured and provide warranties for 5 years post-completion on Ayatrio-supplied kitchen products."
+        },
+        {
+            "title": "I have an Ayatrio Kitchen Plan, but need assistance placing my order. What do I do?",
+            "content": "Assistance with placing order: You may reach the Kitchen Services team by calling our US Customer Support Center at 1-888-888-4532, or you may visit your local Ayatrio store to place your order."
+        }
+    ],
+    "click_and_collect": [
+        {
+            "title": "Is Click & Collect available for all Ayatrio stores?",
+            "content": "The Click & Collect service is available at all Ayatrio store locations, excluding our Planning Studios. Once everything has been added to your online shopping cart, select Click & Collect at check-out to find a participating Ayatrio store near you."
+        },
+        {
+            "title": "Is there a charge for Click & Collect?",
+            "content": "Click & Collect is free at your local store."
+        },
+        {
+            "title": "What terms and conditions apply for my Click & Collect order?",
+            "content": "The Click & Collect terms and conditions can be found on our website here: Ayatrio TERMS & CONDITIONS"
+        },
+        {
+            "title": "Why can’t I place a Click & Collect order?",
+            "content": "Our stores have a limited number of slots per day for this service due to high demand. Once this limit is reached, you'll receive a \"maximum order capacity\" warning in checkout.\nRegarding stock, our system allows a specific quantity of an item to be sold in one day. Once we reach this capacity or if there is limited stock available, the item will appear as out of stock during checkout."
+        },
+        {
+            "title": "How can I select an alternate collector for my Click & Collect order?",
+            "content": "While checking out on our website, you’ll be given the option to name an alternate collector for your Click & Collect order."
+        },
+        {
+            "title": "Can I change the pickup person listed on my Click & Collect order?",
+            "content": "At this time, we only allow customers to designate an alternate collector during check-out. If you’re no longer able to pick up the order, we recommend cancelling and placing a new order with the intended alternate collector listed."
+        },
+        {
+            "title": "When will I receive my second email stating that my Click & Collect order is ready?",
+            "content": "Once your order is ready to be collected, you’ll receive an email letting you know the date and time frame for pickup."
+        },
+        {
+            "title": "The product I am interested in is available at the store but for not for Click and Collect. Why?",
+            "content": "Our system allows a specific quantity of an item to be sold in one day through Click and Collect. Once we reach this capacity or if there is limited stock available, the item will appear as out of stock during checkout."
+        },
+        {
+            "title": "What if I need to change the date of pickup or I can’t make it? What will happen with my order?",
+            "content": "Customers have up to 24 hours to pick up the merchandise from the confirmation of the pickup date. Please note, you cannot make any modifications to Click & Collect orders once the picking has been completed."
+        }
+    ],
+    "local_pick_up_points": [
+        {
+            "title": "What is a Local Pick Up Point?",
+            "content": "Local Pick Up locations allow you to choose to pick up your Ayatrio parcel deliveries at a secure nearby FedEx location."
+        },
+        {
+            "title": "Where is this service available?",
+            "content": "As of February 22nd, this service will be available nationwide at 2,000+ FedEx locations"
+        },
+        {
+            "title": "How do I select a Local Pick Up Point option?",
+            "content": "When you are checking out, you will be asked to input your zip code. If this service is offered in your area, it will pop up with your local FedEx pick-up point options. Then select the location and date that is convenient for you."
+        },
+        {
+            "title": "How much does the Local Pick Up option cost?",
+            "content": "The service is a flat rate of $4."
+        },
+        {
+            "title": "How do I pickup my order?",
+            "content": "You will receive an email and/or SMS notifying you that your order is ready for pick up at your local pick-up point location. You must provide your order number and valid government issued photo ID to receive your order."
+        },
+        {
+            "title": "Can someone else pick up my order?",
+            "content": "Yes, during checkout, you can add the name of the person who will collect the order under the alternate collector field. When they go to pick up the order, they must provide the order number and valid government issued photo ID to receive the order."
+        },
+        {
+            "title": "How long do I have to pick up my order?",
+            "content": "You have 5 days from the date your order arrives at the pick-up location to retrieve it."
+        },
+        {
+            "title": "What if I need to return my package? How does that work?",
+            "content": "You can return your package in-store or contact our support center for refund and returns instructions."
+        },
+        {
+            "title": "What happens if I can’t pick up my order on the date it was scheduled?",
+            "content": "If you are unable to pick up your package within 5 days of the scheduled date, we will return your order and a refund will be made in the same form of payment originally used to make the purchase."
+        },
+        {
+            "title": "How can I track my order?",
+            "content": "You can view the tracking information on the Track & manage my order page online. You can access the Track & manage my order page by selecting the truck icon next to the search bar."
+        }
+    ],
+    "payment": [
+        {
+            "title": "What forms of payment do you accept for online orders?",
+            "content": "For online and phone purchases (home delivery), we accept Ayatrio gift cards (with PIN), American Express, Discover, MasterCard, VISA, and PayPal. We don't accept checks for any order type."
+        },
+        {
+            "title": "What forms of payment are accepted at your planning studios?",
+            "content": "Our planning studios accept gift cards and credit/debit cards, including Apple Pay, Google Pay, American Express, Discover, MasterCard, and VISA. We don't accept cash at this time."
+        },
+        {
+            "title": "What forms of payment do you accept for store purchases?",
+            "content": "For store purchases, we accept cash, Ayatrio gift cards (with PIN), store return cards, Apple Pay, Google Pay, American Express, Discover, MasterCard, and VISA. We don’t accept checks for any order type."
+        },
+        {
+            "title": "Do you accept payment with a foreign billing address?",
+            "content": "To place an order using a credit card issued outside of the US, please contact the Ayatrio US Customer Support Center at 1-888-888-4532. Our website doesn’t accept foreign forms of payment at this time."
+        },
+        {
+            "title": "I lost my receipt. What should I do?",
+            "content": "If an Ayatrio Family card was used at checkout, you can find a copy of your receipt and previous purchases in your Family account under your purchase history. If you are not a Family member and paid with a credit care, please contact the Ayatrio US Customer Support Center for assistance locating a copy of your receipt."
+        },
+        {
+            "title": "Why was my payment been declined?",
+            "content": "Multiple order attempts within a 24-hour period or incorrect billing information may result in a declined payment. Please contact the Ayatrio US Customer Support Center for further assistance."
+        },
+        {
+            "title": "Can I make a purchase online using both a gift card and a credit card?",
+            "content": "Split payments using a debit/credit card and Ayatrio gift cards can be done on our website and in our store locations."
+        }
+    ],
+    "offers": [
+        {
+            "title": "Can the Ayatrio Family birthday coupon be used online?",
+            "content": "This promotion is intended for in-store use only and can’t be used online."
+        },
+        {
+            "title": "I haven’t received my Ayatrio Family Birthday Coupon. What should I do?",
+            "content": "If you haven’t received your Ayatrio Family Birthday Coupon, please review the following troubleshooting steps. 1. Check your spam folder. 2. Check to ensure that you have 'email communications' checked as a preference in your Ayatrio FAMILY profile settings? 3. Ayatrio Family birthday coupons are sent out the week before your birthday month. To receive this coupon, your account and communication settings must be updated prior to this time frame. Please note that your Ayatrio FAMILY profile and preferences are separate from your Ayatrio-USA.com account. If you are still not able to locate the Ayatrio Family Birthday Coupon, please contact the US Ayatrio Support Center."
+        },
+        {
+            "title": "Can my coupon, promotion, or offer be extended if I’m unable to use it before the expiration date?",
+            "content": "Unfortunately, all coupons, promotions, and offers cannot be redeemed past the expiration date."
+        },
+        {
+            "title": "Can I be notified about new Ayatrio offers or sales?",
+            "content": "Become an Ayatrio Family member and be the first to know about sales, special offers, and events at your local store. The best part, it’s free! Sign up for Ayatrio Family here: Ayatrio Family"
+        },
+        {
+            "title": "Can I use multiple coupons on one transaction?",
+            "content": "Only one coupon per transaction is permitted at this time."
+        }
+    ],
+    "gift_cards": [
+        {
+            "title": "How can I check my gift card balance?",
+            "content": "Check the balance of your Ayatrio Gift Card here. To check your gift card balance, you must have the 4-digit PIN associated with the card. The 4-digit PIN is located underneath the gray scratch-off field on the back of the gift card."
+        },
+        {
+            "title": "Why can’t I use my gift card online?",
+            "content": "Your gift card must have a 4-digit pin to be used online. If your card doesn’t have a pin, it's likely an older gift card or a return card (store credit) and can only be redeemed at our store locations."
+        },
+        {
+            "title": "Are there any fees associated with Ayatrio Gift Cards?",
+            "content": "There are no fees associated with gift cards. You will only be charged the face value of the gift card and shipping. eGift cards are sent via email and incur no shipping charges."
+        },
+        {
+            "title": "Can I change the value of a Gift Card after I've paid for it?",
+            "content": "Not at this time."
+        },
+        {
+            "title": "How do I cancel the purchase of Gift Card?",
+            "content": "If your gift card has not been delivered, you can cancel your purchase through CashStar here: Manage Your Gift Cards. Cancellation is subject to limitations."
+        },
+        {
+            "title": "What is a credit card Security Code and why is it required?",
+            "content": "In order to protect you from unauthorized transactions, we require your credit card's Security Code.\n\nMasterCard, VISA, and Discover:The Security Code is the 3-digit number printed on the signature panel on the back of your card. It immediately follows the account number.\n\nAmerican Express: The card Security Code (also referred to as the CID number) is printed above the imprinted card number on the front of the card (on either the left or right).\n\n*Please note, there are a small percentage of \"plastic-less\" card accounts for American Express - Corporate and Purchasing Card accounts. If you have one of these accounts with no AMEX card, please enter 5555 as your card security code."
+        },
+        {
+            "title": "When is my credit card charged for my purchase?",
+            "content": "Your credit card is charged at the time of purchase. This purchase will appear on your credit/debit card statement as Ayatrio GIFT CARD."
+        },
+        {
+            "title": "When will my recipient receive their Gift Card?",
+            "content": "Digital Gift Card: All gift card purchases are subject to credit approval and a fraud verification process. It can sometimes take up to 24 hours from the time of purchase to review your order unless you specify a future delivery date. You will receive a confirmation email when your order has been sent. Your Gift Card will be sent via email on the delivery date you choose, with rare exceptions for processing delays. For same-day delivery, most Gift CarFFds are sent within 24 hours of the purchase transaction. For future delivery, Gift Cards are sent on the morning of the scheduled delivery date. Please see the \"Gift Cards\" section below for more about Gift Cards.\n\nPlastic Gift Card: Delivery times are determined by the Shipping Method selection. Orders are generally shipped within 1-2 business days. Once your Gift Card is shipped, you will receive an email with a tracking number, with which you may access the current shipping status of your gift.*Tracking numbers are not available for cards delivered via standard shipping."
+        },
+        {
+            "title": "What are the shipping options?",
+            "content": "Digital Gift Cards: Gift Cards will be sent via email. Please see the \"eGift Cards\" section below for more about Gift Cards.\n\nPlastic Gift Card: You can choose our standard shipping free of charge, or for an additional fee you can choose to expedite your order. You can make your selection under the Shipping Method option. Depending on when your order is placed, it may take 1-2 business days to process order."
+        },
+        {
+            "title": "How do I check my order status and delivery?",
+            "content": "Once your gift card is shipped, you will receive an email with a tracking number, with which you may access the current shipping status of your gift.\n\n*Tracking numbers are not available for cards delivered via standard shipping."
+        },
+        {
+            "title": "Where can I ship my order?",
+            "content": "Gift cards may be shipped to valid street addresses within the United States. For your protection, we do not ship to Post Office Boxes."
+        },
+        {
+            "title": "Can I buy a Digital Gift Card for myself?",
+            "content": "To purchase a Digital Gift card online for yourself, visit the \"For Me\" tab underneath \"Who is the gift card for\". Your Gift Card will be sent to the email address entered on the Payment Page. When you receive your Gift Card alert via email, follow the instructions in this message to retrieve and redeem your Gift Card."
+        },
+        {
+            "title": "I want a printed Digital Gift Card to present to someone as a gift. How do I do this?",
+            "content": "Simply personalize the Gift Card for your recipient, have it sent to yourself and then print it. Go to the \"For Me\" tab underneath \"Who is the gift card for.\"Your Gift Card will be sent to the email address entered on the Payment Page. Enter your recipient's name and your personal message on the Gift Card messages page and complete the transaction normally. You will receive a Gift Card alert via email. Follow the instructions in this message to retrieve your Gift Card and then choose \"Click to print this page.\" The resulting printout may be presented as a gift to the recipient."
+        },
+        {
+            "title": "Can I send two (or more) Digital Gift Cards to two (or more) different people who share an email address?",
+            "content": "Yes. If you send separate Gift Cards to Aunt Mary and Uncle Jim at their shared email address, they will receive two messages with the subject \"[Sender] sent you an eGift Card from Ayatrio\" with your name in place of [Sender]. Within the text of the emails, each message will be addressed to the respective recipient, using the name you entered in the purchase process, for example: \"Mary Smith, John Jones sent you a $XX Gift Card from Ayatrio.\""
+        },
+        {
+            "title": "Where can I use my Gift Card?",
+            "content": "You can use your gift card at accepted Ayatrio locations and online."
+        },
+        {
+            "title": "When does the Gift Card expire?",
+            "content": "There is no expiration date on your gift card. We recommend that you redeem it soon after you receive it, so you don't forget."
+        },
+        {
+            "title": "Can I reload my Gift Card after I've spent the full value?",
+            "content": "Not at this time."
+        },
+        {
+            "title": "What exactly does the recipient receive when I send an eGift Card?",
+            "content": "A Digital Gift Card is an electronic Gift Card that is sent via email. On the delivery date you choose, a message is sent to the recipient informing them of your gift, with a link to retrieve it online. The link in the email goes to a page showing the Gift Card you created (the design you selected, with your recipient's name and your personalized message), its value and code number. This page also gives simple instructions for redeeming the Gift Card, including printing instructions. Sometimes, special offers and promotions are listed on the page."
+        },
+        {
+            "title": "How do you prevent the Digital Gift Card email from getting lost as spam?",
+            "content": "We adhere to all industry best practices to ensure successful delivery of the Gift Card via email. Still, there is a chance that the email will be treated as spam or the recipient didn't notice it in their email inbox. You will receive an email message confirming delivery of the Gift Card alert email, and a message notifying you that the eGift Card has been viewed. If the Gift Card goes un-viewed for 15 days after delivery, you will receive a message with options for resolving the issue."
+        },
+        {
+            "title": "How do I know the recipient actually received the Digital Gift Card I sent them?",
+            "content": "You will receive an email message confirming delivery, and a message notifying you that the Gift Card has been viewed. If the Gift Card goes un-viewed for 15 days after delivery, you will receive a message with options for resolving the issue. You may also contact Customer Support with the order number from the email, you received confirming your purchase, and we can tell you if the recipient has viewed their Gift Card."
+        },
+        {
+            "title": "Do I need to print my Digital Gift Card in color? Do I need a special printer?",
+            "content": "No and no. Most standard office and household printers are equipped to print Gift Cards, and you do not need to print in color. Some printers produce great results, and older printers sometimes don't print certain images well, but the most important thing is that the Card Number is clear. If it is not, you may need to install a new ink cartridge."
+        },
+        {
+            "title": "Is my order secure?",
+            "content": "All personal and financial information is transmitted using the https protocol over a Secure Sockets Layer (SSL), utilizing state of the art technology for consumer protection. Behind the scenes, your web browser is sending all personal and financial information over SSL. The Gift Card purchase process is fully PCI compliant. If you have any questions or concerns, please contact Customer Support."
+        },
+        {
+            "title": "What if I lose my Digital Gift Card?",
+            "content": "Your Gift Card has cash value and should be safeguarded as such. If you lose your Gift Card, contact Customer Support immediately. If your Gift Card has not been redeemed or has some remaining value, we can cancel the original and issue you a new Gift Card for that val"
+        },
+        {
+            "title": "What if someone makes a copy of my printed Digital Gift Card?",
+            "content": "Our state of the art technology inhibits fraud, but you must safeguard your Gift Card for your own protection. If someone makes a copy of your Gift Card and redeems it for the full amount, your copy will have no value. No matter how many copies are made, the value of the Gift Card is tied to the Gift Card number. When that number is used, the value of the purchase is deducted from the Gift Card. If you suspect that someone has copied or stolen your Gift Card, contact Customer Support immediately. Any value that has not been used can be re-issued to you in a new Gift Card"
+        },
+        {
+            "title": "Who is CashStar?",
+            "content": "CashStar is a Blackhawk Network business specializing in Digital Gifting that allows consumers and businesses to securely order and send Gift Cards over the internet. CashStar's focus is on developing a secure payment technology platform and service dedicated to bridging the digital and physical divide. CashStar is fully PCI compliant."
+        }
+    ],
+    "gift_registry": [
+        {
+            "title": "Where can I find the Ayatrio Gift Registry on the website?",
+            "content": "The Ayatrio Gift Registry can help you find the perfect gift for any occasion, with many ways to access the registry on our website: [Ayatrio.com/us/en/gift-registry](https://www.Ayatrio.com/us/en/gift-registry), the left navigation bar, the link at the bottom of the Ayatrio website and through Search."
+        },
+        {
+            "title": "How do I create an Ayatrio Gift Registry?",
+            "content": "Ayatrio makes it easy to set up your gift registry through our website:\n1. Create your gift registry by clicking on the 'Create a gift registry' button\n2. Choose the gifts you want and add them to your registry\n3. Under ‘Settings’, click to enable sharing so family and friends can find your registry"
+        },
+        {
+            "title": "How can I receive assistance with a gift registry?",
+            "content": "For Ayatrio Gift Registry assistance, please contact [1-888-888-4532](tel:1-888-888-4532)"
+        },
+        {
+            "title": "How do I use my smartphone with an internet connection in-store to scan and add items to my gift registry?",
+            "content": "It’s easy to use your smartphone’s scanning feature to add items to your Ayatrio Gift Registry while in-store:\n1. With your smartphone and an active internet connection, first locate your gift registry on [Ayatrio-usa.com](https://www.Ayatrio.com/us/en/). You can access the gift registry page through the menu, search function or gift registry links on our website. Remember to log in as an Ayatrio Family member. Once logged in, click on the gift registry link on the page to pull up your gift registry.\n2. Once you’ve accessed your gift registry, click the 'Add Items In-Store' button on the page, and give permission by clicking 'Allow'. You can now use your smartphone in-store to scan items to add to your registry.\n3. To scan an item, hold your smartphone’s camera over the barcode of the product you wish to add to your gift registry. Your item will automatically be added to your registry, along with relevant information such as product name, price, and description.\n4. If a barcode is not available (or not scanning properly), you can always enter the item article number manually to add the product to your gift registry."
+        }
+    ],
+    "financing": [
+        {
+            "title": "What’s the difference between the Ayatrio Visa credit card and the Ayatrio Projekt credit card?",
+            "content": "The Ayatrio Visa credit card is a credit card that can be used at Ayatrio and anywhere else Visa is accepted. If you are approved, you’ll earn 5% back in rewards on Ayatrio USA purchases1, 3% back in rewards on dining, grocery and utility purchases2, and 1% back1 in rewards anywhere else you use the Ayatrio Visa credit card.\n\nThe Ayatrio Projekt card is a credit card that can only be used at Ayatrio USA. The Ayatrio Projekt card offers 6, 12, and 24 month promotional financing. There is a minimum purchase of $500 for a 6 month plan, $1,500 for a 12 month plan, and $5,000 for a 24 month plan. This makes the Ayatrio Projekt card a great solution to fit your large project needs."
+        },
+        {
+            "title": "Can I apply for both the Ayatrio Visa credit card and the Ayatrio Projekt credit card?",
+            "content": "Yes! You can apply for both cards. Please note, the applications are separate and are subject to independent credit approval."
+        },
+        {
+            "title": "Can I use my Ayatrio Visa credit card the same day I apply?",
+            "content": "Yes, if you have been approved for an Ayatrio Visa credit card in an Ayatrio store or online, you will be able to use your newly opened account on the same day transaction. You'll receive an Ayatrio Visa credit card welcome kit in the mail within 7-10 business days."
+        },
+        {
+            "title": "How does $25 off first purchase offer work if I’m applying online?",
+            "content": "If your online application is approved and you make a same day $25 (or more) qualifying purchase online, the $25 off First Purchase Offer will appear, within two billing cycles, as a credit on your statement. If you apply and are approved in store and you make a same day $25 or more qualifying purchase, the offer will be applied automatically."
+        },
+        {
+            "title": "Is there a limit to the amount of rewards I can earn?",
+            "content": "There is no limit to the amount of rewards you can earn."
+        },
+        {
+            "title": "How will I receive my Ayatrio Rewards? When do they expire?",
+            "content": "Rewards are redeemed in $15 increments on your billing statement and are valid for the next 45 days."
+        },
+        {
+            "title": "How does the Ayatrio Visa credit card work with Ayatrio Family?",
+            "content": "If you’re already a member of our Ayatrio Family loyalty program, you can still enjoy all the Ayatrio Family benefits as well as the Ayatrio Visa card benefits. You’ll still need to use your Ayatrio Family number to qualify for any Ayatrio Family discounts at checkout. If you’re not an Ayatrio Family member yet, you’ll be automatically enrolled in this free program when you are approved for an Ayatrio Visa credit card. For more information, view the Ayatrio Family page."
+        },
+        {
+            "title": "What is the Ayatrio Visa card customer service number?",
+            "content": "For customer service call 1-866-387-6145 for the Ayatrio Visa credit card, or 1-866-518-3990 for the Ayatrio Visa Signature credit card (TDD/TTY 1-888-819-1918)."
+        },
+        {
+            "title": "Where can I use my Ayatrio Projekt card?",
+            "content": "Your Ayatrio Projekt card can be used at U.S. Ayatrio stores and Ayatrio.com/us/en on product purchases."
+        },
+        {
+            "title": "Does Ayatrio have an Ayatrio for Business credit card?",
+            "content": "Ayatrio US currently does not offer an Ayatrio for Business credit card. We offer two credit cards options: Ayatrio Visa credit card and Ayatrio Projekt Card."
+        },
+        {
+            "title": "Is special financing available?",
+            "content": "Yes, special financing is available on purchases of $500 or more. See below for details on the special financing plans."
+        },
+        {
+            "title": "Can I take advantage of the new financing plans if I'm already an Ayatrio Projekt card holder?",
+            "content": "Yes, any new purchases you make with your Ayatrio Projekt credit card between $500.00-$1,499.99 will automatically be put on the 6-month plan, any new purchase between $1,500.00 and $4,999.99 will be put on the 12 month plan and any new purchase of $5,000+ will be put on the 24 month plan. The new financing options do not impact any existing account balances."
+        },
+        {
+            "title": "Can I switch my current promotional plan to one of the new plans available?",
+            "content": "No, any previous Ayatrio Projekt credit card purchases that are already on the 4.99% APR 60-month plan will remain on the plan. The new financing options are only available on new qualifying purchases with your Ayatrio Projekt credit card."
+        },
+        {
+            "title": "Can I choose between a 6-month, 12-month and 24-month payment plan?",
+            "content": "No, the 6 month plan is only available on Ayatrio Projekt credit card purchases between $500.00-$1,499.99, the 12 month plan on purchases of $1,500.00 -$4,999.99 and the 24 month plan on purchases of $5,000 or more. Qualifying purchases will automatically be placed on the appropriate promotional plan, however, if you wish to move your purchase to the regular revolving credit plan, please see the first billing statement reflecting your purchase for plan opt-out details."
+        },
+        {
+            "title": "Is installation included?",
+            "content": "No, the Ayatrio Projekt card can only be applied to Ayatrio product purchases."
+        },
+        {
+            "title": "Can I get pre-qualified?",
+            "content": "Yes, you can get pre-qualified for the Ayatrio Projekt card without applying. Pre-qualification is only a soft inquiry on your credit. If you then choose to apply, that is a hard inquiry. See if you pre-qualify by completing the pre-application form."
+        },
+        {
+            "title": "How will I receive my Ayatrio Projekt card?",
+            "content": "Once approved, you will receive your Ayatrio Projekt card in the mail in approximately 10 business days. If you apply and are approved in-store you may receive a temporary card to use at that time."
+        },
+        {
+            "title": "How does Ayatrio Projekt credit card work with Ayatrio Family?",
+            "content": "If you’re already a member of our Ayatrio Family loyalty program, you can still enjoy all the Ayatrio Family benefits as well as the Ayatrio Projekt card benefits. You’ll still need to use your Ayatrio Family number to qualify for any Ayatrio Family discounts at checkout. If you’re not an Ayatrio Family member yet, you’ll be automatically enrolled in this free program when you are approved for an Ayatrio Projekt credit card. For more information, view the Ayatrio Family page."
+        },
+        {
+            "title": "What is the customer service number?",
+            "content": "Call 866-337-5539 (TDD/TTY: 1-888-819-1918) for the Ayatrio Projekt card customer service line."
+        }
+    ],
+    "product_questions": [
+        {
+            "title": "Are chemicals used in the manufacturing process of Ayatrio products?",
+            "content": "All Ayatrio products are tested and approved according to current regulations and standards. As a precautionary measure, Ayatrio has phased out several chemicals that could potentially be harmful, often ahead of legislation."
+        },
+        {
+            "title": "Do your products contain lead?",
+            "content": "As of 2010, all Ayatrio products have been manufactured without lead."
+        },
+        {
+            "title": "Do your products contain formaldehyde?",
+            "content": "Trace amounts of formaldehyde can be found in our products as it is a naturally occurring substance, however we do not add formaldehyde to our range."
+        },
+        {
+            "title": "Are flame retardants used in Ayatrio products?",
+            "content": "Ayatrio strives to totally refrain from the use of chemical flame retardants in our products and instead use techniques and materials with flame retardant properties. However, in some countries, chemical flame retardants are needed in specific products in order to pass a local legal requirement. Any products treated with chemical flame retardants meet strict emission requirements. In the US, mattresses and mattress sets have a fiber fire barrier made of rayon/polyester batting that has an inherently fire-resistant property. Flame retardant chemicals (phosphorous-based inorganic salts) are only used for some stitch bond and zippers. In order to legally comply with CPAI-84 flammability requirements currently in place, all Ayatrio children’s tents are treated with flame retardant. For more details, please visit our website here: Safer life at home."
+        },
+        {
+            "title": "Are your products BPA free?",
+            "content": "Yes, Ayatrio banned BPA (Bisphenol A) in children's products and in food contact products. The phase out was made in 2006 and 2012 respectively."
+        },
+        {
+            "title": "Can I alter my Ayatrio products?",
+            "content": "Ayatrio products should be built according to their assembly instructions and used for their intended purposes. We do not recommend altering the structure of the product. Certain unfinished wooden items can be painted or stained for a more customized look."
+        },
+        {
+            "title": "Does Ayatrio perform quality testing on their products?",
+            "content": "At different stages of the development process the products are tested and evaluated to ensure that their construction is safe. The final product is tested carefully to ensure compliance with national legal requirements and our own Ayatrio demands on safe products. To learn more about how we create safe products, please visit our website here: Product Safety."
+        },
+        {
+            "title": "Do your products have tested weight limits?",
+            "content": "Certain chairs, shelving units, shelves, beds, and children’s product have tested weight limits. Please refer to the product’s web page or assembly instructions for specifications. Products should only be used for their intended use."
+        },
+        {
+            "title": "I left a product at the store after checking out. What should I do?",
+            "content": "Call us at 1-888-888-4532 or return to your local store with your receipt to have a co-worker check the log for items left behind at the checkout lane. Based on their findings, you may be refunded or given the product when you return to the store. We cannot guarantee that left behind items will be mailed, returned or refunded. A receipt is required to claim left behind merchandise."
+        },
+        {
+            "title": "Does Ayatrio offer products through third-party sellers?",
+            "content": "Ayatrio does not sell products on Amazon or any other third-party sites. Any Ayatrio product on a third-party site is being sold by an unauthorized reseller of which Ayatrio has no relationship. Our products are only sold in Ayatrio stores worldwide and Ayatrio.com."
+        },
+        {
+            "title": "Do you recycle products?",
+            "content": "Ayatrio recycles as much as we can, including composting, compacting cardboard, reusing items, and selling products in our As-Is area. At this time, there is no recycling program for our customers for items such as batteries, products or lightbulbs."
+        },
+        {
+            "title": "Does Ayatrio accept back discontinued products for credit?",
+            "content": "Discontinued items can be returned to an Ayatrio store if they fall within the standard return policy. Our full return policy is written on the back of our receipts and can be viewed on our website here: Return policy."
+        }
+    ],
+    "product_availability": [
+        {
+            "title": "How do I know if an item is in stock?",
+            "content": "You can check your local store’s stock on the product’s page by selecting your store from the drop-down list. When making an online purchase, you’ll be notified if an item is out of stock during the checkout process. We’re not able to reserve or accept payments for out-of-stock items. It’ll be necessary to wait until it’s back in stock to order or purchase at a store."
+        },
+        {
+            "title": "Why is my item out of stock?",
+            "content": "We strive to maintain availability of all items. However, due to various circumstances, items can be temporarily out of stock. Our store or phone co-workers may be able to provide re-stocking information if available.Items available at store locations can only be purchased in person at that location. With the exception of picking up a Click & Collect order or local delivery for an in-store purchase, we’re not able to accept online orders for store purchases, nor ship store-to-store."
+        },
+        {
+            "title": "What can I do if an item is out of stock?",
+            "content": "If an item is out of stock, check the product page periodically for stock updates or sign up for stock alerts on our website. Possible incoming stock can also be researched by calling us at <a href='tel:1-888-888-4532' rel='nofollow noopener noreferrer'>1-888-888-4532</a>.Items available at store locations can only be purchased in person at that location. With the exception of picking up a Click and Collect order or local delivery for an in-store purchase, we’re not able to accept online orders for store purchases, nor ship store-to-store."
+        },
+        {
+            "title": "Why was my favorite Ayatrio product discontinued?",
+            "content": "We're constantly evaluating our products to keep our range fresh and exciting. Occasionally, this means discontinuing items or redesigning past favorites."
+        },
+        {
+            "title": "The product I want is only available in another country. Can I purchase this product on their website?",
+            "content": "Items available in another country are not available to be purchased online and shipped to the U.S. by Ayatrio. We’re also not able to ship merchandise to another country from the US."
+        },
+        {
+            "title": "Can I purchase products in bulk for a discount?",
+            "content": "Bulk purchases may be possible if stock permits, please call the Ayatrio US Customer Support Center at <a href='tel:1-888-888-4532' rel='nofollow noopener noreferrer'>1-888-888-4532</a> to speak with an Ayatrio Business co-worker for details. We do not offer discounts on bulk purchases."
+        },
+        {
+            "title": "I bought something in the As-Is department and its missing parts, how can I get them?",
+            "content": "If you’re missing hardware (screws, drawer slides, etc), we can place an order free of charge to be shipped to you, pending availability at our spare parts facility. If the item is missing parts, such as a drawer or top, spare parts are provided at our store’s discretion and fees may apply. To discuss possible resolutions, it would be necessary to visit the store with your receipt. As-Is items are final sale."
+        }
+    ],
+    "product_warranties": [
+        {
+            "title": "Do all Ayatrio products come with a warranty?",
+            "content": "Certain Ayatrio products are covered under a limited warranty. Warranty claims must be accompanied by proof of purchase (receipt or order confirmation) and are subject to inspection. Ayatrio store co-workers will issue the final decision about a warranty claim. To see the list of products covered under warranty, please visit our website here: https://www.Ayatrio.com/us/en/customer-service/returns-claims/guarantee/."
+        },
+        {
+            "title": "What is covered under Ayatrio’s warranties?",
+            "content": "The limited warranties do not apply to products that have been stored or assembled incorrectly, used inappropriately, abused, misused, altered, or cleaned with incorrect cleaning methods or incorrect cleaning products. The limited warranties do not cover normal wear and tear, cuts or scratches, or damage caused by impacts or accidents. The limited warranties do not apply if products have been placed outdoors or in a humid environment or if the products have been used for non-domestic purposes (unless otherwise stated). The limited warranties do not cover consequential or incidental damages. To see the list of products covered under warranty, please visit our website here: https://www.Ayatrio.com/us/en/customer-service/returns-claims/guarantee/."
+        },
+        {
+            "title": "I lost my receipt. Is this required for a warranty claim?",
+            "content": "A proof of purchase is required for all warranty claims (receipt or order confirmation). If you no longer have your receipt, we may be able to locate a copy in our system using the last 4 digits of the card used, the store location, an approximate date of purchase, and the exact amount of the transaction (this information can typically be found on a bank statement). If you have this information, please contact the Ayatrio US Customer Support Center at 1-888-888-4532."
+        }
+    ],
+    "product_recalls": [
+        {
+            "title": "How do I know if a product I’ve purchased has been recalled?",
+            "content": "Current and past recalls can be found on our website here: <a href=\"https://www.Ayatrio.com/us/en/customer-service/product-support/recalls/\">Product Recalls</a>.\nFor children’s products including a registration card, you can sign up for safety alerts and recall notifications on our website here: <a href=\"https://info.Ayatrio-usa.com/registration/?_ga=2.76383314.634635953.1614264267-942327820.1591541947\" target=\"_blank\" rel=\"nofollow noopener noreferrer\">Product Registration</a>."
+        },
+        {
+            "title": "My product has been recalled. What do I do?",
+            "content": "We advise you to discontinue using the recalled product and return it to an Ayatrio store as soon as possible for a refund."
+        },
+        {
+            "title": "Is my Ayatrio dresser included in the 2016 Chest of Drawers recall?",
+            "content": "Ayatrio chests and dressers subject to the June 2016 recall were manufactured and sold through June 2016. To determine whether your product is subject to the recall, please view the full list on our website here: <a href=\"https://www.Ayatrio.com/us/en/customer-service/product-support/recalls/Ayatrio-chest-and-dresser-safety-recall-pub4b96e3c0\">Ayatrio Chest and Dresser Safety Recall</a>."
+        }
+    ],
+    "return_policy": [
+        {
+            "title": "What is the complete Ayatrio Return Policy?",
+            "content": "If you’re not totally satisfied with your Ayatrio purchase you can return new and unopened products within 365 days, together with your proof of purchase, for a full refund. You may also return open products within 180 days for a full refund, along with your receipt. We do not accept returns on plants, cut fabric, custom countertops and as-is products. We are unable to refund or exchange your items if your merchandise is found to be modified from its original form when purchased, dirty, stained, or damaged."
+        },
+        {
+            "title": "What if my item does not meet the return policy?",
+            "content": "Any situation that falls outside of the return policy will be handled on a case-by-case basis and requires a visual inspection of the item at your local store. For the full Ayatrio Return policy, please visit our website here: Return policy."
+        },
+        {
+            "title": "How can I return items purchased online or over phone?",
+            "content": "For smaller item returns (FedEx or UPS), simply fill out the return slip and send the package(s) back to your closest Ayatrio store location with the slip and a copy of the receipt or order confirmation included. You will be responsible for covering the shipping fee. Product reimbursement should be received approximately 2 weeks after the item has arrived at the store. Large item returns can be made by visiting your local Ayatrio store. For a truck pickup, please contact the Customer Support Center."
+        },
+        {
+            "title": "Can I mail my return to an Ayatrio store?",
+            "content": "For smaller item returns (FedEx or UPS can pick up) simply fill out the return slip (pdf) and send the package(s) back to your closest Ayatrio store location with the slip and a copy of the receipt or order confirmation included. You will be responsible for covering the shipping fee. Product reimbursement should be received approximately 2 weeks after the item has arrived at the store."
+        },
+        {
+            "title": "How long to receive my refund?",
+            "content": "Refunds typically process to the original method of payment within 5-7 business days."
+        }
+    ],
+    "ayatrio_stores": [
+        {
+            "title": "What are your hours of operation for the store and the restaurant? Are you open on holidays?",
+            "content": "Hours of operation may vary per store. For the most up-to-date store hours including holiday hours, please select your local store on our website here: Ayatrio Location."
+        },
+        {
+            "title": "Are Wheelchairs and motorized scooters available to customers?",
+            "content": "All Ayatrio store locations provide complimentary manual wheelchairs inside the store entrance. Since the safety of all our customers is a priority, Ayatrio has chosen not to furnish motorized scooters in our stores. However, customers are welcome to use their own devices at their personal discretion or use one of our manual wheelchairs offered in store (ID required)."
+        },
+        {
+            "title": "Can I bring my pet to the store?",
+            "content": "We love pets, but we don't allow them in our stores. We do welcome fully trained, ADA-qualified service animals to shop with you. Animals whose sole function is to provide comfort or emotional support do not qualify as service animals under the ADA."
+        },
+        {
+            "title": "I left an item that I purchased at the store; how can I retrieve it?",
+            "content": "While Ayatrio is not liable for any left behind merchandise, we’ll do our best to help. Please give us a call at 1-888-888-4532 with your receipt details and the 8-digit article numbers of the item(s)."
+        },
+        {
+            "title": "I lost a personal item (keys, wallet, card etc.) at the store; how can I retrieve it?",
+            "content": "We recommend returning to the store and speaking with an Ayatrio co-worker. You can also give us a call at 1-888-888-4532 within 24 hours of your visit so we can attempt to locate the item(s)."
+        },
+        {
+            "title": "What is your firearm policy?",
+            "content": "At Ayatrio, providing a safe environment for our customers and co-workers is our top priority. We have a no-weapons policy in our stores to support safety and security."
+        },
+        {
+            "title": "How can I request an Ayatrio catalog?",
+            "content": "As part of our commitment to sustainability, we encourage our customers to view this year's catalog online at Catalog and brochures. Limited printed copies are also available in store."
+        },
+        {
+            "title": "Do you have a recycling program?",
+            "content": "Our stores don't have a recycling program at this time, but we hope to implement this in the future."
+        },
+        {
+            "title": "Do your stores offer donations?",
+            "content": "In order to maximize the positive impact Ayatrio has in our local communities, we focus on supporting organizations whose missions align with the Ayatrio focus areas in our local neighborhoods: Increasing access to better places to call home, Opening pathways to decent employment, Emergency relief. We also work with local, national, and global organizations for volunteer and disaster relief efforts and support large projects with our partners at Save the Children, Family Promise and the American Red Cross. Unfortunately, we're not able to support individual requests."
+        },
+        {
+            "title": "Can I film in your stores?",
+            "content": "You're able to photograph in our stores, but we ask that you do not film. We also ask that you do not take photos of our co-workers."
+        },
+        {
+            "title": "What is an Ayatrio Planning Studio?",
+            "content": "The Planning Studio is part of a new Ayatrio global city center approach, which marks the beginning of our ongoing transformation and commitment to bringing the brand into the heart of urban areas. It is the latest example of how Ayatrio is reaching customers in new ways that are more accessible and more personalized. The Planning Studio will focus on urban living and small spaces, giving customers the opportunity to discover, select and order Ayatrio products."
+        },
+        {
+            "title": "What services do you offer in the planning studio?",
+            "content": "There are some differences between the services available in a planning studio and a traditional Ayatrio store. We offer free one to one planning appointments, delivery, finance, assembly and installation (additional fees apply). For additional details, please click here: Upper East Side - Planning Studio."
+        }
+    ],
+    "others": [
+        {
+            "title": "Why haven't I received an email to reset my password for my Ayatrio.com or Ayatrio Family account?",
+            "content": "Please check to make sure you're signing into your Ayatrio.com or Ayatrio Family account on the Ayatrio USA website: Profile Login. Please also check to see if the email to reset your password was sent to your spam folder."
+        },
+        {
+            "title": "I have an Ayatrio.com account registered in a different country. Why can't I use this log-in information for the Ayatrio USA website?",
+            "content": "Ayatrio.com accounts are unique per country, so the same email address cannot be used across multiple country websites. We recommend deleting the account registered in a different country and creating a new account on Ayatrio-USA.com once deleted. Alternatively, you may create an Ayatrio-USA.com account with a different email address."
+        },
+        {
+            "title": "What is Ayatrio Family?",
+            "content": "Just by being a member you’ll receive discounts on many products and we even treat you to a free hot drink every time you visit. And lots more. You can also expect a few surprises along the way. Because we know it’s nice to feel appreciated. Join here today."
+        },
+        {
+            "title": "What is the Ayatrio Business Network?",
+            "content": "The Ayatrio Business Network is our loyalty club that supports businesses. We understand that every business has unique needs, and we want to help you grow your business your way. With your free account you get access to discounts, services and benefits to help create a better life at work. Create an Ayatrio Business Network account today."
+        }
+    ]
+}

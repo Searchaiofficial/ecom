@@ -12,31 +12,38 @@ import axios from "axios";
 const servicedData = [
   {
     image: "/Ayatrio updated icon/10 year warrante.svg",
-    label: "Measuring service"
+    label: "Measuring service",
+    link: "#"
   },
   {
     image: "/Ayatrio updated icon/10 year warrante.svg",
-    label: "Installation Services"
+    label: "Installation Services",
+    link: "/services/Installation"
   },
   {
     image: "/Ayatrio updated icon/10 year warrante.svg",
-    label: "Kitchen planning service"
+    label: "planning service",
+    link: "/services/Planning"
   },
   {
     image: "/Ayatrio updated icon/10 year warrante.svg",
-    label: "Interior design service"
+    label: "Interior design service",
+    link: "#"
   },
   {
     image: "/Ayatrio updated icon/10 year warrante.svg",
-    label: "Design your room"
+    label: "Design your room",
+    link: "#"
   },
   {
     image: "/Ayatrio updated icon/10 year warrante.svg",
-    label: "Delivery and transport"
+    label: "Delivery and transport",
+    link: "#"
   },
   {
     image: "/Ayatrio updated icon/10 year warrante.svg",
-    label: "Returns and exchanges"
+    label: "Returns and exchanges",
+    link: "#"
   }
 ]
 
@@ -98,9 +105,11 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex }) => {
           servicedData.map((service, index) => (
             <SwiperSlide className="bg-white  parent ">
               <div className=" child  h-full pt-10 flex px-2 justify-start ">
-                <div
+                <Link
+
                   key={index}
-                  passHref
+                  href={service.link}
+                  // passHref
                   className="flex flex-col items-start"
                   onClick={() => setHoveredIndex(null)}
                 >
@@ -108,7 +117,7 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex }) => {
                   <h3 className="text-[14px]  font-semibold  py-2 text-gray-900 hover:underline">
                     {service.label}
                   </h3>
-                </div>
+                </Link>
               </div>
             </SwiperSlide>
           ))

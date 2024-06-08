@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from 'react';
-import faqsDataJson from './faqData.json';
+import faqsDataJson from './FAQData.json';
 
 const FaqSection = ({ faqFor }) => {
     let faqsData = faqsDataJson[`${faqFor}`];
@@ -13,7 +13,7 @@ const FaqSection = ({ faqFor }) => {
     return (
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-10">
             <div className="lg:col-span-2">
-                
+
                 <div>
                     {faqsData.map((faq, index) => (
                         <div key={index} className="mb-4">
