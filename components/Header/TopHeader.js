@@ -8,7 +8,7 @@ const TopHeader = () => {
   return (
     <div className="hidden md:block">
       <div
-        className={`bg-[#f5f5f5] fixed h-[35px] z-[9998] w-full flex items-center justify-between px-5`}
+        className={`bg-[#f5f5f5] top-0 fixed h-[35px] z-[9998] w-full flex items-center justify-between px-5`}
       >
         <div className="">
           <Link className="pr-[20px] text-sm underline underline-offset-4" href="#">For you</Link>
