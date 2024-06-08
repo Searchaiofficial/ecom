@@ -191,6 +191,7 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
                 key={item._id}
                 className="dropdown-item sm:font-medium  py-2  text-[20px] font-medium "
                 href={`/product/${item.category.replace(/\s/g, "-")}/${item.subcategory.replace(/\s/g, "-")}`}
+                onClick={onClose}
               >
                 {item.productTitle}
               </Link>
