@@ -27,6 +27,21 @@ const servicedData = [
   },
   {
     image: "/Ayatrio updated icon/10 year warrante.svg",
+    label: "Buy Back service",
+    link: "/services/BuyBack"
+  },
+  {
+    image: "/Ayatrio updated icon/10 year warrante.svg",
+    label: "Click&Collect service",
+    link: "/services/ClickAndCollect"
+  },
+  {
+    image: "/Ayatrio updated icon/10 year warrante.svg",
+    label: "Finance service",
+    link: "/services/Finance"
+  },
+  {
+    image: "/Ayatrio updated icon/10 year warrante.svg",
     label: "Track & Manage my Order",
     link: "/track-order"
   },
