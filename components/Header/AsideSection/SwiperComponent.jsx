@@ -27,13 +27,28 @@ const servicedData = [
   },
   {
     image: "/Ayatrio updated icon/10 year warrante.svg",
-    label: "Interior design service",
-    link: "#"
+    label: "Buy Back service",
+    link: "/services/BuyBack"
   },
   {
     image: "/Ayatrio updated icon/10 year warrante.svg",
-    label: "Design your room",
-    link: "#"
+    label: "Click&Collect service",
+    link: "/services/ClickAndCollect"
+  },
+  {
+    image: "/Ayatrio updated icon/10 year warrante.svg",
+    label: "Finance service",
+    link: "/services/Finance"
+  },
+  {
+    image: "/Ayatrio updated icon/10 year warrante.svg",
+    label: "Track & Manage my Order",
+    link: "/track-order"
+  },
+  {
+    image: "/Ayatrio updated icon/10 year warrante.svg",
+    label: "warranty Service",
+    link: "/warranty"
   },
   {
     image: "/Ayatrio updated icon/10 year warrante.svg",
@@ -65,89 +80,94 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
       fetchAllOffers();
     }
   }, []);
+
+
   return (
-    <Swiper
-      className="bg-white parent h-48 gap-1 w-screen"
-      spaceBetween={20}
-      slidesPerView={7}
-      mousewheel={{ invert: true }}
-      scrollbar={{
-        hide: true,
-        draggable: true,
-      }}
-      modules={[Scrollbar]}
+    <div
+      className="bg-white parent min-h-fit  px-4 pb-4 w-full "
     >
-      {hoveredIndex === 3 &&
-        roomOptions.map((data, index) => (
-          <SwiperSlide className="bg-white parent " onClick={handleClick}>
-            <div className=" child w-full h-full pt-10 flex flex-col px-2 justify-start ">
-              <Link
-                key={index}
-                href={`/rooms/${data.room.replace(/\s+/g, "-")}`}
-                onClick={() => setHoveredIndex(null)}
-                passHref
-              >
-                <div className="parent w-[10rem] h-[5rem] ">
-                  <Image
-                    src={data.src}
-                    width={400}
-                    height={400}
-                    className="child object-cover w-full h-full"
-                    alt="Room Image"
-                  />
-                </div>
-                <h3 className="text-[14px]  text-center font-semibold  py-2 text-gray-900">
-                  {data.room}
-                </h3>
-              </Link>
-            </div>
-          </SwiperSlide>
-        ))}
-
-      {
-        hoveredIndex === 4 && (
-          servicedData.map((service, index) => (
-            <SwiperSlide className="bg-white  parent " onClick={handleClick}>
-              <div className=" child  h-full pt-10 flex px-2 justify-start ">
+      <div className="grid grid-cols-5">
+        {hoveredIndex === 3 &&
+          roomOptions.map((data, index) => (
+            <div className="bg-white parent group " onClick={handleClick}>
+              <div className=" child w-full h-full pt-10 flex flex-col px-2 justify-start ">
                 <Link
-
                   key={index}
-                  href={service.link}
-                  // passHref
-                  className="flex flex-col items-start"
+                  href={`/rooms/${data.room.replace(/\s+/g, "-")}`}
                   onClick={() => setHoveredIndex(null)}
+                  passHref
+                  className="flex items-center gap-4"
                 >
-                  <Image src={service.image} height={100} width={100} alt="service" />
-                  <h3 className="text-[14px]  font-semibold  py-2 text-gray-900 hover:underline">
-                    {service.label}
+                  <div className="parent w-[110px] h-[61px] ">
+                    <Image
+                      src={data.src}
+                      width={400}
+                      height={400}
+                      className="child object-cover w-full h-full"
+                      alt="Room Image"
+                    />
+                  </div>
+                  <h3 className="text-[14px] group-hover:underline   font-semibold  py-2 text-[#111111]">
+                    {data.room}
                   </h3>
                 </Link>
               </div>
-            </SwiperSlide>
-          ))
-        )
-      }
-
-      {hoveredIndex === 5 && (
-        allOffers.map((offer, index) => (
-          <SwiperSlide className="bg-white  parent " onClick={handleClick}>
-            <div className=" child  h-full pt-10 flex px-2 justify-start ">
-              <Link
-                key={index}
-                href={`/heading/offers/${offer.type.replace(/ /g, "-")}`}
-                passHref
-
-                onClick={() => setHoveredIndex(null)}
-              >
-                <h3 className="text-[14px] text-center font-semibold  py-2 text-gray-900 hover:underline">
-                  {offer.type}
-                </h3>
-              </Link>
             </div>
-          </SwiperSlide>
-        ))
-      )}
-    </Swiper>
+          ))}
+      </div>
+
+      <>
+
+        <div className="grid grid-cols-2 w-[35%] mt-5">
+          {
+            hoveredIndex === 4 && (
+              servicedData.map((service, index) => (
+                <div className="bg-white  parent " onClick={handleClick}>
+                  <div className=" child  h-full  flex px-2 justify-start ">
+                    <Link
+
+                      key={index}
+                      href={service.link}
+                      // passHref
+                      className="flex items-center gap-4"
+                      onClick={() => setHoveredIndex(null)}
+                    >
+                      {/* <Image src={service.image} height={100} width={100} alt="service" /> */}
+                      {/* <p className="text-[8px]">⚫</p> */}
+                      <h3 className="text-[14px]  font-semibold  py-2 text-gray-700 hover:underline">
+                        {service.label}
+                      </h3>
+                    </Link>
+                  </div>
+                </div>
+              ))
+            )
+          }
+        </div>
+      </>
+
+      <div className="grid grid-cols-2 w-[35%] mt-5">
+        {hoveredIndex === 5 && (
+          allOffers.map((offer, index) => (
+            <div className="bg-white  parent " onClick={handleClick}>
+              <div className=" child  h-full  flex px-2 justify-start ">
+                <Link
+                  key={index}
+                  href={`/heading/offers/${offer.type.replace(/ /g, "-")}`}
+                  passHref
+
+                  onClick={() => setHoveredIndex(null)}
+                >
+                  <h3 className="text-[14px] text-center font-semibold  py-2 text-gray-700 hover:underline">
+                    {offer.type}
+                  </h3>
+                </Link>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+    </div>
   );
 };
 

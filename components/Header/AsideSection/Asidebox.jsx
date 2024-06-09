@@ -122,7 +122,7 @@ const Asidebox = (props) => {
             window.innerWidth > 800 && { y: -10, opacity: 0 }
           }
           whileInView={{ y: 0, opacity: 1 }}
-          className="absolute top-[2.7rem] p-4 bg-white flex flex-col mt-[15px] md:flex-row noto-sans-200 transition-all duration-300 ease-linear w-full md:left-0 min-h-[10rem] md:h-auto md:px-10"
+          className="absolute top-[2.7rem]  bg-white flex flex-col mt-[15px] md:flex-row noto-sans-200 transition-all duration-300 ease-linear w-full md:left-0 min-h-[10rem] md:h-auto "
         >
           <SwiperComponent
             handleChange={props.handleChange}

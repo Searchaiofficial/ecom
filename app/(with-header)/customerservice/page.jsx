@@ -1,8 +1,9 @@
 'use client'
 import dynamic from "next/dynamic";
 import Image from "next/image";
+const FAQ = dynamic(() => import('@/components/FAQ/FAQ'))
+const FAQSwiper = dynamic(() => import('@/components/FAQSwiper/FAQSwiper'))
 import { servicesData, gridDataRow1, gridDataRow2 } from "@/Model/CustomerServiceData/CustomerServiceData";
-import Faq from '../../../components/CustomerServiceFAQ/Faq.jsx'
 
 import "@/components/styles/CustomerServicePage.css";
 import { useRouter } from "next/navigation";
@@ -22,7 +23,7 @@ const CustomerServicePage = () => {
         router.push("/customerservice/shoppinginfo");
         break;
       case 4:
-        router.push("/customerservice/faq");
+        router.push("/faq");
         break;
       case 5:
         router.push("/customerservice/returnpolicy");
@@ -42,7 +43,7 @@ const CustomerServicePage = () => {
   };
 
   return (
-    <div className="">
+    <div className="w-full">
       <div className="pt-36 sm:px-[50px] px-[20px] sm:space-y-10 space-y-5 ">
         <div className="space-y-6 ">
           <h1 className="font-bold text-4xl">Customer Service</h1>
@@ -61,246 +62,43 @@ const CustomerServicePage = () => {
             })}
           </div>
         </div>
-        {/* edited */}
-        <h1 className="text-black text-4xl font-bold mb-12 pr-3">
-          Frequently asked questions
-        </h1>
-        <div className=''>
-          <h1 className="text-black text-3xl font-bold mb-12 px-3">
-            How to check stock availability
-          </h1>
-          <div className="md:w-2/3 mt-6">
-
-            <ol className="px-10 opacity-80 list-disc text-justify">
-              <li className="mb-3">Always check your desired product’s availability here on our website or in the IKEA app before you visit your local IKEA store. We update stock status for our products every few hours. </li>
-              <li className="mb-3">The best way to get the latest stock status is to visit the product page or listing pages of the item you are interested in and check its availability at your local IKEA store. When checking on our listing page, an indicator for your local store will display as well as possibility for delivery. </li>
-              <li className="mb-3">If the product you are looking for is out of stock at your local store, you can click on the 'check other IKEA stores' link to view inventory from our other locations.</li>
-              <li className="mb-3">You can also select 'notify me' and you will receive a communication from IKEA when your product is back in stock. Note that stock shipments are limited and tend to be purchased quickly, so we encourage you to use our click and collect service to secure the products you want or visit your local store first thing in the morning.  </li>
-              <li className="mb-3">Products that show the status 'Few in stock' may not be available for purchase online because their limited stock level means we can’t guarantee that they will still be available at time of purchase.</li>
-              <li className="mb-3">Please note – the stock status you see online or in the IKEA app is the same information that our customer service co-workers have access to. If you need further support, please see the FAQ below or connect with us via Chat.</li>
-              <li className="mb-3">Before you visit be sure to download our shopping app – it is a great way to check out what IKEA has to offer and also to even check for stock while you are shopping in store!</li>
-            </ol>
-
+        <div>
+          <h2 className="font-bold text-2xl">Helping you help yourself </h2>
+          <p className="">
+            Looking to check the status of your order? Want to return a product
+            or order a spare part? We have convenient self service options which
+            will let you do just that!{" "}
+          </p>
+        </div>
+        {/* Section of grid starts */}
+        <section>
+          <div>
+            <div className="grid-row-1">
+              {gridDataRow1.map((gridItem) => {
+                return (
+                  <div className="bg-gray-200 py-10 px-5 border border-white text-center">
+                    <h3 className="font-bold">{gridItem.heading}</h3>
+                    <p>{gridItem.text}</p>
+                    <p className="underline text-gray-500">Read more</p>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="grid-row-2">
+              {gridDataRow2.map((gridItem) => {
+                return (
+                  <div className="bg-gray-200 py-10 px-5 border border-white text-center">
+                    <h3 className="font-bold">{gridItem.heading}</h3>
+                    <p>{gridItem.text}</p>
+                    <p className="underline text-gray-500">Read more</p>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-          <hr className="mt-20 mb-10" />
+        </section>
 
-        </div>
-        <div className=''>
-          <h1 className="text-black text-3xl font-bold mb-12 px-3">
-            Orders
-          </h1>
-
-          <h1 className="text-black text-xl font-semibold mb-12 px-3">
-            General
-          </h1>
-          <section id="faq">
-            <Faq faqFor='general' />
-            <hr className="mt-20 mb-10" />
-          </section>
-
-          <h1 className="text-black text-xl font-semibold mb-12 px-3">
-            Missing Items
-          </h1>
-          <section id="faq">
-            <Faq faqFor='missing_items' />
-            <hr className="mt-20 mb-10" />
-          </section>
-
-          <h1 className="text-black text-xl font-semibold mb-12 px-3">
-            Damaged Items
-          </h1>
-          <section id="faq">
-            <Faq faqFor='damaged_items' />
-            <hr className="mt-20 mb-10" />
-          </section>
-
-
-          <h1 className="text-black text-xl font-semibold mb-12 px-3">
-            Missing Parts or Hardware
-          </h1>
-          <section id="faq">
-            <Faq faqFor='missing_parts_hardware' />
-            <hr className="mt-20 mb-10" />
-          </section>
-
-          <h1 className="text-black text-xl font-semibold mb-12 px-3">
-            Order Changes
-          </h1>
-          <section id="faq">
-            <Faq faqFor='order_changes' />
-            <hr className="mt-20 mb-10" />
-          </section>
-
-        </div>
-        <div className=''>
-          <h1 className="text-black text-3xl font-bold mb-12 px-3">
-            Services
-          </h1>
-
-          <h1 className="text-black text-xl font-semibold mb-12 px-3">
-            Delivery
-          </h1>
-          <section id="faq">
-            <Faq faqFor='delivery' />
-            <hr className="mt-20 mb-10" />
-          </section>
-
-          <h1 className="text-black text-xl font-semibold mb-12 px-3">
-            Mattresses
-          </h1>
-          <section id="faq">
-            <Faq faqFor='mattresses' />
-            <hr className="mt-20 mb-10" />
-          </section>
-
-          <h1 className="text-black text-xl font-semibold mb-12 px-3">
-            Assembly
-          </h1>
-          <section id="faq">
-            <Faq faqFor='assembly' />
-            <hr className="mt-20 mb-10" />
-          </section>
-
-          <h1 className="text-black text-xl font-semibold mb-12 px-3">
-            Kitchen Services
-          </h1>
-          <section id="faq">
-            <Faq faqFor='kitchen_services' />
-            <hr className="mt-20 mb-10" />
-          </section>
-
-          <h1 className="text-black text-xl font-semibold mb-12 px-3">
-            Click & Collect
-          </h1>
-          <section id="faq">
-            <Faq faqFor='click_and_collect' />
-            <hr className="mt-20 mb-10" />
-          </section>
-
-
-          <h1 className="text-black text-xl font-semibold mb-12 px-3">
-            Local Pick Up Points
-          </h1>
-          <section id="faq">
-            <Faq faqFor='local_pick_up_points' />
-            <hr className="mt-20 mb-10" />
-          </section>
-
-        </div>
-        <div className=''>
-          <h1 className="text-black text-3xl font-bold mb-12 px-3">
-            Payment
-          </h1>
-
-          <h1 className="text-black text-xl font-semibold mb-12 px-3">
-            Payment
-          </h1>
-          <section id="faq">
-            <Faq faqFor='payment' />
-            <hr className="mt-20 mb-10" />
-          </section>
-
-          <h1 className="text-black text-xl font-semibold mb-12 px-3">
-            Coupons & Offers
-          </h1>
-          <section id="faq">
-            <Faq faqFor='offers' />
-            <hr className="mt-20 mb-10" />
-          </section>
-
-
-          <h1 className="text-black text-xl font-semibold mb-12 px-3">
-            Gift Cards
-          </h1>
-          <section id="faq">
-            <Faq faqFor='gift_cards' />
-            <hr className="mt-20 mb-10" />
-          </section>
-
-
-          <h1 className="text-black text-xl font-semibold mb-12 px-3">
-            Gift Registry
-          </h1>
-          <section id="faq">
-            <Faq faqFor='gift_registry' />
-            <hr className="mt-20 mb-10" />
-          </section>
-
-          <h1 className="text-black text-xl font-semibold mb-12 px-3">
-            IKEA Financing
-          </h1>
-          <section id="faq">
-            <Faq faqFor='financing' />
-            <hr className="mt-20 mb-10" />
-          </section>
-
-        </div>
-
-        <div className=''>
-          <h1 className="text-black text-3xl font-bold mb-12 px-3">
-            Product Information
-          </h1>
-
-          <h1 className="text-black text-xl font-semibold mb-12 px-3">
-            Product Questions
-          </h1>
-          <section id="faq">
-            <Faq faqFor='product_questions' />
-            <hr className="mt-20 mb-10" />
-          </section>
-
-          <h1 className="text-black text-xl font-semibold mb-12 px-3">
-            Product Availability
-          </h1>
-          <section id="faq">
-            <Faq faqFor='product_availability' />
-            <hr className="mt-20 mb-10" />
-          </section>
-
-          <h1 className="text-black text-xl font-semibold mb-12 px-3">
-            Product Warranties
-          </h1>
-          <section id="faq">
-            <Faq faqFor='product_warranties' />
-            <hr className="mt-20 mb-10" />
-          </section>
-
-
-          <h1 className="text-black text-xl font-semibold mb-12 px-3">
-            Product Recalls
-          </h1>
-          <section id="faq">
-            <Faq faqFor='product_recalls' />
-            <hr className="mt-20 mb-10" />
-          </section>
-
-          <h1 className="text-black text-xl font-semibold mb-12 px-3">
-            Return Policy
-          </h1>
-          <section id="faq">
-            <Faq faqFor='return_policy' />
-            <hr className="mt-20 mb-10" />
-          </section>
-
-          <h1 className="text-black text-xl font-semibold mb-12 px-3">
-            Ayatrio Stores
-          </h1>
-          <section id="faq">
-            <Faq faqFor='ayatrio_stores' />
-            <hr className="mt-20 mb-10" />
-          </section>
-
-          <h1 className="text-black text-xl font-semibold mb-12 px-3">
-            Other
-          </h1>
-          <section id="faq">
-            <Faq faqFor='others' />
-            <hr className="mt-20 mb-10" />
-          </section>
-        </div>
-        {/* edited */}
-
-
+        <FAQ />
 
         {/* Still have questions section starts */}
         <section>
