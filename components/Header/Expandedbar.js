@@ -29,11 +29,12 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
   const [isStoreLoading, setIsStoreLoading] = useState(true);
 
   useEffect(() => {
-    fetchStores().then((stores) => {
+    setIsStoreLoading(true);
+    fetchStores(searchQuery).then((stores) => {
       setStores(stores);
       setIsStoreLoading(false);
     });
-  }, []);
+  }, [searchQuery]);
 
   let cacheddata = JSON.parse(sessionStorage.getItem("cachedData"));
 
