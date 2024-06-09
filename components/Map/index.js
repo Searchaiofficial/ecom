@@ -1,19 +1,33 @@
 import { GoogleMap, useLoadScript, OverlayView } from "@react-google-maps/api";
 import "./styles.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { mapStyles } from "./mapStyles";
 import MapMarker from "./MapMarker";
 import { REACT_APP_GMAP_API_KEY } from "./config.js";
 import Search from "./Search";
 import { useSelector } from "react-redux";
-import { selectMapDataCoords, selectMapDataZoom } from "@/components/Features/Slices/mapSlice"
+import {
+  selectMapDataCoords,
+  selectMapDataZoom,
+} from "@/components/Features/Slices/mapSlice";
+import { fetchStores } from "../Features/api";
 const Map = ({ setBoundaries, coords, places, PlacesData }) => {
+  const [stores, setStores] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetchStores().then((stores) => {
+      setStores(stores);
+      setIsLoading(false);
+    });
+  }, []);
+
   // console.log(PlacesData);
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: REACT_APP_GMAP_API_KEY,
   });
-  const newZoom = useSelector(selectMapDataZoom)
-  const newCoords = useSelector(selectMapDataCoords)
+  const newZoom = useSelector(selectMapDataZoom);
+  const newCoords = useSelector(selectMapDataCoords);
   // console.log(newZoom)
   const india_zoom = 5;
   const hotels_zoom = 11;
@@ -74,7 +88,7 @@ const Map = ({ setBoundaries, coords, places, PlacesData }) => {
       ) : (
         <>
           {/* <Sidebar places={places} /> */}
-          <Search places={PlacesData} onResultClick={handleResultClick} />
+          <Search places={stores} onResultClick={handleResultClick} />
           <GoogleMap
             mapContainerClassName="map-container"
             onLoad={onLoad}
@@ -86,15 +100,15 @@ const Map = ({ setBoundaries, coords, places, PlacesData }) => {
               styles: mapStyles,
               mapId: "2d6636895d6a199d",
             }}
-          // onBoundsChanged={handleBoundsChanged}
+            // onBoundsChanged={handleBoundsChanged}
           >
-            {PlacesData &&
-              PlacesData.map((place, i) => (
+            {!isLoading &&
+              stores.map((store, i) => (
                 <CustomMarker
-                  lat={place.lat}
-                  lng={place.lng}
-                  key={places.id}
-                  content={<MapMarker place={place} />}
+                  lat={store.address.lat}
+                  lng={store.address.lng}
+                  key={store._id}
+                  content={<MapMarker place={store} />}
                 />
               ))}
           </GoogleMap>

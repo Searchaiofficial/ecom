@@ -22,9 +22,6 @@ const MapMarker = ({ place }) => {
 
   // console.log("Rendering MapMarker for", place);
 
-
-
-
   const defaultImageUrl =
     "https://bolt-gcdn.sc-cdn.net/3/Z2i0CKb1i5GtNvg8xNoP7.256.IRZXSOY?mo=GlgaFhoAGgAyAX06AQRCBgjm_5mrBlBJYAFaEERmTGFyZ2VUaHVtYm5haWyiARQIgAIiDwoCSAISACoHSVJaWFNPWaIBFAiaCiIPCgJIAxIAKgdJUlpYU09Z&uc=73";
 
@@ -70,16 +67,25 @@ const MapMarker = ({ place }) => {
                 </p>
               </div> */}
               <div className="flex flex-col rounded-lg">
-                <Image src={defaultImageUrl} height={100} width={200} alt="store-image" className="w-full rounded-t-lg h-[125px] object-cover" />
+                <Image
+                  src={defaultImageUrl}
+                  height={100}
+                  width={200}
+                  alt="store-image"
+                  className="w-full rounded-t-lg h-[125px] object-cover"
+                />
 
                 <div className="flex flex-col  px-2 mt-1">
-                  <p className="text-[16px] sm:text-[14px] font-semibold">{place.name}</p>
-                  <p className="text-[12px] text-gray-500">{place.address}</p>
+                  <p className="text-[16px] sm:text-[14px] font-semibold">
+                    {place.name}
+                  </p>
+                  <p className="text-[12px] text-gray-500">
+                    {place.address.streetAddress} {place.address.pincode}
+                  </p>
                   <p className="text-gray-600 text-[14px] my-1 font-semibold w-full text-left">
                     {place.phone}
                   </p>
                 </div>
-
               </div>
             </div>
           </PopupPortal>

@@ -14,6 +14,7 @@ import { useDebounceValue } from "usehooks-ts";
 import { searchProductsRequest } from "../Features/search/searchSlice"
 import { STORE_MAP_DATA } from "@/constants/store-map-data";
 import { updateCoords, updateZoom } from "../Features/Slices/mapSlice";
+import { fetchStores } from "../Features/api";
 
 const Expandedbar = ({ searchText, onClose, onSearch }) => {
   const [searchQuery, setSearchQuery] = useState(searchText);
@@ -24,10 +25,15 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
   const [data, setData] = useState([]);
   const [isLoading, setLoading] = useState(false);
 
-  console.log(STORE_MAP_DATA)
+  const [stores, setStores] = useState([]);
+  const [isStoreLoading, setIsStoreLoading] = useState(true);
 
-
-
+  useEffect(() => {
+    fetchStores().then((stores) => {
+      setStores(stores);
+      setIsStoreLoading(false);
+    });
+  }, []);
 
   let cacheddata = JSON.parse(sessionStorage.getItem("cachedData"));
 
@@ -355,23 +361,23 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
             path === "/ayatrio-map" && searchQuery && (
 
               <div className="grid sm:grid-cols-5 grid-cols-2 gap-2 sm:ml-44 px-[24px] lg:px-[0px] lg:mt-0 mt-10 ">
-                {(!STORE_MAP_DATA) ? (
+                {(!stores) ? (
                   <p className="flex flex-row justify-center items-center">
                     No results found
                   </p>
                 ) : (
-                  (STORE_MAP_DATA && STORE_MAP_DATA?.length > 0
-                    ? STORE_MAP_DATA
+                  (stores && stores?.length > 0
+                    ? stores
                     : []
                   ).map((item) => (
                     <div >
                       <div
-                        key={item.id}
+                        key={item._id}
                         className="col-span-1"
                         // onClick={() => handleRoute(item)}
                         onClick={() => handleResultClick({
-                          lat: item.lat,
-                          lng: item.lng,
+                          lat: item.address.lat,
+                          lng: item.address.lng,
                         })}
                       >
                         <div className="lg:w-[170px] w-[150px] h-[150px] lg:h-[170px]">
@@ -387,7 +393,7 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
                           {item.name}
                         </div>
                         <div className="lg:text-[12px] text-[12px]  font-normal py-[2px] line-clamp-2 text-[#707072]">
-                          {item.address}
+                          {item.address.streetAddress}
                         </div>
                         <div className="lg:text-[12px] text-[12px]  font-semibold  text-black">
                           {item.phone}

@@ -62,7 +62,7 @@ const Search = ({ places, onResultClick }) => {
   if (data && data.length > 0) {
     filteredData = data
       .filter(
-        (item) => item.address_obj && item.address_obj.country === "India"
+        (item) => item.address.streetAddress && item.address.country === "India"
       )
       .slice(0, 4);
 
@@ -75,8 +75,8 @@ const Search = ({ places, onResultClick }) => {
   const handleResultClick = (item) => {
     if (onResultClick && item) {
       onResultClick({
-        lat: item.lat,
-        lng: item.lng,
+        lat: item.address.lat,
+        lng: item.address.lng,
       });
     } else {
       onResultClick({ lat: 20.593, lng: 78.96 });
@@ -275,7 +275,7 @@ const Search = ({ places, onResultClick }) => {
               {places.map((item, index) => (
                 <div
                   className={`flex justify-around items-center hover:bg-gray-100 pl-4`}
-                  key={item.location_id}
+                  key={item._id}
                   onClick={() =>
                     index === 0 ? handleResultClick() : handleResultClick(item)
                   }
@@ -299,7 +299,7 @@ const Search = ({ places, onResultClick }) => {
                     />
                   )} */}
                   <div className="px-4 py-2 text-gray-700 cursor-pointer">
-                    {`${item.name} ${item.address.slice(0, 20)}`}
+                    {`${item.name} ${item.address.streetAddress.slice(0, 20)}`}
                   </div>
                   <Image
                     src="/svg/dropdown/closeicon.svg"

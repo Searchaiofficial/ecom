@@ -48,7 +48,6 @@ export const fetchSliderView = async (page, limit) => {
   }
 };
 
-
 export const fetchProductsWithSearch = async (searchQuery) => {
   try {
     const response = await axios.get(createApiEndpoint("products"), {
@@ -174,7 +173,9 @@ export const fetchHeaderCategoryData = async (category) => {
 
 export const fetchProductsFromDemandType = async (type) => {
   try {
-    const response = await axios.get(createApiEndpoint(`getAllProductsByDemandType/${type}`));
+    const response = await axios.get(
+      createApiEndpoint(`getAllProductsByDemandType/${type}`)
+    );
     return response.data;
   } catch (error) {
     console.error(`Error fetching suggestions: ${error.message}`);
@@ -184,10 +185,21 @@ export const fetchProductsFromDemandType = async (type) => {
 
 export const fetchProductsFromOffers = async (type) => {
   try {
-    const response = await axios.get(createApiEndpoint(`getAllProductsByOffer/${type}`));
+    const response = await axios.get(
+      createApiEndpoint(`getAllProductsByOffer/${type}`)
+    );
     return response.data;
   } catch (error) {
     console.error(`Error fetching suggestions: ${error.message}`);
     throw error;
   }
-}
+};
+
+export const fetchStores = async () => {
+  try {
+    const response = await axios.get(createApiEndpoint(`store`));
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching suggestions: ${error.message}`);
+  }
+};
