@@ -28,12 +28,20 @@ const FooterContent = (props) => {
       elementId === 1
         ? router.push("/deliveryservice")
         : elementId === 2
-          ? router.push("/installationservice")
-          : elementId === 8
-            ? router.push("/designservice")
-            : elementId === 9
-              ? router.push("customerservice")
-              : router.push("/home");
+          ? router.push("/services/Installation")
+          : elementId === 3
+            ? router.push("/services/Planning")
+            : elementId === 4
+              ? router.push("/services/BuyBack")
+              : elementId === 5
+                ? router.push("/services/ClickAndCollect")
+                : elementId === 6
+                  ? router.push("/services/Finance")
+                  : elementId === 7
+                    ? router.push("/designservice")
+                    : elementId === 8
+                      ? router.push("customerservice")
+                      : router.push("/home");
     } else if (headingId === 3) {
       elementId === 8
         ? router.push("/customerservice/returnpolicy")
@@ -44,7 +52,7 @@ const FooterContent = (props) => {
             : elementId === 10
               ? router.push("/customerservice/contactus")
               : elementId === 11
-                ? router.push("/customerservice/faq")
+                ? router.push("/faq")
                 : elementId === 2
                   ? router.push("/billing-payment")
                   : elementId === 3

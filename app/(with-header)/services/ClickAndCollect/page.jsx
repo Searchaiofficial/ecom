@@ -158,7 +158,7 @@ export default function ClickAndCollectServicePage() {
                 </div>
                 <hr className="mt-20" />
             </section>
-            <section id="faq">
+            <section id="faq" className='mt-8'>
             <h1 className="text-black text-2xl lg:text-4xl font-semibold mb-6 lg:mb-12 px-3 lg:text-left">
                     Frequently asked questions
                 </h1>

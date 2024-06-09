@@ -9,7 +9,7 @@ export default function Installation() {
                 <div className="flex flex-wrap md:flex-nowrap gap-y-3">
                     <div className="w-full md:w-2/5 flex flex-col justify-center">
                         <h1 className="text-black text-4xl font-bold mb-12 ">
-                            Kitchen installation service
+                            Installation service
                         </h1>
                         <p className="text-justify px-3 opacity-90 mb-3">
                             <strong>Do you need your kitchen installed?</strong> Start by booking a planning service. Our Ayatrio Home Services Provider will guide you through the process from start to finish. Their knowledge and experience will help you build the kitchen of your dreams.
@@ -173,8 +173,8 @@ export default function Installation() {
 
             </section>
 
-            <section id="faq">
-            <h1 className="text-black text-2xl lg:text-4xl font-semibold mb-6 lg:mb-12 px-3 lg:text-left">
+            <section id="faq" className='mt-8'>
+                <h1 className="text-black text-2xl lg:text-4xl font-semibold mb-6 lg:mb-12 px-3 lg:text-left">
                     Frequently asked questions
                 </h1>
                 <Faq faqFor='installation' />

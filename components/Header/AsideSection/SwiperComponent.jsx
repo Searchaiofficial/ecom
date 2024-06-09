@@ -27,13 +27,13 @@ const servicedData = [
   },
   {
     image: "/Ayatrio updated icon/10 year warrante.svg",
-    label: "Interior design service",
-    link: "#"
+    label: "Track & Manage my Order",
+    link: "/track-order"
   },
   {
     image: "/Ayatrio updated icon/10 year warrante.svg",
-    label: "Design your room",
-    link: "#"
+    label: "warranty Service",
+    link: "/warranty"
   },
   {
     image: "/Ayatrio updated icon/10 year warrante.svg",
