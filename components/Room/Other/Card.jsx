@@ -911,7 +911,7 @@ const Card = ({ data, productId }) => {
                       <div className="flex flex-col">
                         <div className="px-[40px] pb-[32px]">
                           <div>
-                            <div className="flex items-center justify-between pl-[40px] h-[72px]">
+                            <div className="flex items-center justify-between  h-[72px]">
                               <h1 className="text-[24px] font-semibold text-[#111111]">
                                 Use your location
                               </h1>
