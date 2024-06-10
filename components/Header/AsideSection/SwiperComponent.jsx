@@ -32,7 +32,7 @@ const servicedData = [
   },
   {
     image: "/Ayatrio updated icon/10 year warrante.svg",
-    label: "Click&Collect service",
+    label: "Click & Collect service",
     link: "/services/ClickAndCollect"
   },
   {

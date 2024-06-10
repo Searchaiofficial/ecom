@@ -572,22 +572,36 @@ const Card = ({ data, productId }) => {
                   {sidebarContect === "zeroCostEMI" && (
                     <div className="fixed z-[9999] h-full w-screen bg-black/50 backdrop:blur-sm top-0 left-0">
                       <section className="text-black bg-white flex-col absolute right-0 top-0 h-full  z-[99999] w-full  lg:w-[35%] flex overflow-y-auto">
-                        <div className="flex px-[40px] h-[72px] items-center   justify-end">
-                          <button
-                            className="text-xl  px-3 py-1 hover:bg-[#e5e5e5] rounded-full mt-0 cursor-pointer  "
-                            onClick={() => setsidebarContent(null)}
-                          >
-                            X
-                          </button>
-                        </div>
-                        <div className="flex flex-col w-full ">
+                        <div className="flex flex-col w-full">
                           <div className="px-[40px] pb-[32px]">
-                            <div className="flex items-center ">
-                              <div onClick={() => setIsActive("Offers for you")} className={`flex-1 cursor-pointer flex items-center justify-center h-[50px]  ${isActive === "Offers for you" ? "border-b-4 border-[#2e2e2e] text-black" : "border-[#8E8E8E] text-[#8E8E8E]"}  `}>
-                                <p className=" text-[16px]">Offers for you</p>
+                            <div className="flex items-center justify-between">
+                              <div className="flex-1 flex">
+                                <div
+                                  onClick={() => setIsActive("Offers for you")}
+                                  className={`flex-1 cursor-pointer flex items-center justify-center h-[50px] ${isActive === "Offers for you"
+                                    ? "border-b-4 border-[#2e2e2e] text-black"
+                                    : "border-[#8E8E8E] text-[#8E8E8E]"
+                                    }`}
+                                >
+                                  <p className="text-[16px]">Offers for you</p>
+                                </div>
+                                <div
+                                  onClick={() => setIsActive("EMI Plans")}
+                                  className={`flex-1 cursor-pointer flex items-center justify-center h-[50px] ${isActive === "EMI Plans"
+                                    ? "border-b-4 border-[#2e2e2e] text-black"
+                                    : "border-[#8E8E8E] text-[#8E8E8E]"
+                                    }`}
+                                >
+                                  <p className="text-[16px]">EMI Plans</p>
+                                </div>
                               </div>
-                              <div onClick={() => setIsActive("EMI Plans")} className={`flex-1 cursor-pointer flex items-center justify-center h-[50px]   ${isActive === "EMI Plans" ? "border-b-4 border-[#2e2e2e] text-black" : "border-[#8E8E8E]  text-[#8E8E8E]"}  `}>
-                                <p className="text-[16px]">EMI Plans</p>
+                              <div className="flex h-[72px] items-center justify-end">
+                                <button
+                                  className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
+                                  onClick={() => setsidebarContent(null)}
+                                >
+                                  X
+                                </button>
                               </div>
                             </div>
                             {
@@ -631,7 +645,7 @@ const Card = ({ data, productId }) => {
                                 <div className="">
                                   <div className="flex items-center gap-[10px] pb-[20px] pt-[32px] ">
                                     <button onClick={(e) => setEmiOption("Credit Card EMI")} className={`${EmiOption === "Credit Card EMI" ? "bg-black text-white py-[16px] hover:bg-gray-900 px-[30px] text-center text-[14px] rounded-full" : "py-[16px] border-2  px-[30px] rounded-full  text-[14px] text-center"}`}>Credit Card EMI</button>
-                                    <button onClick={(e) => setEmiOption("Debit Card")} className={`${EmiOption === "Debit Card" ? "bg-black hover:bg-gray-900 flex-1 text-white py-[16px] px-[30px] text-center text-[14px]  rounded-full" : "py-[16px] flex-1 border-2 px-[30px]  rounded-full  text-[14px] text-center"}`}>Debit Card & Cardless EMI</button>
+                                    <button onClick={(e) => setEmiOption("Debit Card")} className={`${EmiOption === "Debit Card" ? "bg-black hover:bg-gray-900 flex-1 text-white py-[16px] px-[30px] text-center text-[14px]  rounded-full" : "py-[16px] flex-1 border-2 px-[30px]  rounded-full  text-[14px] text-center"}`}>Debit Card & EMI</button>
                                   </div>
                                   {
                                     EmiOption === "Credit Card EMI" && (
@@ -795,18 +809,24 @@ const Card = ({ data, productId }) => {
                   {sidebarContect === "inStoreRequest" && (
                     <div className="fixed z-[99999] h-full w-screen bg-black/50 backdrop:blur-sm top-0 left-0">
                       <section className="text-black bg-white flex-col absolute right-0 top-0 h-full z-[99999] w-full  lg:w-[35%] flex overflow-y-auto">
-                        <div className="flex px-[40px] h-[72px] items-center mt-[20px] mb-[10px]   justify-end">
-                          <button
-                            className="text-xl  px-3 py-1 hover:bg-[#e5e5e5] rounded-full mt-0 cursor-pointer  "
-                            onClick={() => setsidebarContent(null)}
-                          >
-                            X
-                          </button>
-                        </div>
+
                         <div className="flex flex-col">
                           <div className="px-[40px] pb-[32px]">
                             <div>
-                              <h1 className="text-[24px] font-semibold text-[#111111]">Visit us at your preferred Ayatrio store</h1>
+                              <div className="flex flex-col w-full">
+                                <div className="flex items-center justify-between pt-2 mt-[10px] mb-[10px] h-[72px]">
+                                  <h1 className="text-[24px] font-semibold text-[#111111]">
+                                    Visit us at your preferred Ayatrio store
+                                  </h1>
+                                  <button
+                                    className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
+                                    onClick={() => setsidebarContent(null)}
+                                  >
+                                    X
+                                  </button>
+                                </div>
+                              </div>
+
                               <div className="my-[16px] flex flex-col">
                                 <label className="text-[14px] font-normal text-[#484848]">Search by city</label>
                                 <div className="w-full px-[6px] border-2 border-[#484848] rounded-md h-[48px]">
@@ -887,18 +907,21 @@ const Card = ({ data, productId }) => {
                 {sidebarContect === "deliveryOption" && (
                   <div className=" fixed z-[99999] h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0">
                     <section className="text-black z-[99999] bg-white flex-col absolute right-0 top-0 h-screen w-full  lg:w-[35%] flex ">
-                      <div className="flex px-[40px] h-[72px] items-center    justify-end">
-                        <button
-                          className="text-xl  px-3 py-1 hover:bg-[#e5e5e5] rounded-full mt-0 cursor-pointer  "
-                          onClick={() => setsidebarContent(null)}
-                        >
-                          X
-                        </button>
-                      </div>
+
                       <div className="flex flex-col">
                         <div className="px-[40px] pb-[32px]">
                           <div>
-                            <h1 className="text-[24px] font-semibold text-[#111111]">Use your location</h1>
+                            <div className="flex items-center justify-between pl-[40px] h-[72px]">
+                              <h1 className="text-[24px] font-semibold text-[#111111]">
+                                Use your location
+                              </h1>
+                              <button
+                                className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
+                                onClick={() => setsidebarContent(null)}
+                              >
+                                X
+                              </button>
+                            </div>
                             <div className="mt-[16px]">
                               <p className="text-[14px] text-[#484848]">Get updated information about product delivery and stock availability for your area.</p>
                             </div>
@@ -928,20 +951,25 @@ const Card = ({ data, productId }) => {
                 {sidebarContect === "calculator" && (
                   <div className=" fixed h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0 z-[99999]">
                     <section className="text-black bg-white flex-col absolute right-0 top-0 h-screen z-[99999] w-full  lg:w-[35%] flex ">
-                      <div className="flex px-[40px] h-[72px]   items-center justify-end">
-                        <button
-                          className="text-xl mt-0 px-3 py-1 hover:bg-[#e5e5e5] rounded-full  cursor-pointer  "
-                          onClick={() => setsidebarContent(null)}
-                        >
-                          X
-                        </button>
-                      </div>
+
+
                       <div className="flex flex-col">
                         <div className="px-[40px] pb-[32px]">
-                          <h1 className="text-[24px] font-semibold text-[#111111] mb-10">Calculator</h1>
+                          <div className="flex items-center justify-between h-[72px] mb-10">
+                            <h1 className="text-[24px] font-semibold text-[#111111]">
+                              Calculator
+                            </h1>
+                            <button
+                              className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
+                              onClick={() => setsidebarContent(null)}
+                            >
+                              X
+                            </button>
+                          </div>
                           <Calculation priceData={data} />
                         </div>
                       </div>
+
 
 
                     </section>
