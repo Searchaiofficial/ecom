@@ -15,7 +15,7 @@ const GiftCards = () => {
               <div className="flex flex-col lg:flex-row gap-8">
                 <div className="flex flex-col">
                   <div>
-                    <Image width={600} height={338} src="/customerservice/GiftCardsImg/gift1.avif" alt="gift1" />
+                    <Image width={600} height={338} src="/images/customerservice/GiftCardsImg/gift1.avif" alt="gift1" />
                   </div>
                   <div className="flex flex-col gap-1">
                     <h2 className="font-bold text-xl">Digital Gift Card</h2>
@@ -42,7 +42,7 @@ const GiftCards = () => {
                     <Image
                       width={600}
                       height={338}
-                      src="/customerservice/GiftCardsImg/gift2.avif"
+                      src="/images/customerservice/GiftCardsImg/gift2.avif"
                       alt=""
                     />
                   </div>
@@ -60,7 +60,7 @@ const GiftCards = () => {
                     <Image
                       width={600}
                       height={338}
-                      src="/customerservice/GiftCardsImg/gift3.avif"
+                      src="/images/customerservice/GiftCardsImg/gift3.avif"
                       alt=""
                     />
                   </div>
@@ -104,7 +104,7 @@ const GiftCards = () => {
                 <Image
                   width={750}
                   height={1001}
-                  src="/customerservice/GiftCardsImg/woman-holding-jar.avif"
+                  src="/images/customerservice/GiftCardsImg/woman-holding-jar.avif"
                   alt=""
                 />
               </div>

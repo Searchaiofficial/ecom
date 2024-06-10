@@ -4,7 +4,7 @@ import WaytoBuy from '@/components/WayToBuy/WaytoBuy'
 function page() {
   return (
     <div>
-        <WaytoBuy/>
+      <WaytoBuy />
     </div>
   )
 }
