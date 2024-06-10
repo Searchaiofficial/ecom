@@ -1,5 +1,5 @@
-import CabinetItem from '../../../../components/services/CabinetItem'
-import Faq from '../../../../components/services/Faq'
+// import CabinetItem from '../../../../components/services/CabinetItem'
+// import Faq from '../../../../components/services/Faq'
 
 
 export default function Installation() {
@@ -95,7 +95,7 @@ export default function Installation() {
                 <div className="container mx-auto px-4">
                     <div className="flex flex-wrap -mx-4">
                         <div className="w-full md:w-1/2 px-4">
-                            <CabinetItem
+                            {/* <CabinetItem
                                 imageSrc="/images/services/installation/cab1.jpg"
                                 title="Cabinet with door (base, wall or high), starting at $119/cabinet"
                                 description={[
@@ -103,10 +103,10 @@ export default function Installation() {
                                     'Adjustment of all Ayatrio SEKTION base cabinets, wall cabinets, high cabinets and doors for appearance.',
                                     'Excludes installation of Ayatrio SEKTION drawer, drawer front, corner carousel, pull-outs, deco strip, side filler strip, cover caps, cover panel 26” x 36”, 36” x 96” or interior fittings other than shelves.'
                                 ]}
-                            />
+                            /> */}
                         </div>
                         <div className="w-full md:w-1/2 px-4">
-                            <CabinetItem
+                            {/* <CabinetItem
                                 imageSrc="/images/services/installation/cab2.jpg"
                                 title="Cabinet with drawer or corner carousel (base or wall), starting at $162/cabinet"
                                 description={[
@@ -114,10 +114,10 @@ export default function Installation() {
                                     "Adjustment of all Ayatrio SEKTION base cabinets, wall cabinets, doors, drawers and drawer fronts for appearance.",
                                     "Excludes installation of Ayatrio SEKTION deco strip, side filler strip, cover caps or cover panel 26” x 36”, 36” x 96”"
                                 ]}
-                            />
+                            /> */}
                         </div>
                         <div className="w-full md:w-1/2 px-4">
-                            <CabinetItem
+                            {/* <CabinetItem
                                 imageSrc="/images/services/installation/cab3.jpg"
                                 title="Cabinet with drawer or corner carousel (base or wall), starting at $162/cabinet"
                                 description={[
@@ -125,10 +125,10 @@ export default function Installation() {
                                     "Adjustment of all Ayatrio SEKTION high cabinets, doors, drawers, drawer fronts for appearance.",
                                     "Excludes installation or Ayatrio SEKTION deco strip, side filler strip, cover caps or cover panel 26” x 36”, 36” x 96”"
                                 ]}
-                            />
+                            /> */}
                         </div>
                         <div className="w-full md:w-1/2 px-4">
-                            <CabinetItem
+                            {/* <CabinetItem
                                 imageSrc="/images/services/installation/cab4.jpg"
                                 title="Cabinet with drawer or corner carousel (base or wall), starting at $162/cabinet"
                                 description={[
@@ -138,7 +138,7 @@ export default function Installation() {
                                     "Gables, molding & fillers",
                                     "Cover caps"
                                 ]}
-                            />
+                            /> */}
                         </div>
                     </div>
                 </div>
@@ -177,7 +177,7 @@ export default function Installation() {
                 <h1 className="text-black text-2xl lg:text-4xl font-semibold mb-6 lg:mb-12 px-3 lg:text-left">
                     Frequently asked questions
                 </h1>
-                <Faq faqFor='installation' />
+                {/* <Faq faqFor='installation' /> */}
             </section>
 
         </div>
