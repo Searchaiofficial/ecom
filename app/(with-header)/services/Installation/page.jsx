@@ -1,7 +1,5 @@
-// import CabinetItem from '../../../../components/services/CabinetItem'
-// import Faq from '../../../../components/services/Faq'
-import CabinetItem from '@/components/services/CabinetItem'
-import Faq from '@/components/services/Faq'
+import CabinetItem from '../../../../components/services/CabinetItem'
+import Faq from '../../../../components/services/Faq'
 
 
 export default function Installation() {
