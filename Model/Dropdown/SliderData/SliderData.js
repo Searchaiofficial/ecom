@@ -1,50 +1,50 @@
 export const roomOptions = [
   {
     room: "Living Room",
-    src : "/room/livingroom.jpg",
+    src: "/images/room/livingroom.jpg",
   },
 
   {
     room: "Bedroom",
-    src : "/room/bedroom.jpg",
+    src: "/images/room/bedroom.jpg",
   },
 
   {
     room: "Dining Room",
-    src : "/room/diningroom.jpg",
+    src: "/images/room/diningroom.jpg",
   },
 
   {
     room: "Bathroom",
-    src : "/room/bathroom.jpg",
+    src: "/images/room/bathroom.jpg",
   },
 
   {
     room: "Balcony",
-    src : "/room/livingroom.jpg",
+    src: "/images/room/livingroom.jpg",
   },
 
   {
     room: "Office Room",
-    src : "/room/homeoffice.jpg",
+    src: "/images/room/homeoffice.jpg",
   },
 
   {
     room: "Guest Room",
-    src : "/room/livingroom.jpg",
+    src: "/images/room/livingroom.jpg",
   },
 
   {
     room: "Pooja Room",
-    src : "/room/livingroom.jpg",
+    src: "/images/room/livingroom.jpg",
   },
 
   {
     room: "Kids Room",
-    src : "/room/kidroom.jpg",
+    src: "/images/room/kidroom.webp",
   },
   {
     room: "Kitchen",
-    src : "/room/kitchen.jpg",
+    src: "/images/room/kitchen.jpg",
   },
 ];

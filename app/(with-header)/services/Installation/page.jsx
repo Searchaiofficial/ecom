@@ -1,5 +1,5 @@
-import CabinetItem from '../../../../components/Services/CabinetItem'
-import Faq from '../../../../components/Services/Faq'
+import CabinetItem from '../../../../components/services/CabinetItem'
+import Faq from '../../../../components/services/Faq'
 
 
 export default function Installation() {
@@ -19,7 +19,7 @@ export default function Installation() {
                     </div>
                     <div className="w-full md:w-3/5 flex items-center justify-center">
                         <img
-                            src="/services/installation/installation.jpg"
+                            src="/images/services/installation/installation.jpg"
                             alt="Financial service"
                             className="w-full h-full object-cover"
                         />
@@ -96,7 +96,7 @@ export default function Installation() {
                     <div className="flex flex-wrap -mx-4">
                         <div className="w-full md:w-1/2 px-4">
                             <CabinetItem
-                                imageSrc="/services/installation/cab1.jpg"
+                                imageSrc="/images/services/installation/cab1.jpg"
                                 title="Cabinet with door (base, wall or high), starting at $119/cabinet"
                                 description={[
                                     'Assembly and installation of Ayatrio SEKTION base cabinets, wall cabinets, high cabinets, doors, cover panels, legs, plinths, shelves, knobs and handles according to manufacturer’s assembly instructions.',
@@ -107,7 +107,7 @@ export default function Installation() {
                         </div>
                         <div className="w-full md:w-1/2 px-4">
                             <CabinetItem
-                                imageSrc="/services/installation/cab2.jpg"
+                                imageSrc="/images/services/installation/cab2.jpg"
                                 title="Cabinet with drawer or corner carousel (base or wall), starting at $162/cabinet"
                                 description={[
                                     "Assembly and installation of Ayatrio SEKTION base cabinets, wall cabinets, drawers, drawer fronts, doors, cover panels, legs, plinths, shelves, interior fittings, knobs and handles according to manufacturer’s assembly instructions.",
@@ -118,7 +118,7 @@ export default function Installation() {
                         </div>
                         <div className="w-full md:w-1/2 px-4">
                             <CabinetItem
-                                imageSrc="/services/installation/cab3.jpg"
+                                imageSrc="/images/services/installation/cab3.jpg"
                                 title="Cabinet with drawer or corner carousel (base or wall), starting at $162/cabinet"
                                 description={[
                                     "Assembly and installation of Ayatrio SEKTION high cabinets, drawers, drawer fronts, doors, cover panels, legs, plinths, shelves, interior fittings, knobs and handles according to manufacturer’s assembly instructions.",
@@ -129,7 +129,7 @@ export default function Installation() {
                         </div>
                         <div className="w-full md:w-1/2 px-4">
                             <CabinetItem
-                                imageSrc="/services/installation/cab4.jpg"
+                                imageSrc="/images/services/installation/cab4.jpg"
                                 title="Cabinet with drawer or corner carousel (base or wall), starting at $162/cabinet"
                                 description={[
                                     "Additional installation services are priced separately from the basic installation cost. All additional installation services will be priced for you by an independent service provider.",

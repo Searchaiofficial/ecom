@@ -1,9 +1,9 @@
 "use client";
-import bnw from "@/public/Dropitemsimg/bnw.png";
-import blue from "@/public/Dropitemsimg/blue.png";
-import green from "@/public/Dropitemsimg/green.png";
-import gray from "@/public/Dropitemsimg/gray.png";
-import pink from "@/public/Dropitemsimg/pink.webp";
+import bnw from "@/public/images/Dropitemsimg/bnw.png";
+import blue from "@/public/images/Dropitemsimg/blue.png";
+import green from "@/public/images/Dropitemsimg/green.png";
+import gray from "@/public/images/Dropitemsimg/gray.png";
+import pink from "@/public/images/Dropitemsimg/pink.webp";
 import "./style.css";
 import Image from "next/image";
 import { useRouter } from "next/navigation";

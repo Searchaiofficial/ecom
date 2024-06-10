@@ -1,5 +1,5 @@
 export const blindsFeaturedData = {
-    id:1,
-    image: "/Dropitemsimg/featuredBlinds.jpg",
-    text: "Blinds"
-  }
+  id: 1,
+  image: "/images/Dropitemsimg/featuredBlinds.jpg",
+  text: "Blinds"
+}

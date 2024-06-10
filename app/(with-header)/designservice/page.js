@@ -45,7 +45,7 @@ const DesignServicePage = () => {
                         height={225}
                         className="p-5"
                         alt="phone image"
-                        src="/Businesstobusinessimg/phone.png"
+                        src="/images/Businesstobusinessimg/phone.png"
                       />
                     </div>
                     <p className="font-semibold text-xl">design chat</p>
@@ -69,7 +69,7 @@ const DesignServicePage = () => {
                         height={225}
                         alt="house image"
                         className="p-5"
-                        src="/Businesstobusinessimg/house.png"
+                        src="/images/Businesstobusinessimg/house.png"
                       />
                     </div>
                     <p className="font-semibold text-xl">design services</p>

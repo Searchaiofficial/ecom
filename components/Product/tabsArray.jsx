@@ -76,16 +76,16 @@ const Size = [
 ];
 
 const colorarr = [
-  { id: 1, name: "Beige", image: "/Dropitemsimg/beige.png" },
-  { id: 2, name: "Black", image: "/Dropitemsimg/black.avif" },
-  { id: 3, name: "Blue", image: "/Dropitemsimg/blue.png" },
-  { id: 4, name: "Brown", image: "/Dropitemsimg/brown.png" },
-  { id: 5, name: "Cream", image: "/Dropitemsimg/cream.jpeg" },
-  { id: 6, name: "Golden", image: "/Dropitemsimg/golden.avif" },
-  { id: 7, name: "Green", image: "/Dropitemsimg/green.png" },
-  { id: 8, name: "Grey", image: "/Dropitemsimg/gray.png" },
-  { id: 9, name: "Multicoloured", image: "/Dropitemsimg/bnw.png" },
-  { id: 10, name: "Orange", image: "/Dropitemsimg/orange.avif" },
+  { id: 1, name: "Beige", image: "/images/Dropitemsimg/beige.png" },
+  { id: 2, name: "Black", image: "/images/Dropitemsimg/black.avif" },
+  { id: 3, name: "Blue", image: "/images/Dropitemsimg/blue.png" },
+  { id: 4, name: "Brown", image: "/images/Dropitemsimg/brown.png" },
+  { id: 5, name: "Cream", image: "/images/Dropitemsimg/cream.jpeg" },
+  { id: 6, name: "Golden", image: "/images/Dropitemsimg/golden.avif" },
+  { id: 7, name: "Green", image: "/images/Dropitemsimg/green.png" },
+  { id: 8, name: "Grey", image: "/images/Dropitemsimg/gray.png" },
+  { id: 9, name: "Multicoloured", image: "/images/Dropitemsimg/bnw.png" },
+  { id: 10, name: "Orange", image: "/images/Dropitemsimg/orange.avif" },
 ];
 
 const categoryarr = [

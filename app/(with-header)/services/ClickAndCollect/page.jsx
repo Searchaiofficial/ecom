@@ -16,7 +16,7 @@ export default function ClickAndCollectServicePage() {
                     </div>
                     <div className="w-full md:w-3/5 flex items-center justify-center">
                         <img
-                            src="/services/ClickCollectService/services.jpg"
+                            src="/images/services/ClickCollectService/services.jpg"
                             alt="Financial service"
                             className="w-full h-full object-cover"
                         />
@@ -72,7 +72,7 @@ export default function ClickAndCollectServicePage() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div className="col-span-1">
                         <div className="pb-[56.49761904761905%] relative">
-                            <img src="/services/ClickCollectService/car.jpg" alt="Cars parked in front of an Ayatrio store" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                            <img src="/images/services/ClickCollectService/car.jpg" alt="Cars parked in front of an Ayatrio store" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
                             <a href="" className="absolute inset-0 flex items-center justify-center">
                                 {null}
                             </a>
@@ -92,7 +92,7 @@ export default function ClickAndCollectServicePage() {
                     </div>
                     <div className="col-span-1">
                         <div className="pb-[56.2%] relative">
-                            <img src="/services/ClickCollectService/pickup.jpg" alt="A person riding a cargo bicycle with Ayatrio boxes" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                            <img src="/images/services/ClickCollectService/pickup.jpg" alt="A person riding a cargo bicycle with Ayatrio boxes" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
                             <a href="" className="absolute inset-0 flex items-center justify-center ">
                                 {null}
                             </a>
@@ -107,7 +107,7 @@ export default function ClickAndCollectServicePage() {
                     </div>
                     <div className="col-span-1">
                         <div className="pb-[56.2%] relative">
-                            <img src="/services/ClickCollectService/deliver.jpg" alt="FedEx worker helping a customer" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                            <img src="/images/services/ClickCollectService/deliver.jpg" alt="FedEx worker helping a customer" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
                             <a href="" className="absolute inset-0 flex items-center justify-center ">{null}</a>
                         </div>
                         <div className="p-4">
