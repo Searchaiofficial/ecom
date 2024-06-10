@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useRef } from "react";
 import "./styles.css";
 import { useEffect, useState } from "react";
 import Asidebox from "./AsideSection/Asidebox";
@@ -145,7 +145,7 @@ function Header({ setIsHeaderMounted }) {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [isScrolled]);
+  }, []);
   const handleLoginNav = () => {
     router.push("/login");
   };
@@ -204,48 +204,38 @@ function Header({ setIsHeaderMounted }) {
 
   console.log(pathname)
 
+  const phrases = pathname !== "/ayatrio-map" ? [` ' Wallpapers '`, ` ' Curtains '`, ` ' Blinds '`] : [` ' Bengaluru '`, ` ' Kolkata '`, ` ' Mumbai '`];
 
-
-
-  const [displayedText, setDisplayedText] = useState("");
-  const phrases = pathname !== "/ayatrio-map" ? [` ' Wallpapers '`, ` ' Curtains '`, ` ' Blinds '`] : [` ' Bengaluru '`, ` ' Kolkata '`, ` ' Mumbai '`];;
-
-
+  const displayedTextRef = useRef("");
+  const currentPhraseIndex = useRef(0);
+  const currentCharIndex = useRef(0);
+  const textElementRef = useRef(null);
+  const textElementRef2 = useRef(null);
 
   useEffect(() => {
-    let currentPhraseIndex = 0;
-    let index = 0;
-    let typingTimeout;
-    let phraseTimeout;
+    const interval = setInterval(() => {
+      const currentPhrase = phrases[currentPhraseIndex.current];
+      const nextCharIndex = currentCharIndex.current + 1;
 
-    const typeWriter = () => {
-      if (index < phrases[currentPhraseIndex].length) {
-        setDisplayedText(`${phrases[currentPhraseIndex].slice(0, index + 1)}`);
-        index++;
-        typingTimeout = setTimeout(typeWriter, 50);
+      if (nextCharIndex > currentPhrase.length) {
+        currentCharIndex.current = 0;
+        currentPhraseIndex.current = (currentPhraseIndex.current + 1) % phrases.length;
       } else {
-        phraseTimeout = setTimeout(() => {
-          index = 0;
-          currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
-          typeWriter();
-        }, 1000);
+        displayedTextRef.current = currentPhrase.substring(0, nextCharIndex);
+        currentCharIndex.current = nextCharIndex;
       }
-    };
 
-    if (searchQuery) {
-      setDisplayedText(`Search for ${searchQuery}`);
-      clearTimeout(typingTimeout);
-      clearTimeout(phraseTimeout);
-    } else {
-      typeWriter();
-    }
+      if (textElementRef.current) {
+        textElementRef.current.textContent = displayedTextRef.current;
+      }
 
-    return () => {
-      clearTimeout(typingTimeout);
-      clearTimeout(phraseTimeout);
-    };
-  }, [searchQuery, pathname]);
+      if (textElementRef2.current) {
+        textElementRef2.current.textContent = displayedTextRef.current;
+      }
+    }, 100);
 
+    return () => clearInterval(interval);
+  }, [phrases]);
 
   const handleLoginClick = () => {
     router.push("/login")
@@ -390,7 +380,7 @@ function Header({ setIsHeaderMounted }) {
                       height={27}
                     />
                   </span>
-                  <p className="ml-7 self-center lg:text-[13px] text-[12px] mt-0.5   text-gray-400"> Search for {displayedText}</p>
+                  <p className="ml-7 self-center lg:text-[13px] text-[12px] mt-0.5   text-gray-400"> Search for <span ref={textElementRef}></span></p>
                 </div>
                 {/* <div
                   className="md:hidden block w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer"
@@ -495,7 +485,7 @@ function Header({ setIsHeaderMounted }) {
                     height={20}
                     className="ml-[10px]"
                   />
-                  <p className="ml-3 line-clamp-1 text-[13px] mt-[2px]  text-gray-400">Search for {displayedText}</p>
+                  <p className="ml-3 line-clamp-1 text-[13px] mt-[2px]  text-gray-400">Search for <span ref={textElementRef2}></span></p>
                 </div>
                 <Image src={"/Ayatrio updated icon/camera.svg"} width={20} height={20} className="mr-[10px] ml-[10px]" />
               </div>
