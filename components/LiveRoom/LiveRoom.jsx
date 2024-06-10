@@ -66,8 +66,8 @@ const LiveRoom = () => {
   };
 
   const stars = new Array(4)
-    .fill("/svg/icon/star.svg")
-    .concat("/svg/icon/half-star.svg");
+    .fill("/icons/star.svg")
+    .concat("/icons/half-star.svg");
 
   return (
     <div className="">
@@ -165,21 +165,19 @@ const LiveRoom = () => {
           <section className="pt-[15vh] text-black bg-white flex-col absolute right-0 top-0 h-screen p-8 gap-8 z-50  w-[35%] flex ">
             <div className="flex justify-around text-lg font-medium">
               <h1
-                className={`border-b-2 cursor-pointer ${
-                  optionClick === "Instant Meeting"
-                    ? "border-black"
-                    : "border-transparent"
-                }`}
+                className={`border-b-2 cursor-pointer ${optionClick === "Instant Meeting"
+                  ? "border-black"
+                  : "border-transparent"
+                  }`}
                 onClick={() => handleSwitchOption("Instant Meeting")}
               >
                 Instant Meeting
               </h1>
               <h1
-                className={`border-b-2 cursor-pointer ${
-                  optionClick === "Schedule Meeting"
-                    ? "border-black"
-                    : "border-transparent"
-                }`}
+                className={`border-b-2 cursor-pointer ${optionClick === "Schedule Meeting"
+                  ? "border-black"
+                  : "border-transparent"
+                  }`}
                 onClick={() => handleSwitchOption("Schedule Meeting")}
               >
                 Schedule Meeting

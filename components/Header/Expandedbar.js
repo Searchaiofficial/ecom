@@ -9,7 +9,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
 import { useDebounceValue } from "usehooks-ts";
-// import search from "../../assets/icon/search.svg";
+// import search from "../../assets/icons/search.svg";
 // import mainlogo from "../../assets/ayatriologo.png";
 import { searchProductsRequest } from "../Features/search/searchSlice"
 import { STORE_MAP_DATA } from "@/constants/store-map-data";
@@ -231,7 +231,7 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
                 }}
               />
               <Image
-                src="/svg/icon/search.svg"
+                src="/icons/search.svg"
                 alt="Search icon"
                 width={20}
                 height={20}

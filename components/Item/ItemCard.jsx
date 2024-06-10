@@ -43,7 +43,7 @@ const handleClick = (id) => {
         >
           <div className="card-title-desc">{props.title}</div>
           <div className="card-rating">
-            <Image src="/rooms/star-full-icon.svg" width={20} height={20} alt="star" />
+            <Image src="/icons/star-full-icon.svg" width={20} height={20} alt="star" />
             {props.rating}
           </div>
         </div>

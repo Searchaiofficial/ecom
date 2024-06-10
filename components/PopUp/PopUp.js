@@ -342,7 +342,7 @@ function App() {
                                       }}
                                     >
                                       <Image
-                                        src="/svg/icon/tick.svg"
+                                        src="/icons/tick.svg"
                                         height={20}
                                         width={20}
                                         alt="tick"
@@ -360,14 +360,14 @@ function App() {
                           )}
                           <div className="swiper-pagination"></div>
                           <Image
-                            src="/svg/dropdown/leftvector.svg"
+                            src="/icons/leftvector.svg"
                             width={30}
                             height={30}
                             alt="arrow"
                             className="swiper-button-prev sm:-translate-y-[150px] sm:-translate-x-[460px]"
                           />
                           <Image
-                            src="/ayatrio icon/right-white.svg"
+                            src="/icons/right-white.svg"
                             width={30}
                             height={30}
                             alt="arrow"
@@ -417,7 +417,7 @@ function App() {
                       }}
                     >
                       <Image
-                        src="/svg/icon/tick.svg"
+                        src="/icons/tick.svg"
                         height={20}
                         width={20}
                         alt="close"

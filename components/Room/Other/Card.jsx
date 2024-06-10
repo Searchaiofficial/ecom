@@ -70,7 +70,7 @@ const Card = ({ data, productId }) => {
       starsArray.push(
         <img
           key={i}
-          src={"/icon/star.svg"}
+          src={"/icons/star.svg"}
           height={20}
           width={20}
           alt="star"
@@ -83,7 +83,7 @@ const Card = ({ data, productId }) => {
       starsArray.push(
         <img
           key={fullStars}
-          src={"/icon/half-star.svg"}
+          src={"/icons/half-star.svg"}
           height={20}
           width={20}
           alt="half-star"
@@ -96,7 +96,7 @@ const Card = ({ data, productId }) => {
       starsArray.push(
         <img
           key={fullStars + halfStar + i}
-          src={"/ayatrio icon/no fill star.svg"}
+          src={"/icons/no-fill-star.svg"}
           height={20}
           width={20}
           alt="empty-star"
@@ -501,7 +501,7 @@ const Card = ({ data, productId }) => {
               >
                 <div className="flex flex-row gap-1">
                   <Image
-                    src="/rooms/payment.svg"
+                    src="/icons/payment.svg"
                     height={25}
                     width={25}
                     alt="icon"
@@ -518,7 +518,7 @@ const Card = ({ data, productId }) => {
               >
                 <div className="flex flex-row gap-1">
                   <Image
-                    src="/rooms/ayatrio_store_b.svg"
+                    src="/icons/ayatrio_store_b.svg"
                     height={25}
                     width={25}
                     alt="icon"
@@ -537,7 +537,7 @@ const Card = ({ data, productId }) => {
               >
                 <div className="flex flex-row gap-2">
                   <Image
-                    src="/rooms/delivary.svg"
+                    src="/icons/delivary.svg"
                     height={25}
                     width={25}
                     alt="icon"
@@ -553,7 +553,7 @@ const Card = ({ data, productId }) => {
               >
                 <div className="flex flex-row gap-2">
                   <Image
-                    src="/rooms/calculator.svg"
+                    src="/icons/calculator.svg"
                     height={25}
                     width={25}
                     alt="icon"
@@ -614,11 +614,11 @@ const Card = ({ data, productId }) => {
                                   <div onClick={() => setOpenOfferDetails((prev) => !prev)} className="py-[20px]  border-b border-[#D1D1D1] cursor-pointer ">
                                     <div className="flex items-center">
                                       <div className="mr-[15px] p-1  ">
-                                        <Image src="/Ayatrio updated icon/adtocart.svg" height={25} width={25} alt="arrow-right" />
+                                        <Image src="/icons/adtocart.svg" height={25} width={25} alt="arrow-right" />
                                       </div>
                                       <p className="text-[#2E2E2E] text-[14px] flex-1">Get cashback up to Rs 200, Pay using CRED UPI</p>
                                       {
-                                        openOfferDetails ? <Image src="/icon/arrow_right.svg" className="-rotate-90" height={20} width={20} alt="arrow-right" /> : <Image src="/icon/arrow_right.svg" className="rotate-90" height={20} width={20} alt="arrow-right" />
+                                        openOfferDetails ? <Image src="/icons/arrow_right.svg" className="-rotate-90" height={20} width={20} alt="arrow-right" /> : <Image src="/icons/arrow_right.svg" className="rotate-90" height={20} width={20} alt="arrow-right" />
                                       }
                                     </div>
 
@@ -658,14 +658,14 @@ const Card = ({ data, productId }) => {
                                         <div onClick={(e) => setOpenEMIDetails(prev => !prev)} className="flex flex-col items-center py-[20px] border-b cursor-pointer">
                                           <div className="flex items-center w-full ">
                                             <div className="mr-[15px] p-1 ">
-                                              <Image src="/Ayatrio updated icon/icic.svg" height={24} width={24} alt="arrow-right" />
+                                              <Image src="/icons/icic.svg" height={24} width={24} alt="arrow-right" />
                                             </div>
                                             <div className="flex flex-col flex-1 ">
                                               <p className="text-[#2E2E2E] text-[14px]">ICIC Bank</p>
                                               <p className="text-[#8E8E8E] text-xs">from ₹294/month</p>
                                             </div>
                                             {
-                                              openEmiDetails ? <Image src="/icon/arrow_right.svg" className="-rotate-90" height={20} width={20} alt="arrow-right" /> : <Image src="/icon/arrow_right.svg" className="rotate-90" height={20} width={20} alt="arrow-right" />
+                                              openEmiDetails ? <Image src="/icons/arrow_right.svg" className="-rotate-90" height={20} width={20} alt="arrow-right" /> : <Image src="/icons/arrow_right.svg" className="rotate-90" height={20} width={20} alt="arrow-right" />
                                             }
                                           </div>
                                           {
@@ -725,25 +725,25 @@ const Card = ({ data, productId }) => {
                                         </div>
                                         {/* <div className="flex items-center py-[20px] border-b cursor-pointer">
                                           <div className="mr-[15px] p-1 shadow-lg ">
-                                            <Image src="/ayatrio icon/utib.svg" height={24} width={24} alt="arrow-right" />
+                                            <Image src="/icons/utib.svg" height={24} width={24} alt="arrow-right" />
                                           </div>
                                           <div className="flex flex-col flex-1 ">
                                             <p className="text-[#2E2E2E] text-[14px]">ICIC Bank</p>
                                             <p className="text-[#8E8E8E] text-xs">from ₹294/month</p>
                                           </div>
-                                          <Image src="/icon/arrow_right.svg" className="rotate-90" height={20} width={20} alt="arrow-right" />
+                                          <Image src="/icons/arrow_right.svg" className="rotate-90" height={20} width={20} alt="arrow-right" />
                                         </div> */}
                                         <div onClick={(e) => setOpenEMIDetails(prev => !prev)} className="flex flex-col items-center py-[20px] border-b cursor-pointer">
                                           <div className="flex items-center w-full ">
                                             <div className="mr-[15px] p-1 ">
-                                              <Image src="/Ayatrio updated icon/icic.svg" height={24} width={24} alt="arrow-right" />
+                                              <Image src="/icons/icic.svg" height={24} width={24} alt="arrow-right" />
                                             </div>
                                             <div className="flex flex-col flex-1 ">
                                               <p className="text-[#2E2E2E] text-[14px]">ICIC Bank</p>
                                               <p className="text-[#8E8E8E] text-xs">from ₹294/month</p>
                                             </div>
                                             {
-                                              openEmiDetails ? <Image src="/icon/arrow_right.svg" className="-rotate-90" height={20} width={20} alt="arrow-right" /> : <Image src="/icon/arrow_right.svg" className="rotate-90" height={20} width={20} alt="arrow-right" />
+                                              openEmiDetails ? <Image src="/icons/arrow_right.svg" className="-rotate-90" height={20} width={20} alt="arrow-right" /> : <Image src="/icons/arrow_right.svg" className="rotate-90" height={20} width={20} alt="arrow-right" />
                                             }
                                           </div>
                                           {
@@ -855,7 +855,7 @@ const Card = ({ data, productId }) => {
                                   </div>
                                 </div>
                                 <div>
-                                  <Image src="/icon/arrow_right.svg" height={50} width={50} alt="arrow-right" />
+                                  <Image src="/icons/arrow_right.svg" height={50} width={50} alt="arrow-right" />
                                 </div>
                               </div>
                               {/* 2 Location */}
@@ -873,7 +873,7 @@ const Card = ({ data, productId }) => {
                                   </div>
                                 </div>
                                 <div>
-                                  <Image src="/icon/arrow_right.svg" height={50} width={50} alt="arrow-right" />
+                                  <Image src="/icons/arrow_right.svg" height={50} width={50} alt="arrow-right" />
                                 </div>
                               </div>
                               {/* 3 Location */}
@@ -891,7 +891,7 @@ const Card = ({ data, productId }) => {
                                   </div>
                                 </div>
                                 <div>
-                                  <Image src="/icon/arrow_right.svg" height={50} width={50} alt="arrow-right" />
+                                  <Image src="/icons/arrow_right.svg" height={50} width={50} alt="arrow-right" />
                                 </div>
                               </div>
                             </div>
@@ -1031,7 +1031,7 @@ const Card = ({ data, productId }) => {
           </div>
           <div className="flex gap-3 mt-8 items-center justify-center">
             <Image
-              src={"/Ayatrio updated icon/ayatrio_comment_button.svg"}
+              src={"/icons/ayatrio_comment_button.svg"}
               height={35}
               width={35}
               alt="downarrow"

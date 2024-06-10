@@ -360,8 +360,8 @@ const Tabs = ({
     selectedpdt.length < 2 ? "bg-gray-300 text-white" : "bg-black text-white";
 
   const stars = new Array(4)
-    .fill("/svg/icon/star.svg")
-    .concat("/svg/icon/half-star.svg");
+    .fill("/icons/star.svg")
+    .concat("/icons/half-star.svg");
 
   // const firstPart = filterData;
   // const firstPart = filterData.slice(0, 8);
@@ -665,7 +665,7 @@ const Tabs = ({
             >
               All Filters &nbsp;
               <Image
-                src="/svg/icon/choserightfloor.svg"
+                src="/icons/choserightfloor.svg"
                 width={40}
                 height={40}
                 className={`w-4 h-4 mt-1  sm:block hidden
@@ -683,7 +683,7 @@ const Tabs = ({
                       <p>Filter and sort</p>
 
                       <Image
-                        src="/svg/dropdown/close.svg"
+                        src="/icons/close.svg"
                         width={24}
                         height={24}
                         onClick={closeAll}
@@ -699,7 +699,7 @@ const Tabs = ({
                       >
                         Sort &nbsp;
                         <Image
-                          src="/svg/dropdown/backarrow.svg"
+                          src="/icons/backarrow.svg"
                           width={40}
                           height={40}
                           className={`w-6 h-6  mt-1
@@ -725,7 +725,7 @@ const Tabs = ({
                       >
                         Size &nbsp;
                         <Image
-                          src="/svg/dropdown/backarrow.svg"
+                          src="/icons/backarrow.svg"
                           width={40}
                           height={40}
                           className={`w-6 h-6  mt-1
@@ -756,7 +756,7 @@ const Tabs = ({
                           >
                             Design style &nbsp;
                             <Image
-                              src="/svg/dropdown/backarrow.svg"
+                              src="/icons/backarrow.svg"
                               width={40}
                               height={40}
                               className={`w-6 h-6  mt-1
@@ -788,7 +788,7 @@ const Tabs = ({
                       >
                         Color &nbsp;
                         <Image
-                          src="/svg/dropdown/backarrow.svg"
+                          src="/icons/backarrow.svg"
                           width={40}
                           height={40}
                           className={`w-6 h-6  mt-1
@@ -816,7 +816,7 @@ const Tabs = ({
                           >
                             Design style &nbsp;
                             <Image
-                              src="/svg/dropdown/backarrow.svg"
+                              src="/icons/backarrow.svg"
                               width={40}
                               height={40}
                               className={`w-6 h-6  mt-1
@@ -843,7 +843,7 @@ const Tabs = ({
                       >
                         Collections &nbsp;
                         <Image
-                          src="/svg/dropdown/backarrow.svg"
+                          src="/icons/backarrow.svg"
                           width={40}
                           height={40}
                           className={`w-6 h-6  mt-1
@@ -868,7 +868,7 @@ const Tabs = ({
                       >
                         Type &nbsp;
                         <Image
-                          src="/svg/dropdown/backarrow.svg"
+                          src="/icons/backarrow.svg"
                           width={40}
                           height={40}
                           className={`w-6 h-6  mt-1

@@ -37,7 +37,7 @@ const Label = ({ data }) => {
             <div className="flex  top-16 border-l border-zinc-200">
               <Image
                 className="flex self-center mx-[4px] "
-                src="/Ayatrio updated icon/backarrow.svg"
+                src="/icons/backarrow.svg"
                 height={24}
                 width={24}
                 alt="arrow"

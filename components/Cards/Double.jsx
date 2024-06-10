@@ -103,14 +103,14 @@ const Double = () => {
           );
         })}
         <Image
-          src="/svg/dropdown/rightvector.svg"
+          src="/icons/rightvector.svg"
           width={30}
           height={30}
           alt="arrow"
           className="swiper-button-prev sm:-translate-y-[150px] rotate-180 sm:-translate-x-[585px] sm:block hidden"
         />
         <Image
-          src="/ayatrio icon/right.svg"
+          src="/icons/right.svg"
           width={30}
           height={30}
           alt="arrow"

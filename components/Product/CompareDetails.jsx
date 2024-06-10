@@ -17,8 +17,8 @@ const CompareDetails = ({ filteredProducts }) => {
     router.push(`/room/${id}`);
   };
   const stars = new Array(4)
-    .fill("/svg/icon/star.svg")
-    .concat("/svg/icon/half-star.svg");
+    .fill("/icons/star.svg")
+    .concat("/icons/half-star.svg");
   return (
     <div className="py-20">
       <div className="flex items-center justify-center sm:flex-row flex-wrap sm:gap-28 gap-10 overflow-x-auto">
@@ -28,7 +28,7 @@ const CompareDetails = ({ filteredProducts }) => {
               className="  flex justify-center items-center flex-col gap-3"
               key={item._id}
             >
-              
+
               <p className="text-2xl font-semibold">{item.productTitle}</p>
 
               <p>
@@ -80,7 +80,7 @@ const CompareDetails = ({ filteredProducts }) => {
                     ))}
                   </p>
                 </div>
-              </div> 
+              </div>
               <hr className=" bg-slate-900 w-full" />
             </div>
           ))}

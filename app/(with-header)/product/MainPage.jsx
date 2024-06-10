@@ -156,7 +156,7 @@ const RoomPage = () => {
                       </span>
                     </Link>
                     <Image
-                      src="/ayatrio icon/backarrow.svg"
+                      src="/icons/backarrow.svg"
                       alt="tick"
                       width={10}
                       height={10}
@@ -171,7 +171,7 @@ const RoomPage = () => {
                       </span>
                     </Link>
                     <Image
-                      src="/ayatrio icon/backarrow.svg"
+                      src="/icons/backarrow.svg"
                       alt="tick"
                       width={10}
                       height={10}
@@ -187,7 +187,7 @@ const RoomPage = () => {
                   </span>
                 </Link>
                 <Image
-                  src="/ayatrio icon/backarrow.svg"
+                  src="/icons/backarrow.svg"
                   alt="tick"
                   width={10}
                   height={10}
@@ -204,7 +204,7 @@ const RoomPage = () => {
                   </span>
                 </Link>
                 <Image
-                  src="/ayatrio icon/backarrow.svg"
+                  src="/icons/backarrow.svg"
                   alt="tick"
                   width={10}
                   height={10}

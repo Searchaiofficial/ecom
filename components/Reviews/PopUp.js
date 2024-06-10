@@ -42,7 +42,7 @@ function PopUp({ isPopupVisible, setPopupVisible, closePopup }) {
                   <div className="flex flex-col">
                     <span className="font-bold text-2xl">
                       4.87
-                      <Image src="/rooms/star-icon.svg" width={10} height={10} alt="star" />
+                      <Image src="/icons/star.svg" width={10} height={10} alt="star" />
                     </span>
                     <span className="font-medium text-xs ">Reviews</span>
                     <hr className="mt-4 mr-6"></hr>
@@ -57,39 +57,39 @@ function PopUp({ isPopupVisible, setPopupVisible, closePopup }) {
               </div>
               <div className=" mt-8 flex flex-col gap-4 ml-4">
                 <div className="flex">
-                  <Image src="/rooms/academic-cap-icon.svg" width={10} height={10} alt="academic cap icon" className="text-4xl mr-2 " />
+                  <Image src="/icons/academic-cap-icon.svg" width={10} height={10} alt="academic cap icon" className="text-4xl mr-2 " />
                   <p>
                     Where I went to school: Universidad de Psicología en
                     Valencia
                   </p>
                 </div>
                 <div className="flex">
-                  <Image src="/rooms/shopping-bag-icon.svg" width={10} height={10} alt="shopping bag" className="text-xl mr-2 " />
+                  <Image src="/icons/shopping-bag-icon.svg" width={10} height={10} alt="shopping bag" className="text-xl mr-2 " />
                   <p>My work: coach</p>
                 </div>
                 <div className="flex">
-                  <Image src="/rooms/light-bulb-icon.svg" width={10} height={10} alt="light bulb" className="text-xl mr-2 " />
+                  <Image src="/icons/light-bulb-icon.svg" width={10} height={10} alt="light bulb" className="text-xl mr-2 " />
                   <p>Fun fact: No one believes my age</p>
                 </div>
                 <div className="flex">
-                  <Image src="/rooms/twinkling-stars-icon.svg" width={10} height={10} alt="twinkling stars" className="text-4xl mr-2 " />
+                  <Image src="/icons/twinkling-stars-icon.svg" width={10} height={10} alt="twinkling stars" className="text-4xl mr-2 " />
                   <p>
                     What makes my home unique: Good energy and feeling at home
                   </p>
                 </div>
                 <div className="flex">
-                  <Image src="/rooms/fast-food-icon.svg" width={10} height={10} alt="fast food" className="text-xl mr-2 " />
+                  <Image src="/icons/fast-food-icon.svg" width={10} height={10} alt="fast food" className="text-xl mr-2 " />
                   <p>For guests, I always: Help them enjoy Valencia</p>
                 </div>
                 <div className="flex">
-                  <Image src="/rooms/balloons-icon.svg" width={10} height={10} alt="balloons" className="text-xl mr-2 " />
+                  <Image src="/icons/balloons-icon.svg" width={10} height={10} alt="balloons" className="text-xl mr-2 " />
                   <p>Born in the 60s</p>
                 </div>
               </div>
               <hr className="my-4" />
               <div className="flex justify-between text-2xl">
                 <h2 className="font-medium">Golwen&apos;s reviews</h2>
-                <Image src="/rooms/right-arrow-in-circle-icon.svg" className="mt-1 text-gray-200" alt="Arrow"/>
+                <Image src="/icons/right-arrow-in-circle-icon.svg" className="mt-1 text-gray-200" alt="Arrow" />
               </div>
               <div className="border border-gray-200 rounded-lg my-10">
                 <p className="mx-5 mb-20 mt-5">
@@ -117,17 +117,17 @@ function PopUp({ isPopupVisible, setPopupVisible, closePopup }) {
                 </div>
                 <div className="flex">
                   {/* <IoCheckmark className="mt-1 text-2xl mr-1" /> */}
-                  <Image src="/rooms/checkmark-icon.svg" width={10} height={10} alt="checkmark icon"/>
+                  <Image src="/icons/checkmark-icon.svg" width={10} height={10} alt="checkmark icon" />
                   <span className="text-xl font-thin">Identity</span>
                 </div>
                 <div className="flex">
                   {/* <IoCheckmark className="mt-1 text-2xl mr-1" /> */}
-                  <Image src="/rooms/checkmark-icon.svg" width={10} height={10} alt="checkmark icon"/>
+                  <Image src="/icons/checkmark-icon.svg" width={10} height={10} alt="checkmark icon" />
                   <span className="text-xl font-thin">Email Address</span>
                 </div>
                 <div className="flex">
                   {/* <IoCheckmark className="mt-1 text-2xl mr-1" /> */}
-                  <Image src="/rooms/checkmark-icon.svg" width={10} height={10} alt="checkmark icon"/>
+                  <Image src="/icons/checkmark-icon.svg" width={10} height={10} alt="checkmark icon" />
                   <span className="text-xl font-thin">Phone</span>
                 </div>
               </div>

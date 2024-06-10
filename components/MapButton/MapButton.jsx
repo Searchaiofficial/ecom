@@ -4,7 +4,7 @@ import { useScrollVisibility } from "@/hooks/useScrollVisibility";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-const MapButton = ({}) => {
+const MapButton = ({ }) => {
   const router = useRouter();
   const { isVisible } = useScrollVisibility();
 
@@ -23,7 +23,7 @@ const MapButton = ({}) => {
         <Image
           width={25}
           height={25}
-          src="/svg/icon/ayatrio_store.svg"
+          src="/icons/ayatrio_store.svg"
           alt="Store icon"
           className="header-div-sStore-icon"
         />
@@ -37,7 +37,7 @@ const MapButton = ({}) => {
         <Image
           width={25}
           height={25}
-          src="/svg/icon/ayatrio_store.svg"
+          src="/icons/ayatrio_store.svg"
           alt="Store icon"
           className="header-div-sStore-icon"
         />

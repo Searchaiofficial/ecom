@@ -13,7 +13,7 @@ function UserReviewPostsCard(props) {
             <div key={props.cardkey} className="cursor-pointer group h-[449px] lg:pb-[48px] lg:h-[550px] ">
                 <div className="h-full">
                     <div className="absolute top-4 left-4 p-2  rounded-full flex items-center gap-2 ">
-                        <Image src={"/Ayatrio updated icon/instagram-white-icon.svg"} height={25} width={25} />
+                        <Image src={"/icons/instagram-white-icon.svg"} height={25} width={25} />
                         <p className="text-[14px] font-semibold text-white transition-all duration-300 ">@{props.username}</p>
                     </div>
 

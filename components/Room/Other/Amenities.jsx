@@ -44,7 +44,7 @@ const Amenities = ({ data }) => {
             Show All amenities
           </button> */}
           {/* <div className="flex gap-6 mt-8 items-center justify-center">
-            <Image src={"/svg/dropdown/backarrowRevarce.svg"} height={35} width={35} alt="downarrow" className="rotate-90 h-[35px] w-[35px]  hover:text-gray-600" />
+            <Image src={"/icons/backarrowRevarce.svg"} height={35} width={35} alt="downarrow" className="rotate-90 h-[35px] w-[35px]  hover:text-gray-600" />
 
             <div className="flex flex-col items-center">
               <p className="font-semibold text-[#1D1D1F] text-xs">Have questions about Ayatrio?</p>
@@ -139,27 +139,27 @@ export default Amenities;
 
 // const amenties = [
 //   {
-//     icon: <Image src="/rooms/garden-icon.svg" width={30} height={30} alt="garden" />,
+//     icon: <Image src="/icons/garden-icon.svg" width={30} height={30} alt="garden" />,
 //     text: "Gardern View",
 //     available: true,
 //   },
 //   {
-//     icon: <Image src="/rooms/insert-image-icon.svg" width={30} height={30} alt="insert photo" />,
+//     icon: <Image src="/icons/insert-image-icon.svg" width={30} height={30} alt="insert photo" />,
 //     text: "Mountain view",
 //     available: true,
 //   },
 //   {
-//     icon: <Image src="/rooms/sea-waves-icon.svg" width={30} height={30} alt="waves" />,
+//     icon: <Image src="/icons/sea-waves-icon.svg" width={30} height={30} alt="waves" />,
 //     text: "Lake access",
 //     available: true,
 //   },
 //   {
-//     icon: <Image src="/rooms/kitchen-icon.svg" width={30} height={30} alt="kitchen" />,
+//     icon: <Image src="/icons/kitchen-icon.svg" width={30} height={30} alt="kitchen" />,
 //     text: "Kitchen",
 //     available: true,
 //   },
 //   {
-//     icon: <Image src="/rooms/wifi-icon.svg" width={30} height={30} alt="wifi"/>,
+//     icon: <Image src="/icons/wifi-icon.svg" width={30} height={30} alt="wifi"/>,
 //     text: "Wifi",
 //     available: true,
 //   },
@@ -169,7 +169,7 @@ export default Amenities;
 //     available: true,
 //   },
 //   {
-//     icon: <Image src="/rooms/parking-icon.svg" width={30} height={30} alt="free parking" />,
+//     icon: <Image src="/icons/parking-icon.svg" width={30} height={30} alt="free parking" />,
 //     text: "Free parking on premises",
 //     available: true,
 //   },

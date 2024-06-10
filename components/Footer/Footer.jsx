@@ -18,7 +18,7 @@ const Footer = () => {
   const freeSamplesRoute = "/freesample"
 
   return (
-    <div className={`${(liveRoomRoute === pathname || virtualRoomRoute === pathname || freeDesignRoute === pathname || freeSamplesRoute === pathname ) && "hidden"} bg-gray-100 lg:px-[67px] sm:px-[50px] px-[20px] p mt-20 pt-[70px]`}>
+    <div className={`${(liveRoomRoute === pathname || virtualRoomRoute === pathname || freeDesignRoute === pathname || freeSamplesRoute === pathname) && "hidden"} bg-gray-100 lg:px-[67px] sm:px-[50px] px-[20px] p mt-20 pt-[70px]`}>
       <div className="grid md:grid-cols-6 grid-cols-1 pb-9">
         <div className="md:col-span-2 row-span-1 col-span-1 mr-12 mb-5">
           <JoinAyatrioFamily />
@@ -44,7 +44,7 @@ const Footer = () => {
                   width={35}
                   height={35}
                   className="list-socialicon"
-                  src="/social-icon/facebook-icon.svg"
+                  src="/icons/social-icon/facebook-icon.svg"
                   alt=""
                 />
               </a>
@@ -53,8 +53,8 @@ const Footer = () => {
               <a href="#" className="me-4 hover:underline">
                 <img
                   className="list-socialicon"
-                  src="/social-icon/instagram-icon.svg"
-                  alt=""
+                  src="/icons/social-icon/instagram-icon.svg"
+                  alt="insta icon"
                 />
               </a>
             </li>
@@ -62,8 +62,8 @@ const Footer = () => {
               <a href="#" className="me-4 hover:underline">
                 <img
                   className="list-socialicon"
-                  src="/social-icon/twitter-icon.svg"
-                  alt=""
+                  src="/icons/social-icon/twitter-icon.svg"
+                  alt="twitter icon"
                 />
               </a>
             </li>
@@ -71,8 +71,8 @@ const Footer = () => {
               <a href="#" className="me-4 hover:underline">
                 <img
                   className="list-socialicon"
-                  src="/social-icon/youtube-icon.svg"
-                  alt=""
+                  src="/icons/social-icon/youtube-icon.svg"
+                  alt="youtube icon"
                 />
               </a>
             </li>

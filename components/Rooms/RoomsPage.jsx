@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import bedimageh from "../../public/testp/h.jpeg";
+import bedimageh from "../../public/images/h.jpeg";
 import React, { useEffect, useRef, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -145,7 +145,7 @@ export const RoomsPage = ({ params }) => {
     // <div className="pt-12 bg-white sm:px-[50px] px-[20px]">
     <div className="w-full">
       <div className=" px-[20px] sm:px-[50px] lg:px-[67px] flex justify-center ">
-      <div className="mt-36 w-full flex flex-col">
+        <div className="mt-36 w-full flex flex-col">
           <h1 className="lg:text-[30px] text-[24px] font-semibold">
             {roomMain?.title}
           </h1>

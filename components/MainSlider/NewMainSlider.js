@@ -123,7 +123,7 @@ export default function NewMainSlider({ initialData }) {
       >
         <div className={`${navigationVisible ? "block" : "hidden"}`}>
           <Image
-            src="/ayatrio icon/left-card.svg"
+            src="/icons/left-card.svg"
             width={30}
             height={30}
             alt="arrow"
@@ -154,7 +154,7 @@ export default function NewMainSlider({ initialData }) {
                     </p>
                   </div>
                 </div> */}
-                {data && data.circles.length > 0 &&  data.circles[0].productTitle && (
+                {data && data.circles.length > 0 && data.circles[0].productTitle && (
                   <div className="absolute  sm:top-0 left-0 flex items-center justify-center w-full h-full transition-opacity opacity-0 group-hover:opacity-100">
                     <div onMouseEnter={handleEnter} className="cursor-pointer">
                       <div
@@ -188,7 +188,7 @@ export default function NewMainSlider({ initialData }) {
                           <div className="absolute top-0 right-0 flex items-center justify-end h-full">
                             <Image
                               className="flex mx-1 rotate-90"
-                              src="/ayatrio icon/uparrow.svg"
+                              src="/icons/uparrow.svg"
                               height={20}
                               width={20}
                               alt="arrow"
@@ -205,7 +205,7 @@ export default function NewMainSlider({ initialData }) {
         })}
         <div className={`${navigationVisible ? "block" : "hidden"}`}>
           <Image
-            src="/ayatrio icon/right-card.svg"
+            src="/icons/right-card.svg"
             width={30}
             height={30}
             alt="arrow"

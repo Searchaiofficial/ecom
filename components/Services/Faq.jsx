@@ -24,7 +24,7 @@ const FaqSection = ({ faqFor }) => {
                             >
                                 <span className="font-semibold">{faq.title}</span>
                                 <img
-                                    src={`/icon/${index === activeIndex ? 'up-arrow.svg' : 'down-arrow.svg'}`}
+                                    src={`/icons/${index === activeIndex ? 'uparrow.svg' : 'downarrow.svg'}`}
                                     alt={index === activeIndex ? 'Collapse' : 'Expand'}
                                     className="w-4 h-4 transition-transform transform"
                                 />

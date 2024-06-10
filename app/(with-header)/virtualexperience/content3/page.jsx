@@ -8,9 +8,8 @@ import Sidebar from "@/components/sidebar";
 const ActivityItem = ({ index, widthRange, selectedActivity, handleClick }) => (
   <div
     onClick={() => handleClick(index)}
-    className={`sm:w-1/5 w-[60%] h-40 my-20 border-t-2 border-b-2 border-pink-950 relative flex items-center flex-col ${
-      selectedActivity[index] ? "" : ""
-    }`}
+    className={`sm:w-1/5 w-[60%] h-40 my-20 border-t-2 border-b-2 border-pink-950 relative flex items-center flex-col ${selectedActivity[index] ? "" : ""
+      }`}
   >
     {selectedActivity[index] && (
       <div className="overlay absolute top-0 left-0 w-full h-full opacity-50 bg-black"></div>
@@ -18,7 +17,7 @@ const ActivityItem = ({ index, widthRange, selectedActivity, handleClick }) => (
     <div className={`w-${widthRange} h-20 bg-orange-400`}></div>
     <div className="flex items-center gap-2">
       <Image
-        src="/svg/dropdown/up-arrow-svgrepo-com.svg"
+        src="/icons/up-arrow-line.svg"
         alt="arrow"
         width={10}
         height={10}
@@ -26,7 +25,7 @@ const ActivityItem = ({ index, widthRange, selectedActivity, handleClick }) => (
       />
       {widthRange} Widths{" "}
       <Image
-        src="/svg/dropdown/up-arrow-svgrepo-com.svg"
+        src="/icons/up-arrow-line.svg"
         alt="arrow"
         width={10}
         height={10}
@@ -38,7 +37,7 @@ const ActivityItem = ({ index, widthRange, selectedActivity, handleClick }) => (
       <div className="room-item absolute bottom-4 z-10 flex items-center opacity-50 justify-center">
         <div className="circle-container relative flex justify-center items-center">
           <Image
-            src="/svg/icon/tick.svg"
+            src="/icons/tick.svg"
             alt="tick"
             width={30}
             height={30}

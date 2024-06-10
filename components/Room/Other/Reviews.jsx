@@ -28,7 +28,7 @@ const ratingsData = [
     value: "5.0",
     icon: (
       <Image
-        src="/rooms/checkmark-icon.svg"
+        src="/icons/checkmark-icon.svg"
         width={36}
         height={36}
         alt="accuracy"
@@ -41,7 +41,7 @@ const ratingsData = [
     value: "4.9",
     icon: (
       <Image
-        src="/rooms/message-icon.svg"
+        src="/icons/message-icon.svg"
         width={36}
         height={36}
         alt="communication"
@@ -54,7 +54,7 @@ const ratingsData = [
     value: "4.0",
     icon: (
       <Image
-        src="/rooms/map-location-icon.svg"
+        src="/icons/map-location-icon.svg"
         width={36}
         height={36}
         alt="map"
@@ -67,7 +67,7 @@ const ratingsData = [
     value: "5.0",
     icon: (
       <Image
-        src="/rooms/price-tag-icon.svg"
+        src="/icons/price-tag-icon.svg"
         width={36}
         height={36}
         alt="value"
@@ -298,7 +298,7 @@ const Reviews = ({ productId, data }) => {
                 {[...Array(review.rating)].map((_, i) => (
                   <Image
                     key={i}
-                    src="/icon/star.svg"
+                    src="/icons/star.svg"
                     width={15}
                     height={15}
                     alt="star"

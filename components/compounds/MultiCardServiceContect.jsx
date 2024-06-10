@@ -21,7 +21,7 @@ const MultiCardServiceContent = (props) => {
       <div className="absolute bottom-1 right-4 mb-8">
         <Image
           className="w-10 h-10"
-          src="/MultiCardIcons/add-circle.svg"
+          src="/icons/add-circle.svg"
           width={0}
           height={0}
           alt="add"

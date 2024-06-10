@@ -11,52 +11,52 @@ import axios from "axios";
 
 const servicedData = [
   {
-    image: "/Ayatrio updated icon/10 year warrante.svg",
+    image: "/icons/10-year-warrante.svg",
     label: "Measuring service",
     link: "#"
   },
   {
-    image: "/Ayatrio updated icon/10 year warrante.svg",
+    image: "/icons/10-year-warrante.svg",
     label: "Installation Services",
     link: "/services/Installation"
   },
   {
-    image: "/Ayatrio updated icon/10 year warrante.svg",
+    image: "/icons/10-year-warrante.svg",
     label: "planning service",
     link: "/services/Planning"
   },
   {
-    image: "/Ayatrio updated icon/10 year warrante.svg",
+    image: "/icons/10-year-warrante.svg",
     label: "Buy Back service",
     link: "/services/BuyBack"
   },
   {
-    image: "/Ayatrio updated icon/10 year warrante.svg",
+    image: "/icons/10-year-warrante.svg",
     label: "Click & Collect service",
     link: "/services/ClickAndCollect"
   },
   {
-    image: "/Ayatrio updated icon/10 year warrante.svg",
+    image: "/icons/10-year-warrante.svg",
     label: "Finance service",
     link: "/services/Finance"
   },
   {
-    image: "/Ayatrio updated icon/10 year warrante.svg",
+    image: "/icons/10-year-warrante.svg",
     label: "Track & Manage my Order",
     link: "/track-order"
   },
   {
-    image: "/Ayatrio updated icon/10 year warrante.svg",
+    image: "/icons/10-year-warrante.svg",
     label: "warranty Service",
     link: "/warranty"
   },
   {
-    image: "/Ayatrio updated icon/10 year warrante.svg",
+    image: "/icons/10-year-warrante.svg",
     label: "Delivery and transport",
     link: "#"
   },
   {
-    image: "/Ayatrio updated icon/10 year warrante.svg",
+    image: "/icons/10-year-warrante.svg",
     label: "Returns and exchanges",
     link: "#"
   }

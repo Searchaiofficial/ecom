@@ -44,7 +44,7 @@ const Calculation = ({ priceData }) => {
       <div className="calculation-container sm">
           {/* <div>
             <Image
-              src="/rooms/calculator-icon.svg"
+              src="/icons/calculator-icon.svg"
               width={20}
               height={20}
               alt="calculate"
@@ -54,7 +54,7 @@ const Calculation = ({ priceData }) => {
           {/* <span className=" self-start">Calculate</span> */}
           {/* {!hidden ? (
             <Image
-              src="/rooms/arrow-circle-right-icon.svg"
+              src="/icons/arrow-circle-right-icon.svg"
               width={23}
               height={23}
               alt="arrow right"
@@ -63,7 +63,7 @@ const Calculation = ({ priceData }) => {
             />
           ) : (
             <Image
-              src="/rooms/arrow-circle-down.svg"
+              src="/icons/arrow-circle-down.svg"
               width={23}
               height={23}
               alt="arrow down"

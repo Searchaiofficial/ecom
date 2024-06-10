@@ -22,7 +22,7 @@ function Carousel({ data }) {
       onMouseLeave={() => setIsHovered(false)}
     >
       {isHovered && slide !== 0 && (
-        <Image src="/rooms/backarrow.svg" width={20} height={20} alt="back arrow"/>
+        <Image src="/icons/backarrow.svg" width={20} height={20} alt="back arrow" />
         // <BsArrowLeftCircleFill
         //   onClick={prevSlide}
         //   className="arrow arrow-left"
@@ -39,7 +39,7 @@ function Carousel({ data }) {
         );
       })}
       {isHovered && (
-        <Image src="/svg/dropdown/rightvector.svg" width={20} height={20} alt="back arrow"
+        <Image src="/icons/rightvector.svg" width={20} height={20} alt="back arrow"
           onClick={nextSlide}
           className="arrow arrow-right"
         />

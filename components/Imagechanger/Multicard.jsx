@@ -86,14 +86,14 @@ const Multicard = () => {
 
           <div className="flex flex-row items-end justify-end gap-4">
             <Image
-              src="/ayatrio icon/left icon.svg"
+              src="/icons/left-icon.svg"
               width={20}
               height={20}
               alt="Arrow"
               className="back  rounded-full h-7 w-7"
             />
             <Image
-              src="/ayatrio icon/right icon.svg"
+              src="/icons/right-icon.svg"
               width={20}
               height={20}
               alt="Arrow"

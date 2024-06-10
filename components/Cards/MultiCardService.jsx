@@ -20,42 +20,42 @@ const data = [
     {
         id: 1,
         headerTitle: "Shop online with click and collect at store",
-        iconPath: "/Ayatrio updated icon/click and collect.svg",
+        iconPath: "/icons/click-and-collect.svg",
     },
     {
         id: 2,
         headerTitle: "Furnishing & Measuring service",
-        iconPath: "/Ayatrio updated icon/meausaring.svg",
+        iconPath: "/icons/meausaring.svg",
     },
     {
         id: 3,
         headerTitle: "Financing",
-        iconPath: "/Ayatrio updated icon/payment.svg",
+        iconPath: "/icons/payment.svg",
     },
     {
         id: 4,
         headerTitle: "buyback & resell",
-        iconPath: "/Ayatrio updated icon/buy back.svg",
+        iconPath: "/icons/buy-back.svg",
     },
     {
         id: 5,
         headerTitle: "warranty",
-        iconPath: "/Ayatrio updated icon/warranty.svg",
+        iconPath: "/icons/warranty.svg",
     },
     {
         id: 6,
         headerTitle: "Installation Service",
-        iconPath: "Ayatrio updated icon/instalation.svg",
+        iconPath: "/icons/instalation.svg",
     },
     {
         id: 7,
         headerTitle: "Gift registry",
-        iconPath: "/Ayatrio updated icon/ayatrio giftcard.svg",
+        iconPath: "/icons/ayatrio-giftcard.svg",
     },
     {
         id: 8,
         headerTitle: "Ayatrio Famaly Card",
-        iconPath: "/Ayatrio updated icon/ayatrio giftcard.svg",
+        iconPath: "/icons/ayatrio-giftcard.svg",
     },
 ]
 
@@ -125,14 +125,14 @@ const MulticardService = () => {
 
                     <div className="flex flex-row items-end justify-end gap-4">
                         <Image
-                            src="/ayatrio icon/left icon.svg"
+                            src="/icons/left-icon.svg"
                             width={20}
                             height={20}
                             alt="Arrow"
                             className="back  rounded-full h-7 w-7"
                         />
                         <Image
-                            src="/ayatrio icon/right icon.svg"
+                            src="/icons/right-icon.svg"
                             width={20}
                             height={20}
                             alt="Arrow"

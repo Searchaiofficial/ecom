@@ -31,7 +31,7 @@ const RoomCard = async () => {
 
                 <div className="flex items-center gap-5 px-5">
                   <p class="text-[12px] font-semibold">Shop all New lower price</p>
-                  <Image src={"/Ayatrio updated icon/Back_arrow.svg"} height={15} width={15} />
+                  <Image src={"/icons/Back_arrow.svg"} height={15} width={15} />
                 </div>
               </Link>
             </div>
@@ -182,7 +182,7 @@ const RoomCard = async () => {
         <div className="flex mb-[20px] h-[60px] border-b px-[15px] items-center justify-between lg:hidden">
           <p class="text-[14px] font-semibold">Shop all New lower price</p>
           <Image
-            src={"Ayatrio updated icon/backarrow.svg"}
+            src={"/icons/backarrow.svg"}
             width={15}
             height={15}
             className=""

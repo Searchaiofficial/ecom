@@ -149,7 +149,7 @@ const LoginComponent = () => {
                   className="border-2 text-black border-solid  w-[100%] sm:h-14 h-8 gap-[5px] rounded-full  transition duration-300 font-semibold flex items-center justify-center mb-[15px]"
                 >
                   <Image
-                    src="/icon/googlelogin.svg"
+                    src="/icons/googlelogin.svg"
                     width={20}
                     height={20}
                     alt="up"
