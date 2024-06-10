@@ -6,12 +6,11 @@ import Link from "next/link";
 import CategoryContent from "../molecules/CategoryContent";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-// import arrow from "../../assets/icon/backarrow.svg";
 export default function BasicMenu() {
   const param = useParams()
-  useEffect(()=>{
+  useEffect(() => {
     setAnchorEl(false);
-  },[param])
+  }, [param])
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [selectectedMenu, setSelectedmenu] = useState(null);
   // const open = Boolean(anchorEl);
@@ -55,7 +54,7 @@ export default function BasicMenu() {
 
   return (
     <div>
-      <Image src='/svg/icon/menu.svg' height={20} width={20} alt="menu"
+      <Image src='/icons/menu.svg' height={20} width={20} alt="menu"
         className="font-bold text-2xl"
         onClick={(event) => {
           setAnchorEl(!anchorEl);
@@ -75,27 +74,27 @@ ${mainContent ? "block" : "hidden"}
           >
             {/* for desktop */}
             <div className="px-[60px] mt-[50px] sm:flex sm:gap-16 hidden">
-                {
-                  menutext.map((category)=>{
-                    return (
-                      <div>
-                        <CategoryContent 
-                          categoryHeading={category.lebel} 
-                          categoryData={category.text}
-                          headingSize="text-md"
-                          headingStyle="font-semibold"
-                          headingColor="text-black"
-                          gapHeadingItems="gap-8"
-                          itemsGap="gap-5"
-                          textSize="text-sm"
-                          textStyle="font-medium"
-                          textColor="text-gray-600"
-                          displayedOn="menu"
-                        />
-                      </div>
-                    )
-                  })
-                }
+              {
+                menutext.map((category) => {
+                  return (
+                    <div>
+                      <CategoryContent
+                        categoryHeading={category.lebel}
+                        categoryData={category.text}
+                        headingSize="text-md"
+                        headingStyle="font-semibold"
+                        headingColor="text-black"
+                        gapHeadingItems="gap-8"
+                        itemsGap="gap-5"
+                        textSize="text-sm"
+                        textStyle="font-medium"
+                        textColor="text-gray-600"
+                        displayedOn="menu"
+                      />
+                    </div>
+                  )
+                })
+              }
             </div>
 
             {/* for mobile only */}
@@ -115,9 +114,9 @@ ${mainContent ? "block" : "hidden"}
                         >
                           <p>{text.lebel}</p>
                           <img
-                            src="/svg/dropdown/backarrow.svg"
+                            src="/icons/backarrow.svg"
                             className="w-5 h-5 rotate-180"
-                            alt=""
+                            alt="back arrow icon"
                             onClick={() => {
                               handleClick(index);
                               handleOpenmenuchild();
@@ -127,9 +126,8 @@ ${mainContent ? "block" : "hidden"}
                           {openchild && selectectedMenu === index && (
                             <div className="menu-overlay overflow-y-auto  border-2 fixed z-10 w-[80vw] top-0 right-0   bg-white h-full">
                               <div
-                                className={`flex flex-col px-4 gap-6 justify-evenly pt-5 ${
-                                  selectectedMenu === index ? "flex" : "hidden"
-                                }`}
+                                className={`flex flex-col px-4 gap-6 justify-evenly pt-5 ${selectectedMenu === index ? "flex" : "hidden"
+                                  }`}
                               >
                                 {text.text.map((txt, idx) => (
                                   <p key={idx}>{txt.text}</p>

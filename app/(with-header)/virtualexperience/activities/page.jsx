@@ -11,22 +11,22 @@ import { selectVirtualData } from "@/components/Features/Slices/virtualSlice";
 import { setSelectedSelectiveProduct } from "@/components/Features/Slices/virtualDataSlice";
 const Activities = () => {
   const router = useRouter();
-  const search=useSearchParams();
+  const search = useSearchParams();
 
   const dataSelector = useSelector(selectVirtualData);
   // console.log("dataSelector", dataSelector);
   const [data, setData] = useState([]);
   useEffect(() => {
-    if (dataSelector &&dataSelector.length>0 && search.get("category")){
-      let tempData = dataSelector?.filter((item) => item.category===search.get("category")?.toLocaleLowerCase());
+    if (dataSelector && dataSelector.length > 0 && search.get("category")) {
+      let tempData = dataSelector?.filter((item) => item.category === search.get("category")?.toLocaleLowerCase());
       setData(tempData);
       // console.log("tempData", tempData);
     }
-    else{
+    else {
       router.push("/virtualexperience/category");
     }
   }
-  , [dataSelector]);
+    , [dataSelector]);
   const prevHandler = () => {
     router.push("/virtualexperience/vrooms");
   };
@@ -39,8 +39,8 @@ const Activities = () => {
       setDataActivities(response.data);
     };
     fetchActivities();
-  },[]);
-// console.log(dataActivities);
+  }, []);
+  // console.log(dataActivities);
   const [selectedPage, setSelectedPage] = useState("activities");
   const [selectedActivity, setSelectedActivity] = useState({});
   const handleSelectPage = (page) => {
@@ -54,19 +54,19 @@ const Activities = () => {
     setShowCircle(!showCircle);
   };
 
-  
-const dispatch = useDispatch();
 
-const handleClick = (roomId, roomTitle) => {
-  setSelectedActivity({
-    ...selectedActivity,
-    [roomTitle]: !selectedActivity[roomTitle],
-  });
-  
-  dispatch(setSelectedSelectiveProduct(selectedActivity));
-};
+  const dispatch = useDispatch();
 
-  
+  const handleClick = (roomId, roomTitle) => {
+    setSelectedActivity({
+      ...selectedActivity,
+      [roomTitle]: !selectedActivity[roomTitle],
+    });
+
+    dispatch(setSelectedSelectiveProduct(selectedActivity));
+  };
+
+
 
   const addToCart = () => {
     SetIsOPen(true);
@@ -78,7 +78,7 @@ const handleClick = (roomId, roomTitle) => {
     <div className=" py-4 relative w-full h-full flex justify-center flex-col bg-[#f4e3dd]">
       <Sidebar selectedPage={selectedPage} onSelectPage={handleSelectPage} />
       <Image
-        src="/svg/icon/adtocart.svg"
+        src="/icons/adtocart.svg"
         width={30}
         height={30}
         onClick={() => {
@@ -102,20 +102,18 @@ const handleClick = (roomId, roomTitle) => {
                 handleSelect();
               }}
               className={`object-cover  w-full h-full block p-1
-              ${
-                selectedActivity[item.title]
+              ${selectedActivity[item.title]
                   ? " overlay z-10 black opacity-100"
                   : ""
-              }  ${selectedActivity[item.title] ? "border-2 border-red-500" : ""}
+                }  ${selectedActivity[item.title] ? "border-2 border-red-500" : ""}
               `}
             />
             <h3
               className={` p-1 rounded-sm absolute right-0 bottom-0
-              ${
-                selectedActivity[item.title]
+              ${selectedActivity[item.title]
                   ? "font-semibold text-white absolute left-2 bottom-2 bg-transparent"
                   : "bg-white"
-              }
+                }
               `}
             >
               {item.title}
@@ -126,10 +124,10 @@ const handleClick = (roomId, roomTitle) => {
                 className="room-item absolute top-2 right-2 z-10  flex items-center opacity-50 justify-center"
               >
                 <div className="circle-container relative flex justify-center items-center">
-                  
+
 
                   <Image
-                    src="/svg/icon/tick.svg"
+                    src="/icons/tick.svg"
                     alt="tick"
                     width={30}
                     height={30}
@@ -144,30 +142,30 @@ const handleClick = (roomId, roomTitle) => {
       </div>
 
       <div className="flex flex-col sm:flex-row justify-between gap-5 px-10 my-4">
-       <Link href={{
-        pathname: "/virtualexperience/vrooms",
-        query: {category: search.get("category") },
-       }}
+        <Link href={{
+          pathname: "/virtualexperience/vrooms",
+          query: { category: search.get("category") },
+        }}
         >
-        <button
-          className="rounded-2xl px-3 py-1 text-center text-white font-normal bg-[#2F4F4F] "
-        >
-          Previous Question
-        </button>
-      </Link>
-      <Link
-      href={
-        {
-          pathname: "/virtualexperience/budget",
-          query: {category: search.get("category") },
-        }
-      }>
-      <button
-          className="rounded-2xl px-3 py-1 text-center text-white font-normal bg-[#2F4F4F] "
-        >
-          Next Question
-        </button>
-      </Link>
+          <button
+            className="rounded-2xl px-3 py-1 text-center text-white font-normal bg-[#2F4F4F] "
+          >
+            Previous Question
+          </button>
+        </Link>
+        <Link
+          href={
+            {
+              pathname: "/virtualexperience/budget",
+              query: { category: search.get("category") },
+            }
+          }>
+          <button
+            className="rounded-2xl px-3 py-1 text-center text-white font-normal bg-[#2F4F4F] "
+          >
+            Next Question
+          </button>
+        </Link>
       </div>
     </div>
   );

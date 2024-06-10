@@ -104,7 +104,7 @@ const CategoriesSlider = () => {
                         <div className="flex flex-row group items-center justify-end gap-2 mb-4">
                             <div className="back rounded-full   group-hover:opacity-60  opacity-0  absolute left-5 z-10">
                                 <Image
-                                    src="/ayatrio icon/left-card.svg"
+                                    src="/icons/left-card.svg"
                                     width={20}
                                     height={20}
                                     alt="Arrow"
@@ -155,7 +155,7 @@ const CategoriesSlider = () => {
                             </Swiper>
                             <div className="right rounded-full   group-hover:opacity-60 opacity-0   absolute right-5 z-10">
                                 <Image
-                                    src="/ayatrio icon/right-card.svg"
+                                    src="/icons/right-card.svg"
                                     width={20}
                                     height={20}
                                     alt="Arrow"

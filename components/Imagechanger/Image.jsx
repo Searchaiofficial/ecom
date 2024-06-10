@@ -108,15 +108,14 @@ const Imagechanger = () => {
                 className="flex  items-center "
               >
                 <h1
-                  className={`sm:text-2xl text-[20px] font-medium  text-left cursor-pointer ${
-                    openStates[idx] && "open"
-                  }`}
+                  className={`sm:text-2xl text-[20px] font-medium  text-left cursor-pointer ${openStates[idx] && "open"
+                    }`}
                 >
                   {value}
                 </h1>
                 {openStates[idx] ? (
                   <Image
-                    src="/svg/dropdown/up.svg"
+                    src="/icons/up.svg"
                     width={20}
                     height={20}
                     alt="up"
@@ -124,7 +123,7 @@ const Imagechanger = () => {
                   />
                 ) : (
                   <Image
-                    src="/svg/dropdown/down.svg"
+                    src="/icons/down.svg"
                     width={20}
                     height={20}
                     alt="down"
@@ -133,9 +132,8 @@ const Imagechanger = () => {
                 )}
               </div>
               <div
-                className={`sm:w-[23rem] w-[80vw] ${
-                  openStates[idx] ? "open" : ""
-                }`}
+                className={`sm:w-[23rem] w-[80vw] ${openStates[idx] ? "open" : ""
+                  }`}
               >
                 <p className={`${idx + 1}text`}>
                   {openStates[idx] ? text[idx] : ""}

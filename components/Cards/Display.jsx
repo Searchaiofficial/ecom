@@ -28,7 +28,7 @@ const Display = async () => {
 
                 <div className="flex items-center px-6 gap-5">
                   <p class="text-[12px] font-semibold">For more floor inspiration</p>
-                  <Image src={"/Ayatrio updated icon/Back_arrow.svg"} height={15} width={15} />
+                  <Image src={"/icons/Back_arrow.svg"} height={15} width={15} />
                 </div>
               </Link>
             </div>
@@ -135,7 +135,7 @@ const Display = async () => {
 
           <p class="text-[14px] font-semibold">For more floor inspiration</p>
         </Link>
-        <Image src={"Ayatrio updated icon/backarrow.svg"} width={15} height={15} className="" />
+        <Image src={"/icons/backarrow.svg"} width={15} height={15} className="" />
       </div>
     </>
   );

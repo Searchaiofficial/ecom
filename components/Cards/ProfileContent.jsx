@@ -76,7 +76,7 @@ const ProfileContent = ({ initialData }) => {
                 <a href="#" className="flex items-center">
                   <Image
                     className="sm:h-6 h-6 sm:w-6 w-6"
-                    src="/social-icon/linkedln.svg"
+                    src="/icons/social-icon/linkedln.svg"
                     alt={`LinkedIn for ${person.name}`}
                     width={24}
                     height={24}
@@ -90,14 +90,14 @@ const ProfileContent = ({ initialData }) => {
       </Swiper>
       <div className=" flex flex-row items-end justify-end gap-6 mt-[25px]">
         <Image
-          src="/ayatrio icon/left icon.svg"
+          src="/icons/left-icon.svg"
           width={20}
           height={20}
           alt="Arrow"
           className="vector-two  rounded-full h-7 w-7"
         />
         <Image
-          src="/ayatrio icon/right icon.svg"
+          src="/icons/right-icon.svg"
           width={20}
           height={20}
           alt="Arrow"

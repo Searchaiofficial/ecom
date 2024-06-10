@@ -48,7 +48,7 @@ function TabsProductCard(props) {
       starsArray.push(
         <img
           key={i}
-          src={"/Ayatrio updated icon/full black.svg"}
+          src={"/icons/full-black.svg"}
           height={15}
           width={15}
           alt="star"
@@ -61,7 +61,7 @@ function TabsProductCard(props) {
       starsArray.push(
         <img
           key={fullStars}
-          src={"/Ayatrio updated icon/half black half white.svg"}
+          src={"/icons/half-black-half-white.svg"}
           height={15}
           width={15}
           alt="half-star"
@@ -74,7 +74,7 @@ function TabsProductCard(props) {
       starsArray.push(
         <img
           key={fullStars + halfStar + i}
-          src={"/Ayatrio updated icon/full white.svg"}
+          src={"/icons/full-white.svg"}
           height={15}
           width={15}
           alt="empty-star"
@@ -269,7 +269,7 @@ function TabsProductCard(props) {
           >
             {isHovered && slide !== 0 && (
               <Image
-                src="/ayatrio icon/left-card.svg"
+                src="/icons/left-card.svg"
                 height={20}
                 width={20}
                 alt="arrow"
@@ -300,7 +300,7 @@ function TabsProductCard(props) {
             {isHovered && (
               <div>
                 <Image
-                  src="/ayatrio icon/right-card.svg"
+                  src="/icons/right-card.svg"
                   height={20}
                   width={20}
                   alt="arrow"
@@ -359,12 +359,12 @@ function TabsProductCard(props) {
 
             {showCart && (
               <div className="bg-[#0152be] p-[6px] mr-2 rounded-full" onClick={addProductToCart} >
-                <Image src={"/Ayatrio updated icon/ad-to-cart.svg"} height={20} width={20} className="cursor-pointer rounded-full" />
+                <Image src={"/icons/ad-to-cart.svg"} height={20} width={20} className="cursor-pointer rounded-full" />
               </div>
             )}
             {/* {inCart && (
               <div className="bg-[#507A57] p-[6px] mr-2 rounded-full">
-                <Image src={"/Ayatrio updated icon/ad-to-cart.svg"} height={20} width={20} className="cursor-pointer rounded-full" />
+                <Image src={"/icons/ad-to-cart.svg"} height={20} width={20} className="cursor-pointer rounded-full" />
               </div>
             )} */}
 

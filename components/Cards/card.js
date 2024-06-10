@@ -52,7 +52,7 @@ function Card(props) {
       starsArray.push(
         <img
           key={i}
-          src={"/icon/star.svg"}
+          src={"/icons/star.svg"}
           height={20}
           width={20}
           alt="star"
@@ -65,7 +65,7 @@ function Card(props) {
       starsArray.push(
         <img
           key={fullStars}
-          src={"/icon/half-star.svg"}
+          src={"/icons/half-star.svg"}
           height={20}
           width={20}
           alt="half-star"
@@ -78,7 +78,7 @@ function Card(props) {
       starsArray.push(
         <img
           key={fullStars + halfStar + i}
-          src={"/ayatrio icon/no fill star.svg"}
+          src={"/icons/no-fill-star.svg"}
           height={20}
           width={20}
           alt="empty-star"
@@ -185,7 +185,7 @@ function Card(props) {
       starsArray.push(
         <img
           key={i}
-          src={"/Ayatrio updated icon/full black.svg"}
+          src={"/icons/full-black.svg"}
           height={15}
           width={15}
           alt="star"
@@ -198,7 +198,7 @@ function Card(props) {
       starsArray.push(
         <img
           key={fullStars}
-          src={"/Ayatrio updated icon/half black half white.svg"}
+          src={"/icons/half-black-half-white.svg"}
           height={15}
           width={15}
           alt="half-star"
@@ -211,7 +211,7 @@ function Card(props) {
       starsArray.push(
         <img
           key={fullStars + halfStar + i}
-          src={"/Ayatrio updated icon/full white.svg"}
+          src={"/icons/full-white.svg"}
           height={15}
           width={15}
           alt="empty-star"
@@ -319,7 +319,7 @@ function Card(props) {
           )}
 
           {/* <div className="absolute z-10 top-2 right-2 opacity-85 hover:opacity-100 bg-white p-[6px] hover:scale-105 transition-transform rounded-full" style={{ boxShadow: '0 2px 6px 0 rgba(0, 0, 0, 0.12)' }}>
-            <Image src={"/svg/icon/like.svg"} height={20} width={20} className="cursor-pointer" />
+            <Image src={"/icons/like.svg"} height={20} width={20} className="cursor-pointer" />
           </div> */}
 
           <div
@@ -329,7 +329,7 @@ function Card(props) {
           >
             {isHovered && slide !== 0 && (
               <Image
-                src="/ayatrio icon/left-card.svg"
+                src="/icons/left-card.svg"
                 height={20}
                 width={20}
                 alt="arrow"
@@ -362,7 +362,7 @@ function Card(props) {
             {isHovered && (
               <div className="z-50">
                 <Image
-                  src="/ayatrio icon/right-card.svg"
+                  src="/icons/right-card.svg"
                   height={30}
                   width={30}
                   alt="arrow"
@@ -416,12 +416,12 @@ function Card(props) {
 
             {showCart && (
               <div className="bg-[#0152be] p-[6px] mr-2 rounded-full" onClick={addProductToCart}>
-                <Image src={"/Ayatrio updated icon/ad-to-cart.svg"} height={20} width={20} className="cursor-pointer rounded-full" />
+                <Image src={"/icons/ad-to-cart.svg"} height={20} width={20} className="cursor-pointer rounded-full" />
               </div>
             )}
             {/* {inCart && (
               <div className="bg-[#507A57] p-[6px] mr-2 rounded-full">
-                <Image src={"/Ayatrio updated icon/ad-to-cart.svg"} height={20} width={20} className="cursor-pointer rounded-full" />
+                <Image src={"/icons/ad-to-cart.svg"} height={20} width={20} className="cursor-pointer rounded-full" />
               </div>
             )} */}
 
@@ -439,13 +439,13 @@ function Card(props) {
             )
           }
           <div className="card-rating">
-            {/* <img src="/svg/star-full-icon.svg" className="w-6 h-6" alt="" /> */}
+            {/* <img src="/icons/star-full-icon.svg" className="w-6 h-6" alt="" /> */}
 
             {props.rating}
           </div>
           {/* <div className="flex lg:gap-2 gap-1 mt-2 ">
-            <Image src={"/svg/icon/adtocart.svg"} height={25} width={25} className="mr-2 cursor-pointer" />
-            <Image src={"/svg/icon/like.svg"} height={30} width={25} className=" cursor-pointer" />
+            <Image src={"/icons/adtocart.svg"} height={25} width={25} className="mr-2 cursor-pointer" />
+            <Image src={"/icons/like.svg"} height={30} width={25} className=" cursor-pointer" />
           </div> */}
 
           {

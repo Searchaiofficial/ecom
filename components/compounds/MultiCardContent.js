@@ -20,7 +20,7 @@ const MultiCardContent = (props) => {
       <div className="absolute bottom-1 right-4 mb-8">
         <Image
           className="w-10 h-10"
-          src="/MultiCardIcons/add-circle.svg"
+          src="/icons/add-circle.svg"
           width={0}
           height={0}
           alt="add"
@@ -36,7 +36,7 @@ const MultiCardContent = (props) => {
       <div className=" ml-[24px] mb-[24px] max-w-fit  bg-[#333336] rounded-full">
         <Image
           className="min-w-[25px] min-h-[25px] p-1 m-2"
-          src="/Ayatrio updated icon/Back_arrow_white.svg"
+          src="/icons/Back_arrow_white.svg"
           width={0}
           height={0}
           alt="Add icon"

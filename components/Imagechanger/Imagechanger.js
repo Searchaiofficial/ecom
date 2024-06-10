@@ -75,7 +75,7 @@ const Imagechanger = () => {
                   </h1>
                   {index === idx ? (
                     <Image
-                      src="/svg/dropdown/up.svg"
+                      src="/icons/up.svg"
                       width={20}
                       height={20}
                       alt="up"
@@ -83,7 +83,7 @@ const Imagechanger = () => {
                     />
                   ) : (
                     <Image
-                      src="/svg/dropdown/down.svg"
+                      src="/icons/down.svg"
                       width={20}
                       height={20}
                       alt="up"
@@ -103,7 +103,7 @@ const Imagechanger = () => {
                 </h1>
                 {openStates[idx] ? (
                   <Image
-                    src="/svg/dropdown/up.svg"
+                    src="/icons/up.svg"
                     width={20}
                     height={20}
                     alt="up"
@@ -111,7 +111,7 @@ const Imagechanger = () => {
                   />
                 ) : (
                   <Image
-                    src="/svg/dropdown/down.svg"
+                    src="/icons/down.svg"
                     width={20}
                     height={20}
                     alt="up"
@@ -139,9 +139,8 @@ const Imagechanger = () => {
               key={i}
               src={image.imageUrl}
               alt=""
-              className={` w-full h-full ${
-                index === i ? "visible" : "hidden"
-              } `}
+              className={` w-full h-full ${index === i ? "visible" : "hidden"
+                } `}
             />
           ))}
           <div className="absolute bottom-4 left-4 flex text-white text-lg">

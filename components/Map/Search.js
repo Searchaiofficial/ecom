@@ -169,7 +169,7 @@ const Search = ({ places, onResultClick }) => {
               >
 
                 <Image
-                  src="/svg/icon/search.svg"
+                  src="icons/search.svg"
                   alt="Search Icon"
                   width={20}
                   height={20}
@@ -183,7 +183,7 @@ const Search = ({ places, onResultClick }) => {
 
                 />
 
-                <Image src={"/Ayatrio updated icon/camera.svg"} width={20} height={20} className="mr-[10px] ml-[10px]" />
+                <Image src={"/icons/camera.svg"} width={20} height={20} className="mr-[10px] ml-[10px]" />
 
               </div>
             </div> */}
@@ -206,7 +206,7 @@ const Search = ({ places, onResultClick }) => {
                 >
                   {/* {index === 0 ? (
                     <Image
-                      src="/svg/icon/homeicon.svg"
+                      src="/icons/homeicon.svg"
                       height={20}
                       width={20}
                       alt="home"
@@ -214,7 +214,7 @@ const Search = ({ places, onResultClick }) => {
                     />
                   ) : ( */}
                   <Image
-                    src="/svg/icon/homeicon.svg"
+                    src="/icons/homeicon.svg"
                     height={20}
                     width={20}
                     alt="time"
@@ -225,7 +225,7 @@ const Search = ({ places, onResultClick }) => {
                     {index === 0 ? "India" : `${item.name}`}
                   </div>
                   <Image
-                    src="/svg/dropdown/closeicon.svg"
+                    src="/icons/closeicon.svg"
                     height={20}
                     width={20}
                     alt="close"
@@ -256,7 +256,7 @@ const Search = ({ places, onResultClick }) => {
             />
             <div className="searchIcon bg-white flex justify-center items-center w-[1rem] mr-3">
               <Image
-                src="/svg/icon/search.svg"
+                src="/icons/search.svg"
                 height={20}
                 width={20}
                 alt="close"
@@ -283,7 +283,7 @@ const Search = ({ places, onResultClick }) => {
                   onMouseLeave={() => handleItemHover(null)}
                 >
                   <Image
-                    src="/svg/icon/homeicon.svg"
+                    src="/icons/homeicon.svg"
                     height={20}
                     width={20}
                     alt="close"
@@ -291,7 +291,7 @@ const Search = ({ places, onResultClick }) => {
                   />
                   {/* ) : (
                     <Image
-                      src="/svg/icon/time.svg"
+                      src="/svg/icons/time.svg"
                       height={20}
                       width={20}
                       alt="close"
@@ -302,7 +302,7 @@ const Search = ({ places, onResultClick }) => {
                     {`${item.name} ${item.address.streetAddress.slice(0, 20)}`}
                   </div>
                   <Image
-                    src="/svg/dropdown/closeicon.svg"
+                    src="/icons/closeicon.svg"
                     height={20}
                     width={20}
                     alt="close"

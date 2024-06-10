@@ -70,7 +70,7 @@ const Card = ({ data, productId }) => {
       starsArray.push(
         <img
           key={i}
-          src={"/icon/star.svg"}
+          src={"/icons/star.svg"}
           height={20}
           width={20}
           alt="star"
@@ -83,7 +83,7 @@ const Card = ({ data, productId }) => {
       starsArray.push(
         <img
           key={fullStars}
-          src={"/icon/half-star.svg"}
+          src={"/icons/half-star.svg"}
           height={20}
           width={20}
           alt="half-star"
@@ -96,7 +96,7 @@ const Card = ({ data, productId }) => {
       starsArray.push(
         <img
           key={fullStars + halfStar + i}
-          src={"/ayatrio icon/no fill star.svg"}
+          src={"/icons/no-fill-star.svg"}
           height={20}
           width={20}
           alt="empty-star"
@@ -501,7 +501,7 @@ const Card = ({ data, productId }) => {
               >
                 <div className="flex flex-row gap-1">
                   <Image
-                    src="/rooms/payment.svg"
+                    src="/icons/payment.svg"
                     height={25}
                     width={25}
                     alt="icon"
@@ -518,7 +518,7 @@ const Card = ({ data, productId }) => {
               >
                 <div className="flex flex-row gap-1">
                   <Image
-                    src="/rooms/ayatrio_store_b.svg"
+                    src="/icons/ayatrio_store_b.svg"
                     height={25}
                     width={25}
                     alt="icon"
@@ -537,7 +537,7 @@ const Card = ({ data, productId }) => {
               >
                 <div className="flex flex-row gap-2">
                   <Image
-                    src="/rooms/delivary.svg"
+                    src="/icons/delivary.svg"
                     height={25}
                     width={25}
                     alt="icon"
@@ -553,7 +553,7 @@ const Card = ({ data, productId }) => {
               >
                 <div className="flex flex-row gap-2">
                   <Image
-                    src="/rooms/calculator.svg"
+                    src="/icons/calculator.svg"
                     height={25}
                     width={25}
                     alt="icon"
@@ -572,22 +572,36 @@ const Card = ({ data, productId }) => {
                   {sidebarContect === "zeroCostEMI" && (
                     <div className="fixed z-[9999] h-full w-screen bg-black/50 backdrop:blur-sm top-0 left-0">
                       <section className="text-black bg-white flex-col absolute right-0 top-0 h-full  z-[99999] w-full  lg:w-[35%] flex overflow-y-auto">
-                        <div className="flex px-[40px] h-[72px] items-center   justify-end">
-                          <button
-                            className="text-xl  px-3 py-1 hover:bg-[#e5e5e5] rounded-full mt-0 cursor-pointer  "
-                            onClick={() => setsidebarContent(null)}
-                          >
-                            X
-                          </button>
-                        </div>
-                        <div className="flex flex-col w-full ">
+                        <div className="flex flex-col w-full">
                           <div className="px-[40px] pb-[32px]">
-                            <div className="flex items-center ">
-                              <div onClick={() => setIsActive("Offers for you")} className={`flex-1 cursor-pointer flex items-center justify-center h-[50px]  ${isActive === "Offers for you" ? "border-b-4 border-[#2e2e2e] text-black" : "border-[#8E8E8E] text-[#8E8E8E]"}  `}>
-                                <p className=" text-[16px]">Offers for you</p>
+                            <div className="flex items-center justify-between">
+                              <div className="flex-1 flex">
+                                <div
+                                  onClick={() => setIsActive("Offers for you")}
+                                  className={`flex-1 cursor-pointer flex items-center justify-center h-[50px] ${isActive === "Offers for you"
+                                    ? "border-b-4 border-[#2e2e2e] text-black"
+                                    : "border-[#8E8E8E] text-[#8E8E8E]"
+                                    }`}
+                                >
+                                  <p className="text-[16px]">Offers for you</p>
+                                </div>
+                                <div
+                                  onClick={() => setIsActive("EMI Plans")}
+                                  className={`flex-1 cursor-pointer flex items-center justify-center h-[50px] ${isActive === "EMI Plans"
+                                    ? "border-b-4 border-[#2e2e2e] text-black"
+                                    : "border-[#8E8E8E] text-[#8E8E8E]"
+                                    }`}
+                                >
+                                  <p className="text-[16px]">EMI Plans</p>
+                                </div>
                               </div>
-                              <div onClick={() => setIsActive("EMI Plans")} className={`flex-1 cursor-pointer flex items-center justify-center h-[50px]   ${isActive === "EMI Plans" ? "border-b-4 border-[#2e2e2e] text-black" : "border-[#8E8E8E]  text-[#8E8E8E]"}  `}>
-                                <p className="text-[16px]">EMI Plans</p>
+                              <div className="flex h-[72px] items-center justify-end">
+                                <button
+                                  className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
+                                  onClick={() => setsidebarContent(null)}
+                                >
+                                  X
+                                </button>
                               </div>
                             </div>
                             {
@@ -600,11 +614,11 @@ const Card = ({ data, productId }) => {
                                   <div onClick={() => setOpenOfferDetails((prev) => !prev)} className="py-[20px]  border-b border-[#D1D1D1] cursor-pointer ">
                                     <div className="flex items-center">
                                       <div className="mr-[15px] p-1  ">
-                                        <Image src="/Ayatrio updated icon/adtocart.svg" height={25} width={25} alt="arrow-right" />
+                                        <Image src="/icons/adtocart.svg" height={25} width={25} alt="arrow-right" />
                                       </div>
                                       <p className="text-[#2E2E2E] text-[14px] flex-1">Get cashback up to Rs 200, Pay using CRED UPI</p>
                                       {
-                                        openOfferDetails ? <Image src="/icon/arrow_right.svg" className="-rotate-90" height={20} width={20} alt="arrow-right" /> : <Image src="/icon/arrow_right.svg" className="rotate-90" height={20} width={20} alt="arrow-right" />
+                                        openOfferDetails ? <Image src="/icons/arrow_right.svg" className="-rotate-90" height={20} width={20} alt="arrow-right" /> : <Image src="/icons/arrow_right.svg" className="rotate-90" height={20} width={20} alt="arrow-right" />
                                       }
                                     </div>
 
@@ -631,7 +645,7 @@ const Card = ({ data, productId }) => {
                                 <div className="">
                                   <div className="flex items-center gap-[10px] pb-[20px] pt-[32px] ">
                                     <button onClick={(e) => setEmiOption("Credit Card EMI")} className={`${EmiOption === "Credit Card EMI" ? "bg-black text-white py-[16px] hover:bg-gray-900 px-[30px] text-center text-[14px] rounded-full" : "py-[16px] border-2  px-[30px] rounded-full  text-[14px] text-center"}`}>Credit Card EMI</button>
-                                    <button onClick={(e) => setEmiOption("Debit Card")} className={`${EmiOption === "Debit Card" ? "bg-black hover:bg-gray-900 flex-1 text-white py-[16px] px-[30px] text-center text-[14px]  rounded-full" : "py-[16px] flex-1 border-2 px-[30px]  rounded-full  text-[14px] text-center"}`}>Debit Card & Cardless EMI</button>
+                                    <button onClick={(e) => setEmiOption("Debit Card")} className={`${EmiOption === "Debit Card" ? "bg-black hover:bg-gray-900 flex-1 text-white py-[16px] px-[30px] text-center text-[14px]  rounded-full" : "py-[16px] flex-1 border-2 px-[30px]  rounded-full  text-[14px] text-center"}`}>Debit Card & EMI</button>
                                   </div>
                                   {
                                     EmiOption === "Credit Card EMI" && (
@@ -644,14 +658,14 @@ const Card = ({ data, productId }) => {
                                         <div onClick={(e) => setOpenEMIDetails(prev => !prev)} className="flex flex-col items-center py-[20px] border-b cursor-pointer">
                                           <div className="flex items-center w-full ">
                                             <div className="mr-[15px] p-1 ">
-                                              <Image src="/Ayatrio updated icon/icic.svg" height={24} width={24} alt="arrow-right" />
+                                              <Image src="/icons/icic.svg" height={24} width={24} alt="arrow-right" />
                                             </div>
                                             <div className="flex flex-col flex-1 ">
                                               <p className="text-[#2E2E2E] text-[14px]">ICIC Bank</p>
                                               <p className="text-[#8E8E8E] text-xs">from ₹294/month</p>
                                             </div>
                                             {
-                                              openEmiDetails ? <Image src="/icon/arrow_right.svg" className="-rotate-90" height={20} width={20} alt="arrow-right" /> : <Image src="/icon/arrow_right.svg" className="rotate-90" height={20} width={20} alt="arrow-right" />
+                                              openEmiDetails ? <Image src="/icons/arrow_right.svg" className="-rotate-90" height={20} width={20} alt="arrow-right" /> : <Image src="/icons/arrow_right.svg" className="rotate-90" height={20} width={20} alt="arrow-right" />
                                             }
                                           </div>
                                           {
@@ -711,25 +725,25 @@ const Card = ({ data, productId }) => {
                                         </div>
                                         {/* <div className="flex items-center py-[20px] border-b cursor-pointer">
                                           <div className="mr-[15px] p-1 shadow-lg ">
-                                            <Image src="/ayatrio icon/utib.svg" height={24} width={24} alt="arrow-right" />
+                                            <Image src="/icons/utib.svg" height={24} width={24} alt="arrow-right" />
                                           </div>
                                           <div className="flex flex-col flex-1 ">
                                             <p className="text-[#2E2E2E] text-[14px]">ICIC Bank</p>
                                             <p className="text-[#8E8E8E] text-xs">from ₹294/month</p>
                                           </div>
-                                          <Image src="/icon/arrow_right.svg" className="rotate-90" height={20} width={20} alt="arrow-right" />
+                                          <Image src="/icons/arrow_right.svg" className="rotate-90" height={20} width={20} alt="arrow-right" />
                                         </div> */}
                                         <div onClick={(e) => setOpenEMIDetails(prev => !prev)} className="flex flex-col items-center py-[20px] border-b cursor-pointer">
                                           <div className="flex items-center w-full ">
                                             <div className="mr-[15px] p-1 ">
-                                              <Image src="/Ayatrio updated icon/icic.svg" height={24} width={24} alt="arrow-right" />
+                                              <Image src="/icons/icic.svg" height={24} width={24} alt="arrow-right" />
                                             </div>
                                             <div className="flex flex-col flex-1 ">
                                               <p className="text-[#2E2E2E] text-[14px]">ICIC Bank</p>
                                               <p className="text-[#8E8E8E] text-xs">from ₹294/month</p>
                                             </div>
                                             {
-                                              openEmiDetails ? <Image src="/icon/arrow_right.svg" className="-rotate-90" height={20} width={20} alt="arrow-right" /> : <Image src="/icon/arrow_right.svg" className="rotate-90" height={20} width={20} alt="arrow-right" />
+                                              openEmiDetails ? <Image src="/icons/arrow_right.svg" className="-rotate-90" height={20} width={20} alt="arrow-right" /> : <Image src="/icons/arrow_right.svg" className="rotate-90" height={20} width={20} alt="arrow-right" />
                                             }
                                           </div>
                                           {
@@ -795,18 +809,24 @@ const Card = ({ data, productId }) => {
                   {sidebarContect === "inStoreRequest" && (
                     <div className="fixed z-[99999] h-full w-screen bg-black/50 backdrop:blur-sm top-0 left-0">
                       <section className="text-black bg-white flex-col absolute right-0 top-0 h-full z-[99999] w-full  lg:w-[35%] flex overflow-y-auto">
-                        <div className="flex px-[40px] h-[72px] items-center mt-[20px] mb-[10px]   justify-end">
-                          <button
-                            className="text-xl  px-3 py-1 hover:bg-[#e5e5e5] rounded-full mt-0 cursor-pointer  "
-                            onClick={() => setsidebarContent(null)}
-                          >
-                            X
-                          </button>
-                        </div>
+
                         <div className="flex flex-col">
                           <div className="px-[40px] pb-[32px]">
                             <div>
-                              <h1 className="text-[24px] font-semibold text-[#111111]">Visit us at your preferred Ayatrio store</h1>
+                              <div className="flex flex-col w-full">
+                                <div className="flex items-center justify-between pt-2 mt-[10px] mb-[10px] h-[72px]">
+                                  <h1 className="text-[24px] font-semibold text-[#111111]">
+                                    Visit us at your preferred Ayatrio store
+                                  </h1>
+                                  <button
+                                    className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
+                                    onClick={() => setsidebarContent(null)}
+                                  >
+                                    X
+                                  </button>
+                                </div>
+                              </div>
+
                               <div className="my-[16px] flex flex-col">
                                 <label className="text-[14px] font-normal text-[#484848]">Search by city</label>
                                 <div className="w-full px-[6px] border-2 border-[#484848] rounded-md h-[48px]">
@@ -835,7 +855,7 @@ const Card = ({ data, productId }) => {
                                   </div>
                                 </div>
                                 <div>
-                                  <Image src="/icon/arrow_right.svg" height={50} width={50} alt="arrow-right" />
+                                  <Image src="/icons/arrow_right.svg" height={50} width={50} alt="arrow-right" />
                                 </div>
                               </div>
                               {/* 2 Location */}
@@ -853,7 +873,7 @@ const Card = ({ data, productId }) => {
                                   </div>
                                 </div>
                                 <div>
-                                  <Image src="/icon/arrow_right.svg" height={50} width={50} alt="arrow-right" />
+                                  <Image src="/icons/arrow_right.svg" height={50} width={50} alt="arrow-right" />
                                 </div>
                               </div>
                               {/* 3 Location */}
@@ -871,7 +891,7 @@ const Card = ({ data, productId }) => {
                                   </div>
                                 </div>
                                 <div>
-                                  <Image src="/icon/arrow_right.svg" height={50} width={50} alt="arrow-right" />
+                                  <Image src="/icons/arrow_right.svg" height={50} width={50} alt="arrow-right" />
                                 </div>
                               </div>
                             </div>
@@ -887,18 +907,21 @@ const Card = ({ data, productId }) => {
                 {sidebarContect === "deliveryOption" && (
                   <div className=" fixed z-[99999] h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0">
                     <section className="text-black z-[99999] bg-white flex-col absolute right-0 top-0 h-screen w-full  lg:w-[35%] flex ">
-                      <div className="flex px-[40px] h-[72px] items-center    justify-end">
-                        <button
-                          className="text-xl  px-3 py-1 hover:bg-[#e5e5e5] rounded-full mt-0 cursor-pointer  "
-                          onClick={() => setsidebarContent(null)}
-                        >
-                          X
-                        </button>
-                      </div>
+
                       <div className="flex flex-col">
                         <div className="px-[40px] pb-[32px]">
                           <div>
-                            <h1 className="text-[24px] font-semibold text-[#111111]">Use your location</h1>
+                            <div className="flex items-center justify-between  h-[72px]">
+                              <h1 className="text-[24px] font-semibold text-[#111111]">
+                                Use your location
+                              </h1>
+                              <button
+                                className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
+                                onClick={() => setsidebarContent(null)}
+                              >
+                                X
+                              </button>
+                            </div>
                             <div className="mt-[16px]">
                               <p className="text-[14px] text-[#484848]">Get updated information about product delivery and stock availability for your area.</p>
                             </div>
@@ -928,20 +951,25 @@ const Card = ({ data, productId }) => {
                 {sidebarContect === "calculator" && (
                   <div className=" fixed h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0 z-[99999]">
                     <section className="text-black bg-white flex-col absolute right-0 top-0 h-screen z-[99999] w-full  lg:w-[35%] flex ">
-                      <div className="flex px-[40px] h-[72px]   items-center justify-end">
-                        <button
-                          className="text-xl mt-0 px-3 py-1 hover:bg-[#e5e5e5] rounded-full  cursor-pointer  "
-                          onClick={() => setsidebarContent(null)}
-                        >
-                          X
-                        </button>
-                      </div>
+
+
                       <div className="flex flex-col">
                         <div className="px-[40px] pb-[32px]">
-                          <h1 className="text-[24px] font-semibold text-[#111111] mb-10">Calculator</h1>
+                          <div className="flex items-center justify-between h-[72px] mb-10">
+                            <h1 className="text-[24px] font-semibold text-[#111111]">
+                              Calculator
+                            </h1>
+                            <button
+                              className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
+                              onClick={() => setsidebarContent(null)}
+                            >
+                              X
+                            </button>
+                          </div>
                           <Calculation priceData={data} />
                         </div>
                       </div>
+
 
 
                     </section>
@@ -1003,7 +1031,7 @@ const Card = ({ data, productId }) => {
           </div>
           <div className="flex gap-3 mt-8 items-center justify-center">
             <Image
-              src={"/Ayatrio updated icon/ayatrio_comment_button.svg"}
+              src={"/icons/ayatrio_comment_button.svg"}
               height={35}
               width={35}
               alt="downarrow"

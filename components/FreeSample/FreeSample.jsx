@@ -461,15 +461,15 @@ const FreeSample = () => {
 
   const stepOneData = [
     {
-      icon: "/Ayatrio updated icon/furniture.svg",
+      icon: "/icons/furniture.svg",
       label: "Furnituring",
     },
     {
-      icon: "/Ayatrio updated icon/furnishing.svg",
+      icon: "/icons/furnishing.svg",
       label: "Furnishing",
     },
     {
-      icon: "/Ayatrio updated icon/storage planing.svg",
+      icon: "/icons/storage-planing.svg",
       label: "Storage plan",
     },
   ];
@@ -512,7 +512,7 @@ const FreeSample = () => {
               <div className="bg-zinc-50 md:w-[22rem]  px-6 py-6">
                 <div className="flex gap-4 items-center mb-6">
                   <Image
-                    src="/Ayatrio updated icon/payment.svg"
+                    src="/icons/payment.svg"
                     width={40}
                     height={40}
                   />
@@ -526,7 +526,7 @@ const FreeSample = () => {
                 </div>
                 {/* <div className="flex gap-4 items-center mb-6">
                   <Image
-                    src="/Ayatrio updated icon/payment.svg"
+                    src="/icons/payment.svg"
                     width={40}
                     height={40}
                   />
@@ -540,7 +540,7 @@ const FreeSample = () => {
                 </div> */}
                 <div className="flex gap-4 items-center mb-6">
                   <Image
-                    src="/Ayatrio updated icon/payment.svg"
+                    src="/icons/payment.svg"
                     width={40}
                     height={40}
                   />
@@ -554,7 +554,7 @@ const FreeSample = () => {
                 </div>
                 <div className="flex gap-4 items-center mb-6">
                   <Image
-                    src="/Ayatrio updated icon/payment.svg"
+                    src="/icons/payment.svg"
                     width={40}
                     height={40}
                   />
@@ -573,7 +573,7 @@ const FreeSample = () => {
               <div className="bg-zinc-50 md:w-[22rem]  px-6 py-6">
                 <div className="flex gap-4 items-center mb-6">
                   <Image
-                    src="/Ayatrio updated icon/virtual online.svg"
+                    src="/icons/virtual-online.svg"
                     width={40}
                     height={40}
                   />
@@ -589,7 +589,7 @@ const FreeSample = () => {
                 </div>
                 <div className="flex gap-4 items-center mb-6">
                   <Image
-                    src="/Ayatrio updated icon/vision.svg"
+                    src="/icons/vision.svg"
                     width={40}
                     height={40}
                   />
@@ -606,7 +606,7 @@ const FreeSample = () => {
                 </div>
                 <div className="flex gap-4 items-center mb-6">
                   <Image
-                    src="/Ayatrio updated icon/onsite management.svg"
+                    src="/icons/onsite-management.svg"
                     width={40}
                     height={40}
                   />
@@ -621,7 +621,7 @@ const FreeSample = () => {
                 </div>
                 <div className="flex gap-4 items-center mb-6">
                   <Image
-                    src="/Ayatrio updated icon/final design.svg"
+                    src="/icons/final-design.svg"
                     width={40}
                     height={40}
                   />
@@ -634,7 +634,7 @@ const FreeSample = () => {
                 </div>
                 <div className="flex gap-4 items-center mb-6">
                   <Image
-                    src="/Ayatrio updated icon/instalation.svg"
+                    src="/icons/instalation.svg"
                     width={40}
                     height={40}
                   />

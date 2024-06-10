@@ -195,10 +195,17 @@ export const fetchProductsFromOffers = async (type) => {
   }
 };
 
-export const fetchStores = async () => {
+export const fetchStores = async (search) => {
   try {
-    const response = await axios.get(createApiEndpoint(`store`));
-    return response.data;
+    if (search === undefined || search === null) {
+      const response = await axios.get(createApiEndpoint(`searchStore`));
+      return response.data;
+    } else {
+      const response = await axios.get(
+        createApiEndpoint(`searchStore?search=${search}`)
+      );
+      return response.data;
+    }
   } catch (error) {
     console.error(`Error fetching suggestions: ${error.message}`);
   }

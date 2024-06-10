@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-// import search from "../../assets/icon/search.svg";
+// import search from "../../assets/icons/search.svg";
 
 const MobileSearch = ({ isOpen, onClose, onSearch }) => {
   const inpRef = useRef(null);
@@ -35,7 +35,7 @@ const MobileSearch = ({ isOpen, onClose, onSearch }) => {
                 }}
               />
               <img
-                src="/svg/icon/search.svg"
+                src="/icons/search.svg"
                 alt=""
                 className="w-5 mx-1 my-1.5 top-[10%] right-[1%]  absolute z-10"
               />

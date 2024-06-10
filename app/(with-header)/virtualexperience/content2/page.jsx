@@ -120,7 +120,7 @@ const Content2 = () => {
               >
                 <div className="circle-container relative flex justify-center items-center">
                   
-                  <Image src="/svg/icon/tick.svg" alt="tick" width={30} height={30} className=" opacity-100" />
+                  <Image src="/icons/tick.svg" alt="tick" width={30} height={30} className=" opacity-100" />
                 </div>
               </div>
             )}

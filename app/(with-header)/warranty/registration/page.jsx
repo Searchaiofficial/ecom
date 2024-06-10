@@ -159,7 +159,7 @@ export default function WarrantyRegistration() {
                                 Upload Invoice <span className="text-red-500">*</span>
                             </label>
                             <label htmlFor="invoiceFile" className="w-full md:w-[300px] cursor-pointer bg-white border border-black rounded-lg flex items-center justify-center px-3 py-2">
-                                <img src="/icon/upload_icon.svg" alt="" className="mr-2 w-6 text-gray-400" />
+                                <img src="/icons/upload_icon.svg" alt="" className="mr-2 w-6 text-gray-400" />
                                 Upload Invoice
                                 <input
                                     id="invoiceFile"

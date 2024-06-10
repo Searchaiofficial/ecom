@@ -6,11 +6,11 @@ import { selectMusicData } from "../Features/Slices/musicSectionSlice";
 const DoubleComp = () => {
   const musicSwiperData = useSelector(selectMusicData);
   const dispatch = useDispatch();
-  useEffect(()=>{
-    if(musicSwiperData.length===0){
-      dispatch({type: "FETCH_MUSIC_DATA", payload: "music"})
+  useEffect(() => {
+    if (musicSwiperData.length === 0) {
+      dispatch({ type: "FETCH_MUSIC_DATA", payload: "music" })
     }
-  },[])
+  }, [])
   //console.log(musicSwiperData)
   const gameImage = musicSwiperData[1]?.img[0]?.url;
   return (
@@ -19,7 +19,7 @@ const DoubleComp = () => {
         <div className="pl-4 pt-4">
           <div className="flex text-3xl  pl-0 pt-0">
             {" "}
-            <Image src="/svg/icon/appleicon.svg" height={30} width={30} alt="apple" />
+            <Image src="/icons/appleicon.svg" height={30} width={30} alt="apple" />
             Music
           </div>
           <div className="text-md   pl-0"> Over 100 million songs.</div>
@@ -43,7 +43,7 @@ const DoubleComp = () => {
       <div className="col-span-1  mr-0 bg-zinc-100 text-black overflow-hidden">
         <div className="pl-4 pt-4">
           <div className="flex text-3xl pl-0 pt-0">
-            <Image src="/svg/icon/appleicon.svg" height={30} width={30} alt="apple" />
+            <Image src="/icons/appleicon.svg" height={30} width={30} alt="apple" />
             Arcade
           </div>
           <div className="text-md  pl-0">Get 3 months of Apple Arcade free</div>

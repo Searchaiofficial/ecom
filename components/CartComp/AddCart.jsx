@@ -145,7 +145,7 @@ const AddCart = () => {
                           </div>
                           <div className="icons flex items-center space-x-2 mt-4">
                             <Image
-                              src="/CartIcons/delete-icon.svg"
+                              src="/icons/delete-icon.svg"
                               width={25}
                               height={25}
                               alt="delete"
@@ -153,10 +153,10 @@ const AddCart = () => {
                               onClick={() => handleDelete(item?.productId?._id)}
                             />
                             <Image
-                              src="/CartIcons/broken-heart-icon.svg"
+                              src="/icons/broken-heart-icon.svg"
                               width={25}
                               height={25}
-                              alt=""
+                              alt="broken heart"
                               className="text-red-700 hover:text-red-500 cursor-pointer"
                             />
                           </div>
@@ -248,13 +248,13 @@ const AddCart = () => {
                 </div>
                 <div className="icons flex items-center space-x-2 mt-4">
                   <img
-                    src="/CartIcons/delete-icon.svg"
-                    alt=""
+                    src="/icons/delete-icon.svg"
+                    alt="delete"
                     className="w-6 h-6 hover:text-slate-500 cursor-pointer "
                   />
                   <img
-                    src="/CartIcons/broken-heart-icon.svg"
-                    alt=""
+                    src="/icons/broken-heart-icon.svg"
+                    alt="broken heart"
                     className="text-red-700 hover:text-red-500 cursor-pointer w-6 h-6"
                   />
                 </div>

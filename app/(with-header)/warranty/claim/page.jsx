@@ -276,7 +276,7 @@ export default function WarrantyClaim() {
                                 required
                             />
                             <label htmlFor="damageProductImages" className="w-full md:w-[300px] cursor-pointer bg-white border border-black rounded-lg flex items-center justify-center px-3 py-2">
-                                <img src="/icon/upload_icon.svg" alt="" className="mr-2 w-6 text-gray-400" />
+                                <img src="/icons/upload_icon.svg" alt="" className="mr-2 w-6 text-gray-400" />
                                 Upload Damage Product Images
                             </label>
                             <p className="text-gray-500 text-sm">At least 3 images required. Max file size: 10MB.</p>
@@ -295,7 +295,7 @@ export default function WarrantyClaim() {
                                 required
                             />
                             <label htmlFor="invoice" className="w-full md:w-[300px] cursor-pointer bg-white border border-black rounded-lg flex items-center justify-center px-3 py-2">
-                                <img src="/icon/upload_icon.svg" alt="" className="mr-2 w-6 text-gray-400" />
+                                <img src="/icons/upload_icon.svg" alt="" className="mr-2 w-6 text-gray-400" />
                                 Upload Invoice
                             </label>
                             <p className="text-gray-500 text-sm">Max file size: 10MB.</p>

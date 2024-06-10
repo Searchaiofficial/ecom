@@ -191,7 +191,7 @@ const UserReviewPosts = ({ slidesPerView, SubcategoryName }) => {
                             <div className="lg:px-[32px] px-[24px] cursor-pointer flex justify-between">
                                 <div className="group hidden md:flex mr-[40px]">
                                     <div className="absolute top-[90px] left-12 p-2 rounded-full flex items-center gap-2">
-                                        <Image src={"/Ayatrio updated icon/instagram-white-icon.svg"} height={25} width={25} />
+                                        <Image src={"/icons/instagram-white-icon.svg"} height={25} width={25} />
                                         <p className="text-[14px] font-semibold text-white transition-all duration-300">@{selectedPost.username}</p>
                                     </div>
                                     <Image src={selectedPost.mediaUrl} width={200} height={200} className="w-[400px] h-[550px]" />
@@ -232,8 +232,8 @@ const UserReviewPosts = ({ slidesPerView, SubcategoryName }) => {
                                                         }
 
                                                         <div className="flex lg:gap-2 gap-1">
-                                                            <Image src={"/svg/icon/adtocart.svg"} height={35} width={35} className="border-2 rounded-full p-1" />
-                                                            <Image src={"/svg/icon/like.svg"} height={35} width={35} className="border-2 rounded-full p-1" />
+                                                            <Image src={"/icons/adtocart.svg"} height={35} width={35} className="border-2 rounded-full p-1" />
+                                                            <Image src={"/icons/like.svg"} height={35} width={35} className="border-2 rounded-full p-1" />
                                                         </div>
                                                     </div>
                                                 </div>
