@@ -214,6 +214,37 @@ const Details = () => {
     }
   };
 
+  const [userCoordinates, setUserCoordinates] = useState(null);
+  const [userPincode, setUserPincode] = useState(null);
+
+  useEffect(() => {
+    localStorage?.getItem("userCoordinates") &&
+      setUserCoordinates(JSON.parse(localStorage.getItem("userCoordinates")));
+  }, []);
+
+  useEffect(() => {
+    if (localStorage?.getItem("userPincode")) {
+      setUserPincode(localStorage.getItem("userPincode"));
+      setForm((prev) => ({
+        ...prev,
+        postal: localStorage.getItem("userPincode"),
+      }));
+    } else if (userCoordinates) {
+      getPinFromCoordinates(userCoordinates.lat, userCoordinates.lng).then(
+        (data) => {
+          if (data) {
+            setUserPincode(data);
+            setForm((prev) => ({
+              ...prev,
+              postal: data,
+            }));
+            localStorage.setItem("userPincode", data);
+          }
+        }
+      );
+    }
+  }, [userCoordinates]);
+
   return (
     <>
       <div className=" px-2 lg:px-20 lg:py-16">
