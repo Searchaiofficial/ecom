@@ -106,9 +106,9 @@ export default function NewMainSlider({ initialData }) {
         }}
         // Responsive breakpoints
         breakpoints={{
-          412: {
+          350: {
             slidesPerView: 1,
-            spaceBetween: 5,
+            // spaceBetween: 5,
           },
 
           640: {
@@ -145,7 +145,7 @@ export default function NewMainSlider({ initialData }) {
                   height={800}
                   alt={data.imgTitle || "Swiper image"}
                   priority
-                  className="object-fill swiper-slide px-[10px] lg:px-[0px] w-full"
+                  className="object-fill swiper-slide mx-auto lg:px-[0px] w-full"
                   // objectFit="cover"
                 />
                 {/* <div className="absolute flex text-lg text-white sm:bottom-[2.5rem] bottom-[96px] left-[3rem] flex-col md:flex-row gap-4 md:items-center">
