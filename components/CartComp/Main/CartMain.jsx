@@ -16,6 +16,7 @@ import axios from "axios";
 import CartProduct from "./CartProduct";
 import { ArrowRight, X } from "lucide-react";
 import { getPinFromCoordinates } from "@/utils/getPinFromCoordinates";
+import { upsertUserLocation } from "@/components/Features/api";
 const CartMain = () => {
   const dispatch = useDispatch();
   const selectedItems = useSelector(selecteddbItems);
@@ -165,6 +166,21 @@ const CartMain = () => {
           if (data) {
             setUserPincode(data);
             localStorage.setItem("userPincode", data);
+
+            const deviceId = localStorage.getItem("deviceId");
+
+            upsertUserLocation({
+              deviceId,
+              pincode: pin,
+              lat: userCoordinates.lat,
+              lng: userCoordinates.lng,
+            })
+              .then(() => {
+                console.log("User location saved");
+              })
+              .catch((error) => {
+                console.error(`Error saving user location: ${error.message}`);
+              });
           }
         }
       );
@@ -290,8 +306,7 @@ const CartMain = () => {
                 </svg>
                 {userPincode ? (
                   <p className=" ml-3 w-full font-[300] text-[15.5px]">
-                    Your pincode:{" "}
-                    <span className="underline">{userPincode}</span>
+                    Your pincode: <span className="underline">{userPincode}</span>
                   </p>
                 ) : null}
               </div>
@@ -338,7 +353,7 @@ const CartMain = () => {
                   onClick={() => {
                     handlePickupType("collect");
                   }}
-                  className={`cursor-pointer box-border border border-[1.5px] ${
+                  className={`cursor-pointer box-border border-[1.5px] ${
                     pickup === "collect" ? "border-black" : "border-[#e5e5e5]"
                   } h-24 w-[50%]`}
                 >

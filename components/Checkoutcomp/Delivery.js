@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setDbItems } from "../Features/Slices/cartSlice";
 import { getPinFromCoordinates } from "@/utils/getPinFromCoordinates";
+import { upsertUserLocation } from "../Features/api";
 
 const Delivery = () => {
   const [selectedOption, setSelectedOption] = useState("option3");
@@ -47,6 +48,21 @@ const Delivery = () => {
           if (data) {
             setUserPincode(data);
             localStorage.setItem("userPincode", data);
+
+            const deviceId = localStorage.getItem("deviceId");
+
+            upsertUserLocation({
+              deviceId,
+              pincode: pin,
+              lat: userCoordinates.lat,
+              lng: userCoordinates.lng,
+            })
+              .then(() => {
+                console.log("User location saved");
+              })
+              .catch((error) => {
+                console.error(`Error saving user location: ${error.message}`);
+              });
           }
         }
       );

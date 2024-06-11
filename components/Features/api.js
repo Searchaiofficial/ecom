@@ -210,3 +210,19 @@ export const fetchStores = async (search) => {
     console.error(`Error fetching suggestions: ${error.message}`);
   }
 };
+
+export const upsertUserLocation = async ({ lat, lng, pincode, deviceId }) => {
+  try {
+    const response = await axios.patch(
+      createApiEndpoint(`userlocation/${deviceId}`),
+      {
+        lat,
+        lng,
+        pincode,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(`Error storing location: ${error.message}`);
+  }
+};

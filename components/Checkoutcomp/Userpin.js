@@ -8,6 +8,7 @@ import { setDbItems } from "../Features/Slices/cartSlice";
 import Link from "next/link";
 import axios from "axios";
 import { getPinFromCoordinates } from "@/utils/getPinFromCoordinates";
+import { upsertUserLocation } from "../Features/api";
 
 const Userpin = () => {
   const dispatch = useDispatch();
@@ -33,11 +34,29 @@ const Userpin = () => {
   }, []);
 
   useEffect(() => {
-    if (userCoordinates) {
+    if (localStorage?.getItem("userPincode")) {
+      setUserPincode(localStorage.getItem("userPincode"));
+    } else if (userCoordinates) {
       getPinFromCoordinates(userCoordinates.lat, userCoordinates.lng).then(
         (data) => {
           if (data) {
             setUserPincode(data);
+            localStorage.setItem("userPincode", data);
+
+            const deviceId = localStorage.getItem("deviceId");
+
+            upsertUserLocation({
+              deviceId,
+              pincode: pin,
+              lat: userCoordinates.lat,
+              lng: userCoordinates.lng,
+            })
+              .then(() => {
+                console.log("User location saved");
+              })
+              .catch((error) => {
+                console.error(`Error saving user location: ${error.message}`);
+              });
           }
         }
       );
