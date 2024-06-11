@@ -13,7 +13,7 @@ import { useDebounceValue } from "usehooks-ts";
 // import mainlogo from "../../assets/ayatriologo.png";
 import { searchProductsRequest } from "../Features/search/searchSlice"
 import { STORE_MAP_DATA } from "@/constants/store-map-data";
-import { updateCoords, updateZoom } from "../Features/Slices/mapSlice";
+import { setClickedItem, updateCoords, updateZoom } from "../Features/Slices/mapSlice";
 import { fetchStores } from "../Features/api";
 
 const Expandedbar = ({ searchText, onClose, onSearch }) => {
@@ -187,7 +187,7 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
 
   // };
 
-  const handleResultClick = ({ lat, lng }) => {
+  const handleResultClick = ({ lat, lng }, item) => {
     onClose();
     if (lat && lng && lat !== null && lng !== null) {
       const latitude = parseFloat(lat);
@@ -201,8 +201,8 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
       } else {
         setZoom(hotels_zoom);
         dispatch(updateZoom(hotels_zoom))
-
       }
+      dispatch(setClickedItem(item))
     }
 
   };
@@ -374,12 +374,12 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
                     <div >
                       <div
                         key={item._id}
-                        className="col-span-1"
+                        className="col-span-1 cursor-pointer"
                         // onClick={() => handleRoute(item)}
                         onClick={() => handleResultClick({
                           lat: item.address.lat,
                           lng: item.address.lng,
-                        })}
+                        }, item)}
                       >
                         <div className="lg:w-[170px] w-[150px] h-[150px] lg:h-[170px]">
                           <Image

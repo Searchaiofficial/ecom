@@ -81,6 +81,9 @@ const Map = ({ setBoundaries, coords, places, PlacesData }) => {
   //   }
   // };
 
+  // console.log(stores)
+  console.log(newZoom)
+
   return (
     <>
       {!isLoaded ? (
@@ -100,7 +103,7 @@ const Map = ({ setBoundaries, coords, places, PlacesData }) => {
               styles: mapStyles,
               mapId: "2d6636895d6a199d",
             }}
-            // onBoundsChanged={handleBoundsChanged}
+          // onBoundsChanged={handleBoundsChanged}
           >
             {!isLoading &&
               stores.map((store, i) => (
@@ -108,7 +111,7 @@ const Map = ({ setBoundaries, coords, places, PlacesData }) => {
                   lat={store.address.lat}
                   lng={store.address.lng}
                   key={store._id}
-                  content={<MapMarker place={store} />}
+                  content={<MapMarker place={store} idx={i} />}
                 />
               ))}
           </GoogleMap>

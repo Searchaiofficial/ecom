@@ -63,6 +63,15 @@ const Asidebox = (props) => {
     // console.log(props.)
   }
 
+  if (props.hoveredIndex === 0 || props.hoveredIndex === 1 || props.hoveredIndex === 2) {
+    if (!asideCategory) {
+      return (
+        <div className="absolute top-[2.7rem]  lg:p-4 bg-white flex flex-col mt-[15px] md:flex-row noto-sans-200 transition-all duration-300 ease-linear w-full md:left-0 min-h-[90%] lg:min-h-[20rem] md:h-auto md:px-10">
+        </div>
+      )
+    }
+  }
+
   return (
     <>
       {asideCategory && (

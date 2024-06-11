@@ -101,14 +101,14 @@ const CategoriesSlider = () => {
             <div className=" pt-[2rem] lg:pt-[52px] pl-[15px]  overflow-x-auto  relative">
                 {
                     categories.length > 0 && (
-                        <div className="flex flex-row group items-center justify-end gap-2 mb-4">
+                        <div className="flex flex-row group items-center justify-end gap-2 lg:mb-4">
                             <div className="back rounded-full   group-hover:opacity-60  opacity-0  absolute left-5 z-10">
                                 <Image
                                     src="/icons/left-icon.svg"
                                     width={20}
                                     height={20}
                                     alt="Arrow"
-                                    className=" h-[28px] -mt-5  w-[28px] "
+                                    className=" h-[28px] lg:-mt-5  mb-[50px] sm:mb-0  w-[28px] "
                                 />
 
                             </div>
@@ -124,17 +124,18 @@ const CategoriesSlider = () => {
                                 breakpoints={{
                                     300: {
                                         slidesPerView: 3.1,
-                                        spaceBetween: 5,
+                                        spaceBetween: 10,
                                     },
                                     768: {
                                         slidesPerView: 3,
-                                        spaceBetween: 5,
+                                        spaceBetween: 10,
                                     },
                                     1024: {
                                         slidesPerView: 3,
-                                        spaceBetween: 5,
+                                        spaceBetween: 10,
                                     },
                                 }}
+                                className="mt-[12px]"
                             >
                                 {categories?.map((curElement, idx) => {
                                     return (
@@ -142,9 +143,11 @@ const CategoriesSlider = () => {
                                             <Link href={`/category/${curElement.name.replace(/ /g, "-")}/all`}
                                                 onClick={() => handleIncrementCategoryPopularity(curElement.name)}
                                             >
-                                                <div className="flex flex-col py-[16px] ">
+                                                <div className="flex flex-col  items-center ">
                                                     <div className="mb-[12px] ">
+
                                                         <Image src={curElement.image || "/images/temp.svg"} width={200} height={130} alt={curElement.name || "Swiper image"} className="w-[200px] h-[62px] lg:h-[130px] " />
+
                                                     </div>
                                                     <h2 className="text-[#333333] lg:text-center line-clamp-1 font-semibold text-[14px] hover:underline">{curElement.name}</h2>
                                                 </div>
@@ -159,7 +162,7 @@ const CategoriesSlider = () => {
                                     width={20}
                                     height={20}
                                     alt="Arrow"
-                                    className="  h-[28px] -mt-5  w-[28px] "
+                                    className="  h-[28px] lg:-mt-5 -mt-10 w-[28px] "
                                 />
 
                             </div>

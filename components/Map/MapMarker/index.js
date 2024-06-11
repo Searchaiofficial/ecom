@@ -1,15 +1,26 @@
 import { IoClose } from "react-icons/io5";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import "./styles.css";
 import Image from "next/image";
+import LottieBackground from "@/components/LottieBackground"
+import animationData from "@/components/Animation - 1718097462437.json"
+import { useDispatch, useSelector } from "react-redux";
+import { selectClickedItem, setClickedItem } from "../../Features/Slices/mapSlice";
+
+
 
 const PopupPortal = ({ children }) => {
   return ReactDOM.createPortal(children, document.body);
 };
 
-const MapMarker = ({ place }) => {
+const MapMarker = ({ place, idx }) => {
+  const clickedItem = useSelector(selectClickedItem)
+  const dispatch = useDispatch()
+
+  // console.log(clickedItem)
   const [isPopupOpen, setPopupOpen] = useState(false);
+  // console.log(place)
 
   const handleMarkerClick = () => {
     // console.log("Marker clicked", place?.name);
@@ -18,6 +29,7 @@ const MapMarker = ({ place }) => {
 
   const handleClose = () => {
     setPopupOpen(false);
+    dispatch(setClickedItem(null))
   };
 
   // console.log("Rendering MapMarker for", place);
@@ -25,18 +37,31 @@ const MapMarker = ({ place }) => {
   const defaultImageUrl =
     "https://bolt-gcdn.sc-cdn.net/3/Z2i0CKb1i5GtNvg8xNoP7.256.IRZXSOY?mo=GlgaFhoAGgAyAX06AQRCBgjm_5mrBlBJYAFaEERmTGFyZ2VUaHVtYm5haWyiARQIgAIiDwoCSAISACoHSVJaWFNPWaIBFAiaCiIPCgJIAxIAKgdJUlpYU09Z&uc=73";
 
+  useEffect(() => {
+    if (clickedItem?._id === place?._id) {
+      handleMarkerClick()
+    }
+  }, [])
+
   return (
     <div className="marker-container gmap-marker">
       <>
         <div className="marker-info" onClick={handleMarkerClick}>
-          <div className="info-wrapper wrapper">
+          <div className="info-wrapper wrapper" style={{ position: 'relative' }}>
+            {
+              idx === 5 && (
+                <LottieBackground animationData={animationData} />
+              )
+            }
             {/* <div className="info-title">
-              <span className="title-text">{place.name}</span>
-            </div> */}
+          <span className="title-text">{place.name}</span>
+        </div> */}
             <div
               className="info-image"
               style={{
                 backgroundImage: `url(${place.thumbnail || defaultImageUrl})`,
+                boxShadow: `${idx === 5 && "0 0 0 6px rgb(117, 56, 215)"}`,
+
               }}
             ></div>
           </div>

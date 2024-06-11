@@ -324,12 +324,13 @@ function Header({ setIsHeaderMounted }) {
                 {/* for only mobile search */}
 
                 <div className="">
-                  <nav className="hidden md:flex gap-4">
+                  <nav className="hidden md:flex">
                     {headerLinks.map((value, idx) => (
                       <div
+                        className="px-[12px]"
                         key={idx}
                         onMouseEnter={() => handleMouseEnter(idx)}
-                        onMouseLeave={handleMouseLeave}
+                        onMouseLeave={() => handleMouseLeave()}
                       // onClick={() => handleClick(idx)}
                       >
                         <Link
