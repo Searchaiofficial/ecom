@@ -108,7 +108,7 @@ export default function NewMainSlider({ initialData }) {
         breakpoints={{
           350: {
             slidesPerView: 1,
-            spaceBetween: 5,
+            // spaceBetween: 5,
           },
 
           640: {
