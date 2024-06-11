@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import "../MainSlider/Mainslidestyle.css";
-import work from "@/public/images/work.webp";
+// import work from "@/public/images/work.webp";
 import "./tabs.css";
 import TabImage from "./TabImage";
 import { useRouter } from "next/navigation";
@@ -93,20 +93,18 @@ const Tabs = ({ data }) => {
           <h2 className="text-xl font-bold mb-5">More ideas and inspiration</h2>
         </div>
         <div
-          className={` py-2.5 bloc-tabsnone flex flex-row tabcategory ${
-            isSticky ? "sticky-tabcategory" : ""
-          }`}
+          className={` py-2.5 bloc-tabsnone flex flex-row tabcategory ${isSticky ? "sticky-tabcategory" : ""
+            }`}
           style={{ overflowX: "auto", WebkitOverflowScrolling: "touch" }}
         >
           {tabsData.map((tab, i) => (
             <div
               key={i}
               className={` px-5 py-2 tabS cursor-pointer
-            ${
-              activeTab === tab.key
-                ? "active-tabs  border border-black mr-2.5 rounded-full flex items-center justify-center bg-gray-100 whitespace-nowrap"
-                : "tabs  border border-white mr-2.5 rounded-full flex items-center justify-center bg-gray-100 whitespace-nowrap"
-            }`}
+            ${activeTab === tab.key
+                  ? "active-tabs  border border-black mr-2.5 rounded-full flex items-center justify-center bg-gray-100 whitespace-nowrap"
+                  : "tabs  border border-white mr-2.5 rounded-full flex items-center justify-center bg-gray-100 whitespace-nowrap"
+                }`}
               onClick={() => setActiveTab(tab.key)}
             >
               {tab.label}
@@ -114,11 +112,10 @@ const Tabs = ({ data }) => {
           ))}
           <div
             className={` px-5 py-2 tabS cursor-pointer
-            ${
-              activeTab === "all"
+            ${activeTab === "all"
                 ? "active-tabs  border border-black mr-2.5 rounded-full flex items-center justify-center bg-gray-100 whitespace-nowrap"
                 : "tabs  border border-white mr-2.5 rounded-full flex items-center justify-center bg-gray-100 whitespace-nowrap"
-            }`}
+              }`}
             onClick={() => setActiveTab("all")}
           >
             All
@@ -127,68 +124,70 @@ const Tabs = ({ data }) => {
 
         {activeTab === "all" ? (
           <div className="classic-tabs text-green-800 grid sm:grid-cols-3 grid-cols-2 gap-3 grid-rows-3">
-          <TabImage
-            width={450}
-            height={700}
-            src={tabImages[uniqueRoomCategories[0]]?.[0]}
-            alt="Room"
-            handleTab={handleTab}
-            labelData={labelData[uniqueRoomCategories[0]]?.[0]|| []}
-          />
+            <TabImage
+              width={450}
+              height={700}
+              src={tabImages[uniqueRoomCategories[0]]?.[0]}
+              alt="Room"
+              handleTab={handleTab}
+              labelData={labelData[uniqueRoomCategories[0]]?.[0] || []}
+            />
 
-          <div className="overflow-hidden relative">
-            <Image
-              className="h-full w-full object-cover "
-              src={tabImages[uniqueRoomCategories[1]]?.[0]}
+            <div className="overflow-hidden relative">
+              <Image
+                className="h-full w-full object-cover "
+                src={tabImages[uniqueRoomCategories[1]]?.[0]}
+                alt="Room"
+                width={450}
+                height={350}
+              />
+            </div>
+
+            <TabImage
+              src={tabImages[uniqueRoomCategories[2]]?.[0]}
+              labelData={labelData[uniqueRoomCategories[2]]?.[0] || []}
               alt="Room"
               width={450}
-              height={350}
+              height={700}
+              handleTab={handleTab}
             />
-          </div>
+            <div className="overflow-hidden sm:hidden block">
+              <Image
+                className="h-full w-full object-cover "
+                src="/images/temp.svg"
+                alt="Room"
+                width={200}
+                height={200}
+              />
+            </div>
 
-          <TabImage
-            src={tabImages[uniqueRoomCategories[2]]?.[0]}
-            labelData={labelData[uniqueRoomCategories[2]]?.[0] || []}
-            alt="Room"
-            width={450}
-            height={700}
-            handleTab={handleTab}
-          />
-          <div className="overflow-hidden sm:hidden block">
-            <Image
-              className="h-full w-full object-cover "
-              src={work}
+            <TabImage
+              src={tabImages[uniqueRoomCategories[3]]?.[0]}
+              labelData={labelData[uniqueRoomCategories[3]]?.[0] || []}
               alt="Room"
-            />
-          </div>
-
-          <TabImage
-            src={tabImages[uniqueRoomCategories[3]]?.[0]}
-            labelData={labelData[uniqueRoomCategories[3]]?.[0] || []}
-            alt="Room"
-            handleTab={handleTab}
-            width={450}
-            height={700}
-          />
-          <div className="overflow-hidden">
-            <Image
-              className="h-full w-full object-cover"
-              src={tabImages[uniqueRoomCategories[4]]?.[0]}
-              alt="Room"
+              handleTab={handleTab}
               width={450}
-              height={350}
+              height={700}
             />
+            <div className="overflow-hidden">
+              <Image
+                className="h-full w-full object-cover"
+                src={tabImages[uniqueRoomCategories[4]]?.[0]}
+                alt="Room"
+                width={450}
+                height={350}
+              />
+            </div>
+            <div className="bg-teal-100 overflow-hidden ">
+              <Image
+                className="h-full w-full object-cover"
+                src={tabImages[uniqueRoomCategories[5]]?.[0]}
+                alt="Room"
+                width={450}
+                height={350}
+              />
+            </div>
           </div>
-          <div className="bg-teal-100 overflow-hidden ">
-            <Image
-              className="h-full w-full object-cover"
-              src={tabImages[uniqueRoomCategories[5]]?.[0]}
-              alt="Room"
-              width={450}
-              height={350}
-            />
-          </div>
-        </div>
 
         ) : (
           <div className="classic-tabs text-green-800 grid sm:grid-cols-3 grid-cols-2 gap-3 grid-rows-3">
@@ -234,8 +233,10 @@ const Tabs = ({ data }) => {
             <div className="overflow-hidden sm:hidden block">
               <Image
                 className="h-full w-full object-cover "
-                src={work}
+                src="/images/temp.svg"
                 alt="Room"
+                width={200}
+                height={200}
               />
             </div>
 

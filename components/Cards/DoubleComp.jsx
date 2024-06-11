@@ -32,7 +32,7 @@ const DoubleComp = () => {
             </a>
             <a href="#" className="flex ">
               Learn more{" "}
-              <img src="/images/right.webp" className=" ml-2 w-7 h-7" />
+              <img src="/icons/backarrowRevarce.svg" alt="right" className=" ml-2 w-7 h-7" />
             </a>
           </div>
         </div>
@@ -54,7 +54,7 @@ const DoubleComp = () => {
             </a>
             <a href="#" className="flex">
               Learn more{" "}
-              <img src="/images/right.webp" className="ml-1 w-7 h-7" />
+              <img src="/icons/backarrowRevarce.svg" alt="right" className="ml-1 w-7 h-7" />
             </a>
           </div>
         </div>

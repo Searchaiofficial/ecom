@@ -361,7 +361,7 @@ const Tabs = ({
 
   const stars = new Array(4)
     .fill("/icons/star.svg")
-    .concat("/icons/half-star.svg");
+    .concat("/icons/half-black-half-white.svg");
 
   // const firstPart = filterData;
   // const firstPart = filterData.slice(0, 8);

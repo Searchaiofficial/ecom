@@ -103,7 +103,7 @@ const Double = () => {
           );
         })}
         <Image
-          src="/icons/rightvector.svg"
+          src="/icons/right.svg"
           width={30}
           height={30}
           alt="arrow"

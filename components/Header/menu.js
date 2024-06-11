@@ -54,7 +54,7 @@ export default function BasicMenu() {
 
   return (
     <div>
-      <Image src='/icons/menu.svg' height={20} width={20} alt="menu"
+      <Image src="/icons/menu.svg" height={20} width={20} alt="menu"
         className="font-bold text-2xl"
         onClick={(event) => {
           setAnchorEl(!anchorEl);

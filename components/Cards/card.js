@@ -65,7 +65,7 @@ function Card(props) {
       starsArray.push(
         <img
           key={fullStars}
-          src={"/icons/half-star.svg"}
+          src={"/icons/half-black-half-white.svg"}
           height={20}
           width={20}
           alt="half-star"
@@ -329,7 +329,7 @@ function Card(props) {
           >
             {isHovered && slide !== 0 && (
               <Image
-                src="/icons/left-card.svg"
+                src="/icons/left-icon.svg"
                 height={20}
                 width={20}
                 alt="arrow"
@@ -362,7 +362,7 @@ function Card(props) {
             {isHovered && (
               <div className="z-50">
                 <Image
-                  src="/icons/right-card.svg"
+                  src="/icons/right-icon.svg"
                   height={30}
                   width={30}
                   alt="arrow"
@@ -439,7 +439,7 @@ function Card(props) {
             )
           }
           <div className="card-rating">
-            {/* <img src="/icons/star-full-icon.svg" className="w-6 h-6" alt="" /> */}
+            {/* <img src="/icons/star.svg" className="w-6 h-6" alt="" /> */}
 
             {props.rating}
           </div>

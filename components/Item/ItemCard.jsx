@@ -24,11 +24,11 @@ const handleClick = (id) => {
     <>
       <div className="card m-2" style={{ width: '100%', height: '100%' }}>
         <div className={`card-flex ${props.cssClass}  `} onClick={()=>handleClick(props.id)}>
-        <img src={props.imgSrc} className="card-img w-full h-full" />
+        <img src={props.imgSrc} className="card-img w-full h-full" alt=''/>
 
           <div className="review-icon-container">
             <Image
-              src="/rooms/rev.webp"
+              src="/images/temp.svg"
               width={10}
               height={10}
               className="h-8 rounded-md cursor-pointer"
@@ -43,7 +43,7 @@ const handleClick = (id) => {
         >
           <div className="card-title-desc">{props.title}</div>
           <div className="card-rating">
-            <Image src="/icons/star-full-icon.svg" width={20} height={20} alt="star" />
+            <Image src="/icons/star.svg" width={20} height={20} alt="star" />
             {props.rating}
           </div>
         </div>

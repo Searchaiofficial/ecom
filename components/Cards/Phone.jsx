@@ -84,18 +84,6 @@ const Phone = () => {
           </span>
         ))}
       </p>
-
-      {/* <div>
-          <Image
-            src="/images/apple.webp"
-            alt=""
-            width={1350}
-            height={500}
-            style={{ width: "100vw", height: "auto" }}
-            className="h-auto  md:w-100vw  w-full"
-          />
-        </div> */}
-
       <br />
     </div>
   );

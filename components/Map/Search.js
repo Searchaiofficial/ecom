@@ -206,7 +206,7 @@ const Search = ({ places, onResultClick }) => {
                 >
                   {/* {index === 0 ? (
                     <Image
-                      src="/icons/homeicon.svg"
+                      src="/icons/info.svg"
                       height={20}
                       width={20}
                       alt="home"
@@ -214,7 +214,7 @@ const Search = ({ places, onResultClick }) => {
                     />
                   ) : ( */}
                   <Image
-                    src="/icons/homeicon.svg"
+                    src="/icons/info.svg"
                     height={20}
                     width={20}
                     alt="time"
@@ -283,7 +283,7 @@ const Search = ({ places, onResultClick }) => {
                   onMouseLeave={() => handleItemHover(null)}
                 >
                   <Image
-                    src="/icons/homeicon.svg"
+                    src="/icons/info.svg"
                     height={20}
                     width={20}
                     alt="close"

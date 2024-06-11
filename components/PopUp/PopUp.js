@@ -396,7 +396,7 @@ function App() {
             </div>
             <div className="head images3">
               <img
-                src="/images/back.webp"
+                src="/icons/backarrow.svg"
                 className="back"
                 onClick={goTo2}
                 alt="Back"

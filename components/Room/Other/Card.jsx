@@ -83,7 +83,7 @@ const Card = ({ data, productId }) => {
       starsArray.push(
         <img
           key={fullStars}
-          src={"/icons/half-star.svg"}
+          src={"/icons/half-black-half-white.svg"}
           height={20}
           width={20}
           alt="half-star"
@@ -518,7 +518,7 @@ const Card = ({ data, productId }) => {
               >
                 <div className="flex flex-row gap-1">
                   <Image
-                    src="/icons/ayatrio_store_b.svg"
+                    src="/icons/ayatrio_store_black.svg"
                     height={25}
                     width={25}
                     alt="icon"

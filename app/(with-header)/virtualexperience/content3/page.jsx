@@ -17,7 +17,7 @@ const ActivityItem = ({ index, widthRange, selectedActivity, handleClick }) => (
     <div className={`w-${widthRange} h-20 bg-orange-400`}></div>
     <div className="flex items-center gap-2">
       <Image
-        src="/icons/up-arrow-line.svg"
+        src="/icons/uparrow.svg"
         alt="arrow"
         width={10}
         height={10}
@@ -25,7 +25,7 @@ const ActivityItem = ({ index, widthRange, selectedActivity, handleClick }) => (
       />
       {widthRange} Widths{" "}
       <Image
-        src="/icons/up-arrow-line.svg"
+        src="/icons/uparrow.svg"
         alt="arrow"
         width={10}
         height={10}

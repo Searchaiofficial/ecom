@@ -74,28 +74,28 @@ function Scene3({ texture, texture_type }) {
     if (texture_type == "Flooring") {
       setup.children[9].material.map = textureLoader.load(texture);
       setup.children[16].material.map = textureLoader.load(
-        "/images/textures/tex_curtain.jpg"
+        "/images/temp.svg"
       );
     } else if (texture_type == "Wallpaper") {
       setup.children[8].material.map = textureLoader.load(texture);
       setup.children[9].material.map = textureLoader.load(
-        "/images/textures/tex_floor.jpg"
+        "/images/temp.svg"
       );
       setup.children[16].material.map = textureLoader.load(
-        "/images/textures/tex_curtain.jpg"
+        "/images/temp.svg"
       );
     } else if (texture_type == "Curtains") {
       setup.children[16].material.map = textureLoader.load(texture);
       setup.children[9].material.map = textureLoader.load(
-        "/images/textures/tex_floor.jpg"
+        "/images/temp.svg"
       );
     } else if (texture_type == "Blinds") {
       setup.children[15].material.map = textureLoader.load(texture);
       setup.children[9].material.map = textureLoader.load(
-        "/images/textures/tex_floor.jpg"
+        "/images/temp.svg"
       );
       setup.children[16].material.map = textureLoader.load(
-        "/images/textures/tex_curtain.jpg"
+        "/images/temp.svg"
       );
     }
     //     setup.children[10].children[0].children[0].children[0].material.map =

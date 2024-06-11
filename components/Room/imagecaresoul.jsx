@@ -121,7 +121,7 @@ const Carousel = () => {
           <div className="z-50" onClick={goToPrevSlide}>
 
             <Image
-              src="/icons/left-card.svg"
+              src="/icons/left-icon.svg"
               height={20}
               width={20}
               alt="arrow"
@@ -134,7 +134,7 @@ const Carousel = () => {
 
           <div className="z-50" onClick={goToNextSlide}>
             <Image
-              src="/icons/right-card.svg"
+              src="/icons/right-icon.svg"
               height={30}
               width={30}
               alt="arrow"

@@ -54,7 +54,7 @@ const ratingsData = [
     value: "4.0",
     icon: (
       <Image
-        src="/icons/map-location-icon.svg"
+        src="/icons/location-pin-icon.svg"
         width={36}
         height={36}
         alt="map"

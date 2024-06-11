@@ -115,7 +115,7 @@ const Imagechanger = () => {
                 </h1>
                 {openStates[idx] ? (
                   <Image
-                    src="/icons/up.svg"
+                    src="/icons/uparrow.svg"
                     width={20}
                     height={20}
                     alt="up"
@@ -123,7 +123,7 @@ const Imagechanger = () => {
                   />
                 ) : (
                   <Image
-                    src="/icons/down.svg"
+                    src="/icons/downarrow.svg"
                     width={20}
                     height={20}
                     alt="down"

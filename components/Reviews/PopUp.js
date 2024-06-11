@@ -22,7 +22,7 @@ function PopUp({ isPopupVisible, setPopupVisible, closePopup }) {
                 <div className="flex flex-col items-center justify-center">
                   <div>
                     <Image
-                      src="/rooms/rev.webp"
+                      src="/images/temp.svg"
                       width={10}
                       height={10}
                       className="h-20 w-20 rounded-full cursor-pointer"
@@ -57,32 +57,32 @@ function PopUp({ isPopupVisible, setPopupVisible, closePopup }) {
               </div>
               <div className=" mt-8 flex flex-col gap-4 ml-4">
                 <div className="flex">
-                  <Image src="/icons/academic-cap-icon.svg" width={10} height={10} alt="academic cap icon" className="text-4xl mr-2 " />
+                  <Image src="/icons/info.svg" width={10} height={10} alt="academic cap icon" className="text-4xl mr-2 " />
                   <p>
                     Where I went to school: Universidad de Psicología en
                     Valencia
                   </p>
                 </div>
                 <div className="flex">
-                  <Image src="/icons/shopping-bag-icon.svg" width={10} height={10} alt="shopping bag" className="text-xl mr-2 " />
+                  <Image src="/icons/info.svg" width={10} height={10} alt="shopping bag" className="text-xl mr-2 " />
                   <p>My work: coach</p>
                 </div>
                 <div className="flex">
-                  <Image src="/icons/light-bulb-icon.svg" width={10} height={10} alt="light bulb" className="text-xl mr-2 " />
+                  <Image src="/icons/info.svg" width={10} height={10} alt="light bulb" className="text-xl mr-2 " />
                   <p>Fun fact: No one believes my age</p>
                 </div>
                 <div className="flex">
-                  <Image src="/icons/twinkling-stars-icon.svg" width={10} height={10} alt="twinkling stars" className="text-4xl mr-2 " />
+                  <Image src="/icons/info.svg" width={10} height={10} alt="twinkling stars" className="text-4xl mr-2 " />
                   <p>
                     What makes my home unique: Good energy and feeling at home
                   </p>
                 </div>
                 <div className="flex">
-                  <Image src="/icons/fast-food-icon.svg" width={10} height={10} alt="fast food" className="text-xl mr-2 " />
+                  <Image src="/icons/info.svg" width={10} height={10} alt="fast food" className="text-xl mr-2 " />
                   <p>For guests, I always: Help them enjoy Valencia</p>
                 </div>
                 <div className="flex">
-                  <Image src="/icons/balloons-icon.svg" width={10} height={10} alt="balloons" className="text-xl mr-2 " />
+                  <Image src="/icons/info.svg" width={10} height={10} alt="balloons" className="text-xl mr-2 " />
                   <p>Born in the 60s</p>
                 </div>
               </div>

@@ -18,7 +18,7 @@ const CompareDetails = ({ filteredProducts }) => {
   };
   const stars = new Array(4)
     .fill("/icons/star.svg")
-    .concat("/icons/half-star.svg");
+    .concat("/icons/half-black-half-white.svg");
   return (
     <div className="py-20">
       <div className="flex items-center justify-center sm:flex-row flex-wrap sm:gap-28 gap-10 overflow-x-auto">

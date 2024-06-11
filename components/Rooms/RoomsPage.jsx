@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import bedimageh from "../../public/images/h.jpeg";
 import React, { useEffect, useRef, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";

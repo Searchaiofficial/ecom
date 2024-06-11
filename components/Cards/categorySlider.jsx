@@ -19,32 +19,32 @@ const data = [
     {
         id: 1,
         title: "IPad",
-        image: "/images/demo1.png"
+        image: "/images/temp.svg"
     },
     {
         id: 2,
         title: "IPad",
-        image: "/images/demo1.png"
+        image: "/images/temp.svg"
     },
     {
         id: 3,
         title: "IPad",
-        image: "/images/demo1.png"
+        image: "/images/temp.svg"
     },
     {
         id: 4,
         title: "IPad",
-        image: "/images/demo1.png"
+        image: "/images/temp.svg"
     },
     {
         id: 5,
         title: "IPad",
-        image: "/images/demo1.png"
+        image: "/images/temp.svg"
     },
     {
         id: 6,
         title: "IPad",
-        image: "/images/demo1.png"
+        image: "/images/temp.svg"
     },
 
 ]
@@ -104,7 +104,7 @@ const CategoriesSlider = () => {
                         <div className="flex flex-row group items-center justify-end gap-2 mb-4">
                             <div className="back rounded-full   group-hover:opacity-60  opacity-0  absolute left-5 z-10">
                                 <Image
-                                    src="/icons/left-card.svg"
+                                    src="/icons/left-icon.svg"
                                     width={20}
                                     height={20}
                                     alt="Arrow"
@@ -144,7 +144,7 @@ const CategoriesSlider = () => {
                                             >
                                                 <div className="flex flex-col py-[16px] ">
                                                     <div className="mb-[12px] ">
-                                                        <Image src={curElement.image || "/images/demo1.png"} width={200} height={130} alt={curElement.name || "Swiper image"} className="w-[200px] h-[62px] lg:h-[130px] " />
+                                                        <Image src={curElement.image || "/images/temp.svg"} width={200} height={130} alt={curElement.name || "Swiper image"} className="w-[200px] h-[62px] lg:h-[130px] " />
                                                     </div>
                                                     <h2 className="text-[#333333] lg:text-center line-clamp-1 font-semibold text-[14px] hover:underline">{curElement.name}</h2>
                                                 </div>
@@ -155,7 +155,7 @@ const CategoriesSlider = () => {
                             </Swiper>
                             <div className="right rounded-full   group-hover:opacity-60 opacity-0   absolute right-5 z-10">
                                 <Image
-                                    src="/icons/right-card.svg"
+                                    src="/icons/right-icon.svg"
                                     width={20}
                                     height={20}
                                     alt="Arrow"

@@ -44,7 +44,7 @@ function Carousel({ data }) {
 
       {isHovered && (
         <div>
-          <Image src='/icons/rightvector.svg' height={20} width={20} alt="arrow"
+          <Image src='/icons/right.svg' height={20} width={20} alt="arrow"
             onClick={nextSlide}
             className="arrow arrow-right"
           />

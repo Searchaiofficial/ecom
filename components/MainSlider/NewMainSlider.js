@@ -123,7 +123,7 @@ export default function NewMainSlider({ initialData }) {
       >
         <div className={`${navigationVisible ? "block" : "hidden"}`}>
           <Image
-            src="/icons/left-card.svg"
+            src="/icons/left-icon.svg"
             width={30}
             height={30}
             alt="arrow"
@@ -206,7 +206,7 @@ export default function NewMainSlider({ initialData }) {
         })}
         <div className={`${navigationVisible ? "block" : "hidden"}`}>
           <Image
-            src="/icons/right-card.svg"
+            src="/icons/right-icon.svg"
             width={30}
             height={30}
             alt="arrow"

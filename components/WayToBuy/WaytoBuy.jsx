@@ -65,7 +65,7 @@ function WaytoBuy() {
                     </p>
                     <p className='mt-2'>
                       <a className='text-blue-600 font-semibold' href="#">Shop iPhone </a>
-                      <Image width={150} height={25} alt='hdfc' className='mx-auto pt-4' src="/images/Waytobuy/hdfc.jpg" />
+                      <Image width={150} height={25} alt='hdfc' className='mx-auto pt-4' src="/icons/hdfc-bank-logo.svg" />
                     </p>
                   </div>
                 </div>
@@ -81,7 +81,7 @@ function WaytoBuy() {
                     </p>
                     <p className='mt-2'>
                       <a className='text-blue-600 font-semibold' href="#">Shop iPhone </a>
-                      <Image width={150} height={25} alt='hdfc' className='mx-auto pt-4' src="/images/Waytobuy/hdfc.jpg" />
+                      <Image width={150} height={25} alt='hdfc' className='mx-auto pt-4' src="/icons/hdfc-bank-logo.svg" />
                     </p>
                   </div>
                 </div>
@@ -104,7 +104,7 @@ function WaytoBuy() {
                     </p>
                     <p className='mt-2'>
                       <a className='text-blue-600 font-semibold' href="#">Shop iPad </a>
-                      <Image width={150} height={25} alt='hdfc' className='mx-auto pt-4' src="/images/Waytobuy/hdfc.jpg" />
+                      <Image width={150} height={25} alt='hdfc' className='mx-auto pt-4' src="/icons/hdfc-bank-logo.svg" />
                     </p>
                   </div>
                 </div>
@@ -121,7 +121,7 @@ function WaytoBuy() {
                     </p>
                     <p className='mt-2'>
                       <a className='text-blue-600 font-semibold' href="#">Shop iPad </a>
-                      <Image width={150} height={25} alt='hdfc' className='mx-auto pt-4' src="/images/Waytobuy/hdfc.jpg" />
+                      <Image width={150} height={25} alt='hdfc' className='mx-auto pt-4' src="/icons/hdfc-bank-logo.svg" />
                     </p>
                   </div>
                 </div>
@@ -142,7 +142,7 @@ function WaytoBuy() {
                     </p>
                     <p className='mt-2'>
                       <a className='text-blue-600 font-semibold' href="#">Shop AirPods </a>
-                      <Image width={150} height={25} alt='hdfc' className='mx-auto pt-4' src="/images/Waytobuy/hdfc.jpg" />
+                      <Image width={150} height={25} alt='hdfc' className='mx-auto pt-4' src="/icons/hdfc-bank-logo.svg" />
                     </p>
                   </div>
                 </div>
@@ -155,7 +155,7 @@ function WaytoBuy() {
                     </p>
                     <p className='mt-2'>
                       <a className='text-blue-600 font-semibold' href="#">Shop AirPods </a>
-                      <Image width={150} height={25} alt='hdfc' className='mx-auto pt-4' src="/images/Waytobuy/hdfc.jpg" />
+                      <Image width={150} height={25} alt='hdfc' className='mx-auto pt-4' src="/icons/hdfc-bank-logo.svg" />
                     </p>
                   </div>
                 </div>
@@ -350,7 +350,7 @@ function WaytoBuy() {
                         <div className="bg-white rounded-lg h-64  flex items-center justify-center">
                           <div className='flex flex-col items-center'>
                             <div className=''>
-                              <Image src="/images/Waytobuy/macbook1.jpg" alt='mac' width={57} height={44} />
+                              <Image src="/icons/appleicon.svg" alt='mac' width={57} height={44} />
                             </div>
                             <div><span>Shop Mac</span></div>
                           </div>
@@ -364,7 +364,7 @@ function WaytoBuy() {
                         <div className="bg-white rounded-lg h-64  flex items-center justify-center">
                           <div className='flex flex-col items-center'>
                             <div className=''>
-                              <Image src="/images/Waytobuy/macbook1.jpg" alt='mac' width={57} height={44} />
+                              <Image src="/icons/appleicon.svg" alt='mac' width={57} height={44} />
                             </div>
                             <div><span>Shop Mac</span></div>
                           </div>
@@ -378,7 +378,7 @@ function WaytoBuy() {
                         <div className="bg-white rounded-lg h-64  flex items-center justify-center">
                           <div className='flex flex-col items-center'>
                             <div className=''>
-                              <Image src="/images/Waytobuy/macbook1.jpg" alt='mac' width={57} height={44} />
+                              <Image src="/icons/appleicon.svg" alt='mac' width={57} height={44} />
                             </div>
                             <div><span>Shop Mac</span></div>
                           </div>
@@ -392,7 +392,7 @@ function WaytoBuy() {
                         <div className="bg-white rounded-lg h-64  flex items-center justify-center">
                           <div className='flex flex-col items-center'>
                             <div className=''>
-                              <Image src="/images/Waytobuy/macbook1.jpg" alt='mac' width={57} height={44} />
+                              <Image src="/icons/appleicon.svg" alt='mac' width={57} height={44} />
                             </div>
                             <div><span>Shop Mac</span></div>
                           </div>
@@ -406,7 +406,7 @@ function WaytoBuy() {
                         <div className="bg-white rounded-lg h-64  flex items-center justify-center">
                           <div className='flex flex-col items-center'>
                             <div className=''>
-                              <Image src="/images/Waytobuy/macbook1.jpg" alt='mac' width={57} height={44} />
+                              <Image src="/icons/appleicon.svg" alt='mac' width={57} height={44} />
                             </div>
                             <div><span>Shop Mac</span></div>
                           </div>
@@ -420,7 +420,7 @@ function WaytoBuy() {
                         <div className="bg-white rounded-lg h-64  flex items-center justify-center">
                           <div className='flex flex-col items-center'>
                             <div className=''>
-                              <Image src="/images/Waytobuy/macbook1.jpg" alt='mac' width={57} height={44} />
+                              <Image src="/icons/appleicon.svg" alt='mac' width={57} height={44} />
                             </div>
                             <div><span>Shop Mac</span></div>
                           </div>
@@ -440,7 +440,7 @@ function WaytoBuy() {
             <div className="flex flex-wrap  font-sans font-normal text-base font-weight-400 justify-center tracking-tighter leading-tight">
               <section className="lg:w-1/2 w-full flex justify-center">
                 <div className='pt-14 relative font-sans text-center w-56 z-1'>
-                  <Image src="/images/Waytobuy/macbook1.jpg" alt='mac' className='mx-auto' width={57} height={44} />
+                  <Image src="/icons/appleicon.svg" alt='mac' className='mx-auto' width={57} height={44} />
                   <h3 className='mt-4 font-sans font-semibold text-lg'>Get Help buying</h3>
                   <p className='mt-4 '>Have a question? Call a Specialist or chat online. Call 000800 040 1966.</p>
                   <span className='mt-4 text-blue-600'> <a href="#">Contact Us</a></span>
@@ -448,7 +448,7 @@ function WaytoBuy() {
               </section>
               <section className="lg:w-1/2 w-full flex justify-center">
                 <div className='pt-14 relative font-sans text-center w-56 z-1'>
-                  <Image src="/images/Waytobuy/macbook1.jpg" alt='mac' className='mx-auto' width={57} height={44} />
+                  <Image src="/icons/appleicon.svg" alt='mac' className='mx-auto' width={57} height={44} />
                   <h3 className='mt-4 font-sans font-semibold text-lg'>Get Help buying</h3>
                   <p className='mt-4'>Have a question? Call a Specialist or chat online. Call 000800 040 1966.</p>
                   <span className='mt-4 text-blue-600'> <a href="#">Contact Us</a></span>

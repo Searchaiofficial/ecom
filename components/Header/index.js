@@ -452,7 +452,7 @@ function Header({ setIsHeaderMounted }) {
 
                 <div className="w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer md:hidden">
                   {/* <MenuIcon onClick={toggleMobileMenu} /> */}
-                  <Image src={"/icons/manu.svg"} height={50} width={50} alt="Menu Icon" className="h-[21px] w-[21px]" onClick={toggleMobileMenu} />
+                  <Image src={"/icons/menu.svg"} height={50} width={50} alt="Menu Icon" className="h-[21px] w-[21px]" onClick={toggleMobileMenu} />
                 </div>
 
                 {/* for only mobole search */}
