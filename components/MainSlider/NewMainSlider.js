@@ -108,7 +108,7 @@ export default function NewMainSlider({ initialData }) {
         breakpoints={{
           350: {
             slidesPerView: 1,
-            // spaceBetween: 5,
+            spaceBetween: 5,
           },
 
           640: {
@@ -135,17 +135,17 @@ export default function NewMainSlider({ initialData }) {
           return (
             <SwiperSlide key={data?._id}>
               <div
-                className={`relative mt-[60px] sm:mt-0 group h-[78vh] lg:-translate-x-[5px] -translate-x-[10px] translate-r md:translate-x-0`}
+                className={`relative mt-[60px] sm:mt-0 group h-[78vh]  lg:-translate-x-[5px] -translate-x-[10px] translate-r md:translate-x-0`}
               >
                 <Image
                   src={
-                    windowWidth > 450 ? data?.desktopImgSrc : data?.mobileImgSrc
+                    windowWidth > 600 ? data?.desktopImgSrc : data?.mobileImgSrc
                   }
                   width={1200}
                   height={800}
                   alt={data.imgTitle || "Swiper image"}
                   priority
-                  className="object-fill swiper-slide mx-auto lg:px-[0px] w-full"
+                  className="object-fill  px-[10px]  swiper-slide  lg:px-[0px] w-full"
                   // objectFit="cover"
                 />
                 {/* <div className="absolute flex text-lg text-white sm:bottom-[2.5rem] bottom-[96px] left-[3rem] flex-col md:flex-row gap-4 md:items-center">
