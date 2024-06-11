@@ -1,10 +1,11 @@
 import Image from "next/image";
+
 export default function PriceGuarantee() {
   return (
     <div className="sm:px-[50px] px-[20px]">
       <section className="mt-20 mb-6">
         <div className="flex flex-col space-y-5 w-full">
-          <h4 className="md:w-2/3 font-bold text-4xl">Prices and price tags</h4>
+          <h4 className="md:w-2/3 font-bold text-4xl pt-20">Prices and price tags</h4>
           <p className="md:w-2/3">
             At AYATRIO you get low prices every day! Find all you need to know
             about a product on the price tag in store or on the product pages of
@@ -53,7 +54,12 @@ export default function PriceGuarantee() {
               </p>
             </div>
             <div className="md:w-1/2">
-              <Image src="/images/priceguarantee/mug.avif" alt="mug" width={500} height={500} />
+              <Image
+                src=""
+                alt="mug"
+                width={500}
+                height={500}
+              />
             </div>
           </div>
         </div>
@@ -62,17 +68,32 @@ export default function PriceGuarantee() {
       <section className="pt-8 mb-28">
         <div className="flex flex-col space-y-5 w-full">
           <div>
-            <h4 className="font-bold text-xl">In store price tags </h4>
+            <h4 className="font-bold text-xl">In store price tags</h4>
           </div>
           <div className="flex flex-col md:flex-row space-x-2">
             <div>
-              <Image width={400} height={800} src="/images/priceguarantee/front.webp" alt="" />
+              <Image
+                width={400}
+                height={800}
+                src=""
+                alt="front"
+              />
             </div>
             <div>
-              <Image width={400} height={800} src="/images/priceguarantee/rev.avif" alt="" />
+              <Image
+                width={400}
+                height={800}
+                src=""
+                alt="rev"
+              />
             </div>
             <div>
-              <Image width={400} height={800} src="/images/priceguarantee/bottom.avif" alt="" />
+              <Image
+                width={400}
+                height={800}
+                src=""
+                alt="bottom"
+              />
             </div>
           </div>
         </div>

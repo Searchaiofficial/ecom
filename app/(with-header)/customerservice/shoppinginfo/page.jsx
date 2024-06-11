@@ -9,17 +9,17 @@ export default function ShoppingInfo() {
   ];
   return (
     <div className="mt-20 sm:px-[50px] px-[20px]">
-      <h1 className="font-bold text-4xl pb-6">Shopping at AYATRIO</h1>
+      <h1 className="font-bold text-4xl pb-6 pt-10" >Shopping at AYATRIO</h1>
       <div className="sm:flex sm:flex-row flex-col pb-6">
         <div className="basis-2/4 flex grow">
           <div>
-            <p className="font-bold text-md">
+            <p className="font-semibold text-md">
               There are a few ways to shop at AYATRIO. Some of them let you shop
               from the comfort of your own home – although we’ll always have
               your favorite Swedish delicacy available at our restaurant for
               those that choose to visit the AYATRIO store.{" "}
             </p>
-            <p className="font-bold text-md">
+            <p className="font-semibold text-md mt-2">
               Discover how to shop at AYATRIO and how AYATRIO can come to you,
               whether you’re looking for any support buy online, over the phone,
               or plan your dream home.
@@ -29,7 +29,7 @@ export default function ShoppingInfo() {
         <div className="basis-2/4 flex grow">
           <div>
             <Image
-              src="/images/customerservice/shoppingInfo/decor.avif"
+              src="/images/customerservice/service3.jpg"
               alt="decor"
               width={550}
               height={650}
@@ -43,7 +43,7 @@ export default function ShoppingInfo() {
       <div className="sm:flex sm:flex-row flex-col pb-6">
         <div className="basis-2/4 flex-grow">
           <Image
-            src="/images/customerservice/shoppingInfo/shop.avif"
+            src="/images/customerservice/shop.jpg"
             alt="decor"
             width={600}
             height={300}
@@ -70,8 +70,8 @@ export default function ShoppingInfo() {
               to take home the same day.
             </p>
             <p className="font-semibold">AYATRIO Large store </p>
-            {shoppingGuide.map((curElement)=>{
-              return(
+            {shoppingGuide.map((curElement) => {
+              return (
                 <p>{curElement.content}</p>
               )
             })}
@@ -83,8 +83,8 @@ export default function ShoppingInfo() {
               Yellow tag means you need to contact our co-workers at the info
               counter
             </li>
-            {shoppingProcess.map((curElement)=>{
-              return(<p>{curElement.content}</p>)
+            {shoppingProcess.map((curElement) => {
+              return (<p>{curElement.content}</p>)
             })}
             <div className="flex flex-col space-y-10 items-start mt-10">
               <button className="bg-black text-white rounded-3xl p-3 px-4 text-sm font-semibold">
@@ -101,8 +101,8 @@ export default function ShoppingInfo() {
         <h2 className="font-bold text-xl mb-10">Know your store</h2>
       </div>
       <div className="flex flex-col gap-5 pb-8">
-        {storeDetails.map((curElement)=>{
-          return(<li>{curElement.content}</li>)
+        {storeDetails.map((curElement) => {
+          return (<li>{curElement.content}</li>)
         })}
       </div>
       <hr />
@@ -150,7 +150,7 @@ export default function ShoppingInfo() {
         <div className="basis-2/4 flex-grow">
           <div>
             <Image
-              src="/images/customerservice/shoppingInfo/work.avif"
+              src="/images/customerservice/work.jpg"
               width={600}
               height={300}
               alt=""

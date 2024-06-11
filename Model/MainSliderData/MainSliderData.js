@@ -1,7 +1,7 @@
 export const content = [
   {
     id: 1,
-    img: '/images/customerservice/shoppingInfo/shopping3.webp',
+    img: '/images/customerservice/shopping3.avif',
     top: 50,
     left: 68,
     productTitle: "Nike Dri-FIT One Women's Tank Top",
@@ -10,7 +10,7 @@ export const content = [
   },
   {
     id: 2,
-    img: '/images/customerservice/shoppingInfo/shopping4.webp',
+    img: '/images/customerservice/shopping4.jpg',
     top: 50,
     left: 20,
     productTitle: "US Essential Women's Nike Graphic Jacket",
@@ -19,7 +19,7 @@ export const content = [
   },
   {
     id: 3,
-    img: '/images/customerservice/shoppingInfo/shopping5.webp',
+    img: '/images/customerservice/service5.jpg',
     top: 30,
     left: 10,
     productTitle: "Nike Alpha Women's High-Support Padded Zip-Front",
@@ -29,7 +29,7 @@ export const content = [
   },
   {
     id: 4,
-    img: '/images/customerservice/shoppingInfo/shopping3.webp',
+    img: '/images/customerservice/shopping3.avif',
     top: 50,
     left: 68,
     productTitle: "Nike Dri-FIT One Women's Tank Top",
@@ -38,7 +38,7 @@ export const content = [
   },
   {
     id: 5,
-    img: '/images/customerservice/shoppingInfo/shopping4.webp',
+    img: '/images/customerservice/shopping4.jpg',
     top: 50,
     left: 20,
     productTitle: "US Essential Women's Nike Graphic Jacket",
@@ -47,7 +47,7 @@ export const content = [
   },
   {
     id: 6,
-    img: '/images/customerservice/shoppingInfo/shopping5.webp',
+    img: '/images/customerservice/service5.jpg',
     top: 30,
     left: 10,
     productTitle: "Nike Alpha Women's High-Support Padded Zip-Front",
