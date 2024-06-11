@@ -141,8 +141,7 @@ export default function NewMainSlider({ initialData }) {
                   src={
                     windowWidth > 600 ? data?.desktopImgSrc : data?.mobileImgSrc
                   }
-                  width={1200}
-                  height={800}
+                  fill
                   alt={data.imgTitle || "Swiper image"}
                   priority
                   className="object-fill  px-[10px]  swiper-slide  lg:px-[0px] w-full"
