@@ -37,7 +37,7 @@ export default function FinanceServicesPage() {
                     </div>
                     <div className="w-full md:w-3/5 flex items-center justify-center">
                         <img
-                            src="/services/FinanceServices/services.jpg"
+                            src="/images/services/FinanceServices/services.jpg"
                             alt="Financial service"
                             className="w-full h-full object-cover"
                         />
@@ -54,7 +54,7 @@ export default function FinanceServicesPage() {
             <section className="flex flex-col md:flex-row bg-gray-100 my-12" id='payment'>
                 <div className="w-full md:w-[70%]">
                     <img
-                        src="/services/FinanceServices/a-man-tossing-a-plush-toy-to-a-young-child.jpg"
+                        src="/images/services/FinanceServices/a-man-tossing-a-plush-toy-to-a-young-child.jpg"
                         alt="A man tossing a plush toy to a young child."
                         className="w-full h-full object-cover"
                     />
@@ -86,7 +86,7 @@ export default function FinanceServicesPage() {
 
                 <div className="w-full md:w-[70%]">
                     <img
-                        src="/services/FinanceServices/a-couple-inside-an-store.jpg"
+                        src="/images/services/FinanceServices/a-couple-inside-an-store.jpg"
                         alt="A couple inside an Ayatrio store shopping for a kitchen sink."
                         className="w-full h-full object-cover"
                     />
@@ -106,7 +106,7 @@ export default function FinanceServicesPage() {
                         <p><strong>PayPlan is available in Ayatrio stores only. PayPlan is not currently available at Ayatrio St. Catherines or Windsor Plan and order points, or for orders placed online or by telephone.</strong></p>
                     </div>
                     <a
-                        href="/services/FinanceServices/"
+                        href="/images/services/FinanceServices/"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-block bg-black text-white font-bold py-2 px-6 rounded-full mt-6 w-[140px]"
@@ -128,7 +128,7 @@ export default function FinanceServicesPage() {
 
                 <div className="flex flex-col justify-center lg:col-span-1">
                     <div className="flex justify-center mb-6">
-                        <img src="/services/FinanceServices/in-store-payment-options.jpg" alt="In store payment options" className="max-w-full h-auto" />
+                        <img src="/images/services/FinanceServices/in-store-payment-options.jpg" alt="In store payment options" className="max-w-full h-auto" />
                     </div>
                     <div className="opacity-90 mb-20">
                         <p className="font-bold mb-4">In store payment options:</p>
@@ -148,7 +148,7 @@ export default function FinanceServicesPage() {
 
                 <div className="flex flex-col justify-center lg:col-span-1 lg:mb-20">
                     <div className="flex justify-center mb-6">
-                        <img src="/services/FinanceServices/online-payment-options.jpg" alt="Online payment options" className="max-w-full h-auto" />
+                        <img src="/images/services/FinanceServices/online-payment-options.jpg" alt="Online payment options" className="max-w-full h-auto" />
                     </div>
                     <div className="opacity-90 mb-8">
                         <p className="font-bold mb-4">Online payment options:</p>
@@ -167,7 +167,7 @@ export default function FinanceServicesPage() {
             </div>
 
             <section id="faq" className='mt-8'>
-            <h1 className="text-black text-2xl lg:text-4xl font-semibold mb-6 lg:mb-12 px-3 lg:text-left">
+                <h1 className="text-black text-2xl lg:text-4xl font-semibold mb-6 lg:mb-12 px-3 lg:text-left">
                     Frequently asked questions
                 </h1>
                 <Faq faqFor='payment' />

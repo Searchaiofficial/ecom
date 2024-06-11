@@ -1,5 +1,5 @@
 import './style.css'
-import Image from '../../public/Dropitemsimg/Option_2-min_1.webp';
+import Image from '../../public/images/Dropitemsimg/Option_2-min_1.webp';
 const Featured = () => {
   return (
     <div className='filter_item mr-20'>

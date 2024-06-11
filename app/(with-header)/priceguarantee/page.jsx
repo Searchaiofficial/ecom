@@ -53,7 +53,7 @@ export default function PriceGuarantee() {
               </p>
             </div>
             <div className="md:w-1/2">
-              <Image src="/priceguarantee/mug.avif" alt="mug" width={500} height={500} />
+              <Image src="/images/priceguarantee/mug.avif" alt="mug" width={500} height={500} />
             </div>
           </div>
         </div>
@@ -66,13 +66,13 @@ export default function PriceGuarantee() {
           </div>
           <div className="flex flex-col md:flex-row space-x-2">
             <div>
-              <Image width={400} height={800} src="/priceguarantee/front.webp" alt="" />
+              <Image width={400} height={800} src="/images/priceguarantee/front.webp" alt="" />
             </div>
             <div>
-              <Image width={400} height={800} src="/priceguarantee/rev.avif" alt="" />
+              <Image width={400} height={800} src="/images/priceguarantee/rev.avif" alt="" />
             </div>
             <div>
-              <Image width={400} height={800} src="/priceguarantee/bottom.avif" alt="" />
+              <Image width={400} height={800} src="/images/priceguarantee/bottom.avif" alt="" />
             </div>
           </div>
         </div>

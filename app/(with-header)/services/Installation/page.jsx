@@ -1,6 +1,113 @@
-import CabinetItem from '../../../../components/Services/CabinetItem'
-import Faq from '../../../../components/Services/Faq'
+"use client"
+import React, { useState } from 'react';
+const faqsDataJson = {
+    "installation": [
+      {
+        "title": "How can I contact the kitchen experts and how can I submit a kitchen design for review?",
+        "content": "This question explains the process of contacting Ayatrio's kitchen experts and submitting a kitchen design for review. It includes a link to a web form where users can submit their designs for review over the phone."
+      },
+      {
+        "title": "Can I use the Ayatrio Shoppable App to book services such as Assembly?",
+        "content": "This question addresses whether the Ayatrio Shoppable App allows users to book services like assembly. The answer states that such services are not currently available within the app."
+      },
+      {
+        "title": "How much does it cost to have an Ayatrio kitchen professionally installed?",
+        "content": "This question provides information on the typical cost of professional installation for Ayatrio kitchens. It states that installation costs are typically around 50% of the purchased kitchen price but may vary depending on the project."
+      },
+      {
+        "title": "Is there a follow up after the kitchen installation is complete?",
+        "content": "This question discusses whether there is follow-up after the completion of kitchen installation. The answer confirms that Ayatrio follows up with customers to ensure satisfaction and offers ongoing support."
+      },
+      {
+        "title": "Why are our appliances delivered without a power cord?",
+        "content": "This question explains why Ayatrio appliances are delivered without a power cord, stating that skilled professionals will install the appropriate cords based on customers' homes."
+      },
+      {
+        "title": "How come I can’t get the drawer fronts to align? The top drawer is in the way of the lower ones, and can't be closed properly.",
+        "content": "This question addresses alignment issues with drawer fronts and suggests that improper assembly of the lowest drawer may be the cause."
+      },
+      {
+        "title": "What are filler pieces?",
+        "content": "This question defines filler pieces as elements used to fill the space between cabinets and walls to ensure proper installation."
+      },
+      {
+        "title": "Can I adjust the hinges?",
+        "content": "This question confirms that Ayatrio hinges are adjustable and explains their functionality."
+      },
+      {
+        "title": "How much ventilation space is needed above the fridge/freezer?",
+        "content": "This question provides guidance on the ventilation space needed above the fridge/freezer."
+      },
+      {
+        "title": "How do I secure my island cabinets to the floor?",
+        "content": "This question discusses securing island cabinets to the floor and suggests using specific support brackets while advising consultation with a professional."
+      }
+    ],
+}
 
+const Faq = ({ faqFor }) => {
+    let faqsData = faqsDataJson[`${faqFor}`];
+    const [activeIndex, setActiveIndex] = useState(null);
+
+    const toggleAccordion = (index) => {
+        setActiveIndex(index === activeIndex ? null : index);
+    };
+
+    return (
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-10">
+            <div className="lg:col-span-2">
+
+                <div>
+                    {faqsData.map((faq, index) => (
+                        <div key={index} className="mb-4">
+                            <hr className="my-4 border-gray-300" />
+                            <button
+                                className="flex items-center justify-between w-full px-4 py-2 text-left focus:outline-none"
+                                onClick={() => toggleAccordion(index)}
+                            >
+                                <span className="font-semibold">{faq.title}</span>
+                                <img
+                                    src={`/icons/${index === activeIndex ? 'uparrow.svg' : 'downarrow.svg'}`}
+                                    alt={index === activeIndex ? 'Collapse' : 'Expand'}
+                                    className="w-4 h-4 transition-transform transform"
+                                />
+                            </button>
+                            <div className={`mt-2 px-4  transition-all duration-100 ${index === activeIndex ? 'max-h-96' : 'max-h-0 overflow-hidden'}`}>
+                                <p>{faq.content}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+};
+
+const CabinetItem = ({ imageSrc, title, price, description }) => {
+    return (
+        <div className="pub-layout-50-50 s1cmcu6f flex flex-wrap">
+            <div className=" w-full p-4">
+                <div className=" vz2frqh v18by0fb">
+                    <img
+                        className="w-full h-auto"
+                        src={imageSrc}
+                        alt="Cabinet"
+                    />
+                </div>
+            </div>
+            <div className=" w-full p-4">
+                <div className="">
+                    <h3 className="text-xl font-semibold mb-4">{title}</h3>
+                    <ul className="list-disc pl-4">
+                        {description.map((item, index) => (
+                            <li key={index} className="mb-2">{item}</li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 export default function Installation() {
     return (
@@ -19,7 +126,7 @@ export default function Installation() {
                     </div>
                     <div className="w-full md:w-3/5 flex items-center justify-center">
                         <img
-                            src="/services/installation/installation.jpg"
+                            src="/images/services/installation/installation.jpg"
                             alt="Financial service"
                             className="w-full h-full object-cover"
                         />
@@ -95,41 +202,41 @@ export default function Installation() {
                 <div className="container mx-auto px-4">
                     <div className="flex flex-wrap -mx-4">
                         <div className="w-full md:w-1/2 px-4">
-                            <CabinetItem
-                                imageSrc="/services/installation/cab1.jpg"
+                            {/* <CabinetItem
+                                imageSrc="/images/services/installation/cab1.jpg"
                                 title="Cabinet with door (base, wall or high), starting at $119/cabinet"
                                 description={[
                                     'Assembly and installation of Ayatrio SEKTION base cabinets, wall cabinets, high cabinets, doors, cover panels, legs, plinths, shelves, knobs and handles according to manufacturer’s assembly instructions.',
                                     'Adjustment of all Ayatrio SEKTION base cabinets, wall cabinets, high cabinets and doors for appearance.',
                                     'Excludes installation of Ayatrio SEKTION drawer, drawer front, corner carousel, pull-outs, deco strip, side filler strip, cover caps, cover panel 26” x 36”, 36” x 96” or interior fittings other than shelves.'
                                 ]}
-                            />
+                            /> */}
                         </div>
                         <div className="w-full md:w-1/2 px-4">
-                            <CabinetItem
-                                imageSrc="/services/installation/cab2.jpg"
+                            {/* <CabinetItem
+                                imageSrc="/images/services/installation/cab2.jpg"
                                 title="Cabinet with drawer or corner carousel (base or wall), starting at $162/cabinet"
                                 description={[
                                     "Assembly and installation of Ayatrio SEKTION base cabinets, wall cabinets, drawers, drawer fronts, doors, cover panels, legs, plinths, shelves, interior fittings, knobs and handles according to manufacturer’s assembly instructions.",
                                     "Adjustment of all Ayatrio SEKTION base cabinets, wall cabinets, doors, drawers and drawer fronts for appearance.",
                                     "Excludes installation of Ayatrio SEKTION deco strip, side filler strip, cover caps or cover panel 26” x 36”, 36” x 96”"
                                 ]}
-                            />
+                            /> */}
                         </div>
                         <div className="w-full md:w-1/2 px-4">
-                            <CabinetItem
-                                imageSrc="/services/installation/cab3.jpg"
+                            {/* <CabinetItem
+                                imageSrc="/images/services/installation/cab3.jpg"
                                 title="Cabinet with drawer or corner carousel (base or wall), starting at $162/cabinet"
                                 description={[
                                     "Assembly and installation of Ayatrio SEKTION high cabinets, drawers, drawer fronts, doors, cover panels, legs, plinths, shelves, interior fittings, knobs and handles according to manufacturer’s assembly instructions.",
                                     "Adjustment of all Ayatrio SEKTION high cabinets, doors, drawers, drawer fronts for appearance.",
                                     "Excludes installation or Ayatrio SEKTION deco strip, side filler strip, cover caps or cover panel 26” x 36”, 36” x 96”"
                                 ]}
-                            />
+                            /> */}
                         </div>
                         <div className="w-full md:w-1/2 px-4">
-                            <CabinetItem
-                                imageSrc="/services/installation/cab4.jpg"
+                            {/* <CabinetItem
+                                imageSrc="/images/services/installation/cab4.jpg"
                                 title="Cabinet with drawer or corner carousel (base or wall), starting at $162/cabinet"
                                 description={[
                                     "Additional installation services are priced separately from the basic installation cost. All additional installation services will be priced for you by an independent service provider.",
@@ -138,7 +245,7 @@ export default function Installation() {
                                     "Gables, molding & fillers",
                                     "Cover caps"
                                 ]}
-                            />
+                            /> */}
                         </div>
                     </div>
                 </div>
@@ -177,7 +284,7 @@ export default function Installation() {
                 <h1 className="text-black text-2xl lg:text-4xl font-semibold mb-6 lg:mb-12 px-3 lg:text-left">
                     Frequently asked questions
                 </h1>
-                <Faq faqFor='installation' />
+                {/* <Faq faqFor='installation' /> */}
             </section>
 
         </div>

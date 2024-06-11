@@ -31,7 +31,7 @@ export default function PlanningServicesPage() {
                     </div>
                     <div className="w-full md:w-1/2 mt-3 md:mt-0">
                         <img
-                            src="/services/PlanningServices/services.jpg"
+                            src="/images/services/PlanningServices/services.jpg"
                             alt="Planning service example"
                             className="w-full h-[306px]"
                         />

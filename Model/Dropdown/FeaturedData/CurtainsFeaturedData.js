@@ -1,5 +1,5 @@
 export const curtainsFeaturedData = {
-    id:1,
-    image: "/Dropitemsimg/featuredcurtains.avif",
-    text: "Curtains"
-  }
+  id: 1,
+  image: "/images/Dropitemsimg/featuredcurtains.avif",
+  text: "Curtains"
+}

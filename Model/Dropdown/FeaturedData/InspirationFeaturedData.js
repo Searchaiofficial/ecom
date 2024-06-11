@@ -1,5 +1,5 @@
 export const inspirationFeaturedData = {
-    id:1,
-    image: "/Dropitemsimg/featuredinspiration.avif",
-    text: "Inspiration - Shop now"
-  }
+  id: 1,
+  image: "/images/Dropitemsimg/featuredinspiration.avif",
+  text: "Inspiration - Shop now"
+}

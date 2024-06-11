@@ -1,5 +1,5 @@
 export const wallpaperFeaturedData = {
-    id:1,
-    image: "/Dropitemsimg/featuredwallpaper.jpg",
-    text: "Wallpaper"
-  }
+  id: 1,
+  image: "/images/Dropitemsimg/featuredwallpaper.jpg",
+  text: "Wallpaper"
+}

@@ -63,7 +63,7 @@ const LoginComponent = () => {
           <div className="w-full">
             <div className="img__con111 sm:block flex items-center justify-center">
               <Image
-                src="/logo/ayatriologo.png"
+                src="/images/logo/ayatriologo.png"
                 width={200}
                 height={100}
                 alt="Ayatrio"
@@ -101,13 +101,13 @@ const LoginComponent = () => {
                     className="rounded-md"
                     width={200}
                     height={256}
-                    src="/login/login1.jpg"
+                    src="/images/login/login1.jpg"
                   />
                   <Image
                     className="rounded-md"
                     width={200}
                     height={256}
-                    src="/login/login3.jpg"
+                    src="/images/login/login3.jpg"
                   />
                 </div>
                 <div className="  flex flex-col gap-4 w-6/12">
@@ -115,13 +115,13 @@ const LoginComponent = () => {
                     className="rounded-md"
                     width={200}
                     height={240}
-                    src="/login/login2.jpg"
+                    src="/images/login/login2.jpg"
                   />
                   <Image
                     className="rounded-md"
                     width={200}
                     height={240}
-                    src="/login/login4.jpg"
+                    src="/images/login/login4.jpg"
                   />
                 </div>
               </div>

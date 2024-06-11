@@ -29,7 +29,7 @@ export default function ShoppingInfo() {
         <div className="basis-2/4 flex grow">
           <div>
             <Image
-              src="/customerservice/shoppingInfo/decor.avif"
+              src="/images/customerservice/shoppingInfo/decor.avif"
               alt="decor"
               width={550}
               height={650}
@@ -43,7 +43,7 @@ export default function ShoppingInfo() {
       <div className="sm:flex sm:flex-row flex-col pb-6">
         <div className="basis-2/4 flex-grow">
           <Image
-            src="/customerservice/shoppingInfo/shop.avif"
+            src="/images/customerservice/shoppingInfo/shop.avif"
             alt="decor"
             width={600}
             height={300}
@@ -150,7 +150,7 @@ export default function ShoppingInfo() {
         <div className="basis-2/4 flex-grow">
           <div>
             <Image
-              src="/customerservice/shoppingInfo/work.avif"
+              src="/images/customerservice/shoppingInfo/work.avif"
               width={600}
               height={300}
               alt=""

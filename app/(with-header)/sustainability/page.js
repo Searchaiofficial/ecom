@@ -3,42 +3,42 @@ import Image from "next/image";
 const gridData = [
   {
     id: 1,
-    image: "/sustainabilityImg/sustain1.avif",
+    image: "/images/sustainabilityImg/sustain1.avif",
     text: "Energy and resources",
   },
   {
     id: 2,
-    image: "/sustainabilityImg/sustain2.avif",
+    image: "/images/sustainabilityImg/sustain2.avif",
     text: "Healthy living",
   },
   {
     id: 3,
-    image: "/sustainabilityImg/sustain3.avif",
+    image: "/images/sustainabilityImg/sustain3.avif",
     text: "Large business, large responsibilities",
   },
   {
     id: 4,
-    image: "/sustainabilityImg/sustain4.avif",
+    image: "/images/sustainabilityImg/sustain4.avif",
     text: "More ways to save water",
   },
   {
     id: 5,
-    image: "/sustainabilityImg/sustain5.avif",
+    image: "/images/sustainabilityImg/sustain5.avif",
     text: "A brighter life at home with LED",
   },
   {
     id: 6,
-    image: "/sustainabilityImg/sustain6.avif",
+    image: "/images/sustainabilityImg/sustain6.avif",
     text: "Less waste, more value",
   },
   {
     id: 7,
-    image: "/sustainabilityImg/sustain7.avif",
+    image: "/images/sustainabilityImg/sustain7.avif",
     text: "Switch on some sustainable light",
   },
   {
     id: 8,
-    image: "/sustainabilityImg/sustain8.avif",
+    image: "/images/sustainabilityImg/sustain8.avif",
     text: "Community Engagement",
   },
 ];
