@@ -15,6 +15,7 @@ import Link from "next/link";
 import axios from "axios";
 import CartProduct from "./CartProduct";
 import { ArrowRight, X } from "lucide-react";
+import { getPinFromCoordinates } from "@/utils/getPinFromCoordinates";
 const CartMain = () => {
   const dispatch = useDispatch();
   const selectedItems = useSelector(selecteddbItems);
@@ -147,85 +148,104 @@ const CartMain = () => {
     updateQuantityInDatabase(productId, quant);
   }
 
+  const [userCoordinates, setUserCoordinates] = useState(null);
+  const [userPincode, setUserPincode] = useState(null);
+
+  useEffect(() => {
+    localStorage?.getItem("userCoordinates") &&
+      setUserCoordinates(JSON.parse(localStorage.getItem("userCoordinates")));
+  }, []);
+
+  useEffect(() => {
+    if (localStorage?.getItem("userPincode")) {
+      setUserPincode(localStorage.getItem("userPincode"));
+    } else if (userCoordinates) {
+      getPinFromCoordinates(userCoordinates.lat, userCoordinates.lng).then(
+        (data) => {
+          if (data) {
+            setUserPincode(data);
+            localStorage.setItem("userPincode", data);
+          }
+        }
+      );
+    }
+  }, [userCoordinates]);
+
   return (
     <>
-      {
-        sideMenu && (
-          <>
-            <div
-              initial={
-                typeof window !== "undefined" &&
-                window.innerWidth <= 800 && { x: 300, opacity: 0 }
-              }
-              whileInView={{ x: 0, opacity: 1 }}
-              transition={{ type: "just" }}
-              className="fixed inset-0 flex flex-col px-[8px] overflow-y-hidden bg-white z-[100000] md:hidden"
-            >
-              <div className="flex justify-between items-center py-[5px] w-full h-fit mb-4">
-                <div className=" flex items-center justify-start ">
-                  <div className="mainlogo">
-                    <Link href="/">
-                      <Image
-                        src="/images/ayatriologo.webp"
-                        alt="logo"
-                        width={300}
-                        height={40}
-                        priority
-                        className="p-2  sm:w-44"
-                      />
-                    </Link>
-                  </div>
-                </div>
-
-                <div className="w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer md:hidden">
-                  <X onClick={() => setSideMenu(false)} />
+      {sideMenu && (
+        <>
+          <div
+            initial={
+              typeof window !== "undefined" &&
+              window.innerWidth <= 800 && { x: 300, opacity: 0 }
+            }
+            whileInView={{ x: 0, opacity: 1 }}
+            transition={{ type: "just" }}
+            className="fixed inset-0 flex flex-col px-[8px] overflow-y-hidden bg-white z-[100000] md:hidden"
+          >
+            <div className="flex justify-between items-center py-[5px] w-full h-fit mb-4">
+              <div className=" flex items-center justify-start ">
+                <div className="mainlogo">
+                  <Link href="/">
+                    <Image
+                      src="/images/ayatriologo.webp"
+                      alt="logo"
+                      width={300}
+                      height={40}
+                      priority
+                      className="p-2  sm:w-44"
+                    />
+                  </Link>
                 </div>
               </div>
-              <div className="flex flex-col p-2">
-                <h1 className="text-lg font-bold">
-                  How would you like to check out?
-                </h1>
-                <ul className="list-disc">
-                  <h3 className="text-[18px] font-bold mt-2 mb-2">
-                    Join Ayatrio Family for free
-                  </h3>
-                  <div className="ml-8">
-                    <li>Get instant benefits</li>
-                    <li>Keep track of your orders</li>
-                    <li>Save time during checkout</li>
-                  </div>
-                </ul>
-                <Link
-                  href={"#"}
-                  className=" border-2 border-black  h-10 mt-20  w-[98%] rounded-full flex items-center font-bold justify-center  text-black"
-                >
-                  Log in or sign up
-                </Link>
-                <hr className="border border-black" />
-                <Link
-                  href={{
-                    pathname: "/checkout/pin",
-                    query: { search: "rooms" },
-                  }}
-                  className="border-2 h-10 w-[98%] text-white bg-black font-bold rounded-full flex items-center justify-center border-black"
-                >
-                  Continue as guest
-                </Link>
+
+              <div className="w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer md:hidden">
+                <X onClick={() => setSideMenu(false)} />
               </div>
-
-
-              {/* <div className="flex"> */}
-
-              {/* </div> */}
             </div>
-          </>
-        )}
+            <div className="flex flex-col p-2">
+              <h1 className="text-lg font-bold">
+                How would you like to check out?
+              </h1>
+              <ul className="list-disc">
+                <h3 className="text-[18px] font-bold mt-2 mb-2">
+                  Join Ayatrio Family for free
+                </h3>
+                <div className="ml-8">
+                  <li>Get instant benefits</li>
+                  <li>Keep track of your orders</li>
+                  <li>Save time during checkout</li>
+                </div>
+              </ul>
+              <Link
+                href={"#"}
+                className=" border-2 border-black  h-10 mt-20  w-[98%] rounded-full flex items-center font-bold justify-center  text-black"
+              >
+                Log in or sign up
+              </Link>
+              <hr className="border border-black" />
+              <Link
+                href={{
+                  pathname: "/checkout/pin",
+                  query: { search: "rooms" },
+                }}
+                className="border-2 h-10 w-[98%] text-white bg-black font-bold rounded-full flex items-center justify-center border-black"
+              >
+                Continue as guest
+              </Link>
+            </div>
+
+            {/* <div className="flex"> */}
+
+            {/* </div> */}
+          </div>
+        </>
+      )}
 
       <div className=" px-[20px] lg:px-[67px] pt-[6rem] pb-[3rem] ">
         <div className=" grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-10">
           <div className="lg:col-span-8 col-span-1">
-
-
             {/* <!-- parent div --> */}
             <div className="py-2 ">
               {/* <!-- header section --> */}
@@ -268,9 +288,12 @@ const CartMain = () => {
                   ></path>
                   <path d="M14.0001 9.2157c0 1.1046-.8954 2-2 2-1.1045 0-2-.8954-2-2s.8955-2 2-2c1.1046 0 2 .8954 2 2z"></path>
                 </svg>
-                <p className=" ml-3 w-full font-[300] text-[15.5px]">
-                  Your pincode <span className="underline">843146</span>
-                </p>
+                {userPincode ? (
+                  <p className=" ml-3 w-full font-[300] text-[15.5px]">
+                    Your pincode:{" "}
+                    <span className="underline">{userPincode}</span>
+                  </p>
+                ) : null}
               </div>
 
               {/* <!-- order text --> */}
@@ -284,8 +307,9 @@ const CartMain = () => {
                   onClick={() => {
                     handlePickupType("delivery");
                   }}
-                  className={`cursor-pointer box-border  border-[1.5px] ${pickup === "delivery" ? "border-black" : "border-[#e5e5e5]"
-                    } h-24 w-[50%]`}
+                  className={`cursor-pointer box-border  border-[1.5px] ${
+                    pickup === "delivery" ? "border-black" : "border-[#e5e5e5]"
+                  } h-24 w-[50%]`}
                 >
                   <div className="flex px-6 py-5 h-24 items-center">
                     <div className="pr-5">
@@ -314,8 +338,9 @@ const CartMain = () => {
                   onClick={() => {
                     handlePickupType("collect");
                   }}
-                  className={`cursor-pointer box-border border border-[1.5px] ${pickup === "collect" ? "border-black" : "border-[#e5e5e5]"
-                    } h-24 w-[50%]`}
+                  className={`cursor-pointer box-border border border-[1.5px] ${
+                    pickup === "collect" ? "border-black" : "border-[#e5e5e5]"
+                  } h-24 w-[50%]`}
                 >
                   <div className="flex px-6 py-5 h-24 items-center">
                     <div className="pr-5">
@@ -396,7 +421,9 @@ const CartMain = () => {
                 calculated on distance and weight
               </p>
               <div className="flex items-center justify-between pb-4 mt-2">
-                <span className="text-black text-[14px] font-semibold">Subtotal </span>
+                <span className="text-black text-[14px] font-semibold">
+                  Subtotal{" "}
+                </span>
                 <span className="font-[700] text-black text-2xl">
                   Rs.{totalPrice}
                 </span>
@@ -407,12 +434,17 @@ const CartMain = () => {
               </div>
               <div
                 onClick={() => handleSchedular(!schedular)}
-                className={`border border-[1.5px] p-[20px] w-[100%] h-auto ${schedular ? "border-black" : "border-[#e5e5e5]"
-                  }`}
+                className={`border border-[1.5px] p-[20px] w-[100%] h-auto ${
+                  schedular ? "border-black" : "border-[#e5e5e5]"
+                }`}
               >
-                <p className="text-black font-[600] ">Make the most of delivery charges</p>
-                <p className="text-[#757575] text-[12px] pt-[5px]">The current delivery price of your order is Rs. 99 for up to 5 kg.</p>
-
+                <p className="text-black font-[600] ">
+                  Make the most of delivery charges
+                </p>
+                <p className="text-[#757575] text-[12px] pt-[5px]">
+                  The current delivery price of your order is Rs. 99 for up to 5
+                  kg.
+                </p>
               </div>
 
               <button

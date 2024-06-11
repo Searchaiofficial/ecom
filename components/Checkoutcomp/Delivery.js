@@ -17,6 +17,7 @@ import { LiaWarehouseSolid } from "react-icons/lia";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setDbItems } from "../Features/Slices/cartSlice";
+import { getPinFromCoordinates } from "@/utils/getPinFromCoordinates";
 
 const Delivery = () => {
   const [selectedOption, setSelectedOption] = useState("option3");
@@ -29,9 +30,32 @@ const Delivery = () => {
   const [sideMenu, setSideMenu] = useState(false);
   const [deliveryChoice, setDeliveryChoice] = useState(99);
 
+  const [userCoordinates, setUserCoordinates] = useState(null);
+  const [userPincode, setUserPincode] = useState(null);
+
+  useEffect(() => {
+    localStorage?.getItem("userCoordinates") &&
+      setUserCoordinates(JSON.parse(localStorage.getItem("userCoordinates")));
+  }, []);
+
+  useEffect(() => {
+    if (localStorage?.getItem("userPincode")) {
+      setUserPincode(localStorage.getItem("userPincode"));
+    } else if (userCoordinates) {
+      getPinFromCoordinates(userCoordinates.lat, userCoordinates.lng).then(
+        (data) => {
+          if (data) {
+            setUserPincode(data);
+            localStorage.setItem("userPincode", data);
+          }
+        }
+      );
+    }
+  }, [userCoordinates]);
+
   const isSchedular = useSelector(selectSchedular);
   const pickup = useSelector(selectPickupOption);
-  console.log(pickup)
+  console.log(pickup);
 
   useEffect(() => {
     if (pickup === "collect") {
@@ -183,9 +207,11 @@ const Delivery = () => {
                 ></path>
                 <path d="M14.0001 9.2157c0 1.1046-.8954 2-2 2-1.1045 0-2-.8954-2-2s.8955-2 2-2c1.1046 0 2 .8954 2 2z"></path>
               </svg>
-              <p className="w-full ml-3 font-[300] text-[15.5px]">
-                Your pincode <span className="underline">843146</span>
-              </p>
+              {userPincode ? (
+                <p className="w-full ml-3 font-[300] text-[15.5px]">
+                  Your pincode: <span className="underline">{userPincode}</span>
+                </p>
+              ) : null}
             </div>
 
             {/* <!-- order text --> */}
@@ -211,7 +237,7 @@ const Delivery = () => {
                       near you
                     </span>{" "}
                     <a href="e" className="text-[#707072] underline">
-                      nearby Maharashtra 400001
+                      nearby {userPincode}
                     </a>
                   </h3>
                 </div>
@@ -219,10 +245,11 @@ const Delivery = () => {
                 <div className=" flex flex-col">
                   <label
                     className={` flex items-center space-x-2 p-4 cursor-pointer border-solid border-black border-l
-               ${selectedOption === "option1"
-                        ? "border-2 border-solid border-blue-800"
-                        : "border-none"
-                      }`}
+               ${
+                 selectedOption === "option1"
+                   ? "border-2 border-solid border-blue-800"
+                   : "border-none"
+               }`}
                   >
                     <input
                       type="radio"
@@ -235,7 +262,10 @@ const Delivery = () => {
                     />
                     <div className="mx-auto flex justify-between  w-full">
                       <div className="">
-                        <label className="lg:text-lg text-[18px] font-bold" htmlFor="option1">
+                        <label
+                          className="lg:text-lg text-[18px] font-bold"
+                          htmlFor="option1"
+                        >
                           Collect at pick-up point
                         </label>
                         {selectedOption !== "option1" ? (
@@ -271,10 +301,11 @@ const Delivery = () => {
                   </label>
 
                   <label
-                    className={`flex items-center space-x-2 p-4 cursor-pointer ${selectedOption === "option2"
-                      ? "border-2 border-solid border-blue-800"
-                      : "border-none"
-                      }`}
+                    className={`flex items-center space-x-2 p-4 cursor-pointer ${
+                      selectedOption === "option2"
+                        ? "border-2 border-solid border-blue-800"
+                        : "border-none"
+                    }`}
                   >
                     <input
                       type="radio"
@@ -287,7 +318,10 @@ const Delivery = () => {
                     />
                     <div className="mx-auto flex justify-between  w-full">
                       <div className="">
-                        <label className="lg:text-lg text-[18px] font-bold" htmlFor="option1">
+                        <label
+                          className="lg:text-lg text-[18px] font-bold"
+                          htmlFor="option1"
+                        >
                           Collect at Store
                         </label>
                         {selectedOption !== "option2" ? (
@@ -341,17 +375,18 @@ const Delivery = () => {
                         Home delivery
                       </span>{" "}
                       <a href="e" className="underline">
-                        nearby Maharashtra 400001
+                        nearby {userPincode}
                       </a>
                     </h3>
                   </div>
                   <div className=" flex flex-col">
                     <label
                       className={`flex items-center space-x-2 p-4 cursor-pointer border-solid border-black border-l
-       ${selectedOption === "option3"
-                          ? "border-2 border-solid border-blue-800"
-                          : "border-none"
-                        }`}
+       ${
+         selectedOption === "option3"
+           ? "border-2 border-solid border-blue-800"
+           : "border-none"
+       }`}
                     >
                       <input
                         type="radio"
@@ -535,8 +570,12 @@ const Delivery = () => {
             <span className="text-[#767677] font-[700]">1.9 kg</span>
           </div>
           <div className="border border-slate-500 p-[20px] w-[100%] h-auto">
-            <p className="text-black font-[600] ">Make the most of delivery charges</p>
-            <p className="text-[#757575] text-[12px] pt-[5px]">The current delivery price of your order is Rs. 99 for up to 5 kg.</p>
+            <p className="text-black font-[600] ">
+              Make the most of delivery charges
+            </p>
+            <p className="text-[#757575] text-[12px] pt-[5px]">
+              The current delivery price of your order is Rs. 99 for up to 5 kg.
+            </p>
           </div>
 
           {/* <div className="flex items-center justify-between py-4 font-bold">
