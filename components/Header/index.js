@@ -517,7 +517,7 @@ function Header({ setIsHeaderMounted }) {
                 {
                   toptext && toptext.length > 0 ? (
                     <div className="flex  items-center">
-                      <Image src={"/icons/backarrow.svg"} height={18} width={18} className="rotate-180" onClick={handlebackArraowClick} />
+                      <Image src={"/icons/backarrowRevarce.svg"} height={18} width={18} className="rotate-180" onClick={handlebackArraowClick} />
                       <p className="text-[18px] ml-[10px] font-semibold">{toptext[toptext.length - 1]}</p>
                     </div>
                   ) : (
@@ -568,7 +568,7 @@ function Header({ setIsHeaderMounted }) {
                       {value.label}
                     </p>
                     <div className="pr-[14px]">
-                      <Image src={"/icons/backarrow.svg"} height={15} width={15} />
+                      <Image src={"/icons/backarrowRevarce.svg"} height={15} width={15} />
 
                     </div>                  </Link>
                   {idx < 3 && hoveredIndex === idx && (

@@ -104,7 +104,7 @@ const Asidebox = (props) => {
               >
                 <span className="p-2">{value.name}</span>
                 <div className="pr-[24px] sm:hidden">
-                  <Image src={"/icons/backarrow.svg"} height={15} width={15} />
+                  <Image src={"/icons/backarrowRevarce.svg"} height={15} width={15} />
                 </div>
               </Link>
             ))}

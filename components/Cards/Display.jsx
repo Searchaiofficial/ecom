@@ -135,7 +135,7 @@ const Display = async () => {
 
           <p class="text-[14px] font-semibold">For more floor inspiration</p>
         </Link>
-        <Image src={"/icons/backarrow.svg"} width={15} height={15} className="" />
+        <Image src={"/icons/Back_arrow.svg"} width={15} height={15} className="" />
       </div>
     </>
   );
