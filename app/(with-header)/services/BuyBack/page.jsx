@@ -109,7 +109,7 @@ export default function BuyBackPage() {
 
                         <div className="w-full md:w-1/2 px-4">
                             <CabinetItem
-                                imageSrc="/images/services/buy-back/img1.jpg"
+                                imageSrc="/images/services/Buy-Back/img1.jpg"
                                 title="Second-hand furniture Ayatrio buys back"
                                 description={[
                                     'Bookcases and shelf units',
@@ -128,7 +128,7 @@ export default function BuyBackPage() {
 
                         <div className="w-full md:w-1/2 px-4">
                             <CabinetItem
-                                imageSrc="/images/services/buy-back/img2.jpg"
+                                imageSrc="/images/services/Buy-Back/img2.jpg"
                                 title="Cabinet with door (base, wall or high), starting at $119/cabinet"
                                 description={[
                                     "Unfortunately, we are currently unable to accept items from the categories listed below. However, we are always looking for new opportunities to improve our services so do check back in the future.',Unfortunately, we are currently unable to accept items from the categories listed below. However, we are always looking for new opportunities to improve our services so do check back in the future.",
