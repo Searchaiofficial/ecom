@@ -6,7 +6,7 @@ import gray from "@/public/images/Dropitemsimg/gray.png";
 import pink from "@/public/images/Dropitemsimg/pink.webp";
 import "./style.css";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";x
 
 const colours = [
   {

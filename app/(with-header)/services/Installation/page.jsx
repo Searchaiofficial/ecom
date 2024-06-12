@@ -2,46 +2,46 @@
 import React, { useState } from 'react';
 const faqsDataJson = {
     "installation": [
-      {
-        "title": "How can I contact the kitchen experts and how can I submit a kitchen design for review?",
-        "content": "This question explains the process of contacting Ayatrio's kitchen experts and submitting a kitchen design for review. It includes a link to a web form where users can submit their designs for review over the phone."
-      },
-      {
-        "title": "Can I use the Ayatrio Shoppable App to book services such as Assembly?",
-        "content": "This question addresses whether the Ayatrio Shoppable App allows users to book services like assembly. The answer states that such services are not currently available within the app."
-      },
-      {
-        "title": "How much does it cost to have an Ayatrio kitchen professionally installed?",
-        "content": "This question provides information on the typical cost of professional installation for Ayatrio kitchens. It states that installation costs are typically around 50% of the purchased kitchen price but may vary depending on the project."
-      },
-      {
-        "title": "Is there a follow up after the kitchen installation is complete?",
-        "content": "This question discusses whether there is follow-up after the completion of kitchen installation. The answer confirms that Ayatrio follows up with customers to ensure satisfaction and offers ongoing support."
-      },
-      {
-        "title": "Why are our appliances delivered without a power cord?",
-        "content": "This question explains why Ayatrio appliances are delivered without a power cord, stating that skilled professionals will install the appropriate cords based on customers' homes."
-      },
-      {
-        "title": "How come I can’t get the drawer fronts to align? The top drawer is in the way of the lower ones, and can't be closed properly.",
-        "content": "This question addresses alignment issues with drawer fronts and suggests that improper assembly of the lowest drawer may be the cause."
-      },
-      {
-        "title": "What are filler pieces?",
-        "content": "This question defines filler pieces as elements used to fill the space between cabinets and walls to ensure proper installation."
-      },
-      {
-        "title": "Can I adjust the hinges?",
-        "content": "This question confirms that Ayatrio hinges are adjustable and explains their functionality."
-      },
-      {
-        "title": "How much ventilation space is needed above the fridge/freezer?",
-        "content": "This question provides guidance on the ventilation space needed above the fridge/freezer."
-      },
-      {
-        "title": "How do I secure my island cabinets to the floor?",
-        "content": "This question discusses securing island cabinets to the floor and suggests using specific support brackets while advising consultation with a professional."
-      }
+        {
+            "title": "How can I contact the kitchen experts and how can I submit a kitchen design for review?",
+            "content": "This question explains the process of contacting Ayatrio's kitchen experts and submitting a kitchen design for review. It includes a link to a web form where users can submit their designs for review over the phone."
+        },
+        {
+            "title": "Can I use the Ayatrio Shoppable App to book services such as Assembly?",
+            "content": "This question addresses whether the Ayatrio Shoppable App allows users to book services like assembly. The answer states that such services are not currently available within the app."
+        },
+        {
+            "title": "How much does it cost to have an Ayatrio kitchen professionally installed?",
+            "content": "This question provides information on the typical cost of professional installation for Ayatrio kitchens. It states that installation costs are typically around 50% of the purchased kitchen price but may vary depending on the project."
+        },
+        {
+            "title": "Is there a follow up after the kitchen installation is complete?",
+            "content": "This question discusses whether there is follow-up after the completion of kitchen installation. The answer confirms that Ayatrio follows up with customers to ensure satisfaction and offers ongoing support."
+        },
+        {
+            "title": "Why are our appliances delivered without a power cord?",
+            "content": "This question explains why Ayatrio appliances are delivered without a power cord, stating that skilled professionals will install the appropriate cords based on customers' homes."
+        },
+        {
+            "title": "How come I can’t get the drawer fronts to align? The top drawer is in the way of the lower ones, and can't be closed properly.",
+            "content": "This question addresses alignment issues with drawer fronts and suggests that improper assembly of the lowest drawer may be the cause."
+        },
+        {
+            "title": "What are filler pieces?",
+            "content": "This question defines filler pieces as elements used to fill the space between cabinets and walls to ensure proper installation."
+        },
+        {
+            "title": "Can I adjust the hinges?",
+            "content": "This question confirms that Ayatrio hinges are adjustable and explains their functionality."
+        },
+        {
+            "title": "How much ventilation space is needed above the fridge/freezer?",
+            "content": "This question provides guidance on the ventilation space needed above the fridge/freezer."
+        },
+        {
+            "title": "How do I secure my island cabinets to the floor?",
+            "content": "This question discusses securing island cabinets to the floor and suggests using specific support brackets while advising consultation with a professional."
+        }
     ],
 }
 
@@ -202,7 +202,7 @@ export default function Installation() {
                 <div className="container mx-auto px-4">
                     <div className="flex flex-wrap -mx-4">
                         <div className="w-full md:w-1/2 px-4">
-                            {/* <CabinetItem
+                            <CabinetItem
                                 imageSrc="/images/services/installation/cab1.jpg"
                                 title="Cabinet with door (base, wall or high), starting at $119/cabinet"
                                 description={[
@@ -210,10 +210,10 @@ export default function Installation() {
                                     'Adjustment of all Ayatrio SEKTION base cabinets, wall cabinets, high cabinets and doors for appearance.',
                                     'Excludes installation of Ayatrio SEKTION drawer, drawer front, corner carousel, pull-outs, deco strip, side filler strip, cover caps, cover panel 26” x 36”, 36” x 96” or interior fittings other than shelves.'
                                 ]}
-                            /> */}
+                            />
                         </div>
                         <div className="w-full md:w-1/2 px-4">
-                            {/* <CabinetItem
+                            <CabinetItem
                                 imageSrc="/images/services/installation/cab2.jpg"
                                 title="Cabinet with drawer or corner carousel (base or wall), starting at $162/cabinet"
                                 description={[
@@ -221,10 +221,10 @@ export default function Installation() {
                                     "Adjustment of all Ayatrio SEKTION base cabinets, wall cabinets, doors, drawers and drawer fronts for appearance.",
                                     "Excludes installation of Ayatrio SEKTION deco strip, side filler strip, cover caps or cover panel 26” x 36”, 36” x 96”"
                                 ]}
-                            /> */}
+                            />
                         </div>
                         <div className="w-full md:w-1/2 px-4">
-                            {/* <CabinetItem
+                            <CabinetItem
                                 imageSrc="/images/services/installation/cab3.jpg"
                                 title="Cabinet with drawer or corner carousel (base or wall), starting at $162/cabinet"
                                 description={[
@@ -232,10 +232,10 @@ export default function Installation() {
                                     "Adjustment of all Ayatrio SEKTION high cabinets, doors, drawers, drawer fronts for appearance.",
                                     "Excludes installation or Ayatrio SEKTION deco strip, side filler strip, cover caps or cover panel 26” x 36”, 36” x 96”"
                                 ]}
-                            /> */}
+                            />
                         </div>
                         <div className="w-full md:w-1/2 px-4">
-                            {/* <CabinetItem
+                            <CabinetItem
                                 imageSrc="/images/services/installation/cab4.jpg"
                                 title="Cabinet with drawer or corner carousel (base or wall), starting at $162/cabinet"
                                 description={[
@@ -245,7 +245,7 @@ export default function Installation() {
                                     "Gables, molding & fillers",
                                     "Cover caps"
                                 ]}
-                            /> */}
+                            />
                         </div>
                     </div>
                 </div>
@@ -284,7 +284,7 @@ export default function Installation() {
                 <h1 className="text-black text-2xl lg:text-4xl font-semibold mb-6 lg:mb-12 px-3 lg:text-left">
                     Frequently asked questions
                 </h1>
-                {/* <Faq faqFor='installation' /> */}
+                <Faq faqFor='installation' />
             </section>
 
         </div>

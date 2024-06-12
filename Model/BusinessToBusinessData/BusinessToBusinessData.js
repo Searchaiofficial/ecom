@@ -1,13 +1,13 @@
 export const expertDesigners = [
   {
     id: 1,
-    image: "/images/Businesstobusinessimg/designer1.jpg",
+    image: "/images/Businesstobusinessimg/designer3.jpg",
     name: "Charity DeLeora Ray",
     city: "Broadway, NY",
   },
   {
     id: 2,
-    image: "/images/Businesstobusinessimg/designer2.jpg",
+    image: "/images/Businesstobusinessimg/designer3.jpg",
     name: "Scott Charles",
     city: "Chelsea, NY",
   },
@@ -19,31 +19,31 @@ export const expertDesigners = [
   },
   {
     id: 4,
-    image: "/images/Businesstobusinessimg/designer4.jpg",
+    image: "/images/Businesstobusinessimg/designer3.jpg",
     name: "Angel Lim",
     city: "Skokie, IL",
   },
   {
     id: 5,
-    image: "/images/Businesstobusinessimg/designer5.jpg",
+    image: "/images/Businesstobusinessimg/designer3.jpg",
     name: "Sarah Dover",
     city: "Providence, RI",
   },
   {
     id: 6,
-    image: "/images/Businesstobusinessimg/designer6.jpeg",
+    image: "/images/Businesstobusinessimg/designer3.jpg",
     name: "Stephanie Fong",
     city: "Son Ramon, CA",
   },
   {
     id: 7,
-    image: "/images/Businesstobusinessimg/designer7.jpg",
+    image: "/images/Businesstobusinessimg/designer3.jpg",
     name: "Silema Bogans",
     city: "Emeryville, CA",
   },
   {
     id: 8,
-    image: "/images/Businesstobusinessimg/designer8.jpg",
+    image: "/images/Businesstobusinessimg/designer3.jpg",
     name: "Alison Metzger",
     city: "Kansas City, M.O",
   },
