@@ -7,7 +7,7 @@ export const homeDecorCategoryData = [
         image: "https://source.unsplash.com/featured/?bedroom",
       },
       {
-        label: "Floral Decor",
+        label: "Floral décor",
         image: "https://source.unsplash.com/featured/?bedroom",
       },
       {

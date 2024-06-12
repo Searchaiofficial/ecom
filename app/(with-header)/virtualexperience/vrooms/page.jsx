@@ -5,7 +5,7 @@ import Image from "next/image";
 
 import "@/components/styles/virtualexperience.css";
 import Sidebar from "@/components/sidebar";
-import { dataRooms } from "@/Model/data";
+// import { dataRooms } from "@/Model/data";
 import { selectVirtualData } from "@/components/Features/Slices/virtualSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";

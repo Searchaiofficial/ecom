@@ -66,7 +66,7 @@ export default function ClickAndCollectServicePage() {
                 <div className='flex-col md:w-2/3 my-8'>
                     <h1 className='text-black text-4xl font-semibold mb-12'>Click and collect options and pricing</h1>
                     <p className='text-justify px-3 opacity-90 my-3'>
-                        You can collect your order at an IKEA store or a local Pick-up location. Pricing details, approximate lead time, maximum package specifications, Pick-up locations, etc. are specified below.
+                        You can collect your order at an Ayatrio store or a local Pick-up location. Pricing details, approximate lead time, maximum package specifications, Pick-up locations, etc. are specified below.
                     </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

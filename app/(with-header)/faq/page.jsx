@@ -14,13 +14,13 @@ export default function FAQPage() {
                     <div className="md:w-2/3 mt-6">
 
                         <ol className="px-10 opacity-80 list-disc text-justify">
-                            <li className="mb-3">Always check your desired product’s availability here on our website or in the IKEA app before you visit your local IKEA store. We update stock status for our products every few hours. </li>
-                            <li className="mb-3">The best way to get the latest stock status is to visit the product page or listing pages of the item you are interested in and check its availability at your local IKEA store. When checking on our listing page, an indicator for your local store will display as well as possibility for delivery. </li>
-                            <li className="mb-3">If the product you are looking for is out of stock at your local store, you can click on the 'check other IKEA stores' link to view inventory from our other locations.</li>
-                            <li className="mb-3">You can also select 'notify me' and you will receive a communication from IKEA when your product is back in stock. Note that stock shipments are limited and tend to be purchased quickly, so we encourage you to use our click and collect service to secure the products you want or visit your local store first thing in the morning.  </li>
+                            <li className="mb-3">Always check your desired product’s availability here on our website or in the Ayatrio app before you visit your local Ayatrio store. We update stock status for our products every few hours. </li>
+                            <li className="mb-3">The best way to get the latest stock status is to visit the product page or listing pages of the item you are interested in and check its availability at your local Ayatrio store. When checking on our listing page, an indicator for your local store will display as well as possibility for delivery. </li>
+                            <li className="mb-3">If the product you are looking for is out of stock at your local store, you can click on the 'check other Ayatrio stores' link to view inventory from our other locations.</li>
+                            <li className="mb-3">You can also select 'notify me' and you will receive a communication from Ayatrio when your product is back in stock. Note that stock shipments are limited and tend to be purchased quickly, so we encourage you to use our click and collect service to secure the products you want or visit your local store first thing in the morning.  </li>
                             <li className="mb-3">Products that show the status 'Few in stock' may not be available for purchase online because their limited stock level means we can’t guarantee that they will still be available at time of purchase.</li>
-                            <li className="mb-3">Please note – the stock status you see online or in the IKEA app is the same information that our customer service co-workers have access to. If you need further support, please see the FAQ below or connect with us via Chat.</li>
-                            <li className="mb-3">Before you visit be sure to download our shopping app – it is a great way to check out what IKEA has to offer and also to even check for stock while you are shopping in store!</li>
+                            <li className="mb-3">Please note – the stock status you see online or in the Ayatrio app is the same information that our customer service co-workers have access to. If you need further support, please see the FAQ below or connect with us via Chat.</li>
+                            <li className="mb-3">Before you visit be sure to download our shopping app – it is a great way to check out what Ayatrio has to offer and also to even check for stock while you are shopping in store!</li>
                         </ol>
 
                     </div>
@@ -169,7 +169,7 @@ export default function FAQPage() {
                     </section>
 
                     <h1 className="text-black text-xl font-semibold mb-12 px-3">
-                        IKEA Financing
+                        Ayatrio Financing
                     </h1>
                     <section id="faq">
                         <Faq faqFor='financing' />

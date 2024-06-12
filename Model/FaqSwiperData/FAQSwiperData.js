@@ -1,7 +1,7 @@
 export const data = [
     {
-      heading: "Caution against fake IKEA Website and Channel",
-      text: "Update about fake IKEA website & social media channels",
+      heading: "Caution against fake Ayatrio Website and Channel",
+      text: "Update about fake Ayatrio website & social media channels",
     },
     {
       heading: "All you want to know about product assembly!",
@@ -17,7 +17,7 @@ export const data = [
     },
     {
       heading: "Refund policy",
-      text: "Refund policy followed at IKEA India",
+      text: "Refund policy followed at Ayatrio India",
     },
     {
       heading: "I have received damaged articles.",

@@ -1,9 +1,9 @@
 export const headerLinks = [
   {
-    label: "Home decor",
+    label: "Home décor",
   },
   {
-    label: "Wall decor",
+    label: "Wall décor",
   },
   {
     label: "Floor",

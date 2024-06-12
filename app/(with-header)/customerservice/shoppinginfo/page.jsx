@@ -30,7 +30,7 @@ export default function ShoppingInfo() {
           <div>
             <Image
               src="/images/customerservice/service3.jpg"
-              alt="decor"
+              alt="décor"
               width={550}
               height={650}
             />
@@ -44,7 +44,7 @@ export default function ShoppingInfo() {
         <div className="basis-2/4 flex-grow">
           <Image
             src="/images/customerservice/shop.jpg"
-            alt="decor"
+            alt="décor"
             width={600}
             height={300}
           />

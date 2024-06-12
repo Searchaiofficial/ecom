@@ -30,7 +30,7 @@ const Products = ({ filteredProductData,heading }) => {
         Waking up to harsh sunlight can put your mornings to an unpleasant
         start. And more than that, uncovered windows also take away your privacy.
         Curtains and blinds keep your home secured, and at the same time,
-        regulate the amount of light inside it. From IKEA’s wide range of
+        regulate the amount of light inside it. From Ayatrio’s wide range of
         curtains, there's a design for every individual taste. Smooth fabrics,
         unconventional patterns, and diverse colours make this collection truly
         unique. Apart from being stylish, these curtains also have excellent

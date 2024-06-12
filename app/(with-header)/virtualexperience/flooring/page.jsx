@@ -15,16 +15,16 @@ const Content1 = () => {
   // console.log("dataSelector", dataSelector);
   const [data, setData] = useState([]);
   useEffect(() => {
-    if (dataSelector &&dataSelector.length>0 && search.get("category")){
-      let tempData = dataSelector?.filter((item) => item?.category===search.get("category")?.toLocaleLowerCase());
+    if (dataSelector && dataSelector.length > 0 && search.get("category")) {
+      let tempData = dataSelector?.filter((item) => item?.category === search.get("category")?.toLocaleLowerCase());
       setData(tempData);
       // console.log("tempData", tempData);
     }
-    else{
-      router.push("/virtualexperience/category");
+    else {
+      // router.push("/virtualexperience/category");
     }
   }
-  , [dataSelector]);
+    , [dataSelector]);
   // console.log("data", data);
   const prevHandler = () => {
     router.push("/virtualexperience/budget");
@@ -47,13 +47,13 @@ const Content1 = () => {
   const dispatch = useDispatch();
   const handleClick = (roomId, roomTitle) => {
     setSelectedActivity((prevSelectedRooms) => {
-    const updatedSelectedRooms = {
-      ...prevSelectedRooms,
-      [roomTitle]: !prevSelectedRooms[roomTitle],
-    };
-    
+      const updatedSelectedRooms = {
+        ...prevSelectedRooms,
+        [roomTitle]: !prevSelectedRooms[roomTitle],
+      };
+
       dispatch(setSelectedStyle(updatedSelectedRooms));
-      
+
       return updatedSelectedRooms;
     });
     setShowCircle(!showCircle);
@@ -65,66 +65,63 @@ const Content1 = () => {
       <Sidebar selectedPage={selectedPage} onSelectPage={handleSelectPage} />
 
       <div className="card-container flex flex-row justify-center  gap-20">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-2 gap-y-1  my-0 mx-0 "style={{
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-2 gap-y-1  my-0 mx-0 " style={{
           gridTemplateColumns: "repeat(11, minmax(0, 1fr))",
         }} >
-{data?.[0]?.style.map((item) => (
-    <div
-        key={item?._id}
-        className="relative overflow-hidden m-1 aspect-w-16 aspect-h-9 group"
-    >
-        {item && item?._id && (
-            <>
-                <img
+          {data?.[0]?.style.map((item) => (
+            <div
+              key={item?._id}
+              className="relative overflow-hidden m-1 aspect-w-16 aspect-h-9 group"
+            >
+              {item && item?._id && (
+                <>
+                  <img
                     src={item?.img}
                     alt={item?.title}
                     style={{ borderRadius: "1rem" }}
                     onClick={() => {
-                        handleClick(item?._id, item?.title);
-                        handleSelect();
+                      handleClick(item?._id, item?.title);
+                      handleSelect();
                     }}
                     className={`object-cover w-full h-full block p-1
-                    ${
-                        selectedActivity[item.title] ?? false
-                            ? " overlay z-10 black opacity-100"
-                            : ""
-                    }
-                    ${
-                        selectedActivity[item.title] ?? false
-                            ? " border-2 border-red-500 "
-                            : ""
-                    }
+                    ${selectedActivity[item.title] ?? false
+                        ? " overlay z-10 black opacity-100"
+                        : ""
+                      }
+                    ${selectedActivity[item.title] ?? false
+                        ? " border-2 border-red-500 "
+                        : ""
+                      }
                 `}
-                />
-                <h3
+                  />
+                  <h3
                     className={`p-1 rounded-sm
-                    ${
-                        selectedActivity[item.title] ?? false
-                            ? "font-semibold text-white absolute left-2 bottom-2 bg-transparent"
-                            : "bg-white absolute right-1 bottom-1"
-                    }
+                    ${selectedActivity[item.title] ?? false
+                        ? "font-semibold text-white absolute left-2 bottom-2 bg-transparent"
+                        : "bg-white absolute right-1 bottom-1"
+                      }
                 `}
-                >
+                  >
                     {item?.title}
-                </h3>
+                  </h3>
 
-                {selectedActivity[item.title] && (
+                  {selectedActivity[item.title] && (
                     <div className="room-item absolute top-2 right-2 z-10  flex items-center opacity-50 justify-center">
-                        <div className="circle-container relative flex justify-center items-center">
-                            <Image
-                                src="/icons/tick.svg"
-                                alt="tick"
-                                width={30}
-                                height={30}
-                                className=" opacity-100"
-                            />
-                        </div>
+                      <div className="circle-container relative flex justify-center items-center">
+                        <Image
+                          src="/icons/tick.svg"
+                          alt="tick"
+                          width={30}
+                          height={30}
+                          className=" opacity-100"
+                        />
+                      </div>
                     </div>
-                )}
-            </>
-        )}
-    </div>
-))}
+                  )}
+                </>
+              )}
+            </div>
+          ))}
 
         </div>
       </div>
