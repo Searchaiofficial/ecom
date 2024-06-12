@@ -101,6 +101,7 @@ function Header({ setIsHeaderMounted }) {
   const toggleDropdown = (item) => {
     console.log(item)
     setSidebarNavigationItem(item)
+    console.log(open)
     setIsOpen(!isOpen);
 
   };
@@ -284,7 +285,7 @@ function Header({ setIsHeaderMounted }) {
       <TopHeaderWrapper>
         <TopHeader />
       </TopHeaderWrapper>
-      {isHovered && <div className="overlay"></div>}
+      {isHovered && <div className="md:overlay"></div>}
       <div
         className={`fixed w-full sm:bg-none ${(!pathname.includes("/checkout") && !pathname.includes("/ayatrio-map"))
           ? typeof window !== "undefined" && window.scrollY < 20
@@ -452,7 +453,6 @@ function Header({ setIsHeaderMounted }) {
                 </div>
 
                 <div className="w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer md:hidden">
-                  {/* <MenuIcon onClick={toggleMobileMenu} /> */}
                   <Image src={"/icons/menu.svg"} height={50} width={50} alt="Menu Icon" className="h-[21px] w-[21px]" onClick={toggleMobileMenu} />
                 </div>
 
@@ -516,7 +516,7 @@ function Header({ setIsHeaderMounted }) {
                 {/* <Image src={"/icons/backarrow.svg"} height={20} width={20} className="rotate-180" /> */}
                 {
                   toptext && toptext.length > 0 ? (
-                    <div className="flex  items-center">
+                    <div className="flex  items-center mt-2">
                       <Image src={"/icons/backarrowRevarce.svg"} height={18} width={18} className="rotate-180" onClick={handlebackArraowClick} />
                       <p className="text-[18px] ml-[10px] font-semibold">{toptext[toptext.length - 1]}</p>
                     </div>
@@ -529,7 +529,7 @@ function Header({ setIsHeaderMounted }) {
                           width={300}
                           height={40}
                           priority
-                          className=" max-w-[135px] mt-[10px] ml-[10px] object-cover  sm:w-44"
+                          className=" max-w-[135px] mt-[10px] ml-[10px]  h-[29px]  sm:w-44"
                         />
                       </Link>
                     </div>
@@ -537,9 +537,13 @@ function Header({ setIsHeaderMounted }) {
                 }
               </div>
 
-              <div className="w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer md:hidden">
-                <X onClick={toggleMobileMenu} />
-              </div>
+              {
+                toptext.length === 0 && (
+                  <div className="w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer md:hidden">
+                    <X onClick={toggleMobileMenu} />
+                  </div>
+                )
+              }
             </div>
 
             {/* <div className="flex"> */}

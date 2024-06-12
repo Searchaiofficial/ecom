@@ -38,6 +38,7 @@
   font-weight:bolder;
 }
 
+
 .swiper-button-next {
   margin-top: 8rem;
   color: black;
@@ -48,11 +49,17 @@
   padding: 4px;
   font-weight:bolder;
   margin-right:2%;
-}
-
-@media only screen and (max-width: 800px) {
+  }
+  
+  @media only screen and (max-width:800px){
+    .swiper-button-next {
+      margin-top: 2%;
+    }
+  }
+  @media only screen and (max-width: 800px) {
   .swiper-button-prev {
-    margin-left: 72%;
+    margin-left: 0%;
+    margin-top: 2%;
   }
 }
 

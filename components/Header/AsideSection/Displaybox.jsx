@@ -19,7 +19,9 @@ const Displaybox = (props) => {
     router.push(newPath);
     props.setAsideCategory(null);
     props.HandleClick(false)
-    props.handleChange(false)
+    if (window.innerWidth > 800) {
+      props.handleChange(false)
+    }
   };
 
   useEffect(() => {
@@ -41,7 +43,7 @@ const Displaybox = (props) => {
 
 
   return (
-    <main className="w-full  noto-sans-200">
+    <main className="w-full  noto-sans-200 lg:h-auto h-screen">
       <h1 className="lg:text-[14px] text-[18px] p-2 mb-2 font-semibold w-full">
         {props.data?.name}
       </h1>

@@ -1,12 +1,12 @@
 "use client"
 import Image from "next/image";
 import React, { useRef, useEffect, useState } from "react";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+import { Navigation, Pagination, Scrollbar, A11y, Mousewheel, FreeMode } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-// import "swiper/css";
-// import "swiper/css/pagination";
-// import "swiper/css/navigation";
-// import "./styles.css";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import "./styles.css";
 
 // import MultiCardContent from "../compounds/MultiCardContent";
 // import { useSelector, useDispatch } from "react-redux";
@@ -94,6 +94,35 @@ const CategoriesSlider = () => {
         fetchCategory()
     }, [])
 
+    const breakpoints = {
+        300: {
+            slidesPerView: Math.min(categories?.length, 2.5),
+            spaceBetween: 10,
+        },
+        768: {
+            slidesPerView: Math.min(categories?.length, 3),
+            spaceBetween: 10,
+        },
+        1024: {
+            slidesPerView: Math.min(categories?.length, 8),
+            spaceBetween: 10,
+        },
+    };
+
+    const swiperOptions2 = {
+        slidesPerView: 4.08,
+        centeredSlides: false,
+        spaceBetween: 5,
+        modules: [Pagination, Scrollbar, Mousewheel, FreeMode],
+        navigation: {
+            nextEl: ".custom-next-button",
+            prevEl: ".custom-prev-button",
+        },
+        noSwiping: false,
+        allowSlidePrev: true,
+        allowSlideNext: true,
+    };
+
 
 
     return (
@@ -114,26 +143,28 @@ const CategoriesSlider = () => {
                             </div>
                             <Swiper
                                 ref={swiper1Ref}
+                                {...swiperOptions2}
                                 modules={[Navigation, Pagination, Scrollbar, A11y]}
                                 navigation={{
                                     nextEl: ".right",
                                     prevEl: ".back",
                                 }}
+                                sticky={true}
                                 draggable={true}
                                 style={{ "--swiper-navigation-size": "24px", maxHeight: "180px" }}
-                                breakpoints={{
-                                    300: {
-                                        slidesPerView: 3.1,
-                                        spaceBetween: 10,
-                                    },
-                                    768: {
-                                        slidesPerView: 3,
-                                        spaceBetween: 10,
-                                    },
-                                    1024: {
-                                        slidesPerView: 3,
-                                        spaceBetween: 10,
-                                    },
+                                breakpoints={breakpoints}
+                                // scrollbar={{
+                                //     hide: false,
+                                //     draggable: true,
+                                // }}
+
+                                mousewheel={{
+                                    forceToAxis: true,
+                                    invert: false,
+                                }}
+                                freeMode={{
+                                    enabled: false,
+                                    sticky: true,
                                 }}
                                 className="mt-[12px]"
                             >

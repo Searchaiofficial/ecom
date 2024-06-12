@@ -427,7 +427,7 @@ function Card(props) {
 
           </div>
           {
-            props?.specialPrice && (
+            props?.specialPrice?.price && (
               <div className="flex flex-col mt-[6px]">
                 <p className="text-[#757575] text-[12px] pt-[3px]">Regular price: Rs.{props?.price} (incl. of all taxes)</p>
                 {

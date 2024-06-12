@@ -216,6 +216,8 @@ function TabsProductCard(props) {
       }
     }, [])
   }
+
+  // console.log(props)
   return (
     <>
       <div
@@ -284,7 +286,7 @@ function TabsProductCard(props) {
                   onClick={() => handleclick(props.productTitle)}
                 >
                   <Image
-                    src={isHovered ? props.images[2] : colorImage ? colorImage : item}
+                    src={isHovered ? props.images[1] : colorImage ? colorImage : item}
                     alt="NA"
                     key={idx}
                     height={300}
@@ -371,7 +373,7 @@ function TabsProductCard(props) {
           </div>
 
           {
-            props?.specialprice && (
+            props?.specialprice?.price && (
               <div className="flex flex-col mt-[6px]">
                 <p className="text-[#757575] text-[12px] pt-[3px]">Regular price: Rs.{props?.specialprice.price} (incl. of all taxes)</p>
                 {

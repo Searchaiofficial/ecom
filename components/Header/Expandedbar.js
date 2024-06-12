@@ -27,13 +27,16 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
 
   const [stores, setStores] = useState([]);
   const [isStoreLoading, setIsStoreLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(true)
 
   useEffect(() => {
-    setIsStoreLoading(true);
-    fetchStores(searchQuery).then((stores) => {
-      setStores(stores);
-      setIsStoreLoading(false);
-    });
+    if (searchQuery !== "") {
+      setIsStoreLoading(true);
+      fetchStores(searchQuery).then((stores) => {
+        setStores(stores);
+        setIsStoreLoading(false);
+      });
+    }
   }, [searchQuery]);
 
   let cacheddata = JSON.parse(sessionStorage.getItem("cachedData"));
@@ -162,8 +165,8 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  console.log(STORE_MAP_DATA)
-  console.log(path)
+  // console.log(STORE_MAP_DATA)
+  // console.log(path)
   const india_zoom = 5;
   const hotels_zoom = 11;
   const [zoom, setZoom] = useState(india_zoom);
@@ -207,9 +210,24 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
 
   };
 
+  const handlePopularSearch = (search) => {
+    console.log(search)
+    setSearchQuery(search)
+    setIsStoreLoading(true);
+    fetchStores(search).then((stores) => {
+      setStores(stores);
+      setIsStoreLoading(false);
+    });
+  }
+
+  console.log(stores)
+
 
   return (
     <>
+      {isModalOpen && (
+        <div className="md:fixed md:inset-0 md:bg-black md:opacity-50 md:z-[9998]"></div>
+      )}
       <div
         className={`expanded-search-box block pt-[12px]  bg-white sm:h-310px h-full  sm:w-full w-[100vw]  absolute right-0 top-0  z-[9999] ${path == "/" ? "sm:mt-[-36px]" : ""
           } `} style={overflowStyle}
@@ -263,16 +281,16 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
                   <div className="dropdown-item sm:font-medium  pb-2 text-[14px]  text-[#707072]">
                     Popular Searches
                   </div>
-                  <div className="dropdown-item sm:font-medium  py-2   text-[20px] font-medium ">
+                  <div className="dropdown-item sm:font-medium  py-2   text-[20px] font-medium " onClick={() => handlePopularSearch("Delhi")}>
                     Delhi
                   </div>
-                  <div className="dropdown-item sm:font-medium  py-2  text-[20px] font-medium  ">
+                  <div className="dropdown-item sm:font-medium  py-2  text-[20px] font-medium  " onClick={() => handlePopularSearch("Bengaluru")}>
                     Bengaluru
                   </div>
-                  <div className="dropdown-item sm:font-medium  py-2   text-[20px] font-medium ">
+                  <div className="dropdown-item sm:font-medium  py-2   text-[20px] font-medium " onClick={() => handlePopularSearch("Hyderabad")}>
                     Hyderabad
                   </div>
-                  <div className="dropdown-item sm:font-medium hidden sm:flex  py-2  text-[20px] font-medium ">
+                  <div className="dropdown-item sm:font-medium hidden sm:flex  py-2  text-[20px] font-medium " onClick={() => handlePopularSearch("Kolkata")}>
                     Kolkata
                   </div>
                 </>
