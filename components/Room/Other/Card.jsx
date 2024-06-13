@@ -600,7 +600,14 @@ const Card = ({ data, productId }) => {
                                   className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
                                   onClick={() => setsidebarContent(null)}
                                 >
-                                  X
+                                  <Image
+                                    src="/icons/closeicon.svg"
+                                    alt="close"
+                                    width={20}
+                                    height={30}
+                                    className="py-2"
+                                  />
+
                                 </button>
                               </div>
                             </div>
@@ -822,7 +829,15 @@ const Card = ({ data, productId }) => {
                                     className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
                                     onClick={() => setsidebarContent(null)}
                                   >
-                                    X
+                                    <Image
+                                      src="/icons/closeicon.svg"
+                                      alt="close"
+                                      width={30}
+                                      height={30}
+                                      className="py-2"
+                                    />
+
+
                                   </button>
                                 </div>
                               </div>
@@ -919,7 +934,14 @@ const Card = ({ data, productId }) => {
                                 className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
                                 onClick={() => setsidebarContent(null)}
                               >
-                                X
+                                <Image
+                                  src="/icons/closeicon.svg"
+                                  alt="close"
+                                  width={20}
+                                  height={30}
+                                  className="py-2"
+                                />
+
                               </button>
                             </div>
                             <div className="mt-[16px]">
@@ -963,7 +985,14 @@ const Card = ({ data, productId }) => {
                               className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
                               onClick={() => setsidebarContent(null)}
                             >
-                              X
+                              <Image
+                                src="/icons/closeicon.svg"
+                                alt="close"
+                                width={20}
+                                height={30}
+                                className="py-2"
+                              />
+
                             </button>
                           </div>
                           <Calculation priceData={data} />
