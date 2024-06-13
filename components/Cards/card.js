@@ -424,15 +424,18 @@ function Card(props) {
               )}
             </div>
           )}
-          <div className="card-rating">
-            {props.rating}
-          </div>
-
-          {Starts && (
-            <div className="flex items-center mt-1">
-              {Starts}
-              <p className="text-[14px] mt-1 ml-2">({Reviews.length})</p>
-            </div>
+          {props.rating > 0 && (
+            <>
+              <div className="card-rating">
+                {props.rating}
+              </div>
+              {Starts && (
+                <div className="flex items-center mt-1">
+                  {Starts}
+                  <p className="text-[14px] mt-1 ml-2">({Reviews.length})</p>
+                </div>
+              )}
+            </>
           )}
 
           {imageData?.length > 1 && (
