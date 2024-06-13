@@ -41,17 +41,17 @@ const Displaybox = (props) => {
     }
   };
 
-
   return (
-    <main className="w-full  noto-sans-200 lg:h-auto h-screen">
+    <main className="w-full noto-sans-200 lg:h-auto h-screen">
       <h1 className="lg:text-[14px] text-[18px] p-2 mb-2 font-semibold w-full">
         {props.data?.name}
       </h1>
-      <div className="grid grid-cols-2 gap-3 lg:gap-8 sm:grid-cols-2 lg:grid-cols-4 ">
+      <div className="grid grid-cols-2 gap-3 lg:gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {props.data?.subcategories && props.data.subcategories.length > 0 ? (
-          props.data.subcategories.map((item) => (
+          props.data.subcategories.map((item, index) => (
             <div
-              className="flex lg:flex-row flex-col gap-1 lg:gap-4 p-2  sm:items-center cursor-pointer hover:bg-[#e5e5e5]"
+              key={index}
+              className="flex flex-row gap-1 lg:gap-4 p-2 items-center cursor-pointer hover:bg-gray-200 rounded-lg min-w-[200px]"
               onClick={() => handleClick(item.name)}
             >
               <Image
@@ -59,18 +59,19 @@ const Displaybox = (props) => {
                 alt={item.name}
                 width={100}
                 height={100}
-                className="w-[50px] h-[56px] bg-gray-200"
+                className="w-[50px] h-[56px] bg-gray-200 rounded"
               />
-              <h2 className=" text-[14px] font-normal text-[#111111]">{item.name}</h2>
+              <h2 className="text-[14px] font-normal text-[#111111] lg:justify-start">
+                {item.name}
+              </h2>
             </div>
-            // <div>
-            //    <ListContent parentCategory={parentCategory} items={item} />
-            //  </div>
           ))
         ) : (
           <p className="text-lg text-center font-medium">No data available</p>
         )}
       </div>
+
+      
     </main>
   );
 };

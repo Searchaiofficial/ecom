@@ -78,33 +78,21 @@ const Asidebox = (props) => {
     <>
       {asideCategory && (
         <div
-          initial={
-            typeof window !== "undefined" &&
-            window.innerWidth > 800 && { y: -10, opacity: 0 }
-          }
-          whileInView={{ y: 0, opacity: 1 }}
-          style={{ overflowY: "auto" }}
-          className="absolute top-[2.7rem]  lg:p-4 bg-white flex flex-col mt-[15px] md:flex-row noto-sans-200 transition-all duration-300 ease-linear w-full md:left-0 min-h-[90%] lg:min-h-[20rem] md:h-auto md:px-10"
+          className="absolute top-[2.7rem] lg:p-4 bg-white flex flex-col mt-[15px] md:flex-row noto-sans-200 transition-all duration-300 ease-linear w-full md:left-0 min-h-[90%] lg:min-h-[20rem] md:h-auto md:px-10"
         >
           <aside
-            className="absolute lg:top-[2.8rem] space-y-2 mt-[15px] md:mr-10 w-[100%] lg:w-[15%] md:top-0 md:static md:border-r md:pr-10 md:py-4"
-            initial={
-              typeof window !== "undefined" &&
-              window.innerWidth <= 800 && { x: 300, opacity: 0 }
-            }
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ type: "just" }}
+            className="absolute lg:top-[2.8rem] space-y-2 mt-[15px] md:mr-10 lg:w-[15%] md:top-0 md:static md:border-r md:pr-10 md:py-4"
           >
             {asideCategory?.map((value, idx) => (
               <Link
                 key={idx}
                 onMouseEnter={() => handleMouseEnter(idx, value)}
                 className={`lg:block flex items-center justify-between w-full lg:text-[14px] text-[18px] font-semibold ${defaultLinkIndex === idx ? "text-blue-600" : ""
-                  }`}
+                  } p-2 hover:underline rounded-lg`}
                 href="#"
                 onClick={() => handleItemClick(value)} // Handle click event
               >
-                <span className="p-2">{value.name}</span>
+                <span>{value.name}</span>
                 <div className="pr-[24px] sm:hidden">
                   <Image src={"/icons/backarrowRevarce.svg"} height={15} width={15} />
                 </div>
@@ -126,14 +114,9 @@ const Asidebox = (props) => {
           </div>
         </div>
       )}
-      {(props.hoveredIndex === 3 || props.hoveredIndex == 4 || props.hoveredIndex == 5) && (
+      {(props.hoveredIndex === 3 || props.hoveredIndex === 4 || props.hoveredIndex === 5) && (
         <div
-          initial={
-            typeof window !== "undefined" &&
-            window.innerWidth > 800 && { y: -10, opacity: 0 }
-          }
-          whileInView={{ y: 0, opacity: 1 }}
-          className="absolute top-[2.7rem]  bg-white flex flex-col mt-[15px] md:flex-row noto-sans-200 transition-all duration-300 ease-linear w-full md:left-0 min-h-[10rem] md:h-auto "
+          className="absolute top-[2.7rem] bg-white flex flex-col mt-[15px] md:flex-row noto-sans-200 transition-all duration-300 ease-linear w-full md:left-0 min-h-[10rem] md:h-auto"
         >
           <SwiperComponent
             handleChange={props.handleChange}
