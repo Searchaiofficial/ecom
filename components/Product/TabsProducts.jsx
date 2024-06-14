@@ -962,6 +962,7 @@ const Tabs = ({
                     offer={text.offer}
                     inCart={inCart}
                     shortDescription={text.shortDescription}
+                    perUnitPrice={text.perUnitPrice}
                   />
                 )
               })

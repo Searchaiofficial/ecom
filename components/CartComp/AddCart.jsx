@@ -196,7 +196,6 @@ const AddCart = () => {
                   width={18}
                   height={18}
                   alt="rupees"
-                  className="mr-1"
                 />
                 {totalPrice}
               </div>
@@ -209,7 +208,6 @@ const AddCart = () => {
                   width={18}
                   height={18}
                   alt="rupees"
-                  className="mr-1"
                 />7
               </div>
             </div>
@@ -224,9 +222,8 @@ const AddCart = () => {
                   width={25}
                   height={25}
                   alt="rupees"
-                  className="mr-1"
                 />
-                {totalPrice + 7 }
+                {totalPrice + 7}
               </div>
             </div>
             <div className="text-sm mb-4">Quantity: {quantities}</div>

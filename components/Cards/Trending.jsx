@@ -201,6 +201,7 @@ const Trending = () => {
                       cssClass={"card1flex"}
                       inCart={inCart}
                       totalPrice={product.totalPrice}
+                      unitType={product.unitType}
                     />
                   </div>
                 </SwiperSlide>

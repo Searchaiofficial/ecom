@@ -354,11 +354,15 @@ function TabsProductCard(props) {
           <div className=" flex h-[40px] pb-[6px] items-center justify-between">
             {/* <span className="font-medium pr-[3px] pt-[3px]">Rs.</span>
             <h2 className="text-xl font-medium tracking-wide">{props.price}</h2> */}
-            <h2 className={`text-3xl flex font-semibold leading-[0.5]  tracking-wide ${props?.specialprice?.price ? "bg-[#FFC21F] px-2 pt-3 pb-1 w-fit shadow-lg" : ""} `} style={props?.specialprice?.price ? { boxShadow: '3px 3px #C31952' } : {}}>
-              <span className={`text-sm ${props?.specialprice?.price ? "" : "pt-3.5"}`}>Rs. &nbsp;</span>{" "}
-              {props?.specialprice?.price ? props?.specialprice?.price : <p className="pt-3 ">{props.totalPrice}</p>}
-            </h2>{" "}
 
+            <div className="flex gap-2 items-end">
+              <h2 className={`text-3xl flex font-semibold leading-[0.5]  tracking-wide ${props?.specialprice?.price ? "bg-[#FFC21F] px-2 pt-3 pb-1 w-fit shadow-lg" : ""} `} style={props?.specialprice?.price ? { boxShadow: '3px 3px #C31952' } : {}}>
+                <span className={`text-sm ${props?.specialprice?.price ? "" : "pt-3.5"}`}>Rs. &nbsp;</span>{" "}
+                {props?.specialprice?.price ? props?.specialprice?.price : <p className="pt-3 ">{props.totalPrice}</p>}
+              </h2>
+              {props.perUnitPrice ? <span className="tracking-wide text-sm">{`/ ${props.perUnitPrice}`}</span> : ''}
+
+            </div>
             {showCart && (
               <div className="bg-[#0152be] p-[6px] mr-2 rounded-full" onClick={addProductToCart} >
                 <Image src={"/icons/ad-to-cart.svg"} height={20} width={20} className="cursor-pointer rounded-full" />
@@ -382,16 +386,25 @@ function TabsProductCard(props) {
                   )
                 }
               </div>
+
             )
           }
 
-          {
-            Starts &&
-            <div className="flex items-center mt-1">
-              {Starts}
-              <p className="text-[14px] mt-1 ml-2">({Reviews.length})</p>
-            </div>
-          }
+          {props?.rating > 0 && (
+            <>
+              <div className="card-rating">
+                {props.rating}
+              </div>
+              {Starts && (
+                <div className="flex items-center mt-1">
+                  {Starts}
+                  <p className="text-[14px] mt-1 ml-2">({Reviews?.length})</p>
+                </div>
+              )}
+            </>
+          )}
+
+
           {
             imageData?.length > 1 && (
 
@@ -408,7 +421,7 @@ function TabsProductCard(props) {
                           onClick={() => handleColor(item.image)}
                           // onMouseLeave={() => setColorImage(null)}
 
-                          className={`parent relative w-[40px] h-[40px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
+                          className={`parent relative w-[35px] h-[35px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
             ${selectedColor === item.color ||
                               (index === 0 && selectedColor === "")
                               ? " border-black "

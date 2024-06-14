@@ -405,10 +405,15 @@ function Card(props) {
           <div className=" flex h-[40px] pb-[6px] items-center justify-between mt-2">
             {/* <span className="font-medium pr-[3px] pt-[3px]">Rs.</span>
             <h2 className="text-xl font-medium tracking-wide">{props.price}</h2> */}
-            <h2 className={`text-3xl flex font-semibold leading-[0.5]  tracking-wide ${props.specialPrice?.price ? "bg-[#FFC21F] px-2 pt-3 pb-1 w-fit shadow-lg" : ""} `} style={props?.specialPrice?.price ? { boxShadow: '3px 3px #C31952' } : {}}>
-              <span className={`text-sm ${props?.specialPrice?.price ? "" : "pt-3.5"}`}>Rs. &nbsp;</span>{" "}
-              {props?.specialPrice?.price ? props?.specialPrice?.price : <p className="pt-3">{props?.price}</p>}
-            </h2>
+            <div className="flex gap-2 items-end">
+              <h2 className={`text-3xl flex font-semibold leading-[0.5] tracking-wide ${props.specialPrice?.price ? "bg-[#FFC21F] px-2 pt-3 pb-1 w-fit shadow-lg" : ""}`} style={props?.specialPrice?.price ? { boxShadow: '3px 3px #C31952' } : {}}>
+                <span className={`text-sm ${props?.specialPrice?.price ? "" : "pt-3.5"}`}>Rs. &nbsp;</span>{" "}
+                {props?.specialPrice?.price ? props?.specialPrice?.price : <p className="pt-3">{props?.price}</p>}
+              </h2>
+              {props.unitType ? <span className="tracking-wide text-sm">{`/ ${props.unitType}`}</span> : ''}
+            </div>
+
+
 
             {showCart && (
               <div className="bg-[#0152be] p-1.5 mr-2 rounded-full" onClick={addProductToCart}>
@@ -441,6 +446,7 @@ function Card(props) {
               )}
             </>
           )}
+
           {/* <div className="flex lg:gap-2 gap-1 mt-2 ">
             <Image src={"/icons/adtocart.svg"} height={25} width={25} className="mr-2 cursor-pointer" />
             <Image src={"/icons/like.svg"} height={30} width={25} className=" cursor-pointer" />
@@ -507,7 +513,7 @@ function Card(props) {
             )}
         </div>
 
-      </div>
+      </div >
     </>
   );
 }

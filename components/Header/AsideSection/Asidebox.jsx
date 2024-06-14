@@ -93,7 +93,7 @@ const Asidebox = (props) => {
                 onClick={() => handleItemClick(value)} // Handle click event
               >
                 <span>{value.name}</span>
-                <div className="pr-[24px] sm:hidden">
+                <div className="pr-[24px] sm:hidden right-0">
                   <Image src={"/icons/backarrowRevarce.svg"} height={15} width={15} />
                 </div>
               </Link>
