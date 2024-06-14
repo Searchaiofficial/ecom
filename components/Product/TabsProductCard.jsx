@@ -217,7 +217,7 @@ function TabsProductCard(props) {
     }, [])
   }
 
-  // console.log(props)
+  console.log(props)
   return (
     <>
       <div
@@ -354,9 +354,9 @@ function TabsProductCard(props) {
           <div className=" flex h-[40px] pb-[6px] items-center justify-between">
             {/* <span className="font-medium pr-[3px] pt-[3px]">Rs.</span>
             <h2 className="text-xl font-medium tracking-wide">{props.price}</h2> */}
-            <h2 className={`text-3xl flex font-semibold leading-[0.5]  tracking-wide ${props.discountedprice ? "bg-[#FFC21F] px-2 pt-3 pb-1 w-fit shadow-lg" : ""} `} style={props?.discountedprice ? { boxShadow: '3px 3px #C31952' } : {}}>
-              <span className={`text-sm ${props?.discountedprice ? "" : "pt-3.5"}`}>Rs. &nbsp;</span>{" "}
-              {props?.discountedprice ? props?.discountedprice : <p className="pt-3 ">{props.totalPrice}</p>}
+            <h2 className={`text-3xl flex font-semibold leading-[0.5]  tracking-wide ${props?.specialprice?.price ? "bg-[#FFC21F] px-2 pt-3 pb-1 w-fit shadow-lg" : ""} `} style={props?.specialprice?.price ? { boxShadow: '3px 3px #C31952' } : {}}>
+              <span className={`text-sm ${props?.specialprice?.price ? "" : "pt-3.5"}`}>Rs. &nbsp;</span>{" "}
+              {props?.specialprice?.price ? props?.specialprice?.price : <p className="pt-3 ">{props.totalPrice}</p>}
             </h2>{" "}
 
             {showCart && (
@@ -375,7 +375,7 @@ function TabsProductCard(props) {
           {
             props?.specialprice?.price && (
               <div className="flex flex-col mt-[6px]">
-                <p className="text-[#757575] text-[12px] pt-[3px]">Regular price: Rs.{props?.specialprice.price} (incl. of all taxes)</p>
+                <p className="text-[#757575] text-[12px] pt-[3px]">Regular price: Rs.{props?.totalPrice} (incl. of all taxes)</p>
                 {
                   props?.specialPrice?.startDate && props?.specialPrice?.endDate && (
                     <p className="text-[#757575] text-[12px] ">Price valid {formattedStartDate} - {formattedEndDate}</p>

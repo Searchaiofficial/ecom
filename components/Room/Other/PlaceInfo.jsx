@@ -9,91 +9,31 @@ const PlaceInfo = (data) => {
       {data?.data?.coreValues ? (
         <>
           <div className="place-features my-4 sm:w-auto  ">
-            <div className="hosted-by flex flex-start py-4 font-lg">
-              <div className="mr-4">
-                <img
-                  className="w-[40px] h-[40px]"
-                  src={data?.data.coreValues[0]?.image}
-                  alt=""
-                />
-              </div>
-              <div>
-                <h4 className="font-semibold">
-                  {data?.data.coreValues[0]?.heading}
-                </h4>
-                <span className="mt-1 text-gray-500">
-                  {data?.data.coreValues[0]?.text}
-                </span>
-              </div>
-            </div>
-            <div className="workspace flex items-center py-4 font-lg">
-              {/* <div className="mr-4">
-                <svg
-                  className="w-[24px] h-[24px] block text-black"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 32 32"
-                  aria-hidden="true"
-                  role="presentation"
-                  focusable="false"
-                >
-                  <path d="M26 2a1 1 0 0 1 .92.61l.04.12 2 7a1 1 0 0 1-.85 1.26L28 11h-3v5h6v2h-2v13h-2v-2.54a3.98 3.98 0 0 1-1.73.53L25 29H7a3.98 3.98 0 0 1-2-.54V31H3V18H1v-2h5v-4a1 1 0 0 1 .88-1h.36L6.09 8.4l1.82-.8L9.43 11H12a1 1 0 0 1 1 .88V16h10v-5h-3a1 1 0 0 1-.99-1.16l.03-.11 2-7a1 1 0 0 1 .84-.72L22 2h4zm1 16H5v7a2 2 0 0 0 1.7 1.98l.15.01L7 27h18a2 2 0 0 0 2-1.85V18zm-16-5H8v3h3v-3zm14.24-9h-2.49l-1.43 5h5.35l-1.43-5z"></path>
-                </svg>
-              </div> */}
-              <div className="mr-4">
-                <img
-                  className="w-[40px] h-[40px]"
-                  src={data?.data.coreValues[1]?.image}
-                  alt=""
-                />
-              </div>
-              <div className="">
-                <h4 className="font-semibold">
-                  {data?.data.coreValues[1]?.heading}
-                </h4>
-                <span className="mt-1 text-gray-500">
-                  {data?.data.coreValues[1]?.text}
-                </span>
-              </div>
-            </div>
-            <div className="dine-in flex items-center pt-2 pb-8  font-lg">
-              <div className="mr-4">
-                <img
-                  className="w-[40px] h-[40px]"
-                  src={data?.data.coreValues[2]?.image}
-                  alt=""
-                />
-              </div>
-              <div className="">
-                <h4 className="font-semibold">
-                  {data?.data.coreValues[2]?.heading}
-                </h4>
-                <span className="mt-1 text-gray-500">
-                  {data?.data.coreValues[2]?.text}
-                </span>
-              </div>
-            </div>
+
+            {
+              data?.data?.coreValues.length > 0 && data?.data?.coreValues.map((item) => (
+
+                <div className="hosted-by flex flex-start items-center py-4 font-lg">
+                  <div className="mr-4 w-[40px] h-[40px]">
+                    <img
+                      className="w-full min-w-[40px] min-h-[40px]"
+                      src={item.image}
+                      alt=""
+                    />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">
+                      {item.heading}
+                    </h4>
+                    <span className="mt-1 text-gray-500">
+                      {item.text}
+                    </span>
+                  </div>
+                </div>
+              ))
+            }
+
           </div>
-          {/* <div className="place-information pt-6 pb-8 border-b">
-            <p className="text-lg text-gray-600 font-[16px] leading-6	mb-6 sm:w-auto text-justify w-[100%]">
-              Red Tree Villa is designed to cater our guests for all seasons. A
-              Premium villa near Karjat, Mumbai and Pune having a lap pool for
-              beating the heat in summers, a lush green lawn to enjoy rain dance
-              amidst lush green mountains, a breathtaking view of waterfalls and
-              river streams during the monsoon whilst you lie in your bed. The
-              major highlight is a trek to Bhimashankar Mandir one of the 12
-              Jyotirlingas in India. Enjoy Star gazing at our open terrace with
-              a sky deck during cold winters.
-            </p>
-            <div className=" flex gap-4 underline font-[16px]  mb-2 cursor-pointer">
-              Show more
-              <Image
-                src="/icons/arrow-circle-right-icon.svg"
-                width={25}
-                height={25}
-                alt="right icon"
-              />
-            </div>
-          </div> */}
         </>
       ) : (
         <>

@@ -18,6 +18,7 @@ import axios from "axios";
 import Image from "next/image";
 import { selectProductImages } from "@/components/Features/Slices/imageDataSlice";
 import { colorsData } from "../../../Model/ColorsData/Colors.js";
+import ResponseCache from "next/dist/server/response-cache";
 
 const Card = ({ data, productId }) => {
   const quantity = useSelector(selectQuantity);
@@ -36,9 +37,6 @@ const Card = ({ data, productId }) => {
   const [openOfferDetails, setOpenOfferDetails] = useState(false)
   const [EmiOption, setEmiOption] = useState("Credit Card EMI")
   const [openEmiDetails, setOpenEMIDetails] = useState(false)
-
-
-
 
 
 
@@ -325,6 +323,19 @@ const Card = ({ data, productId }) => {
     });
   }, []);
 
+  console.log(data)
+
+  const fetchCategoryDetails = async () => {
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getCategoryByName/${data?.category}`)
+    console.log(response.data)
+  }
+
+  useEffect(() => {
+    if (data?.category) {
+      fetchCategoryDetails()
+    }
+  }, [data?.category])
+
   return (
     <>
       <div className="flex justify-start md:min-w-[25vw] gap-1 mt-2.5 w-[100%] ml-0">
@@ -367,18 +378,17 @@ const Card = ({ data, productId }) => {
                 </h1>
 
             }
-            <div className="font-medium flex tracking-wider text-[#757575] mb-1">
-              <h3>{data?.collectionName}</h3>
+            <div className="flex text-[14px] font-medium tracking-wider text-[#757575] ">
+              <h3>{data?.shortDescription}</h3>
             </div>
             {/* <div className="font-medium tracking-wider text-[#757575] flex mb-1">
               Pattern Number:&nbsp;
               <h3>{data?.patternNumber}</h3>
             </div> */}
             <div className="price">
-              <div className="font-bold items-end flex mb-1 mt-[30px]">
+              <div className="font-bold items-end flex mb-1 mt-[10px]">
 
-
-                <h2 className={`text-3xl leading-[0.5] tracking-wide ${data?.specialprice ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg" : ""} `} style={data?.specialprice ? { boxShadow: '3px 3px #ad3535' } : {}}>
+                <h2 className={`text-3xl leading-[0.5] tracking-wide ${data?.specialprice?.price ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg" : ""} `} style={data?.specialprice?.price ? { boxShadow: '3px 3px #ad3535' } : {}}>
                   <span className="text-sm">Rs. &nbsp;</span>{" "}
                   {data?.specialprice?.price ? data?.specialprice.price : data.perUnitPrice}
                 </h2>{" "}
@@ -386,7 +396,7 @@ const Card = ({ data, productId }) => {
               </div>
 
               {
-                data?.specialprice && (
+                data?.specialprice?.price && (
                   <div className="flex flex-col">
                     <p className="text-[#757575] text-[12px] pt-[3px]">Regular price: Rs.{data?.totalPrice} (incl. of all taxes)</p>
                     {

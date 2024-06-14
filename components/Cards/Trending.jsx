@@ -199,7 +199,8 @@ const Trending = () => {
                       productId={product.productId}
                       setPopupVisible={setPopupVisible}
                       cssClass={"card1flex"}
-                      inCart={inCart}  // Send the inCart prop to Card component
+                      inCart={inCart}
+                      totalPrice={product.totalPrice}
                     />
                   </div>
                 </SwiperSlide>

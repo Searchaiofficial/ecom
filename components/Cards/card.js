@@ -291,6 +291,8 @@ function Card(props) {
     }
   }, [])
 
+  console.log(props)
+
 
 
   return (
@@ -344,7 +346,7 @@ function Card(props) {
                   <Link href={`/product/${props.title}`}>
                     <Image
                       // src={isHovered ? props.imgSrc[2] : item}
-                      src={isHovered ? props.imgSrc[2] : colorImage ? colorImage : item}
+                      src={isHovered ? props.imgSrc[1] : colorImage ? colorImage : item}
                       alt="NA"
                       key={idx}
                       height={300}
@@ -400,13 +402,12 @@ function Card(props) {
           </div>
           <div className="font-normal mb-1 text-[12px] text-[#757575]">{props?.shortDescription}</div>
 
-          <div className="flex h-[40px] pb-1 items-center justify-between mt-2">
-            <h2
-              className={`text-3xl flex font-semibold leading-[0.5] tracking-wide ${props.specialPrice ? "bg-[#FFC21F] px-2 pb-1 w-fit shadow-lg" : ""}`}
-              style={props?.specialPrice ? { boxShadow: '3px 3px #C31952' } : {}}
-            >
+          <div className=" flex h-[40px] pb-[6px] items-center justify-between mt-2">
+            {/* <span className="font-medium pr-[3px] pt-[3px]">Rs.</span>
+            <h2 className="text-xl font-medium tracking-wide">{props.price}</h2> */}
+            <h2 className={`text-3xl flex font-semibold leading-[0.5]  tracking-wide ${props.specialPrice?.price ? "bg-[#FFC21F] px-2 pt-3 pb-1 w-fit shadow-lg" : ""} `} style={props?.specialPrice?.price ? { boxShadow: '3px 3px #C31952' } : {}}>
               <span className={`text-sm ${props?.specialPrice?.price ? "" : "pt-3.5"}`}>Rs. &nbsp;</span>{" "}
-              {props?.specialPrice?.price ? props?.specialPrice.price : <p className="pt-3">{props.price}</p>}
+              {props?.specialPrice?.price ? props?.specialPrice?.price : <p className="pt-3">{props?.price}</p>}
             </h2>
 
             {showCart && (
@@ -415,16 +416,19 @@ function Card(props) {
               </div>
             )}
           </div>
-
-          {props?.specialPrice?.price && (
-            <div className="flex flex-col mt-1.5">
-              <p className="text-[#757575] text-[12px] pt-1">Regular price: Rs.{props?.price} (incl. of all taxes)</p>
-              {props?.specialPrice?.startDate && props?.specialPrice?.endDate && (
-                <p className="text-[#757575] text-[12px]">Price valid {formattedStartDate} - {formattedEndDate}</p>
-              )}
-            </div>
-          )}
-          {props.rating > 0 && (
+          {
+            props?.specialPrice?.price && (
+              <div className="flex flex-col mt-[6px]">
+                <p className="text-[#757575] text-[12px] pt-[3px]">Regular price: Rs.{props?.price} (incl. of all taxes)</p>
+                {
+                  props?.specialPrice?.startDate && props?.specialPrice?.endDate && (
+                    <p className="text-[#757575] text-[12px] ">Price valid {formattedStartDate} - {formattedEndDate}</p>
+                  )
+                }
+              </div>
+            )
+          }
+          {props?.rating > 0 && (
             <>
               <div className="card-rating">
                 {props.rating}
@@ -432,42 +436,75 @@ function Card(props) {
               {Starts && (
                 <div className="flex items-center mt-1">
                   {Starts}
-                  <p className="text-[14px] mt-1 ml-2">({Reviews.length})</p>
+                  <p className="text-[14px] mt-1 ml-2">({Reviews?.length})</p>
                 </div>
               )}
             </>
           )}
+          {/* <div className="flex lg:gap-2 gap-1 mt-2 ">
+            <Image src={"/icons/adtocart.svg"} height={25} width={25} className="mr-2 cursor-pointer" />
+            <Image src={"/icons/like.svg"} height={30} width={25} className=" cursor-pointer" />
+          </div> */}
 
-          {imageData?.length > 1 && (
-            <div className="colorContainer flex flex-col sm:w-auto w-[80vw] mt-1">
-              <div className="w-full flex justify-between mb-1">
-                <h1 className="text-[12px] font-medium">Colours</h1>
-              </div>
-              <div className="colors flex gap-1.5">
-                {imageData?.map((item, index) => (
-                  <div
-                    key={index}
-                    onClick={() => handleColor(item.image)}
-                    className={`parent relative w-[40px] h-[40px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
-              ${selectedColor === item.color || (index === 0 && selectedColor === "") ? "border-black" : "border-black"}`}
-                  >
-                    <Image
-                      className="relative w-full h-full object-cover"
-                      src={item.image}
-                      alt={item.color}
-                      width={0}
-                      height={0}
-                      layout="fill"
-                      objectFit="cover"
-                    />
-                    {colorImage === item.image || (index === 0 && colorImage === "") ? (
-                      <div className="w-full h-1 bg-black mt-[50px]" />
-                    ) : ""}
-                  </div>
-                ))}
-              </div>
+          {/* {
+            Starts &&
+            <div className="flex items-center mt-1">
+              {Starts}
+              <p className="text-[14px] mt-1 ml-2">({Reviews.length})</p>
             </div>
-          )}
+          } */}
+
+
+
+          {
+            imageData?.length > 1 && (
+
+              <div className="colorContainer flex flex-col sm:w-auto w-[80vw] mt-1 ">
+                <div className="w-full flex justify-between mb-1">
+                  <h1 className="] text-[12px] font-medium">Colours</h1>
+                </div>
+                {
+                  <>
+                    <div className="colors flex gap-1.5">
+                      {imageData?.map((item, index) => (
+                        <div
+                          key={index}
+                          onClick={() => handleColor(item.image)}
+                          // onMouseLeave={() => setColorImage(null)}
+
+                          className={`parent relative w-[40px] h-[40px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
+            ${selectedColor === item.color ||
+                              (index === 0 && selectedColor === "")
+                              ? " border-black "
+                              : " border-black"
+                            }   
+          `}
+                        >
+                          <Image
+                            className="relative w-full h-full object-cover"
+                            src={item.image}
+                            alt={item.color}
+                            width={0}
+                            height={0}
+                            layout="fill"
+                            objectFit="cover"
+                          />
+
+                          {
+                            colorImage === item.image ||
+                              (index === 0 && colorImage === "") ? (
+                              <div className="w-[100%] h-[4px] bg-black mt-[50px]" />
+                            ) : ""
+                          }
+
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                }
+              </div>
+
+            )}
         </div>
 
       </div>

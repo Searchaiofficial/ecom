@@ -139,7 +139,7 @@ const RoomPage = () => {
     };
   }, []);
 
-  console.log("11111", data);
+  // console.log("11111", data);
 
   return (
     <>
@@ -240,7 +240,7 @@ const RoomPage = () => {
           <div className="lg:ml-[40px] w-full">
             <Carous data={data} />
           </div>
-        </div>c
+        </div>
       </div>
     </>
   );

@@ -433,6 +433,8 @@ const Tabs = ({
     },
   };
 
+  console.log(filterData)
+
   return (
     <>
       <div className="lg:px-[67px] sm:px-[50px] px-[20px]">

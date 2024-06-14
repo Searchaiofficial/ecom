@@ -1,9 +1,31 @@
+import axios from "axios";
 import Image from "next/image";
-import React from "react";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
 
 const Amenities = ({ data }) => {
-  const amenities = data.features || []; // Assuming data.features is an array
+  const amenities = data.features || [];
+  const [categoryDetails, setCategoryDetails] = useState()
+  console.log(data)
+
   console.log({ amenities });
+  const [showMore, setShowMore] = useState(false)
+
+
+  const handleShowMore = () => {
+    setShowMore(!showMore)
+  }
+  const fetchCategoryDetails = async () => {
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getCategoryByName/${data?.category}`)
+    console.log(response.data)
+    setCategoryDetails(response.data)
+  }
+
+  useEffect(() => {
+    if (data?.category) {
+      fetchCategoryDetails()
+    }
+  }, [data?.category])
   return (
     <>
       {amenities.length > 0 && (
@@ -11,22 +33,20 @@ const Amenities = ({ data }) => {
           <h3 className="mb-6 text-xl font-semibold">
             What this place offers
           </h3>
-          <div className="amenities grid grid-cols-2  sm:w-auto ">
+          <div className="amenities grid grid-cols-1 sm:grid-cols-2  sm:w-auto ">
             {amenities.map((amenity) => (
-              <div className="flex my-2 gap-x-2" key={amenity._id}>
-                <div className="parent relative w-8 h-8">
+              <div className="flex my-2 items-start" key={amenity._id}>
+                <div className=" w-10 h-10 mr-4">
                   <Image
-                    className="child absolute w-full h-full object-cover"
-                    width={0}
-                    height={0}
-                    layout="fill"
-                    objectFit="cover"
+                    className=""
+                    width={40}
+                    height={40}
                     src={amenity.image}
                     alt={amenity.name}
                   />
                 </div>
                 <span
-                  className={`font-normal text-lg`}
+                  className={`font-medium`}
                 // ${amenity.available !== true ? "line-through" : ""}
                 >
                   {amenity.text}
@@ -34,8 +54,26 @@ const Amenities = ({ data }) => {
               </div>
             ))}
           </div>
-          <div className="pt-[30px] font-normal text-sm text-gray-500">
-            <p>View more</p>
+          <div className="pt-[30px] font-normal text-sm  flex flex-col gap-4 sm:mt-10">
+
+
+            <>
+              <p className={`${showMore ? "line-clamp-none" : "line-clamp-2"}`}>{data?.productDescription}</p>
+              <p className="cursor-pointer hover:underline font-semibold" onClick={() => setShowMore(!showMore)}>{showMore ? "View less" : "View more"}</p>
+              {
+                categoryDetails?.maintenanceDetails && categoryDetails?.certification &&
+                <>
+                  <Link href={categoryDetails?.maintenanceDetails} target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-gray-900 font-medium">
+                    Maintenance Details Download
+                  </Link>
+                  <Link href={categoryDetails?.certification} target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-gray-900 font-medium">
+                    Certification Download
+                  </Link>
+                </>
+              }
+            </>
+
+
           </div>
           {/* <button
             type="button"
