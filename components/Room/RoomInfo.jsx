@@ -239,6 +239,28 @@ const RoomInfo = ({ data }) => {
             }
           </div>
         </div>
+
+        <div className="pt-[30px] font-normal text-sm  flex flex-col gap-4 sm:mt-10">
+          <>
+            <p className={`"line-clamp-2"}`}>{data?.productDescription}</p>
+            {/* <p className={`${showMore ? "line-clamp-none" : "line-clamp-2"}`}>{data?.productDescription}</p>
+              <p className="cursor-pointer hover:underline font-semibold" onClick={() => setShowMore(!showMore)}>{showMore ? "View less" : "View more"}</p> */}
+            {
+              data.categoryDetails?.maintenanceDetails && categoryDetails?.certification &&
+              <>
+                <Link href={categoryDetails?.maintenanceDetails} target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-gray-900 font-medium">
+                  Maintenance Details Download
+                </Link>
+                <Link href={categoryDetails?.certification} target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-gray-900 font-medium">
+                  Certification Download
+                </Link>
+              </>
+            }
+          </>
+
+
+        </div>
+
         {/* place features and information */}
         <PlaceInfo data={data} />
 

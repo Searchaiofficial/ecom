@@ -33,30 +33,31 @@ const Amenities = ({ data }) => {
           <h3 className="mb-6 text-xl font-semibold">
             What this place offers
           </h3>
-          <div className="amenities grid grid-cols-1 sm:grid-cols-2  sm:w-auto ">
-            {amenities.map((amenity) => (
-              <div className="flex my-2 items-start" key={amenity._id}>
-                <div className=" w-10 h-10 mr-4">
+          <div className="amenities grid grid-cols-1 sm:grid-cols-2 sm:w-auto">
+            {amenities.map((amenity, index) => (
+              <div
+                className={`flex my-2 items-center ${index < 3 ? 'sm:col-span-1' : 'sm:col-span-2'}`}
+                key={amenity._id}
+              >
+                <div className="w-10 h-10 mr-4">
                   <Image
                     className=""
-                    width={40}
-                    height={40}
+                    width={35}
+                    height={35}
                     src={amenity.image}
                     alt={amenity.name}
                   />
                 </div>
-                <span
-                  className={`font-medium`}
-                // ${amenity.available !== true ? "line-through" : ""}
+                <span className={`font-medium `}
+                // ${!amenity.available ? 'line-through' : ''}
                 >
                   {amenity.text}
                 </span>
               </div>
             ))}
           </div>
+
           <div className="pt-[30px] font-normal text-sm  flex flex-col gap-4 sm:mt-10">
-
-
             <>
               <p className={`${showMore ? "line-clamp-none" : "line-clamp-2"}`}>{data?.productDescription}</p>
               <p className="cursor-pointer hover:underline font-semibold" onClick={() => setShowMore(!showMore)}>{showMore ? "View less" : "View more"}</p>

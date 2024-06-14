@@ -114,56 +114,68 @@ const AddCart = () => {
             {cartdata && cartdata.items && cartdata.items.map((item) => (
               <div key={item._id}>
                 <div className="left-cart flex-col flex sm:w-2/3 w-[90vw] pr-8">
-                  <div className="bagContainer w-72">
-                    <div className="cartitem flex mb-6 border-b pb-4">
-                      <div className="img w-48 h-48 mr-8">
-                        {item?.productId?.images && item?.productId?.images[0] && (
-                          <Image
-                            src={item.productId.images[0]}
-                            className="w-full h-full object-cover rounded-md"
-                            alt="Product"
-                            width={150}
-                            height={150}
-                          />
-                        )}
-                      </div>
-                      <div className="cartContent flex flex-col justify-between">
-                        <div className="mainright">
-                          <div className="leftContent flex flex-col">
-                            <h2 className="sm:text-xl text-lg sm:font-semibold font-medium  mb-2">
-                              {item?.productId?.productTitle}
-                            </h2>
-                            <h3 className="text-gray-600">
-                              {item?.productId?.category}
-                            </h3>
-                            <h3 className="text-gray-600">
-                              Quantity: &nbsp;{item?.quantity}
-                            </h3>
-                          </div>
-                          <div className="rightContent sm:text-xl text-lg sm:font-semibold font-medium">
-                            ₹ &nbsp;{(item?.productId?.totalPrice || 0) * (item?.quantity || 0)}
-                          </div>
-                          <div className="icons flex items-center space-x-2 mt-4">
+                  <div className="bagContainer w-80 ">
+                    <div className="cartitem flex mb-6 border-b pb-4 gap-6">
+                      <div className="w-1/2">
+                        <div className="img mr-8 w-40 h-40">
+                          {item?.productId?.images && item?.productId?.images[0] && (
                             <Image
-                              src="/icons/info.svg"
-                              width={25}
-                              height={25}
+                              src={item.productId.images[0]}
+                              className="w-full h-full object-cover"
+                              alt="Product"
+                              width={150}
+                              height={150}
+                            />
+                          )}
+                        </div>
+                      </div>
+                      <div className="w-1/2">
+
+                        <div className="leftContent flex flex-col">
+                          <h2 className="sm:text-xl text-md sm:font-semibold font-medium truncate">
+                            {item?.productId?.productTitle}
+                          </h2>
+                          <h3 className="text-gray-600 text-[14px]">
+                            {item?.productId?.category}
+                          </h3>
+                          <h3 className="text-black text-[16px] mt-2">
+                            Quantity : &nbsp;{item?.quantity}
+                          </h3>
+                        </div>
+                        <div className="sm:text-xl text-lg sm:font-semibold font-medium mt-2">
+                          <div className="flex items-center">
+                            <Image
+                              src="/icons/indianrupeesicon.svg"
+                              width={18}
+                              height={18}
+                              alt="rupees"
+                              className="mr-1"
+                            />
+                            {(item?.productId?.totalPrice || 0) * (item?.quantity || 0)}
+                          </div>
+                          <div className="icons flex items-center mt-4 space-x-6">
+                            <Image
+                              src="/icons/delete-icon.svg"
+                              width={21}
+                              height={21}
                               alt="delete"
                               className="hover:text-slate-500 cursor-pointer"
                               onClick={() => handleDelete(item?.productId?._id)}
                             />
                             <Image
-                              src="/icons/info.svg"
-                              width={25}
-                              height={25}
-                              alt="broken heart"
+                              src="/icons/like.svg"
+                              width={21}
+                              height={21}
+                              alt="heart"
                               className="text-red-700 hover:text-red-500 cursor-pointer"
                             />
                           </div>
                         </div>
+
                       </div>
                     </div>
                   </div>
+
                 </div>
               </div>
             ))}
@@ -172,30 +184,52 @@ const AddCart = () => {
           <p>No data is available here. Please add some item in cart page.</p>
         )}
         {cartStatus === "succeeded" && cartdata && (
-          <div className="right-cart flex flex-col  sm:w-1/3 w-[80vw]">
-            <h1 className="lg:text-4xl text-[16px] font-semibold mb-6">
+          <div className="right-cart flex flex-col sm:w-1/3 w-[90vw] p-4 ">
+            <h1 className="text-xl font-semibold mb-6">
               Order Summary
             </h1>
-            <div className="subtotal flex justify-between items-center mb-4">
-              <div className="lg:text-lg text-[14px]">Subtotal</div>
-              <div className="text-lg sm:font-semibold font-medium">
-                ₹ &nbsp;{totalPrice}
+            <div className="subtotal flex justify-between items-center mb-4 opacity-70">
+              <div className="text-base">Subtotal</div>
+              <div className="text-base font-bold flex">
+                <Image
+                  src="/icons/indianrupeesicon.svg"
+                  width={18}
+                  height={18}
+                  alt="rupees"
+                  className="mr-1"
+                />
+                {totalPrice}
               </div>
             </div>
-            <div className="deliveryCharges flex justify-between items-center mb-4">
-              <div className="text-lg">Delivery Charges</div>
-              <div className="text-lg sm:font-semibold font-medium">₹7</div>
+            <div className="deliveryCharges flex justify-between items-center mb-4 opacity-70">
+              <div className="text-base">Delivery Charges</div>
+              <div className="text-base font-bold flex">
+                <Image
+                  src="/icons/indianrupeesicon.svg"
+                  width={18}
+                  height={18}
+                  alt="rupees"
+                  className="mr-1"
+                />7
+              </div>
             </div>
-            <hr className="my-4" />
+            <hr className="my-4 border-black border-[1px]" />
             <div className="total flex justify-between items-center mb-6">
-              <div className="sm:text-xl text-lg sm:font-semibold font-medium">
+              <div className="text-lg font-semibold">
                 Total
               </div>
-              <div className="sm:text-xl text-lg sm:font-semibold font-medium">
-                ₹ &nbsp; {totalPrice + 7}
+              <div className="text-3xl font-semibold flex">
+                <Image
+                  src="/icons/indianrupeesicon.svg"
+                  width={25}
+                  height={25}
+                  alt="rupees"
+                  className="mr-1"
+                />
+                {totalPrice + 7 }
               </div>
             </div>
-            <div>Quantity: {quantities}</div>
+            <div className="text-sm mb-4">Quantity: {quantities}</div>
             <Link
               href={{
                 pathname: "/checkout",
@@ -205,7 +239,7 @@ const AddCart = () => {
               }}
               className="memberCheckout my-4 flex items-center justify-center"
             >
-              <button className="bg-black text-white sm:w-full w-[40vw] sm:h-14 h-9 rounded-full hover:bg-gray-900 transition duration-300">
+              <button className="bg-black text-white w-full sm:w-[40vw] sm:h-14 h-9 rounded-full hover:bg-gray-900 transition duration-300">
                 Guest Checkout
               </button>
             </Link>
@@ -218,11 +252,12 @@ const AddCart = () => {
               }}
               className="memberCheckout my-4 flex items-center justify-center"
             >
-              <button className="bg-black text-white sm:w-full w-[40vw] sm:h-14 h-9 rounded-full hover:bg-gray-900 transition duration-300">
+              <button className="bg-black text-white w-full sm:w-[40vw] sm:h-14 h-9 rounded-full hover:bg-gray-900 transition duration-300">
                 Member Checkout
               </button>
             </Link>
           </div>
+
         )}
       </div>
       <div className="middle-cart">
@@ -243,12 +278,18 @@ const AddCart = () => {
                   </h2>
                   <h3 className="text-gray-600">{item?.category}</h3>
                 </div>
-                <div className="rightContent sm:text-xl text-lg sm:font-semibold font-medium">
-                  ₹{item?.price}
+                <div className="flex rightContent sm:text-xl text-lg sm:font-semibold font-medium">
+                  <Image
+                    src="/icons/indianrupeesicon.svg"
+                    width={20}
+                    height={15}
+                    alt="rupees"
+                    className=""
+                  />{item?.price}
                 </div>
-                <div className="icons flex items-center space-x-2 mt-4">
+                <div className="icons flex items-center space-x-2 mt-4 justify-around">
                   <img
-                    src="/icons/info.svg"
+                    src="/icons/delete-icon.svg"
                     alt="delete"
                     className="w-6 h-6 hover:text-slate-500 cursor-pointer "
                   />
