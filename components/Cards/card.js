@@ -472,7 +472,7 @@ function Card(props) {
                           onClick={() => handleColor(item.image)}
                           // onMouseLeave={() => setColorImage(null)}
 
-                          className={`parent relative w-[40px] h-[40px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
+                          className={`parent relative w-[35px] h-[35px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
             ${selectedColor === item.color ||
                               (index === 0 && selectedColor === "")
                               ? " border-black "

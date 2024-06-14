@@ -51,7 +51,7 @@ const Displaybox = (props) => {
           props.data.subcategories.map((item, index) => (
             <div
               key={index}
-              className="flex flex-row gap-1 lg:gap-4 p-2 items-center cursor-pointer hover:bg-gray-200 rounded-lg min-w-[200px]"
+              className="flex flex-row gap-1 lg:gap-4 p-2 items-center cursor-pointer hover:bg-[#f5f5f5]  min-w-[200px]"
               onClick={() => handleClick(item.name)}
             >
               <Image
@@ -59,7 +59,7 @@ const Displaybox = (props) => {
                 alt={item.name}
                 width={100}
                 height={100}
-                className="w-[50px] h-[56px] bg-gray-200 rounded"
+                className="w-[50px] h-[56px] bg-transparent"
               />
               <h2 className="text-[14px] font-normal text-[#111111] lg:justify-start">
                 {item.name}
@@ -71,7 +71,7 @@ const Displaybox = (props) => {
         )}
       </div>
 
-      
+
     </main>
   );
 };

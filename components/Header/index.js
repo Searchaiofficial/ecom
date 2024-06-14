@@ -446,7 +446,7 @@ function Header({ setIsHeaderMounted }) {
                         alt="Profile Icon"
                         width={18}
                         height={18}
-                        className="header-div-icon"
+                        className="header-div-icon p-[2px]"
                       />
                     </div>
                   )}
