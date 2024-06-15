@@ -304,6 +304,8 @@ function Card(props) {
           width: "100%",
           height: "100%",
         }}
+        onTouchStart={() => setIsHovered(true)} // for touch devices
+        onTouchEnd={() => setIsHovered(false)} // for touch devices
       >
         <div className={`relative`}>
           {props.demandtype ? (
@@ -423,7 +425,7 @@ function Card(props) {
           </div>
           {
             props?.specialPrice?.price && (
-              <div className="flex flex-col mt-[6px]">
+              <div className="flex flex-col my-3">
                 <p className="text-[#757575] text-[12px] pt-[3px]">Regular price: Rs.{props?.price} (incl. of all taxes)</p>
                 {
                   props?.specialPrice?.startDate && props?.specialPrice?.endDate && (

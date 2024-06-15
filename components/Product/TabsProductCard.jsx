@@ -378,7 +378,7 @@ function TabsProductCard(props) {
 
           {
             props?.specialprice?.price && (
-              <div className="flex flex-col mt-[6px]">
+              <div className="flex flex-col my-3">
                 <p className="text-[#757575] text-[12px] pt-[3px]">Regular price: Rs.{props?.totalPrice} (incl. of all taxes)</p>
                 {
                   props?.specialPrice?.startDate && props?.specialPrice?.endDate && (
