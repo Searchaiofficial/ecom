@@ -233,15 +233,16 @@ const ProductPage = ({ params }) => {
     <>
       {/* ( */}
       <div>
+
         <Tabproduct
           filteredProductData={
             params.parentCategory === "virtualexperience"
               ? filteredProducts
               : params.parentCategory === "offers"
-              ? offerProductData
-              : params.parentCategory === "demandtype"
-              ? demandTypeProduct
-              : filteredProductData
+                ? offerProductData
+                : params.parentCategory === "demandtype"
+                  ? demandTypeProduct
+                  : filteredProductData
           }
           heading={
             params.parentCategory === "offers"
@@ -249,8 +250,8 @@ const ProductPage = ({ params }) => {
                 ? "Highest Offer"
                 : type
               : params.parentCategory === "demandtype"
-              ? type
-              : category.name
+                ? type
+                : category.name
           }
           description={category?.description}
           subCategory={category?.subcategories}

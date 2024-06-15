@@ -8,8 +8,7 @@ const PlaceInfo = (data) => {
     <>
       {data?.data?.coreValues ? (
         <>
-          <div className="place-features my-4 sm:w-auto  ">
-
+          <div className="place-features mb-4 sm:w-auto  ">
             {
               data?.data?.coreValues.length > 0 && data?.data?.coreValues.map((item) => (
 
