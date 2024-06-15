@@ -132,13 +132,16 @@ const Tabs = ({
   //   // const [allDimensions, setAllDimensions] = useState([]);
   // =======
 
-
   //   // console.log(filterData)
 
   // >>>>>>> Stashed changes
 
   useEffect(() => {
     // filterData is the filtered product data and product.colors is an array of colors
+    if (filteredProductData && filteredProductData.length < 0) {
+      return null;
+    }
+
     const colors = filterData.flatMap((product) => product.colors);
     const uniqueColors = [...new Set(colors)];
     console.log("Unique colors:", uniqueColors);
@@ -151,12 +154,12 @@ const Tabs = ({
 
     const offers = filterData.map((product) => product.offer);
     const uniqueOffers = [...new Set(offers)];
-    console.log(uniqueOffers)
+    console.log(uniqueOffers);
     setAllOffers(uniqueOffers);
 
     const demandTypes = filterData.map((product) => product.demandtype);
     const uniqueDemandTypes = [...new Set(demandTypes)];
-    console.log(uniqueDemandTypes)
+    console.log(uniqueDemandTypes);
     setAllDemandType(uniqueDemandTypes);
 
     // const dimensions = filterData.map((product) => product.dimensions);
@@ -166,8 +169,7 @@ const Tabs = ({
     // setAllDimensions(uniqueDimensions);
   }, [filteredProductData]);
 
-
-  console.log(allDemandType)
+  console.log(allDemandType);
 
   // =======
   //     // setAllProductTypes(uniqueTypes)
@@ -177,13 +179,10 @@ const Tabs = ({
   //     // const dimensions = filterData.map((product) => product.dimensions);
   //     // console.log(dimensions.flat())
 
-
   //     // const uniqueDimensions = [...new Set(dimensions)];
   //     // setAllDimensions(uniqueDimensions);
 
   //   }, [filterData]);
-
-
 
   // >>>>>>> Stashed changes
   const handleColorChange = (color) => {
@@ -194,7 +193,6 @@ const Tabs = ({
     });
     setFilterdata(filteredProducts);
   };
-
 
   // >>>>>>> Stashed changes
 
@@ -214,16 +212,13 @@ const Tabs = ({
   };
 
   const handleDemandTypeChange = (demandType) => {
-    console.log(demandType)
+    console.log(demandType);
     const filteredProducts = filteredProductData.filter((product) => {
       return product.demandtype === demandType;
     });
     setFilterdata(filteredProducts);
-    console.log(filterData)
+    console.log(filterData);
   };
-
-
-
 
   const [activeTab, setActiveTab] = useState("all");
 
@@ -243,11 +238,9 @@ const Tabs = ({
     }
   };
 
-  const [openFilter, setOpenFilter] = useState("")
+  const [openFilter, setOpenFilter] = useState("");
 
-  const handleFilterClick = (Filter) => {
-
-  }
+  const handleFilterClick = (Filter) => {};
   const [openAllsort, setopenallsort] = useState(false);
   const handleAllsort = () => {
     setopenallsort(!openAllsort);
@@ -302,7 +295,6 @@ const Tabs = ({
     setopenallOfferType(!openallOfferType);
   };
 
-
   // ^^^^^^^^^^^^^^^^^^^^^^^^DemandType^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
   const [openWidth, setOpenWidth] = useState(false);
@@ -356,7 +348,6 @@ const Tabs = ({
   const handleAllType = () => {
     setOpenAllType(!openAllType);
   };
-
 
   const [selectedCircle, setSelectedCircle] = useState([]);
   const handleClick = (idx) => {
@@ -456,7 +447,7 @@ const Tabs = ({
   //sorting
   const handleSorting = (selectedOption) => {
     let filterer = [...filterData];
-    console.log(selectedOption)
+    console.log(selectedOption);
 
     if (selectedOption.name === "Best match") {
       filterer = [...filterData];
@@ -598,7 +589,7 @@ const Tabs = ({
     },
   };
 
-  console.log(filterData)
+  console.log(filterData);
 
   // const handleFilterColor = (color) => {
   //   console.log(color);
@@ -616,19 +607,16 @@ const Tabs = ({
     // const color = checkbox.value;
     // const isChecked = checkbox.checked;
 
-    console.log(text)
+    console.log(text);
 
     // console.log(`Color: ${color}, Checked: ${isChecked}`);
-
 
     const newFilteredData = filterData?.filter((data) =>
       data.productImages?.some((imageSet) => imageSet.color === text)
     );
     console.log(newFilteredData);
     setFilterdata(newFilteredData);
-
   };
-
 
   // const renderColor = (text, idx) => (
   //   <div className="flex justify-between items-center" key={idx}>
@@ -654,9 +642,8 @@ const Tabs = ({
   // );
 
   const handleRemoveallFilters = () => {
-    setFilterdata(filteredProductData)
-  }
-
+    setFilterdata(filteredProductData);
+  };
 
   return (
     <>
@@ -791,25 +778,21 @@ const Tabs = ({
           /> */}
 
           {/* >>>>>>> Stashed changes */}
-          {
-            filteredProductData.length > 0 && (
-              <TabsProductContent
-                filterName={"Sort"}
-                commonClasses={commonClasses}
-
-                isFilterOpen={openSort}
-                handleAll={handleAll}
-                handleTabClick={handleTabClick}
-                handleFilter={handleOpen}
-                handleAllFilter={handleAllsort}
-                filterArr={srtarr}
-                renderFilter={(text, idx) =>
-                  renderSortItem(text, idx, handleSorting)
-                }
-              />
-            )
-          }
-
+          {filteredProductData.length > 0 && (
+            <TabsProductContent
+              filterName={"Sort"}
+              commonClasses={commonClasses}
+              isFilterOpen={openSort}
+              handleAll={handleAll}
+              handleTabClick={handleTabClick}
+              handleFilter={handleOpen}
+              handleAllFilter={handleAllsort}
+              filterArr={srtarr}
+              renderFilter={(text, idx) =>
+                renderSortItem(text, idx, handleSorting)
+              }
+            />
+          )}
 
           {/* <<<<<<< Updated upstream */}
           {/* Size - dropdown2 */}
@@ -851,21 +834,24 @@ const Tabs = ({
 
           {/* Color dropdown */}
           {/* <<<<<<< Updated upstream */}
-          {filteredProductData.length > 0 && allColors.length > 0 ? (
-            <TabsProductContent
-              filterName={"Colors"}
-              commonClasses={commonClasses}
-              isFilterOpen={opencolor}
-              handleAll={handleAll}
-              handleTabClick={handleTabClick}
-              handleFilter={handlecolor}
-              handleAllFilter={handleAllcolor}
-              filterArr={allColors}
-              renderFilter={(text, idx) =>
-                renderColor(text, idx, handleColorChange)
-              }
-            />
-          ) : null}
+          {filteredProductData &&
+            filteredProductData.length > 0 &&
+            allColors &&
+            allColors.length > 0 && (
+              <TabsProductContent
+                filterName={"Colors"}
+                commonClasses={commonClasses}
+                isFilterOpen={opencolor}
+                handleAll={handleAll}
+                handleTabClick={handleTabClick}
+                handleFilter={handlecolor}
+                handleAllFilter={handleAllcolor}
+                filterArr={allColors}
+                renderFilter={(text, idx) =>
+                  renderColor(text, idx, handleColorChange)
+                }
+              />
+            )}
 
           {/* {allStyles.length > 0 ? (
             <TabsProductContent
@@ -896,8 +882,9 @@ const Tabs = ({
           ) : null} */}
 
           {/* Collections - filter */}
-          {
-            filteredProductData.length > 0 && allDemandType.length > 0 && (
+          {allDemandType &&
+            allDemandType.length > 0 &&
+            filteredProductData.length > 0 && (
               <TabsProductContent
                 filterName={"DemandType"}
                 commonClasses={commonClasses}
@@ -911,13 +898,16 @@ const Tabs = ({
                   renderDemand(text, idx, handleDemandTypeChange)
                 }
               />
-            )
-          }
-          {
-            filteredProductData.length > 0 && (
-              <button onClick={handleRemoveallFilters} className="bg-gray-100 px-3 py-2 rounded-full min-w-fit">Remove all filters</button>
-            )
-          }
+            )}
+
+          {filteredProductData.length > 0 && (
+            <button
+              onClick={handleRemoveallFilters}
+              className="bg-gray-100 px-3 py-2 rounded-full min-w-fit"
+            >
+              Remove all filters
+            </button>
+          )}
           {/* {allOffers.length > 0 && (
             <TabsProductContent
               filterName={"Offers"}
@@ -971,7 +961,6 @@ const Tabs = ({
             renderFilter={renderColor}
           /> */}
 
-
           {/* <TabsProductContent
             filterName={"Collections"}
             commonClasses={commonClasses}
@@ -983,7 +972,6 @@ const Tabs = ({
             filterArr={collectionArr}
             renderFilter={renderCollection}
           /> */}
-
 
           {/* <TabsProductContent
             filterName={"Type"}
@@ -1001,9 +989,6 @@ const Tabs = ({
             renderTypeContent={renderTypeContent}
           /> */}
           {/* >>>>>>> Stashed changes */}
-
-
-
 
           {/* <div>
             <button
