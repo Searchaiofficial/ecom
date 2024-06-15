@@ -23,18 +23,18 @@ const srtarr = [
     id: 6,
     name: "Name",
   },
-  {
-    id: 7,
-    name: "Most popular",
-  },
-  {
-    id: 8,
-    name: "Width",
-  },
-  {
-    id: 9,
-    name: "Length",
-  },
+  // {
+  //   id: 7,
+  //   name: "Most popular",
+  // },
+  // {
+  //   id: 8,
+  //   name: "Width",
+  // },
+  // {
+  //   id: 9,
+  //   name: "Length",
+  // },
 ];
 const Size = [
   {

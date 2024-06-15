@@ -59,40 +59,40 @@ const Tabs = ({
   // console.log({ dimensions: filteredProductData[0].dimensions });
   // console.log({ style: filteredProductData[0].style });
 
-  const [allColors, setAllColors] = useState(() => {
-    const colors = new Set();
-    filteredProductData.forEach((product) => {
-      product.colors.forEach((color) => {
-        colors.add(color);
-      });
-    });
+  // const [allColors, setAllColors] = useState(() => {
+  //   const colors = new Set();
+  //   filteredProductData.forEach((product) => {
+  //     product.colors.forEach((color) => {
+  //       colors.add(color);
+  //     });
+  //   });
 
-    return Array.from(colors);
-  });
+  //   return Array.from(colors);
+  // });
 
-  const [allStyles, setAllStyles] = useState(() => {
-    const styles = new Set();
-    filteredProductData.forEach((product) => {
-      styles.add(product.style);
-    });
+  // const [allStyles, setAllStyles] = useState(() => {
+  //   const styles = new Set();
+  //   filteredProductData.forEach((product) => {
+  //     styles.add(product.style);
+  //   });
 
-    return Array.from(styles);
-  });
+  //   return Array.from(styles);
+  // });
 
-  const [allDimensions, setAllDimensions] = useState(() => {
-    const dimensions = new Set();
-    filteredProductData.forEach((product) => {
-      product.dimensions.forEach((dimension) => {
-        dimensions.add({
-          length: dimension.length,
-          width: dimension.width,
-          thickness: dimension.thickness,
-        });
-      });
-    });
+  // const [allDimensions, setAllDimensions] = useState(() => {
+  //   const dimensions = new Set();
+  //   filteredProductData.forEach((product) => {
+  //     product.dimensions.forEach((dimension) => {
+  //       dimensions.add({
+  //         length: dimension.length,
+  //         width: dimension.width,
+  //         thickness: dimension.thickness,
+  //       });
+  //     });
+  //   });
 
-    return Array.from(dimensions);
-  });
+  //   return Array.from(dimensions);
+  // });
 
   // console.log("Filtered products:", filteredProducts);
   const [swiperRef, setSwiperRef] = useState(null);
@@ -115,6 +115,70 @@ const Tabs = ({
     setFilterdata(filteredProductData);
   }, [filteredProductData]);
 
+  const [allColors, setAllColors] = useState([]);
+  const [allProductTypes, setAllProductTypes] = useState([]);
+  const [allOffers, setAllOffers] = useState([]);
+  const [allDemandType, setAllDemandType] = useState([]); 
+  // const [allDimensions, setAllDimensions] = useState([]);
+
+  useEffect(() => {
+    // filterData is the filtered product data and product.colors is an array of colors
+    const colors = filterData.flatMap((product) => product.colors);
+    const uniqueColors = [...new Set(colors)];
+    console.log("Unique colors:", uniqueColors);
+    setAllColors(uniqueColors);
+
+    const types = filterData.map((product) => product.types);
+    const uniqueTypes = [...new Set(types)];
+    setAllProductTypes(uniqueTypes);
+
+    const offers = filterData.map((product) => product.offers);
+    const uniqueOffers = [...new Set(offers)];
+    setAllOffers(uniqueOffers);
+
+    const demandTypes = filterData.map((product) => product.demandType);
+    const uniqueDemandTypes = [...new Set(demandTypes)];
+    setAllDemandType(uniqueDemandTypes);
+
+    // const dimensions = filterData.map((product) => product.dimensions);
+    // console.log(dimensions.flat());
+
+    // const uniqueDimensions = [...new Set(dimensions)];
+    // setAllDimensions(uniqueDimensions);
+  }, [filterData]);
+
+  const handleColorChange = (color) => {
+    console.log("Selected color:", color);
+    // Filter products by color
+    const filteredProducts = filterData.filter((product) => {
+      return product.colors.includes(color);
+    });
+    setFilterdata(filteredProducts);
+  };
+
+  const handleTypeChange = (type) => {
+    const filteredProducts = filterData.filter((product) => {
+      return product.types === type;
+    });
+    setFilterdata(filteredProducts);
+  };
+
+  const handleOfferChange = (offer) => {
+    const filteredProducts = filterData.filter((product) => {
+      return product.offers === offer;
+    });
+    setFilterdata(filteredProducts);
+  };
+
+  const handleDemandTypeChange = (demandType) => {
+    const filteredProducts = filterData.filter((product) => {
+      return product.demandType === demandType;
+    });
+    setFilterdata(filteredProducts);
+  };
+
+
+
   const [activeTab, setActiveTab] = useState("all");
 
   const [openSort, setOpenSort] = React.useState(false);
@@ -123,7 +187,7 @@ const Tabs = ({
     if (
       openSize === false &&
       opencolor === false &&
-      openCollection === false &&
+      openDemandTYpe === false &&
       openType === false &&
       openAll === false &&
       openCaategory === false &&
@@ -146,7 +210,7 @@ const Tabs = ({
     if (
       openSort === false &&
       opencolor === false &&
-      openCollection === false &&
+      openDemandTYpe === false &&
       openType === false &&
       openAll === false &&
       openCaategory === false &&
@@ -162,8 +226,8 @@ const Tabs = ({
   };
 
   // collection
-  const [openCollection, setOpenCollection] = useState(false);
-  const handleCollection = () => {
+  const [openDemandTYpe, setopenDemandTYpe] = useState(false);
+  const handleDemandType = () => {
     if (
       openSize === false &&
       openSort === false &&
@@ -173,16 +237,16 @@ const Tabs = ({
       openCaategory === false &&
       openOffer === false
     ) {
-      setOpenCollection(!openCollection);
+      setopenDemandTYpe(!openDemandTYpe);
     }
   };
 
-  const [openAllCollection, setOpenAllCollection] = useState(false);
-  const handleAllCollection = () => {
-    setOpenAllCollection(!openAllCollection);
+  const [openAllDemandType, setOpenAllDemandType] = useState(false);
+  const handleAllDemandType = () => {
+    setOpenAllDemandType(!openAllDemandType);
   };
 
-  // ^^^^^^^^^^^^^^^^^^^^^^^^collection^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  // ^^^^^^^^^^^^^^^^^^^^^^^^DemandType^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
   const [openWidth, setOpenWidth] = useState(false);
   const handleWidth = () => {
@@ -199,7 +263,7 @@ const Tabs = ({
     if (
       openSize === false &&
       openSort === false &&
-      openCollection === false &&
+      openDemandTYpe === false &&
       openType === false &&
       openAll === false &&
       openCaategory === false &&
@@ -218,7 +282,7 @@ const Tabs = ({
     if (
       openSort === false &&
       opencolor === false &&
-      openCollection === false &&
+      openDemandTYpe === false &&
       openType === false &&
       openAll === false &&
       openSize === false &&
@@ -251,7 +315,7 @@ const Tabs = ({
       openSize === false &&
       openSort === false &&
       opencolor === false &&
-      openCollection === false &&
+      openDemandTYpe === false &&
       openAll === false &&
       openCaategory === false &&
       openOffer === false
@@ -270,7 +334,7 @@ const Tabs = ({
       openSize === false &&
       openSort === false &&
       opencolor === false &&
-      openCollection === false &&
+      openDemandTYpe === false &&
       openType === false &&
       openCaategory === false &&
       openOffer === false
@@ -285,7 +349,7 @@ const Tabs = ({
       openSize === false &&
       openSort === false &&
       opencolor === false &&
-      openCollection === false &&
+      openDemandTYpe === false &&
       openType === false &&
       openCaategory === false &&
       openAll === false
@@ -584,7 +648,7 @@ const Tabs = ({
         <p className="leading-2 mb-4 text-[14px] pt-[5px] text-[#484848] lg:w-[70%] line-clamp-2">
           {description}
         </p>
-        <div className="flex sticky top-0 z-20 bg-white py-5 overflow-x-auto scrollbar">
+        <div className="flex sticky top-0 z-20 bg-white py-5  scrollbar">
           <TabsProductContent
             filterName={"Sort"}
             commonClasses={commonClasses}
@@ -601,7 +665,7 @@ const Tabs = ({
           />
 
           {/* Size - dropdown2 */}
-          <div className="">
+          {/* <div className="">
             <TabsProductContent
               filterName={"Size"}
               commonClasses={commonClasses}
@@ -613,10 +677,10 @@ const Tabs = ({
               filterArr={Size}
               renderFilter={rendersizewidth}
             />
-          </div>
+          </div> */}
 
           {/* Design style - dropdown4 */}
-          {pathname.includes("Wallpaper") ? (
+          {/* {pathname.includes("Wallpaper") ? (
             <TabsProductContent
               filterName={"Design style"}
               commonClasses={commonClasses}
@@ -628,7 +692,7 @@ const Tabs = ({
               filterArr={categoryarr}
               renderFilter={rendercategory}
             />
-          ) : null}
+          ) : null} */}
 
           {/* Color dropdown */}
           {allColors.length > 0 ? (
@@ -640,12 +704,14 @@ const Tabs = ({
               handleTabClick={handleTabClick}
               handleFilter={handlecolor}
               handleAllFilter={handleAllcolor}
-              filterArr={colorarr}
-              renderFilter={renderColor}
+              filterArr={allColors}
+              renderFilter={(text, idx) =>
+                renderColor(text, idx, handleColorChange)
+              }
             />
           ) : null}
 
-          {allStyles.length > 0 ? (
+          {/* {allStyles.length > 0 ? (
             <TabsProductContent
               filterName={"Styles"}
               commonClasses={commonClasses}
@@ -657,9 +723,9 @@ const Tabs = ({
               filterArr={allStyles}
               renderFilter={rendercategory}
             />
-          ) : null}
+          ) : null} */}
 
-          {allDimensions.length > 0 ? (
+          {/* {allDimensions.length > 0 ? (
             <TabsProductContent
               filterName={"Dimensions"}
               commonClasses={commonClasses}
@@ -671,39 +737,49 @@ const Tabs = ({
               filterArr={allDimensions}
               renderFilter={rendersizewidth}
             />
-          ) : null}
+          ) : null} */}
 
           {/* Collections - filter */}
-          <TabsProductContent
-            filterName={"Collections"}
-            commonClasses={commonClasses}
-            isFilterOpen={openCollection}
-            handleAll={handleAll}
-            handleTabClick={handleTabClick}
-            handleFilter={handleCollection}
-            handleAllFilter={handleAllCollection}
-            filterArr={collectionArr}
-            renderFilter={renderCollection}
-          />
+          {
+            allDemandType.length > 0 && (
+              <TabsProductContent
+                filterName={"DemandType"}
+                commonClasses={commonClasses}
+                isFilterOpen={openDemandTYpe}
+                handleAll={handleAll}
+                handleTabClick={handleTabClick}
+                handleFilter={handleDemandType}
+                handleAllFilter={handleAllDemandType}
+                filterArr={allDemandType}
+                renderFilter={(text, idx) =>
+                  renderColor(text, idx, handleDemandType)
+                }
+              />
+            )
+          }
 
           {/* Type - dropdown5 */}
-          <TabsProductContent
-            filterName={"Type"}
-            commonClasses={commonClasses}
-            isFilterOpen={openType}
-            handleAll={handleAll}
-            handleTabClick={handleTabClick}
-            handleFilter={handleType}
-            handleAllFilter={handleAllType}
-            filterArr={typearr}
-            renderFilter={renderType}
-            openContent={openContent}
-            handleContent={handleContent}
-            typeContent={typeContent}
-            renderTypeContent={renderTypeContent}
-          />
+          {
+            allTypes.length>0 && (
+              <TabsProductContent
+                filterName={"Type"}
+                commonClasses={commonClasses}
+                isFilterOpen={openType}
+                handleAll={handleAll}
+                handleTabClick={handleTabClick}
+                handleFilter={handleType}
+                handleAllFilter={handleAllType}
+                filterArr={allTypes}
+                renderFilter={renderType}
+                openContent={openContent}
+                handleContent={handleContent}
+                typeContent={typeContent}
+                renderTypeContent={(text, idx) => renderOfferItem(text, idx, setType)}
+              />
+            )
+          }
 
-          {parentCategory === "offers" && (
+          {allOffers.length && (
             <TabsProductContent
               filterName={"Offers"}
               commonClasses={commonClasses}
@@ -712,7 +788,7 @@ const Tabs = ({
               handleTabClick={handleTabClick}
               handleFilter={handleOffer}
               handleAllFilter={handleAllType}
-              filterArr={allTypes}
+              filterArr={allOffers}
               renderFilter={(text, idx) => renderOfferItem(text, idx, setType)}
               openContent={openContent}
               handleContent={handleContent}
@@ -914,24 +990,24 @@ const Tabs = ({
                     {/* Collections div */}
                     <div className="flex flex-col gap-7">
                       <div
-                        onClick={handleAllCollection}
+                        onClick={handleAllDemandType}
                         className="flex justify-between text-left"
                       >
-                        Collections &nbsp;
+                        DemandTypes &nbsp;
                         <Image
                           src="/icons/backarrow.svg"
                           width={40}
                           height={40}
                           className={`w-6 h-6  mt-1
-                ${openAllCollection ? " rotate-90" : "-rotate-90"}
+                ${openAllDemandType ? " rotate-90" : "-rotate-90"}
                 
                 `}
                           alt=""
                         />
                       </div>
-                      {openAllCollection ? (
+                      {openAllDemandType ? (
                         <div className="flex flex-col gap-7">
-                          {collectionArr.map(rendercategory)}
+                          {DemandTypeArr.map(rendercategory)}
                         </div>
                       ) : null}
                     </div>

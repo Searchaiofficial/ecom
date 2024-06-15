@@ -38,13 +38,12 @@ export const rendersizewidth = (text, idx) => (
   </div>
 );
 
-export const renderColor = (text, idx) => (
+export const renderColor = (text, idx, handleColorChange) => (
   <div className="flex justify-between items-center" key={idx}>
     <label for="age1" className="">
-      {text.name}
+      {text}
     </label>
     <div className="flex gap-2">
-      <Image src={text.image} width={25} height={15} className="rounded-full w-5 h-5" />
       <input type="checkbox" id="age6" name="age" value="36" />
     </div>
   </div>
