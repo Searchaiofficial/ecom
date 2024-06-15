@@ -79,6 +79,21 @@ const Tabs = ({
     return Array.from(styles);
   });
 
+  const [allDimensions, setAllDimensions] = useState(() => {
+    const dimensions = new Set();
+    filteredProductData.forEach((product) => {
+      product.dimensions.forEach((dimension) => {
+        dimensions.add({
+          length: dimension.length,
+          width: dimension.width,
+          thickness: dimension.thickness,
+        });
+      });
+    });
+
+    return Array.from(dimensions);
+  });
+
   // console.log("Filtered products:", filteredProducts);
   const [swiperRef, setSwiperRef] = useState(null);
   const router = useRouter();
@@ -641,6 +656,20 @@ const Tabs = ({
               handleAllFilter={handleAllCategory}
               filterArr={allStyles}
               renderFilter={rendercategory}
+            />
+          ) : null}
+
+          {allDimensions.length > 0 ? (
+            <TabsProductContent
+              filterName={"Dimensions"}
+              commonClasses={commonClasses}
+              isFilterOpen={openWidth}
+              handleAll={handleAll}
+              handleTabClick={handleTabClick}
+              handleFilter={handleWidth}
+              handleAllFilter={handleHeight}
+              filterArr={allDimensions}
+              renderFilter={rendersizewidth}
             />
           ) : null}
 
