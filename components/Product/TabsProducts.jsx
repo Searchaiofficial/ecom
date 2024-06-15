@@ -915,7 +915,7 @@ const Tabs = ({
           }
           {
             filteredProductData.length > 0 && (
-              <button onClick={handleRemoveallFilters} className="bg-gray-100 px-3 py-2 rounded-full">Remove all filters</button>
+              <button onClick={handleRemoveallFilters} className="bg-gray-100 px-3 py-2 rounded-full min-w-fit">Remove all filters</button>
             )
           }
           {/* {allOffers.length > 0 && (
