@@ -360,7 +360,7 @@ function TabsProductCard(props) {
                 <span className={`text-sm ${props?.specialprice?.price ? "" : "pt-3.5"}`}>Rs. &nbsp;</span>{" "}
                 {props?.specialprice?.price ? props?.specialprice?.price : <p className="pt-3 ">{props.totalPrice}</p>}
               </h2>
-              {props.perUnitPrice ? <span className="tracking-wide text-sm">{`/ ${props.perUnitPrice}`}</span> : ''}
+              {props.unitType ? <span className="tracking-wide text-sm">{`/ ${props.unitType}`}</span> : ''}
 
             </div>
             {showCart && (
