@@ -851,7 +851,7 @@ const Tabs = ({
 
           {/* Color dropdown */}
           {/* <<<<<<< Updated upstream */}
-          {allColors.length > 0 ? (
+          {filteredProductData.length > 0 && allColors.length > 0 ? (
             <TabsProductContent
               filterName={"Colors"}
               commonClasses={commonClasses}
@@ -897,7 +897,7 @@ const Tabs = ({
 
           {/* Collections - filter */}
           {
-            allDemandType.length > 0 && (
+            filteredProductData.length > 0 && allDemandType.length > 0 && (
               <TabsProductContent
                 filterName={"DemandType"}
                 commonClasses={commonClasses}
