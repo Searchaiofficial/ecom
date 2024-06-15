@@ -36,7 +36,6 @@ const TabsProductContent = (props) => {
 
   return (
     <>
-      {filterArr && filterArr.length > 0 && (
         <div className="">
           <div className="flex flex-col w-fit">
             <button
@@ -103,7 +102,6 @@ const TabsProductContent = (props) => {
             ) : null}
           </div>
         </div>
-      )}
     </>
   );
 };
