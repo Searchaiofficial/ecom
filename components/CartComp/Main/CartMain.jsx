@@ -9,6 +9,7 @@ import {
   selectPickupOption,
   selectQuantity,
   selectSchedular,
+  updateQuantity,
 } from "../../Features/Slices/calculationSlice";
 import { selecteddbItems, setDbItems } from "../../Features/Slices/cartSlice";
 import Link from "next/link";
@@ -91,22 +92,28 @@ const CartMain = () => {
     quantity: quantity,
   };
 
+  const quantityCart = useSelector(selectQuantity);
+
   //delete handle function
   const handleItemDelete = async (productId) => {
+    console.log(productId)
+    console.log(id)
     try {
       const response = await axios.delete(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
         {
-          data: {
+          params: {
             owner: id,
             productId: productId,
           },
         }
       );
+      console.log(response.data)
       if (response.status === 200) {
         setCartStaus("succeeded");
         fetchData();
         // dispatch(setDbItems(response.data));
+        dispatch(updateQuantity(quantityCart - 1));
       }
     } catch (error) {
       setCartStaus("failed");
@@ -322,9 +329,8 @@ const CartMain = () => {
                   onClick={() => {
                     handlePickupType("delivery");
                   }}
-                  className={`cursor-pointer box-border  border-[1.5px] ${
-                    pickup === "delivery" ? "border-black" : "border-[#e5e5e5]"
-                  } h-24 w-[50%]`}
+                  className={`cursor-pointer box-border  border-[1.5px] ${pickup === "delivery" ? "border-black" : "border-[#e5e5e5]"
+                    } h-24 w-[50%]`}
                 >
                   <div className="flex px-6 py-5 h-24 items-center">
                     <div className="pr-5">
@@ -353,9 +359,8 @@ const CartMain = () => {
                   onClick={() => {
                     handlePickupType("collect");
                   }}
-                  className={`cursor-pointer box-border border-[1.5px] ${
-                    pickup === "collect" ? "border-black" : "border-[#e5e5e5]"
-                  } h-24 w-[50%]`}
+                  className={`cursor-pointer box-border border-[1.5px] ${pickup === "collect" ? "border-black" : "border-[#e5e5e5]"
+                    } h-24 w-[50%]`}
                 >
                   <div className="flex px-6 py-5 h-24 items-center">
                     <div className="pr-5">
@@ -449,9 +454,8 @@ const CartMain = () => {
               </div>
               <div
                 onClick={() => handleSchedular(!schedular)}
-                className={`border border-[1.5px] p-[20px] w-[100%] h-auto ${
-                  schedular ? "border-black" : "border-[#e5e5e5]"
-                }`}
+                className={`border border-[1.5px] p-[20px] w-[100%] h-auto ${schedular ? "border-black" : "border-[#e5e5e5]"
+                  }`}
               >
                 <p className="text-black font-[600] ">
                   Make the most of delivery charges

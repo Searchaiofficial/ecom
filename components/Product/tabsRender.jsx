@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+
 export const renderSortItem = (text, idx, handleSorting) => (
   <div
     className="flex justify-between"
@@ -13,18 +14,49 @@ export const renderSortItem = (text, idx, handleSorting) => (
   </div>
 );
 
-export const renderOfferItem = (type, idx, setType) => (
+export const renderColor = (text, idx, handlechange) => (
   <div
     className="flex justify-between"
+    onClick={() => handlechange(text)}
     key={idx}
-    onClick={() => setType(type)}
   >
     <label htmlFor="age1" className="">
-      {type}
+      {text}
     </label>
-    <input type="radio" id="age1" name="age" value={type} />
+    <input type="radio" id="age1" name="age" value="30" />
   </div>
 );
+
+export const renderDemand = (text, idx, handlechange) => (
+  <div
+    className="flex justify-between"
+    onClick={() => handlechange(text)}
+    key={idx}
+  >
+    <label htmlFor="age1" className="">
+      {text}
+    </label>
+    <input type="radio" id="age1" name="age" value="30" />
+  </div>
+);
+
+
+export const handleOffer = (text, idx, handlechange) => (
+  <div
+    className="flex justify-between"
+    onClick={() => handlechange(text)}
+    key={idx}
+  >
+    <label htmlFor="age1" className="">
+      {text}
+    </label>
+    <input type="radio" id="age1" name="age" value="30" />
+  </div>
+);
+
+
+
+
 
 export const rendersizewidth = (text, idx) => (
   <div className="flex justify-between" key={idx}>
@@ -38,16 +70,7 @@ export const rendersizewidth = (text, idx) => (
   </div>
 );
 
-export const renderColor = (text, idx, handleColorChange) => (
-  <div className="flex justify-between items-center" key={idx}>
-    <label for="age1" className="">
-      {text}
-    </label>
-    <div className="flex gap-2">
-      <input type="checkbox" id="age6" name="age" value="36" />
-    </div>
-  </div>
-);
+
 
 export const rendercategory = (text, idx) => (
   <div className="flex justify-between" key={idx}>

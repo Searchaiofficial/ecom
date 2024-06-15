@@ -425,8 +425,13 @@ function Card(props) {
           </div>
           {
             props?.specialPrice?.price && (
+
               <div className="flex flex-col my-3">
                 <p className="text-[#757575] text-[12px] pt-[3px]">Regular price: Rs.{props?.price} (incl. of all taxes)</p>
+
+                {/* <div className="flex flex-col mt-[6px]">
+                <p className="text-[#757575] text-[12px] pt-[3px]">Regular price: Rs.{props?.totalPrice} (incl. of all taxes)</p> */}
+
                 {
                   props?.specialPrice?.startDate && props?.specialPrice?.endDate && (
                     <p className="text-[#757575] text-[12px] ">Price valid {formattedStartDate} - {formattedEndDate}</p>
@@ -515,7 +520,7 @@ function Card(props) {
             )}
         </div>
 
-      </div >
+      </div>
     </>
   );
 }

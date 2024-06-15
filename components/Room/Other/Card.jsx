@@ -19,6 +19,7 @@ import Image from "next/image";
 import { selectProductImages } from "@/components/Features/Slices/imageDataSlice";
 import { colorsData } from "../../../Model/ColorsData/Colors.js";
 import ResponseCache from "next/dist/server/response-cache";
+import { updateQuantity } from "../../Features/Slices/calculationSlice.js";
 
 const Card = ({ data, productId }) => {
   const quantity = useSelector(selectQuantity);
@@ -37,6 +38,8 @@ const Card = ({ data, productId }) => {
   const [openOfferDetails, setOpenOfferDetails] = useState(false)
   const [EmiOption, setEmiOption] = useState("Credit Card EMI")
   const [openEmiDetails, setOpenEMIDetails] = useState(false)
+  const [showCart, setShowCart] = useState(false)
+
 
 
 
@@ -241,40 +244,110 @@ const Card = ({ data, productId }) => {
       console.error("Error posting room data:", error);
     }
   };
+  // const dispatch = useDispatch()
+
+  const [inCart, setInCart] = useState(false)
+  const [cartData, setCartData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
+          {
+            params: {
+              deviceId: localStorage.getItem("deviceId"),
+            },
+          }
+        );
+        if (response.status !== 200) {
+          throw new Error("HTTP status " + response.status);
+        }
+        const data = response.data;
+        console.log("Fetched cart data:", data);
+
+        // Ensure cartData is an array
+        if (data && Array.isArray(data.items)) {
+          setCartData(data.items);
+        } else {
+          console.error("Cart data items are not an array:", data);
+          setCartData([]);
+        }
+      } catch (error) {
+        console.log("Error fetching cart data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const isProductInCart = (productId) => {
+    console.log("Checking product ID:", productId);
+    return cartData.some((cartItem) => {
+      console.log("Comparing with cart item product ID:", cartItem?.productId?._id);
+      return cartItem?.productId?._id === productId;
+    });
+  };
+
+  useEffect(() => {
+    if (cartData) {
+      if (isProductInCart(roomData._id) === true) {
+        setInCart(true)
+      }
+    }
+  }, [roomData._id, cartData])
 
   const handleClickDB = async () => {
+    setsidebarContent("addToBag")
+    if (inCart) {
+      return
+    }
     try {
       // Validate quantity, productId, and deviceId
-      if (quantity <= 0) {
-        console.error("Invalid quantity");
-        return;
-      }
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`, {
+        deviceId: localStorage.getItem("deviceId"),
+        productId: roomData._id,
+        quantity: 1
+      })
+      if (response.status === 200) {
+        setInCart(true)
+        dispatch(updateQuantity(quantity + 1))
 
-      if (!roomData.productId) {
-        console.error("Invalid productId");
-        return;
       }
-
-      if (!id) {
-        console.error("Invalid deviceId");
-        return;
-      }
-
-      // Post data to the database
-      await postRoomData();
 
       // Redirect to the checkout page
     } catch (error) {
       console.error("Error handling click:", error);
+      setInCart(true)
     }
   };
+
+  const handleAddToCart = async (productId) => {
+    try {
+      // Validate quantity, productId, and deviceId
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`, {
+        deviceId: localStorage.getItem("deviceId"),
+        productId: productId,
+        quantity: 1
+      })
+      if (response.status === 200) {
+        // setInCart(true)
+        dispatch(updateQuantity(quantity + 1))
+
+      }
+
+      // Redirect to the checkout page
+    } catch (error) {
+      console.error("Error handling click:", error);
+      // setInCart(true)
+    }
+  }
   //posting data to database
 
   const handleClicks = () => {
     router.push("/checkout");
   };
 
-  console.log({ data });
+  console.log(data);
 
   const [Modal, setModal] = useState(false);
   const [delivery, setDelivery] = useState(false);
@@ -323,16 +396,25 @@ const Card = ({ data, productId }) => {
     });
   }, []);
 
-  console.log(data)
+  console.log("ProductData", data)
 
-  const fetchCategoryDetails = async () => {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getCategoryByName/${data?.category}`)
+  // const fetchCategoryDetails = async () => {
+  //   const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getCategoryByName/${data?.category}`)
+  //   console.log(response.data)
+  // }
+
+  const [categoryProducts, setCategoryProducts] = useState([])
+
+  const fetchCategoryProducts = async () => {
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/fetchProductsByCategory/${data?.category}`)
     console.log(response.data)
+    const filteredProducts = response.data.filter(product => product._id !== productId);
+    setCategoryProducts(filteredProducts)
   }
 
   useEffect(() => {
     if (data?.category) {
-      fetchCategoryDetails()
+      fetchCategoryProducts()
     }
   }, [data?.category])
 
@@ -412,42 +494,7 @@ const Card = ({ data, productId }) => {
                 )
               }
 
-              {/* {data.specialprice ? (
-                <div>
-                  <p className=" text-sm font-semibold bg-yellow-400 price-box w-fit px-2 py-1">
-                    Rs.<span className="text-3xl">{data.specialprice?.price}</span>
-                  </p>
-                  <p className="text-sm mt-2 text-gray-500">
-                    Regular price: Rs.{data.totalPrice}
-                  </p>
 
-                  {data.specialprice.startDate && data.specialprice.endDate && (
-                    <p className="text-sm mt-1 text-gray-500">
-                      Price valid from {formattedDate.startDate} to{" "}
-                      {formattedDate.endDate}
-                    </p>
-                  )}
-                </div>
-              ) : (
-                <p className="text-sm font-semibold">
-                  Rs.<span className="text-3xl">{data.totalPrice}</span>
-                </p>
-              )} */}
-              {/* <div className="flex flex-col">
-                <p className="text-[#757575] text-[12px] pt-[3px]">Regular price: Rs.499 (incl. of all taxes)</p>
-                <p className="text-[#757575] text-[12px] pb-[10px]">Price valid May 02 - May 29 or while supply lasts</p>
-              </div> */}
-
-              {/* ======= */}
-              {/* <div className="flex flex-col">
-                <p className="text-[#757575] text-[12px] pt-[3px]">
-                  Regular price: Rs.499 (incl. of all taxes)
-                </p>
-                <p className="text-[#757575] text-[12px] pb-[10px]">
-                  Price valid May 02 - May 29 or while supply lasts
-                </p>
-              </div> */}
-              {/* >>>>>>> c5884d5bc6361cb1d9e12f35f788d80f70e78eeb */}
             </div>
 
             <IncDecCounter />
@@ -1017,14 +1064,147 @@ const Card = ({ data, productId }) => {
                     </section>
                   </div>
                 )}
+                {sidebarContect === "addToBag" && (
+                  <div className=" fixed h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0 z-[99999]">
+                    <section className="text-black bg-white flex-col absolute right-0 top-0 h-screen z-[99999] w-full  lg:w-[35%] flex ">
+
+
+                      <div className="flex flex-col ">
+                        <div className="md:px-[40px] pb-[32px] px-[20px]">
+                          <div className="flex items-center justify-between h-[72px] mb-2">
+                            <h1 className="text-[14px] font-medium text-[#484848]">
+                              Added to cart
+                            </h1>
+                            <button
+                              className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
+                              onClick={() => setsidebarContent(null)}
+                            >
+                              <Image
+                                src="/icons/closeicon.svg"
+                                alt="close"
+                                width={20}
+                                height={30}
+                                className="py-2"
+                              />
+
+                            </button>
+                          </div>
+                          <div className="flex items-start w-[100%]  pb-10 absolute ">
+
+                            <Image src={data?.images[0]} height={100} width={100} className=" mr-[16px] mt-[6px] h-[100px] min-w-[100px]" />
+
+                            <div className="flex flex-col mx-[12px] md:w-[100%] w-[50%]">
+                              <p className="text-[14px] font-bold text-[#484848]">{data?.productTitle}</p>
+                              <p className="text-[#484848] text-[12px] mb-[5px] line-clamp-1">{data?.shortDescription}</p>
+                              <div className="font-bold items-end flex mb-1 my-[5px]">
+                                <h2 className={`text-3xl leading-[0.5] tracking-wide ${data?.specialprice?.price ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg" : ""} `} style={data?.specialprice?.price ? { boxShadow: '3px 3px #ad3535' } : {}}>
+                                  <span className="text-sm">Rs. &nbsp;</span>{" "}
+                                  {data?.specialprice?.price ? data?.specialprice?.price : data.perUnitPrice}
+                                </h2>{" "}
+                                <span> &nbsp;/roll</span>
+                              </div>
+                              {
+                                data?.specialprice?.price && (
+                                  <div className="flex flex-col">
+                                    <p className="text-[#757575] text-[12px] pt-[3px]">Regular price: Rs.{data?.totalPrice} </p>
+                                    {
+                                      data?.specialprice?.startDate && data?.specialprice?.endDate && (
+                                        <p className="text-[#757575] text-[12px] pb-[10px]">Price valid {formattedStartDate} - {formattedEndDate} </p>
+                                      )
+                                    }
+                                    {/* <p className="text-[#757575] text-[12px] pb-[10px]">Price valid May 02 - May 29 or while supply lasts</p> */}
+                                  </div>
+                                )
+                              }
+
+
+                            </div>
+                          </div>
+                          <div className="w-full border-t mt-[155px] pb-28 h-[500px] overflow-y-auto">
+                            <h2 className="md:text-[24px] text-[18px] font-bold mt-2">Complement your order</h2>
+                            <div className="">
+                              {
+                                categoryProducts && categoryProducts.length > 0 ? (
+                                  categoryProducts.map((product) => (
+                                    <div key={product._id} className="flex items-start  justify-between cursor-pointer  mt-[30px]  pb-10" onMouseEnter={() => setShowCart(true)} onMouseLeave={() => setShowCart(false)}>
+                                      <div className="flex">
+                                        <Image src={product?.images[0]} height={100} width={100} className="mr-[16px] h-[100px] w-[100px]" />
+                                        <div className="flex flex-col mx-[12px] max-w-[220px]">
+                                          <p className="text-[14px] font-bold text-[#484848]">{product.productTitle}</p>
+                                          <p className="text-[#484848] text-[12px] mb-[5px] line-clamp-1">{product?.shortDescription}</p>
+                                          <div className="font-bold items-end flex mb-1 my-[5px]">
+                                            <h2 className={`text-3xl leading-[0.5] tracking-wide ${product?.specialprice?.price ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg" : ""} `} style={product?.specialprice?.price ? { boxShadow: '3px 3px #ad3535' } : {}}>
+                                              <span className="text-sm">Rs. &nbsp;</span>{" "}
+                                              {product?.specialprice?.price ? product?.specialprice?.price : product.perUnitPrice}
+                                            </h2>{" "}
+                                            <span> &nbsp;/roll</span>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                      <div className="bg-[#0152be] p-1.5 rounded-full max-w-fit self-center md:mr-10 " onClick={() => handleAddToCart(product._id)}>
+                                        <Image src={"/icons/ad-to-cart.svg"} height={20} width={20} className="cursor-pointer rounded-full min-w-[20px] min-h-[20px]" />
+                                      </div>
+                                    </div>
+                                  ))
+                                )
+                                  :
+                                  (
+                                    <div className="mt-5">
+                                      <p>No related products found !</p>
+                                    </div>
+                                  )
+                              }
+                              {/* <div className="flex items-start  justify-between cursor-pointer  mt-[30px]  pb-10" onMouseEnter={() => setShowCart(true)} onMouseLeave={() => setShowCart(false)}>
+                                <div className="flex">
+                                  <Image src={"/images/room/bathroom.jpg"} height={100} width={100} className="mr-[16px] h-[100px] w-[100px]" />
+                                  <div className="flex flex-col mx-[12px] max-w-[220px]">
+                                    <p className="text-[14px] font-bold text-[#484848]">Baggego</p>
+                                    <p className="text-[#484848] text-[12px] mb-[5px] line-clamp-1">Cabinate with door</p>
+                                    <div className="flex items-end">
+                                      <p className="text-[12px] font-bold pb-[5px]">Rs.</p>
+                                      <p className="text-[24px] font-bold ">3,000</p>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="bg-[#0152be] p-1.5 rounded-full max-w-fit self-center md:mr-10 ">
+                                  <Image src={"/icons/ad-to-cart.svg"} height={20} width={20} className="cursor-pointer rounded-full min-w-[20px] min-h-[20px]" />
+                                </div>
+                              </div> */}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex w-full px-[16px] py-[24px] gap-4  md:py-0 md:px-0  md:flex-row flex-col items-center justify-around absolute bottom-0 left-0 border-t bg-white z-10 ">
+                          <button className="md:px-[42px] w-full px-[24px] md:h-[56px] h-[40px] border   rounded-full md:my-[24px] text-[12px] md:text-[14px] font-semibold md:ml-[24px] hover:border-black" onClick={() => setsidebarContent(null)}>Continue shopping</button>
+                          <button className="md:px-[42px] w-full px-[24px] md:h-[56px] h-[40px] border rounded-full md:my-[24px] bg-black text-white text-[12px] md:text-[14px] font-semibold md:mr-[24px] hover:bg-gray-900">
+                            <Link
+                              href={{
+                                pathname: "/checkout",
+                                query: {
+                                  search: "rooms",
+                                },
+                              }}
+                            >
+                              Go to shopping bag
+                            </Link>
+                          </button>
+                        </div>
+                      </div>
+
+
+
+                    </section>
+                  </div>
+                )}
               </div>
 
             )}
           </div>
 
           {/* //buttons */}
-          <div className="buttons mt-4 sm:w-auto w-[100%] sm:block flex flex-col items-center justify-center">
-            <Link
+          < div className="buttons mt-4 sm:w-auto w-[100%] sm:block flex flex-col items-center justify-center" >
+            {/* <Link
               href={{
                 pathname: "/checkout",
                 query: {
@@ -1039,25 +1219,25 @@ const Card = ({ data, productId }) => {
               >
                 Buy Now
               </button>
-            </Link>
+            </Link> */}
 
-            <div className="guestCheckout w-[100%] flex justify-center items-center ">
+            <div className="guestCheckout w-[100%] flex justify-center items-center my-[16px] " >
               <button
                 onClick={() => {
                   handleClickDB();
-                  {
-                    roomStatus === "succeeded" &&
-                      toast.success("Succesfully added", {
-                        toastId: "success1",
-                      });
-                  }
+                  // {
+                  //   roomStatus === "succeeded" &&
+                  //     toast.success("Succesfully added", {
+                  //       toastId: "success1",
+                  //     });
+                  // }
                 }}
-                className="bg-black text-white px-4   w-[100%] sm:h-14 h-10 rounded-full hover:bg-gray-900 transition duration-300"
+                className={` bg-black hover:bg-gray-900 text-white px-4   w-[100%] sm:h-14 h-10 rounded-full  transition duration-300`}
               >
-                Add To Bag
+                Add to bag
               </button>
             </div>
-            <Link
+            {/* <Link
               href={{
                 pathname: "/checkout",
                 query: {
@@ -1069,7 +1249,7 @@ const Card = ({ data, productId }) => {
               <button className="border-2 px-4 text-black border-solid   w-[100%] sm:h-14 h-10 rounded-full  transition duration-300">
                 Buy Now with in-store request
               </button>
-            </Link>
+            </Link> */}
           </div>
           <div className="flex gap-3 mt-8 items-center justify-center">
             <Image
@@ -1089,7 +1269,7 @@ const Card = ({ data, productId }) => {
               </p>
             </div>
           </div>
-        </div>
+        </div >
         <ToastContainer
           position="top-right"
           autoClose={5000}
@@ -1097,7 +1277,7 @@ const Card = ({ data, productId }) => {
           theme="light"
           style={{ zIndex: "9999999999999" }}
         />
-      </div>
+      </div >
     </>
   );
 };

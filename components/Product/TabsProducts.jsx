@@ -37,6 +37,7 @@ import {
   renderSortItem,
   renderColor,
   renderOfferItem,
+  renderDemand,
 } from "./tabsRender";
 import TabsProductContent from "../compounds/TabsProductContent";
 import Measure from "./meausrement";
@@ -66,9 +67,16 @@ const Tabs = ({
   //       colors.add(color);
   //     });
   //   });
+  // <<<<<<< Updated upstream
 
-  //   return Array.from(colors);
-  // });
+  //   //   return Array.from(colors);
+  //   // });
+  // =======
+
+  //   //   return Array.from(colors);
+  //   // });
+
+  // >>>>>>> Stashed changes
 
   // const [allStyles, setAllStyles] = useState(() => {
   //   const styles = new Set();
@@ -117,9 +125,17 @@ const Tabs = ({
 
   const [allColors, setAllColors] = useState([]);
   const [allProductTypes, setAllProductTypes] = useState([]);
+  // <<<<<<< Updated upstream
   const [allOffers, setAllOffers] = useState([]);
   const [allDemandType, setAllDemandType] = useState([]);
-  // const [allDimensions, setAllDimensions] = useState([]);
+  // <<<<<<< Updated upstream
+  //   // const [allDimensions, setAllDimensions] = useState([]);
+  // =======
+
+
+  //   // console.log(filterData)
+
+  // >>>>>>> Stashed changes
 
   useEffect(() => {
     // filterData is the filtered product data and product.colors is an array of colors
@@ -130,14 +146,17 @@ const Tabs = ({
 
     const types = filterData.map((product) => product.types);
     const uniqueTypes = [...new Set(types)];
+    // <<<<<<< Updated upstream
     setAllProductTypes(uniqueTypes);
 
-    const offers = filterData.map((product) => product.offers);
+    const offers = filterData.map((product) => product.offer);
     const uniqueOffers = [...new Set(offers)];
+    console.log(uniqueOffers)
     setAllOffers(uniqueOffers);
 
-    const demandTypes = filterData.map((product) => product.demandType);
+    const demandTypes = filterData.map((product) => product.demandtype);
     const uniqueDemandTypes = [...new Set(demandTypes)];
+    console.log(uniqueDemandTypes)
     setAllDemandType(uniqueDemandTypes);
 
     // const dimensions = filterData.map((product) => product.dimensions);
@@ -145,37 +164,64 @@ const Tabs = ({
 
     // const uniqueDimensions = [...new Set(dimensions)];
     // setAllDimensions(uniqueDimensions);
-  }, [filterData]);
+  }, [filteredProductData]);
 
+
+  console.log(allDemandType)
+
+  // =======
+  //     // setAllProductTypes(uniqueTypes)
+
+  //     // // product.dimensions is the array of all the dimensions of the product and each dimension is the object of length , width and height of the product
+
+  //     // const dimensions = filterData.map((product) => product.dimensions);
+  //     // console.log(dimensions.flat())
+
+
+  //     // const uniqueDimensions = [...new Set(dimensions)];
+  //     // setAllDimensions(uniqueDimensions);
+
+  //   }, [filterData]);
+
+
+
+  // >>>>>>> Stashed changes
   const handleColorChange = (color) => {
     console.log("Selected color:", color);
     // Filter products by color
-    const filteredProducts = filterData.filter((product) => {
+    const filteredProducts = filteredProductData.filter((product) => {
       return product.colors.includes(color);
     });
     setFilterdata(filteredProducts);
   };
 
+
+  // >>>>>>> Stashed changes
+
   const handleTypeChange = (type) => {
-    const filteredProducts = filterData.filter((product) => {
+    const filteredProducts = filteredProductData.filter((product) => {
       return product.types === type;
+      // <<<<<<< Updated upstream
     });
     setFilterdata(filteredProducts);
   };
 
   const handleOfferChange = (offer) => {
-    const filteredProducts = filterData.filter((product) => {
+    const filteredProducts = filteredProductData.filter((product) => {
       return product.offers === offer;
     });
     setFilterdata(filteredProducts);
   };
 
   const handleDemandTypeChange = (demandType) => {
-    const filteredProducts = filterData.filter((product) => {
-      return product.demandType === demandType;
+    console.log(demandType)
+    const filteredProducts = filteredProductData.filter((product) => {
+      return product.demandtype === demandType;
     });
     setFilterdata(filteredProducts);
+    console.log(filterData)
   };
+
 
 
 
@@ -196,6 +242,12 @@ const Tabs = ({
       setOpenSort(!openSort);
     }
   };
+
+  const [openFilter, setOpenFilter] = useState("")
+
+  const handleFilterClick = (Filter) => {
+
+  }
   const [openAllsort, setopenallsort] = useState(false);
   const handleAllsort = () => {
     setopenallsort(!openAllsort);
@@ -245,6 +297,11 @@ const Tabs = ({
   const handleAllDemandType = () => {
     setOpenAllDemandType(!openAllDemandType);
   };
+  const [openallOfferType, setopenallOfferType] = useState(false);
+  const handleAllOfferType = () => {
+    setopenallOfferType(!openallOfferType);
+  };
+
 
   // ^^^^^^^^^^^^^^^^^^^^^^^^DemandType^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -299,6 +356,7 @@ const Tabs = ({
   const handleAllType = () => {
     setOpenAllType(!openAllType);
   };
+
 
   const [selectedCircle, setSelectedCircle] = useState([]);
   const handleClick = (idx) => {
@@ -398,6 +456,7 @@ const Tabs = ({
   //sorting
   const handleSorting = (selectedOption) => {
     let filterer = [...filterData];
+    console.log(selectedOption)
 
     if (selectedOption.name === "Best match") {
       filterer = [...filterData];
@@ -539,7 +598,65 @@ const Tabs = ({
     },
   };
 
-  console.log(filterData);
+  console.log(filterData)
+
+  // const handleFilterColor = (color) => {
+  //   console.log(color);
+  //   const newFilteredData = filterData?.filter((data) =>
+  //     data.productImages?.some((imageSet) => imageSet.color === color)
+  //   );
+  //   console.log(newFilteredData);
+  //   setFilterdata(newFilteredData)
+
+  // }
+  // let originalData = [...filterData];
+
+  const handleFilterColor = (text) => {
+    // const checkbox = event.target;
+    // const color = checkbox.value;
+    // const isChecked = checkbox.checked;
+
+    console.log(text)
+
+    // console.log(`Color: ${color}, Checked: ${isChecked}`);
+
+
+    const newFilteredData = filterData?.filter((data) =>
+      data.productImages?.some((imageSet) => imageSet.color === text)
+    );
+    console.log(newFilteredData);
+    setFilterdata(newFilteredData);
+
+  };
+
+
+  // const renderColor = (text, idx) => (
+  //   <div className="flex justify-between items-center" key={idx}>
+  //     <label for="age1" className="">
+  //       {text}
+  //     </label>
+  //     <div className="flex gap-2">
+  //       {/* <Image src={text.image} width={25} height={15} className="rounded-full w-5 h-5" /> */}
+  //       <input type="radio" onClick={() => handleColorChange(text)} />
+  //     </div>
+  //   </div>
+  // );
+  // const renderDemand = (text, idx) => (
+  //   <div className="flex justify-between items-center" key={idx}>
+  //     <label for="age1" className="">
+  //       {text}
+  //     </label>
+  //     <div className="flex gap-2">
+  //       {/* <Image src={text.image} width={25} height={15} className="rounded-full w-5 h-5" /> */}
+  //       <input type="radio" onClick={() => handleDemandTypeChange(text)} />
+  //     </div>
+  //   </div>
+  // );
+
+  const handleRemoveallFilters = () => {
+    setFilterdata(filteredProductData)
+  }
+
 
   return (
     <>
@@ -648,23 +765,57 @@ const Tabs = ({
         <p className="leading-2 mb-4 text-[14px] pt-[5px] text-[#484848] lg:w-[70%] line-clamp-2">
           {description}
         </p>
-        <div className="flex sticky top-0 z-20 bg-white py-5  scrollbar">
-          <TabsProductContent
+        {/* <<<<<<< Updated upstream */}
+        {/* <div className="flex sticky top-0 z-20 bg-white py-5  scrollbar"> */}
+        {/* ======= */}
+        <div className="flex sticky top-0 z-20 bg-white py-5 overflow-x-auto md:overflow-x-visible mb-[20px] md:mb-0">
+          {/* <TabsProductContent
             filterName={"Sort"}
-            commonClasses={commonClasses}
-            //isFilterOpen is to open the dropdown
             isFilterOpen={openSort}
-            handleAll={handleAll}
-            handleTabClick={handleTabClick}
             handleFilter={handleOpen}
-            handleAllFilter={handleAllsort}
             filterArr={srtarr}
             renderFilter={(text, idx) =>
               renderSortItem(text, idx, handleSorting)
             }
-          />
 
+          />
+          <TabsProductContent
+            filterName={"Colors"}
+            isFilterOpen={opencolor}
+            handleFilter={handlecolor}
+          />
+          <TabsProductContent
+            filterName={"Type"}
+            isFilterOpen={openType}
+            handleFilter={handleType}
+          /> */}
+
+          {/* >>>>>>> Stashed changes */}
+          {
+            filteredProductData.length > 0 && (
+              <TabsProductContent
+                filterName={"Sort"}
+                commonClasses={commonClasses}
+
+                isFilterOpen={openSort}
+                handleAll={handleAll}
+                handleTabClick={handleTabClick}
+                handleFilter={handleOpen}
+                handleAllFilter={handleAllsort}
+                filterArr={srtarr}
+                renderFilter={(text, idx) =>
+                  renderSortItem(text, idx, handleSorting)
+                }
+              />
+            )
+          }
+
+
+          {/* <<<<<<< Updated upstream */}
           {/* Size - dropdown2 */}
+          {/* ======= */}
+
+          {/* >>>>>>> Stashed changes */}
           {/* <div className="">
             <TabsProductContent
               filterName={"Size"}
@@ -679,8 +830,12 @@ const Tabs = ({
             />
           </div> */}
 
+          {/* <<<<<<< Updated upstream */}
           {/* Design style - dropdown4 */}
           {/* {pathname.includes("Wallpaper") ? (
+=======
+          {pathname.includes("Wallpaper") ? (
+>>>>>>> Stashed changes
             <TabsProductContent
               filterName={"Design style"}
               commonClasses={commonClasses}
@@ -695,6 +850,7 @@ const Tabs = ({
           ) : null} */}
 
           {/* Color dropdown */}
+          {/* <<<<<<< Updated upstream */}
           {allColors.length > 0 ? (
             <TabsProductContent
               filterName={"Colors"}
@@ -752,14 +908,38 @@ const Tabs = ({
                 handleAllFilter={handleAllDemandType}
                 filterArr={allDemandType}
                 renderFilter={(text, idx) =>
-                  renderColor(text, idx, handleDemandType)
+                  renderDemand(text, idx, handleDemandTypeChange)
                 }
               />
             )
           }
+          {
+            filteredProductData.length > 0 && (
+              <button onClick={handleRemoveallFilters} className="bg-gray-100 px-3 py-2 rounded-full">Remove all filters</button>
+            )
+          }
+          {/* {allOffers.length > 0 && (
+            <TabsProductContent
+              filterName={"Offers"}
+              commonClasses={commonClasses}
+              isFilterOpen={openOffer}
+              handleAll={handleAll}
+              handleTabClick={handleTabClick}
+              handleFilter={handleOffer}
+              handleAllFilter={handleAllOfferType}
+              filterArr={allOffers}
+              renderFilter={(text, idx) => handleOffer(text, idx, handleOfferChange)}
+              openContent={openContent}
+              handleContent={handleContent}
+            />
+          )} */}
 
           {/* Type - dropdown5 */}
+          {/* <<<<<<< Updated upstream
           {
+======= */}
+          {/* {
+>>>>>>> Stashed changes
             allTypes.length > 0 && (
               <TabsProductContent
                 filterName={"Type"}
@@ -777,26 +957,55 @@ const Tabs = ({
                 renderTypeContent={(text, idx) => renderOfferItem(text, idx, setType)}
               />
             )
-          }
+          } */}
 
-          {allOffers.length && (
-            <TabsProductContent
-              filterName={"Offers"}
-              commonClasses={commonClasses}
-              isFilterOpen={openOffer}
-              handleAll={handleAll}
-              handleTabClick={handleTabClick}
-              handleFilter={handleOffer}
-              handleAllFilter={handleAllType}
-              filterArr={allOffers}
-              renderFilter={(text, idx) => renderOfferItem(text, idx, setType)}
-              openContent={openContent}
-              handleContent={handleContent}
-            />
-          )}
+          {/* <TabsProductContent
+            filterName={"Colors"}
+            commonClasses={commonClasses}
+            isFilterOpen={opencolor}
+            handleAll={handleAll}
+            handleTabClick={handleTabClick}
+            handleFilter={handlecolor}
+            handleAllFilter={handleAllcolor}
+            filterArr={allColors}
+            renderFilter={renderColor}
+          /> */}
 
-          {/* ddropdown6 */}
-          <div>
+
+          {/* <TabsProductContent
+            filterName={"Collections"}
+            commonClasses={commonClasses}
+            isFilterOpen={openCollection}
+            handleAll={handleAll}
+            handleTabClick={handleTabClick}
+            handleFilter={handleCollection}
+            handleAllFilter={handleAllCollection}
+            filterArr={collectionArr}
+            renderFilter={renderCollection}
+          /> */}
+
+
+          {/* <TabsProductContent
+            filterName={"Type"}
+            commonClasses={commonClasses}
+            isFilterOpen={openType}
+            handleFilter={handleType}
+            handleAll={handleAll}
+            handleTabClick={handleTabClick}
+            handleAllFilter={handleAllType}
+            filterArr={typearr}
+            renderFilter={renderType}
+            openContent={openContent}
+            handleContent={handleContent}
+            typeContent={typeContent}
+            renderTypeContent={renderTypeContent}
+          /> */}
+          {/* >>>>>>> Stashed changes */}
+
+
+
+
+          {/* <div>
             <button
               onClick={() => {
                 handleAll();
@@ -819,8 +1028,8 @@ const Tabs = ({
                 width={40}
                 height={40}
                 className={`w-4 h-4 mt-1  sm:block hidden
-                
-                
+
+
                 `}
                 alt=""
               />
@@ -841,7 +1050,7 @@ const Tabs = ({
                       />
                     </div>
                     <hr />
-                    {/* 1stt div */}
+
                     <div className="flex flex-col gap-7">
                       <div
                         onClick={handleAllsort}
@@ -854,7 +1063,7 @@ const Tabs = ({
                           height={40}
                           className={`w-6 h-6  mt-1
                 ${openAllsort ? " rotate-90" : "-rotate-90"}
-                
+
                 `}
                           alt=""
                         />
@@ -866,7 +1075,7 @@ const Tabs = ({
                       ) : null}
                     </div>
                     <hr />
-                    {/* 2nd div */}
+
 
                     <div className="flex flex-col gap-7">
                       <div
@@ -880,23 +1089,21 @@ const Tabs = ({
                           height={40}
                           className={`w-6 h-6  mt-1
                 ${openAllSize ? " rotate-90" : "-rotate-90"}
-                
+
                 `}
                           alt=""
                         />
                       </div>
                       {openAllSize ? (
                         <div className="flex flex-col gap-7">
-                          {/* <p className="font-semibold text-left">Width</p> */}
+
                           {Size.map(rendersizewidth)}
-                          {/* 
-                            <p className="font-semibold text-left">Height</p>
-                            {htarr.map(rendersizewidth)} */}
+
                         </div>
                       ) : null}
                     </div>
                     <hr />
-                    {/* design style for wallpaper */}
+
                     {pathname.includes("Wallpaper") ? (
                       <>
                         <div className="flex flex-col gap-7">
@@ -911,26 +1118,23 @@ const Tabs = ({
                               height={40}
                               className={`w-6 h-6  mt-1
                 ${openAllCategory ? " rotate-90" : "-rotate-90"}
-                
+
                 `}
                               alt=""
                             />
                           </div>
                           {openAllCategory ? (
                             <div className="flex flex-col gap-7">
-                              {/* <p className="font-semibold text-left">Width</p> */}
+
                               {categoryarr.map(rendercategory)}
-                              {/* 
-                            <p className="font-semibold text-left">Height</p>
-                            {htarr.map(rendersizewidth)} */}
+
                             </div>
                           ) : null}
                         </div>
                         <hr />
                       </>
                     ) : null}
-                    {/* ****************************** */}
-                    {/* 3rd div */}
+
                     <div className="flex flex-col gap-7">
                       <div
                         onClick={handleAllcolor}
@@ -943,7 +1147,7 @@ const Tabs = ({
                           height={40}
                           className={`w-6 h-6  mt-1
                 ${openAllcolor ? " rotate-90" : "-rotate-90"}
-                
+
                 `}
                           alt=""
                         />
@@ -956,7 +1160,7 @@ const Tabs = ({
                     </div>
                     <hr />
 
-                    {/* 4th div */}
+
                     {heading === "Wallpaper" ? (
                       <>
                         <div className="flex flex-col gap-7">
@@ -971,7 +1175,7 @@ const Tabs = ({
                               height={40}
                               className={`w-6 h-6  mt-1
                 ${openAllCategory ? " rotate-90" : "-rotate-90"}
-                
+
                 `}
                               alt=""
                             />
@@ -985,7 +1189,7 @@ const Tabs = ({
                         <hr />
                       </>
                     ) : null}
-                    {/* Collections div */}
+
                     <div className="flex flex-col gap-7">
                       <div
                         onClick={handleAllDemandType}
@@ -998,19 +1202,19 @@ const Tabs = ({
                           height={40}
                           className={`w-6 h-6  mt-1
                 ${openAllDemandType ? " rotate-90" : "-rotate-90"}
-                
+
                 `}
                           alt=""
                         />
                       </div>
                       {openAllDemandType ? (
                         <div className="flex flex-col gap-7">
-                          {DemandTypeArr.map(rendercategory)}
+                          {allDemandType.map(rendercategory)}
                         </div>
                       ) : null}
                     </div>
                     <hr />
-                    {/* 5th div */}
+
                     <div className="flex flex-col gap-7">
                       <div
                         onClick={handleAllType}
@@ -1023,7 +1227,7 @@ const Tabs = ({
                           height={40}
                           className={`w-6 h-6  mt-1
                 ${openAllType ? " rotate-90" : "-rotate-90"}
-                
+
                 `}
                           alt=""
                         />
@@ -1066,8 +1270,9 @@ const Tabs = ({
                   </div>
                 </div>
               </div>
+
             ) : null}
-          </div>
+          </div> */}
         </div>
         <hr />
         {/* iimages */}
