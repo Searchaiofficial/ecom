@@ -160,7 +160,8 @@ const Tabs = ({
     const demandTypes = filterData.map((product) => product.demandtype);
     const uniqueDemandTypes = [...new Set(demandTypes)];
     console.log(uniqueDemandTypes);
-    setAllDemandType(uniqueDemandTypes);
+    if (uniqueDemandTypes.length > 0) setAllDemandType(uniqueDemandTypes);
+    else setAllDemandType([]);
 
     // const dimensions = filterData.map((product) => product.dimensions);
     // console.log(dimensions.flat());
