@@ -68,7 +68,7 @@ const Card = ({ data, productId }) => {
       starsArray.push(
         <img
           key={i}
-          src={"/icons/star.svg"}
+          src={"/icons/full-black.svg"}
           height={20}
           width={20}
           alt="star"
@@ -94,7 +94,7 @@ const Card = ({ data, productId }) => {
       starsArray.push(
         <img
           key={fullStars + halfStar + i}
-          src={"/icons/no-fill-star.svg"}
+          src={"/icons/full-white.svg"}
           height={20}
           width={20}
           alt="empty-star"
@@ -346,14 +346,15 @@ const Card = ({ data, productId }) => {
                 <div className="flex items-center justify-between">
                   <p className="font-semibold text-[#C31952] text-[15px]">{data.demandtype}</p>
 
-                  <div className="flex gap-2">
-                    <div className="flex items-center">
-                      {
-                        Stars
-                      }
+                  {reviews.length > 0 && (
+                    <div className="flex gap-2">
+                      <div className="flex items-center">
+                        {Stars}
+                      </div>
+                      <p className="text-gray-800 underline h-[20px] cursor-pointer">{reviews.length}</p>
                     </div>
-                    <p className="text-gray-800 underline  h-[20px] cursor-pointer">{reviews.length}</p>
-                  </div>
+                  )}
+
                 </div>
               )
             }
@@ -363,14 +364,16 @@ const Card = ({ data, productId }) => {
                   <h1 className="text-2xl  font-bold mb-1">
                     {data?.productTitle}
                   </h1>
-                  <div className="flex gap-2">
-                    <div className="flex items-center">
-                      {
-                        Stars
-                      }
+
+                  {reviews.length > 0 && (
+                    <div className="flex gap-2">
+                      <div className="flex items-center">
+                        {Stars}
+                      </div>
+                      <p className="text-gray-800 underline h-[20px] cursor-pointer">{reviews.length}</p>
                     </div>
-                    <p className="text-gray-800 underline  h-[20px] cursor-pointer">{reviews.length}</p>
-                  </div>
+                  )}
+
                 </div>
               ) :
                 <h1 className="text-2xl  font-bold mb-1">

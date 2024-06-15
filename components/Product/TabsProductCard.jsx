@@ -241,6 +241,7 @@ function TabsProductCard(props) {
                 border: "2px solid red",
               }}
               checked={props.selectedpdt.includes(props.text)}
+              className="accent-black"
             />
           </div>
           {props.parentCategory === "offers" ? (

@@ -118,7 +118,7 @@ const Tabs = ({
   const [allColors, setAllColors] = useState([]);
   const [allProductTypes, setAllProductTypes] = useState([]);
   const [allOffers, setAllOffers] = useState([]);
-  const [allDemandType, setAllDemandType] = useState([]); 
+  const [allDemandType, setAllDemandType] = useState([]);
   // const [allDimensions, setAllDimensions] = useState([]);
 
   useEffect(() => {
@@ -760,7 +760,7 @@ const Tabs = ({
 
           {/* Type - dropdown5 */}
           {
-            allTypes.length>0 && (
+            allTypes.length > 0 && (
               <TabsProductContent
                 filterName={"Type"}
                 commonClasses={commonClasses}
@@ -1056,11 +1056,11 @@ const Tabs = ({
                     </div>
                     <hr />
                   </div>
-                  <div className="flex flex-row items-center justify-center gap-3 py-2">
-                    <button className="bg-black text-white w-36 h-14 h-9 rounded-full">
+                  <div className="flex flex-col items-center justify-center gap-3 pt-3 px-4 pb-2">
+                    <button className="bg-black text-white w-full h-9 rounded-full ">
                       View 96
                     </button>
-                    <button className="bg-black text-white w-36 h-14 h-9 rounded-full">
+                    <button className="bg-black text-white w-full h-9 rounded-full">
                       Clear all
                     </button>
                   </div>

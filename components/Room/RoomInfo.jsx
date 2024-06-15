@@ -251,7 +251,7 @@ const RoomInfo = ({ data }) => {
                       return (
                         <Image
                           key={idx}
-                          src="/icons/star.svg"
+                          src="/icons/full-black.svg"
                           width={20}
                           height={20}
                           alt="star"
