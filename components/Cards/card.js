@@ -397,20 +397,20 @@ function Card(props) {
               {props.demandtype === "Ayatrio Member Favorite" && (
                 <p className="font-medium text-[#0152be] mb-1 text-[12px]">{props.demandtype}</p>
               )}
-              <div className="text-[14px] font-semibold">{props.title}</div>
+              <div className="text-[15px] font-semibold">{props.title}</div>
             </div>
           </div>
-          <div className="font-normal mb-1 text-[12px] text-[#757575]">{props?.shortDescription}</div>
+          <div className="font-normal mb-1 text-[14px] py-[2px] font-[400px]">{props?.shortDescription}</div>
 
           <div className=" flex h-[40px] pb-[6px] items-center justify-between mt-2">
             {/* <span className="font-medium pr-[3px] pt-[3px]">Rs.</span>
             <h2 className="text-xl font-medium tracking-wide">{props.price}</h2> */}
-            <div className="flex gap-2 items-end">
+            <div className="flex gap-1 items-end">
               <h2 className={`text-3xl flex font-semibold leading-[0.5] tracking-wide ${props.specialPrice?.price ? "bg-[#FFC21F] px-2 pt-3 pb-1 w-fit shadow-lg" : ""}`} style={props?.specialPrice?.price ? { boxShadow: '3px 3px #C31952' } : {}}>
                 <span className={`text-sm ${props?.specialPrice?.price ? "" : "pt-3.5"}`}>Rs. &nbsp;</span>{" "}
                 {props?.specialPrice?.price ? props?.specialPrice?.price : <p className="pt-3">{props?.price}</p>}
               </h2>
-              {props.unitType ? <span className="tracking-wide text-sm">{`/ ${props.unitType}`}</span> : ''}
+              {props.unitType ? <span className="tracking-wide text-sm font-semibold">{`/${props.unitType}`}</span> : ''}
             </div>
 
 
@@ -467,7 +467,7 @@ function Card(props) {
 
               <div className="colorContainer flex flex-col sm:w-auto w-[80vw] mt-1 ">
                 <div className="w-full flex justify-between mb-1">
-                  <h1 className="] text-[12px] font-medium">Colours</h1>
+                  <h1 className="] text-[12px] font-normal">Colours</h1>
                 </div>
                 {
                   <>
