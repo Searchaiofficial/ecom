@@ -803,16 +803,14 @@ const Tabs = ({
                 handleTabClick();
               }}
               className={`Tabbtn z-0 bg-gray-100
-                  ${
-                    openAll
-                      ? `active-tabs  border border-black ${commonClasses}`
-                      : `tabS  border border-white ${commonClasses}`
-                  }
-                  ${
-                    typeof window !== "undefined" && window.innerWidth <= 450
-                      ? " justify-center"
-                      : " justify-between"
-                  }
+                  ${openAll
+                  ? `active-tabs  border border-black ${commonClasses}`
+                  : `tabS  border border-white ${commonClasses}`
+                }
+                  ${typeof window !== "undefined" && window.innerWidth <= 450
+                  ? " justify-center"
+                  : " justify-between"
+                }
                   `}
             >
               All Filters &nbsp;
@@ -1048,9 +1046,8 @@ const Tabs = ({
 
                           <button
                             onClick={handleContent}
-                            className={`text-left underline ${
-                              openContent ? "block" : "hidden"
-                            }`}
+                            className={`text-left underline ${openContent ? "block" : "hidden"
+                              }`}
                           >
                             Less
                           </button>
@@ -1059,11 +1056,11 @@ const Tabs = ({
                     </div>
                     <hr />
                   </div>
-                  <div className="flex flex-row items-center justify-center gap-3 pt-10">
-                    <button className="text-white bg-blue-900 rounded-full w-36 h-14">
+                  <div className="flex flex-row items-center justify-center gap-3 py-2">
+                    <button className="bg-black text-white w-36 h-14 h-9 rounded-full">
                       View 96
                     </button>
-                    <button className="text-white bg-blue-900 rounded-full w-36 h-14">
+                    <button className="bg-black text-white w-36 h-14 h-9 rounded-full">
                       Clear all
                     </button>
                   </div>
@@ -1086,7 +1083,7 @@ const Tabs = ({
               </button>
             )}
           </div>
-          <div className=" grid md:grid-cols-4 cursor-pointer grid-cols-2  gap-4 ">
+          <div className=" grid md:grid-cols-4 cursor-pointer gap-4 py-3">
             {filterData && filterData.length > 0 ? (
               filterData.map((text, idx) => {
                 const inCart = isProductInCart(text?._id);

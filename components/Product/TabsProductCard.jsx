@@ -268,6 +268,8 @@ function TabsProductCard(props) {
             className="relative flex h-full w-full items-center justify-center  aspect-square"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            onTouchStart={() => setIsHovered(true)} // for touch devices
+            onTouchEnd={() => setIsHovered(false)} // for touch devices
           >
             {isHovered && slide !== 0 && (
               <Image
@@ -350,12 +352,12 @@ function TabsProductCard(props) {
 
           </div>
           {/* <p className="text-sm">{props.productDescription}</p> */}
-          <div className=" font-normal mb-[4px] text-[12px] text-[#757575]">{props?.shortDescription}</div>
-          <div className=" flex h-[40px] pb-[6px] items-center justify-between">
+          <div className=" font-normal mb-1 text-[14px] py-[2px] font-[400px]">{props?.shortDescription}</div>
+          <div className=" flex h-[40px] pb-[6px] items-center justify-between mt-2">
             {/* <span className="font-medium pr-[3px] pt-[3px]">Rs.</span>
             <h2 className="text-xl font-medium tracking-wide">{props.price}</h2> */}
 
-            <div className="flex gap-2 items-end">
+            <div className="flex gap-1 items-end">
               <h2 className={`text-3xl flex font-semibold leading-[0.5]  tracking-wide ${props?.specialprice?.price ? "bg-[#FFC21F] px-2 pt-3 pb-1 w-fit shadow-lg" : ""} `} style={props?.specialprice?.price ? { boxShadow: '3px 3px #C31952' } : {}}>
                 <span className={`text-sm ${props?.specialprice?.price ? "" : "pt-3.5"}`}>Rs. &nbsp;</span>{" "}
                 {props?.specialprice?.price ? props?.specialprice?.price : <p className="pt-3 ">{props.totalPrice}</p>}
