@@ -834,7 +834,7 @@ const Tabs = ({
 
           {/* Color dropdown */}
           {/* <<<<<<< Updated upstream */}
-          {filteredProductData && filteredProductData.length > 0 && (
+          {/* {filteredProductData && filteredProductData.length > 0 && ( */}
             <TabsProductContent
               filterName={"Colors"}
               commonClasses={commonClasses}
@@ -848,7 +848,7 @@ const Tabs = ({
                 renderColor(text, idx, handleColorChange)
               }
             />
-          )}
+           {/* )} */}
 
           {/* {allStyles.length > 0 ? (
             <TabsProductContent
@@ -879,7 +879,7 @@ const Tabs = ({
           ) : null} */}
 
           {/* Collections - filter */}
-          {filteredProductData && filteredProductData.length > 0 && (
+          {/* {filteredProductData && filteredProductData.length > 0 && ( */}
               <TabsProductContent
                 filterName={"DemandType"}
                 commonClasses={commonClasses}
@@ -893,7 +893,7 @@ const Tabs = ({
                   renderDemand(text, idx, handleDemandTypeChange)
                 }
               />
-            )}
+            {/* )} */}
 
           {filteredProductData.length > 0 && (
             <button
