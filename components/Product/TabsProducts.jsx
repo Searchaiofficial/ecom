@@ -160,8 +160,7 @@ const Tabs = ({
     const demandTypes = filterData.map((product) => product.demandtype);
     const uniqueDemandTypes = [...new Set(demandTypes)];
     console.log(uniqueDemandTypes);
-    if (uniqueDemandTypes.length > 0) setAllDemandType(uniqueDemandTypes);
-    else setAllDemandType([]);
+    setAllDemandType(uniqueDemandTypes);
 
     // const dimensions = filterData.map((product) => product.dimensions);
     // console.log(dimensions.flat());
@@ -835,24 +834,21 @@ const Tabs = ({
 
           {/* Color dropdown */}
           {/* <<<<<<< Updated upstream */}
-          {filteredProductData &&
-            filteredProductData.length > 0 &&
-            allColors &&
-            allColors.length > 0 && (
-              <TabsProductContent
-                filterName={"Colors"}
-                commonClasses={commonClasses}
-                isFilterOpen={opencolor}
-                handleAll={handleAll}
-                handleTabClick={handleTabClick}
-                handleFilter={handlecolor}
-                handleAllFilter={handleAllcolor}
-                filterArr={allColors}
-                renderFilter={(text, idx) =>
-                  renderColor(text, idx, handleColorChange)
-                }
-              />
-            )}
+          {filteredProductData && filteredProductData.length > 0 && (
+            <TabsProductContent
+              filterName={"Colors"}
+              commonClasses={commonClasses}
+              isFilterOpen={opencolor}
+              handleAll={handleAll}
+              handleTabClick={handleTabClick}
+              handleFilter={handlecolor}
+              handleAllFilter={handleAllcolor}
+              filterArr={allColors}
+              renderFilter={(text, idx) =>
+                renderColor(text, idx, handleColorChange)
+              }
+            />
+          )}
 
           {/* {allStyles.length > 0 ? (
             <TabsProductContent
@@ -883,9 +879,7 @@ const Tabs = ({
           ) : null} */}
 
           {/* Collections - filter */}
-          {allDemandType &&
-            allDemandType.length > 0 &&
-            filteredProductData.length > 0 && (
+          {filteredProductData && filteredProductData.length > 0 && (
               <TabsProductContent
                 filterName={"DemandType"}
                 commonClasses={commonClasses}
