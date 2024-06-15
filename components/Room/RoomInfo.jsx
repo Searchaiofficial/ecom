@@ -1,9 +1,43 @@
-import React from "react";
 import Beding from "./Other/Beding";
 import PlaceInfo from "./Other/PlaceInfo";
 import Amenities from "./Other/Amenities";
 import Image from "next/image";
+import React, { useEffect, useState, useRef } from "react";
+import axios from "axios";
+import Link from "next/link";
+
+
 const RoomInfo = ({ data }) => {
+  const [categoryDetails, setCategoryDetails] = useState()
+  const [showMore, setShowMore] = useState(false)
+
+  const handleShowMore = () => {
+    setShowMore(!showMore)
+  }
+  const fetchCategoryDetails = async () => {
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getCategoryByName/${data?.category}`)
+    console.log(response.data)
+    setCategoryDetails(response.data)
+  }
+
+  useEffect(() => {
+    if (data?.category) {
+      fetchCategoryDetails()
+    }
+  }, [data?.category])
+
+  const [isClamped, setIsClamped] = useState(false);
+  const descriptionRef = useRef(null);
+
+  useEffect(() => {
+    const descriptionElement = descriptionRef.current;
+    if (descriptionElement.scrollHeight > descriptionElement.clientHeight) {
+      setIsClamped(true);
+    } else {
+      setIsClamped(false);
+    }
+  }, [data]);
+
   return (
     <div className=" my-6 ">
       <div className="w-full">
@@ -240,13 +274,28 @@ const RoomInfo = ({ data }) => {
           </div>
         </div>
 
-        <div className="pt-[30px] font-normal text-sm  flex flex-col gap-4 sm:mt-10">
+        <div className="font-normal text-sm  flex flex-col gap-4 sm:mt-10 mb-10">
           <>
-            <p className={`"line-clamp-2"}`}>{data?.productDescription}</p>
-            {/* <p className={`${showMore ? "line-clamp-none" : "line-clamp-2"}`}>{data?.productDescription}</p>
-              <p className="cursor-pointer hover:underline font-semibold" onClick={() => setShowMore(!showMore)}>{showMore ? "View less" : "View more"}</p> */}
+
+            <div>
+              <div className={`relative ${showMore ? '' : 'line-clamp-2'} overflow-hidden`} ref={descriptionRef}>
+                <p className="inline">
+                  {data?.productDescription}
+                </p>
+              </div>
+              {isClamped && (
+                <span
+                  className="cursor-pointer hover:underline font-semibold"
+                  onClick={() => setShowMore(!showMore)}
+                >
+                  {showMore ? 'View less' : 'View more'}
+                </span>
+              )}
+            </div>
+
+
             {
-              data.categoryDetails?.maintenanceDetails && categoryDetails?.certification &&
+              categoryDetails?.maintenanceDetails && categoryDetails?.certification &&
               <>
                 <Link href={categoryDetails?.maintenanceDetails} target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-gray-900 font-medium">
                   Maintenance Details Download
@@ -257,8 +306,6 @@ const RoomInfo = ({ data }) => {
               </>
             }
           </>
-
-
         </div>
 
         {/* place features and information */}
