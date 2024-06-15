@@ -55,6 +55,30 @@ const Tabs = ({
   parentCategory,
   setSelectedOfferCategory,
 }) => {
+  console.log({ filteredProductData });
+  // console.log({ dimensions: filteredProductData[0].dimensions });
+  // console.log({ style: filteredProductData[0].style });
+
+  const [allColors, setAllColors] = useState(() => {
+    const colors = new Set();
+    filteredProductData.forEach((product) => {
+      product.colors.forEach((color) => {
+        colors.add(color);
+      });
+    });
+
+    return Array.from(colors);
+  });
+
+  const [allStyles, setAllStyles] = useState(() => {
+    const styles = new Set();
+    filteredProductData.forEach((product) => {
+      styles.add(product.style);
+    });
+
+    return Array.from(styles);
+  });
+
   // console.log("Filtered products:", filteredProducts);
   const [swiperRef, setSwiperRef] = useState(null);
   const router = useRouter();
@@ -413,7 +437,10 @@ const Tabs = ({
 
   const isProductInCart = (productId) => {
     return cartData.some((cartItem) => {
-      console.log("Comparing with cart item product ID:", cartItem?.productId?._id);
+      console.log(
+        "Comparing with cart item product ID:",
+        cartItem?.productId?._id
+      );
       return cartItem?.productId?._id === productId;
     });
   };
@@ -433,7 +460,7 @@ const Tabs = ({
     },
   };
 
-  console.log(filterData)
+  console.log(filterData);
 
   return (
     <>
@@ -589,17 +616,33 @@ const Tabs = ({
           ) : null}
 
           {/* Color dropdown */}
-          <TabsProductContent
-            filterName={"Colors"}
-            commonClasses={commonClasses}
-            isFilterOpen={opencolor}
-            handleAll={handleAll}
-            handleTabClick={handleTabClick}
-            handleFilter={handlecolor}
-            handleAllFilter={handleAllcolor}
-            filterArr={colorarr}
-            renderFilter={renderColor}
-          />
+          {allColors.length > 0 ? (
+            <TabsProductContent
+              filterName={"Colors"}
+              commonClasses={commonClasses}
+              isFilterOpen={opencolor}
+              handleAll={handleAll}
+              handleTabClick={handleTabClick}
+              handleFilter={handlecolor}
+              handleAllFilter={handleAllcolor}
+              filterArr={colorarr}
+              renderFilter={renderColor}
+            />
+          ) : null}
+
+          {allStyles.length > 0 ? (
+            <TabsProductContent
+              filterName={"Styles"}
+              commonClasses={commonClasses}
+              isFilterOpen={openCaategory}
+              handleAll={handleAll}
+              handleTabClick={handleTabClick}
+              handleFilter={handleCategory}
+              handleAllFilter={handleAllCategory}
+              filterArr={allStyles}
+              renderFilter={rendercategory}
+            />
+          ) : null}
 
           {/* Collections - filter */}
           <TabsProductContent
@@ -655,14 +698,16 @@ const Tabs = ({
                 handleTabClick();
               }}
               className={`Tabbtn z-0 bg-gray-100
-                  ${openAll
-                  ? `active-tabs  border border-black ${commonClasses}`
-                  : `tabS  border border-white ${commonClasses}`
-                }
-                  ${typeof window !== "undefined" && window.innerWidth <= 450
-                  ? " justify-center"
-                  : " justify-between"
-                }
+                  ${
+                    openAll
+                      ? `active-tabs  border border-black ${commonClasses}`
+                      : `tabS  border border-white ${commonClasses}`
+                  }
+                  ${
+                    typeof window !== "undefined" && window.innerWidth <= 450
+                      ? " justify-center"
+                      : " justify-between"
+                  }
                   `}
             >
               All Filters &nbsp;
@@ -898,8 +943,9 @@ const Tabs = ({
 
                           <button
                             onClick={handleContent}
-                            className={`text-left underline ${openContent ? "block" : "hidden"
-                              }`}
+                            className={`text-left underline ${
+                              openContent ? "block" : "hidden"
+                            }`}
                           >
                             Less
                           </button>
@@ -940,7 +986,6 @@ const Tabs = ({
               filterData.map((text, idx) => {
                 const inCart = isProductInCart(text?._id);
                 return (
-
                   <TabsProductCard
                     id={text._id}
                     text={text}
@@ -963,9 +1008,8 @@ const Tabs = ({
                     inCart={inCart}
                     shortDescription={text.shortDescription}
                     perUnitPrice={text.perUnitPrice}
-                    unitType={text.unitType}
                   />
-                )
+                );
               })
             ) : (
               <div className="flex justify-center items-center h-[50vh] w-full">
