@@ -121,20 +121,20 @@ const Tabs = ({
   const [filterData, setFilterdata] = useState([]);
   useEffect(() => {
     setFilterdata(filteredProductData);
-    const colors = filterData.flatMap((product) => product.colors);
+    const colors = filteredProductData.flatMap((product) => product.colors);
     const uniqueColors = [...new Set(colors)];
     console.log("Unique colors:", uniqueColors);
     setAllColors(uniqueColors);
 
-    const types = filterData.map((product) => product.types);
+    const types = filteredProductData.map((product) => product.types);
     const uniqueTypes = [...new Set(types)];
     setAllProductTypes(uniqueTypes);
 
-    const offers = filterData.map((product) => product.offer);
+    const offers = filteredProductData.map((product) => product.offer);
     const uniqueOffers = [...new Set(offers)];
     setAllOffers(uniqueOffers);
 
-    const demandTypes = filterData.map((product) => product.demandtype);
+    const demandTypes = filteredProductData.map((product) => product.demandtype);
     const uniqueDemandTypes = [...new Set(demandTypes)];
     console.log(uniqueDemandTypes);
     setAllDemandType(uniqueDemandTypes);
