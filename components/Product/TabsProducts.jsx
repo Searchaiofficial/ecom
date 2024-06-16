@@ -137,10 +137,6 @@ const Tabs = ({
   // >>>>>>> Stashed changes
 
   useEffect(() => {
-    // filterData is the filtered product data and product.colors is an array of colors
-    if (filteredProductData && filteredProductData.length < 0) {
-      return null;
-    }
 
     const colors = filterData.flatMap((product) => product.colors);
     const uniqueColors = [...new Set(colors)];
@@ -149,12 +145,10 @@ const Tabs = ({
 
     const types = filterData.map((product) => product.types);
     const uniqueTypes = [...new Set(types)];
-    // <<<<<<< Updated upstream
     setAllProductTypes(uniqueTypes);
 
     const offers = filterData.map((product) => product.offer);
     const uniqueOffers = [...new Set(offers)];
-    console.log(uniqueOffers);
     setAllOffers(uniqueOffers);
 
     const demandTypes = filterData.map((product) => product.demandtype);
