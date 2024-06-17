@@ -29,14 +29,9 @@ import {
   Size,
 } from "./tabsArray";
 import {
-  renderType,
-  renderTypeContent,
-  rendercategory,
-  renderCollection,
-  rendersizewidth,
   renderSortItem,
   renderColor,
-  renderOfferItem,
+  renderOffer,
   renderDemand,
 } from "./tabsRender";
 import TabsProductContent from "../compounds/TabsProductContent";
@@ -121,23 +116,32 @@ const Tabs = ({
   const [filterData, setFilterdata] = useState([]);
   useEffect(() => {
     setFilterdata(filteredProductData);
-    const colors = filteredProductData.flatMap((product) => product.colors);
-    const uniqueColors = [...new Set(colors)];
-    console.log("Unique colors:", uniqueColors);
-    setAllColors(uniqueColors);
+    if (filteredProductData && filteredProductData.length > 0) {
+      const colors = filteredProductData.flatMap((product) => product.colors);
+      const uniqueColors = [...new Set(colors)];
+      console.log("Unique colors:", uniqueColors);
+      setAllColors(uniqueColors);
 
-    const types = filteredProductData.map((product) => product.types);
-    const uniqueTypes = [...new Set(types)];
-    setAllProductTypes(uniqueTypes);
+      const types = filteredProductData
+        .map((product) => product.types)
+        .filter((type) => type);
+      const uniqueTypes = [...new Set(types)];
+      setAllProductTypes(uniqueTypes);
 
-    const offers = filteredProductData.map((product) => product.offer);
-    const uniqueOffers = [...new Set(offers)];
-    setAllOffers(uniqueOffers);
+      const offers = filteredProductData
+        .map((product) => product.offer)
+        .filter((offer) => offer);
+      const uniqueOffers = [...new Set(offers)];
+      console.log("unique colors : ", uniqueOffers);
+      setAllOffers(uniqueOffers);
 
-    const demandTypes = filteredProductData.map((product) => product.demandtype);
-    const uniqueDemandTypes = [...new Set(demandTypes)];
-    console.log(uniqueDemandTypes);
-    setAllDemandType(uniqueDemandTypes);
+      const demandTypes = filteredProductData
+        .map((product) => product.demandtype)
+        .filter((demandType) => demandType);
+      const uniqueDemandTypes = [...new Set(demandTypes)];
+      console.log(uniqueDemandTypes);
+      setAllDemandType(uniqueDemandTypes);
+    }
   }, [filteredProductData]);
 
   const [allColors, setAllColors] = useState([]);
@@ -203,7 +207,7 @@ const Tabs = ({
 
   const handleTypeChange = (type) => {
     const filteredProducts = filteredProductData.filter((product) => {
-      return product.types === type;
+      return product.type === type;
       // <<<<<<< Updated upstream
     });
     setFilterdata(filteredProducts);
@@ -211,7 +215,7 @@ const Tabs = ({
 
   const handleOfferChange = (offer) => {
     const filteredProducts = filteredProductData.filter((product) => {
-      return product.offers === offer;
+      return product.offer === offer;
     });
     setFilterdata(filteredProducts);
   };
@@ -839,21 +843,24 @@ const Tabs = ({
 
           {/* Color dropdown */}
           {/* <<<<<<< Updated upstream */}
-          {/* {filteredProductData && filteredProductData.length > 0 && ( */}
-          <TabsProductContent
-            filterName={"Colors"}
-            commonClasses={commonClasses}
-            isFilterOpen={opencolor}
-            handleAll={handleAll}
-            handleTabClick={handleTabClick}
-            handleFilter={handlecolor}
-            handleAllFilter={handleAllcolor}
-            filterArr={allColors}
-            renderFilter={(text, idx) =>
-              renderColor(text, idx, handleColorChange)
-            }
-          />
-          {/* )} */}
+          {filteredProductData &&
+            filteredProductData.length > 0 &&
+            allColors &&
+            allColors.length > 0 && (
+              <TabsProductContent
+                filterName={"Colors"}
+                commonClasses={commonClasses}
+                isFilterOpen={opencolor}
+                handleAll={handleAll}
+                handleTabClick={handleTabClick}
+                handleFilter={handlecolor}
+                handleAllFilter={handleAllcolor}
+                filterArr={allColors}
+                renderFilter={(text, idx) =>
+                  renderColor(text, idx, handleColorChange)
+                }
+              />
+            )}
 
           {/* {allStyles.length > 0 ? (
             <TabsProductContent
@@ -884,21 +891,45 @@ const Tabs = ({
           ) : null} */}
 
           {/* Collections - filter */}
-          {/* {filteredProductData && filteredProductData.length > 0 && ( */}
-          <TabsProductContent
-            filterName={"DemandType"}
-            commonClasses={commonClasses}
-            isFilterOpen={openDemandTYpe}
-            handleAll={handleAll}
-            handleTabClick={handleTabClick}
-            handleFilter={handleDemandType}
-            handleAllFilter={handleAllDemandType}
-            filterArr={allDemandType}
-            renderFilter={(text, idx) =>
-              renderDemand(text, idx, handleDemandTypeChange)
-            }
-          />
-          {/* )} */}
+          {filteredProductData &&
+            filteredProductData.length > 0 &&
+            allDemandType &&
+            allDemandType.length > 0 && (
+              <TabsProductContent
+                filterName={"DemandType"}
+                commonClasses={commonClasses}
+                isFilterOpen={openDemandTYpe}
+                handleAll={handleAll}
+                handleTabClick={handleTabClick}
+                handleFilter={handleDemandType}
+                handleAllFilter={handleAllDemandType}
+                filterArr={allDemandType}
+                renderFilter={(text, idx) =>
+                  renderDemand(text, idx, handleDemandTypeChange)
+                }
+              />
+            )}
+
+          {filteredProductData &&
+            filteredProductData.length > 0 &&
+            allOffers &&
+            allOffers.length > 0 && (
+              <TabsProductContent
+                filterName={"Offers"}
+                commonClasses={commonClasses}
+                isFilterOpen={openOffer}
+                handleAll={handleAll}
+                handleTabClick={handleTabClick}
+                handleFilter={handleOffer}
+                handleAllFilter={handleAllOfferType}
+                filterArr={allOffers}
+                renderFilter={(text, idx) =>
+                  renderOffer(text, idx, handleOfferChange)
+                }
+                openContent={openContent}
+                handleContent={handleContent}
+              />
+            )}
 
           {filteredProductData.length > 0 && (
             <button
@@ -908,21 +939,6 @@ const Tabs = ({
               Remove all filters
             </button>
           )}
-          {/* {allOffers.length > 0 && (
-            <TabsProductContent
-              filterName={"Offers"}
-              commonClasses={commonClasses}
-              isFilterOpen={openOffer}
-              handleAll={handleAll}
-              handleTabClick={handleTabClick}
-              handleFilter={handleOffer}
-              handleAllFilter={handleAllOfferType}
-              filterArr={allOffers}
-              renderFilter={(text, idx) => handleOffer(text, idx, handleOfferChange)}
-              openContent={openContent}
-              handleContent={handleContent}
-            />
-          )} */}
 
           {/* Type - dropdown5 */}
           {/* <<<<<<< Updated upstream

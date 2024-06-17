@@ -41,7 +41,7 @@ export const renderDemand = (text, idx, handlechange) => (
 );
 
 
-export const handleOffer = (text, idx, handlechange) => (
+export const renderOffer = (text, idx, handlechange) => (
   <div
     className="flex justify-between"
     onClick={() => handlechange(text)}

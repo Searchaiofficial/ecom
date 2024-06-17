@@ -20,6 +20,23 @@ import {
 
 // const hideheader=
 const ProductPage = ({ params }) => {
+  let queryString;
+  if (typeof window !== "undefined") {
+    queryString = window.location.search;
+  }
+
+  const [products, setProducts] = useState([]);
+  const parseQueryString = (queryString) => {
+    const params = new URLSearchParams(queryString);
+    const queryParams = {};
+    for (const [key, value] of params.entries()) {
+      queryParams[key] = value;
+    }
+    return queryParams;
+  };
+  const queryParams = parseQueryString(queryString);
+  const demandtype = queryParams?.demandtype;
+
   const pathname = usePathname();
   const [type, setType] = useState(
     params.cat.replace(/-/g, " ")
@@ -31,7 +48,6 @@ const ProductPage = ({ params }) => {
   // Offers
   let offerProduct = useSelector(selectOfferProducts);
   let offerProductData = offerProduct;
-  const offerProductStatus = useSelector(selectOfferProductsStatus);
   const [allTypes, setAllTypes] = useState([]);
   const [selectedOfferCategory, setSelectedOfferCategory] = useState("");
   let offerCategory;
@@ -59,11 +75,9 @@ const ProductPage = ({ params }) => {
   }, [type]);
 
   // DemandType
-  const demandTypeProduct = useSelector(selectDemandTypeProducts);
-  const demandTypeProductStatus = useSelector(selectDemandTypeProductsStatus);
-
+  let demandTypeProduct = useSelector(selectDemandTypeProducts);
   const dispatch = useDispatch();
-  const filteredProductData = useSelector(selectedFilteredProduct);
+  let filteredProductData = useSelector(selectedFilteredProduct);
 
   let parentCategoryVar = params.parentCategory;
   const x = useSelector(allSelectedData);
@@ -167,7 +181,7 @@ const ProductPage = ({ params }) => {
       fetchVeProducts();
       console.log("ve products");
     } else if (params.heading === "category" && type === "all") {
-      handleSetItem("Products")
+      handleSetItem("Products");
       dispatch({
         type: "FETCH_FILTER_PRODUCTS",
         payload: {
@@ -188,7 +202,7 @@ const ProductPage = ({ params }) => {
         fetchCategoryData();
       }
     } else {
-      handleSetItem("Products")
+      handleSetItem("Products");
       if (!category.name) {
         const fetchCategoryData = async () => {
           const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getCategoryByName/${params.parentCategory}`;
@@ -229,20 +243,55 @@ const ProductPage = ({ params }) => {
     };
   }, []);
 
+  if (queryParams) {
+    if (queryParams.demandtype) {
+      if (offerProductData.length > 0)
+        offerProductData = offerProductData?.filter(
+          (product) =>
+            product.demandtype.toLowerCase() === demandtype.toLowerCase()
+        );
+      if (filteredProductData.length > 0)
+        filteredProductData = filteredProductData?.filter(
+          (product) =>
+            product.demandtype.toLowerCase() === demandtype.toLowerCase()
+        );
+      if (demandTypeProduct.length > 0)
+        demandTypeProduct = demandTypeProduct?.filter(
+          (product) =>
+            product.demandtype.toLowerCase() === demandtype.toLowerCase()
+        );
+    }
+    if (queryParams.offer) {
+      if (offerProductData.length > 0)
+        offerProductData = offerProductData?.filter(
+          (product) =>
+            product.offer.toLowerCase() === offer.toLowerCase()
+        );
+      if (filteredProductData.length > 0)
+        filteredProductData = filteredProductData?.filter(
+          (product) =>
+            product.offer.toLowerCase() === offer.toLowerCase()
+        );
+      if (demandTypeProduct.length > 0)
+        demandTypeProduct = demandTypeProduct?.filter(
+          (product) =>
+            product.offer.toLowerCase() === offer.toLowerCase()
+        );
+    }
+  }
   return (
     <>
       {/* ( */}
       <div>
-
         <Tabproduct
           filteredProductData={
             params.parentCategory === "virtualexperience"
               ? filteredProducts
               : params.parentCategory === "offers"
-                ? offerProductData
-                : params.parentCategory === "demandtype"
-                  ? demandTypeProduct
-                  : filteredProductData
+              ? offerProductData
+              : params.parentCategory === "demandtype"
+              ? demandTypeProduct
+              : filteredProductData
           }
           heading={
             params.parentCategory === "offers"
@@ -250,8 +299,8 @@ const ProductPage = ({ params }) => {
                 ? "Highest Offer"
                 : type
               : params.parentCategory === "demandtype"
-                ? type
-                : category.name
+              ? type
+              : category.name
           }
           description={category?.description}
           subCategory={category?.subcategories}
