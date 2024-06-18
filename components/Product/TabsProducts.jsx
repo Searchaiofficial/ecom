@@ -783,7 +783,7 @@ const Tabs = ({
         {/* <<<<<<< Updated upstream */}
         {/* <div className="flex sticky top-0 z-20 bg-white py-5  scrollbar"> */}
         {/* ======= */}
-        <div className="flex sticky top-0 z-[9997] bg-white py-5 overflow-x-auto md:overflow-x-visible mb-[20px] md:mb-0">
+        <div className="flex sticky top-0 z-[9996] bg-white py-5 overflow-x-auto md:overflow-x-visible mb-[20px] md:mb-0">
           {/* <TabsProductContent
             filterName={"Sort"}
             isFilterOpen={openSort}
