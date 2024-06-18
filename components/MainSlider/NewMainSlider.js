@@ -138,7 +138,6 @@ export default function NewMainSlider({ initialData }) {
               <div
                 className={`relative mt-[60px] sm:mt-0 group h-[78vh]  lg:-translate-x-[5px] -translate-x-[10px] translate-r md:translate-x-0`}
               >
-                {data.link}
                 <Link href={data?.link || "/"}>
                   <Image
                     src={
