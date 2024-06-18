@@ -43,7 +43,7 @@ function Cards() {
 
   return (
     <div className="w-full h-auto">
-      <MainSliderWrapper />
+      {/* <MainSliderWrapper /> */}
 
       <div className="lg:px-[52px]">
         <CategoriesSlider />
