@@ -311,7 +311,7 @@ function Card(props) {
           {props.demandtype ? (
             <div
               className={
-                "flex text-[12px] justify-between text-black font-normal bg-white py-1 px-3 absolute top-2 left-2 z-10"
+                "flex text-[12px] justify-between text-black font-normal bg-white absolute top-2 left-2 z-10 py-[.1rem] px-[.5rem]"
               }
             >
               {props.demandtype === "Ayatrio Member Favorite"
@@ -333,12 +333,12 @@ function Card(props) {
           >
             {isHovered && slide !== 0 && (
               <Image
-                src="/icons/left-icon.svg"
+                src="/icons/backarrow-w.svg"
                 height={20}
                 width={20}
                 alt="arrow"
                 onClick={prevSlide}
-                className="arrow arrow-left"
+                className="arrow arrow-left hover:opacity-[1.0]"
               // className="absolute filter drop-shadow-sm w-7 h-7  text-white opacity-85 group hover:cursor-pointer hover:opacity-100 hover:scale-104 hover:filter-drop-shadow-lg  arrow-left"
               />
             )}
@@ -366,12 +366,12 @@ function Card(props) {
             {isHovered && (
               <div className="z-50">
                 <Image
-                  src="/icons/right-icon.svg"
+                  src="/icons/rightarrow-w.svg"
                   height={30}
                   width={30}
                   alt="arrow"
                   onClick={nextSlide}
-                  className="arrow arrow-right"
+                  className="arrow arrow-right hover:opacity-[1.0]"
                 // className="absolute filter drop-shadow-sm w-7 h-7 -mt-[13px] text-white opacity-85 group hover:cursor-pointer hover:opacity-100 hover:scale-104 hover:filter-drop-shadow-lg arrow-right"
                 />
               </div>

@@ -58,7 +58,7 @@ const LoginComponent = () => {
 
   return (
     <>
-      <div className="flex lg:flex-wrap flex-wrap-reverse  justify-around w-full">
+      <div className="flex lg:flex-wrap flex-wrap-reverse justify-around w-full">
         <div className="flex p-8 w-[430px]">
           <div className="w-full">
             <div className="img__con111 sm:block flex items-center justify-center">
@@ -95,8 +95,8 @@ const LoginComponent = () => {
               <p className="text-base pt-1 mb-[15px]">
                 ... and a whole lot more!
               </p>
-              <div className="flex flex-row gap-4">
-                <div className="  flex flex-col gap-4 w-6/12">
+              <div className="flex flex-row gap-2">
+                <div className="  flex flex-col gap-2 w-6/12">
                   <Image
                     className="rounded-md"
                     width={200}
@@ -110,7 +110,7 @@ const LoginComponent = () => {
                     src="/images/login/login3.jpg"
                   />
                 </div>
-                <div className="  flex flex-col gap-4 w-6/12">
+                <div className="  flex flex-col gap-2 w-6/12">
                   <Image
                     className="rounded-md"
                     width={200}

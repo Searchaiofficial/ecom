@@ -73,7 +73,7 @@ const ProfileContent = ({ initialData }) => {
               </div>
               <div className="text-[13px] lg:text-[16px] p-1 flex  items-center font-bold ">
                 <p className="line-clamp-1">{person.name}</p>
-                <a href="#" className="flex items-center">
+                <a href="#" className="flex items-center" target="_blank">
                   <Image
                     className="sm:h-6 h-6 sm:w-6 w-6"
                     src="/icons/social-icon/linkedln.svg"

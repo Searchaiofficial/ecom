@@ -274,7 +274,7 @@ function TabsProductCard(props) {
           >
             {isHovered && slide !== 0 && (
               <Image
-                src="/icons/left-icon.svg"
+                src="/icons/backarrow-w.svg"
                 height={20}
                 width={20}
                 alt="arrow"
@@ -305,7 +305,7 @@ function TabsProductCard(props) {
             {isHovered && (
               <div>
                 <Image
-                  src="/icons/right-icon.svg"
+                  src="/icons/rightarrow-w.svg"
                   height={20}
                   width={20}
                   alt="arrow"

@@ -203,12 +203,13 @@ const AddCart = () => {
             <div className="deliveryCharges flex justify-between items-center mb-4 opacity-70">
               <div className="text-base">Delivery Charges</div>
               <div className="text-base font-bold flex">
-                <Image
+                {/* <Image
                   src="/icons/indianrupeesicon.svg"
                   width={18}
                   height={18}
                   alt="rupees"
-                />7
+                /> */}
+                <span>-</span>
               </div>
             </div>
             <hr className="my-4 border-black border-[1px]" />
@@ -223,7 +224,7 @@ const AddCart = () => {
                   height={25}
                   alt="rupees"
                 />
-                {totalPrice + 7}
+                {totalPrice}
               </div>
             </div>
             <div className="text-sm mb-4">Quantity: {quantities}</div>

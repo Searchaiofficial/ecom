@@ -261,11 +261,10 @@ const Delivery = () => {
                 <div className=" flex flex-col">
                   <label
                     className={` flex items-center space-x-2 p-4 cursor-pointer border-solid border-black border-l
-               ${
-                 selectedOption === "option1"
-                   ? "border-2 border-solid border-blue-800"
-                   : "border-none"
-               }`}
+               ${selectedOption === "option1"
+                        ? "border-2 border-solid border-blue-800"
+                        : "border-none"
+                      }`}
                   >
                     <input
                       type="radio"
@@ -317,11 +316,10 @@ const Delivery = () => {
                   </label>
 
                   <label
-                    className={`flex items-center space-x-2 p-4 cursor-pointer ${
-                      selectedOption === "option2"
+                    className={`flex items-center space-x-2 p-4 cursor-pointer ${selectedOption === "option2"
                         ? "border-2 border-solid border-blue-800"
                         : "border-none"
-                    }`}
+                      }`}
                   >
                     <input
                       type="radio"
@@ -398,11 +396,10 @@ const Delivery = () => {
                   <div className=" flex flex-col">
                     <label
                       className={`flex items-center space-x-2 p-4 cursor-pointer border-solid border-black border-l
-       ${
-         selectedOption === "option3"
-           ? "border-2 border-solid border-blue-800"
-           : "border-none"
-       }`}
+       ${selectedOption === "option3"
+                          ? "border-2 border-solid border-blue-800"
+                          : "border-none"
+                        }`}
                     >
                       <input
                         type="radio"
