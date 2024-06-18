@@ -67,19 +67,19 @@ export default function NewMainSlider({ initialData }) {
     return <Splashscreen />;
   }
 
-  // const [windowWidth, setWindowWidth] = useState(0);
-  // useEffect(() => {
-  //   if (typeof window !== "undefined") {
-  //     setWindowWidth(window.innerWidth);
-  //   }
-  //   function handleResize() {
-  //     setWindowWidth(window.innerWidth);
-  //   }
-  //   window.addEventListener("resize", handleResize);
-  //   return () => window.removeEventListener("resize", handleResize);
-  // }, [windowWidth]);
+  const [windowWidth, setWindowWidth] = useState(0);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setWindowWidth(window.innerWidth);
+    }
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [windowWidth]);
 
-  // console.log(sliderApiData);
+  console.log(sliderApiData);
 
   return (
     <div
@@ -124,11 +124,11 @@ export default function NewMainSlider({ initialData }) {
       >
         <div className={`${navigationVisible ? "block" : "hidden"}`}>
           <Image
-            src="/icons/backarrow-w.svg"
+            src="/icons/left-icon.svg"
             width={30}
             height={30}
             alt="arrow"
-            className="swiper-button-prev mt-[8rem] sm:-translate-y-[150px]  sm:translate-x-[-80.8vw] absolute left-0 hover:opacity-[1.0] hover:shadow-[0_6px_16px_rgba(0,0,0,0.12)]"
+            className=" swiper-button-prev mt-[8rem] sm:-translate-y-[150px]  sm:translate-x-[-80.8vw] absolute left-0"
           />
         </div>
 
@@ -141,15 +141,15 @@ export default function NewMainSlider({ initialData }) {
                 <Link href={data?.link || "/"}>
                   <Image
                     src={
-                      // windowWidth > 600
-                        data?.desktopImgSrc
-                    //     : data?.mobileImgSrc
+                      windowWidth > 600
+                        ? data?.desktopImgSrc
+                        : data?.mobileImgSrc
                     }
                     fill
                     alt={data.imgTitle || "Swiper image"}
                     priority
                     className="object-fill  px-[10px]  swiper-slide  lg:px-[0px] w-full"
-                  // objectFit="cover"
+                    // objectFit="cover"
                   />
                 </Link>
                 {/* <div className="absolute flex text-lg text-white sm:bottom-[2.5rem] bottom-[96px] left-[3rem] flex-col md:flex-row gap-4 md:items-center">
@@ -195,10 +195,10 @@ export default function NewMainSlider({ initialData }) {
                                 {data?.circles[0].productPrice}
                               </p>
                             </div>
-                            <div className="absolute top-0 right-0 flex items-center justify-end h-full ">
+                            <div className="absolute top-0 right-0 flex items-center justify-end h-full">
                               <Image
-                                className="flex mx-1"
-                                src="/icons/rightarrow-w.svg"
+                                className="flex mx-1 rotate-90"
+                                src="/icons/uparrow.svg"
                                 height={20}
                                 width={20}
                                 alt="arrow"
@@ -215,11 +215,11 @@ export default function NewMainSlider({ initialData }) {
         })}
         <div className={`${navigationVisible ? "block" : "hidden"}`}>
           <Image
-            src="/icons/rightarrow-w.svg"
+            src="/icons/right-icon.svg"
             width={30}
             height={30}
             alt="arrow"
-            className={`swiper-button-next  hover:bg-opacity-50 sm:-translate-y-[150px] hover:opacity-[1.0] hover:shadow-[0_6px_16px_rgba(0,0,0,0.12)]`}
+            className={`swiper-button-next  hover:bg-opacity-50 sm:-translate-y-[150px] `}
           />
         </div>
       </Swiper>
