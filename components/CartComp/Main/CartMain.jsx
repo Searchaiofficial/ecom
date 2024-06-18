@@ -431,7 +431,18 @@ const CartMain = () => {
               <h2 className="text-[16px] pb-3 font-bold ">Order summary</h2>
               <div className="flex items-center justify-between  border-slate-500 pb-3 ">
                 <span className="text-[#767677]">Products price </span>
-                <span className="text-black font-[700]">Rs.{totalPrice}</span>
+                <div className="text-black font-[700]">
+                  <div className="flex items-center">
+                    <Image
+                      src="/icons/indianrupeesicon.svg"
+                      width={18}
+                      height={18}
+                      alt="rupees"
+                      className="mr-1"
+                    />
+                    {totalPrice}
+                  </div>
+                </div>
               </div>
               <div className="flex items-center justify-between ">
                 <span className="text-[#767677]">Delivery charge </span>

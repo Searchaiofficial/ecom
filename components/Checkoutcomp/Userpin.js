@@ -318,7 +318,18 @@ const Userpin = () => {
           <h2 className="text- pb-3 text-black font-bold">Order summary</h2>
           <div className="flex items-center justify-between  border-slate-500 pb-3 lg:pb-6 ">
             <span className="text-[#767677]">Products price </span>
-            <span className="font-[700] text-black">Rs. {totalPrice}</span>
+            <div className="font-[700] text-black">
+              <div className="flex items-center">
+                <Image
+                  src="/icons/indianrupeesicon.svg"
+                  width={18}
+                  height={18}
+                  alt="rupees"
+                  className="mr-1"
+                />
+                {totalPrice}
+              </div>
+            </div>
           </div>
           <div className="flex items-center justify-between ">
             <span className="text-[#767677]">Delivery charge </span>
@@ -329,9 +340,18 @@ const Userpin = () => {
           </p>
           <div className="flex items-center justify-between pb-2 lg:pb-4 mt-2">
             <span className="text-[#767677]">Subtotal </span>
-            <span className="font-[700] text-black text-2xl">
-              Rs. {totalPrice}
-            </span>
+            <div className="font-[700] text-black text-2xl">
+              <div className="flex items-center">
+                <Image
+                  src="/icons/indianrupeesicon.svg"
+                  width={20}
+                  height={20}
+                  alt="rupees"
+                  className="mr-1"
+                />
+                {totalPrice}
+              </div>
+            </div>
           </div>
           <div className="flex items-center justify-between pb-4">
             <span className="text-[#767677]">Total weight </span>

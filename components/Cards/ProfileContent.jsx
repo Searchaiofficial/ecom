@@ -90,14 +90,14 @@ const ProfileContent = ({ initialData }) => {
       </Swiper>
       <div className=" flex flex-row items-end justify-end gap-6 mt-[25px]">
         <Image
-          src="/icons/left-icon.svg"
+          src="/icons/backarrow-w.svg"
           width={20}
           height={20}
           alt="Arrow"
           className="vector-two  rounded-full h-7 w-7"
         />
         <Image
-          src="/icons/right-icon.svg"
+          src="/icons/rightarrow-w.svg"
           width={20}
           height={20}
           alt="Arrow"

@@ -124,7 +124,7 @@ export default function NewMainSlider({ initialData }) {
       >
         <div className={`${navigationVisible ? "block" : "hidden"}`}>
           <Image
-            src="/icons/left-icon.svg"
+            src="/icons/backarrow-w.svg"
             width={30}
             height={30}
             alt="arrow"
@@ -149,7 +149,7 @@ export default function NewMainSlider({ initialData }) {
                     alt={data.imgTitle || "Swiper image"}
                     priority
                     className="object-fill  px-[10px]  swiper-slide  lg:px-[0px] w-full"
-                    // objectFit="cover"
+                  // objectFit="cover"
                   />
                 </Link>
                 {/* <div className="absolute flex text-lg text-white sm:bottom-[2.5rem] bottom-[96px] left-[3rem] flex-col md:flex-row gap-4 md:items-center">
@@ -215,7 +215,7 @@ export default function NewMainSlider({ initialData }) {
         })}
         <div className={`${navigationVisible ? "block" : "hidden"}`}>
           <Image
-            src="/icons/right-icon.svg"
+            src="/icons/rightarrow-w.svg"
             width={30}
             height={30}
             alt="arrow"

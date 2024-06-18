@@ -530,22 +530,51 @@ const Details = () => {
             <h2 className="text-xl pb-3 font-bold">Order summary</h2>
             <div className="flex items-center justify-between  border-slate-500 pb-6 ">
               <span className="text-black">Products price </span>
-              <span className=" text-black font-[700]">Rs. {totalPrice}</span>
+              <div className=" text-black font-[700]">
+                <div className="flex items-center">
+                  <Image
+                    src="/icons/indianrupeesicon.svg"
+                    width={18}
+                    height={18}
+                    alt="rupees"
+                    className="mr-1"
+                  />
+                  {totalPrice}
+                </div>
+              </div>
             </div>
             <div className="flex items-center justify-between ">
               <span className="text-black">Delivery charge </span>
-              <span className="text-black">
-                Rs.{deliveryPrice === null ? DeliverCost : deliveryPrice}
-              </span>
+              <div className="text-black">
+                <div className="flex items-center">
+                  <Image
+                    src="/icons/indianrupeesicon.svg"
+                    width={18}
+                    height={18}
+                    alt="rupees"
+                    className="mr-1"
+                  />
+                  {deliveryPrice === null ? DeliverCost : deliveryPrice}
+                </div>
+              </div>
             </div>
             <p className="text-xs text-[#767677] border-b-2 lg:border-b-4 border-black pb-6">
               calculated on distance and weight
             </p>
             <div className="flex items-center justify-between pb-4 mt-2">
               <span className="text-black">Subtotal </span>
-              <span className="font-[700] text-black text-2xl">
-                Rs. {totalPrice + DeliverCost || deliveryPrice}
-              </span>
+              <div className="font-[700] text-black text-2xl">
+                <div className="flex items-center">
+                  <Image
+                    src="/icons/indianrupeesicon.svg"
+                    width={20}
+                    height={20}
+                    alt="rupees"
+                    className="mr-1"
+                  />
+                  {totalPrice + DeliverCost || deliveryPrice}
+                </div>
+              </div>
             </div>
             <div className="flex items-center justify-between pb-4">
               <span className="text-black">Total weight </span>

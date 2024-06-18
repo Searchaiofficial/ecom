@@ -197,8 +197,8 @@ const AddCart = () => {
               <div className="text-base font-bold flex">
                 <Image
                   src="/icons/indianrupeesicon.svg"
-                  width={18}
-                  height={18}
+                  width={20}
+                  height={20}
                   alt="rupees"
                 />
                 {totalPrice}

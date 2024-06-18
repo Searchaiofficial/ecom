@@ -1,25 +1,0 @@
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<!-- Uploaded to: SVG Repo, www.svgrepo.com, Transformed by: SVG Repo Mixer Tools -->
-<svg width="800px" height="800px" viewBox="0 0 64 64" id="filled" xmlns="http://www.w3.org/2000/svg" fill="#000000">
-<g id="SVGRepo_bgCarrier" stroke-width="0"/>
-<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-<g id="SVGRepo_iconCarrier">
-<defs>
-<style>.cls-1{fill:#FFFFFF;}.cls-1,.cls-2,.cls-3{stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}.cls-2{fill:none;}.cls-3{fill:#FFFFFF;}</style>
-</defs>
-<title/>
-<path class="cls-1" d="M27,40v7.4861a5,5,0,0,1-.84,2.7735L23.84,53.74A5,5,0,0,0,23,56.5139V60H11V56.5139a5,5,0,0,0-.84-2.7735L7.84,50.26A5,5,0,0,1,7,47.4861V36a4,4,0,0,1,4,4h0"/>
-<path class="cls-1" d="M27,41V36a2,2,0,0,0-2-2h0a2,2,0,0,0-2,2v5"/>
-<path class="cls-1" d="M23,41V30a2,2,0,0,0-2-2h0a2,2,0,0,0-2,2V41"/>
-<path class="cls-1" d="M19,41V27.2A2.1072,2.1072,0,0,0,17,25h0a2.1072,2.1072,0,0,0-2,2.2V41"/>
-<path class="cls-1" d="M15,41V30a2,2,0,0,0-2-2h0a2,2,0,0,0-2,2V41"/>
-<path class="cls-2" d="M15,48a3.9977,3.9977,0,0,0-4-4V41"/>
-<path class="cls-1" d="M37,40v7.4861a5,5,0,0,0,.84,2.7735L40.16,53.74A5,5,0,0,1,41,56.5139V60H53V56.5139a5,5,0,0,1,.84-2.7735L56.16,50.26A5,5,0,0,0,57,47.4861V37a4,4,0,0,0-4,4V40"/>
-<path class="cls-1" d="M37,41V36a2,2,0,0,1,2-2h0a2,2,0,0,1,2,2v5"/>
-<path class="cls-1" d="M41,41V30a2,2,0,0,1,2-2h0a2,2,0,0,1,2,2V41"/>
-<path class="cls-1" d="M45,41V27.2A2.1072,2.1072,0,0,1,47,25h0a2.1072,2.1072,0,0,1,2,2.2V41"/>
-<path class="cls-1" d="M49,41V30a2,2,0,0,1,2-2h0a2,2,0,0,1,2,2V41"/>
-<path class="cls-2" d="M49,48a3.9977,3.9977,0,0,1,4-4V41"/>
-<polygon class="cls-3" points="42 13.5 34.5 13.5 34.5 6 29.5 6 29.5 13.5 22 13.5 22 18.5 29.5 18.5 29.5 26 34.5 26 34.5 18.5 42 18.5 42 13.5"/>
-</g>
-</svg>

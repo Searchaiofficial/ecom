@@ -310,15 +310,26 @@ const Delivery = () => {
                         )}
                       </div>
                       <div>
-                        <p className="text-md font-bold">Rs. 59</p>
+                        <div className="text-md font-bold">
+                          <div className="flex items-center">
+                            <Image
+                              src="/icons/indianrupeesicon.svg"
+                              width={18}
+                              height={18}
+                              alt="rupees"
+                              className="mr-1"
+                            />
+                            59
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </label>
 
                   <label
                     className={`flex items-center space-x-2 p-4 cursor-pointer ${selectedOption === "option2"
-                        ? "border-2 border-solid border-blue-800"
-                        : "border-none"
+                      ? "border-2 border-solid border-blue-800"
+                      : "border-none"
                       }`}
                   >
                     <input
@@ -368,7 +379,18 @@ const Delivery = () => {
                         )}
                       </div>
                       <div>
-                        <p className="text-md font-bold">Rs. 79</p>
+                        <div className="text-md font-bold">
+                          <div className="flex items-center">
+                            <Image
+                              src="/icons/indianrupeesicon.svg"
+                              width={18}
+                              height={18}
+                              alt="rupees"
+                              className="mr-1"
+                            />
+                            79
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </label>
@@ -436,7 +458,18 @@ const Delivery = () => {
                           )}
                         </div>
                         <div>
-                          <p className="text-md font-bold">Rs.99</p>
+                          <div className="text-md font-bold">
+                            <div className="flex items-center">
+                              <Image
+                                src="/icons/indianrupeesicon.svg"
+                                width={18}
+                                height={18}
+                                alt="rupees"
+                                className="mr-1"
+                              />
+                              99
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </label>
@@ -563,11 +596,33 @@ const Delivery = () => {
           <h2 className="text-xl pb-3 font-bold">Order summary</h2>
           <div className="flex items-center justify-between  border-slate-500 pb-3 lg:pb-6 ">
             <span className="text-[#767677]">Products price </span>
-            <span className="text-black font-[700]">Rs.{totalPrice}</span>
+            <div className="text-black font-[700]">
+              <div className="flex items-center">
+                <Image
+                  src="/icons/indianrupeesicon.svg"
+                  width={18}
+                  height={18}
+                  alt="rupees"
+                  className="mr-1"
+                />
+                {totalPrice}
+              </div>
+            </div>
           </div>
           <div className="flex items-center justify-between ">
             <span className="text-[#767677]">Delivery charge </span>
-            <span className="text-black">Rs. {deliveryChoice}</span>
+            <span className="text-black">
+              <div className="flex items-center">
+                <Image
+                  src="/icons/indianrupeesicon.svg"
+                  width={18}
+                  height={18}
+                  alt="rupees"
+                  className="mr-1"
+                />
+                {deliveryChoice}
+              </div>
+            </span>
           </div>
           <p className="text-xs text-[#767677] border-b-2 lg:border-b-4 border-black pb-3 lg:pb-6">
             calculated on distance and weight
@@ -575,7 +630,16 @@ const Delivery = () => {
           <div className="flex items-center justify-between pb-2 lg:pb-4 mt-2">
             <span className="text-black">Subtotal </span>
             <span className="font-[700] text-black text-2xl">
-              Rs. {totalPrice + deliveryChoice}
+              <div className="flex items-center">
+                <Image
+                  src="/icons/indianrupeesicon.svg"
+                  width={20}
+                  height={20}
+                  alt="rupees"
+                  className="mr-1"
+                />
+                {totalPrice + deliveryChoice}
+              </div>
             </span>
           </div>
           <div className="flex items-center justify-between pb-2 lg:pb-4">
@@ -646,7 +710,7 @@ const Delivery = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

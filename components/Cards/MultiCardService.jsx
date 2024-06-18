@@ -1,6 +1,6 @@
 "use client"
 import React, { useRef } from "react";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+import { Navigation, Pagination, Scrollbar, A11y, FreeMode, Mousewheel } from 'swiper/modules';
 import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
 import "./styles.css";
@@ -81,14 +81,14 @@ const MulticardService = () => {
                 <Swiper
                     ref={swiper1Ref}
                     mousewheel={{
-                        forceToAxis: true,
-                        invert: false,
+                        forceToAxis: true, // Ensures vertical scrolling on touchpad
+                        invert: false,     // Set to true if you want to invert scrolling direction
                     }}
                     freeMode={{
                         enabled: false,
                         sticky: true,
                     }}
-                    modules={[Navigation, Pagination, Scrollbar, A11y]}
+                    modules={[Navigation, Pagination, Scrollbar, A11y, FreeMode, Mousewheel]}
                     navigation={{
                         nextEl: ".right",
                         prevEl: ".back",
@@ -109,13 +109,16 @@ const MulticardService = () => {
                             spaceBetween: 10,
                         },
                     }}
+                    touchEventsTarget="container" // Ensure Swiper listens for touch events on the container
+                    touchRatio={1} // Adjust touch sensitivity (optional)
+                    touchReleaseOnEdges={true} // Release touch event when the edge is reached
+                    resistanceRatio={0.85} // Adjust resistance ratio for a smoother experience
                 >
                     {data.map((data) => {
                         return (
                             <SwiperSlide key={data.id}>
                                 <MultiCardServiceContent
                                     title={data.headerTitle}
-
                                     iconPath={data.iconPath}
                                     iconSize={data.iconSize}
                                 />
@@ -125,18 +128,18 @@ const MulticardService = () => {
 
                     <div className="flex flex-row items-end justify-end gap-4">
                         <Image
-                            src="/icons/left-icon.svg"
+                            src="/icons/backarrow-w.svg"
                             width={20}
                             height={20}
                             alt="Arrow"
-                            className="back  rounded-full h-7 w-7"
+                            className="back rounded-full h-7 w-7 bg-slate-400"
                         />
                         <Image
-                            src="/icons/right-icon.svg"
+                            src="/icons/rightarrow-w.svg"
                             width={20}
                             height={20}
                             alt="Arrow"
-                            className="right lg:mr-16  mr-6 rounded-full h-7 w-7"
+                            className="right lg:mr-16 mr-6 rounded-full h-7 w-7 bg-slate-400"
                         />
                     </div>
                 </Swiper>
