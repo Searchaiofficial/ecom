@@ -7,6 +7,7 @@ import { selectQuantity, updateQuantity } from "../Features/Slices/calculationSl
 import { setDbItems } from "../Features/Slices/cartSlice";
 import Link from "next/link";
 import axios from "axios";
+import Emptycart from "./EmptyCart";
 
 const AddCart = () => {
   const dispatch = useDispatch();
@@ -181,7 +182,10 @@ const AddCart = () => {
             ))}
           </div>
         ) : (
-          <p>No data is available here. Please add some item in cart page.</p>
+          <>
+            {/* <p>No data is available here. Please add some item in cart page.</p> */}
+            <Emptycart />
+          </>
         )}
         {cartStatus === "succeeded" && cartdata && (
           <div className="right-cart flex flex-col sm:w-1/3 w-[90vw] p-4 ">
