@@ -194,6 +194,8 @@ const Tabs = ({
   //   }, [filterData]);
 
   // >>>>>>> Stashed changes
+  const [selectedResult, setselectedResult] = useState(0)
+  const [clearSelectedResult, setClearSelectedResult] = useState(false)
   const handleColorChange = (color) => {
     console.log("Selected color:", color);
     // Filter products by color
@@ -201,6 +203,8 @@ const Tabs = ({
       return product.colors.includes(color);
     });
     setFilterdata(filteredProducts);
+    setClearSelectedResult(true)
+    setselectedResult(filteredProducts?.length)
   };
 
   // >>>>>>> Stashed changes
@@ -218,6 +222,8 @@ const Tabs = ({
       return product.offer === offer;
     });
     setFilterdata(filteredProducts);
+    setClearSelectedResult(true)
+    setselectedResult(filteredProducts?.length)
   };
 
   const handleDemandTypeChange = (demandType) => {
@@ -226,7 +232,8 @@ const Tabs = ({
       return product.demandtype === demandType;
     });
     setFilterdata(filteredProducts);
-    console.log(filterData);
+    setClearSelectedResult(true)
+    setselectedResult(filteredProducts?.length)
   };
 
   const [activeTab, setActiveTab] = useState("all");
@@ -249,7 +256,7 @@ const Tabs = ({
 
   const [openFilter, setOpenFilter] = useState("");
 
-  const handleFilterClick = (Filter) => {};
+  const handleFilterClick = (Filter) => { };
   const [openAllsort, setopenallsort] = useState(false);
   const handleAllsort = () => {
     setopenallsort(!openAllsort);
@@ -299,6 +306,7 @@ const Tabs = ({
   const handleAllDemandType = () => {
     setOpenAllDemandType(!openAllDemandType);
   };
+
   const [openallOfferType, setopenallOfferType] = useState(false);
   const handleAllOfferType = () => {
     setopenallOfferType(!openallOfferType);
@@ -426,7 +434,7 @@ const Tabs = ({
     setOpenOffer(false);
   };
 
-  const commonClasses = "px-3 py-2 mr-2.5 rounded-full flex  whitespace-nowrap";
+  const commonClasses = "px-[24px] py-3 mr-2.5 rounded-full flex  whitespace-nowrap";
 
   // logic for stikey
   useEffect(() => {
@@ -480,6 +488,8 @@ const Tabs = ({
     } else {
       setFilterdata(filteredProductData);
     }
+
+    setselectedResult(filterer?.length)
 
     // console.log(filterer);
   };
@@ -652,10 +662,19 @@ const Tabs = ({
 
   const handleRemoveallFilters = () => {
     setFilterdata(filteredProductData);
+    setOpenAll(false)
+    setselectedResult(0)
+    setClearSelectedResult(false)
   };
 
+  const handleViewResult = () => {
+    setOpenAll(false)
+    setselectedResult(0)
+  }
+
   return (
-    <>
+    <div className="">
+      {openAll && <div className="background-overlay open"></div>}
       <div className="lg:px-[67px] sm:px-[50px] px-[20px]">
         <div className="flex flex-col overflow-hidden">
           <div className="mt-36" />
@@ -764,7 +783,7 @@ const Tabs = ({
         {/* <<<<<<< Updated upstream */}
         {/* <div className="flex sticky top-0 z-20 bg-white py-5  scrollbar"> */}
         {/* ======= */}
-        <div className="flex sticky top-0 z-20 bg-white py-5 overflow-x-auto md:overflow-x-visible mb-[20px] md:mb-0">
+        <div className="flex sticky top-0 z-[9997] bg-white py-5 overflow-x-auto md:overflow-x-visible mb-[20px] md:mb-0">
           {/* <TabsProductContent
             filterName={"Sort"}
             isFilterOpen={openSort}
@@ -934,7 +953,7 @@ const Tabs = ({
           {filteredProductData.length > 0 && (
             <button
               onClick={handleRemoveallFilters}
-              className="bg-gray-100 px-3 py-2 rounded-full min-w-fit"
+              className="bg-gray-100 px-[24px] text-[14px] font-medium mr-[10px] py-3 rounded-full min-w-fit"
             >
               Remove all filters
             </button>
@@ -1006,79 +1025,93 @@ const Tabs = ({
           /> */}
           {/* >>>>>>> Stashed changes */}
 
-          {/* <div>
-            <button
-              onClick={() => {
-                handleAll();
-                handleTabClick();
-              }}
-              className={`Tabbtn z-0 bg-gray-100
+          {
+            filteredProductData &&
+            filteredProductData?.length > 0 && (
+              <div>
+                <button
+                  onClick={() => {
+                    handleAll();
+                    handleTabClick();
+                  }}
+                  className={`Tabbtn z-0 bg-gray-100
                   ${openAll
-                  ? `active-tabs  border border-black ${commonClasses}`
-                  : `tabS  border border-white ${commonClasses}`
-                }
+                      ? `active-tabs  border border-black px-[24px] text-[14px] font-medium ${commonClasses}`
+                      : `tabS  border border-white px-[24px] ${commonClasses} text-[14px] font-medium`
+                    }
                   ${typeof window !== "undefined" && window.innerWidth <= 450
-                  ? " justify-center"
-                  : " justify-between"
-                }
+                      ? " justify-center px-[24px] text-[14px] font-medium"
+                      : " justify-between px-[24px] text-[14px] font-medium"
+                    }
                   `}
-            >
-              All Filters &nbsp;
-              <Image
-                src="/icons/choserightfloor.svg"
-                width={40}
-                height={40}
-                className={`w-4 h-4 mt-1  sm:block hidden
+                >
+                  All Filters &nbsp;
+                  <Image
+                    src="/icons/choserightfloor.svg"
+                    width={40}
+                    height={40}
+                    className={`w-4 h-4 mt-1  sm:block hidden
 
 
                 `}
-                alt=""
-              />
-            </button>
-            {openAll ? (
-              <div className="menu-overlay overflow-y-auto bg-white  border-2 fixed  sm:w-[30vw] w-[100vw] sm:h-auto h-[80vh]  right-0 sm:top-16 bottom-0 z-[5000] rounded-2xl">
-                <div className="menu-option bg-white  pt-5  w-[100%] h-[100vh] border-slate-600 z-10">
-                  <div className="flex flex-col gap-6 px-4">
-                    <div className="flex justify-between gap-32">
-                      <p>Filter and sort</p>
+                    alt=""
+                  />
+                </button>
 
+              </div>
+            )
+          }
+
+        </div>
+        <hr />
+        <div>
+          {openAll ? (
+            <div className="menu-overlay z-[9999]  bg-white  border-2 fixed  sm:w-[30vw] w-[100vw] sm:h-[100vh] h-[80vh]  right-0  bottom-0 ">
+              <div className="flex border-b py-4 mb-10 w-full items-center justify-center">
+                <p className="text-center text-[16px] text-[#111111] font-semibold">Filter and sort</p>
+
+                <Image
+                  className="absolute right-3 px-[2px]"
+                  src="/icons/closeicon.svg"
+                  width={20}
+                  height={20}
+                  onClick={closeAll}
+                  color="black"
+                />
+              </div>
+              <div className="menu-option bg-white  overflow-y-scroll mb-[20rem]  min-h-fit max-h-[50vh] md:max-h-[70vh]  pt-5  w-[100%]  border-slate-600 z-50">
+                <div className="flex flex-col gap-6 px-4">
+
+
+                  <div className="flex flex-col gap-7">
+                    <div
+                      onClick={handleAllsort}
+                      className="flex justify-between text-left text-[14px] font-semibold "
+                    >
+                      Sort &nbsp;
                       <Image
-                        src="/icons/close.svg"
-                        width={24}
-                        height={24}
-                        onClick={closeAll}
-                        color="black"
-                      />
-                    </div>
-                    <hr />
-
-                    <div className="flex flex-col gap-7">
-                      <div
-                        onClick={handleAllsort}
-                        className="flex justify-between text-left"
-                      >
-                        Sort &nbsp;
-                        <Image
-                          src="/icons/backarrow.svg"
-                          width={40}
-                          height={40}
-                          className={`w-6 h-6  mt-1
+                        src="/icons/backarrow.svg"
+                        width={40}
+                        height={40}
+                        className={`w-5 h-5  mt-1
                 ${openAllsort ? " rotate-90" : "-rotate-90"}
 
                 `}
-                          alt=""
-                        />
-                      </div>
-                      {openAllsort ? (
-                        <div className="flex flex-col gap-7">
-                          {srtarr.map(renderSortItem)}
-                        </div>
-                      ) : null}
+                        alt=""
+                      />
                     </div>
-                    <hr />
+                    {openAllsort ? (
+                      <div className="flex flex-col gap-7">
+                        {srtarr.map((text, idx) => (
+                          renderSortItem(text, idx, handleSorting)
+                        ))}
+                      </div>
+                    ) : null}
+                  </div>
+                  <hr />
 
 
-                    <div className="flex flex-col gap-7">
+                  {/* <div className="flex flex-col gap-7">
                       <div
                         onClick={handleAllSize}
                         className="flex justify-between text-left"
@@ -1103,130 +1136,160 @@ const Tabs = ({
                         </div>
                       ) : null}
                     </div>
-                    <hr />
+                    <hr /> */}
 
-                    {pathname.includes("Wallpaper") ? (
-                      <>
-                        <div className="flex flex-col gap-7">
-                          <div
-                            onClick={handleAllCategory}
-                            className="flex justify-between text-left"
-                          >
-                            Design style &nbsp;
-                            <Image
-                              src="/icons/backarrow.svg"
-                              width={40}
-                              height={40}
-                              className={`w-6 h-6  mt-1
+                  {pathname.includes("Wallpaper") ? (
+                    <>
+                      <div className="flex flex-col gap-7">
+                        <div
+                          onClick={handleAllCategory}
+                          className="flex justify-between text-left"
+                        >
+                          Design style &nbsp;
+                          <Image
+                            src="/icons/backarrow.svg"
+                            width={40}
+                            height={40}
+                            className={`w-6 h-6  mt-1
                 ${openAllCategory ? " rotate-90" : "-rotate-90"}
 
                 `}
-                              alt=""
-                            />
-                          </div>
-                          {openAllCategory ? (
-                            <div className="flex flex-col gap-7">
-
-                              {categoryarr.map(rendercategory)}
-
-                            </div>
-                          ) : null}
+                            alt=""
+                          />
                         </div>
-                        <hr />
-                      </>
-                    ) : null}
+                        {openAllCategory ? (
+                          <div className="flex flex-col gap-7">
 
-                    <div className="flex flex-col gap-7">
-                      <div
-                        onClick={handleAllcolor}
-                        className="flex justify-between text-left"
-                      >
-                        Color &nbsp;
-                        <Image
-                          src="/icons/backarrow.svg"
-                          width={40}
-                          height={40}
-                          className={`w-6 h-6  mt-1
+                            {categoryarr.map(rendercategory)}
+
+                          </div>
+                        ) : null}
+                      </div>
+                      <hr />
+                    </>
+                  ) : null}
+
+                  <div className="flex flex-col gap-7">
+                    <div
+                      onClick={handleAllcolor}
+                      className="flex justify-between text-left text-[14px] font-semibold "
+                    >
+                      Color &nbsp;
+                      <Image
+                        src="/icons/backarrow.svg"
+                        width={40}
+                        height={40}
+                        className={`w-5 h-5  mt-1
                 ${openAllcolor ? " rotate-90" : "-rotate-90"}
 
                 `}
-                          alt=""
-                        />
-                      </div>
-                      {openAllcolor ? (
-                        <div className="flex flex-col gap-7">
-                          {colorarr.map(renderColor)}
-                        </div>
-                      ) : null}
+                        alt=""
+                      />
                     </div>
-                    <hr />
+                    {openAllcolor ? (
+                      <div className="flex flex-col gap-7">
+                        {allColors.map((text, idx) => (
+                          renderColor(text, idx, handleColorChange)
+                        ))}
+                      </div>
+                    ) : null}
+                  </div>
+                  <hr />
 
 
-                    {heading === "Wallpaper" ? (
-                      <>
-                        <div className="flex flex-col gap-7">
-                          <div
-                            onClick={handleAllCategory}
-                            className="flex justify-between text-left"
-                          >
-                            Design style &nbsp;
-                            <Image
-                              src="/icons/backarrow.svg"
-                              width={40}
-                              height={40}
-                              className={`w-6 h-6  mt-1
+                  {heading === "Wallpaper" ? (
+                    <>
+                      <div className="flex flex-col gap-7">
+                        <div
+                          onClick={handleAllCategory}
+                          className="flex justify-between text-left text-[14px] font-semibold "
+                        >
+                          Design style &nbsp;
+                          <Image
+                            src="/icons/backarrow.svg"
+                            width={40}
+                            height={40}
+                            className={`w-5 h-5  mt-1
                 ${openAllCategory ? " rotate-90" : "-rotate-90"}
 
                 `}
-                              alt=""
-                            />
-                          </div>
-                          {openAllCategory ? (
-                            <div className="flex flex-col gap-7">
-                              {categoryarr.map(rendercategory)}
-                            </div>
-                          ) : null}
+                            alt=""
+                          />
                         </div>
-                        <hr />
-                      </>
-                    ) : null}
+                        {openAllCategory ? (
+                          <div className="flex flex-col gap-7">
+                            {categoryarr.map(rendercategory)}
+                          </div>
+                        ) : null}
+                      </div>
+                      <hr />
+                    </>
+                  ) : null}
 
-                    <div className="flex flex-col gap-7">
-                      <div
-                        onClick={handleAllDemandType}
-                        className="flex justify-between text-left"
-                      >
-                        DemandTypes &nbsp;
-                        <Image
-                          src="/icons/backarrow.svg"
-                          width={40}
-                          height={40}
-                          className={`w-6 h-6  mt-1
+                  <div className="flex flex-col gap-7">
+                    <div
+                      onClick={handleAllDemandType}
+                      className="flex justify-between text-left text-[14px] font-semibold "
+                    >
+                      Demand Types &nbsp;
+                      <Image
+                        src="/icons/backarrow.svg"
+                        width={40}
+                        height={40}
+                        className={`w-5 h-5  mt-1
                 ${openAllDemandType ? " rotate-90" : "-rotate-90"}
 
                 `}
-                          alt=""
-                        />
-                      </div>
-                      {openAllDemandType ? (
-                        <div className="flex flex-col gap-7">
-                          {allDemandType.map(rendercategory)}
-                        </div>
-                      ) : null}
+                        alt=""
+                      />
                     </div>
-                    <hr />
+                    {openAllDemandType ? (
+                      <div className="flex flex-col gap-7">
+                        {allDemandType.map((text, idx) => (
+                          renderDemand(text, idx, handleDemandTypeChange)
+                        ))}
+                      </div>
+                    ) : null}
+                  </div>
+                  <hr />
+                  <div className="flex flex-col gap-7">
+                    <div
+                      onClick={handleAllOfferType}
+                      className="flex justify-between text-left text-[14px] font-semibold "
+                    >
+                      Offer &nbsp;
+                      <Image
+                        src="/icons/backarrow.svg"
+                        width={40}
+                        height={40}
+                        className={`w-5 h-5  mt-1
+                ${openallOfferType ? " rotate-90" : "-rotate-90"}
 
-                    <div className="flex flex-col gap-7">
+                `}
+                        alt=""
+                      />
+                    </div>
+                    {openallOfferType ? (
+                      <div className="flex flex-col gap-7">
+                        {allOffers.map((text, idx) => (
+                          renderOffer(text, idx, handleOfferChange)
+                        ))}
+                      </div>
+                    ) : null}
+                  </div>
+                  <hr />
+
+                  {/* <div className="flex flex-col gap-7">
                       <div
                         onClick={handleAllType}
-                        className="flex justify-between text-left"
+                        className="flex justify-between text-left text-[14px] font-semibold"
                       >
                         Type &nbsp;
                         <Image
                           src="/icons/backarrow.svg"
                           width={40}
                           height={40}
-                          className={`w-6 h-6  mt-1
+                          className={`w-5 h-5  mt-1
                 ${openAllType ? " rotate-90" : "-rotate-90"}
 
                 `}
@@ -1258,24 +1321,22 @@ const Tabs = ({
                           </button>
                         </div>
                       ) : null}
-                    </div>
-                    <hr />
-                  </div>
-                  <div className="flex flex-col items-center justify-center gap-3 pt-3 px-4 pb-2">
-                    <button className="bg-black text-white w-full h-9 rounded-full ">
-                      View 96
-                    </button>
-                    <button className="bg-black text-white w-full h-9 rounded-full">
-                      Clear all
-                    </button>
-                  </div>
+                    </div> */}
+                  {/* <hr /> */}
                 </div>
               </div>
+              <div className="flex bg-white z-50 flex-col absolute bottom-0 left-0 right-0 items-center justify-center gap-3 pt-3 px-4 pb-2">
+                <button onClick={handleViewResult} className="bg-black text-white w-full h-9 text-[14px] font-semibold rounded-full ">
+                  View {selectedResult}
+                </button>
+                <button onClick={handleRemoveallFilters} className={` ${clearSelectedResult ? "bg-white border-[1.5px] border-black" : "bg-[#929292] opacity-50"} text-[14px] font-semibold text-black  w-full h-9 rounded-full`}>
+                  Clear all
+                </button>
+              </div>
+            </div>
 
-            ) : null}
-          </div> */}
+          ) : null}
         </div>
-        <hr />
         {/* iimages */}
         <div div className="flex flex-col image-product">
           <div className="text-right">
@@ -1382,7 +1443,7 @@ const Tabs = ({
           </div> */}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

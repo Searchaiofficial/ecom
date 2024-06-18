@@ -7,7 +7,7 @@ export const renderSortItem = (text, idx, handleSorting) => (
     onClick={() => handleSorting(text)}
     key={idx}
   >
-    <label htmlFor="age1" className="">
+    <label htmlFor="age1" className="text-[14px] text-[#111111]">
       {text.name}
     </label>
     <input type="radio" id="age1" name="age" value="30" />
@@ -20,7 +20,7 @@ export const renderColor = (text, idx, handlechange) => (
     onClick={() => handlechange(text)}
     key={idx}
   >
-    <label htmlFor="age1" className="">
+    <label htmlFor="age1" className="text-[14px] text-[#111111]">
       {text}
     </label>
     <input type="radio" id="age1" name="age" value="30" />
@@ -33,7 +33,7 @@ export const renderDemand = (text, idx, handlechange) => (
     onClick={() => handlechange(text)}
     key={idx}
   >
-    <label htmlFor="age1" className="">
+    <label htmlFor="age1" className="text-[14px] text-[#111111]">
       {text}
     </label>
     <input type="radio" id="age1" name="age" value="30" />
@@ -47,7 +47,7 @@ export const renderOffer = (text, idx, handlechange) => (
     onClick={() => handlechange(text)}
     key={idx}
   >
-    <label htmlFor="age1" className="">
+    <label htmlFor="age1" className="text-[14px] text-[#111111]">
       {text}
     </label>
     <input type="radio" id="age1" name="age" value="30" />
