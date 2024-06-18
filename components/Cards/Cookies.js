@@ -27,7 +27,7 @@ const Cookies = () => {
         animationTimingFunction: 'cubic-bezier(0, 0, 0.1, 1)',
         animationName: modal ? 'none' : 'fade-in',
       }}
-      className={`sm:h-[350px] px-10 pt-10 sm:w-[450px]  bg-white space-y-5  fixed sm:left-3 bottom-4 z-[1000] ${modal ? 'block' : 'hidden'}`}
+      className={`sm:h-[350px] px-10 py-10 sm:w-[450px]  bg-white space-y-5  fixed sm:left-3 bottom-4 z-[1000] ${modal ? 'block' : 'hidden'}`}
     >
       <div className="font-semibold text-[15px]">
         You are in control of your own cookies
