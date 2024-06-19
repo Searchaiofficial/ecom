@@ -138,7 +138,7 @@ export default function NewMainSlider({ initialData }) {
               <div
                 className={`relative mt-[60px] sm:mt-0 group h-[78vh]  lg:-translate-x-[5px] -translate-x-[10px] translate-r md:translate-x-0`}
               >
-                <Link href={data?.link || "/"}>
+                <Link href={`https://ayatrio.com//category/${data?.link}` || "/"}>
                   <Image
                     src={
                       windowWidth > 600
