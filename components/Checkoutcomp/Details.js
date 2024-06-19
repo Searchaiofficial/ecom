@@ -217,6 +217,33 @@ const Details = () => {
 
   const [userCoordinates, setUserCoordinates] = useState(null);
   const [userPincode, setUserPincode] = useState(null);
+  const [location, setLocation] = useState(null);
+
+  const getDataFromCoordinates = async (lat, lng) => {
+    const rapidApiKey = process.env.NEXT_PUBLIC_RAPID_API_KEY;
+    const rapidApiHost = process.env.NEXT_PUBLIC_RAPID_API_HOST;
+
+    const options = {
+      method: "GET",
+      url: "https://trueway-geocoding.p.rapidapi.com/ReverseGeocode",
+      params: {
+        location: `${lat},${lng}`,
+        language: "en",
+      },
+      headers: {
+        "X-RapidAPI-Key": rapidApiKey,
+        "X-RapidAPI-Host": rapidApiHost,
+      },
+    };
+
+    try {
+      console.log(lat)
+      const response = await axios.request(options);
+      setLocation(response.data.results[0].address);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     localStorage?.getItem("userCoordinates") &&
@@ -224,6 +251,10 @@ const Details = () => {
   }, []);
 
   useEffect(() => {
+    if(userCoordinates){
+      console.log(userCoordinates)
+      getDataFromCoordinates(userCoordinates.lat, userCoordinates.lng);
+    }
     if (localStorage?.getItem("userPincode")) {
       setUserPincode(localStorage.getItem("userPincode"));
       setForm((prev) => ({
@@ -272,18 +303,17 @@ const Details = () => {
                       Delivered to pick-up location via parcel at
                     </h3>
                     <p className="text-sm text-gray-700">
-                      IKEA Navi Mumbai TTC Ind Ar,Thane Belapur Rd, Turbhe
-                      400705 Mumbai
+                      {location}
                     </p>
                   </div>
-                  <div className="mb-2">
+                  {/* <div className="mb-2">
                     <h3 className="text-md font-bold ">
                       Estimated Pick-up Date
                     </h3>
                     <p className="text-sm text-gray-700">
                       24.3.2024 11:00 AM - 5:00 PM
                     </p>
-                  </div>
+                  </div> */}
                 </div>
               </div>
 
