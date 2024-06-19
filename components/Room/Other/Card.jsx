@@ -297,6 +297,34 @@ const Card = ({ data, productId }) => {
     }
   }, [roomData._id, cartData])
 
+
+  const handleBuyNow = async () => {
+    if (inCart) {
+      router.push("/checkout")
+    }
+    try {
+      // Validate quantity, productId, and deviceId
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`, {
+        deviceId: localStorage.getItem("deviceId"),
+        productId: roomData._id,
+        quantity: 1
+      })
+
+      console.log(response.data)
+      if (response.status === 200) {
+        setInCart(true)
+        dispatch(setDbItems(response.data))
+
+      }
+
+      // Redirect to the checkout page
+      router.push("/checkout")
+    } catch (error) {
+      console.error("Error handling click:", error);
+      setInCart(true)
+    }
+  }
+
   const handleClickDB = async () => {
     setsidebarContent("addToBag")
     if (inCart) {
@@ -1207,24 +1235,17 @@ const Card = ({ data, productId }) => {
 
           {/* //buttons */}
           < div className="buttons mt-4 sm:w-auto w-[100%] sm:block flex flex-col items-center justify-center" >
-            {/* <Link
-              href={{
-                pathname: "/checkout",
-                query: {
-                  search: "rooms",
-                },
-              }}
-              className="memberCheckout w-[100%] my-2 flex items-center justify-center"
-            >
+            <div className="guestCheckout w-[100%] flex justify-center items-center mb-[10px] " >
               <button
-                onClick={() => handleClickDB()}
-                className="bg-black text-white w-[100%] sm:h-14 h-10 rounded-full hover:bg-gray-900 transition duration-300 px-4"
+                onClick={() => {
+                  handleBuyNow();
+                }}
+                className={` bg-black hover:bg-gray-900 text-white px-4   w-[100%] sm:h-14 h-10 rounded-full  transition duration-300`}
               >
                 Buy Now
               </button>
-            </Link> */}
-
-            <div className="guestCheckout w-[100%] flex justify-center items-center my-[16px] " >
+            </div>
+            <div className="guestCheckout w-[100%] flex justify-center items-center mb-[16px] " >
               <button
                 onClick={() => {
                   handleClickDB();
@@ -1240,6 +1261,7 @@ const Card = ({ data, productId }) => {
                 Add to bag
               </button>
             </div>
+
             {/* <Link
               href={{
                 pathname: "/checkout",

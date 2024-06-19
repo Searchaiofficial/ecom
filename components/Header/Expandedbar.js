@@ -108,7 +108,7 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
 
   // console.log("cached data is ", JSON.parse(cacheddata));
   useEffect(() => {
-    if (debouncedSearchQuery) {
+    if (debouncedSearchQuery && searchQuery?.length > 1) {
       fetchData();
     }
 
