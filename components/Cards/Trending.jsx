@@ -22,14 +22,17 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { selectTrendingData } from "../Features/Slices/trendingSlice";
 import axios from "axios";
+import { selecteddbItems } from "../Features/Slices/cartSlice";
 
 const Trending = () => {
   const [newTrendingData, setNewTrendingData] = useState([]);
-  const [cartData, setCartData] = useState([]);
+  // const [cartData, setCartData] = useState([]);
   const trendingData = useSelector(selectTrendingData);
   const dispatch = useDispatch();
   const [swiperRef, setSwiperRef] = useState(null);
   const [isPopupVisible, setPopupVisible] = useState(false);
+  const cartData = useSelector(selecteddbItems)
+
 
   const handleImageClick = () => {
     setPopupVisible(true);
@@ -44,36 +47,38 @@ const Trending = () => {
     }
   }, [trendingData]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
-          {
-            params: {
-              deviceId: localStorage.getItem("deviceId"),
-            },
-          }
-        );
-        if (response.status !== 200) {
-          throw new Error("HTTP status " + response.status);
-        }
-        const data = response.data;
-        console.log("Fetched cart data:", data);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
+  //         {
+  //           params: {
+  //             deviceId: localStorage.getItem("deviceId"),
+  //           },
+  //         }
+  //       );
+  //       if (response.status !== 200) {
+  //         throw new Error("HTTP status " + response.status);
+  //       }
+  //       const data = response.data;
+  //       console.log("Fetched cart data:", data);
 
-        // Ensure cartData is an array
-        if (data && Array.isArray(data.items)) {
-          setCartData(data.items);
-        } else {
-          console.error("Cart data items are not an array:", data);
-          setCartData([]);
-        }
-      } catch (error) {
-        console.log("Error fetching cart data:", error);
-      }
-    };
-    fetchData();
-  }, []);
+  //       // Ensure cartData is an array
+  //       if (data && Array.isArray(data.items)) {
+  //         setCartData(data.items);
+  //       } else {
+  //         console.error("Cart data items are not an array:", data);
+  //         setCartData([]);
+  //       }
+  //     } catch (error) {
+  //       console.log("Error fetching cart data:", error);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
+
+  console.log(cartData)
 
   const swiperOptions2 = {
     slidesPerView: 4.08,
@@ -98,7 +103,7 @@ const Trending = () => {
 
   const isProductInCart = (productId) => {
     console.log("Checking product ID:", productId);
-    return cartData.some((cartItem) => {
+    return cartData?.items?.some((cartItem) => {
       console.log("Comparing with cart item product ID:", cartItem?.productId?._id);
       return cartItem?.productId?._id === productId;
     });

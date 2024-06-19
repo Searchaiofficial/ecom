@@ -6,7 +6,7 @@ import "swiper/css/navigation";
 import "./styles.css";
 import "./styles.css";
 import Image from "next/image";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter, usePathname } from "next/navigation";
 import { setselectedproduct } from "../Features/Slices/compareSlice";
 import { A11y } from "swiper/modules";
@@ -39,6 +39,7 @@ import Measure from "./meausrement";
 import Link from "next/link";
 import axios from "axios";
 import TabsProductCard from "./TabsProductCard";
+import { selecteddbItems } from "../Features/Slices/cartSlice";
 const Tabs = ({
   filteredProductData,
   heading,
@@ -550,41 +551,44 @@ const Tabs = ({
     allowSlideNext: true,
   };
 
-  const [cartData, setCartData] = useState([]);
+  // const [cartData, setCartData] = useState([]);
+  const cartData = useSelector(selecteddbItems)
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
-          {
-            params: {
-              deviceId: localStorage.getItem("deviceId"),
-            },
-          }
-        );
-        if (response.status !== 200) {
-          throw new Error("HTTP status " + response.status);
-        }
-        const data = response.data;
-        console.log("Fetched cart data:", data);
+  console.log(cartData)
 
-        // Ensure cartData is an array
-        if (data && Array.isArray(data.items)) {
-          setCartData(data.items);
-        } else {
-          console.error("Cart data items are not an array:", data);
-          setCartData([]);
-        }
-      } catch (error) {
-        console.log("Error fetching cart data:", error);
-      }
-    };
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
+  //         {
+  //           params: {
+  //             deviceId: localStorage.getItem("deviceId"),
+  //           },
+  //         }
+  //       );
+  //       if (response.status !== 200) {
+  //         throw new Error("HTTP status " + response.status);
+  //       }
+  //       const data = response.data;
+  //       console.log("Fetched cart data:", data);
+
+  //       // Ensure cartData is an array
+  //       if (data && Array.isArray(data.items)) {
+  //         setCartData(data.items);
+  //       } else {
+  //         console.error("Cart data items are not an array:", data);
+  //         setCartData([]);
+  //       }
+  //     } catch (error) {
+  //       console.log("Error fetching cart data:", error);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
 
   const isProductInCart = (productId) => {
-    return cartData.some((cartItem) => {
+    return cartData?.items?.some((cartItem) => {
       console.log(
         "Comparing with cart item product ID:",
         cartItem?.productId?._id

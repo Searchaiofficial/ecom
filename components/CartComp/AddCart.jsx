@@ -43,6 +43,7 @@ const AddCart = () => {
         const data = response.data;
         setcartdata(data);
         setCartStaus("succeeded");
+        console.log(data)
         dispatch(setDbItems(data));
       } catch (error) {
         setCartStaus("failed");
@@ -86,6 +87,8 @@ const AddCart = () => {
         },
       });
 
+      console.log(response.data)
+
       if (response.status !== 200) {
         console.error("HTTP status", response.status);
       }
@@ -97,7 +100,7 @@ const AddCart = () => {
         ...prevstate,
         items: updatedItems,
       }));
-      dispatch(updateQuantity(quantityCart - 1));
+      dispatch(setDbItems(response.data));
     } catch (error) {
       console.error("Error deleting item", error);
     }

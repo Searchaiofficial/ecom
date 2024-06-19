@@ -11,6 +11,7 @@ import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import { selectQuantity, updateQuantity } from "../Features/Slices/calculationSlice";
+import { selecteddbItems, setDbItems } from "../Features/Slices/cartSlice";
 
 function Card(props) {
   const dispatch = useDispatch();
@@ -254,13 +255,11 @@ function Card(props) {
   useEffect(() => {
 
     const averageRating = calculateAverageRating(Reviews);
-    // console.log(averageRating);
-    const stars = renderStars(averageRating); // Assuming renderStars is defined somewhere
+    const stars = renderStars(averageRating);
     setStars(stars);
-
   }, [Reviews]);
 
-  const quantity = useSelector(selectQuantity);
+  const cartData = useSelector(selecteddbItems);
 
   const addProductToCart = async () => {
     const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`, {
@@ -270,10 +269,8 @@ function Card(props) {
     })
     if (response.status === 200) {
       setInCart(true)
-      dispatch(updateQuantity(quantity + 1))
-
+      dispatch(setDbItems(response.data))
     }
-    // console.log(response.data)
   }
 
 

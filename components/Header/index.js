@@ -18,6 +18,7 @@ import { MenuIcon, X } from "lucide-react";
 import TopHeaderWrapper from "./TopHeaderWrapper";
 import { useScrollVisibility } from "@/hooks/useScrollVisibility";
 import axios from "axios";
+import { selecteddbItems, setDbItems } from "../Features/Slices/cartSlice";
 
 function Header({ setIsHeaderMounted }) {
   useEffect(() => {
@@ -28,7 +29,7 @@ function Header({ setIsHeaderMounted }) {
 
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
-  const quantity = useSelector(selectQuantity);
+  const CartItems = useSelector(selecteddbItems);
   const [sidebarNavigationItem, setSidebarNavigationItem] = useState("")
   const dispatch = useDispatch()
 
@@ -50,7 +51,7 @@ function Header({ setIsHeaderMounted }) {
         }
         const data = response.data;
 
-        dispatch(updateQuantity(data?.items.length))
+        dispatch(setDbItems(data));
 
       } catch (error) {
 
@@ -58,6 +59,8 @@ function Header({ setIsHeaderMounted }) {
     };
     fetchData();
   }, []);
+
+  console.log(CartItems)
 
 
   // Filter
@@ -419,7 +422,7 @@ function Header({ setIsHeaderMounted }) {
                       />
                     </Link>
                     {
-                      quantity > 0 && <div className="cart-notification bg-black">{quantity}</div>
+                      CartItems?.items?.length > 0 && <div className="cart-notification bg-black">{CartItems?.items?.length}</div>
                     }
                   </div>
                   {loginStatus === "true" ? (

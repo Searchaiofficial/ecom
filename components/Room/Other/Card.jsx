@@ -20,6 +20,7 @@ import { selectProductImages } from "@/components/Features/Slices/imageDataSlice
 import { colorsData } from "../../../Model/ColorsData/Colors.js";
 import ResponseCache from "next/dist/server/response-cache";
 import { updateQuantity } from "../../Features/Slices/calculationSlice.js";
+import { setDbItems } from "@/components/Features/Slices/cartSlice";
 
 const Card = ({ data, productId }) => {
   const quantity = useSelector(selectQuantity);
@@ -308,9 +309,11 @@ const Card = ({ data, productId }) => {
         productId: roomData._id,
         quantity: 1
       })
+
+      console.log(response.data)
       if (response.status === 200) {
         setInCart(true)
-        dispatch(updateQuantity(quantity + 1))
+        dispatch(setDbItems(response.data))
 
       }
 
@@ -331,7 +334,7 @@ const Card = ({ data, productId }) => {
       })
       if (response.status === 200) {
         // setInCart(true)
-        dispatch(updateQuantity(quantity + 1))
+        dispatch(setDbItems(response.data))
 
       }
 

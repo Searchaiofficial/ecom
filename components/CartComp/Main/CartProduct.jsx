@@ -17,6 +17,9 @@ const CartProduct = ({
   handleItemIncr,
   handleItemDelete,
 }) => {
+
+  const dbItems = useSelector(selecteddbItems)
+  console.log(dbItems)
   return (
     <>
       <div className="">

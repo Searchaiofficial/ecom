@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./styles.css";
 import axios from "axios";
 import { selectQuantity, updateQuantity } from "../Features/Slices/calculationSlice";
+import { setDbItems } from "../Features/Slices/cartSlice";
 
 function TabsProductCard(props) {
   const [slide, setSlide] = useState(0);
@@ -193,7 +194,7 @@ function TabsProductCard(props) {
     setColorImage(imagesrc)
   }
 
-  const quantity = useSelector(selectQuantity);
+  // const quantity = useSelector(selectQuantity);
 
   const addProductToCart = async () => {
     const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`, {
@@ -203,19 +204,19 @@ function TabsProductCard(props) {
     })
     if (response.status === 200) {
       setInCart(true)
-      dispatch(updateQuantity(quantity + 1))
+      dispatch(setDbItems(response.data))
 
     }
     // console.log(response.data)
 
-    console.log(imageData)
-    useEffect(() => {
-      if (imageData?.length > 0) {
-
-        setColorImage(imageData[0]?.image)
-      }
-    }, [])
   }
+  console.log(imageData)
+  useEffect(() => {
+    if (imageData?.length > 0) {
+
+      setColorImage(imageData[0]?.image)
+    }
+  }, [])
 
   console.log(props)
   return (

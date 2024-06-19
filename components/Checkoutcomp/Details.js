@@ -38,6 +38,7 @@ const Details = () => {
   const deliveryPrice = useSelector(selectDeliveryPrice);
   const cartdata = useSelector(selecteddbItems);
 
+
   if (typeof window !== "undefined") {
     var id = localStorage.getItem("deviceId");
     console.log(id);

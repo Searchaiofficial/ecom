@@ -113,7 +113,7 @@ const CartMain = () => {
         setCartStaus("succeeded");
         fetchData();
         // dispatch(setDbItems(response.data));
-        dispatch(updateQuantity(quantityCart - 1));
+        dispatch(setDbItems(response.data));
       }
     } catch (error) {
       setCartStaus("failed");
