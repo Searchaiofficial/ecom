@@ -408,7 +408,7 @@ const CartMain = () => {
                   <div className="p-10">
                     <h1 className="text-2xl font-bold">No Item added</h1>
                     <p>
-                      No data is available here.Please add some item in cart
+                      No data is available here. Please add some item in cart
                       page
                     </p>
                     <div className="box-border font-bold border-2 bg-sky-800 text-white p-4 rounded-lg h-20 w-[40%] flex items-center justify-between">
@@ -456,7 +456,16 @@ const CartMain = () => {
                   Subtotal{" "}
                 </span>
                 <span className="font-[700] text-black text-2xl">
-                  Rs.{totalPrice}
+                  <div className="flex items-center">
+                    <Image
+                      src="/icons/indianrupeesicon.svg"
+                      width={20}
+                      height={20}
+                      alt="rupees"
+                      className="mr-1"
+                    />
+                    {totalPrice}
+                  </div>
                 </span>
               </div>
               <div className="flex items-center justify-between pb-4">

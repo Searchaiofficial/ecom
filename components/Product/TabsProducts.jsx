@@ -885,6 +885,27 @@ const Tabs = ({
               />
             )}
 
+          {filteredProductData &&
+            filteredProductData.length > 0 &&
+            allOffers &&
+            allOffers.length > 0 && (
+              <TabsProductContent
+                filterName={"Offers"}
+                commonClasses={commonClasses}
+                isFilterOpen={openOffer}
+                handleAll={handleAll}
+                handleTabClick={handleTabClick}
+                handleFilter={handleOffer}
+                handleAllFilter={handleAllOfferType}
+                filterArr={allOffers}
+                renderFilter={(text, idx) =>
+                  renderOffer(text, idx, handleOfferChange)
+                }
+                openContent={openContent}
+                handleContent={handleContent}
+              />
+            )}
+
           {/* {allStyles.length > 0 ? (
             <TabsProductContent
               filterName={"Styles"}
@@ -933,26 +954,7 @@ const Tabs = ({
               />
             )}
 
-          {filteredProductData &&
-            filteredProductData.length > 0 &&
-            allOffers &&
-            allOffers.length > 0 && (
-              <TabsProductContent
-                filterName={"Offers"}
-                commonClasses={commonClasses}
-                isFilterOpen={openOffer}
-                handleAll={handleAll}
-                handleTabClick={handleTabClick}
-                handleFilter={handleOffer}
-                handleAllFilter={handleAllOfferType}
-                filterArr={allOffers}
-                renderFilter={(text, idx) =>
-                  renderOffer(text, idx, handleOfferChange)
-                }
-                openContent={openContent}
-                handleContent={handleContent}
-              />
-            )}
+
 
           {filteredProductData.length > 0 && (
             <button

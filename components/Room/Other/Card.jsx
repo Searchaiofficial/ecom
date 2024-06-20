@@ -527,7 +527,6 @@ const Card = ({ data, productId }) => {
 
 
             </div>
-
             <IncDecCounter />
           </div>
 

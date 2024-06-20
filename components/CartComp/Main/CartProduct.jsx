@@ -44,11 +44,11 @@ const CartProduct = ({
                 <div className="sm:text-xl text-md sm:font-semibold font-medium truncate">{cartItem?.name}</div>
                 {/* <div className="text-[14px] md:text-[20px]  lg:text-xl">Rs. {cartItem?.price.toFixed(2)}</div> */}
               </p>
-              <p className="my-2 text-gray-800 text-[8px] md:text-[16px]  lg:text-md ">
+              <p className="my-2 text-gray-800 text-[12px] md:text-[16px]  lg:text-md ">
                 Room darkening curtains, 1 pair, yellow-beige
               </p>
-              <p className="my-1 text-gray-600 text-[8px] md:text-[16px]  lg:text-md">135x250 cm (53x98 ")</p>
-              <p className=" text-gray-600 text-[8px] md:text-[16px]  lg:text-md">1.18 kg per piece</p>
+              <p className="my-1 text-gray-600 text-[12px] md:text-[16px]  lg:text-md">135x250 cm (53x98 ")</p>
+              <p className=" text-gray-600 text-[12px] md:text-[16px]  lg:text-md">1.18 kg per piece</p>
               <p className=" my-2">
                 <span className=" box-border h-1 w-10  rounded-xl mr-3 text-xs text-gray-400 bg-slate-400">
                   .d.
@@ -57,28 +57,33 @@ const CartProduct = ({
                   Go to checkout for delivery information
                 </span>
               </p>
-              <div className="flex items-center justify-between mt-2">
-                <div className=" rounded-3xl p-2 lg:p-3 lg:w-36 w-[112px]  border border-gray-400 flex justify-between items-center">
-                  <button
-                    onClick={() =>
-                      handleItemDecr(cartItem?.productId._id, cartItem.quantity)
-                    }
-                    className=" border-gray-400 "
-                  >
-                    <Minus />
-                  </button>
-                  <p className="font-bold ">
+              <div className="flex items-center justify-between mt-[5px] md:w-2/3   ">
+                <div className="input-group p-1 inline-flex rounded-full border text-xl font-medium items-center">
+                  <div className="input-group-prepend">
+                    <button
+                      onClick={() =>
+                        handleItemDecr(cartItem?.productId._id, cartItem.quantity)
+                      }
+                      className="hover:bg-zinc-200 w-9 h-9 rounded-full flex items-center justify-center"
+                    >
+                      -
+                    </button>
+                  </div>
+                  <p className="form-control w-10 text-center inline-flex items-center justify-center mx-1">
                     {cartItem.quantity}
                   </p>
-                  <button
-                    onClick={() =>
-                      handleItemIncr(cartItem?.productId._id, cartItem.quantity)
-                    }
-                    className=" border-gray-400 "
-                  >
-                    <Plus />
-                  </button>
+                  <div className="input-group-prepend">
+                    <button
+                      onClick={() =>
+                        handleItemIncr(cartItem?.productId._id, cartItem.quantity)
+                      }
+                      className="hover:bg-zinc-200 w-9 h-9 rounded-full flex items-center justify-center"
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
+
                 <div className="">
                   <Image
                     src="/icons/like.svg"
