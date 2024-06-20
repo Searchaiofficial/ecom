@@ -138,7 +138,9 @@ export default function NewMainSlider({ initialData }) {
               <div
                 className={`relative mt-[60px] sm:mt-0 group h-[78vh]  lg:-translate-x-[5px] -translate-x-[10px] translate-r md:translate-x-0`}
               >
-                <Link href={`https://ayatrio.com//category/${data?.link}` || "/"}>
+                <Link
+                  href={`https://ayatrio.com//category/${data?.link}` || "/"}
+                >
                   <Image
                     src={
                       windowWidth > 600
@@ -149,7 +151,7 @@ export default function NewMainSlider({ initialData }) {
                     alt={data.imgTitle || "Swiper image"}
                     priority
                     className="object-fill  px-[10px]  swiper-slide  lg:px-[0px] w-full"
-                  // objectFit="cover"
+                    // objectFit="cover"
                   />
                 </Link>
                 {/* <div className="absolute flex text-lg text-white sm:bottom-[2.5rem] bottom-[96px] left-[3rem] flex-col md:flex-row gap-4 md:items-center">
@@ -173,40 +175,44 @@ export default function NewMainSlider({ initialData }) {
                             left: `${data?.circles[0].leftPosition}%`,
                           }}
                           className="border-2 border-neutral-300 hover:border-white  absolute hover:bg-[rgba(0,0,0,0.3)] rounded-full size-[30px] flex items-center justify-center transition-all duration-200 before:content-[''] before:size-3 before:bg-white  before:rounded-full before:hover:size-2 before:transition-all before:duration-200"
-                        />
-                      </div>
-                      {hov && (
-                        <div
-                          className={`flex-row z-10 p-2 sm:-ml-[350px] sm:-mt-[100px] flex items-center pb-3 bg-white cursor-pointer absolute top-36 sm:top-60 left-44 sm:left-[34rem] shadow-lg drop-shadow-2xl`}
-                          onClick={handleTab}
-                          onMouseLeave={handleLeave}
                         >
-                          <div className="flex flex-row">
-                            <div
-                              className="flex flex-col basis-3/4 w-28 flex-grow ml-1 mr-2.5 text-[14px]"
-                              key={data?._id}
+                          {hov && (
+                            <Link 
+                              className={`flex-row z-10 p-2  flex items-center pb-3 absolute lg:top-2 lg:left-7 -left-12 top-[70px] bg-white cursor-pointer  shadow-lg drop-shadow-2xl`}
+                              onClick={handleTab}
+                              onMouseLeave={handleLeave}
+                              href={data?.circles[0].productLink}
                             >
-                              <h2 className="font-[600]">
-                                {data?.circles[0].productTitle}
-                              </h2>
-                              <p>{data?.circles[0].productCategory}</p>
-                              <p className="flex items-center gap-1 text-2xl mt-1">
-                                <sub className="text-[12px] font-bold">₹</sub>
-                                {data?.circles[0].productPrice}
-                              </p>
-                            </div>
-                            <div className="absolute top-0 right-0 flex items-center justify-end h-full">
-                              <Image
-                                className="flex mx-1 rotate-90"
-                                src="/icons/uparrow.svg"
-                                height={20}
-                                width={20}
-                                alt="arrow"
-                              />
-                            </div>
-                          </div>
+                              <div className="flex flex-row">
+                                <div
+                                  className="flex flex-col basis-3/4 w-28 flex-grow ml-1 mr-2.5 text-[14px]"
+                                  key={data?._id}
+                                >
+                                  <h2 className="font-[600]">
+                                    {data?.circles[0].productTitle}
+                                  </h2>
+                                  <p>{data?.circles[0].productCategory}</p>
+                                  <p className="flex items-center gap-1 text-2xl mt-1">
+                                    <sub className="text-[12px] font-bold">
+                                      ₹
+                                    </sub>
+                                    {data?.circles[0].productPrice}
+                                  </p>
+                                </div>
+                                <div className="absolute top-0 right-0 flex items-center justify-end h-full">
+                                  <Image
+                                    className="flex mx-1 rotate-90"
+                                    src="/icons/uparrow.svg"
+                                    height={20}
+                                    width={20}
+                                    alt="arrow"
+                                  />
+                                </div>
+                              </div>
+                            </Link>
+                          )}
                         </div>
-                      )}
+                      </div>
                     </div>
                   )}
               </div>
