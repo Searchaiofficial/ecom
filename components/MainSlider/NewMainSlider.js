@@ -138,9 +138,22 @@ export default function NewMainSlider({ initialData }) {
               <div
                 className={`relative mt-[60px] sm:mt-0 group h-[78vh]  lg:-translate-x-[5px] -translate-x-[10px] translate-r md:translate-x-0`}
               >
-                <Link
-                  href={`https://ayatrio.com//category/${data?.link}` || "/"}
-                >
+                {data.link ? (
+                  <Link href={`https://ayatrio.com//category/${data?.link}`}>
+                    <Image
+                      src={
+                        windowWidth > 600
+                          ? data?.desktopImgSrc
+                          : data?.mobileImgSrc
+                      }
+                      fill
+                      alt={data.imgTitle || "Swiper image"}
+                      priority
+                      className="object-fill  px-[10px]  swiper-slide  lg:px-[0px] w-full"
+                      // objectFit="cover"
+                    />
+                  </Link>
+                ) : (
                   <Image
                     src={
                       windowWidth > 600
@@ -153,7 +166,7 @@ export default function NewMainSlider({ initialData }) {
                     className="object-fill  px-[10px]  swiper-slide  lg:px-[0px] w-full"
                     // objectFit="cover"
                   />
-                </Link>
+                )}
                 {/* <div className="absolute flex text-lg text-white sm:bottom-[2.5rem] bottom-[96px] left-[3rem] flex-col md:flex-row gap-4 md:items-center">
                   <div className="w-full md:w-auto flex gap-2 flex-col">
                     <p className="text-[12px] font-[500] drop-shadow-xl text-black">
@@ -177,7 +190,7 @@ export default function NewMainSlider({ initialData }) {
                           className="border-2 border-neutral-300 hover:border-white  absolute hover:bg-[rgba(0,0,0,0.3)] rounded-full size-[30px] flex items-center justify-center transition-all duration-200 before:content-[''] before:size-3 before:bg-white  before:rounded-full before:hover:size-2 before:transition-all before:duration-200"
                         >
                           {hov && (
-                            <Link 
+                            <Link
                               className={`flex-row z-10 p-2  flex items-center pb-3 absolute lg:top-2 lg:left-7 -left-12 top-[70px] bg-white cursor-pointer  shadow-lg drop-shadow-2xl`}
                               onClick={handleTab}
                               onMouseLeave={handleLeave}
