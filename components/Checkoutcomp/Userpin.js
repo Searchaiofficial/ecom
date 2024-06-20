@@ -126,7 +126,7 @@ const Userpin = () => {
           <div className=" py-2 mx-2">
             {/* <!-- header section --> */}
             <div className="flex justify-between items-center mb-10 lg:pb-5">
-              <h1 className=" text-[22px] leading-[1.33] font-[700] tracking-tight">
+              <h1 className=" leading-[1.33]  tracking-tight text-xl font-semibold mb-6">
                 Shopping bag
               </h1>
               <div className="cursor-pointer hover:bg-gray-400 box-border rounded-xl">
@@ -284,9 +284,9 @@ const Userpin = () => {
 
           <div className="">{/* CART1 */}</div>
         </div>
-        <div className="lg:col-span-4 col-span-1 sm:block order-1 lg:order-2 bg-white  border-gray-300 rounded-lg  overflow-hidden  p-[0.6rem]  text-slate-600 ">
+        <div className="lg:col-span-4 col-span-1 sm:block order-1 lg:order-2 bg-white  border-gray-300 rounded-lg  overflow-hidden  p-[0.6rem]  text-slate-600 pt-[20px]">
           <div className="flex justify-between">
-            <h3 className="text-[22px] font-bold text-black">Your Order</h3>
+            <h3 className="text-black text-xl font-semibold mb-6">Your Order</h3>
             <Link href={"/cart"} className="underline">
               {" "}
               Edit

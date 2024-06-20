@@ -41,7 +41,15 @@ const Card = ({ data, productId }) => {
   const [openEmiDetails, setOpenEMIDetails] = useState(false)
   const [showCart, setShowCart] = useState(false)
 
+  const specifications = ['1.5mm', '3mm', '5mm'];
 
+  // State to hold the selected specification
+  const [selectedSpec, setSelectedSpec] = useState(null);
+
+  // Handler for clicking a specification
+  const handleSpecClick = (spec) => {
+    setSelectedSpec(spec);
+  };
 
 
   const fetchReviews = async () => {
@@ -449,6 +457,7 @@ const Card = ({ data, productId }) => {
     }
   }, [data?.category])
 
+
   return (
     <>
       <div className="flex justify-start md:min-w-[25vw] gap-1 mt-2.5 w-[100%] ml-0">
@@ -528,6 +537,24 @@ const Card = ({ data, productId }) => {
 
             </div>
             <IncDecCounter />
+          </div>
+
+          <div>
+            <div className="py-4">
+              <h2 className="text-lg font-semibold mb-4">Specification</h2>
+              <div className="flex space-x-4">
+                {specifications.map((spec) => (
+                  <button
+                    key={spec}
+                    onClick={() => handleSpecClick(spec)}
+                    className={`px-2 py-1 ${selectedSpec === spec ? 'bg-green-500 text-white' : 'bg-gray-200 text-black'
+                      }`}
+                  >
+                    {spec}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* color-container */}

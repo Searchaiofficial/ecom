@@ -273,7 +273,7 @@ const CartMain = () => {
             <div className="py-2 ">
               {/* <!-- header section --> */}
               <div className="flex justify-between items-center lg:mb-10 mb-5 ">
-                <h1 className=" text-[24px] text-[#111111] leading-[1.33] font-[700] tracking-tight">
+                <h1 className=" text-[#111111] leading-[1.33] tracking-tight text-xl font-semibold mb-6">
                   Shopping Details
                 </h1>
                 <div className="cursor-pointer hover:bg-gray-400 box-border rounded-xl">

@@ -114,7 +114,7 @@ const AddCart = () => {
         {cartStatus === "failed" && <p>Error loading data from DB.</p>}
         {cartStatus === "succeeded" && cartdata ? (
           <div>
-            <h1 className="sm:text-4xl text-2xl mb-6 font-semibold">Bag</h1>
+            <h1 className="text-xl font-semibold mb-6">Bag</h1>
             {cartdata && cartdata.items && cartdata.items.map((item) => (
               <div key={item._id}>
                 <div className="left-cart flex-col flex sm:w-2/3 w-[90vw] pr-8">
