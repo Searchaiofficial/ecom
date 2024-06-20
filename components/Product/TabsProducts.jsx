@@ -1067,7 +1067,6 @@ const Tabs = ({
           }
 
         </div>
-        <hr />
         <div>
           {openAll ? (
             <div className="menu-overlay z-[9999]  bg-white  border-2 fixed  sm:w-[30vw] w-[100vw] sm:h-[100vh] h-[80vh]  right-0  bottom-0 ">
@@ -1354,7 +1353,7 @@ const Tabs = ({
               </button>
             )}
           </div>
-          <div className=" grid md:grid-cols-4 cursor-pointer gap-4 py-3">
+          <div className="grid md:grid-cols-4 grid-cols-2 cursor-pointer gap-4 py-3">
             {filterData && filterData.length > 0 ? (
               filterData.map((text, idx) => {
                 const inCart = isProductInCart(text?._id);

@@ -248,7 +248,7 @@ function TabsProductCard(props) {
           {props.parentCategory === "offers" ? (
             <div
               className={
-                "flex text-[12px] justify-between text-black font-normal bg-white py-1 px-3 absolute top-2 left-2 z-10"
+                "flex text-[12px] justify-between text-black font-normal bg-white py-[.1rem] px-[.5rem] absolute top-2 left-2 z-10"
               }
             >
               {props.offer}
@@ -256,7 +256,7 @@ function TabsProductCard(props) {
           ) : props.demandtype ? (
             <div
               className={
-                "flex text-[12px] justify-between text-black font-normal bg-white py-1 px-3 absolute top-2 left-2 z-10"
+                "flex text-[12px] justify-between text-black font-normal bg-white py-[.1rem] px-[.5rem] absolute top-2 left-2 z-10"
               }
             >
               {props.demandtype === "Ayatrio Member Favorite"
@@ -280,7 +280,7 @@ function TabsProductCard(props) {
                 width={20}
                 alt="arrow"
                 onClick={prevSlide}
-                className="arrow arrow-left"
+                className="arrow arrow-left hover:opacity-100"
               />
             )}
             {props.images?.map((item, idx) => {
@@ -311,7 +311,7 @@ function TabsProductCard(props) {
                   width={20}
                   alt="arrow"
                   onClick={nextSlide}
-                  className="arrow arrow-right"
+                  className="arrow arrow-right hover:opacity-100"
                 />
               </div>
             )}

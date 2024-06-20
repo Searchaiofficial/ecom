@@ -128,7 +128,7 @@ export default function NewMainSlider({ initialData }) {
             width={30}
             height={30}
             alt="arrow"
-            className=" swiper-button-prev mt-[8rem] sm:-translate-y-[150px]  sm:translate-x-[-80.8vw] absolute left-0"
+            className="swiper-button-prev mt-[8rem] sm:-translate-y-[150px]  sm:translate-x-[-80.8vw] absolute left-0"
           />
         </div>
 

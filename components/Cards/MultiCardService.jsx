@@ -132,14 +132,14 @@ const MulticardService = () => {
                             width={20}
                             height={20}
                             alt="Arrow"
-                            className="back rounded-full h-7 w-7 bg-slate-400"
+                            className="back rounded-full h-7 w-7 shadow-[0_6px_16px_rgba(0,0,0,0.12)]"
                         />
                         <Image
                             src="/icons/rightarrow-w.svg"
                             width={20}
                             height={20}
                             alt="Arrow"
-                            className="right lg:mr-16 mr-6 rounded-full h-7 w-7 bg-slate-400"
+                            className="right lg:mr-16 mr-6 rounded-full h-7 w-7 shadow-[0_6px_16px_rgba(0,0,0,0.12)]"
                         />
                     </div>
                 </Swiper>

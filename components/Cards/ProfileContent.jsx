@@ -94,7 +94,7 @@ const ProfileContent = ({ initialData }) => {
           width={20}
           height={20}
           alt="Arrow"
-          className="vector-two  rounded-full h-7 w-7"
+          className="vector-two rounded-full h-7 w-7"
         />
         <Image
           src="/icons/rightarrow-w.svg"

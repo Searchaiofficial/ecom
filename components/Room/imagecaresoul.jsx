@@ -126,7 +126,7 @@ const Carousel = () => {
               width={20}
               alt="arrow"
 
-              className="absolute left-3 h-8 w-8 top-1/2 opacity-70"
+              className="absolute left-3 h-8 w-8 top-1/2 hover:opacity-100"
             // className="absolute filter drop-shadow-sm w-7 h-7  text-white opacity-85 group hover:cursor-pointer hover:opacity-100 hover:scale-104 hover:filter-drop-shadow-lg  arrow-left"
             />
           </div>
@@ -139,7 +139,7 @@ const Carousel = () => {
               width={30}
               alt="arrow"
 
-              className="absolute right-3 top-1/2 h-8 w-8  opacity-70"
+              className="absolute right-3 top-1/2 h-8 w-8 hover:opacity-100"
             // className="absolute filter drop-shadow-sm w-7 h-7 -mt-[13px] text-white opacity-85 group hover:cursor-pointer hover:opacity-100 hover:scale-104 hover:filter-drop-shadow-lg arrow-right"
             />
 

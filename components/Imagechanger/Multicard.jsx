@@ -90,14 +90,14 @@ const Multicard = () => {
               width={20}
               height={20}
               alt="Arrow"
-              className="back  rounded-full h-7 w-7"
+              className="back rounded-full h-7 w-7 hover:opacity-100"
             />
             <Image
               src="/icons/rightarrow-w.svg"
               width={20}
               height={20}
               alt="Arrow"
-              className="right lg:mr-16 mr-6   rounded-full h-7 w-7"
+              className="right lg:mr-16 mr-6 rounded-full h-7 w-7 hover:opacity-100"
             />
           </div>
         </Swiper>
