@@ -59,7 +59,7 @@ export default function WarrantyClaim() {
                                 name="firstName"
                                 type="text"
                                 placeholder="Enter First Name"
-                                className="w-full p-2 border border-black rounded mt-1 h-12"
+                                className="w-full p-2 border border-black rounded mt-1 h-12 px-4"
                                 value={formData.firstName}
                                 onChange={handleChange}
                                 required
@@ -74,7 +74,7 @@ export default function WarrantyClaim() {
                                 name="lastName"
                                 type="text"
                                 placeholder="Enter Last Name"
-                                className="w-full p-2 border border-black rounded mt-1 h-12"
+                                className="w-full p-2 border border-black rounded mt-1 h-12 px-4"
                                 value={formData.lastName}
                                 onChange={handleChange}
                                 required
@@ -89,7 +89,7 @@ export default function WarrantyClaim() {
                                 name="company"
                                 type="text"
                                 placeholder="Enter Company Name"
-                                className="w-full p-2 border border-black rounded mt-1 h-12"
+                                className="w-full p-2 border border-black rounded mt-1 h-12 px-4"
                                 value={formData.company}
                                 onChange={handleChange}
                             />
@@ -103,7 +103,7 @@ export default function WarrantyClaim() {
                                 name="fullAddress"
                                 type="text"
                                 placeholder="Enter Full Address"
-                                className="w-full p-2 border border-black rounded mt-1 h-12"
+                                className="w-full p-2 border border-black rounded mt-1 h-12 px-4"
                                 value={formData.fullAddress}
                                 onChange={handleChange}
                                 required
@@ -118,7 +118,7 @@ export default function WarrantyClaim() {
                                 name="apartment"
                                 type="text"
                                 placeholder="Enter Apartment, suite, etc."
-                                className="w-full p-2 border border-black rounded mt-1 h-12"
+                                className="w-full p-2 border border-black rounded mt-1 h-12 px-4"
                                 value={formData.apartment}
                                 onChange={handleChange}
                             />
@@ -132,7 +132,7 @@ export default function WarrantyClaim() {
                                 name="city"
                                 type="text"
                                 placeholder="Enter City"
-                                className="w-full p-2 border border-black rounded mt-1 h-12"
+                                className="w-full p-2 border border-black rounded mt-1 h-12 px-4"
                                 value={formData.city}
                                 onChange={handleChange}
                                 required
@@ -145,7 +145,7 @@ export default function WarrantyClaim() {
                             <select
                                 id="country"
                                 name="country"
-                                className="w-full p-2 border border-black rounded mt-1 h-12"
+                                className="w-full p-2 border border-black rounded mt-1 h-12 px-4"
                                 value={formData.country}
                                 onChange={handleChange}
                                 required
@@ -165,7 +165,7 @@ export default function WarrantyClaim() {
                                 name="state"
                                 type="text"
                                 placeholder="Enter State"
-                                className="w-full p-2 border border-black rounded mt-1 h-12"
+                                className="w-full p-2 border border-black rounded mt-1 h-12 px-4"
                                 value={formData.state}
                                 onChange={handleChange}
                             />
@@ -179,7 +179,7 @@ export default function WarrantyClaim() {
                                 name="pincode"
                                 type="text"
                                 placeholder="Enter Pincode"
-                                className="w-full p-2 border border-black rounded mt-1 h-12"
+                                className="w-full p-2 border border-black rounded mt-1 h-12 px-4"
                                 value={formData.pincode}
                                 onChange={handleChange}
                                 required
@@ -194,7 +194,7 @@ export default function WarrantyClaim() {
                                 name="email"
                                 type="email"
                                 placeholder="Enter Email ID"
-                                className="w-full p-2 border border-black rounded mt-1 h-12"
+                                className="w-full p-2 border border-black rounded mt-1 h-12 px-4"
                                 value={formData.email}
                                 onChange={handleChange}
                                 required
@@ -209,7 +209,7 @@ export default function WarrantyClaim() {
                                 name="phoneNumber"
                                 type="tel"
                                 placeholder="Enter Phone Number"
-                                className="w-full p-2 border border-black rounded mt-1 h-12"
+                                className="w-full p-2 border border-black rounded mt-1 h-12 px-4"
                                 value={formData.phoneNumber}
                                 onChange={handleChange}
                                 required
@@ -222,7 +222,7 @@ export default function WarrantyClaim() {
                             <select
                                 id="purchasedFrom"
                                 name="purchasedFrom"
-                                className="w-full p-2 border border-black rounded mt-1 h-12"
+                                className="w-full p-2 border border-black rounded mt-1 h-12 px-4"
                                 value={formData.purchasedFrom}
                                 onChange={handleChange}
                                 required
@@ -241,7 +241,7 @@ export default function WarrantyClaim() {
                                 id="issue"
                                 name="issue"
                                 placeholder="Describe the issue"
-                                className="w-full p-2 border border-black rounded mt-1"
+                                className="w-full p-2 border border-black rounded mt-1 px-4"
                                 value={formData.issue}
                                 onChange={handleChange}
                                 required
@@ -255,7 +255,7 @@ export default function WarrantyClaim() {
                                 id="reason"
                                 name="reason"
                                 placeholder="Enter your reason"
-                                className="w-full p-2 border border-black rounded mt-1"
+                                className="w-full p-2 border border-black rounded mt-1 px-4"
                                 value={formData.reason}
                                 onChange={handleChange}
                                 required
@@ -275,7 +275,7 @@ export default function WarrantyClaim() {
                                 onChange={handleChange}
                                 required
                             />
-                            <label htmlFor="damageProductImages" className="w-full md:w-[300px] cursor-pointer bg-white border border-black rounded-lg flex items-center justify-center px-3 py-2">
+                            <label htmlFor="damageProductImages" className="w-full md:w-[300px] cursor-pointer bg-white border border-black rounded-lg flex items-center justify-center px-3 py-2 h-12">
                                 Upload Damage Product Images
                             </label>
                             <p className="text-gray-500 text-sm">At least 3 images required. Max file size: 10MB.</p>
@@ -293,7 +293,7 @@ export default function WarrantyClaim() {
                                 onChange={handleChange}
                                 required
                             />
-                            <label htmlFor="invoice" className="w-full md:w-[300px] cursor-pointer bg-white border border-black rounded-lg flex items-center justify-center px-3 py-2">
+                            <label htmlFor="invoice" className="w-full md:w-[300px] cursor-pointer bg-white border border-black rounded-lg flex items-center justify-center px-3 py-2 h-12">
                                 Upload Invoice
                             </label>
                             <p className="text-gray-500 text-sm">Max file size: 10MB.</p>

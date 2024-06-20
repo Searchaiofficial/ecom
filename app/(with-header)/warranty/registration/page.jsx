@@ -56,7 +56,7 @@ export default function WarrantyRegistration() {
                                 name="fullName"
                                 type="text"
                                 placeholder="Enter Full Name"
-                                className="w-full p-2 border border-black rounded mt-1 h-12"
+                                className="w-full p-2 border border-black rounded mt-1 h-12 px-4"
                                 value={formData.fullName}
                                 onChange={handleChange}
                                 required
@@ -71,7 +71,7 @@ export default function WarrantyRegistration() {
                                 name="email"
                                 type="email"
                                 placeholder="Enter Email ID"
-                                className="w-full p-2 border border-black rounded mt-1 h-12"
+                                className="w-full p-2 border border-black rounded mt-1 h-12 px-4"
                                 value={formData.email}
                                 onChange={handleChange}
                                 required
@@ -98,7 +98,7 @@ export default function WarrantyRegistration() {
                                 <select
                                     id="phoneCountryCode"
                                     name="phoneCountryCode"
-                                    className="border rounded-l-lg px-3 py-2 h-12 border-black"
+                                    className="border rounded-l-lg px-3 py-2 h-12 border-black px-4"
                                     value={formData.phoneCountryCode}
                                     onChange={handleChange}
                                 >
@@ -111,7 +111,7 @@ export default function WarrantyRegistration() {
                                     name="phoneNumber"
                                     type="tel"
                                     placeholder="Enter Phone Number"
-                                    className="w-full px-3 py-2 border rounded-r-lg border-black border-l-0"
+                                    className="w-full px-4 py-2 border rounded-r-lg border-black border-l-0"
                                     value={formData.phoneNumber}
                                     onChange={handleChange}
                                     required
@@ -125,7 +125,7 @@ export default function WarrantyRegistration() {
                             <select
                                 id="category"
                                 name="category"
-                                className="w-full p-2 border border-black rounded mt-1 h-12"
+                                className="w-full p-2 border border-black rounded mt-1 h-12 px-3"
                                 value={formData.category}
                                 onChange={handleChange}
                                 required
@@ -148,7 +148,7 @@ export default function WarrantyRegistration() {
                                 name="purchasedFrom"
                                 type="text"
                                 placeholder="Enter Purchased From"
-                                className="w-full p-2 border border-black rounded mt-1 h-12"
+                                className="w-full p-2 border border-black rounded mt-1 h-12 px-4"
                                 value={formData.purchasedFrom}
                                 onChange={handleChange}
                                 required
@@ -158,7 +158,7 @@ export default function WarrantyRegistration() {
                             <label className="block text-black font-bold mb-2" htmlFor="invoiceFile">
                                 Upload Invoice <span className="text-red-500">*</span>
                             </label>
-                            <label htmlFor="invoiceFile" className="w-full md:w-[300px] cursor-pointer bg-white border border-black rounded-lg flex items-center justify-center px-3 py-2">
+                            <label htmlFor="invoiceFile" className="w-full md:w-[300px] cursor-pointer bg-white border border-black rounded-lg flex items-center justify-center px-3 py-2 h-12">
                                 Upload Invoice
                                 <input
                                     id="invoiceFile"
