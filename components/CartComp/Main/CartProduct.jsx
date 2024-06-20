@@ -11,7 +11,7 @@ const CartProduct = ({
   handleItemDelete,
 }) => {
   // Calculate the total cost of selected services
-  const totalServiceCost = cartItem?.selectedServices?.reduce((total, service) => total + parseFloat(service.cost), 0);
+  const totalServiceCost = cartItem?.selectedServices.reduce((total, service) => total + parseFloat(service.cost), 0);
 
   // Calculate the total price including services
   const totalPrice = cartItem?.price + totalServiceCost;

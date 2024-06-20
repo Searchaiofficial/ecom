@@ -78,12 +78,12 @@ const CartMain = () => {
   }, []);
 
   if (cartStatus === "succeeded" && selectedItems) {
-    totalPrice = selectedItems?.items?.reduce((total, item) => {
-      const serviceTotalCost = item?.selectedServices?.reduce(
+    totalPrice = selectedItems.items.reduce((total, item) => {
+      const serviceTotalCost = item.selectedServices.reduce(
         (serviceTotal, service) => serviceTotal + parseFloat(service.cost),
         0
       );
-      const itemTotalPrice = (item?.productId?.totalPrice + serviceTotalCost) * item?.quantity;
+      const itemTotalPrice = (item.productId.totalPrice + serviceTotalCost) * item.quantity;
       return total + itemTotalPrice;
     }, 0);
   }

@@ -109,12 +109,12 @@ const Userpin = () => {
   //   );
   // }
   if (cartStatus === "succeeded" && cartdata) {
-    totalPrice = cartdata?.items?.reduce((total, item) => {
-      const serviceTotalCost = item?.selectedServices?.reduce(
+    totalPrice = cartdata.items.reduce((total, item) => {
+      const serviceTotalCost = item.selectedServices.reduce(
         (serviceTotal, service) => serviceTotal + parseFloat(service.cost),
         0
       );
-      const itemTotalPrice = (item?.productId?.totalPrice + serviceTotalCost) * item.quantity;
+      const itemTotalPrice = (item.productId.totalPrice + serviceTotalCost) * item.quantity;
       return total + itemTotalPrice;
     }, 0);
   }
