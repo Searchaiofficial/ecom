@@ -75,19 +75,31 @@ const Details = () => {
   console.log(deliveryPrice);
 
   let totalPrice = 0;
-  if (cartdata && cartdata.items) {
-    totalPrice = cartdata.items.reduce(
-      (total, item) => total + item.productId.totalPrice * item.quantity,
-      0
-    );
-  }
+  // if (cartdata && cartdata.items) {
+  //   totalPrice = cartdata.items.reduce(
+  //     (total, item) => total + item.productId.totalPrice * item.quantity,
+  //     0
+  //   );
+  // }
 
-  if (CartData && CartData.items) {
-    totalPrice = CartData.items.reduce(
-      (total, item) => total + item.productId.totalPrice * item.quantity,
-      0
-    );
+  if (cartdata && cartdata.items) {
+    totalPrice = cartdata.items.reduce((total, item) => {
+      const serviceTotalCost = item.selectedServices.reduce(
+        (serviceTotal, service) => serviceTotal + parseFloat(service.cost),
+        0
+      );
+      const itemTotalPrice = (item.productId.totalPrice + serviceTotalCost) * item.quantity;
+      return total + itemTotalPrice;
+    }, 0);
   }
+  // if (CartData && CartData.items) {
+  //   totalPrice = CartData.items.reduce(
+  //     (total, item) => total + item.productId.totalPrice * item.quantity,
+  //     0
+  //   );
+  // }
+
+  console.log(totalPrice)
 
   // console.log(cartdata);
 
@@ -251,7 +263,7 @@ const Details = () => {
   }, []);
 
   useEffect(() => {
-    if(userCoordinates){
+    if (userCoordinates) {
       console.log(userCoordinates)
       getDataFromCoordinates(userCoordinates.lat, userCoordinates.lng);
     }

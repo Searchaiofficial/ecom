@@ -102,11 +102,21 @@ const Userpin = () => {
     console.log("Updated cartStatus", cartStatus);
   }, [cartdata, cartStatus]);
   let totalPrice = 0;
+  // if (cartStatus === "succeeded" && cartdata) {
+  //   totalPrice = cartdata.items.reduce(
+  //     (total, item) => total + item.productId.totalPrice * item.quantity,
+  //     0
+  //   );
+  // }
   if (cartStatus === "succeeded" && cartdata) {
-    totalPrice = cartdata.items.reduce(
-      (total, item) => total + item.productId.totalPrice * item.quantity,
-      0
-    );
+    totalPrice = cartdata.items.reduce((total, item) => {
+      const serviceTotalCost = item.selectedServices.reduce(
+        (serviceTotal, service) => serviceTotal + parseFloat(service.cost),
+        0
+      );
+      const itemTotalPrice = (item.productId.totalPrice + serviceTotalCost) * item.quantity;
+      return total + itemTotalPrice;
+    }, 0);
   }
 
   const delcharge = 100;

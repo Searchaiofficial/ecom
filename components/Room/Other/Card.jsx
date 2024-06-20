@@ -307,30 +307,32 @@ const Card = ({ data, productId }) => {
 
 
   const handleBuyNow = async () => {
-    if (inCart) {
-      router.push("/checkout")
-    }
-    try {
-      // Validate quantity, productId, and deviceId
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`, {
-        deviceId: localStorage.getItem("deviceId"),
-        productId: roomData._id,
-        quantity: 1
-      })
+    setsidebarContent("buyNow")
+    // if (inCart) {
+    //   // router.push("/checkout")
+    //   return
+    // }
+    // try {
+    //   // Validate quantity, productId, and deviceId
+    //   const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`, {
+    //     deviceId: localStorage.getItem("deviceId"),
+    //     productId: roomData._id,
+    //     quantity: 1
+    //   })
 
-      console.log(response.data)
-      if (response.status === 200) {
-        setInCart(true)
-        dispatch(setDbItems(response.data))
+    //   console.log(response.data)
+    //   if (response.status === 200) {
+    //     setInCart(true)
+    //     dispatch(setDbItems(response.data))
 
-      }
+    //   }
 
-      // Redirect to the checkout page
-      router.push("/checkout")
-    } catch (error) {
-      console.error("Error handling click:", error);
-      setInCart(true)
-    }
+    //   // Redirect to the checkout page
+    //   router.push("/checkout")
+    // } catch (error) {
+    //   console.error("Error handling click:", error);
+    //   setInCart(true)
+    // }
   }
 
   const handleClickDB = async () => {
@@ -360,6 +362,8 @@ const Card = ({ data, productId }) => {
     }
   };
 
+  // console.log(localStorage.getItem("deviceId"))
+
   const handleAddToCart = async (productId) => {
     try {
       // Validate quantity, productId, and deviceId
@@ -380,11 +384,68 @@ const Card = ({ data, productId }) => {
       // setInCart(true)
     }
   }
+
+  const [selectedServices, setSelectedServices] = useState([])
+
+
+
+  const handleServiceChange = (service) => {
+    setSelectedServices((prevSelectedServices) => {
+      if (prevSelectedServices.some((s) => s.name === service.name)) {
+        return prevSelectedServices.filter((s) => s.name !== service.name);
+      } else {
+        return [...prevSelectedServices, service];
+      }
+    });
+  };
+  // console.log(cartData)
+
+  // const cartItem = cartData.filter((item) => item.productId._id === productId)
+
+  // console.log(cartItem)
+  // console.log(cartItem[0]?.selectedServices)
+
+
+
+  // useEffect(() => {
+  //   // Initialize selected services from cart item
+  //   if (cartItem && cartItem.selectedServices) {
+  //     setSelectedServices(cartItem[0]?.selectedServices);
+  //     console.log(selectedServices)
+  //   }
+  // }, [cartItem]);
+
+  // console.log(selectedServices)
+
+
+
+
+  const handleBuy = async () => {
+    try {
+      // Validate quantity, productId, and deviceId
+      console.log(selectedServices)
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`, {
+        deviceId: localStorage.getItem("deviceId"),
+        productId: productId,
+        quantity: 1,
+        selectedServices
+      })
+      if (response.status === 200) {
+        // setInCart(true)
+        dispatch(setDbItems(response.data))
+        router.push("/checkout")
+      }
+      // Redirect to the checkout page
+    } catch (error) {
+      console.error("Error handling click:", error);
+      // setInCart(true)
+    }
+  }
   //posting data to database
 
-  const handleClicks = () => {
-    router.push("/checkout");
-  };
+  // const handleClicks = () => {
+  //   router.push("/checkout");
+  // };
 
   console.log(data);
 
@@ -451,9 +512,18 @@ const Card = ({ data, productId }) => {
     setCategoryProducts(filteredProducts)
   }
 
+  const [avaliableServices, setavaliableServices] = useState([])
+  const fetchCategoryData = async () => {
+    const responce = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getCategoryByName/${data?.category}`)
+    console.log(responce.data)
+    setavaliableServices(responce.data?.availableServices)
+  }
+
+  console.log(avaliableServices)
   useEffect(() => {
     if (data?.category) {
       fetchCategoryProducts()
+      fetchCategoryData()
     }
   }, [data?.category])
 
@@ -1178,7 +1248,7 @@ const Card = ({ data, productId }) => {
                             </div>
                           </div>
                           <div className="w-full border-t mt-[155px] pb-28 h-[500px] overflow-y-auto">
-                            <h2 className="md:text-[24px] text-[18px] font-bold mt-2">Complement your order</h2>
+                            <h2 className="md:text-[24px] text-[18px] font-bold mt-2">Similar products</h2>
                             <div className="">
                               {
                                 categoryProducts && categoryProducts.length > 0 ? (
@@ -1245,6 +1315,133 @@ const Card = ({ data, productId }) => {
                             >
                               Go to shopping bag
                             </Link>
+                          </button>
+                        </div>
+                      </div>
+
+
+
+                    </section>
+                  </div>
+                )}
+                {sidebarContect === "buyNow" && (
+                  <div className=" fixed h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0 z-[99999]">
+                    <section className="text-black bg-white flex-col absolute right-0 top-0 h-screen z-[99999] w-full  lg:w-[35%] flex ">
+
+
+                      <div className="flex flex-col ">
+                        <div className="md:px-[40px] pb-[32px] px-[20px]">
+                          <div className="flex items-center justify-between h-[72px] mb-2">
+                            <h1 className="text-[14px] font-medium text-[#484848]">
+                              Buy Now
+                            </h1>
+                            <button
+                              className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
+                              onClick={() => setsidebarContent(null)}
+                            >
+                              <Image
+                                src="/icons/closeicon.svg"
+                                alt="close"
+                                width={20}
+                                height={30}
+                                className="py-2"
+                              />
+
+                            </button>
+                          </div>
+                          <div className="flex items-start w-[100%]  pb-10 absolute ">
+
+                            <Image src={data?.images[0]} height={100} width={100} className=" mr-[16px] mt-[6px] h-[100px] min-w-[100px]" />
+
+                            <div className="flex flex-col mx-[12px] md:w-[100%] w-[50%]">
+                              <p className="text-[14px] font-bold text-[#484848]">{data?.productTitle}</p>
+                              <p className="text-[#484848] text-[12px] mb-[5px] line-clamp-1">{data?.shortDescription}</p>
+                              <div className="font-bold items-end flex mb-1 my-[5px]">
+                                <h2 className={`text-3xl leading-[0.5] tracking-wide ${data?.specialprice?.price ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg" : ""} `} style={data?.specialprice?.price ? { boxShadow: '3px 3px #ad3535' } : {}}>
+                                  <span className="text-sm">Rs. &nbsp;</span>{" "}
+                                  {data?.specialprice?.price ? data?.specialprice?.price : data.perUnitPrice}
+                                </h2>{" "}
+                                <span> &nbsp;/roll</span>
+                              </div>
+                              {
+                                data?.specialprice?.price && (
+                                  <div className="flex flex-col">
+                                    <p className="text-[#757575] text-[12px] pt-[3px]">Regular price: Rs.{data?.totalPrice} </p>
+                                    {
+                                      data?.specialprice?.startDate && data?.specialprice?.endDate && (
+                                        <p className="text-[#757575] text-[12px] pb-[10px]">Price valid {formattedStartDate} - {formattedEndDate} </p>
+                                      )
+                                    }
+                                    {/* <p className="text-[#757575] text-[12px] pb-[10px]">Price valid May 02 - May 29 or while supply lasts</p> */}
+                                  </div>
+                                )
+                              }
+
+
+                            </div>
+                          </div>
+                          <div className="w-full border-t mt-[155px] pb-28 h-[500px] overflow-y-auto">
+                            <h2 className="md:text-[24px] text-[18px] font-bold mt-2">Add other services</h2>
+                            <div className="">
+                              {/* {
+                                categoryProducts && categoryProducts.length > 0 ? (
+                                  categoryProducts.map((product) => (
+                                    <div key={product._id} className="flex items-start  justify-between cursor-pointer  mt-[30px]  pb-10" onMouseEnter={() => setShowCart(true)} onMouseLeave={() => setShowCart(false)}>
+                                      <div className="flex">
+                                        <Image src={product?.images[0]} height={100} width={100} className="mr-[16px] h-[100px] w-[100px]" />
+                                        <div className="flex flex-col mx-[12px] max-w-[220px]">
+                                          <p className="text-[14px] font-bold text-[#484848]">{product.productTitle}</p>
+                                          <p className="text-[#484848] text-[12px] mb-[5px] line-clamp-1">{product?.shortDescription}</p>
+                                          <div className="font-bold items-end flex mb-1 my-[5px]">
+                                            <h2 className={`text-3xl leading-[0.5] tracking-wide ${product?.specialprice?.price ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg" : ""} `} style={product?.specialprice?.price ? { boxShadow: '3px 3px #ad3535' } : {}}>
+                                              <span className="text-sm">Rs. &nbsp;</span>{" "}
+                                              {product?.specialprice?.price ? product?.specialprice?.price : product.perUnitPrice}
+                                            </h2>{" "}
+                                            <span> &nbsp;/roll</span>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                      <div className="bg-[#0152be] p-1.5 rounded-full max-w-fit self-center md:mr-10 " onClick={() => handleAddToCart(product._id)}>
+                                        <Image src={"/icons/ad-to-cart.svg"} height={20} width={20} className="cursor-pointer rounded-full min-w-[20px] min-h-[20px]" />
+                                      </div>
+                                    </div>
+                                  ))
+                                )
+                                  :
+                                  (
+                                    <div className="mt-5">
+                                      <p>No related products found !</p>
+                                    </div>
+                                  )
+                              } */}
+
+                              {
+                                avaliableServices && avaliableServices.length > 0 && (
+                                  avaliableServices.map((service, idx) => (
+                                    <div className={`flex items-center w-full justify-between mt-4 border p-3 cursor-pointer hover:border-black rounded-md ${selectedServices.some((s) => s.name === service.name) ? "border-black" : ""}`}>
+                                      <div className="flex flex-col items-start gap-1">
+                                        <p className="text-[14px] font-semibold text-[#484848]">{service?.name}</p>
+                                        <p className="text-[14px] font-semibold text-[#484848]"><span className="text-[10px] font-bold">Rs</span> {service?.cost}</p>
+                                      </div>
+                                      <input type="checkbox" onChange={() => handleServiceChange(service)} checked={selectedServices.some((s) => s.name === service.name)} className="form-checkbox h-4 w-4 text-blue-600  border-gray-300 " />
+
+                                    </div>
+                                  ))
+                                )
+                              }
+
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex w-full px-[16px] py-[24px] gap-4  md:py-0 md:px-0  md:flex-row flex-col items-center justify-around absolute bottom-0 left-0 border-t bg-white z-10 ">
+
+                          <button className="md:px-[42px] w-full px-[24px] md:h-[56px] h-[40px] border rounded-full md:my-[24px] bg-black text-white text-[12px] md:text-[14px] font-semibold md:mx-[24px] hover:bg-gray-900">
+                            <div
+                              onClick={handleBuy}
+                            >
+                              Go to shopping bag
+                            </div>
                           </button>
                         </div>
                       </div>
