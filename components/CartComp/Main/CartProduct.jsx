@@ -16,7 +16,7 @@ const CartProduct = ({
   // Calculate the total price including services
   const totalPrice = cartItem?.price + totalServiceCost;
 
-  console.log(cartItem);
+  console.log("cartItem : ", cartItem);
 
   return (
     <>
@@ -41,8 +41,8 @@ const CartProduct = ({
               <p className="my-2 text-gray-800 text-[12px] md:text-[16px]  lg:text-md ">
                 Room darkening curtains, 1 pair, yellow-beige
               </p>
-              <p className="my-1 text-gray-600 text-[12px] md:text-[16px]  lg:text-md">135x250 cm (53x98 ")</p>
-              <p className=" text-gray-600 text-[12px] md:text-[16px]  lg:text-md">1.18 kg per piece</p>
+              <p className="my-1 text-gray-600 text-[12px] md:text-[16px]  lg:text-md">{cartItem?.productId.productTitle}</p>
+              <p className=" text-gray-600 text-[12px] md:text-[16px]  lg:text-md"></p>
               <p className=" my-2">
                 <span className=" box-border h-1 w-10 rounded-xl mr-3 text-xs text-gray-400 bg-slate-400">
                   .d.
@@ -65,30 +65,26 @@ const CartProduct = ({
                   )
                 }
               </div>
-              <div className="flex items-center justify-between mt-2">
-                <div className=" rounded-3xl p-2 lg:p-3 lg:w-36 w-[112px]  border border-gray-400 flex justify-between items-center">
+              <div className="flex items-center justify-between mt-2 md:w-2/3 lg:w-2/3">
+                <div className="rounded-3xl py-1 px-1 w-28 border border-gray-400 flex justify-between items-center">
                   <button
-                    onClick={() =>
-                      handleItemDecr(cartItem?.productId._id, cartItem.quantity)
-                    }
-                    className=" border-gray-400 "
+                    onClick={() => handleItemDecr(cartItem?.productId._id, cartItem.quantity)}
+                    className="hover:bg-zinc-200 w-9 h-9 rounded-full flex items-center justify-center"
                   >
-                    <Minus />
+                    -
                   </button>
-                  <p className="font-bold ">
+                  <p className="font-bold text-center">
                     {cartItem.quantity}
                   </p>
-                  <div className="input-group-prepend">
-                    <button
-                      onClick={() =>
-                        handleItemIncr(cartItem?.productId._id, cartItem.quantity)
-                      }
-                      className="hover:bg-zinc-200 w-9 h-9 rounded-full flex items-center justify-center"
-                    >
-                      +
-                    </button>
-                  </div>
+                  <button
+                    onClick={() => handleItemIncr(cartItem?.productId._id, cartItem.quantity)}
+                    className="hover:bg-zinc-200 w-9 h-9 rounded-full flex items-center justify-center"
+                  >
+                    +
+                  </button>
                 </div>
+
+
 
                 <div className="">
                   <Image

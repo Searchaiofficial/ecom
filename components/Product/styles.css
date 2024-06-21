@@ -178,7 +178,6 @@ input[type="radio"] {
   width: 30px;
   height: 30px;
   color: white;
-  opacity: 85%;
   margin-top: -13px;
 }
 
@@ -189,7 +188,7 @@ input[type="radio"] {
   height: 30px;
   color: white;
   outline: #000;
-  
+  opacity: 100%;
 }
 
 .arrow:hover {
