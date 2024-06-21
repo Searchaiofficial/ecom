@@ -610,8 +610,8 @@ const Card = ({ data, productId }) => {
           </div>
 
           <div>
-            <div className="py-4">
-              <h2 className="text-lg font-semibold mb-4">Specification</h2>
+            <div className="py-4 mt-[10px]">
+              <h2 className="font-bold mb-2">Specification</h2>
               <div className="flex space-x-4">
                 {specifications.map((spec) => (
                   <button
@@ -628,7 +628,7 @@ const Card = ({ data, productId }) => {
           </div>
 
           {/* color-container */}
-          <div className="colorContainer flex flex-col mt-[30px] sm:w-auto w-[80vw]">
+          <div className="colorContainer flex flex-col mt-[10px] sm:w-auto w-[80vw]">
             <div className="w-full flex justify-between">
               {
                 imageData && imageData?.length > 1 && (

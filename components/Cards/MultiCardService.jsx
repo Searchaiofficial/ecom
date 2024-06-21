@@ -128,18 +128,18 @@ const MulticardService = () => {
 
                     <div className="flex flex-row items-end justify-end gap-4">
                         <Image
-                            src="/icons/backarrow-w.svg"
+                            src="/icons/backarrowblack.svg"
                             width={20}
                             height={20}
                             alt="Arrow"
-                            className="back rounded-full h-7 w-7 shadow-[0_6px_16px_rgba(0,0,0,0.12)]"
+                            className="back rounded-full h-7 w-7 "
                         />
                         <Image
-                            src="/icons/rightarrow-w.svg"
+                            src="/icons/rightarrowblack.svg"
                             width={20}
                             height={20}
                             alt="Arrow"
-                            className="right lg:mr-16 mr-6 rounded-full h-7 w-7 shadow-[0_6px_16px_rgba(0,0,0,0.12)]"
+                            className="right lg:mr-16 mr-6 rounded-full h-7 w-7 "
                         />
                     </div>
                 </Swiper>

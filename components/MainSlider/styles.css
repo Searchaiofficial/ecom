@@ -97,7 +97,6 @@ img {
   padding: 1rem;
   width: 2rem;
   height: 5rem;
-  opacity: 0.75;
   border-radius: 50%;
   color: var(--white-100);
   background: var(--black-300);
@@ -112,7 +111,6 @@ img {
   padding: 1rem;
   width: 2rem;
   height: 2rem;
-  opacity: 0.75;
   border-radius: 50%;
   color: var(--white-100);
   background: var(--black-300);

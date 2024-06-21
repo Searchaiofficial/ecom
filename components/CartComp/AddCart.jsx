@@ -114,7 +114,7 @@ const AddCart = () => {
         {cartStatus === "failed" && <p>Error loading data from DB.</p>}
         {cartStatus === "succeeded" && cartdata ? (
           <div>
-            <h1 className="text-xl font-semibold mb-6">Bag</h1>
+            <h1 className="sm:text-4xl text-2xl mb-6 font-semibold">Bag</h1>
             {cartdata && cartdata.items && cartdata.items.map((item) => (
               <div key={item._id}>
                 <div className="left-cart flex-col flex sm:w-2/3 w-[90vw] pr-8">
@@ -147,7 +147,6 @@ const AddCart = () => {
                           </h3>
                         </div>
                         <div className="sm:text-xl text-lg sm:font-semibold font-medium mt-2">
-
                           <div className="flex items-center">
                             <Image
                               src="/icons/indianrupeesicon.svg"
@@ -158,32 +157,6 @@ const AddCart = () => {
                             />
                             {(item?.productId?.totalPrice || 0) * (item?.quantity || 0)}
                           </div>
-                          {/* <div className="input-group p-1 inline-flex rounded-full border text-xl font-medium items-center">
-                            <div className="input-group-prepend">
-                              <button
-                                onClick={() =>
-                                  handleItemDecr()
-
-                                }
-                                className="hover:bg-zinc-200 w-9 h-9 rounded-full flex items-center justify-center"
-                              >
-                                -
-                              </button>
-                            </div>
-                            <p className="form-control w-10 text-center inline-flex items-center justify-center mx-1">
-                              {1}
-                            </p>
-                            <div className="input-group-prepend">
-                              <button
-                                onClick={() =>
-                                  handleItemDecr()
-                                }
-                                className="hover:bg-zinc-200 w-9 h-9 rounded-full flex items-center justify-center"
-                              >
-                                +
-                              </button>
-                            </div>
-                          </div> */}
                           <div className="icons flex items-center mt-4 space-x-6">
                             <Image
                               src="/icons/delete-icon.svg"

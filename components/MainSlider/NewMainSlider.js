@@ -128,7 +128,7 @@ export default function NewMainSlider({ initialData }) {
             width={30}
             height={30}
             alt="arrow"
-            className="swiper-button-prev mt-[8rem] sm:-translate-y-[150px]  sm:translate-x-[-80.8vw] absolute left-0"
+            className="swiper-button-prev mt-[8rem] sm:-translate-y-[150px] sm:translate-x-[-80.8vw] absolute left-0 transform transition-transform hover:scale-105"
           />
         </div>
 
@@ -150,7 +150,7 @@ export default function NewMainSlider({ initialData }) {
                       alt={data.imgTitle || "Swiper image"}
                       priority
                       className="object-fill  px-[10px]  swiper-slide  lg:px-[0px] w-full"
-                      // objectFit="cover"
+                    // objectFit="cover"
                     />
                   </Link>
                 ) : (
@@ -164,7 +164,7 @@ export default function NewMainSlider({ initialData }) {
                     alt={data.imgTitle || "Swiper image"}
                     priority
                     className="object-fill  px-[10px]  swiper-slide  lg:px-[0px] w-full"
-                    // objectFit="cover"
+                  // objectFit="cover"
                   />
                 )}
                 {/* <div className="absolute flex text-lg text-white sm:bottom-[2.5rem] bottom-[96px] left-[3rem] flex-col md:flex-row gap-4 md:items-center">
@@ -238,7 +238,7 @@ export default function NewMainSlider({ initialData }) {
             width={30}
             height={30}
             alt="arrow"
-            className={`swiper-button-next  hover:bg-opacity-50 sm:-translate-y-[150px] `}
+            className={`swiper-button-next sm:-translate-y-[150px] hover:scale-105`}
           />
         </div>
       </Swiper>

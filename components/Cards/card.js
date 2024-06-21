@@ -335,7 +335,7 @@ function Card(props) {
                 width={20}
                 alt="arrow"
                 onClick={prevSlide}
-                className="arrow arrow-left hover:opacity-[1.0]"
+                className="arrow arrow-left hover:opacity-[1.0] hover:scale-105"
               // className="absolute filter drop-shadow-sm w-7 h-7  text-white opacity-85 group hover:cursor-pointer hover:opacity-100 hover:scale-104 hover:filter-drop-shadow-lg  arrow-left"
               />
             )}
