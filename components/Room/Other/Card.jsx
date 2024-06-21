@@ -41,7 +41,6 @@ const Card = ({ data, productId }) => {
   const [openEmiDetails, setOpenEMIDetails] = useState(false)
   const [showCart, setShowCart] = useState(false)
 
-  const specifications = ['1.5mm', '3mm', '5mm'];
 
   // State to hold the selected specification
   const [selectedSpec, setSelectedSpec] = useState(null);
@@ -50,6 +49,8 @@ const Card = ({ data, productId }) => {
   const handleSpecClick = (spec) => {
     setSelectedSpec(spec);
   };
+
+  const selectedSpecData = data?.dimensions?.find(dim => dim._id === selectedSpec);
 
 
   const fetchReviews = async () => {
@@ -585,7 +586,8 @@ const Card = ({ data, productId }) => {
 
                 <h2 className={`text-3xl leading-[0.5] tracking-wide ${data?.specialprice?.price ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg" : ""} `} style={data?.specialprice?.price ? { boxShadow: '3px 3px #ad3535' } : {}}>
                   <span className="text-sm">Rs. &nbsp;</span>{" "}
-                  {data?.specialprice?.price ? data?.specialprice.price : data.perUnitPrice}
+                  {/* {data?.specialprice?.price ? data?.specialprice.price : data.perUnitPrice} */}
+                  {data?.specialprice?.price ? data?.specialprice.price : (selectedSpecData?.specialprice ?  selectedSpecData.price : data.perUnitPrice)}
                 </h2>{" "}
                 <span> &nbsp;/roll</span>
               </div>
@@ -606,21 +608,22 @@ const Card = ({ data, productId }) => {
 
 
             </div>
-            <IncDecCounter />
+            <div className="py-2 mt-[10px]">
+              <IncDecCounter />
+            </div>
           </div>
 
           <div>
-            <div className="py-4 mt-[10px]">
+            <div className="py-2 mt-[10px]">
               <h2 className="font-bold mb-2">Specification</h2>
               <div className="flex space-x-4">
-                {specifications.map((spec) => (
+                {data?.dimensions?.map((dim) => (
                   <button
-                    key={spec}
-                    onClick={() => handleSpecClick(spec)}
-                    className={`px-2 py-1 ${selectedSpec === spec ? 'bg-green-500 text-white' : 'bg-gray-200 text-black'
-                      }`}
+                    key={dim._id}
+                    onClick={() => handleSpecClick(dim._id)}
+                    className={`px-2 py-1 ${selectedSpec === dim._id ? 'bg-green-500 text-white' : 'bg-gray-200 text-black'}`}
                   >
-                    {spec}
+                    {`${dim.thickness.value} ${dim.length.unit}`}
                   </button>
                 ))}
               </div>
