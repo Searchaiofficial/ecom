@@ -44,6 +44,32 @@ const Card = ({ data, productId }) => {
 
   // State to hold the selected specification
   const [selectedSpec, setSelectedSpec] = useState(null);
+  // const [accessoriesData, setAccessoriesData] = useState([])
+  const [accessories, setAccessories] = useState([])
+  const fetchAccessories = async () => {
+    try {
+      const responce = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/productByCategoryAndSubCategory?category=${data?.category}&subcategory=Accessories `)
+      console.log("Accessories :", responce.data)
+      setAccessories(responce.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    if (data?.category) {
+      fetchAccessories()
+    }
+  }, [data])
+
+  // useEffect(() => {
+  //   if (accessories?.length > 0) {
+  //     setAccessoriesData(accessories)
+  //   }
+  // }, [accessories])
+
+  console.log(accessories)
+  // console.log(accessoriesData)
 
   // Handler for clicking a specification
   const handleSpecClick = (spec) => {
@@ -309,35 +335,12 @@ const Card = ({ data, productId }) => {
 
   const handleBuyNow = async () => {
     setsidebarContent("buyNow")
-    // if (inCart) {
-    //   // router.push("/checkout")
-    //   return
-    // }
-    // try {
-    //   // Validate quantity, productId, and deviceId
-    //   const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`, {
-    //     deviceId: localStorage.getItem("deviceId"),
-    //     productId: roomData._id,
-    //     quantity: 1
-    //   })
-
-    //   console.log(response.data)
-    //   if (response.status === 200) {
-    //     setInCart(true)
-    //     dispatch(setDbItems(response.data))
-
-    //   }
-
-    //   // Redirect to the checkout page
-    //   router.push("/checkout")
-    // } catch (error) {
-    //   console.error("Error handling click:", error);
-    //   setInCart(true)
-    // }
+    document.body.style.overflow = "hidden"
   }
 
   const handleClickDB = async () => {
     setsidebarContent("addToBag")
+    document.body.style.overflow = "hidden"
     if (inCart) {
       return
     }
@@ -422,6 +425,7 @@ const Card = ({ data, productId }) => {
 
 
   const handleBuy = async () => {
+    document.body.style.overflow = "auto"
     try {
       // Validate quantity, productId, and deviceId
       console.log(selectedServices)
@@ -508,7 +512,7 @@ const Card = ({ data, productId }) => {
 
   const fetchCategoryProducts = async () => {
     const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/fetchProductsByCategory/${data?.category}`)
-    console.log(response.data)
+    // console.log(response.data)
     const filteredProducts = response.data.filter(product => product._id !== productId);
     setCategoryProducts(filteredProducts)
   }
@@ -516,17 +520,22 @@ const Card = ({ data, productId }) => {
   const [avaliableServices, setavaliableServices] = useState([])
   const fetchCategoryData = async () => {
     const responce = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getCategoryByName/${data?.category}`)
-    console.log(responce.data)
+    // console.log(responce.data)
     setavaliableServices(responce.data?.availableServices)
   }
 
-  console.log(avaliableServices)
+  // console.log(avaliableServices)
   useEffect(() => {
     if (data?.category) {
       fetchCategoryProducts()
       fetchCategoryData()
     }
   }, [data?.category])
+
+  const handleGoToShoppingBag = () => {
+    router.push("/checkout")
+    document.body.style.overflow = "auto"
+  }
 
 
   return (
@@ -1207,7 +1216,10 @@ const Card = ({ data, productId }) => {
                             </h1>
                             <button
                               className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
-                              onClick={() => setsidebarContent(null)}
+                              onClick={() => {
+                                setsidebarContent(null)
+                                document.body.style.overflow = "auto"
+                              }}
                             >
                               <Image
                                 src="/icons/closeicon.svg"
@@ -1306,18 +1318,16 @@ const Card = ({ data, productId }) => {
                           </div>
                         </div>
                         <div className="flex w-full px-[16px] py-[24px] gap-4  md:py-0 md:px-0  md:flex-row flex-col items-center justify-around absolute bottom-0 left-0 border-t bg-white z-10 ">
-                          <button className="md:px-[42px] w-full px-[24px] md:h-[56px] h-[40px] border   rounded-full md:my-[24px] text-[12px] md:text-[14px] font-semibold md:ml-[24px] hover:border-black" onClick={() => setsidebarContent(null)}>Continue shopping</button>
+                          <button className="md:px-[42px] w-full px-[24px] md:h-[56px] h-[40px] border   rounded-full md:my-[24px] text-[12px] md:text-[14px] font-semibold md:ml-[24px] hover:border-black" onClick={() => {
+                            setsidebarContent(null)
+                            document.body.style.overflow = "auto"
+                          }}>Continue shopping</button>
                           <button className="md:px-[42px] w-full px-[24px] md:h-[56px] h-[40px] border rounded-full md:my-[24px] bg-black text-white text-[12px] md:text-[14px] font-semibold md:mr-[24px] hover:bg-gray-900">
-                            <Link
-                              href={{
-                                pathname: "/checkout",
-                                query: {
-                                  search: "rooms",
-                                },
-                              }}
+                            <div
+                              onClick={handleGoToShoppingBag}
                             >
                               Go to shopping bag
-                            </Link>
+                            </div>
                           </button>
                         </div>
                       </div>
@@ -1340,7 +1350,10 @@ const Card = ({ data, productId }) => {
                             </h1>
                             <button
                               className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
-                              onClick={() => setsidebarContent(null)}
+                              onClick={() => {
+                                setsidebarContent(null)
+                                document.body.style.overflow = "auto"
+                              }}
                             >
                               <Image
                                 src="/icons/closeicon.svg"
@@ -1384,7 +1397,10 @@ const Card = ({ data, productId }) => {
                             </div>
                           </div>
                           <div className="w-full border-t mt-[155px] pb-28 h-[500px] overflow-y-auto">
-                            <h2 className="md:text-[24px] text-[18px] font-bold mt-2">Add other services</h2>
+                            <div className="flex items-center justify-between">
+                              <h2 className="md:text-[24px] text-[18px] font-bold mt-2">Add other services</h2>
+                              <p className="text-[#111111] text-[14px] mr-2 cursor-pointer hover:underline font-medium">View More</p>
+                            </div>
                             <div className="">
                               {/* {
                                 categoryProducts && categoryProducts.length > 0 ? (
@@ -1419,6 +1435,7 @@ const Card = ({ data, productId }) => {
                                   )
                               } */}
 
+
                               {
                                 avaliableServices && avaliableServices.length > 0 && (
                                   avaliableServices.map((service, idx) => (
@@ -1429,6 +1446,34 @@ const Card = ({ data, productId }) => {
                                       </div>
                                       <input type="checkbox" onChange={() => handleServiceChange(service)} checked={selectedServices.some((s) => s.name === service.name)} className="form-checkbox h-4 w-4 text-blue-600  border-gray-300 " />
 
+                                    </div>
+                                  ))
+                                )
+                              }
+                              <h2 className="md:text-[24px] text-[18px] font-bold mt-2">Accessories</h2>
+
+                              {
+                                accessories && accessories.length > 0 && (
+                                  accessories.map((product) => (
+                                    <div key={product._id} className="flex items-start  justify-between cursor-pointer  mt-[30px]  pb-10" onMouseEnter={() => setShowCart(true)} onMouseLeave={() => setShowCart(false)}>
+                                      <div className="flex">
+                                        <Image src={product?.images[0]} height={100} width={100} className="mr-[16px] h-[100px] w-[100px]" />
+                                        <div className="flex flex-col mx-[12px] max-w-[220px]">
+                                          <p className="text-[14px] font-bold text-[#484848]">{product.productTitle}</p>
+                                          <p className="text-[#484848] text-[12px] mb-[5px] line-clamp-1">{product?.shortDescription}</p>
+                                          <div className="font-bold items-end flex mb-1 my-[5px]">
+                                            <h2 className={`text-3xl leading-[0.5] tracking-wide ${product?.specialprice?.price ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg" : ""} `} style={product?.specialprice?.price ? { boxShadow: '3px 3px #ad3535' } : {}}>
+                                              <span className="text-sm">Rs. &nbsp;</span>{" "}
+                                              {product?.specialprice?.price ? product?.specialprice?.price : product.perUnitPrice}
+                                            </h2>{" "}
+                                            <span> &nbsp;/roll</span>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                      <div className="bg-[#0152be] p-1.5 rounded-full max-w-fit self-center md:mr-10 " onClick={() => handleAddToCart(product._id)}>
+                                        <Image src={"/icons/ad-to-cart.svg"} height={20} width={20} className="cursor-pointer rounded-full min-w-[20px] min-h-[20px]" />
+                                      </div>
                                     </div>
                                   ))
                                 )

@@ -103,6 +103,13 @@ const UserReviewPosts = ({ slidesPerView, SubcategoryName }) => {
         return new Date(dateString).toLocaleDateString("en-GB", options).replace(/ /g, '-');
     };
 
+    console.log(postsToRender)
+
+    if (postsToRender.length == 0) {
+        return null
+    }
+
+
     return (
         <div>
             {openModal && <div className="background-overlay open"></div>}
@@ -247,7 +254,7 @@ const UserReviewPosts = ({ slidesPerView, SubcategoryName }) => {
                     </div>
                 )}
             </div>
-        </div >
+        </div>
     );
 };
 

@@ -11,10 +11,10 @@ const CartProduct = ({
   handleItemDelete,
 }) => {
   // Calculate the total cost of selected services
-  const totalServiceCost = cartItem?.selectedServices.reduce((total, service) => total + parseFloat(service.cost), 0);
+  // const totalServiceCost = cartItem?.selectedServices.reduce((total, service) => total + parseFloat(service.cost), 0);
 
   // Calculate the total price including services
-  const totalPrice = cartItem?.price + totalServiceCost;
+  const totalPrice = cartItem?.price;
 
   console.log("cartItem : ", cartItem);
 
@@ -51,22 +51,8 @@ const CartProduct = ({
                   Go to checkout for delivery information
                 </span>
               </p>
-              {
-                cartItem?.selectedServices?.length > 0 && (
-                  <p className="text-[14px] font-semibold">Selected Services</p>
-                )
-              }
-              <div className="flex items-center gap-4">
-                {
-                  cartItem?.selectedServices && (
-                    cartItem?.selectedServices?.map((service) => (
-                      <p className="text-[14px] text-gray-600 font-medium underline">{service.name}</p>
-                    ))
-                  )
-                }
-              </div>
-              <div className="flex items-center justify-between mt-2 md:w-2/3 lg:w-2/3">
-                <div className="rounded-3xl py-1 px-1 w-28 border border-gray-400 flex justify-between items-center">
+              <div className="flex items-center justify-between mt-2">
+                <div className=" rounded-3xl p-2 lg:p-3 lg:w-36 w-[112px]  border border-gray-400 flex justify-between items-center">
                   <button
                     onClick={() => handleItemDecr(cartItem?.productId._id, cartItem.quantity)}
                     className="hover:bg-zinc-200 w-9 h-9 rounded-full flex items-center justify-center"
@@ -107,6 +93,32 @@ const CartProduct = ({
                     className="w-6 h-6 cursor-pointer"
                   />
                 </button>
+              </div>
+              <div className="flex flex-col mt-4">
+                {
+                  cartItem?.selectedServices?.length > 0 && (
+                    <p className="text-[14px] font-semibold">Selected Services</p>
+                  )
+                }
+                <div className="flex flex-col  gap-1">
+                  {
+                    cartItem?.selectedServices && (
+                      cartItem?.selectedServices?.map((service) => (
+                        <div className="flex w-full items-center justify-between">
+                          <p className="text-[14px] text-gray-600 font-medium underline">{service.name}</p>
+                          <div className="text-[14px] flex items-center  font-medium "><span className=" font-semibold text-[12px]">
+                            <Image
+                              src="/icons/indianrupeesicon.svg"
+                              width={12}
+                              height={12}
+                              alt="rupees"
+                              className="mr-1"
+                            /></span>{service.cost}</div>
+                        </div>
+                      ))
+                    )
+                  }
+                </div>
               </div>
             </div>
             <div className="w-[100px] lg:w-auto">

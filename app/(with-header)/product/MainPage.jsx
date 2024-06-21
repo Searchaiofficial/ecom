@@ -18,6 +18,7 @@ import axios from "axios";
 import Carous from "@/components/Carousel/Carous";
 import { useParams } from "next/navigation";
 import UserReviewPosts from "@/components/Cards/UserReviewPosts";
+import AccessoriesPosts from "@/components/Cards/AccessoriesPosts";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -141,6 +142,23 @@ const RoomPage = () => {
 
   // console.log("11111", data);
 
+  const [accessories, setAccessories] = useState([])
+  const fetchAccessories = async () => {
+    try {
+      const responce = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/productByCategoryAndSubCategory?category=${data?.category}&subcategory=Accessories `)
+      console.log("Accessories :", responce.data)
+      setAccessories(responce.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    if (data?.category) {
+      fetchAccessories()
+    }
+  }, [data])
+
   return (
     <>
       <div className="overflow-y-auto overflow-x-hidden container-rooms flex sm:block items-center px-[20px] sm:px-[50px] lg:px-[27px] ">
@@ -217,7 +235,7 @@ const RoomPage = () => {
               <RoomImageList images={data?.images} />
               <ImageCaresoul images={data?.images} />
               <div className="block md:hidden">
-                <Card data={data} productId={data._id} />
+                <Card data={data} productId={data._id} accessories={accessories} />
               </div>
               <RoomInfo data={data} />
               <Reviews productId={data._id} data={data} />
@@ -230,6 +248,9 @@ const RoomPage = () => {
                 <Card data={data} productId={data._id} />
               </div>
             </div>
+          </div>
+          <div className="lg:pl-[40px] w-full ">
+            <AccessoriesPosts data={data} accessories={accessories} />
           </div>
           <div className="lg:pl-[40px] w-full lg:w-[66%]">
             <UserReviewPosts

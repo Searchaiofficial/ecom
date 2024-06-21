@@ -32,6 +32,7 @@ const Trending = () => {
   const [swiperRef, setSwiperRef] = useState(null);
   const [isPopupVisible, setPopupVisible] = useState(false);
   const cartData = useSelector(selecteddbItems)
+  const [TrendingData, setTrendingData] = useState([])
 
 
   const handleImageClick = () => {
@@ -46,6 +47,16 @@ const Trending = () => {
       setNewTrendingData(trendingData);
     }
   }, [trendingData]);
+
+  console.log(newTrendingData)
+
+  useEffect(() => {
+    const trendindData = newTrendingData.filter((item) => item.subcategory !== "Accessories ")
+    console.log(trendindData)
+    if (trendindData.length > 0) {
+      setTrendingData(trendindData)
+    }
+  }, [newTrendingData])
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -177,12 +188,12 @@ const Trending = () => {
           noSwiping={true}
           style={{ paddingRight: "10px" }}
         >
-          {!newTrendingData ? (
+          {!TrendingData ? (
             <SwiperSlide>
               <div className="flex"></div>
             </SwiperSlide>
           ) : (
-            newTrendingData.map((product, idx) => {
+            TrendingData.map((product, idx) => {
               const inCart = isProductInCart(product?._id);
               console.log("Product in cart prop for Card:", inCart);
               return (

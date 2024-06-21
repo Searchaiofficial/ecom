@@ -78,6 +78,7 @@ const ProductPage = ({ params }) => {
   let demandTypeProduct = useSelector(selectDemandTypeProducts);
   const dispatch = useDispatch();
   let filteredProductData = useSelector(selectedFilteredProduct);
+  console.log(filteredProductData)
 
   let parentCategoryVar = params.parentCategory;
   const x = useSelector(allSelectedData);
@@ -288,10 +289,10 @@ const ProductPage = ({ params }) => {
             params.parentCategory === "virtualexperience"
               ? filteredProducts
               : params.parentCategory === "offers"
-              ? offerProductData
-              : params.parentCategory === "demandtype"
-              ? demandTypeProduct
-              : filteredProductData
+                ? offerProductData
+                : params.parentCategory === "demandtype"
+                  ? demandTypeProduct
+                  : filteredProductData
           }
           heading={
             params.parentCategory === "offers"
@@ -299,8 +300,8 @@ const ProductPage = ({ params }) => {
                 ? "Highest Offer"
                 : type
               : params.parentCategory === "demandtype"
-              ? type
-              : category.name
+                ? type
+                : category.name
           }
           description={category?.description}
           subCategory={category?.subcategories}
