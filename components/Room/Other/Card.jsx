@@ -694,11 +694,11 @@ const Card = ({ data, productId }) => {
           <div className="border-black w-[100%] sm:w-full mt-[30px] relative">
             <div className="flex flex-row ">
               <div
-                className="w-[1px] h-full bg-black absolute"
+                className="w-[1px] h-full bg-[#e5e7eb] absolute"
                 style={{ left: "calc(50%)", top: "0" }}
               ></div>
               <div
-                className="flex flex-col col-span-1 w-1/2 p-[14px]  hover:bg-[#f5f5f5] cursor-pointer border-t-[1px] border-l-[1px] border-black"
+                className="flex flex-col col-span-1 w-1/2 p-[14px]  hover:bg-[#f5f5f5] cursor-pointer border-t-[1px] border-l-[1px] border-[#e5e7eb]"
                 onClick={() => handleOptionClick("zeroCostEMI")}
               >
                 <div className="flex flex-row gap-1">
@@ -715,7 +715,7 @@ const Card = ({ data, productId }) => {
               </div>
 
               <div
-                className="flex flex-col col-span-2 w-1/2 p-[14px] hover:bg-[#f5f5f5]  cursor-pointer border-t-[1px] border-r-[1px] border-black"
+                className="flex flex-col col-span-2 w-1/2 p-[14px] hover:bg-[#f5f5f5]  cursor-pointer border-t-[1px] border-r-[1px] border-[#e5e7eb]"
                 onClick={() => handleOptionClick("inStoreRequest")}
               >
                 <div className="flex flex-row gap-1">
@@ -731,10 +731,10 @@ const Card = ({ data, productId }) => {
                 <p className="text-[11px] pt-[5px]">Check in-store stock</p>
               </div>
             </div>
-            <hr className="border-black" />
+            <hr className="border-[#e5e7eb]" />
             <div className="flex flex-row ">
               <div
-                className="flex flex-col col-span-2 w-1/2 p-[14px] hover:bg-[#f5f5f5] cursor-pointer border-b-[1px] border-l-[1px] border-black"
+                className="flex flex-col col-span-2 w-1/2 p-[14px] hover:bg-[#f5f5f5] cursor-pointer border-b-[1px] border-l-[1px] border-[#e5e7eb]"
                 onClick={() => handleOptionClick("deliveryOption")}
               >
                 <div className="flex flex-row gap-2">
@@ -750,7 +750,7 @@ const Card = ({ data, productId }) => {
                 <p className="text-[11px] pt-[5px]">Check availability</p>
               </div>
               <div
-                className="flex flex-col col-span-2 w-1/2 p-[14px] hover:bg-[#f5f5f5] cursor-pointer border-b-[1px] border-r-[1px] border-black"
+                className="flex flex-col col-span-2 w-1/2 p-[14px] hover:bg-[#f5f5f5] cursor-pointer border-b-[1px] border-r-[1px] border-[#e5e7eb]"
                 onClick={() => handleOptionClick("calculator")}
               >
                 <div className="flex flex-row gap-2">
