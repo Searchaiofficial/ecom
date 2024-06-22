@@ -6,10 +6,10 @@ import {
 import { useDispatch } from "react-redux";
 function IncDecCounter() {
   const dispatch = useDispatch();
-  const [visible, setVisible] = useState(false);
-  const handleClickVisible = () => {
-    setVisible(true);
-  };
+  // const [visible, setVisible] = useState(false);
+  // const handleClickVisible = () => {
+  //   setVisible(true);
+  // };
   let [num, setNum] = useState(1);
   let incNum = () => {
     if (num < 10) {
@@ -35,7 +35,7 @@ function IncDecCounter() {
               type="button"
               onClick={() => {
                 decNum();
-                handleClickVisible();
+                // handleClickVisible();
               }}
             >
               -
@@ -53,14 +53,14 @@ function IncDecCounter() {
               type="button"
               onClick={() => {
                 incNum();
-                handleClickVisible();
+                // handleClickVisible();
               }}
             >
               +
             </button>
           </div>
         </div>
-        <div className="">
+        {/* <div className="">
           <button
             className={` bg-black  h-9 w-auto text-white  rounded-full border  px-7 text-sm items-center justify-center
             ${visible === true ? "block" : "hidden"}
@@ -74,7 +74,7 @@ function IncDecCounter() {
             <span>&nbsp;items to </span>
             <span>buy</span>
           </button>
-        </div>
+        </div> */}
       </div>
     </>
   );

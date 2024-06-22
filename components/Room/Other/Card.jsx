@@ -563,7 +563,7 @@ const Card = ({ data, productId }) => {
             {
               !data.demandtype ? (
                 <div className="flex items-center justify-between">
-                  <h1 className="text-2xl  font-bold mb-1">
+                  <h1 className="text-2xl  font-bold mb-0.5">
                     {data?.productTitle}
                   </h1>
 
@@ -578,12 +578,12 @@ const Card = ({ data, productId }) => {
 
                 </div>
               ) :
-                <h1 className="text-2xl  font-bold mb-1">
+                <h1 className="text-2xl  font-bold mb-0.5">
                   {data?.productTitle}
                 </h1>
 
             }
-            <div className="flex text-[14px] font-medium tracking-wider text-[#757575] ">
+            <div className="flex text-[14px] font-medium tracking-wider text-[#757575] pb-3">
               <h3>{data?.shortDescription}</h3>
             </div>
             {/* <div className="font-medium tracking-wider text-[#757575] flex mb-1">
@@ -596,7 +596,7 @@ const Card = ({ data, productId }) => {
                 <h2 className={`text-3xl leading-[0.5] tracking-wide ${data?.specialprice?.price ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg" : ""} `} style={data?.specialprice?.price ? { boxShadow: '3px 3px #ad3535' } : {}}>
                   <span className="text-sm">Rs. &nbsp;</span>{" "}
                   {/* {data?.specialprice?.price ? data?.specialprice.price : data.perUnitPrice} */}
-                  {data?.specialprice?.price ? data?.specialprice.price : (selectedSpecData?.specialprice ?  selectedSpecData.price : data.perUnitPrice)}
+                  {data?.specialprice?.price ? data?.specialprice.price : (selectedSpecData?.specialprice ? selectedSpecData.price : data.perUnitPrice)}
                 </h2>{" "}
                 <span> &nbsp;/roll</span>
               </div>
@@ -622,22 +622,25 @@ const Card = ({ data, productId }) => {
             </div>
           </div>
 
-          <div>
-            <div className="py-2 mt-[10px]">
-              <h2 className="font-bold mb-2">Specification</h2>
-              <div className="flex space-x-4">
-                {data?.dimensions?.map((dim) => (
-                  <button
-                    key={dim._id}
-                    onClick={() => handleSpecClick(dim._id)}
-                    className={`px-2 py-1 ${selectedSpec === dim._id ? 'bg-green-500 text-white' : 'bg-gray-200 text-black'}`}
-                  >
-                    {`${dim.thickness.value} ${dim.length.unit}`}
-                  </button>
-                ))}
+          {data?.dimensions?.length > 0 &&
+
+            (<div>
+              <div className="py-2 mt-[10px]">
+                <h2 className="font-bold mb-2">Specification</h2>
+                <div className="flex space-x-4">
+                  {data?.dimensions?.map((dim) => (
+                    <button
+                      key={dim._id}
+                      onClick={() => handleSpecClick(dim._id)}
+                      className={`px-2 py-1  ${selectedSpec === dim._id ? 'bg-green-500 text-white' : 'bg-zinc-100 text-black hover:bg-zinc-200'}`}
+                    >
+                      {`${dim.thickness.value} ${dim.length.unit}`}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
-          </div>
+            </div>)
+          }
 
           {/* color-container */}
           <div className="colorContainer flex flex-col mt-[10px] sm:w-auto w-[80vw]">
@@ -688,14 +691,14 @@ const Card = ({ data, productId }) => {
           </div>
 
           {/* calculations */}
-          <div className="border-black w-[100%] sm:w-full mt-[30px] bg-zinc-100 relative">
-            <div className="flex flex-row">
+          <div className="border-black w-[100%] sm:w-full mt-[30px] relative">
+            <div className="flex flex-row ">
               <div
-                className="w-[1px] h-full bg-[#e5e7eb] absolute"
+                className="w-[1px] h-full bg-black absolute"
                 style={{ left: "calc(50%)", top: "0" }}
               ></div>
               <div
-                className="flex flex-col col-span-1 w-1/2 p-[14px]  hover:bg-zinc-200 cursor-pointer"
+                className="flex flex-col col-span-1 w-1/2 p-[14px]  hover:bg-[#f5f5f5] cursor-pointer border-t-[1px] border-l-[1px] border-black"
                 onClick={() => handleOptionClick("zeroCostEMI")}
               >
                 <div className="flex flex-row gap-1">
@@ -712,7 +715,7 @@ const Card = ({ data, productId }) => {
               </div>
 
               <div
-                className="flex flex-col col-span-2 w-1/2 p-[14px] hover:bg-zinc-200  cursor-pointer"
+                className="flex flex-col col-span-2 w-1/2 p-[14px] hover:bg-[#f5f5f5]  cursor-pointer border-t-[1px] border-r-[1px] border-black"
                 onClick={() => handleOptionClick("inStoreRequest")}
               >
                 <div className="flex flex-row gap-1">
@@ -728,10 +731,10 @@ const Card = ({ data, productId }) => {
                 <p className="text-[11px] pt-[5px]">Check in-store stock</p>
               </div>
             </div>
-            <hr />
+            <hr className="border-black" />
             <div className="flex flex-row ">
               <div
-                className="flex flex-col col-span-2 w-1/2 p-[14px] hover:bg-zinc-200 cursor-pointer"
+                className="flex flex-col col-span-2 w-1/2 p-[14px] hover:bg-[#f5f5f5] cursor-pointer border-b-[1px] border-l-[1px] border-black"
                 onClick={() => handleOptionClick("deliveryOption")}
               >
                 <div className="flex flex-row gap-2">
@@ -747,7 +750,7 @@ const Card = ({ data, productId }) => {
                 <p className="text-[11px] pt-[5px]">Check availability</p>
               </div>
               <div
-                className="flex flex-col col-span-2 w-1/2 p-[14px] hover:bg-zinc-200 cursor-pointer"
+                className="flex flex-col col-span-2 w-1/2 p-[14px] hover:bg-[#f5f5f5] cursor-pointer border-b-[1px] border-r-[1px] border-black"
                 onClick={() => handleOptionClick("calculator")}
               >
                 <div className="flex flex-row gap-2">
@@ -1550,8 +1553,8 @@ const Card = ({ data, productId }) => {
           <div className="flex gap-3 mt-8 items-center justify-center">
             <Image
               src={"/icons/ayatrio_comment_button.svg"}
-              height={35}
-              width={35}
+              height={30}
+              width={30}
               alt="downarrow"
               className="hover:text-gray-600"
             />
