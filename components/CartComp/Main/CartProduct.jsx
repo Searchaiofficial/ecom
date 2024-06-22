@@ -38,9 +38,9 @@ const CartProduct = ({
                   {cartItem?.name}
                 </div>
               </p>
-              <p className="my-2 text-gray-800 text-[12px] md:text-[16px]  lg:text-md ">
+              {/* <p className="my-2 text-gray-800 text-[12px] md:text-[16px]  lg:text-md ">
                 Room darkening curtains, 1 pair, yellow-beige
-              </p>
+              </p> */}
               <p className="my-1 text-gray-600 text-[12px] md:text-[16px]  lg:text-md">{cartItem?.productId.productTitle}</p>
               <p className=" text-gray-600 text-[12px] md:text-[16px]  lg:text-md"></p>
               <p className=" my-2">
@@ -51,26 +51,24 @@ const CartProduct = ({
                   Go to checkout for delivery information
                 </span>
               </p>
-              <div className="flex items-center justify-between mt-2">
-                <div className=" rounded-3xl p-2 lg:p-3 lg:w-36 w-[112px]  border border-gray-400 flex justify-between items-center">
+              <div className="flex items-center justify-between mt-2 ">
+                <div className="rounded-3xl p-1 w-28 border border-gray-400 flex justify-between items-center mr-[20px]">
                   <button
                     onClick={() => handleItemDecr(cartItem?.productId._id, cartItem.quantity)}
-                    className="hover:bg-zinc-200 w-9 h-9 rounded-full flex items-center justify-center"
+                    className="hover:bg-zinc-200 w-9 h-9 rounded-full flex items-center justify-center focus:outline-none"
                   >
                     -
                   </button>
-                  <p className="font-bold text-center">
+                  <p className="font-bold text-center mx-2">
                     {cartItem.quantity}
                   </p>
                   <button
                     onClick={() => handleItemIncr(cartItem?.productId._id, cartItem.quantity)}
-                    className="hover:bg-zinc-200 w-9 h-9 rounded-full flex items-center justify-center"
+                    className="hover:bg-zinc-200 w-9 h-9 rounded-full flex items-center justify-center focus:outline-none"
                   >
                     +
                   </button>
                 </div>
-
-
 
                 <div className="">
                   <Image
