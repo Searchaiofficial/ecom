@@ -5,12 +5,27 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import LiveRoomProductCard from "./LiveRoomProductCard";
 import Link from "next/link";
+import { useSocket } from "@/providers/SocketProvider";
 
 const LiveRoom = () => {
   const x = useSelector(allSelectedData);
 
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [similarProducts, setSimilarProducts] = useState([]);
+
+  const socket = useSocket();
+
+  useEffect(() => {
+    if (socket) {
+      socket.emit("join-room", x.category);
+    }
+
+    return () => {
+      if (socket) {
+        socket.emit("leave-room", x.category);
+      }
+    };
+  }, [socket]);
 
   useEffect(() => {
     if (x.length > 0) {
@@ -165,19 +180,21 @@ const LiveRoom = () => {
           <section className="pt-[15vh] text-black bg-white flex-col absolute right-0 top-0 h-screen p-8 gap-8 z-50  w-[35%] flex ">
             <div className="flex justify-around text-lg font-medium">
               <h1
-                className={`border-b-2 cursor-pointer ${optionClick === "Instant Meeting"
-                  ? "border-black"
-                  : "border-transparent"
-                  }`}
+                className={`border-b-2 cursor-pointer ${
+                  optionClick === "Instant Meeting"
+                    ? "border-black"
+                    : "border-transparent"
+                }`}
                 onClick={() => handleSwitchOption("Instant Meeting")}
               >
                 Instant Meeting
               </h1>
               <h1
-                className={`border-b-2 cursor-pointer ${optionClick === "Schedule Meeting"
-                  ? "border-black"
-                  : "border-transparent"
-                  }`}
+                className={`border-b-2 cursor-pointer ${
+                  optionClick === "Schedule Meeting"
+                    ? "border-black"
+                    : "border-transparent"
+                }`}
                 onClick={() => handleSwitchOption("Schedule Meeting")}
               >
                 Schedule Meeting
