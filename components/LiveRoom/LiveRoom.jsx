@@ -160,12 +160,12 @@ const LiveRoom = () => {
     init();
   }, [roomId, socket]);
 
-  useEffect(() => {
-    if (myStream) {
-      setMyAudioEnabled(myStream.getAudioTracks()[0].enabled);
-      setMyVideoEnabled(myStream.getVideoTracks()[0].enabled);
-    }
-  }, [myStream]);
+  // useEffect(() => {
+  //   if (myStream) {
+  //     setMyAudioEnabled(myStream.getAudioTracks()[0].enabled);
+  //     setMyVideoEnabled(myStream.getVideoTracks()[0].enabled);
+  //   }
+  // }, [myStream]);
 
   const createPeerConnection = (userId, isAnswerer) => {
     const peer = new RTCPeerConnection({
@@ -241,7 +241,7 @@ const LiveRoom = () => {
         track.enabled = !track.enabled;
       });
 
-      setMyAudioEnabled(myStream.getAudioTracks()[0].enabled);
+      // setMyAudioEnabled(myStream.getAudioTracks()[0].enabled);
     }
   };
 
@@ -251,7 +251,7 @@ const LiveRoom = () => {
         track.enabled = !track.enabled;
       });
 
-      setMyVideoEnabled(myStream.getVideoTracks()[0].enabled);
+      // setMyVideoEnabled(myStream.getVideoTracks()[0].enabled);
     }
   };
 
@@ -337,14 +337,15 @@ const LiveRoom = () => {
               onClick={toggleAudio}
               className="bg-red-500 hover:bg-red-400 text-xs text-center text-white font-medium shadow-sm  rounded-full w-10 h-10"
             >
-              {myAudioEnabled ? "Mute" : "UnMute"}
-              {/* Audio */}
+              {/* {myAudioEnabled ? "Mute" : "UnMute"} */}
+              Audio
             </button>
             <button
               onClick={toggleVideo}
               className="bg-red-500 hover:bg-red-400 text-xs text-center text-white font-medium shadow-sm  rounded-full w-10 h-10"
             >
-              {myVideoEnabled ? "Video Off" : "Video On"}
+              {/* {myVideoEnabled ? "Video Off" : "Video On"} */}
+              Video
             </button>
             {myStream && (
               <button
