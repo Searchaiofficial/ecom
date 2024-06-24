@@ -9,7 +9,7 @@ const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const socket = io(process.env.NEXT_PUBLIC_SOCKET_URL);
+    const socket = io(process.env.NEXT_PUBLIC_API_BASE_URL);
     setSocket(socket);
 
     return () => {

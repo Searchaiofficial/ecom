@@ -4,9 +4,8 @@ import { allSelectedData } from "@/components/Features/Slices/virtualDataSlice";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import LiveRoomProductCard from "@/components/LiveRoom/LiveRoomProductCard";
-import Link from "next/link";
-import { io } from "socket.io-client";
 import { useRouter } from "next/navigation";
+import { useSocket } from "@/providers/SocketProvider";
 
 const page = ({ params }) => {
   const router = useRouter();
@@ -17,7 +16,8 @@ const page = ({ params }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [similarProducts, setSimilarProducts] = useState([]);
 
-  const [socket, setSocket] = useState(null);
+  const socket = useSocket();
+
   const [peers, setPeers] = useState({});
   const [streams, setStreams] = useState({});
   const [myStream, setMyStream] = useState(null);
@@ -26,15 +26,7 @@ const page = ({ params }) => {
   const [isScreenSharing, setIsScreenSharing] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem("userData")) {
-      const socket = io(process.env.NEXT_PUBLIC_API_BASE_URL);
-      console.log(socket);
-      setSocket(socket);
-
-      return () => {
-        socket.disconnect();
-      };
-    } else {
+    if (!localStorage.getItem("userData")) {
       router.push(`/liveroom/`);
     }
   }, []);
