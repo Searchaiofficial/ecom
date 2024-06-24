@@ -95,9 +95,9 @@ function LiveRoomProductCard(props) {
               <p className="text-lg font-semibold hover:underline">
                 {props.productTitle}
               </p>
-              <p className="text-sm mb-1">{props.productDescription}</p>
+              {/* <p className="text-sm mb-1">{props.productDescription}</p> */}
 
-              {props.specialprice ? (
+              {props.specialprice?.price ? (
                 <div>
                   <p className=" text-sm font-semibold bg-yellow-400 price-box shadow-[3px_3px_rgb(173,_53,_53)] w-fit px-2 py-1">
                     Rs.

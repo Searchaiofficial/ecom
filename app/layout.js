@@ -6,6 +6,7 @@ import { GoogleTagManager } from "@next/third-parties/google";
 import FooterWrapper from "@/components/FooterWrapper/FooterWrapper";
 import NextTopLoader from "nextjs-toploader";
 import { BASE_URL } from "@/constants/base-url";
+import SocketProvider from "@/providers/SocketProvider";
 // const myFont = localFont({
 //   src: "../public/Font/Jost-Regular.ttf",
 // });
@@ -62,11 +63,13 @@ export default function RootLayout({ children }) {
     <html lang="en" className={poppins.className}>
       <GoogleTagManager gtmId={gtmId} />
       <body>
-        <Providers>
-          <NextTopLoader color="#000" showSpinner={false} zIndex={99999}/>
-          {children}
-          <FooterWrapper />
-        </Providers>
+        <SocketProvider>
+          <Providers>
+            <NextTopLoader color="#000" showSpinner={false} zIndex={99999} />
+            {children}
+            <FooterWrapper />
+          </Providers>
+        </SocketProvider>
       </body>
     </html>
   );
