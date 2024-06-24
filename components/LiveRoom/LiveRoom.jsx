@@ -42,10 +42,10 @@ const LiveRoom = () => {
   };
 
   useEffect(() => {
-    socket.on("accept-join", handleAcceptJoin);
+    socket?.on("accept-join", handleAcceptJoin);
 
     return () => {
-      socket.off("accept-join", handleAcceptJoin);
+      socket?.off("accept-join", handleAcceptJoin);
     };
   }, [socket, handleAcceptJoin]);
 
