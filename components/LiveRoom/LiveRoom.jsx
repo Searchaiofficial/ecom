@@ -1,9 +1,12 @@
 "use client";
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSocket } from "@/providers/SocketProvider";
 
 const LiveRoom = () => {
   const router = useRouter();
+
+  const socket = useSocket();
 
   const [roomId, setRoomId] = useState(1234);
   const [isDataFilled, setIsDataFilled] = useState(false);
@@ -19,26 +22,43 @@ const LiveRoom = () => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
 
-  useEffect(()=>{
-    if(localStorage.getItem("userData")){
+  useEffect(() => {
+    if (localStorage.getItem("userData")) {
       router.push(`/liveroom/${roomId}`);
       setIsDataFilled(true);
     }
-  },[])
+  }, []);
 
   const handleJoin = () => {
-    setRoomId("1234")
+    setRoomId("1234");
     localStorage.setItem("userData", JSON.stringify(userData));
     localStorage.setItem("roomId", roomId);
     router.push(`/liveroom/${roomId}`);
     setIsDataFilled(true);
   };
 
+  const handleAcceptJoin = (data) => {
+    console.log(data);
+  };
+
+  useEffect(() => {
+    socket.on("accept-join", handleAcceptJoin);
+
+    return () => {
+      socket.off("accept-join", handleAcceptJoin);
+    };
+  }, [socket, handleAcceptJoin]);
+
+  const requestJoin = () => {
+    socket.emit("request-join", {
+      ...userData,
+    });
+  };
+
   return (
     <div className="">
       <div className="sm:px-4 flex px-[20px] h-screen py-4 flex-col md:flex-row">
-        <div className="relative w-full  md:w-[70%] bg-black py-4 border-2 border-black">
-        </div>
+        <div className="relative w-full  md:w-[70%] bg-black py-4 border-2 border-black"></div>
       </div>
 
       {!isDataFilled && (
@@ -93,7 +113,7 @@ const LiveRoom = () => {
 
                 <button
                   className="bg-black text-white w-full h-10 rounded-full mt-4"
-                  onClick={handleJoin}
+                  onClick={requestJoin}
                 >
                   Join
                 </button>
