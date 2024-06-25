@@ -390,6 +390,9 @@ const Card = ({ data, productId }) => {
   }
 
   const [selectedServices, setSelectedServices] = useState([])
+  const [selectedAccessories, setSelectedAccessories] = useState([])
+
+  console.log(selectedAccessories)
 
 
 
@@ -402,6 +405,16 @@ const Card = ({ data, productId }) => {
       }
     });
   };
+
+  const handleAccessoriesChange = (product) => {
+    setSelectedAccessories((prevSelectedAccessories) => {
+      if (prevSelectedAccessories.some((s) => s._id === product._id)) {
+        return prevSelectedAccessories.filter((s) => s._id !== product._id);
+      } else {
+        return [...prevSelectedAccessories, product];
+      }
+    });
+  }
   // console.log(cartData)
 
   // const cartItem = cartData.filter((item) => item.productId._id === productId)
@@ -429,11 +442,13 @@ const Card = ({ data, productId }) => {
     try {
       // Validate quantity, productId, and deviceId
       console.log(selectedServices)
+      console.log(selectedAccessories)
       const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`, {
         deviceId: localStorage.getItem("deviceId"),
         productId: productId,
         quantity: 1,
-        selectedServices
+        selectedServices,
+        selectedAccessories
       })
       if (response.status === 200) {
         // setInCart(true)
@@ -518,6 +533,7 @@ const Card = ({ data, productId }) => {
   }
 
   const [avaliableServices, setavaliableServices] = useState([])
+  console.log(avaliableServices)
   const fetchCategoryData = async () => {
     const responce = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getCategoryByName/${data?.category}`)
     // console.log(responce.data)
@@ -536,6 +552,55 @@ const Card = ({ data, productId }) => {
     router.push("/checkout")
     document.body.style.overflow = "auto"
   }
+  console.log(avaliableServices)
+
+  const [initialServiceQuantity, setinitialServiceQuantity] = useState(1)
+  console.log(selectedServices)
+
+  const handleServiceIncrease = (serviceId) => {
+    setSelectedServices((prevSelectedServices) =>
+      prevSelectedServices.map((service) =>
+        service._id === serviceId ? { ...service, quantity: service.quantity + 1 } : service
+      )
+    );
+  };
+
+  const handleServiceDecrease = (serviceId) => {
+    setSelectedServices((prevSelectedServices) =>
+      prevSelectedServices.map((service) =>
+        service._id === serviceId ? { ...service, quantity: service.quantity - 1 } : service
+      )
+    );
+  }
+
+  const [accessoryQuantities, setAccessoryQuantities] = useState(
+    selectedAccessories.reduce((acc, accessory) => {
+      acc[accessory._id] = 1;
+      return acc;
+    }, {})
+  );
+
+  const handleIncreaseAccessory = (productId) => {
+    setSelectedAccessories((prevSelected) =>
+      prevSelected.map((item) =>
+        item._id === productId ? { ...item, quantity: (item.quantity || 1) + 1 } : item
+      )
+    );
+  };
+
+  console.log(selectedAccessories)
+
+  const handleDecreaseAccessory = (productId) => {
+    setSelectedAccessories((prevSelected) =>
+      prevSelected
+        .map((item) =>
+          item._id === productId
+            ? { ...item, quantity: item.quantity > 1 ? item.quantity - 1 : 1 }
+            : item
+        )
+        .filter((item) => item.quantity > 0)
+    );
+  };
 
 
   return (
@@ -1400,87 +1465,146 @@ const Card = ({ data, productId }) => {
                             </div>
                           </div>
                           <div className="w-full border-t mt-[155px] pb-28 h-[500px] overflow-y-auto">
-                            <div className="flex items-center justify-between">
-                              <h2 className="md:text-[24px] text-[18px] font-bold mt-2">Add other services</h2>
-                              <p className="text-[#111111] text-[14px] mr-2 cursor-pointer hover:underline font-medium">View More</p>
-                            </div>
+                            {
+                              avaliableServices && avaliableServices.length > 0 && (
+
+                                <div className="flex items-center justify-between">
+                                  <h2 className="md:text-[24px] text-[18px] font-bold mt-2">Add other services</h2>
+                                  <p className="text-[#111111] text-[14px] mr-2 cursor-pointer hover:underline font-medium">View More</p>
+                                </div>
+                              )
+                            }
                             <div className="">
-                              {/* {
-                                categoryProducts && categoryProducts.length > 0 ? (
-                                  categoryProducts.map((product) => (
-                                    <div key={product._id} className="flex items-start  justify-between cursor-pointer  mt-[30px]  pb-10" onMouseEnter={() => setShowCart(true)} onMouseLeave={() => setShowCart(false)}>
-                                      <div className="flex">
-                                        <Image src={product?.images[0]} height={100} width={100} className="mr-[16px] h-[100px] w-[100px]" />
-                                        <div className="flex flex-col mx-[12px] max-w-[220px]">
-                                          <p className="text-[14px] font-bold text-[#484848]">{product.productTitle}</p>
-                                          <p className="text-[#484848] text-[12px] mb-[5px] line-clamp-1">{product?.shortDescription}</p>
-                                          <div className="font-bold items-end flex mb-1 my-[5px]">
-                                            <h2 className={`text-3xl leading-[0.5] tracking-wide ${product?.specialprice?.price ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg" : ""} `} style={product?.specialprice?.price ? { boxShadow: '3px 3px #ad3535' } : {}}>
-                                              <span className="text-sm">Rs. &nbsp;</span>{" "}
-                                              {product?.specialprice?.price ? product?.specialprice?.price : product.perUnitPrice}
-                                            </h2>{" "}
-                                            <span> &nbsp;/roll</span>
-                                          </div>
-                                        </div>
-                                      </div>
+                              {avaliableServices && avaliableServices.length > 0 && (
+                                avaliableServices.map((service, idx) => {
+                                  const isSelected = selectedServices.some((s) => s._id === service._id);
+                                  const selectedService = selectedServices.find((s) => s._id === service._id);
 
-                                      <div className="bg-[#0152be] p-1.5 rounded-full max-w-fit self-center md:mr-10 " onClick={() => handleAddToCart(product._id)}>
-                                        <Image src={"/icons/ad-to-cart.svg"} height={20} width={20} className="cursor-pointer rounded-full min-w-[20px] min-h-[20px]" />
-                                      </div>
-                                    </div>
-                                  ))
-                                )
-                                  :
-                                  (
-                                    <div className="mt-5">
-                                      <p>No related products found !</p>
-                                    </div>
-                                  )
-                              } */}
-
-
-                              {
-                                avaliableServices && avaliableServices.length > 0 && (
-                                  avaliableServices.map((service, idx) => (
-                                    <div className={`flex items-center w-full justify-between mt-4 border p-3 cursor-pointer hover:border-black rounded-md ${selectedServices.some((s) => s.name === service.name) ? "border-black" : ""}`}>
-                                      <div className="flex flex-col items-start gap-1">
+                                  return (
+                                    <div
+                                      key={idx}
+                                      className={`flex items-center w-full justify-between mt-4 border p-3 cursor-pointer hover:border-black rounded-md ${isSelected ? "border-black" : ""}`}
+                                    >
+                                      <div className="flex flex-col max-w-[150px] items-start gap-1">
                                         <p className="text-[14px] font-semibold text-[#484848]">{service?.name}</p>
                                         <p className="text-[14px] font-semibold text-[#484848]"><span className="text-[10px] font-bold">Rs</span> {service?.cost}</p>
                                       </div>
-                                      <input type="checkbox" onChange={() => handleServiceChange(service)} checked={selectedServices.some((s) => s.name === service.name)} className="form-checkbox h-4 w-4 text-blue-600  border-gray-300 " />
-
+                                      {isSelected && (
+                                        <div className="flex items-center justify-between">
+                                          <div className="rounded-3xl w-24 border border-gray-400 flex justify-between items-center">
+                                            <button
+                                              onClick={() => handleServiceDecrease(service._id)}
+                                              className="hover:bg-zinc-200 w-9 h-9 rounded-full flex items-center justify-center focus:outline-none"
+                                            >
+                                              -
+                                            </button>
+                                            <p className="font-bold text-center mx-2">
+                                              {selectedService.quantity}
+                                            </p>
+                                            <button
+                                              onClick={() => handleServiceIncrease(service._id)}
+                                              className="hover:bg-zinc-200 w-9 h-9 rounded-full flex items-center justify-center focus:outline-none"
+                                            >
+                                              +
+                                            </button>
+                                          </div>
+                                        </div>
+                                      )}
+                                      <input
+                                        type="checkbox"
+                                        onChange={() => handleServiceChange(service)}
+                                        checked={isSelected}
+                                        className="form-checkbox h-4 w-4 text-blue-600 border-gray-300"
+                                      />
                                     </div>
-                                  ))
-                                )
-                              }
-                              <h2 className="md:text-[24px] text-[18px] font-bold mt-2">Accessories</h2>
-
+                                  );
+                                })
+                              )}
                               {
                                 accessories && accessories.length > 0 && (
-                                  accessories.map((product) => (
-                                    <div key={product._id} className="flex items-start  justify-between cursor-pointer  mt-[30px]  pb-10" onMouseEnter={() => setShowCart(true)} onMouseLeave={() => setShowCart(false)}>
+                                  <h2 className="md:text-[24px] mb-2 text-[18px] font-bold mt-2">Accessories</h2>
+                                )
+                              }
+
+                              {accessories && accessories.length > 0 && (
+                                accessories.map((product) => {
+                                  const selectedAccessory = selectedAccessories.find(
+                                    (s) => s._id === product._id
+                                  );
+
+                                  return (
+                                    <div
+                                      key={product._id}
+                                      className="flex mb-10 p-2.5 items-center justify-between cursor-pointer mt-[10px] pb-5"
+                                      onMouseEnter={() => setShowCart(true)}
+                                      onMouseLeave={() => setShowCart(false)}
+                                    >
                                       <div className="flex">
-                                        <Image src={product?.images[0]} height={100} width={100} className="mr-[16px] h-[100px] w-[100px]" />
+                                        <Image
+                                          src={product?.images[0]}
+                                          height={100}
+                                          width={100}
+                                          className="mr-[16px] h-[80px] w-[80px]"
+                                        />
                                         <div className="flex flex-col mx-[12px] max-w-[220px]">
-                                          <p className="text-[14px] font-bold text-[#484848]">{product.productTitle}</p>
-                                          <p className="text-[#484848] text-[12px] mb-[5px] line-clamp-1">{product?.shortDescription}</p>
+                                          <p className="text-[14px] font-bold text-[#484848]">
+                                            {product.productTitle}
+                                          </p>
+                                          <p className="text-[#484848] text-[12px] mb-[5px] line-clamp-1">
+                                            {product?.shortDescription}
+                                          </p>
                                           <div className="font-bold items-end flex mb-1 my-[5px]">
-                                            <h2 className={`text-3xl leading-[0.5] tracking-wide ${product?.specialprice?.price ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg" : ""} `} style={product?.specialprice?.price ? { boxShadow: '3px 3px #ad3535' } : {}}>
+                                            <h2
+                                              className={`text-3xl leading-[0.5] tracking-wide ${product?.specialprice?.price
+                                                ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg"
+                                                : ""
+                                                }`}
+                                              style={
+                                                product?.specialprice?.price
+                                                  ? { boxShadow: "3px 3px #ad3535" }
+                                                  : {}
+                                              }
+                                            >
                                               <span className="text-sm">Rs. &nbsp;</span>{" "}
-                                              {product?.specialprice?.price ? product?.specialprice?.price : product.perUnitPrice}
+                                              {product?.specialprice?.price
+                                                ? product?.specialprice?.price
+                                                : product.perUnitPrice}
                                             </h2>{" "}
                                             <span> &nbsp;/roll</span>
                                           </div>
                                         </div>
                                       </div>
-
-                                      <div className="bg-[#0152be] p-1.5 rounded-full max-w-fit self-center md:mr-10 " onClick={() => handleAddToCart(product._id)}>
-                                        <Image src={"/icons/ad-to-cart.svg"} height={20} width={20} className="cursor-pointer rounded-full min-w-[20px] min-h-[20px]" />
-                                      </div>
+                                      {selectedAccessory && (
+                                        <div className="flex items-center justify-between">
+                                          <div className="rounded-3xl w-24 border border-gray-400 flex justify-between items-center">
+                                            <button
+                                              onClick={() => handleDecreaseAccessory(product._id)}
+                                              className="hover:bg-zinc-200 w-9 h-9 rounded-full flex items-center justify-center focus:outline-none"
+                                            >
+                                              -
+                                            </button>
+                                            <p className="font-bold text-center mx-2">
+                                              {selectedAccessory.quantity || 1}
+                                            </p>
+                                            <button
+                                              onClick={() => handleIncreaseAccessory(product._id)}
+                                              className="hover:bg-zinc-200 w-9 h-9 rounded-full flex items-center justify-center focus:outline-none"
+                                            >
+                                              +
+                                            </button>
+                                          </div>
+                                        </div>
+                                      )}
+                                      <input
+                                        type="checkbox"
+                                        onChange={() => handleAccessoriesChange(product)}
+                                        checked={!!selectedAccessory}
+                                        className="form-checkbox h-4 w-4 text-blue-600 border-gray-300 self-center"
+                                      />
                                     </div>
-                                  ))
-                                )
-                              }
+                                  );
+                                })
+                              )}
 
                             </div>
                           </div>
@@ -1568,7 +1692,7 @@ const Card = ({ data, productId }) => {
               </p>
             </div>
           </div>
-        </div >
+        </div>
         <ToastContainer
           position="top-right"
           autoClose={5000}

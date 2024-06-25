@@ -8,6 +8,7 @@ import { setDbItems } from "../Features/Slices/cartSlice";
 import Link from "next/link";
 import axios from "axios";
 import Emptycart from "./EmptyCart";
+import CartProduct from "./Main/CartProduct";
 
 const AddCart = () => {
   const dispatch = useDispatch();
@@ -24,31 +25,32 @@ const AddCart = () => {
     id = localStorage.getItem("deviceId");
     console.log(id);
   }
+  const fetchData = async () => {
+    try {
+      setCartStaus("loading");
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
+        {
+          params: {
+            deviceId: id,
+          },
+        }
+      );
+      if (response.status !== 200) {
+        throw new Error("HTTP status " + response.status);
+      }
+      const data = response.data;
+      setcartdata(data);
+      setCartStaus("succeeded");
+      console.log(data)
+      dispatch(setDbItems(data));
+    } catch (error) {
+      setCartStaus("failed");
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setCartStaus("loading");
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
-          {
-            params: {
-              deviceId: id,
-            },
-          }
-        );
-        if (response.status !== 200) {
-          throw new Error("HTTP status " + response.status);
-        }
-        const data = response.data;
-        setcartdata(data);
-        setCartStaus("succeeded");
-        console.log(data)
-        dispatch(setDbItems(data));
-      } catch (error) {
-        setCartStaus("failed");
-      }
-    };
+
     fetchData();
   }, [dispatch]);
 
@@ -59,6 +61,56 @@ const AddCart = () => {
 
   let totalPrice = 0;
   let quantities = 0;
+
+
+  let totalServicesPrice = 0;
+
+  if (cartStatus === "succeeded" && cartdata) {
+    totalServicesPrice = cartdata.items.reduce((total, item) => {
+      const serviceTotalCost = item.selectedServices.reduce(
+        (serviceTotal, service) => serviceTotal + parseFloat(service.cost * service.quantity),
+        0
+      );
+      return (total + serviceTotalCost);
+    }, 0);
+  }
+
+  console.log(cartdata)
+
+  console.log(totalServicesPrice)
+
+  let totalAccessoryPrice = 0;
+
+  if (cartStatus === "succeeded" && cartdata) {
+    totalAccessoryPrice = cartdata.items.reduce((total, item) => {
+      const serviceTotalCost = item.selectedAccessories.reduce(
+        (serviceTotal, service) => serviceTotal + parseFloat(service.perUnitPrice * service.quantity),
+        0
+      );
+      return total + serviceTotalCost;
+    }, 0);
+  }
+
+  console.log(totalAccessoryPrice)
+
+
+  let SumtotalPrice = 0;
+
+  if (cartStatus === "succeeded" && cartdata) {
+    SumtotalPrice = cartdata.items.reduce((total, item) => {
+      const serviceTotalCost = item.selectedServices.reduce(
+        (serviceTotal, service) => serviceTotal + parseFloat(service.cost * service?.quantity),
+        0
+      );
+      const accessoriesTotalCost = item.selectedAccessories.reduce(
+        (accessoryTotal, accessory) => accessoryTotal + parseFloat(accessory.totalPrice * accessory?.quantity),
+        0
+      );
+      const itemTotalPrice = (item.productId.totalPrice + serviceTotalCost + accessoriesTotalCost) * item.quantity;
+      return total + itemTotalPrice;
+    }, 0);
+  }
+
   if (cartStatus === "succeeded" && cartdata && cartdata.items) {
     totalPrice = cartdata.items.reduce((total, item) => {
       return total + (item?.productId?.totalPrice || 0) * (item?.quantity || 0);
@@ -67,6 +119,8 @@ const AddCart = () => {
       return total + (item?.quantity || 0);
     }, 0);
   }
+
+
 
   const postUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`;
   const postData = {
@@ -117,82 +171,166 @@ const AddCart = () => {
 
   console.log(cartdata);
 
+  const handleItemDelete = async (productId) => {
+    console.log(productId)
+    console.log(id)
+    try {
+      const response = await axios.delete(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
+        {
+          params: {
+            owner: id,
+            productId: productId,
+          },
+        }
+      );
+      console.log(response.data)
+      if (response.status === 200) {
+        setCartStaus("succeeded");
+        fetchData();
+        // dispatch(setDbItems(response.data));
+        dispatch(setDbItems(response.data));
+      }
+    } catch (error) {
+      setCartStaus("failed");
+      console.error("Error while deleting product:", error);
+    }
+  };
+
+  async function updateQuantityInDatabase(productId, quantity) {
+    const postUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`;
+    const postData = {
+      deviceId: id,
+      productId: productId,
+      quantity: quantity,
+    };
+    try {
+      const response = await axios.put(postUrl, postData);
+      if (response.status === 200) {
+        fetchData();
+        setCartStaus("succeeded");
+      }
+
+      // Reload cart data after updating quantity in the database
+    } catch (error) {
+      // setloading("failed");
+      setCartStaus("failed");
+      console.error("Error updating quantity in database:", error);
+    }
+  }
+
+  function handleItemIncr(productId, quantity) {
+    let quant = quantity + 1;
+    updateQuantityInDatabase(productId, quant);
+  }
+
+  function handleItemDecr(productId, quantity) {
+    let quant = quantity - 1;
+    if (quant < 1) {
+      handleItemDelete(productId);
+    }
+    updateQuantityInDatabase(productId, quant);
+  }
+
+  const updateServiceQuantity = async (productId, serviceId, Quant) => {
+    const postUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart/service/quantity`;
+    const postData = {
+      deviceId: id,
+      productId: productId,
+      serviceId: serviceId,
+      quantity: Quant,
+    };
+
+    try {
+      const response = await axios.post(postUrl, postData);
+      if (response.status === 200) {
+        fetchData();
+        setCartStaus("succeeded");
+      }
+      // Reload cart data after updating quantity in the database
+    } catch (error) {
+      // setloading("failed");
+      setCartStaus("failed");
+      console.error("Error updating quantity in database:", error);
+    }
+  }
+
+  const handleServiceIncrease = (productId, serviceId, quantity) => {
+
+    let Quant = quantity + 1
+    updateServiceQuantity(productId, serviceId, Quant)
+  }
+
+  const handleServiceDecrease = (productId, serviceId, quantity) => {
+    let Quant = quantity - 1
+    if (Quant > 0) {
+      updateServiceQuantity(productId, serviceId, Quant)
+    }
+  }
+
+  const updateAccessoryQuantity = async (productId, accessoryId, Quant) => {
+    const postUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart/accessory/quantity`;
+    const postData = {
+      deviceId: id,
+      productId: productId,
+      accessoryId: accessoryId,
+      quantity: Quant,
+    };
+    console.log(postData)
+    try {
+      const response = await axios.post(postUrl, postData);
+      console.log(response.data)
+      if (response.status === 200) {
+
+        fetchData();
+        // setcartdata(response.data)
+        setCartStaus("succeeded");
+      }
+      // Reload cart data after updating quantity in the database
+    } catch (error) {
+      // setloading("failed");
+      setCartStaus("failed");
+      console.error("Error updating quantity in database:", error);
+    }
+  }
+
+
+  const handleAccessoriesIncrease = (productId, accessoryId, quantity) => {
+    let Quant = quantity + 1
+    console.log(Quant)
+    updateAccessoryQuantity(productId, accessoryId, Quant)
+  }
+  const handleAccessoriesDecrease = (productId, accessoryId, quantity) => {
+    let Quant = quantity - 1
+    console.log(Quant)
+    if (Quant > 1) {
+      updateAccessoryQuantity(productId, accessoryId, Quant)
+    }
+
+  }
+
   return (
-    <div className="">
-      <div className="main-cart flex justify-center sm:flex-row flex-col sm:gap-80 gap-10  sm:items-start items-center min-h-screen relative top-32 pb-20">
+    <div className="px-[67px]">
+      <div className="main-cart flex  sm:flex-row flex-col justify-between gap-10  sm:items-start items-center min-h-screen relative top-32 pb-20">
         {cartStatus === "loading" && <p>Loading...</p>}
         {cartStatus === "failed" && <p>Error loading data from DB.</p>}
         {cartStatus === "succeeded" && cartdata ? (
-          <div>
+          <div className="flex-1">
             <h1 className="text-xl font-semibold mb-6">Bag</h1>
             {cartdata && cartdata.items && cartdata.items.map((item) => (
-              <div key={item._id}>
-                <div className="left-cart flex-col flex sm:w-2/3 w-[90vw] pr-8">
-                  <div className="bagContainer w-80 ">
-                    <div className="cartitem flex mb-6 border-b pb-4 gap-6">
-                      <div className="w-1/2">
-                        <div className="img mr-8 w-40 h-40">
-                          {item?.productId?.images && item?.productId?.images[0] && (
-                            <Image
-                              src={item.productId.images[0]}
-                              className="w-full h-full object-cover"
-                              alt="Product"
-                              width={150}
-                              height={150}
-                            />
-                          )}
-                        </div>
-                      </div>
-                      <div className="w-1/2">
+              <CartProduct
+                cartItem={item}
+                handleItemDelete={handleItemDelete}
+                handleItemIncr={handleItemIncr}
+                handleItemDecr={handleItemDecr}
+                handleServiceIncrease={handleServiceIncrease}
+                handleServiceDecrease={handleServiceDecrease}
+                handleAccessoriesIncrease={handleAccessoriesIncrease}
+                handleAccessoriesDecrease={handleAccessoriesDecrease}
 
-                        <div className="leftContent flex flex-col">
-                          <h2 className="sm:text-xl text-md sm:font-semibold font-medium truncate">
-                            {item?.productId?.productTitle}
-                          </h2>
-                          <h3 className="text-gray-600 text-[14px]">
-                            {item?.productId?.category}
-                          </h3>
-                          <h3 className="text-black text-[16px] mt-2">
-                            Quantity : &nbsp;{item?.quantity}
-                          </h3>
-                        </div>
-                        <div className="sm:text-xl text-lg sm:font-semibold font-medium mt-2">
-                          <div className="flex items-center">
-                            <Image
-                              src="/icons/indianrupeesicon.svg"
-                              width={18}
-                              height={18}
-                              alt="rupees"
-                              className="mr-1"
-                            />
-                            {(item?.productId?.totalPrice || 0) * (item?.quantity || 0)}
-                          </div>
-                          <div className="icons flex items-center mt-4 space-x-6">
-                            <Image
-                              src="/icons/delete-icon.svg"
-                              width={21}
-                              height={21}
-                              alt="delete"
-                              className="hover:text-slate-500 cursor-pointer"
-                              onClick={() => handleDelete(item?.productId?._id)}
-                            />
-                            <Image
-                              src="/icons/like.svg"
-                              width={21}
-                              height={21}
-                              alt="heart"
-                              className="text-red-700 hover:text-red-500 cursor-pointer"
-                            />
-                          </div>
-                        </div>
-
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
+              />
             ))}
+
           </div>
         ) : (
           <>
@@ -205,8 +343,8 @@ const AddCart = () => {
             <h1 className="text-xl font-semibold mb-6">
               Order Summary
             </h1>
-            <div className="subtotal flex justify-between items-center mb-4 opacity-70">
-              <div className="text-base">Subtotal</div>
+            <div className="subtotal flex justify-between items-center mb-3 opacity-70">
+              <div className="text-base">Product price</div>
               <div className="text-base font-bold flex">
                 <Image
                   src="/icons/indianrupeesicon.svg"
@@ -215,6 +353,30 @@ const AddCart = () => {
                   alt="rupees"
                 />
                 {totalPrice}
+              </div>
+            </div>
+            <div className="subtotal flex justify-between items-center mb-3 opacity-70">
+              <div className="text-base">Services price</div>
+              <div className="text-base font-bold flex">
+                <Image
+                  src="/icons/indianrupeesicon.svg"
+                  width={20}
+                  height={20}
+                  alt="rupees"
+                />
+                {totalServicesPrice}
+              </div>
+            </div>
+            <div className="subtotal flex justify-between items-center mb-3 opacity-70">
+              <div className="text-base">Accessories price</div>
+              <div className="text-base font-bold flex">
+                <Image
+                  src="/icons/indianrupeesicon.svg"
+                  width={20}
+                  height={20}
+                  alt="rupees"
+                />
+                {totalAccessoryPrice}
               </div>
             </div>
             <div className="deliveryCharges flex justify-between items-center mb-4 opacity-70">
@@ -241,7 +403,7 @@ const AddCart = () => {
                   height={25}
                   alt="rupees"
                 />
-                {totalPrice}
+                {SumtotalPrice}
               </div>
             </div>
             <div className="text-sm mb-4">Quantity: {quantities}</div>

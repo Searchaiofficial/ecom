@@ -133,14 +133,61 @@ const Delivery = () => {
   // }
   if (cartStatus === "succeeded" && cartdata) {
     totalPrice = cartdata.items.reduce((total, item) => {
-      const serviceTotalCost = item.selectedServices.reduce(
-        (serviceTotal, service) => serviceTotal + parseFloat(service.cost),
-        0
-      );
-      const itemTotalPrice = (item.productId.totalPrice + serviceTotalCost) * item.quantity;
+      // const serviceTotalCost = item.selectedServices.reduce(
+      //   (serviceTotal, service) => serviceTotal + parseFloat(service.cost),
+      //   0
+      // );
+      const itemTotalPrice = (item.productId.totalPrice) * item.quantity;
       return total + itemTotalPrice;
     }, 0);
   }
+
+  let SumtotalPrice = 0;
+
+  if (cartStatus === "succeeded" && cartdata) {
+    SumtotalPrice = cartdata.items.reduce((total, item) => {
+      const serviceTotalCost = item.selectedServices.reduce(
+        (serviceTotal, service) => serviceTotal + parseFloat(service.cost * service?.quantity),
+        0
+      );
+      const accessoriesTotalCost = item.selectedAccessories.reduce(
+        (accessoryTotal, accessory) => accessoryTotal + parseFloat(accessory.totalPrice * accessory?.quantity),
+        0
+      );
+      const itemTotalPrice = (item.productId.totalPrice + serviceTotalCost + accessoriesTotalCost) * item.quantity;
+      return total + itemTotalPrice;
+    }, 0);
+  }
+
+  let totalServicesPrice = 0;
+
+  if (cartStatus === "succeeded" && cartdata) {
+    totalServicesPrice = cartdata.items.reduce((total, item) => {
+      const serviceTotalCost = item.selectedServices.reduce(
+        (serviceTotal, service) => serviceTotal + parseFloat(service.cost * service.quantity),
+        0
+      );
+      return (total + serviceTotalCost);
+    }, 0);
+  }
+
+  console.log(cartdata)
+
+  console.log(totalServicesPrice)
+
+  let totalAccessoryPrice = 0;
+
+  if (cartStatus === "succeeded" && cartdata) {
+    totalAccessoryPrice = cartdata.items.reduce((total, item) => {
+      const serviceTotalCost = item.selectedAccessories.reduce(
+        (serviceTotal, service) => serviceTotal + parseFloat(service.perUnitPrice * service.quantity),
+        0
+      );
+      return total + serviceTotalCost;
+    }, 0);
+  }
+
+  console.log(totalAccessoryPrice)
 
   const handlePrice = () => {
     dispatch(deliveryPrice(deliveryChoice));
@@ -604,7 +651,7 @@ const Delivery = () => {
             </div>
           </div>
           <h2 className="text-xl pb-3 font-bold">Order summary</h2>
-          <div className="flex items-center justify-between  border-slate-500 pb-3 lg:pb-6 ">
+          <div className="flex items-center justify-between  border-slate-500 pb-3  ">
             <span className="text-[#767677]">Products price </span>
             <div className="text-black font-[700]">
               <div className="flex items-center">
@@ -616,6 +663,36 @@ const Delivery = () => {
                   className="mr-1"
                 />
                 {totalPrice}
+              </div>
+            </div>
+          </div>
+          <div className="flex items-center justify-between  border-slate-500 pb-3  ">
+            <span className="text-[#767677]">Services price </span>
+            <div className="text-black font-[700]">
+              <div className="flex items-center">
+                <Image
+                  src="/icons/indianrupeesicon.svg"
+                  width={18}
+                  height={18}
+                  alt="rupees"
+                  className="mr-1"
+                />
+                {totalServicesPrice}
+              </div>
+            </div>
+          </div>
+          <div className="flex items-center justify-between  border-slate-500 pb-3  ">
+            <span className="text-[#767677]">Accessory price </span>
+            <div className="text-black font-[700]">
+              <div className="flex items-center">
+                <Image
+                  src="/icons/indianrupeesicon.svg"
+                  width={18}
+                  height={18}
+                  alt="rupees"
+                  className="mr-1"
+                />
+                {totalAccessoryPrice}
               </div>
             </div>
           </div>
@@ -648,7 +725,7 @@ const Delivery = () => {
                   alt="rupees"
                   className="mr-1"
                 />
-                {totalPrice + deliveryChoice}
+                {SumtotalPrice + deliveryChoice}
               </div>
             </span>
           </div>

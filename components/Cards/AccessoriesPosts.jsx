@@ -120,7 +120,7 @@ const AccessoriesPosts = ({ data, accessories }) => {
                 }}
                 breakpoints={{
                     300: {
-                        slidesPerView: 1.1,
+                        slidesPerView: 1.5,
                         spaceBetween: 10,
                     },
                     640: {
@@ -128,7 +128,7 @@ const AccessoriesPosts = ({ data, accessories }) => {
                         spaceBetween: 10,
                     },
                     1024: {
-                        slidesPerView: 5,
+                        slidesPerView: 3.5,
                         spaceBetween: 10,
                     },
                 }}
