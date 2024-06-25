@@ -2,9 +2,10 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSocket } from "@/providers/SocketProvider";
+import axios from "axios";
 
-const LiveRoom = ({user}) => {
-  const {email, displayName, image} = user;
+const LiveRoom = ({ user }) => {
+  const { email, displayName, image } = user;
   const router = useRouter();
 
   const socket = useSocket();
@@ -14,6 +15,33 @@ const LiveRoom = ({user}) => {
   const handleSwitchOption = (option) => {
     setOptionClick(option);
   };
+
+  
+  const [selectedCategory, setSelectedCategory] = useState({});
+  const [categories, setCategories] = useState([]);
+
+  const getCategories = async () => {
+    try {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/categories`);
+      return response.data;
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  useEffect(() => {
+    getCategories().then((categories) => {
+      setCategories(() => {
+        let allCategories = [];
+
+        categories.forEach((category) => {
+          allCategories = [...allCategories, ...category.subcategories];
+        });
+
+        return allCategories;
+      });
+    });
+  }, []);
 
   // const [userData, setUserData] = useState({ name: "", mobile: "" });
 
@@ -25,28 +53,28 @@ const LiveRoom = ({user}) => {
 
   const requestJoin = () => {
     if (socket) {
-      socket.emit("request_join", { email, displayName, image });
+      socket.emit("request_join", { email, displayName, image, category : selectedCategory.name });
       setMessage({ status: "pending", text: "Waiting for response..." });
     }
-  }
-    
-    useEffect(() => {
-      if (socket) {
-        socket.on('join_accepted', ({ roomId }) => {
-          setMessage({
-            status: "accepted",
-            text: "Your request has been accepted!",
-          })
-          router.push(`/liveroom/${roomId}`);
+  };
+
+  useEffect(() => {
+    if (socket) {
+      socket.on("join_accepted", ({ roomId }) => {
+        setMessage({
+          status: "accepted",
+          text: "Your request has been accepted!",
         });
-        socket.on('join_rejected', () => {
-          setMessage({
-            status: "rejected",
-            text: "Your request has been rejected!",
-          })
-        }
-      )}
-    }, [socket, router]);
+        router.push(`/liveroom/${roomId}`);
+      });
+      socket.on("join_rejected", () => {
+        setMessage({
+          status: "rejected",
+          text: "Your request has been rejected!",
+        });
+      });
+    }
+  }, [socket, router]);
 
   return (
     <div className="">
@@ -102,6 +130,28 @@ const LiveRoom = ({user}) => {
                   onChange={handleOnChange}
                 />
               </div> */}
+
+              <div className="flex flex-col gap-2">
+                <label className="font-medium text-sm">Select Category</label>
+                <select
+                  // defaultValue={initialValue}
+                  className="w-full border rounded-lg p-2"
+                  onChange={(e) => {
+                    const selectedCategory = categories.find(
+                      (category) => category._id === e.target.value
+                    );
+
+                    setSelectedCategory(selectedCategory);
+                  }}
+                >
+                  <option value="">Select Category</option>
+                  {categories.map((category) => (
+                    <option key={category._id} value={category._id}>
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
               <button
                 className="bg-black text-white w-full h-10 rounded-full mt-4"

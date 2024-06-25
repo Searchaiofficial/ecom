@@ -20,11 +20,14 @@ const page = async () => {
 
   return (
     <div>
-      {userInfo && userInfo.user && userInfo.user.isLiveStreamHost ? (
-        <LiveRoomAdmin />
-      ) : (
-        <LiveRoom user={userInfo.user} />
-      )}
+      {userInfo &&
+        !isLoading &&
+        userInfo.user &&
+        (userInfo.user && userInfo.user.isLiveStreamHost ? (
+          <LiveRoomAdmin />
+        ) : (
+          <LiveRoom user={userInfo.user} />
+        ))}
     </div>
   );
 };

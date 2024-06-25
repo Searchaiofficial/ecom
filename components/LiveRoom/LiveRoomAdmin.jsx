@@ -22,6 +22,7 @@ const LiveRoomAdmin = () => {
     if (socket) {
       const roomId = Math.floor(1000 + Math.random() * 9000);
       socket.emit("admin_response", { socketId, accepted, roomId });
+      console.log(requests)
       if (accepted) {
         setRequests([]);
         router.push(`/liveroom/${roomId}`);
@@ -50,6 +51,8 @@ const LiveRoomAdmin = () => {
                 <div>
                   <h1 className="text-lg font-semibold">{req.displayName}</h1>
                   <p className="text-sm text-gray-500">{req.email}</p>
+                  
+                  <span className="text-sm text-gray-500">{req.category}</span>
                 </div>
               </div>
               <div>
