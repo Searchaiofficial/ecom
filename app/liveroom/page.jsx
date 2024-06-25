@@ -1,22 +1,24 @@
-import { getLiveRoomAdminByEmail } from "@/actions/getLiveRoomAdminByEmail";
-import { getUserInfo } from "@/actions/getUserInfo";
+"use client";
+
 import LiveRoom from "@/components/LiveRoom/LiveRoom";
 import LiveRoomAdmin from "@/components/LiveRoom/LiveRoomAdmin";
-import { redirect } from "next/navigation";
+import Splashscreen from "@/components/Splashscreen/Splashscreen";
+import { useUserInfo } from "@/hooks/useUserInfo";
+import { useRouter } from "next/navigation";
 
 const page = async () => {
-  // This is a server-side function
-  const userInfo = await getUserInfo();
-  console.log(userInfo);
-  if(!userInfo) {
-    redirect("/login");
+  const { userInfo, isLoading } = useUserInfo();
+  const router = useRouter();
+
+  if (!isLoading && !userInfo) {
+    router.push("/login");
   }
-  // const isLiveRoomAdmin = !!(await getLiveRoomAdminByEmail(
-  //   userInfo?.user?.email
-  // ));
+
+  if (isLoading) {
+    return <Splashscreen />;
+  }
 
   return (
-    //  <div>{isLiveRoomAdmin ? <LiveRoomAdmin /> : <LiveRoom />}</div>;
     <div>
       {userInfo && userInfo.user && userInfo.user.isLiveStreamHost ? (
         <LiveRoomAdmin />
