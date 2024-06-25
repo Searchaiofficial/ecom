@@ -18,7 +18,6 @@ const LiveRoomAdmin = () => {
     }
   }, [socket]);
 
-
   const handleResponse = (socketId, accepted) => {
     if (socket) {
       const roomId = Math.floor(1000 + Math.random() * 9000);
@@ -42,9 +41,16 @@ const LiveRoomAdmin = () => {
               key={req.socketId}
               className="col-span-6 bg-white p-4 rounded-md shadow-md flex justify-between items-center"
             >
-              <div>
-                <h1 className="text-lg font-semibold">{req.name}</h1>
-                <p className="text-sm text-gray-500">{req.mobile}</p>
+              <div className="flex gap-4 items-center">
+                <img
+                  className="object-cover w-12 h-12 rounded-full"
+                  src={req.image}
+                  alt="Profile"
+                />
+                <div>
+                  <h1 className="text-lg font-semibold">{req.displayName}</h1>
+                  <p className="text-sm text-gray-500">{req.email}</p>
+                </div>
               </div>
               <div>
                 <button

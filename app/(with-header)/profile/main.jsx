@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import ReviewForm from "./ReviewForm";
+import Link from "next/link";
 
 const ProfileComponent = () => {
   const [user, setUser] = useState(null);
@@ -23,13 +24,13 @@ const ProfileComponent = () => {
   let router = useRouter();
 
   const handleHomeClick = () => {
-    router.push("/home");
+    router.push("/");
   };
 
   const handleLogout = () => {
     localStorage?.removeItem("token");
     window?.open(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/logout", "_self"`
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/logout`, "_self"
     );
   };
 
@@ -147,7 +148,7 @@ const ProfileComponent = () => {
 
   return (
     <div>
-      <div className="flex items-center justify-center h-screen bg-gray-100">
+      <div className="flex items-center justify-center h-screen pt-[100px] bg-gray-100">
         <div
           className="nav absolute z-10 left-[1%] top-[0.1%] text-[2.5rem]"
           onClick={handleHomeClick}
@@ -159,12 +160,12 @@ const ProfileComponent = () => {
           </div>
         </div>
         <div
-          className="nav absolute z-10 right-[2.5%] top-[1%] "
+          className=" "
           onClick={handleLogout}
         >
           <div className="back">
             <div className="font-semibold text-center text-white bg-red-600 rounded-lg shadow-xl cursor-pointer w-14 h-7 ">
-              LogOut
+              LogOut 
             </div>
           </div>
         </div>
@@ -219,6 +220,12 @@ const ProfileComponent = () => {
               onChange={(e) => setNewEmail(e.target.value)}
             />
           </div>
+          <Link href={'/liveroom'}>
+            <button className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
+              Live Room 
+            </button>
+          </Link>
+          {user?.isLiveStreamHost ? "Host" : "User"}
           {editProfile && (
             <button
               className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"

@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSocket } from "@/providers/SocketProvider";
 
-const LiveRoom = () => {
+const LiveRoom = ({user}) => {
+  const {email, displayName, image} = user;
   const router = useRouter();
 
   const socket = useSocket();
@@ -14,17 +15,17 @@ const LiveRoom = () => {
     setOptionClick(option);
   };
 
-  const [userData, setUserData] = useState({ name: "", mobile: "" });
+  // const [userData, setUserData] = useState({ name: "", mobile: "" });
 
-  const handleOnChange = (e) => {
-    setUserData({ ...userData, [e.target.name]: e.target.value });
-  };
+  // const handleOnChange = (e) => {
+  //   setUserData({ ...userData, [e.target.name]: e.target.value });
+  // };
 
   const [message, setMessage] = useState({ status: null, text: "" });
 
   const requestJoin = () => {
     if (socket) {
-      socket.emit("request_join", { ...userData });
+      socket.emit("request_join", { email, displayName, image });
       setMessage({ status: "pending", text: "Waiting for response..." });
     }
   }
@@ -80,7 +81,7 @@ const LiveRoom = () => {
 
           {optionClick === "Instant Meeting" && (
             <div>
-              <div className="">
+              {/* <div className="">
                 <h1 className="text-lg font-semibold">Enter Name</h1>
                 <input
                   type="text"
@@ -100,7 +101,7 @@ const LiveRoom = () => {
                   className="w-full mt-2 h-10 border-1 bg-gray-100  rounded-full px-4 py-2 focus:outline-none"
                   onChange={handleOnChange}
                 />
-              </div>
+              </div> */}
 
               <button
                 className="bg-black text-white w-full h-10 rounded-full mt-4"

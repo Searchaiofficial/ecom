@@ -1,6 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export const getUserInfo = async () => {
   const cookieStore = cookies();
@@ -8,7 +9,8 @@ export const getUserInfo = async () => {
   const token = cookieStore.get("jwt")?.value;
 
   if (!token) {
-    return null;
+    redirect("/login");
+    // return null;
   }
 
   const response = await fetch(
