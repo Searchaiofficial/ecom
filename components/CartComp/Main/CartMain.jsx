@@ -46,7 +46,7 @@ const CartMain = () => {
     dispatch(schedularToogle(value));
   };
 
-  let totalPrice = 0;
+
 
   const fetchData = async () => {
     try {
@@ -77,16 +77,68 @@ const CartMain = () => {
     fetchData();
   }, []);
 
+  let totalPrice = 0;
+
   if (cartStatus === "succeeded" && selectedItems) {
     totalPrice = selectedItems.items.reduce((total, item) => {
-      const serviceTotalCost = item.selectedServices.reduce(
-        (serviceTotal, service) => serviceTotal + parseFloat(service.cost),
-        0
-      );
-      const itemTotalPrice = (item.productId.totalPrice + serviceTotalCost) * item.quantity;
+      // const serviceTotalCost = item.selectedServices.reduce(
+      //   (serviceTotal, service) => serviceTotal + parseFloat(service.cost),
+      //   0
+      // );
+      // const accessoriesTotalCost = item.selectedAccessories.reduce(
+      //   (accessoryTotal, accessory) => accessoryTotal + parseFloat(accessory.totalPrice),
+      //   0
+      // );
+      const itemTotalPrice = (item.productId.totalPrice) * item.quantity;
       return total + itemTotalPrice;
     }, 0);
   }
+  let SumtotalPrice = 0;
+
+  if (cartStatus === "succeeded" && selectedItems) {
+    SumtotalPrice = selectedItems.items.reduce((total, item) => {
+      const serviceTotalCost = item.selectedServices.reduce(
+        (serviceTotal, service) => serviceTotal + parseFloat(service.cost * service?.quantity),
+        0
+      );
+      const accessoriesTotalCost = item.selectedAccessories.reduce(
+        (accessoryTotal, accessory) => accessoryTotal + parseFloat(accessory.totalPrice * accessory?.quantity),
+        0
+      );
+      const itemTotalPrice = (item.productId.totalPrice + serviceTotalCost + accessoriesTotalCost) * item.quantity;
+      return total + itemTotalPrice;
+    }, 0);
+  }
+
+  let totalServicesPrice = 0;
+
+  if (cartStatus === "succeeded" && selectedItems) {
+    totalServicesPrice = selectedItems.items.reduce((total, item) => {
+      const serviceTotalCost = item.selectedServices.reduce(
+        (serviceTotal, service) => serviceTotal + parseFloat(service.cost * service.quantity),
+        0
+      );
+      return (total + serviceTotalCost);
+    }, 0);
+  }
+
+  console.log(selectedItems)
+
+  console.log(totalServicesPrice)
+
+  let totalAccessoryPrice = 0;
+
+  if (cartStatus === "succeeded" && selectedItems) {
+    totalAccessoryPrice = selectedItems.items.reduce((total, item) => {
+      const serviceTotalCost = item.selectedAccessories.reduce(
+        (serviceTotal, service) => serviceTotal + parseFloat(service.perUnitPrice * service.quantity),
+        0
+      );
+      return total + serviceTotalCost;
+    }, 0);
+  }
+
+  console.log(totalAccessoryPrice)
 
   //delete items from DB
   const postUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`;
@@ -147,6 +199,84 @@ const CartMain = () => {
     }
   }
 
+
+  const updateServiceQuantity = async (productId, serviceId, Quant) => {
+    const postUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart/service/quantity`;
+    const postData = {
+      deviceId: id,
+      productId: productId,
+      serviceId: serviceId,
+      quantity: Quant,
+    };
+
+    try {
+      const response = await axios.post(postUrl, postData);
+      if (response.status === 200) {
+        fetchData();
+        setCartStaus("succeeded");
+      }
+      // Reload cart data after updating quantity in the database
+    } catch (error) {
+      // setloading("failed");
+      setCartStaus("failed");
+      console.error("Error updating quantity in database:", error);
+    }
+  }
+
+  const updateAccessoryQuantity = async (productId, accessoryId, Quant) => {
+    const postUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart/accessory/quantity`;
+    const postData = {
+      deviceId: id,
+      productId: productId,
+      accessoryId: accessoryId,
+      quantity: Quant,
+    };
+
+    console.log(postData)
+    try {
+      const response = await axios.post(postUrl, postData);
+      console.log(response.data)
+      if (response.status === 200) {
+
+        await fetchData();
+        // setcartdata(response.data)
+        setCartStaus("succeeded");
+      }
+      // Reload cart data after updating quantity in the database
+    } catch (error) {
+      // setloading("failed");
+      setCartStaus("failed");
+      console.error("Error updating quantity in database:", error);
+    }
+  }
+
+  const handleServiceIncrease = (productId, serviceId, quantity) => {
+
+    let Quant = quantity + 1
+    updateServiceQuantity(productId, serviceId, Quant)
+  }
+
+  const handleServiceDecrease = (productId, serviceId, quantity) => {
+    let Quant = quantity - 1
+    if (Quant > 0) {
+      updateServiceQuantity(productId, serviceId, Quant)
+    }
+  }
+
+  const handleAccessoriesIncrease = (productId, accessoryId, quantity) => {
+    let Quant = quantity + 1
+    console.log(Quant)
+    updateAccessoryQuantity(productId, accessoryId, Quant)
+  }
+  const handleAccessoriesDecrease = (productId, accessoryId, quantity) => {
+    let Quant = quantity - 1
+    console.log(Quant)
+    if (Quant >= 1) {
+      updateAccessoryQuantity(productId, accessoryId, Quant)
+    }
+
+  }
+
   function handleItemIncr(productId, quantity) {
     let quant = quantity + 1;
     updateQuantityInDatabase(productId, quant);
@@ -154,7 +284,7 @@ const CartMain = () => {
 
   function handleItemDecr(productId, quantity) {
     let quant = quantity - 1;
-    if (quant < 1) {
+    if (quant >= 1) {
       handleItemDelete(productId);
     }
     updateQuantityInDatabase(productId, quant);
@@ -404,6 +534,10 @@ const CartMain = () => {
                       handleItemDecr={handleItemDecr}
                       handleItemIncr={handleItemIncr}
                       handleItemDelete={handleItemDelete}
+                      handleServiceIncrease={handleServiceIncrease}
+                      handleServiceDecrease={handleServiceDecrease}
+                      handleAccessoriesIncrease={handleAccessoriesIncrease}
+                      handleAccessoriesDecrease={handleAccessoriesDecrease}
                     />
                   );
                 })
@@ -448,6 +582,36 @@ const CartMain = () => {
                   </div>
                 </div>
               </div>
+              <div className="flex items-center justify-between  border-slate-500 pb-3 ">
+                <span className="text-[#767677]">Services price </span>
+                <div className="text-black font-[700]">
+                  <div className="flex items-center">
+                    <Image
+                      src="/icons/indianrupeesicon.svg"
+                      width={18}
+                      height={18}
+                      alt="rupees"
+                      className="mr-1"
+                    />
+                    {totalServicesPrice}
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center justify-between  border-slate-500 pb-3 ">
+                <span className="text-[#767677]">Accessories price </span>
+                <div className="text-black font-[700]">
+                  <div className="flex items-center">
+                    <Image
+                      src="/icons/indianrupeesicon.svg"
+                      width={18}
+                      height={18}
+                      alt="rupees"
+                      className="mr-1"
+                    />
+                    {totalAccessoryPrice}
+                  </div>
+                </div>
+              </div>
               <div className="flex items-center justify-between ">
                 <span className="text-[#767677]">Delivery charge </span>
                 <span>-</span>
@@ -468,7 +632,7 @@ const CartMain = () => {
                       alt="rupees"
                       className="mr-1"
                     />
-                    {totalPrice}
+                    {SumtotalPrice}
                   </div>
                 </span>
               </div>

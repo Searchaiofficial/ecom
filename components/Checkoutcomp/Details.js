@@ -84,11 +84,11 @@ const Details = () => {
 
   if (cartdata && cartdata.items) {
     totalPrice = cartdata.items.reduce((total, item) => {
-      const serviceTotalCost = item.selectedServices.reduce(
-        (serviceTotal, service) => serviceTotal + parseFloat(service.cost),
-        0
-      );
-      const itemTotalPrice = (item.productId.totalPrice + serviceTotalCost) * item.quantity;
+      // const serviceTotalCost = item.selectedServices.reduce(
+      //   (serviceTotal, service) => serviceTotal + parseFloat(service.cost),
+      //   0
+      // );
+      const itemTotalPrice = (item.productId.totalPrice) * item.quantity;
       return total + itemTotalPrice;
     }, 0);
   }
@@ -100,6 +100,52 @@ const Details = () => {
   // }
 
   console.log(totalPrice)
+  let totalServicesPrice = 0;
+
+  if (cartdata) {
+    totalServicesPrice = cartdata.items.reduce((total, item) => {
+      const serviceTotalCost = item.selectedServices.reduce(
+        (serviceTotal, service) => serviceTotal + parseFloat(service.cost * service.quantity),
+        0
+      );
+      return (total + serviceTotalCost);
+    }, 0);
+  }
+
+  console.log(cartdata)
+
+  console.log(totalServicesPrice)
+
+  let totalAccessoryPrice = 0;
+
+  if (cartdata) {
+    totalAccessoryPrice = cartdata.items.reduce((total, item) => {
+      const serviceTotalCost = item.selectedAccessories.reduce(
+        (serviceTotal, service) => serviceTotal + parseFloat(service.perUnitPrice * service.quantity),
+        0
+      );
+      return total + serviceTotalCost;
+    }, 0);
+  }
+
+  console.log(totalAccessoryPrice)
+
+  let SumtotalPrice = 0;
+
+  if (cartdata) {
+    SumtotalPrice = cartdata.items.reduce((total, item) => {
+      const serviceTotalCost = item.selectedServices.reduce(
+        (serviceTotal, service) => serviceTotal + parseFloat(service.cost * service?.quantity),
+        0
+      );
+      const accessoriesTotalCost = item.selectedAccessories.reduce(
+        (accessoryTotal, accessory) => accessoryTotal + parseFloat(accessory.totalPrice * accessory?.quantity),
+        0
+      );
+      const itemTotalPrice = (item.productId.totalPrice + serviceTotalCost + accessoriesTotalCost) * item.quantity;
+      return total + itemTotalPrice;
+    }, 0);
+  }
 
   // console.log(cartdata);
 
@@ -208,7 +254,7 @@ const Details = () => {
           method: "POST",
           url: `${apiBaseUrl}/api/makepayment`,
           data: {
-            amount: (totalPrice + DeliverCost || deliveryPrice) * 100,
+            amount: (SumtotalPrice + DeliverCost || deliveryPrice) * 100,
             callbackUrl: `${BASE_URL}/success`,
             redirectUrl: `${BASE_URL}/success`,
           },
@@ -586,6 +632,36 @@ const Details = () => {
                 </div>
               </div>
             </div>
+            <div className="flex items-center justify-between  border-slate-500 pb-6 ">
+              <span className="text-black">Services price </span>
+              <div className=" text-black font-[700]">
+                <div className="flex items-center">
+                  <Image
+                    src="/icons/indianrupeesicon.svg"
+                    width={18}
+                    height={18}
+                    alt="rupees"
+                    className="mr-1"
+                  />
+                  {totalServicesPrice}
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center justify-between  border-slate-500 pb-6 ">
+              <span className="text-black">Accessories price </span>
+              <div className=" text-black font-[700]">
+                <div className="flex items-center">
+                  <Image
+                    src="/icons/indianrupeesicon.svg"
+                    width={18}
+                    height={18}
+                    alt="rupees"
+                    className="mr-1"
+                  />
+                  {totalAccessoryPrice}
+                </div>
+              </div>
+            </div>
             <div className="flex items-center justify-between ">
               <span className="text-black">Delivery charge </span>
               <div className="text-black">
@@ -615,7 +691,7 @@ const Details = () => {
                     alt="rupees"
                     className="mr-1"
                   />
-                  {totalPrice + DeliverCost || deliveryPrice}
+                  {SumtotalPrice + DeliverCost || deliveryPrice}
                 </div>
               </div>
             </div>

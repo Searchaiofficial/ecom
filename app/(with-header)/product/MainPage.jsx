@@ -248,7 +248,8 @@ const RoomPage = () => {
               </div>
             </div>
           </div>
-          <div className="lg:pl-[40px] w-full">
+
+          <div className="lg:pl-[40px] w-full lg:w-[66%] ">
             <AccessoriesPosts data={data} accessories={accessories} />
           </div>
           <div className="lg:pl-[40px] w-full lg:w-[66%]">

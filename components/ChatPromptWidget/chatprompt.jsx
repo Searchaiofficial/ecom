@@ -39,9 +39,9 @@ const ChatPrompt = () => {
             {showContent && (
                 <div className="lg:flex hidden lg:flex-col">
                     <p className="text-[14px] font-semibold text-[#1D1D1F]">Need shopping help?</p>
-                    <Link href="#">
+                    <div>
                         <p className="text-blue-500 text-[14px] font-normal">Ask a specialist</p>
-                    </Link>
+                    </div>
                 </div>
             )}
         </Link>
