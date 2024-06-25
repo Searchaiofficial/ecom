@@ -25,11 +25,11 @@ const page = ({ params }) => {
   const [myVideoEnabled, setMyVideoEnabled] = useState(null);
   const [isScreenSharing, setIsScreenSharing] = useState(false);
 
-  useEffect(() => {
-    if (!localStorage.getItem("userData")) {
-      router.push(`/liveroom/`);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!localStorage.getItem("userData")) {
+  //     router.push(`/liveroom/`);
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (x.length > 0) {
@@ -73,6 +73,7 @@ const page = ({ params }) => {
   useEffect(() => {
     if (socket) {
       const handleUserJoined = ({ userId: _, users }) => {
+        console.log(users)
         users.forEach((id) => {
           if (id !== socket.id && !peers[id]) {
             console.log("User joined", id);
@@ -139,13 +140,6 @@ const page = ({ params }) => {
     init();
   }, [roomId, socket]);
 
-  // useEffect(() => {
-  //   if (myStream) {
-  //     setMyAudioEnabled(myStream.getAudioTracks()[0].enabled);
-  //     setMyVideoEnabled(myStream.getVideoTracks()[0].enabled);
-  //   }
-  // }, [myStream]);
-
   const createPeerConnection = (userId, isAnswerer) => {
     const peer = new RTCPeerConnection({
       iceServers: [
@@ -209,8 +203,6 @@ const page = ({ params }) => {
       audio: true,
     });
     setMyStream(stream);
-    // setMyAudioEnabled(myStream.getAudioTracks()[0].enabled);
-    // setMyVideoEnabled(myStream.getVideoTracks()[0].enabled);
     socket.emit("join-room", { roomId });
   };
 
@@ -220,7 +212,6 @@ const page = ({ params }) => {
         track.enabled = !track.enabled;
       });
 
-      // setMyAudioEnabled(myStream.getAudioTracks()[0].enabled);
     }
   };
 
@@ -230,7 +221,6 @@ const page = ({ params }) => {
         track.enabled = !track.enabled;
       });
 
-      // setMyVideoEnabled(myStream.getVideoTracks()[0].enabled);
     }
   };
 
@@ -295,20 +285,6 @@ const page = ({ params }) => {
                   }
                 }}
               />
-              {/* <div className="flex justify-between">
-                <button
-                  onClick={toggleAudio}
-                  className="px-2 py-1 bg-blue-500 text-white rounded"
-                >
-                  Toggle Audio
-                </button>
-                <button
-                  onClick={toggleVideo}
-                  className="px-2 py-1 bg-blue-500 text-white rounded"
-                >
-                  Toggle Video
-                </button>
-              </div> */}
             </div>
           )}
           <div className=" absolute bottom-8 w-full flex gap-2 justify-center">
@@ -316,14 +292,12 @@ const page = ({ params }) => {
               onClick={toggleAudio}
               className="bg-red-500 hover:bg-red-400 text-xs text-center text-white font-medium shadow-sm  rounded-full w-10 h-10"
             >
-              {/* {myAudioEnabled ? "Mute" : "UnMute"} */}
               Audio
             </button>
             <button
               onClick={toggleVideo}
               className="bg-red-500 hover:bg-red-400 text-xs text-center text-white font-medium shadow-sm  rounded-full w-10 h-10"
             >
-              {/* {myVideoEnabled ? "Video Off" : "Video On"} */}
               Video
             </button>
             {myStream && (
@@ -441,13 +415,6 @@ const page = ({ params }) => {
               )}
             </div>
           </div>
-          {/* <div className="absolute p-2 w-full bottom-0 left-0 h-[8%] ">
-            <input
-              type="text"
-              placeholder="Type here to chat..."
-              className="w-full h-full border-1 bg-gray-200  rounded-full p-2 focus:outline-none"
-            />
-          </div> */}
         </div>
       </div>
     </div>
