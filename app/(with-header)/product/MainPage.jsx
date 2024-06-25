@@ -99,47 +99,47 @@ const RoomPage = () => {
 
   console.log(data);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setHowMuchScrolled(window.scrollY);
-      } else {
-        setHowMuchScrolled(0);
-      }
-    };
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     if (window.scrollY > 0) {
+  //       setHowMuchScrolled(window.scrollY);
+  //     } else {
+  //       setHowMuchScrolled(0);
+  //     }
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
+  //   window.addEventListener("scroll", handleScroll);
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [howMuchScrolled]);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, [howMuchScrolled]);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, []);
 
-  const [isFilterVisible, setIsFilterVisible] = useState(true);
+  // const [isFilterVisible, setIsFilterVisible] = useState(true);
 
-  useEffect(() => {
-    let prevScrollPos = window.scrollY;
+  // useEffect(() => {
+  //   let prevScrollPos = window.scrollY;
 
-    const handleScroll = () => {
-      const currentScrollPos = window.scrollY;
-      setIsFilterVisible(
-        currentScrollPos <= prevScrollPos || currentScrollPos < 100
-      );
-      prevScrollPos = currentScrollPos;
-    };
+  //   const handleScroll = () => {
+  //     const currentScrollPos = window.scrollY;
+  //     setIsFilterVisible(
+  //       currentScrollPos <= prevScrollPos || currentScrollPos < 100
+  //     );
+  //     prevScrollPos = currentScrollPos;
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
+  //   window.addEventListener("scroll", handleScroll);
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
 
-  console.log("11111", data);
+  // console.log("11111", data);
 
   const [accessories, setAccessories] = useState([]);
   const fetchAccessories = async () => {
@@ -242,7 +242,7 @@ const RoomPage = () => {
                 <UserReviewPosts />
               </div> */}
             </div>
-            <div className="md:basis-2/3 hidden md:flex flex-col">
+            <div className="md:basis-2/3 hidden md:flex flex-col"  >
               <div className="md:relative flex top-14 mb-16 ml-0 ">
                 <Card data={data} productId={data._id} />
               </div>
