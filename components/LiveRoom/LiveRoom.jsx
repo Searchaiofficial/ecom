@@ -1,75 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { allSelectedData } from "@/components/Features/Slices/virtualDataSlice";
-import { useSelector } from "react-redux";
-import axios from "axios";
-import LiveRoomProductCard from "./LiveRoomProductCard";
-import Link from "next/link";
-import { io } from "socket.io-client";
 import { useRouter } from "next/navigation";
+import { useSocket } from "@/providers/SocketProvider";
 
 const LiveRoom = () => {
   const router = useRouter();
-  const x = useSelector(allSelectedData);
 
-  const [filteredProducts, setFilteredProducts] = useState([]);
-  const [similarProducts, setSimilarProducts] = useState([]);
+  const socket = useSocket();
 
-  const [roomId, setRoomId] = useState("");
-  const [socket, setSocket] = useState(null);
-  const [peers, setPeers] = useState({});
-  const [streams, setStreams] = useState({});
-  const [myStream, setMyStream] = useState(null);
-  const [myAudioEnabled, setMyAudioEnabled] = useState(null);
-  const [myVideoEnabled, setMyVideoEnabled] = useState(null);
-  const [isScreenSharing, setIsScreenSharing] = useState(false);
-
-  useEffect(() => {
-    const socket = io(process.env.NEXT_PUBLIC_API_BASE_URL);
-    console.log(socket);
-    setSocket(socket);
-
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
-
-  useEffect(() => {
-    if (x.length > 0) {
-      router.push("/virtualexperience/category");
-    }
-    const fetchVeProducts = async () => {
-      try {
-        const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getVEFilter`;
-        const response = await axios.post(apiUrl, x, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        setFilteredProducts(response.data);
-      } catch (error) {
-        console.error("Error fetching filtered products:", error);
-      }
-    };
-
-    const fetchProductByCategory = async () => {
-      try {
-        const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/fetchProductsByCategory/${x.category}`;
-        const response = await axios.get(apiUrl);
-        setSimilarProducts(response.data);
-      } catch (error) {
-        console.error("Error fetching filtered products:", error);
-      }
-    };
-
-    fetchVeProducts();
-
-    if (x.category) {
-      fetchProductByCategory();
-    }
-  }, []);
-
-  const [isDataFilled, setIsDataFilled] = useState(false);
   const [optionClick, setOptionClick] = useState("Instant Meeting");
 
   const handleSwitchOption = (option) => {
@@ -82,486 +20,102 @@ const LiveRoom = () => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
 
-  const handleJoin = () => {
-    setRoomId("1234");
-    setIsDataFilled(true);
-  };
+  const [message, setMessage] = useState({ status: null, text: "" });
 
-  const stars = new Array(4)
-    .fill("/icons/star.svg")
-    .concat("/icons/half-black-half-white.svg");
-
-  useEffect(() => {
+  const requestJoin = () => {
     if (socket) {
-      const handleUserJoined = ({ userId: _, users }) => {
-        users.forEach((id) => {
-          if (id !== socket.id && !peers[id]) {
-            console.log("User joined", id);
-            createPeerConnection(id, false);
-          }
+      socket.emit("request_join", { ...userData });
+      setMessage({ status: "pending", text: "Waiting for response..." });
+    }
+  }
+    
+    useEffect(() => {
+      if (socket) {
+        socket.on('join_accepted', ({ roomId }) => {
+          setMessage({
+            status: "accepted",
+            text: "Your request has been accepted!",
+          })
+          router.push(`/liveroom/${roomId}`);
         });
-      };
-
-      const handleUserLeft = ({ userId }) => {
-        if (peers[userId]) {
-          peers[userId].close();
-          delete peers[userId];
-          delete streams[userId];
-          setPeers({ ...peers });
-          setStreams({ ...streams });
+        socket.on('join_rejected', () => {
+          setMessage({
+            status: "rejected",
+            text: "Your request has been rejected!",
+          })
         }
-      };
-
-      const handleOffer = async ({ from, offer }) => {
-        const peer = createPeerConnection(from, true);
-        await peer.setRemoteDescription(new RTCSessionDescription(offer));
-        const answer = await peer.createAnswer();
-        await peer.setLocalDescription(answer);
-        socket.emit("answer", { to: from, answer });
-      };
-
-      const handleAnswer = async ({ from, answer }) => {
-        const peer = peers[from];
-        await peer.setRemoteDescription(new RTCSessionDescription(answer));
-      };
-
-      const handleIceCandidate = async ({ from, candidate }) => {
-        const peer = peers[from];
-        if (peer.remoteDescription)
-          await peer.addIceCandidate(new RTCIceCandidate(candidate));
-      };
-
-      socket.on("user-joined", handleUserJoined);
-      socket.on("user-left", handleUserLeft);
-      socket.on("offer", handleOffer);
-      socket.on("answer", handleAnswer);
-      socket.on("ice-candidate", handleIceCandidate);
-
-      return () => {
-        socket.off("user-joined", handleUserJoined);
-        socket.off("user-left", handleUserLeft);
-        socket.off("offer", handleOffer);
-        socket.off("answer", handleAnswer);
-        socket.off("ice-candidate", handleIceCandidate);
-      };
-    }
-  }, [socket, peers, streams]);
-
-  useEffect(() => {
-    const init = async () => {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: true,
-        audio: true,
-      });
-      setMyStream(stream);
-      if (socket) socket.emit("join-room", { roomId });
-    };
-
-    init();
-  }, [roomId, socket]);
-
-  // useEffect(() => {
-  //   if (myStream) {
-  //     setMyAudioEnabled(myStream.getAudioTracks()[0].enabled);
-  //     setMyVideoEnabled(myStream.getVideoTracks()[0].enabled);
-  //   }
-  // }, [myStream]);
-
-  const createPeerConnection = (userId, isAnswerer) => {
-    const peer = new RTCPeerConnection({
-      iceServers: [
-        { urls: ["stun:stun.l.google.com:19302"] },
-        {
-          urls: "turn:numb.viagenie.ca",
-          username: "webrtc@live.com",
-          credential: "muazkh",
-        },
-      ],
-    });
-
-    peer.onicecandidate = (event) => {
-      if (event.candidate) {
-        socket.emit("ice-candidate", {
-          to: userId,
-          candidate: event.candidate,
-        });
-      }
-    };
-
-    peer.ontrack = (event) => {
-      setStreams((prev) => ({ ...prev, [userId]: event.streams[0] }));
-    };
-
-    if (myStream) {
-      myStream.getTracks().forEach((track) => {
-        peer.addTrack(track, myStream);
-      });
-    }
-
-    if (!isAnswerer) {
-      peer.onnegotiationneeded = async () => {
-        const offer = await peer.createOffer();
-        await peer.setLocalDescription(offer);
-        socket.emit("offer", { to: userId, offer });
-      };
-    }
-
-    setPeers((prev) => ({ ...prev, [userId]: peer }));
-    return peer;
-  };
-
-  const exitCall = () => {
-    Object.values(peers).forEach((peer) => {
-      peer.close();
-    });
-
-    setPeers({});
-    setStreams({});
-    setMyStream(null);
-    setMyAudioEnabled(null);
-    setMyVideoEnabled(null);
-
-    socket.emit("leave-room", { roomId });
-  };
-
-  const rejoinCall = async () => {
-    const stream = await navigator.mediaDevices.getUserMedia({
-      video: true,
-      audio: true,
-    });
-    setMyStream(stream);
-    // setMyAudioEnabled(myStream.getAudioTracks()[0].enabled);
-    // setMyVideoEnabled(myStream.getVideoTracks()[0].enabled);
-    socket.emit("join-room", { roomId });
-  };
-
-  const toggleAudio = () => {
-    if (myStream) {
-      myStream.getAudioTracks().forEach((track) => {
-        track.enabled = !track.enabled;
-      });
-
-      // setMyAudioEnabled(myStream.getAudioTracks()[0].enabled);
-    }
-  };
-
-  const toggleVideo = () => {
-    if (myStream) {
-      myStream.getVideoTracks().forEach((track) => {
-        track.enabled = !track.enabled;
-      });
-
-      // setMyVideoEnabled(myStream.getVideoTracks()[0].enabled);
-    }
-  };
-
-  const startScreenShare = async () => {
-    try {
-      const screenStream = await navigator.mediaDevices.getDisplayMedia({
-        video: true,
-      });
-
-      screenStream.getVideoTracks()[0].onended = () => {
-        stopScreenShare();
-      };
-
-      setIsScreenSharing(true);
-
-      if (myStream) {
-        const videoTrack = myStream.getVideoTracks()[0];
-        myStream.removeTrack(videoTrack);
-        videoTrack.stop();
-        myStream.addTrack(screenStream.getVideoTracks()[0]);
-      }
-
-      Object.values(peers).forEach((peer) => {
-        const sender = peer
-          .getSenders()
-          .find((s) => s.track && s.track.kind === "video");
-        if (sender) {
-          sender.replaceTrack(screenStream.getVideoTracks()[0]);
-        }
-      });
-    } catch (error) {
-      console.error("Error sharing screen: ", error);
-    }
-  };
-
-  const stopScreenShare = () => {
-    if (myStream) {
-      myStream.getVideoTracks()[0].stop();
-      exitCall();
-      rejoinCall();
-    }
-    setIsScreenSharing(false);
-  };
+      )}
+    }, [socket, router]);
 
   return (
     <div className="">
       <div className="sm:px-4 flex px-[20px] h-screen py-4 flex-col md:flex-row">
-        <div className="relative w-full  md:w-[70%] bg-black py-4 border-2 border-black">
-          {myStream && (
-            <div className="h-full w-full">
-              {/* <span className="block text-center font-semibold mb-2">
-                My Stream
-              </span> */}
-              <video
-                className="w-full h-full"
-                autoPlay
-                playsInline
-                muted
-                ref={(video) => {
-                  if (video) {
-                    video.srcObject = myStream;
-                  }
-                }}
-              />
-              {/* <div className="flex justify-between">
-                <button
-                  onClick={toggleAudio}
-                  className="px-2 py-1 bg-blue-500 text-white rounded"
-                >
-                  Toggle Audio
-                </button>
-                <button
-                  onClick={toggleVideo}
-                  className="px-2 py-1 bg-blue-500 text-white rounded"
-                >
-                  Toggle Video
-                </button>
-              </div> */}
-            </div>
-          )}
-          <div className=" absolute bottom-8 w-full flex gap-2 justify-center">
-            <button
-              onClick={toggleAudio}
-              className="bg-red-500 hover:bg-red-400 text-xs text-center text-white font-medium shadow-sm  rounded-full w-10 h-10"
-            >
-              {/* {myAudioEnabled ? "Mute" : "UnMute"} */}
-              Audio
-            </button>
-            <button
-              onClick={toggleVideo}
-              className="bg-red-500 hover:bg-red-400 text-xs text-center text-white font-medium shadow-sm  rounded-full w-10 h-10"
-            >
-              {/* {myVideoEnabled ? "Video Off" : "Video On"} */}
-              Video
-            </button>
-            {myStream && (
-              <button
-                onClick={exitCall}
-                className="bg-red-500 hover:bg-red-400 text-xs text-center text-white font-medium shadow-sm  rounded-full w-10 h-10"
-              >
-                Exit Call
-              </button>
-            )}
-            {!myStream && (
-              <button
-                onClick={rejoinCall}
-                className="px-4 py-2 bg-green-600 text-white rounded-lg"
-              >
-                Rejoin Call
-              </button>
-            )}
-            {!isScreenSharing && (
-              <button
-                onClick={startScreenShare}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg"
-              >
-                Share Screen
-              </button>
-            )}
-            {isScreenSharing && (
-              <button
-                onClick={stopScreenShare}
-                className="px-4 py-2 bg-yellow-600 text-white rounded-lg"
-              >
-                Stop Screen Share
-              </button>
-            )}
-          </div>
-          <div className="absolute w-[20%]  top-0 right-0">
-            {Object.keys(streams).map((key) => (
-              <div
-                key={key}
-                className="z-50 relative mb-2 rounded-lg shadow-lg"
-              >
-                <span className="absolute text-white top-0 text-sm text-center font-semibold mb-2">
-                  {key}'s
-                </span>
-                <video
-                  className="w-full rounded-lg"
-                  autoPlay
-                  playsInline
-                  ref={(video) => {
-                    if (video) {
-                      video.srcObject = streams[key];
-                    }
-                  }}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="relative flex flex-col w-full  md:w-[30%] pl-4">
-          <div className="relative w-full overflow-y-scroll h-[100%]">
-            <div>
-              <h1 className="text-2xl font-semibold mb-2">Related Products</h1>
-              {filteredProducts.length > 0 ? (
-                filteredProducts.map((product, idx) => (
-                  <div className="grid grid-cols-1 w-full h-full fade-in ">
-                    <LiveRoomProductCard
-                      productTitle={product.productTitle}
-                      price={product.perUnitPrice}
-                      demandtype={product.demandtype}
-                      specialprice={product.specialprice}
-                      desc={product.productTitle}
-                      imgSrc={product.images}
-                      rating={product.ratings}
-                      key={idx}
-                      id={product._id}
-                      category={product.category}
-                      productId={product.productId}
-                      ratings={product.ratings}
-                      stars={stars}
-                      totalPrice={product.totalPrice}
-                      productDescription={product.productDescription}
-                    />
-                  </div>
-                ))
-              ) : (
-                <div className="mt-2">No products found</div>
-              )}
-            </div>
-            <div className="mt-4">
-              <h1 className="text-2xl font-semibold mb-2">Similar Products</h1>
-              {similarProducts.length > 0 ? (
-                similarProducts.map((product, idx) => (
-                  <div className="grid grid-cols-1 w-full h-full fade-in ">
-                    <LiveRoomProductCard
-                      productTitle={product.productTitle}
-                      price={product.perUnitPrice}
-                      demandtype={product.demandtype}
-                      specialprice={product.specialprice}
-                      desc={product.productTitle}
-                      imgSrc={product.images}
-                      rating={product.ratings}
-                      key={idx}
-                      id={product._id}
-                      category={product.category}
-                      productId={product.productId}
-                      ratings={product.ratings}
-                      stars={stars}
-                      totalPrice={product.totalPrice}
-                      productDescription={product.productDescription}
-                    />
-                  </div>
-                ))
-              ) : (
-                <div className="mt-2">No products found</div>
-              )}
-            </div>
-          </div>
-          {/* <div className="absolute p-2 w-full bottom-0 left-0 h-[8%] ">
-            <input
-              type="text"
-              placeholder="Type here to chat..."
-              className="w-full h-full border-1 bg-gray-200  rounded-full p-2 focus:outline-none"
-            />
-          </div> */}
-        </div>
+        <div className="relative w-full  md:w-[70%] bg-black py-4 border-2 border-black"></div>
       </div>
 
-      {!isDataFilled && (
-        <div className=" fixed h-full w-screen  bg-black/90 z-[9999] backdrop:blur-sm top-0 left-0">
-          <section className="pt-[15vh] text-black bg-white flex-col absolute right-0 top-0 h-screen p-8 gap-8 z-50  w-[30%] flex ">
-            <div className="flex justify-around text-lg font-medium">
-              <h1
-                className={`border-b-2 cursor-pointer ${
-                  optionClick === "Instant Meeting"
-                    ? "border-black"
-                    : "border-transparent"
-                }`}
-                onClick={() => handleSwitchOption("Instant Meeting")}
-              >
-                Instant Meeting
-              </h1>
-              <h1
-                className={`border-b-2 cursor-pointer ${
-                  optionClick === "Schedule Meeting"
-                    ? "border-black"
-                    : "border-transparent"
-                }`}
-                onClick={() => handleSwitchOption("Schedule Meeting")}
-              >
-                Schedule Meeting
-              </h1>
-            </div>
-
-            {optionClick === "Instant Meeting" && (
-              <div>
-                <div className="">
-                  <h1 className="text-lg font-semibold">Enter Name</h1>
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="john doe"
-                    className="w-full mt-2 h-10 border-1 bg-gray-100 px-4 rounded-full py-2 focus:outline-none"
-                    onChange={handleOnChange}
-                  />
-                </div>
-
-                <div className="mt-2">
-                  <h1 className="text-lg font-semibold">Mobile no.</h1>
-                  <input
-                    type="number"
-                    placeholder="9876543210"
-                    name="mobile"
-                    className="w-full mt-2 h-10 border-1 bg-gray-100  rounded-full px-4 py-2 focus:outline-none"
-                    onChange={handleOnChange}
-                  />
-                </div>
-
-                <button
-                  className="bg-black text-white w-full h-10 rounded-full mt-4"
-                  onClick={handleJoin}
-                >
-                  Join
-                </button>
-              </div>
-            )}
-          </section>
-        </div>
-      )}
-
-      {/* {filteredProducts.length === 0 && similarProducts.length === 0 && (
-        <div
-          className="relative z-[9999]"
-          aria-labelledby="modal-title"
-          role="dialog"
-          aria-modal="true"
-        >
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-70 transition-opacity"></div>
-
-          <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-            <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-              <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-                <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-                  <div className="sm:flex flex-col  items-center">
-                    <p className="text-lg  mb-2">No Product Found</p>
-
-                    <Link href="/category/virtualexperience">
-                      <h1 className="bg-blue-500 p-2 text-white rounded-md">
-                        Go Back
-                      </h1>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
+      <div className=" fixed h-full w-screen  bg-black/80 z-[9999] backdrop:blur-sm top-0 left-0">
+        <section className="pt-[15vh] text-black bg-white flex-col absolute right-0 top-0 h-screen p-8 gap-8 z-50  w-[30%] flex ">
+          <div className="flex justify-around text-lg font-medium">
+            <h1
+              className={`border-b-2 cursor-pointer ${
+                optionClick === "Instant Meeting"
+                  ? "border-black"
+                  : "border-transparent"
+              }`}
+              onClick={() => handleSwitchOption("Instant Meeting")}
+            >
+              Instant Meeting
+            </h1>
+            <h1
+              className={`border-b-2 cursor-pointer ${
+                optionClick === "Schedule Meeting"
+                  ? "border-black"
+                  : "border-transparent"
+              }`}
+              onClick={() => handleSwitchOption("Schedule Meeting")}
+            >
+              Schedule Meeting
+            </h1>
           </div>
-        </div>
-      )} */}
+
+          {optionClick === "Instant Meeting" && (
+            <div>
+              <div className="">
+                <h1 className="text-lg font-semibold">Enter Name</h1>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="john doe"
+                  className="w-full mt-2 h-10 border-1 bg-gray-100 px-4 rounded-full py-2 focus:outline-none"
+                  onChange={handleOnChange}
+                />
+              </div>
+
+              <div className="mt-2">
+                <h1 className="text-lg font-semibold">Mobile no.</h1>
+                <input
+                  type="number"
+                  placeholder="9876543210"
+                  name="mobile"
+                  className="w-full mt-2 h-10 border-1 bg-gray-100  rounded-full px-4 py-2 focus:outline-none"
+                  onChange={handleOnChange}
+                />
+              </div>
+
+              <button
+                className="bg-black text-white w-full h-10 rounded-full mt-4"
+                onClick={requestJoin}
+              >
+                Join
+              </button>
+
+              {message.status && (
+                <p className="mt-4 text-center text-sm">{message.text}</p>
+              )}
+            </div>
+          )}
+        </section>
+      </div>
     </div>
   );
 };
