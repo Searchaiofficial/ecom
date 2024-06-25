@@ -59,7 +59,6 @@ const MapPage = () => {
   return (
     <>
       <SaveUserCoordinates />
-      {!isMobile ? <Header /> : null}
       <Map
         setBoundaries={setBoundaries}
         coords={coords}
