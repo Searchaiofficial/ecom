@@ -53,7 +53,7 @@ const DisplayBox = ({ selectedService }) => (
                             height={80}
                             className="w-[170px] h-[80px] mb-1"
                         />
-                        <h3 className="text-[14px] font-semibold mb-1">{detail.title}</h3>
+                        <h3 className="text-[14px] font-semibold pt-2">{detail.title}</h3>
                         <p className="text-[12px]">{selectedService.description}</p>
 
                     </Link>

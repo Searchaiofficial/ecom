@@ -93,7 +93,7 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
         {hoveredIndex === 3 &&
           roomOptions.map((data, index) => (
             <div className="bg-white parent group " onClick={handleClick}>
-              <div className=" child w-full h-full pt-10 flex flex-col px-2 justify-start ">
+              <div className=" child w-full h-full pt-10 flex flex-col px-2 justify-start pl-10">
                 <Link
                   key={index}
                   href={`/rooms/${data.room.replace(/\s+/g, "-")}`}
@@ -114,7 +114,6 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
                     {data.room}
                   </h3>
                 </Link>
-
 
               </div>
             </div>
