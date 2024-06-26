@@ -11,22 +11,23 @@ const Displaybox = (props) => {
   const handleClick = (value) => {
     // const category = value.replace(/\s+/g, "-").toLowerCase();
     if (window.innerWidth < 800) {
-      props.toggleMobileMenu()
+      props.toggleMobileMenu();
     }
     handleIncrementCategoryPopularity();
+    handleIncrementSubCategoryPopularity(value);
     const category = value.toLowerCase().replace(/ /g, "-");
     const newPath = `/${props.parentCategory}/${currentCategory}/${category}`;
     router.push(newPath);
     props.setAsideCategory(null);
-    props.HandleClick(false)
+    props.HandleClick(false);
     if (window.innerWidth > 800) {
-      props.handleChange(false)
+      props.handleChange(false);
     }
   };
 
   useEffect(() => {
     if (props.data.name) {
-      const category = props.data.name.toLowerCase().replace(/ /g, "-")
+      const category = props.data.name.toLowerCase().replace(/ /g, "-");
       setCurrentCategory(category);
     }
   }, [props.data.name]);
@@ -34,8 +35,19 @@ const Displaybox = (props) => {
   const handleIncrementCategoryPopularity = async () => {
     try {
       await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/incrementCategoryPopularity?category=${currentCategory}`
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/incrementCategoryPopularity?category=${props.data.name}`
       );
+    } catch (error) {
+      console.error("Error incrementing category popularity:", error);
+    }
+  };
+
+  const handleIncrementSubCategoryPopularity = async (subCategory) => {
+    try {
+      const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/incrementSubCategoryPopularity?category=${props.data.name}&subCategory=${subCategory}`;
+      console.log(url);
+      const encodedUrl = encodeURI(url);
+      await axios.get(encodedUrl);
     } catch (error) {
       console.error("Error incrementing category popularity:", error);
     }
@@ -70,8 +82,6 @@ const Displaybox = (props) => {
           <p className="text-lg text-center font-medium">No data available</p>
         )}
       </div>
-
-
     </main>
   );
 };
