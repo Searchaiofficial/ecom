@@ -10,12 +10,12 @@ const page = async () => {
   const { userInfo, isLoading } = useUserInfo();
   const router = useRouter();
 
-  if (!isLoading && !userInfo) {
-    router.push("/login");
-  }
-
   if (isLoading) {
     return <Splashscreen />;
+  }
+
+  if (!isLoading && !userInfo) {
+    return router.push("/login");
   }
 
   return (
@@ -23,7 +23,7 @@ const page = async () => {
       {userInfo &&
         !isLoading &&
         userInfo.user &&
-        (userInfo.user && userInfo.user.isLiveStreamHost ? (
+        (userInfo.user && userInfo.user.liveStreamDetails?.isLiveStreamHost ? (
           <LiveRoomAdmin />
         ) : (
           <LiveRoom user={userInfo.user} />
