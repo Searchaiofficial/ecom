@@ -7,6 +7,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Scrollbar } from "swiper/modules";
 import { roomOptions } from "@/Model/Dropdown/SliderData/SliderData";
+
+import DesignServices from '../Services/DesignServices';
+
 import axios from "axios";
 
 const servicedData = [
@@ -96,49 +99,55 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
                   href={`/rooms/${data.room.replace(/\s+/g, "-")}`}
                   onClick={() => setHoveredIndex(null)}
                   passHref
-                  className="flex items-center gap-4"
+                  className="flex flex-col gap-1"
                 >
-                  <div className="parent w-[110px] h-[61px] ">
+                  <div className="parent w-[170px] h-[80px]">
                     <Image
                       src={data.src}
                       width={400}
                       height={400}
-                      className="child object-cover w-full h-full"
+                      className="child w-[170px] h-[80px]"
                       alt="Room Image"
                     />
                   </div>
-                  <h3 className="text-[14px] group-hover:underline   font-semibold  py-2 text-[#111111]">
+                  <h3 className="text-[14px] group-hover:underline font-semibold py-2 text-[#111111]">
                     {data.room}
                   </h3>
                 </Link>
+
+
               </div>
             </div>
           ))}
       </div>
 
       <>
-        <div className="grid grid-cols-2 w-[35%] mt-5">
+        {/* <div className="grid grid-cols-2 w-[35%] mt-5"> */}
+        <div className="mt-5">
           {hoveredIndex === 4 && (
+            // <>
+            //   <h3 className="text-[14px] font-semibold py-2 text-gray-700 ml-2">See all the services</h3>
+            //   {servicedData.map((service, index) => (
+            //     <div key={index} className="bg-white parent" onClick={handleClick}>
+            //       <div className="child h-full flex px-2 justify-start">
+            //         <Link
+            //           href={service.link}
+            //           onClick={() => setHoveredIndex(null)}
+            //           className="flex items-center gap-4"
+            //         //PassHref
+            //         >
+            //           {/* <Image src={service.image} height={100} width={100} alt="service" /> */}
+            //           {/* <p className="text-[8px]">⚫</p> */}
+            //           <h3 className="text-[14px] py-2 text-gray-700 hover:underline">
+            //             {service.label}
+            //           </h3>
+            //         </Link>
+            //       </div>
+            //     </div>
+            //   ))}
+            // </>
             <>
-              <h3 className="text-[14px] font-semibold py-2 text-gray-700 ml-2">See all the services</h3>
-              {servicedData.map((service, index) => (
-                <div key={index} className="bg-white parent" onClick={handleClick}>
-                  <div className="child h-full flex px-2 justify-start">
-                    <Link
-                      href={service.link}
-                      onClick={() => setHoveredIndex(null)}
-                      className="flex items-center gap-4"
-                    //PassHref
-                    >
-                      {/* <Image src={service.image} height={100} width={100} alt="service" /> */}
-                      {/* <p className="text-[8px]">⚫</p> */}
-                      <h3 className="text-[14px] py-2 text-gray-700 hover:underline">
-                        {service.label}
-                      </h3>
-                    </Link>
-                  </div>
-                </div>
-              ))}
+              <DesignServices />
             </>
           )}
         </div>

@@ -75,7 +75,7 @@ const MulticardService = () => {
     return (
         <div>
             <div className="bg-zinc-50 pt-[5rem] pl-[20px] sm:pl-[50px]  lg:pl-[67px] overflow-x-auto pb-[80px] lg:pb-[80px]">
-                <div className="text-2xl flex flex-col gap-[2px]  font-semibold w-full pb-1">
+                <div className="text-2xl flex flex-col gap-[2px]  font-semibold w-full pb-8">
                     <p>Service and Financial help on shopping</p>
                 </div>
                 <Swiper

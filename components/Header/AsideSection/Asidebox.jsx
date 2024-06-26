@@ -88,7 +88,7 @@ const Asidebox = (props) => {
                 key={idx}
                 onMouseEnter={() => handleMouseEnter(idx, value)}
                 className={`lg:block flex items-center justify-between w-full lg:text-[14px] text-[18px] font-semibold ${defaultLinkIndex === idx ? "text-blue-600" : ""
-                  } p-2 hover:underline rounded-lg`}
+                  } p-2 hover:underline`}
                 href="#"
                 onClick={() => handleItemClick(value)} // Handle click event
               >
