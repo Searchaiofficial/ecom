@@ -5,8 +5,9 @@ import "./tabs.css";
 import Image from "next/image";
 import Label from "../Label/Label";
 import Link from "next/link";
-const TabImage = ({ src, alt, width, height, labelData, href, firstData }) => {
+const TabImage = ({ src, alt, width, height, handleTab, labelData, href, firstData }) => {
   const circledData = Array.isArray(labelData) ? labelData : [labelData];
+
 
   const [windowWidth, setWindowWidth] = useState(0);
   useEffect(() => {
@@ -68,6 +69,7 @@ const TabImage = ({ src, alt, width, height, labelData, href, firstData }) => {
                 next[idx] = !next[idx];
                 return next;
               });
+
             }}
             style={{
               boxShadow: `0 1px 4px rgba(var(--colour-static-black, 17, 17, 17), 0.55)`,

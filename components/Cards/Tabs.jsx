@@ -6,18 +6,40 @@ import "./tabs.css";
 import TabImage from "./TabImage";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import axios from "axios";
+
 
 const Tabs = ({ data }) => {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState("");
+  const [activeTab, setActiveTab] = useState("all");
   const [isSticky, setIsSticky] = useState(false);
+  const [newdata, setNewData] = useState([])
+
+  console.log(data)
 
   useEffect(() => {
-    if (data) {
-      const defaultActiveTab = data[0]?.roomCategory[0]?.toLowerCase();
-      setActiveTab(defaultActiveTab);
+    fetchAllRoom()
+  }, [])
+
+  const fetchAllRoom = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getAllRooms`
+      );
+      setNewData(response.data)
+    } catch (error) {
+      console.log(error)
     }
-  }, [data]);
+  }
+
+  // console.log(newdata)
+
+  // useEffect(() => {
+  //   if (data) {
+  //     const defaultActiveTab = data[0]?.roomCategory[0]?.toLowerCase();
+  //     setActiveTab(defaultActiveTab);
+  //   }
+  // }, [data]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,7 +60,8 @@ const Tabs = ({ data }) => {
     };
   }, []);
 
-  const recommendedProducts = data.flatMap((product) => product.roomCategory);
+  const recommendedProducts = newdata.flatMap((product) => product.roomType);
+  // console.log(recommendedProducts)
 
   const tabsData = [];
   const tabImages = {};
@@ -46,19 +69,35 @@ const Tabs = ({ data }) => {
 
   let uniqueRoomCategories = [...new Set(recommendedProducts)];
 
+  // console.log(uniqueRoomCategories)
+
   uniqueRoomCategories?.forEach((category) => {
-    const products = data.filter((item) =>
-      item.roomCategory.includes(category)
+    const products = newdata.filter((item) =>
+      item.roomType.includes(category)
     );
 
+    console.log(products)
+
+    // const sorted = products.sort((a, b) => b.popularity - a.popularity)
+    // console.log(sorted)
     if (products.length > 0) {
-      const images = products.map((product) => product.images[1]);
+      products.sort((a, b) => parseInt(b.productObjectId.popularity) - parseInt(a.productObjectId.popularity));
+      const images = products.map((product) => product.imgSrc);
       const labels = products.map((product) => {
-        const { productTitle, perUnitPrice } = product;
+        // const { productTitle, perUnitPrice } = product;
+        console.log()
+        const productTitle = product.children[0].productTitle
+        const perUnitPrice = product.children[0].productPrice
+        const topPosition = product.children[0].topPosition
+        const leftPosition = product.children[0].leftPosition
+        const ProductLink = product.children[0].productLink
         return {
           productTitle,
           productCategory: category,
           productPrice: perUnitPrice,
+          topPosition,
+          leftPosition,
+          ProductLink
         };
       });
       tabsData.push({
@@ -68,9 +107,12 @@ const Tabs = ({ data }) => {
       });
       // Set tabImages and labelData for the current category
       tabImages[category.toLowerCase()] = images;
+      console.log(tabImages)
       labelData[category.toLowerCase()] = labels;
     }
   });
+
+  console.log(labelData)
 
   uniqueRoomCategories = uniqueRoomCategories.map(category => category.toLowerCase());
 
@@ -78,13 +120,14 @@ const Tabs = ({ data }) => {
     setActiveTab(tab);
   };
 
-  const handleTab = () => {
-    router.push("/room");
+  const handleTab = (productLink) => {
+    // router.push(`/${productLink}`);
+    console.log(productLink)
   };
 
   // console.log("tabsData", tabsData);
   // console.log("tabImages", tabImages);
-  // console.log("labelDatazzz", labelData);
+  // console.log("labelDatazzz", labelData)
 
   return (
     <>
@@ -97,6 +140,16 @@ const Tabs = ({ data }) => {
             }`}
           style={{ overflowX: "auto", WebkitOverflowScrolling: "touch" }}
         >
+          <div
+            className={` px-5 py-2 tabS cursor-pointer
+            ${activeTab === "all"
+                ? "active-tabs  border border-black mr-2.5 rounded-full flex items-center justify-center bg-gray-100 whitespace-nowrap"
+                : "tabs  border border-white mr-2.5 rounded-full flex items-center justify-center bg-gray-100 whitespace-nowrap"
+              }`}
+            onClick={() => setActiveTab("all")}
+          >
+            All
+          </div>
           {tabsData.map((tab, i) => (
             <div
               key={i}
@@ -110,16 +163,7 @@ const Tabs = ({ data }) => {
               {tab.label}
             </div>
           ))}
-          <div
-            className={` px-5 py-2 tabS cursor-pointer
-            ${activeTab === "all"
-                ? "active-tabs  border border-black mr-2.5 rounded-full flex items-center justify-center bg-gray-100 whitespace-nowrap"
-                : "tabs  border border-white mr-2.5 rounded-full flex items-center justify-center bg-gray-100 whitespace-nowrap"
-              }`}
-            onClick={() => setActiveTab("all")}
-          >
-            All
-          </div>
+
         </div>
 
         {activeTab === "all" ? (
@@ -209,7 +253,7 @@ const Tabs = ({ data }) => {
                 className="h-full w-full object-cover "
                 src={
                   tabImages[activeTab]
-                    ? tabImages[activeTab][3]
+                    ? tabImages[activeTab][1]
                     : tabImages[activeTab]?.alt
                 }
                 alt="Room"
@@ -221,10 +265,10 @@ const Tabs = ({ data }) => {
             <TabImage
               src={
                 tabImages[activeTab]
-                  ? tabImages[activeTab][1]
+                  ? tabImages[activeTab][2]
                   : tabImages[activeTab]?.alt
               }
-              labelData={labelData[activeTab]?.[1] || []}
+              labelData={labelData[activeTab]?.[2] || []}
               alt="Room"
               width={450}
               height={700}
@@ -243,10 +287,10 @@ const Tabs = ({ data }) => {
             <TabImage
               src={
                 tabImages[activeTab]
-                  ? tabImages[activeTab][2]
+                  ? tabImages[activeTab][3]
                   : tabImages[activeTab]?.alt
               }
-              labelData={labelData[activeTab]?.[2] || []}
+              labelData={labelData[activeTab]?.[3] || []}
               alt="Room"
               handleTab={handleTab}
               width={450}

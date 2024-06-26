@@ -7,8 +7,9 @@ import { useRouter } from "next/navigation";
 
 const Label = ({ data }) => {
   const router = useRouter();
+  console.log(data)
   const handleTab = () => {
-    router.push("/room");
+    router.push(`/${data?.ProductLink}`);
   };
   return (
     <div className="absolute lg:top-2 lg:left-7 -left-12 top-[70px] z-50" onClick={handleTab}>
