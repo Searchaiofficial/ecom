@@ -7,11 +7,12 @@ import LiveRoomProductCard from "@/components/LiveRoom/LiveRoomProductCard";
 import { useRouter } from "next/navigation";
 import { useSocket } from "@/providers/SocketProvider";
 
-
 const page = ({ params }) => {
   const router = useRouter();
 
   const roomId = params.roomId;
+
+  const [hasCallStarted, setHasCallStarted] = useState(false);
 
   const x = useSelector(allSelectedData);
 
@@ -195,6 +196,12 @@ const page = ({ params }) => {
     socket.emit("leave-room", { roomId });
   };
 
+  const startCall = () => {
+    setHasCallStarted(true);
+    exitCall();
+    rejoinCall();
+  };
+
   const rejoinCall = async () => {
     const stream = await navigator.mediaDevices.getUserMedia({
       video: true,
@@ -296,14 +303,22 @@ const page = ({ params }) => {
             >
               Video
             </button>
-            {myStream && (
-              <button
-                onClick={exitCall}
-                className="bg-red-500 hover:bg-red-400 text-xs text-center text-white font-medium shadow-sm  rounded-full w-10 h-10"
-              >
-                Exit Call
-              </button>
-            )}
+            {myStream &&
+              (hasCallStarted ? (
+                <button
+                  onClick={exitCall}
+                  className="bg-red-500 hover:bg-red-400 text-xs text-center text-white font-medium shadow-sm  rounded-full w-10 h-10"
+                >
+                  Exit Call
+                </button>
+              ) : (
+                <button
+                  onClick={startCall}
+                  className="bg-red-500 hover:bg-red-400 text-xs text-center text-white font-medium shadow-sm  rounded-full w-10 h-10"
+                >
+                  Start Call
+                </button>
+              ))}
             {!myStream && (
               <button
                 onClick={rejoinCall}
