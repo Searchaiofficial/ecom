@@ -25,6 +25,7 @@ const LiveRoomAdmin = () => {
       console.log(requests)
       if (accepted) {
         setRequests([]);
+        sessionStorage.setItem("roomId", roomId);
         router.push(`/liveroom/${roomId}`);
       } else {
         setRequests((prev) => prev.filter((req) => req.socketId !== socketId));

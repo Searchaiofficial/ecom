@@ -65,6 +65,7 @@ const LiveRoom = ({ user }) => {
           status: "accepted",
           text: "Your request has been accepted!",
         });
+        sessionStorage.setItem("roomId", roomId);
         router.push(`/liveroom/${roomId}`);
       });
       socket.on("join_rejected", () => {

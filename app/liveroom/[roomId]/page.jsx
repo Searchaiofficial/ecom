@@ -7,10 +7,12 @@ import LiveRoomProductCard from "@/components/LiveRoom/LiveRoomProductCard";
 import { useRouter } from "next/navigation";
 import { useSocket } from "@/providers/SocketProvider";
 
+
 const page = ({ params }) => {
   const router = useRouter();
 
   const roomId = params.roomId;
+
   const x = useSelector(allSelectedData);
 
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -24,12 +26,6 @@ const page = ({ params }) => {
   const [myAudioEnabled, setMyAudioEnabled] = useState(null);
   const [myVideoEnabled, setMyVideoEnabled] = useState(null);
   const [isScreenSharing, setIsScreenSharing] = useState(false);
-
-  // useEffect(() => {
-  //   if (!localStorage.getItem("userData")) {
-  //     router.push(`/liveroom/`);
-  //   }
-  // }, []);
 
   useEffect(() => {
     if (x.length > 0) {
@@ -71,9 +67,11 @@ const page = ({ params }) => {
     .concat("/icons/half-black-half-white.svg");
 
   useEffect(() => {
-    if (socket) {
+    if (sessionStorage.getItem("roomId") !== roomId) {
+      router.push("/liveroom");
+    } else if (socket) {
       const handleUserJoined = ({ userId: _, users }) => {
-        console.log(users)
+        console.log(users);
         users.forEach((id) => {
           if (id !== socket.id && !peers[id]) {
             console.log("User joined", id);
@@ -211,7 +209,6 @@ const page = ({ params }) => {
       myStream.getAudioTracks().forEach((track) => {
         track.enabled = !track.enabled;
       });
-
     }
   };
 
@@ -220,7 +217,6 @@ const page = ({ params }) => {
       myStream.getVideoTracks().forEach((track) => {
         track.enabled = !track.enabled;
       });
-
     }
   };
 

@@ -9,6 +9,10 @@ export const useUserInfo = () => {
 
   useEffect(() => {
     const token = localStorage?.getItem("token");
+    if(!token) {
+      setIsLoading(false);
+      return;
+    }
 
     fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/user`, {
       headers: {
@@ -17,7 +21,9 @@ export const useUserInfo = () => {
     })
       .then((response) => response.json())
       .then((userInfo) => {
-        setUserInfo(userInfo);
+        if(userInfo.isAuthenticated) {
+          setUserInfo(userInfo);
+        }
         setIsLoading(false);
       })
       .catch((error) => {
