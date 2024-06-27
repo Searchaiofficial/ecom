@@ -1,20 +1,18 @@
 /* styles.module.css */
 .services-scrollbar {
-    scrollbar-width: thin;
-    scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
-    overflow-y: hidden; /* Hide scrollbar by default */
+    overflow-y: hidden; 
 }
 
 .services-scrollbar:hover {
-    overflow-y: auto; /* Show scrollbar on hover */
+    overflow-y: auto; 
 }
 
 .services-scrollbar::-webkit-scrollbar {
-    width: 8px; /* Adjust as needed */
+    width: 8px;
 }
 
 .services-scrollbar::-webkit-scrollbar-track {
-    background: var(--scrollbar-track-color);
+    background: transparent; 
 }
 
 .services-scrollbar::-webkit-scrollbar-thumb {
@@ -22,9 +20,9 @@
 }
 
 .services-scrollbar::-webkit-scrollbar-thumb:hover {
-    background-color: #e5e5e5;
+    background-color: #e5e5e5; 
 }
 
 .services-scrollbar::-webkit-scrollbar-thumb:active {
-    background-color: #e5e5e5;
+    background-color: #e5e5e5; 
 }
