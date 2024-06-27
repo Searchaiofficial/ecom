@@ -7,7 +7,7 @@ export async function generateMetadata({ params }) {
   const category = await getCategoryByName(params.parentCategory);
 
   return {
-    title: category?.name || params.parentCategory,
+    title: category?.metadata?.title || params.parentCategory,
     description: category?.description || "",
   };
 }
