@@ -1,3 +1,4 @@
+
 import axios from "axios";
 
 // const BASE_URL = "http://52.66.30.159:8080/api";
@@ -183,12 +184,16 @@ export const fetchProductsFromDemandType = async (type) => {
   }
 };
 
+
+
 export const fetchProductsFromOffers = async (type) => {
+
   try {
     const response = await axios.get(
       createApiEndpoint(`getAllProductsByOffer/${type}`)
     );
-    return response.data;
+    // dispatch(setOfferTotalPages(response.data.Totalproducts))
+    return response.data.products;
   } catch (error) {
     console.error(`Error fetching suggestions: ${error.message}`);
     throw error;
@@ -226,7 +231,6 @@ export const upsertUserLocation = async ({ lat, lng, pincode, deviceId }) => {
     console.error(`Error storing location: ${error.message}`);
   }
 };
-
 export const getCategoryByName = async (categoryName) => {
   try {
     const response = await axios.get(

@@ -1,24 +1,25 @@
-"use client";
-import React, { useEffect, useState } from "react";
+"use client"
+import React, { act, useEffect, useState } from "react";
 import "@/components/Product/styles.css";
 import Tabproduct from "@/components/Product/TabsProducts";
 import axios from "axios";
 import { allSelectedData } from "@/components/Features/Slices/virtualDataSlice";
 import { usePathname, useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { selectedFilteredProduct } from "@/components/Features/Slices/FilteredProduct";
-
+import { selectFilteredProductCurrentPage, selectTotalPages, selectedFilteredProduct, setFilteredProductCurrentPage } from "@/components/Features/Slices/FilteredProduct";
 import {
+  selectOfferProductCurrentPage,
   selectOfferProducts,
   selectOfferProductsStatus,
+  selectOfferTotalPages,
+  selectofferProductItemsPerPage,
+  setOfferProductCurrentPage,
 } from "@/components/Features/Slices/offerProductsSlice";
-
 import {
   selectDemandTypeProducts,
   selectDemandTypeProductsStatus,
 } from "@/components/Features/Slices/demandTypeProductsSlice";
 
-// const hideheader=
 const ProductPage = ({ params }) => {
   // const [parentCategory, setParentCategory] = useState(params.parentCategory.replace(/-/g, " "))
   const parentCategory = params.parentCategory.replace(/-/g, " ")
@@ -28,7 +29,10 @@ const ProductPage = ({ params }) => {
     queryString = window.location.search;
   }
 
-  const [products, setProducts] = useState([]);
+  // const [products, setProducts] = useState([]);
+  // const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 1;
+
   const parseQueryString = (queryString) => {
     const params = new URLSearchParams(queryString);
     const queryParams = {};
@@ -41,24 +45,21 @@ const ProductPage = ({ params }) => {
   const demandtype = queryParams?.demandtype;
 
   const pathname = usePathname();
-  const [type, setType] = useState(
-    params.cat.replace(/-/g, " ")
-    // params.cat.replace(/percent-/g, "% ")
-  );
+  const [type, setType] = useState(params.cat.replace(/-/g, " "));
   const [isFilterVisible, setIsFilterVisible] = useState(true);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
-  // Offers
+  const currentPage = useSelector(selectFilteredProductCurrentPage)
+
   let offerProduct = useSelector(selectOfferProducts);
+  console.log(offerProduct.length)
   let offerProductData = offerProduct;
   const [allTypes, setAllTypes] = useState([]);
   const [selectedOfferCategory, setSelectedOfferCategory] = useState("");
   let offerCategory;
-  console.log("offerProduct", offerProductData);
-  if (parentCategory === "offers" && offerProductData.length > 0) {
+  if (params.parentCategory === "offers" && offerProductData.length > 0) {
     offerCategory = offerProductData.map((product) => product.category);
     if (offerCategory.length > 0) offerCategory = [...new Set(offerCategory)];
-
     if (selectedOfferCategory) {
       offerProductData = offerProductData.filter(
         (product) => product.category === selectedOfferCategory
@@ -69,26 +70,24 @@ const ProductPage = ({ params }) => {
   useEffect(() => {
     offerProductData = offerProduct;
   }, [type]);
-  // if(parentCategory === "offers" && offerProductData.length > 0 && selectedOfferCategory) {
-  //   offerProductData = offerProductData.filter((product) => product.category === selectedOfferCategory);
-  // }
+
 
   useEffect(() => {
     if (offerProductData.length === 0) offerProductData = offerProductData;
   }, [type]);
 
-  // DemandType
   let demandTypeProduct = useSelector(selectDemandTypeProducts);
   const dispatch = useDispatch();
   let filteredProductData = useSelector(selectedFilteredProduct);
-  console.log(filteredProductData)
+
+  console.log(filteredProductData?.length)
+
 
   let parentCategoryVar = parentCategory;
   const x = useSelector(allSelectedData);
 
   const isNumericString = (str) => /^\d+$/.test(str);
 
-  // Remove entries with titles that are numeric strings
   const filteredRooms = Object.entries(x.room)
     .filter(([roomId, isSelected]) => isSelected && !isNumericString(roomId))
     .map(([roomId]) => ({ title: roomId }));
@@ -127,9 +126,11 @@ const ProductPage = ({ params }) => {
 
   const handleSetItem = (label) => {
     const newItem = { label: label, href: pathname };
-    console.log("newItem", newItem);
     sessionStorage.setItem("navigationItem", JSON.stringify(newItem));
   };
+
+
+
 
   useEffect(() => {
     if (parentCategory === "offers") {
@@ -137,8 +138,10 @@ const ProductPage = ({ params }) => {
       const encodedType = encodeURI(type);
       dispatch({
         type: "FETCH_PRODUCTS_FROM_OFFER",
-        payload: encodedType,
+        payload: encodedType
       });
+
+
 
       const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getAllOffers`;
       const fetchAllOfferAndProducts = async () => {
@@ -152,7 +155,7 @@ const ProductPage = ({ params }) => {
       const encodedType = encodeURI(type);
       dispatch({
         type: "FETCH_PRODUCTS_FROM_DEMAND_TYPE",
-        payload: encodedType,
+        payload: encodedType
       });
 
       const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getAllDemandTypes`;
@@ -163,27 +166,23 @@ const ProductPage = ({ params }) => {
       fetchAllDemandType();
     } else if (parentCategory === "virtualexperience") {
       handleSetItem("Free Sample");
-      console.log(x, "x");
       if (x.length > 0) {
         router.push("/virtualexperience");
       }
       const fetchVeProducts = async () => {
         try {
           const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getVEFilter`;
-          console.log("apiUrl", apiUrl);
           const response = await axios.post(apiUrl, x, {
             headers: {
               "Content-Type": "application/json",
             },
           });
-          console.log("response", response.data);
           setFilteredProducts(response.data); // Save the filtered products in state
         } catch (error) {
           console.error("Error fetching filtered products:", error);
         }
       };
       fetchVeProducts();
-      console.log("ve products");
     } else if (params.heading === "category" && type === "all") {
       handleSetItem("Products");
       dispatch({
@@ -283,36 +282,90 @@ const ProductPage = ({ params }) => {
         );
     }
   }
+
+  // useEffect(() => {
+  //   // Example: Dispatch initial action to fetch filtered products
+  //   dispatch({
+  //     type: "FETCH_FILTER_PRODUCTS",
+  //     payload: {
+  //       heading: params.heading,
+  //       parentCategoryVar: params.parentCategory.replace(/-/g, " "),
+  //       cat: params.cat,
+  //     },
+  //   });
+  // }, [dispatch]);
+
+  const totalPages = useSelector(selectTotalPages)
+  const totalPagesOffer = useSelector(selectOfferTotalPages)
+
+  const handlePageChange = (pageNumber) => {
+    console.log(pageNumber)
+    console.log(parentCategory)
+    if (parentCategory === "offers") {
+      dispatch(setOfferProductCurrentPage(pageNumber));
+      handleSetItem("Offers");
+      const encodedType = encodeURI(type);
+      dispatch({
+        type: "FETCH_PRODUCTS_FROM_OFFER",
+        payload: encodedType
+      });
+    }
+
+    dispatch(setFilteredProductCurrentPage(pageNumber));
+    dispatch({
+      type: "FETCH_FILTER_PRODUCTS",
+      payload: {
+        heading: "category",
+        parentCategoryVar: params.parentCategory.replace(/-/g, " "),
+      },
+    });
+  };
+
+  // const currentItems = filteredProductData.slice(
+  //   (currentPage - 1) * itemsPerPage,
+  //   currentPage * itemsPerPage
+  // );
+
+  // console.log(filteredProductData.length)
+  // const newFilteredData = filteredProductData.filter(product => product.subcategory !== "Accessories ")
+  // console.log(newFilteredData.length)
+
   return (
     <>
       {/* ( */}
       <div>
         <Tabproduct
           filteredProductData={
-            parentCategory === "virtualexperience"
+            params.parentCategory === "virtualexperience"
               ? filteredProducts
-              : parentCategory === "offers"
+              : params.parentCategory === "offers"
                 ? offerProductData
-                : parentCategory === "demandtype"
+                : params.parentCategory === "demandtype"
                   ? demandTypeProduct
                   : filteredProductData
           }
           heading={
-            parentCategory === "offers"
+            params.parentCategory === "offers"
               ? type === "all"
                 ? "Highest Offer"
                 : type
-              : parentCategory === "demandtype"
+              : params.parentCategory === "demandtype"
                 ? type
                 : category.name
           }
           description={category?.description}
           subCategory={category?.subcategories}
           allTypes={allTypes}
-          parentCategory={parentCategory}
+          parentCategory={params.parentCategory}
           offerCategory={offerCategory}
           setType={setType}
           setSelectedOfferCategory={setSelectedOfferCategory}
+          currentPage={currentPage}
+          totalPages={params.parentCategory === "offers"
+            ? totalPagesOffer
+            : totalPages
+          }
+          onPageChange={handlePageChange}
         />
       </div>
       {/* ) : (

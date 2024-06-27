@@ -51,6 +51,10 @@ const Tabs = ({
   offerCategory,
   parentCategory,
   setSelectedOfferCategory,
+  onPageChange,
+  totalPages,
+  currentPage
+
 }) => {
   console.log({ filteredProductData });
   // console.log({ dimensions: filteredProductData[0].dimensions });
@@ -676,6 +680,23 @@ const Tabs = ({
     setselectedResult(0)
   }
 
+  const renderPaginationControls = () => {
+    const pages = [];
+    for (let i = 1; i <= totalPages; i++) {
+      pages.push(
+        <button
+          key={i}
+          className={`bg-gray-200 px-3 py-1 rounded ${currentPage === i ? "bg-gray-400" : ""
+            }`}
+          onClick={() => onPageChange(i)}
+        >
+          {i}
+        </button>
+      );
+    }
+    return pages;
+  };
+
   return (
     <div className="">
       {openAll && <div className="background-overlay open"></div>}
@@ -810,7 +831,7 @@ const Tabs = ({
           /> */}
 
           {/* >>>>>>> Stashed changes */}
-          {filteredProductData.length > 0 && (
+          {filteredProductData?.length > 0 && (
             <TabsProductContent
               filterName={"Sort"}
               commonClasses={commonClasses}
@@ -867,7 +888,7 @@ const Tabs = ({
           {/* Color dropdown */}
           {/* <<<<<<< Updated upstream */}
           {filteredProductData &&
-            filteredProductData.length > 0 &&
+            filteredProductData?.length > 0 &&
             allColors &&
             allColors.length > 0 && (
               <TabsProductContent
@@ -936,7 +957,7 @@ const Tabs = ({
 
           {/* Collections - filter */}
           {filteredProductData &&
-            filteredProductData.length > 0 &&
+            filteredProductData?.length > 0 &&
             allDemandType &&
             allDemandType.length > 0 && (
               <TabsProductContent
@@ -956,7 +977,7 @@ const Tabs = ({
 
 
 
-          {filteredProductData.length > 0 && (
+          {filteredProductData?.length > 0 && (
             <button
               onClick={handleRemoveallFilters}
               className="bg-gray-100 px-[24px] text-[14px] font-medium mr-[10px] py-3 rounded-full min-w-fit"
@@ -1390,6 +1411,9 @@ const Tabs = ({
                 <h1 className="text-2xl">No Products Found</h1>
               </div>
             )}
+          </div>
+          <div className="self-center flex items-center  gap-2">
+            {renderPaginationControls()}
           </div>
           <Measure filteredProductData={filteredProductData} />
           {/* <div className="main-image-pdt pt-[32px] grid sm:grid-cols-4 grid-cols-2 sm:gap-6 gap-0">

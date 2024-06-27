@@ -32,6 +32,8 @@ const Tabs = ({ data }) => {
     }
   }
 
+  console.log(newdata)
+
   // console.log(newdata)
 
   // useEffect(() => {
@@ -67,6 +69,9 @@ const Tabs = ({ data }) => {
   const labelData = {};
 
   let uniqueRoomCategories = [...new Set(recommendedProducts)];
+
+  // console.log(uniqueRoomCategories)
+  console.log(uniqueRoomCategories)
 
   uniqueRoomCategories?.forEach((category) => {
     const products = newdata.filter((item) =>
