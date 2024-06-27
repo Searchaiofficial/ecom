@@ -1,21 +1,18 @@
 import React from "react";
 import ProductPage from "../Meta";
 import { BreadcrumbJsonLd } from "next-seo";
+import { getCategoryByName } from "@/components/Features/api";
 
-export function generateMetadata({ params, searchParams }, parent) {
-  // console.log("f", params, searchParams);
+export async function generateMetadata({ params }) {
+  const category = await getCategoryByName(params.parentCategory);
+
   return {
-    title: decodeURIComponent(params.cat),
+    title: category?.name || params.parentCategory,
+    description: category?.description || "",
   };
 }
 
 const page = ({ params }) => {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    name: decodeURIComponent(params.cat),
-  };
-
   return (
     <>
       <BreadcrumbJsonLd

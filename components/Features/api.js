@@ -226,3 +226,14 @@ export const upsertUserLocation = async ({ lat, lng, pincode, deviceId }) => {
     console.error(`Error storing location: ${error.message}`);
   }
 };
+
+export const getCategoryByName = async (categoryName) => {
+  try {
+    const response = await axios.get(
+      createApiEndpoint(`getCategoryByName/${categoryName}`)
+    );
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching category: ${error.message}`);
+  }
+};
