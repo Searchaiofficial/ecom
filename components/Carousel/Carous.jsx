@@ -142,10 +142,14 @@ const Carous = ({ data }) => {
                 <SwiperSlide key={idx}>
                   <div className="grid grid-cols-1 mt-2 h-full fade-in">
                     <Card
-                      title={product.productName}
-                      // date={product.date}
+                      // title={product.productName}
+                      title={product.productTitle}
+                      productImages={product?.productImages}
+                      specialPrice={product?.specialprice}
                       price={product.perUnitPrice}
                       desc={product.productTitle}
+                      shortDescription={product.shortDescription}
+                      demandtype={product.demandtype}
                       imgSrc={product.images}
                       rating={product.ratings}
                       key={idx}
@@ -154,6 +158,9 @@ const Carous = ({ data }) => {
                       productId={product.productId}
                       setPopupVisible={setPopupVisible}
                       cssClass={"card1flex"}
+                      totalPrice={product.totalPrice}
+                      unitType={product.unitType}
+                    // date={product.date}
                     />
                   </div>
                 </SwiperSlide>

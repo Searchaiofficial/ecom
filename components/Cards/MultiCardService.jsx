@@ -126,7 +126,7 @@ const MulticardService = () => {
                         );
                     })}
 
-                    <div className="flex flex-row items-end justify-end gap-4">
+                    <div className="flex flex-row items-end justify-end gap-4 pt-[32px]">
                         <Image
                             src="/icons/backarrowblack.svg"
                             width={20}
