@@ -15,7 +15,7 @@ const Tabs = ({ data }) => {
   const [isSticky, setIsSticky] = useState(false);
   const [newdata, setNewData] = useState([])
 
-  console.log(data)
+  // console.log(data)
 
   useEffect(() => {
     fetchAllRoom()
@@ -24,7 +24,7 @@ const Tabs = ({ data }) => {
   const fetchAllRoom = async () => {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getAllRooms`
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getTabsRoom`
       );
       setNewData(response.data)
     } catch (error) {
@@ -61,7 +61,6 @@ const Tabs = ({ data }) => {
   }, []);
 
   const recommendedProducts = newdata.flatMap((product) => product.roomType);
-  // console.log(recommendedProducts)
 
   const tabsData = [];
   const tabImages = {};
@@ -69,19 +68,17 @@ const Tabs = ({ data }) => {
 
   let uniqueRoomCategories = [...new Set(recommendedProducts)];
 
-  // console.log(uniqueRoomCategories)
-
   uniqueRoomCategories?.forEach((category) => {
     const products = newdata.filter((item) =>
       item.roomType.includes(category)
     );
 
-    console.log(products)
+    // console.log(products)
 
     // const sorted = products.sort((a, b) => b.popularity - a.popularity)
     // console.log(sorted)
     if (products.length > 0) {
-      products.sort((a, b) => parseInt(b.productObjectId.popularity) - parseInt(a.productObjectId.popularity));
+      // products.sort((a, b) => parseInt(b.productObjectId.popularity) - parseInt(a.productObjectId.popularity));
       const images = products.map((product) => product.imgSrc);
       const labels = products.map((product) => {
         // const { productTitle, perUnitPrice } = product;
