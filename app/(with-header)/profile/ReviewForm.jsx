@@ -5,6 +5,7 @@ import axios from "axios";
 const ReviewForm = ({ addReview }) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
+  const [image, setImage] = useState("");
 
   //   useEffect(() => {
   //     // Prefill the rating state with a default value if needed
@@ -16,6 +17,7 @@ const ReviewForm = ({ addReview }) => {
     const newReview = {
       rating: rating,
       comment: comment,
+      image: image,
     };
     addReview(newReview);
     setRating(0);
@@ -60,6 +62,16 @@ const ReviewForm = ({ addReview }) => {
             onChange={(e) => setComment(e.target.value)}
             required
           ></textarea>
+        </div>
+        <div className="mb-4">
+          <input 
+           type="file" 
+           id="image" 
+            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+          />
+
         </div>
         <button
           type="submit"

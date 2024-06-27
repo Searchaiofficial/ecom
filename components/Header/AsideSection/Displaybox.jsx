@@ -13,9 +13,9 @@ const Displaybox = (props) => {
     if (window.innerWidth < 800) {
       props.toggleMobileMenu();
     }
-    handleIncrementCategoryPopularity();
-    handleIncrementSubCategoryPopularity(value);
-    const category = value.toLowerCase().replace(/ /g, "-");
+    // handleIncrementCategoryPopularity();
+    // handleIncrementSubCategoryPopularity(value);
+    const category = value.replace(/ /g, "-");
     const newPath = `/${props.parentCategory}/${currentCategory}/${category}`;
     router.push(newPath);
     props.setAsideCategory(null);
@@ -27,31 +27,31 @@ const Displaybox = (props) => {
 
   useEffect(() => {
     if (props.data.name) {
-      const category = props.data.name.toLowerCase().replace(/ /g, "-");
+      const category = props.data.name.replace(/ /g, "-");
       setCurrentCategory(category);
     }
   }, [props.data.name]);
 
-  const handleIncrementCategoryPopularity = async () => {
-    try {
-      await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/incrementCategoryPopularity?category=${props.data.name}`
-      );
-    } catch (error) {
-      console.error("Error incrementing category popularity:", error);
-    }
-  };
+  // const handleIncrementCategoryPopularity = async () => {
+  //   try {
+  //     await axios.get(
+  //       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/incrementCategoryPopularity?category=${props.data.name}`
+  //     );
+  //   } catch (error) {
+  //     console.error("Error incrementing category popularity:", error);
+  //   }
+  // };
 
-  const handleIncrementSubCategoryPopularity = async (subCategory) => {
-    try {
-      const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/incrementSubCategoryPopularity?category=${props.data.name}&subCategory=${subCategory}`;
-      console.log(url);
-      const encodedUrl = encodeURI(url);
-      await axios.get(encodedUrl);
-    } catch (error) {
-      console.error("Error incrementing category popularity:", error);
-    }
-  };
+  // const handleIncrementSubCategoryPopularity = async (subCategory) => {
+  //   try {
+  //     const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/incrementSubCategoryPopularity?category=${props.data.name}&subCategory=${subCategory}`;
+  //     console.log(url);
+  //     const encodedUrl = encodeURI(url);
+  //     await axios.get(encodedUrl);
+  //   } catch (error) {
+  //     console.error("Error incrementing category popularity:", error);
+  //   }
+  // };
 
   return (
     <main className="w-full noto-sans-200 lg:h-auto h-screen">

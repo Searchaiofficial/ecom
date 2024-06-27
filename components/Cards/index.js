@@ -50,7 +50,6 @@ function Cards() {
         <Cookies />
         <Trending />
         <RoomCard />
-        {/* <OfferSlider /> */}
         <DataSliderWrapper />
         <Display />
         <DataSliderWrapper

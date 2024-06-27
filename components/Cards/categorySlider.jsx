@@ -79,15 +79,15 @@ const CategoriesSlider = () => {
         }
     };
 
-    const handleIncrementCategoryPopularity = async (categoryName) => {
-        try {
-            await axios.get(
-                `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/incrementCategoryPopularity?category=${categoryName}`
-            );
-        } catch (error) {
-            console.error("Error incrementing category popularity:", error);
-        }
-    };
+    // const handleIncrementCategoryPopularity = async (categoryName) => {
+    //     try {
+    //         await axios.get(
+    //             `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/incrementCategoryPopularity?category=${categoryName}`
+    //         );
+    //     } catch (error) {
+    //         console.error("Error incrementing category popularity:", error);
+    //     }
+    // };
 
 
     useEffect(() => {
@@ -172,7 +172,7 @@ const CategoriesSlider = () => {
                                     return (
                                         <SwiperSlide className=" max-w-[100px] lg:max-w-[120px] mr-[10px] min-h-[95px] mb-[30px] md:mb-0 " key={idx}>
                                             <Link href={`/category/${curElement.name.replace(/ /g, "-")}/all`}
-                                                onClick={() => handleIncrementCategoryPopularity(curElement.name)}
+                                                // onClick={() => handleIncrementCategoryPopularity(curElement.name)}
                                             >
                                                 <div className="flex flex-col  items-center ">
                                                     <div className="mb-[12px] ">
