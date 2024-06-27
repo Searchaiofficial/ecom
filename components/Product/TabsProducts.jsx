@@ -1236,7 +1236,7 @@ const Tabs = ({
                       onClick={handleAllDemandType}
                       className="flex justify-between text-left text-[14px] font-semibold "
                     >
-                      Demand Types &nbsp;
+                      Latest &nbsp;
                       <Image
                         src="/icons/backarrow.svg"
                         width={40}

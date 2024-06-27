@@ -12,7 +12,7 @@ const DesignServices = () => {
     };
 
     return (
-        <div className="container mx-auto py-2 h-[60vh]">
+        <div className="container mx-auto pt-2 h-[64vh]">
             <header className="flex flex-col md:flex-row w-full h-full overflow-hidden">
                 <AsideBox services={services} onMouseEnter={handleMouseEnter} />
                 <DisplayBox selectedService={selectedService} />
@@ -38,14 +38,13 @@ const AsideBox = ({ services, onMouseEnter }) => (
 );
 
 const DisplayBox = ({ selectedService }) => (
-    <div className={`w-full md:w-3/4 lg:w-4/5 pl-10 h-full overflow-y-auto ${styles['services-scrollbar']}`}>
+    <div className={`w-full md:w-3/4 lg:w-4/5 pl-5 h-full overflow-y-auto ${styles['services-scrollbar']}`}>
 
         <h2 className="lg:text-[14px] text-[18px] p-2 mb-2 font-semibold w-full">{selectedService.name}</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 ">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2 ">
             {selectedService.details.map((detail, index) => (
-                <div key={index} className="p-2 hover:bg-zinc-100">
+                <div key={index} className="p-[15px] hover:bg-zinc-100 max-w-[270px] ">
                     <Link href={detail.link}>
-
                         <Image
                             src={detail.image}
                             alt={detail.title}
@@ -53,8 +52,8 @@ const DisplayBox = ({ selectedService }) => (
                             height={80}
                             className="w-[170px] h-[80px] mb-1"
                         />
-                        <h3 className="text-[14px] font-semibold pt-2">{detail.title}</h3>
-                        <p className="text-[12px]">{selectedService.description}</p>
+                        <h3 className="text-[14px] font-semibold pt-2 md:max-w-50% line-clamp-1">{detail.title}</h3>
+                        <p className="text-[12px] line-clamp-1">{selectedService.description}</p>
 
                     </Link>
                 </div>
