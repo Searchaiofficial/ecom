@@ -29,7 +29,7 @@ const data = [
     },
     {
         id: 3,
-        headerTitle: "Financing",
+        headerTitle: "Financing Service",
         iconPath: "/icons/payment.svg",
     },
     {
@@ -39,7 +39,7 @@ const data = [
     },
     {
         id: 5,
-        headerTitle: "warranty",
+        headerTitle: "warranty Service",
         iconPath: "/icons/warranty.svg",
     },
     {
