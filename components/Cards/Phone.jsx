@@ -19,15 +19,15 @@ const Phone = () => {
     }
   };
 
-  const handleIncrementCategoryPopularity = async (categoryName) => {
-    try {
-      await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/incrementCategoryPopularity?category=${categoryName}`
-      );
-    } catch (error) {
-      console.error("Error incrementing category popularity:", error);
-    }
-  };
+  // const handleIncrementCategoryPopularity = async (categoryName) => {
+  //   try {
+  //     await axios.get(
+  //       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/incrementCategoryPopularity?category=${categoryName}`
+  //     );
+  //   } catch (error) {
+  //     console.error("Error incrementing category popularity:", error);
+  //   }
+  // };
 
   useEffect(() => {
     fetchCategory();
@@ -71,9 +71,9 @@ const Phone = () => {
             <span className="cursor-pointer hover:underline">
               <Link
                 href={`/category/${category.name.replace(/ /g, "-")}/all`}
-                onClick={() =>
-                  handleIncrementCategoryPopularity(category.name)
-                }
+                // onClick={() =>
+                //   handleIncrementCategoryPopularity(category.name)
+                // }
               >
                 {category.name}
               </Link>

@@ -3,13 +3,15 @@ import RoomPage from "../MainPage";
 import axios from "axios";
 
 export async function generateMetadata({ params }) {
-  // let url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getSingleProduct?id=`;
-
-  // const response = await axios.get(`${url}${params.id}`);
-  // const t = response?.data?.productTitle;
+  const response = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getSingleProduct?title=${params.title}`
+  );
 
   return {
-    title: params,
+    title: response.data?.productTitle?.replace(/^./, (match) => {
+      return match.toUpperCase();
+    }),
+    description: response.data?.productDescription,
   };
 }
 
