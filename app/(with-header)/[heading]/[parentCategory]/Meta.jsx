@@ -20,6 +20,9 @@ import {
 
 // const hideheader=
 const ProductPage = ({ params }) => {
+  // const [parentCategory, setParentCategory] = useState(params.parentCategory.replace(/-/g, " "))
+  const parentCategory = params.parentCategory.replace(/-/g, " ")
+  // console.log(parentCategory.replace(/-/g, " "))
   let queryString;
   if (typeof window !== "undefined") {
     queryString = window.location.search;
@@ -52,7 +55,7 @@ const ProductPage = ({ params }) => {
   const [selectedOfferCategory, setSelectedOfferCategory] = useState("");
   let offerCategory;
   console.log("offerProduct", offerProductData);
-  if (params.parentCategory === "offers" && offerProductData.length > 0) {
+  if (parentCategory === "offers" && offerProductData.length > 0) {
     offerCategory = offerProductData.map((product) => product.category);
     if (offerCategory.length > 0) offerCategory = [...new Set(offerCategory)];
 
@@ -66,7 +69,7 @@ const ProductPage = ({ params }) => {
   useEffect(() => {
     offerProductData = offerProduct;
   }, [type]);
-  // if(params.parentCategory === "offers" && offerProductData.length > 0 && selectedOfferCategory) {
+  // if(parentCategory === "offers" && offerProductData.length > 0 && selectedOfferCategory) {
   //   offerProductData = offerProductData.filter((product) => product.category === selectedOfferCategory);
   // }
 
@@ -80,7 +83,7 @@ const ProductPage = ({ params }) => {
   let filteredProductData = useSelector(selectedFilteredProduct);
   console.log(filteredProductData)
 
-  let parentCategoryVar = params.parentCategory;
+  let parentCategoryVar = parentCategory;
   const x = useSelector(allSelectedData);
 
   const isNumericString = (str) => /^\d+$/.test(str);
@@ -115,7 +118,7 @@ const ProductPage = ({ params }) => {
   const [category, setCategory] = useState({});
 
   useEffect(() => {
-    if (params.parentCategory === "offers") {
+    if (parentCategory === "offers") {
       if (params.cat === "all") {
         setType("all");
       }
@@ -129,7 +132,7 @@ const ProductPage = ({ params }) => {
   };
 
   useEffect(() => {
-    if (params.parentCategory === "offers") {
+    if (parentCategory === "offers") {
       handleSetItem("Offers");
       const encodedType = encodeURI(type);
       dispatch({
@@ -144,7 +147,7 @@ const ProductPage = ({ params }) => {
       };
 
       fetchAllOfferAndProducts();
-    } else if (params.parentCategory === "demandtype") {
+    } else if (parentCategory === "demandtype") {
       handleSetItem("Demand Type");
       const encodedType = encodeURI(type);
       dispatch({
@@ -158,7 +161,7 @@ const ProductPage = ({ params }) => {
         setAllTypes(response.data.map((item) => item.type));
       };
       fetchAllDemandType();
-    } else if (params.parentCategory === "virtualexperience") {
+    } else if (parentCategory === "virtualexperience") {
       handleSetItem("Free Sample");
       console.log(x, "x");
       if (x.length > 0) {
@@ -187,12 +190,12 @@ const ProductPage = ({ params }) => {
         type: "FETCH_FILTER_PRODUCTS",
         payload: {
           heading: params.heading,
-          parentCategoryVar: params.parentCategory.replace(/-/g, " "),
+          parentCategoryVar: parentCategory,
         },
       });
       if (!category.name) {
         const fetchCategoryData = async () => {
-          const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getCategoryByName/${params.parentCategory}`;
+          const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getCategoryByName/${parentCategory}`;
           const response = await axios.get(apiUrl, {
             headers: {
               "Content-Type": "application/json",
@@ -206,7 +209,7 @@ const ProductPage = ({ params }) => {
       handleSetItem("Products");
       if (!category.name) {
         const fetchCategoryData = async () => {
-          const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getCategoryByName/${params.parentCategory}`;
+          const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getCategoryByName/${parentCategory}`;
           const response = await axios.get(apiUrl, {
             headers: {
               "Content-Type": "application/json",
@@ -219,12 +222,12 @@ const ProductPage = ({ params }) => {
       dispatch({
         type: "FETCH_FILTER_PRODUCTS",
         payload: {
-          parentCategoryVar: params.parentCategory.replace(/-/g, " "),
+          parentCategoryVar: parentCategory,
           cat: type,
         },
       });
     }
-  }, [params.parentCategory, params.cat, type]);
+  }, [parentCategory, params.cat, type]);
 
   useEffect(() => {
     let prevScrollPos = window.scrollY;
@@ -286,27 +289,27 @@ const ProductPage = ({ params }) => {
       <div>
         <Tabproduct
           filteredProductData={
-            params.parentCategory === "virtualexperience"
+            parentCategory === "virtualexperience"
               ? filteredProducts
-              : params.parentCategory === "offers"
+              : parentCategory === "offers"
                 ? offerProductData
-                : params.parentCategory === "demandtype"
+                : parentCategory === "demandtype"
                   ? demandTypeProduct
                   : filteredProductData
           }
           heading={
-            params.parentCategory === "offers"
+            parentCategory === "offers"
               ? type === "all"
                 ? "Highest Offer"
                 : type
-              : params.parentCategory === "demandtype"
+              : parentCategory === "demandtype"
                 ? type
                 : category.name
           }
           description={category?.description}
           subCategory={category?.subcategories}
           allTypes={allTypes}
-          parentCategory={params.parentCategory}
+          parentCategory={parentCategory}
           offerCategory={offerCategory}
           setType={setType}
           setSelectedOfferCategory={setSelectedOfferCategory}

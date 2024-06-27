@@ -166,7 +166,8 @@ const Reviews = ({ productId, data }) => {
             userEmail: user.email,
             rating: newReview.rating,
             comment: newReview.comment,
-            image: user.image,
+            profilePic: user.image,
+            image: newReview.images,
           }
         );
         console.log(response.data);
