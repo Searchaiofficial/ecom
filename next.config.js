@@ -83,6 +83,14 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "scontent-sin6-3.cdninstagram.com",
+      },
+      {
+        protocol: "https",
+        hostname: "**.cdninstagram.com",
+      },
+      {
+        protocol: "https",
         hostname: "unsplash.com",
       },
       {
