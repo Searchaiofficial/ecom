@@ -13,59 +13,6 @@ import Offers from '../Offers/Offers';
 
 import axios from "axios";
 
-const servicedData = [
-  {
-    image: "/icons/10-year-warrante.svg",
-    label: "Measuring service",
-    link: "#"
-  },
-  {
-    image: "/icons/10-year-warrante.svg",
-    label: "Installation Services",
-    link: "/services/Installation"
-  },
-  {
-    image: "/icons/10-year-warrante.svg",
-    label: "planning service",
-    link: "/services/Planning"
-  },
-  {
-    image: "/icons/10-year-warrante.svg",
-    label: "Buy Back service",
-    link: "/services/BuyBack"
-  },
-  {
-    image: "/icons/10-year-warrante.svg",
-    label: "Click & Collect service",
-    link: "/services/ClickAndCollect"
-  },
-  {
-    image: "/icons/10-year-warrante.svg",
-    label: "Finance service",
-    link: "/services/Finance"
-  },
-  {
-    image: "/icons/10-year-warrante.svg",
-    label: "Track & Manage my Order",
-    link: "/track-order"
-  },
-  {
-    image: "/icons/10-year-warrante.svg",
-    label: "warranty Service",
-    link: "/warranty"
-  },
-  {
-    image: "/icons/10-year-warrante.svg",
-    label: "Delivery and transport",
-    link: "#"
-  },
-  {
-    image: "/icons/10-year-warrante.svg",
-    label: "Returns and exchanges",
-    link: "#"
-  }
-]
-
 const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
   const [allOffers, setAllOffers] = useState([]);
 
@@ -90,12 +37,12 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
     <div
       className="bg-white parent min-h-fit px-4 w-full border-t"
     >
-      <div>
-        <div className="grid grid-cols-5 w-[80%] ">
-          {hoveredIndex === 3 &&
-            roomOptions.map((data, index) => (
+      {hoveredIndex === 3 &&
+        roomOptions.map((data, index) => (
+          <div>
+            <div className="grid grid-cols-5 w-[80%] ">
               <div className="bg-white parent group" onClick={handleClick}>
-                <div className=" child w-full h-full pt-10 flex flex-col px-2 justify-start pl-10">
+                <div className=" child w-full h-full pt-10 flex flex-col px-2 justify-start">
                   <Link
                     key={index}
                     href={`/rooms/${data.room.replace(/\s+/g, "-")}`}
@@ -119,9 +66,9 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
 
                 </div>
               </div>
-            ))}
-        </div>
-      </div>
+            </div>
+          </div>
+        ))}
 
       <>
         {/* <div className="grid grid-cols-2 w-[35%] mt-5"> */}
@@ -172,6 +119,7 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
           //       >
           //         <h3 className="text-[14px] text-center font-semibold  py-2 text-gray-700 hover:underline">
           //           {offer.type}
+          //           {console.log("all offers",allOffers)}
           //         </h3>
           //       </Link>
           //     </div>
