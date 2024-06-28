@@ -51,7 +51,7 @@ const Trending = () => {
   console.log(newTrendingData)
 
   useEffect(() => {
-    const trendindData = newTrendingData.filter((item) => item.subcategory !== "Accessories ")
+    const trendindData = newTrendingData.filter((item) => item.subcategory !== "Accessories")
     console.log(trendindData)
     if (trendindData.length > 0) {
       setTrendingData(trendindData)
