@@ -643,7 +643,7 @@ const Card = ({ data, productId }) => {
 
                 </div>
               ) :
-                <h1 className="text-2xl  font-bold mb-0.5">
+                <h1 className="mb-0.5 font-semibold text-2xl">
                   {data?.productTitle}
                 </h1>
 

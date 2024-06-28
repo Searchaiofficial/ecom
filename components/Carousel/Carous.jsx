@@ -39,14 +39,12 @@ const Carous = ({ data }) => {
   const [newRelatedData, setNewrelatedData] = useState([])
 
   useEffect(() => {
-    const Data = relatedData.filter((item) => item.subcategory !== "Accessories ")
+    const Data = relatedData.filter((item) => item.subcategory !== "Accessories")
     console.log(Data)
     if (Data.length > 0) {
       setNewrelatedData(Data);
     }
   }, [relatedData]);
-
-
 
   const swiperOptions2 = {
     slidesPerView: 4,

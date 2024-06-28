@@ -29,7 +29,7 @@ const Dataslider = ({ category, data, sliderIndex }) => {
 
   const [productData, setProductData] = useState([]);
   useEffect(() => {
-    const Data = data.filter((item) => item.subcategory !== "Accessories ")
+    const Data = data.filter((item) => item.subcategory !== "Accessories")
     console.log(Data)
     if (Data.length > 0) {
       setProductData(Data);
