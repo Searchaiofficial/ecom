@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import axios from 'axios'; // Ensure axios is installed and imported
 import allOffers from './offersData'; // Import the offers data
-import styles from './styles.module.css'; // Import CSS module
+import styles from '../styles.module.css'; // Import CSS module
 
 const OfferSection = () => {
     const [selectedOffer, setSelectedOffer] = useState(allOffers[0]);

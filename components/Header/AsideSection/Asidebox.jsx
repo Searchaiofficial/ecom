@@ -51,26 +51,22 @@ const Asidebox = (props) => {
   const handleItemClick = (data) => {
     props.onItemClick(data); // Call the parent component's function with the data
     setInnerData(true);
-
   };
 
   const [innerData, setInnerData] = useState(false);
 
   const HandleClick = (item) => {
-    console.log(item)
     if (window.innerWidth > 800) {
-      props.setHoveredIndex(item)
+      props.setHoveredIndex(item);
     }
-    // props.setIsHovered(false)
-    // console.log(props.)
-  }
+  };
 
   if (props.hoveredIndex === 0 || props.hoveredIndex === 1 || props.hoveredIndex === 2) {
     if (!asideCategory) {
       return (
-        <div className="absolute top-[2.7rem]  lg:p-4 bg-white flex flex-col mt-[15px] md:flex-row noto-sans-200 transition-all duration-300 ease-linear w-full md:left-0 min-h-[90%] lg:min-h-[20rem] md:h-auto md:px-10 border-t">
+        <div className="absolute top-[2.7rem] lg:p-4 bg-white flex flex-col mt-[15px] md:flex-row noto-sans-200 transition-all duration-300 ease-linear w-full md:left-0 min-h-[90%] lg:min-h-[20rem] md:h-auto md:px-10 border-t">
         </div>
-      )
+      );
     }
   }
 
@@ -81,7 +77,7 @@ const Asidebox = (props) => {
           className="absolute top-[2.7rem] bg-white flex flex-col mt-[15px] md:flex-row noto-sans-200 w-full md:left-0 min-h-[90%] lg:min-h-[20rem] md:h-auto md:px-10 border-t"
         >
           <aside
-            className="absolute lg:top-[2.8rem] space-y-2 mt-[15px] md:mr-10 md:mt-0 lg:w-[15%] md:top-0 md:static md:border-r md:pr-10 md:pb-4 w-full pt-2"
+            className="w-full md:w-1/4 lg:w-1/5 md:sticky md:top-0 h-full overflow-y-auto p-2"
           >
             {asideCategory?.map((value, idx) => (
               <Link

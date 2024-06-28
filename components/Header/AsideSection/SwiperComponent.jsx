@@ -90,35 +90,37 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
     <div
       className="bg-white parent min-h-fit px-4 w-full border-t"
     >
-      <div className="grid grid-cols-5">
-        {hoveredIndex === 3 &&
-          roomOptions.map((data, index) => (
-            <div className="bg-white parent group " onClick={handleClick}>
-              <div className=" child w-full h-full pt-10 flex flex-col px-2 justify-start pl-10">
-                <Link
-                  key={index}
-                  href={`/rooms/${data.room.replace(/\s+/g, "-")}`}
-                  onClick={() => setHoveredIndex(null)}
-                  passHref
-                  className="flex flex-col gap-1"
-                >
-                  <div className="parent w-[170px] h-[80px]">
-                    <Image
-                      src={data.src}
-                      width={400}
-                      height={400}
-                      className="child w-[170px] h-[80px]"
-                      alt="Room Image"
-                    />
-                  </div>
-                  <h3 className="text-[14px] group-hover:underline font-semibold py-2 text-[#111111]">
-                    {data.room}
-                  </h3>
-                </Link>
+      <div>
+        <div className="grid grid-cols-5 w-[80%] ">
+          {hoveredIndex === 3 &&
+            roomOptions.map((data, index) => (
+              <div className="bg-white parent group" onClick={handleClick}>
+                <div className=" child w-full h-full pt-10 flex flex-col px-2 justify-start pl-10">
+                  <Link
+                    key={index}
+                    href={`/rooms/${data.room.replace(/\s+/g, "-")}`}
+                    onClick={() => setHoveredIndex(null)}
+                    passHref
+                    className="flex flex-col gap-1"
+                  >
+                    <div className="parent w-[170px] h-[80px]">
+                      <Image
+                        src={data.src}
+                        width={400}
+                        height={400}
+                        className="child w-[170px] h-[80px]"
+                        alt="Room Image"
+                      />
+                    </div>
+                    <h3 className="text-[14px] group-hover:underline font-semibold py-2 text-[#111111]">
+                      {data.room}
+                    </h3>
+                  </Link>
 
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+        </div>
       </div>
 
       <>

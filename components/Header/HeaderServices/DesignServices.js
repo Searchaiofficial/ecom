@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import services from './servicesData';
-import styles from './styles.module.css'; // Import CSS module
+import styles from '../styles.module.css'; // Import CSS module
 
 const DesignServices = () => {
     const [allOffers, setAllOffers] = useState([]);
