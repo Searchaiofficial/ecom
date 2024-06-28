@@ -8,7 +8,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Scrollbar } from "swiper/modules";
 import { roomOptions } from "@/Model/Dropdown/SliderData/SliderData";
 
-import DesignServices from '../Services/DesignServices';
+import DesignServices from '../HeaderServices/DesignServices';
+import Offers from '../Offers/Offers';
 
 import axios from "axios";
 
@@ -87,7 +88,7 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
 
   return (
     <div
-      className="bg-white parent min-h-fit  px-4 pb-4 w-full "
+      className="bg-white parent min-h-fit px-4 w-full border-t"
     >
       <div className="grid grid-cols-5">
         {hoveredIndex === 3 &&
@@ -153,25 +154,28 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
 
       </>
 
-      <div className="grid grid-cols-2 w-[35%] mt-5">
-        {hoveredIndex === 5 && (
-          allOffers.map((offer, index) => (
-            <div className="bg-white  parent " onClick={handleClick}>
-              <div className=" child  h-full  flex px-2 justify-start ">
-                <Link
-                  key={index}
-                  href={`/heading/offers/${offer.type.replace(/ /g, "-")}`}
-                  passHref
+      {/* <div className="grid grid-cols-2 w-[35%] mt-5"> */}
+      <div>
 
-                  onClick={() => setHoveredIndex(null)}
-                >
-                  <h3 className="text-[14px] text-center font-semibold  py-2 text-gray-700 hover:underline">
-                    {offer.type}
-                  </h3>
-                </Link>
-              </div>
-            </div>
-          ))
+        {hoveredIndex === 5 && (
+          // allOffers.map((offer, index) => (
+          //   <div className="bg-white  parent " onClick={handleClick}>
+          //     <div className=" child  h-full  flex px-2 justify-start ">
+          //       <Link
+          //         key={index}
+          //         href={`/heading/offers/${offer.type.replace(/ /g, "-")}`}
+          //         passHref
+
+          //         onClick={() => setHoveredIndex(null)}
+          //       >
+          //         <h3 className="text-[14px] text-center font-semibold  py-2 text-gray-700 hover:underline">
+          //           {offer.type}
+          //         </h3>
+          //       </Link>
+          //     </div>
+          //   </div>
+          // ))
+          <Offers />
         )}
       </div>
     </div>

@@ -1,16 +1,5 @@
 const services = [
     {
-        id: 'measuring',
-        name: 'Measuring Service',
-        description: 'Get precise measurements for your space.',
-        details: [
-            { title: 'Room Measuring', description: 'Detailed room measurement service.', image: '/images/room/bedroom.jpg', link: '#' },
-            { title: 'Furniture Measuring', description: 'Accurate furniture measuring.', image: '/images/room/bathroom.jpg', link: '#' },
-            { title: 'Custom Measuring', description: 'Tailored measuring solutions.', image: '/images/room/Laundry.jpg', link: '#' },
-            { title: 'Accessory Measuring', description: 'Measure for accessories and fixtures.', image: '/images/room/livingroom.jpg', link: '#' }
-        ]
-    },
-    {
         id: 'installation',
         name: 'Installation Service',
         description: 'Professional installation services for your convenience.',
@@ -19,6 +8,17 @@ const services = [
             { title: 'Curtains Installation', description: 'Professional curtain installation.', image: '/images/room/bathroom.jpg', link: '/services/Installation' },
             { title: 'Wallpaper Installation', description: 'Seamless wallpaper installation.', image: '/images/room/Laundry.jpg', link: '/services/Installation' },
             { title: 'Other Installations', description: 'Various other installation services.', image: '/images/room/livingroom.jpg', link: '/services/Installation' }
+        ]
+    },
+    {
+        id: 'measuring',
+        name: 'Measuring Service',
+        description: 'Get precise measurements for your space.',
+        details: [
+            { title: 'Room Measuring', description: 'Detailed room measurement service.', image: '/images/room/bedroom.jpg', link: '#' },
+            { title: 'Furniture Measuring', description: 'Accurate furniture measuring.', image: '/images/room/bathroom.jpg', link: '#' },
+            { title: 'Custom Measuring', description: 'Tailored measuring solutions.', image: '/images/room/Laundry.jpg', link: '#' },
+            { title: 'Accessory Measuring', description: 'Measure for accessories and fixtures.', image: '/images/room/livingroom.jpg', link: '#' }
         ]
     },
     {
