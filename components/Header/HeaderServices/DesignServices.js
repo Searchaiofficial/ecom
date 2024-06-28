@@ -5,6 +5,7 @@ import services from './servicesData';
 import styles from './styles.module.css'; // Import CSS module
 
 const DesignServices = () => {
+    const [allOffers, setAllOffers] = useState([]);
     const [selectedService, setSelectedService] = useState(services[0]);
 
     const handleMouseEnter = (service) => {
@@ -12,7 +13,7 @@ const DesignServices = () => {
     };
 
     return (
-        <div className="container mx-auto pt-2 h-[64vh]">
+        <div className="container mx-auto h-[64vh]">
             <header className="flex flex-col md:flex-row w-full h-full overflow-hidden">
                 <AsideBox services={services} onMouseEnter={handleMouseEnter} selectedService={selectedService} />
                 <DisplayBox selectedService={selectedService} />

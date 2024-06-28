@@ -123,7 +123,7 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
 
       <>
         {/* <div className="grid grid-cols-2 w-[35%] mt-5"> */}
-        <div className="mt-5">
+        <div>
           {hoveredIndex === 4 && (
             // <>
             //   <h3 className="text-[14px] font-semibold py-2 text-gray-700 ml-2">See all the services</h3>

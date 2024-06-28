@@ -42,7 +42,7 @@ const OfferSection = () => {
 
 const OfferAsideBox = ({ offers, onMouseEnter, selectedOffer }) => (
     <aside
-        className={`w-full md:w-1/4 lg:w-1/5 md:sticky md:top-0 border-r h-full overflow-y-auto ${styles['services-scrollbar']}`}
+        className={`w-full md:w-1/4 lg:w-1/5 md:sticky md:top-0 border-r h-full overflow-y-auto ${styles.servicesScrollbar} ${styles['services-scrollbar']}`}
         aria-label="Offer List"
     >
         <div className="h-full">
@@ -63,7 +63,7 @@ const OfferAsideBox = ({ offers, onMouseEnter, selectedOffer }) => (
 );
 
 const OfferDisplayBox = ({ selectedOffer }) => (
-    <div className={`w-full md:w-3/4 lg:w-4/5 pl-5 h-full overflow-y-auto ${styles['services-scrollbar']}`}>
+    <div className={`w-full md:w-3/4 lg:w-4/5 pl-5 h-full overflow-y-auto ${styles.servicesScrollbar}`}>
         <h2 className="lg:text-[14px] text-[18px] p-2 mb-2 font-semibold w-full">{selectedOffer.type}</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2 ">
             {selectedOffer.details.map((detail, index) => (

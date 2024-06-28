@@ -78,10 +78,10 @@ const Asidebox = (props) => {
     <>
       {asideCategory && (
         <div
-          className="absolute top-[2.7rem] lg:p-4 bg-white flex flex-col mt-[15px] md:flex-row noto-sans-200 transition-all duration-300 ease-linear w-full md:left-0 min-h-[90%] lg:min-h-[20rem] md:h-auto md:px-10 border-t"
+          className="absolute top-[2.7rem] bg-white flex flex-col mt-[15px] md:flex-row noto-sans-200 w-full md:left-0 min-h-[90%] lg:min-h-[20rem] md:h-auto md:px-10 border-t"
         >
           <aside
-            className="absolute lg:top-[2.8rem] space-y-2 mt-[15px] md:mr-10 md:mt-0 lg:w-[15%] md:top-0 md:static md:border-r md:pr-10 md:pb-4 w-full"
+            className="absolute lg:top-[2.8rem] space-y-2 mt-[15px] md:mr-10 md:mt-0 lg:w-[15%] md:top-0 md:static md:border-r md:pr-10 md:pb-4 w-full pt-2"
           >
             {asideCategory?.map((value, idx) => (
               <Link
