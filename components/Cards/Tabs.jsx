@@ -32,7 +32,7 @@ const Tabs = ({ data }) => {
     }
   }
 
-  console.log(newdata)
+  console.log(newdata.length)
 
   // console.log(newdata)
 
@@ -130,6 +130,16 @@ const Tabs = ({ data }) => {
   // console.log("tabsData", tabsData);
   // console.log("tabImages", tabImages);
   // console.log("labelDatazzz", labelData)
+  const [loadMoreAll, setLoadMoreAll] = useState(false)
+  const handleLoadMoreAll = () => {
+    setLoadMoreAll(true)
+  }
+  const [loadMore, setLoadMore] = useState(false)
+  const handleLoadMore = () => {
+    setLoadMore(true)
+  }
+
+  console.log(tabImages)
 
   return (
     <>
@@ -168,163 +178,397 @@ const Tabs = ({ data }) => {
 
         </div>
 
+
+
         {activeTab === "all" ? (
-          <div className="classic-tabs text-green-800 grid sm:grid-cols-3 grid-cols-2 gap-3 grid-rows-3">
-            <TabImage
-              width={450}
-              height={700}
-              src={tabImages[uniqueRoomCategories[0]]?.[0]}
-              alt="Room"
-              handleTab={handleTab}
-              labelData={labelData[uniqueRoomCategories[0]]?.[0] || []}
-            />
+          <>
 
-            <div className="overflow-hidden relative">
-              <Image
-                className="h-full w-full object-cover "
-                src={tabImages[uniqueRoomCategories[1]]?.[0]}
+            <div className="classic-tabs text-green-800 grid sm:grid-cols-3 grid-cols-2 gap-3 grid-rows-3">
+              <TabImage
+                width={450}
+                height={700}
+                src={tabImages[uniqueRoomCategories[0]]?.[0]}
+                alt="Room"
+                handleTab={handleTab}
+                labelData={labelData[uniqueRoomCategories[0]]?.[0] || []}
+              />
+
+              <div className="overflow-hidden relative">
+                <Image
+                  className="h-full w-full object-cover "
+                  src={tabImages[uniqueRoomCategories[1]]?.[0]}
+                  alt="Room"
+                  width={450}
+                  height={350}
+                />
+              </div>
+
+              <TabImage
+                src={tabImages[uniqueRoomCategories[2]]?.[0]}
+                labelData={labelData[uniqueRoomCategories[2]]?.[0] || []}
                 alt="Room"
                 width={450}
-                height={350}
+                height={700}
+                handleTab={handleTab}
               />
-            </div>
+              <div className="overflow-hidden sm:hidden block">
+                <Image
+                  className="h-full w-full object-cover "
+                  src="/images/temp.svg"
+                  alt="Room"
+                  width={200}
+                  height={200}
+                />
+              </div>
 
-            <TabImage
-              src={tabImages[uniqueRoomCategories[2]]?.[0]}
-              labelData={labelData[uniqueRoomCategories[2]]?.[0] || []}
-              alt="Room"
-              width={450}
-              height={700}
-              handleTab={handleTab}
-            />
-            <div className="overflow-hidden sm:hidden block">
-              <Image
-                className="h-full w-full object-cover "
-                src="/images/temp.svg"
+              <TabImage
+                src={tabImages[uniqueRoomCategories[3]]?.[0]}
+                labelData={labelData[uniqueRoomCategories[3]]?.[0] || []}
                 alt="Room"
-                width={200}
-                height={200}
-              />
-            </div>
-
-            <TabImage
-              src={tabImages[uniqueRoomCategories[3]]?.[0]}
-              labelData={labelData[uniqueRoomCategories[3]]?.[0] || []}
-              alt="Room"
-              handleTab={handleTab}
-              width={450}
-              height={700}
-            />
-            <div className="overflow-hidden">
-              <Image
-                className="h-full w-full object-cover"
-                src={tabImages[uniqueRoomCategories[4]]?.[0]}
-                alt="Room"
+                handleTab={handleTab}
                 width={450}
-                height={350}
+                height={700}
               />
-            </div>
-            <div className="bg-teal-100 overflow-hidden ">
-              <Image
-                className="h-full w-full object-cover"
-                src={tabImages[uniqueRoomCategories[5]]?.[0]}
-                alt="Room"
-                width={450}
-                height={350}
-              />
-            </div>
-          </div>
 
+              <div className="overflow-hidden">
+                <Image
+                  className="h-full w-full object-cover 11"
+                  src={tabImages[uniqueRoomCategories[4]]?.[0]}
+                  alt="Room"
+                  width={450}
+                  height={350}
+                />
+
+              </div>
+              <div className="bg-teal-100 overflow-hidden ">
+                <Image
+                  className="h-full w-full object-cover"
+                  src={tabImages[uniqueRoomCategories[5]]?.[0]}
+                  alt="Room"
+                  width={450}
+                  height={350}
+                />
+              </div>
+              {
+                loadMoreAll && (
+                  <TabImage
+                    width={450}
+                    height={700}
+                    src={tabImages[uniqueRoomCategories[6]]?.[0]}
+                    alt="Room"
+                    handleTab={handleTab}
+                    labelData={labelData[uniqueRoomCategories[6]]?.[0] || []}
+                  />
+                )
+
+              }
+
+              {
+                loadMoreAll && (
+                  <div className="overflow-hidden relative">
+                    <Image
+                      className="h-full w-full object-cover "
+                      src={tabImages[uniqueRoomCategories[7]]?.[0]}
+                      alt="Room"
+                      width={450}
+                      height={350}
+                    />
+                  </div>
+                )
+              }
+
+              {
+                loadMoreAll && (
+                  <TabImage
+                    src={tabImages[uniqueRoomCategories[8]]?.[0]}
+                    labelData={labelData[uniqueRoomCategories[8]]?.[0] || []}
+                    alt="Room"
+                    width={450}
+                    height={700}
+                    handleTab={handleTab}
+                  />
+                )
+              }
+              {
+                loadMoreAll && (
+                  <div className="overflow-hidden sm:hidden block">
+                    <Image
+                      className="h-full w-full object-cover "
+                      src="/images/temp.svg"
+                      alt="Room"
+                      width={200}
+                      height={200}
+                    />
+                  </div>
+                )
+              }
+
+              {
+                loadMoreAll && (
+                  <TabImage
+                    src={tabImages[uniqueRoomCategories[9]]?.[0]}
+                    labelData={labelData[uniqueRoomCategories[9]]?.[0] || []}
+                    alt="Room"
+                    handleTab={handleTab}
+                    width={450}
+                    height={700}
+                  />
+                )
+              }
+
+              {
+                loadMoreAll && (
+                  <div className="overflow-hidden">
+                    <Image
+                      className="h-full w-full object-cover 11"
+                      src={tabImages[uniqueRoomCategories[10]]?.[0]}
+                      alt="Room"
+                      width={450}
+                      height={350}
+                    />
+
+                  </div>
+                )
+              }
+              {
+                loadMoreAll && (
+                  <div className="bg-teal-100 overflow-hidden ">
+                    <Image
+                      className="h-full w-full object-cover"
+                      src={tabImages[uniqueRoomCategories[11]]?.[0]}
+                      alt="Room"
+                      width={450}
+                      height={350}
+                    />
+                  </div>
+                )
+              }
+
+            </div>
+            {
+              !loadMoreAll && (
+                <div className="flex items-center justify-center">
+                  <p onClick={handleLoadMoreAll} className="text-center text-[14px] font-semibold border max-w-fit p-2 px-4 rounded-full  border-black cursor-pointer">Load 6 more</p>
+                </div>
+              )
+            }
+          </>
         ) : (
-          <div className="classic-tabs text-green-800 grid sm:grid-cols-3 grid-cols-2 gap-3 grid-rows-3">
-            <TabImage
-              width={450}
-              height={700}
-              src={
-                tabImages[activeTab]
-                  ? tabImages[activeTab][0]
-                  : tabImages[activeTab]?.alt
-              }
-              alt="Room"
-              handleTab={handleTab}
-              labelData={labelData[activeTab]?.[0] || []}
-            />
+          <>
 
-            <div className="overflow-hidden relative">
-              <Image
-                className="h-full w-full object-cover "
+            <div className="classic-tabs text-green-800 grid sm:grid-cols-3 grid-cols-2 gap-3 grid-rows-3">
+              <TabImage
+                width={450}
+                height={700}
                 src={
                   tabImages[activeTab]
-                    ? tabImages[activeTab][1]
+                    ? tabImages[activeTab][0]
                     : tabImages[activeTab]?.alt
                 }
                 alt="Room"
-                width={450}
-                height={350}
+                handleTab={handleTab}
+                labelData={labelData[activeTab]?.[0] || []}
               />
-            </div>
 
-            <TabImage
-              src={
-                tabImages[activeTab]
-                  ? tabImages[activeTab][2]
-                  : tabImages[activeTab]?.alt
-              }
-              labelData={labelData[activeTab]?.[2] || []}
-              alt="Room"
-              width={450}
-              height={700}
-              handleTab={handleTab}
-            />
-            <div className="overflow-hidden sm:hidden block">
-              <Image
-                className="h-full w-full object-cover "
-                src="/images/temp.svg"
-                alt="Room"
-                width={200}
-                height={200}
-              />
-            </div>
+              <div className="overflow-hidden relative">
+                <Image
+                  className="h-full w-full object-cover "
+                  src={
+                    tabImages[activeTab]
+                      ? tabImages[activeTab][1]
+                      : tabImages[activeTab]?.alt
+                  }
+                  alt="Room"
+                  width={450}
+                  height={350}
+                />
+              </div>
 
-            <TabImage
-              src={
-                tabImages[activeTab]
-                  ? tabImages[activeTab][3]
-                  : tabImages[activeTab]?.alt
-              }
-              labelData={labelData[activeTab]?.[3] || []}
-              alt="Room"
-              handleTab={handleTab}
-              width={450}
-              height={700}
-            />
-            <div className="overflow-hidden">
-              <Image
-                className="h-full w-full object-cover"
+              <TabImage
                 src={
                   tabImages[activeTab]
-                    ? tabImages[activeTab][4]
+                    ? tabImages[activeTab][2]
                     : tabImages[activeTab]?.alt
                 }
+                labelData={labelData[activeTab]?.[2] || []}
                 alt="Room"
                 width={450}
-                height={350}
+                height={700}
+                handleTab={handleTab}
               />
-            </div>
-            <div className="bg-teal-100 overflow-hidden ">
-              <Image
-                className="h-full w-full object-cover"
+              <div className="overflow-hidden sm:hidden block">
+                <Image
+                  className="h-full w-full object-cover "
+                  src="/images/temp.svg"
+                  alt="Room"
+                  width={200}
+                  height={200}
+                />
+              </div>
+
+              <TabImage
                 src={
                   tabImages[activeTab]
-                    ? tabImages[activeTab][5]
+                    ? tabImages[activeTab][3]
                     : tabImages[activeTab]?.alt
                 }
+                labelData={labelData[activeTab]?.[3] || []}
                 alt="Room"
+                handleTab={handleTab}
                 width={450}
-                height={350}
+                height={700}
               />
+              <div className="overflow-hidden">
+                <Image
+                  className="h-full w-full object-cover"
+                  src={
+                    tabImages[activeTab]
+                      ? tabImages[activeTab][4]
+                      : tabImages[activeTab]?.alt
+                  }
+                  alt="Room"
+                  width={450}
+                  height={350}
+                />
+              </div>
+              <div className="bg-teal-100 overflow-hidden ">
+                <Image
+                  className="h-full w-full object-cover"
+                  src={
+                    tabImages[activeTab]
+                      ? tabImages[activeTab][5]
+                      : tabImages[activeTab]?.alt
+                  }
+                  alt="Room"
+                  width={450}
+                  height={350}
+                />
+              </div>
+              {
+                loadMore && (
+                  <TabImage
+                    width={450}
+                    height={700}
+                    src={
+                      tabImages[activeTab]
+                        ? tabImages[activeTab][6]
+                        : tabImages[activeTab]?.alt
+                    }
+                    alt="Room"
+                    handleTab={handleTab}
+                    labelData={labelData[activeTab]?.[6] || []}
+                  />
+                )
+              }
+
+              {
+                loadMore && (
+                  <div className="overflow-hidden relative">
+                    <Image
+                      className="h-full w-full object-cover "
+                      src={
+                        tabImages[activeTab]
+                          ? tabImages[activeTab][7]
+                          : tabImages[activeTab]?.alt
+                      }
+                      alt="Room"
+                      width={450}
+                      height={350}
+                    />
+                  </div>
+                )
+              }
+
+              {
+                loadMore && (
+                  <TabImage
+                    src={
+                      tabImages[activeTab]
+                        ? tabImages[activeTab][8]
+                        : tabImages[activeTab]?.alt
+                    }
+                    labelData={labelData[activeTab]?.[8] || []}
+                    alt="Room"
+                    width={450}
+                    height={700}
+                    handleTab={handleTab}
+                  />
+                )
+              }
+              {
+                loadMore && (
+                  <div className="overflow-hidden sm:hidden block">
+                    <Image
+                      className="h-full w-full object-cover "
+                      src="/images/temp.svg"
+                      alt="Room"
+                      width={200}
+                      height={200}
+                    />
+                  </div>
+                )
+              }
+
+              {
+                loadMore && (
+                  <TabImage
+                    src={
+                      tabImages[activeTab]
+                        ? tabImages[activeTab][9]
+                        : tabImages[activeTab]?.alt
+                    }
+                    labelData={labelData[activeTab]?.[9] || []}
+                    alt="Room"
+                    handleTab={handleTab}
+                    width={450}
+                    height={700}
+                  />
+                )
+              }
+              {
+                loadMore && (
+                  <div className="overflow-hidden">
+                    <Image
+                      className="h-full w-full object-cover"
+                      src={
+                        tabImages[activeTab]
+                          ? tabImages[activeTab][10]
+                          : tabImages[activeTab]?.alt
+                      }
+                      alt="Room"
+                      width={450}
+                      height={350}
+                    />
+                  </div>
+                )
+              }
+              {
+                loadMore && (
+                  <div className="bg-teal-100 overflow-hidden ">
+                    <Image
+                      className="h-full w-full object-cover"
+                      src={
+                        tabImages[activeTab]
+                          ? tabImages[activeTab][11]
+                          : tabImages[activeTab]?.alt
+                      }
+                      alt="Room"
+                      width={450}
+                      height={350}
+                    />
+                  </div>
+                )
+              }
             </div>
-          </div>
+            {
+              !loadMore && (
+                <div className="flex items-center justify-center">
+                  <p onClick={handleLoadMore} className="text-center text-[14px] font-semibold border max-w-fit p-2 px-4 rounded-full  border-black cursor-pointer">Load 6 more</p>
+                </div>
+              )
+            }
+
+          </>
         )}
       </div>
     </>
