@@ -12,6 +12,7 @@ import DesignServices from '../HeaderServices/DesignServices';
 import Offers from '../Offers/Offers';
 
 import axios from "axios";
+import styles from '../styles.module.css'
 
 const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
   const [allOffers, setAllOffers] = useState([]);
@@ -32,19 +33,37 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
     }
   }, []);
 
+  const links = [
+    { title: "Room Installation service", href: "#" },
+    { title: "Flooring service", href: "#" },
+    { title: "Kitchen Service", href: "#" },
+    { title: "Room Decoration service", href: "#" },
+    { title: "Room Installation service", href: "#" },
+    { title: "Flooring service", href: "#" },
+    { title: "Kitchen Service", href: "#" },
+    { title: "Room Decoration service", href: "#" },
+    { title: "Room Installation service", href: "#" },
+    { title: "Flooring service", href: "#" },
+    { title: "Kitchen Service", href: "#" },
+    { title: "Room Decoration service", href: "#" },
+    { title: "Room Installation service", href: "#" },
+    { title: "Flooring service", href: "#" },
+    { title: "Kitchen Service", href: "#" },
+    { title: "Room Decoration service", href: "#" },
+  ];
+
 
   return (
     <div
       className="bg-white parent min-h-fit px-4 w-full border-t"
     >
-      {hoveredIndex === 3 &&
-        roomOptions.map((data, index) => (
-          <div>
-            <div className="grid grid-cols-5 w-[80%] ">
-              <div className="bg-white parent group" onClick={handleClick}>
-                <div className=" child w-full h-full pt-10 flex flex-col px-2 justify-start">
+      {hoveredIndex === 3 && (
+        <div className="flex h-[55vh]">
+          <div className="grid grid-cols-5 w-[80%]">
+            {roomOptions.map((data, index) => (
+              <div className="bg-white parent group" onClick={handleClick} key={index}>
+                <div className="child w-full h-full pt-10 flex flex-col px-2 justify-start">
                   <Link
-                    key={index}
                     href={`/rooms/${data.room.replace(/\s+/g, "-")}`}
                     onClick={() => setHoveredIndex(null)}
                     passHref
@@ -63,12 +82,28 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
                       {data.room}
                     </h3>
                   </Link>
-
                 </div>
               </div>
+            ))}
+          </div>
+          <div className="border-l w-[20%] px-2 pt-8">
+            <div className={`h-full ${styles.servicesScrollbar} ${styles['services-scrollbar']}`}>
+              <ul>
+                {links.map((link, index) => (
+                  <li key={index} className="pb-4 border-gray-300">
+                    <Link href={link.href} className="text-[14px] font-normal text-[#111111] lg:justify-start hover:underline">
+                      {link.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
-        ))}
+        </div>
+      )}
+
+
+
 
       <>
         {/* <div className="grid grid-cols-2 w-[35%] mt-5"> */}
