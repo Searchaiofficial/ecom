@@ -503,7 +503,7 @@ function Card(props) {
                           {
                             colorImage === item.image ||
                               (index === 0 && colorImage === "") ? (
-                              <div className="w-[100%] h-[4px] bg-black mt-[50px]" />
+                              <div className="w-[100%] h-[2px] bg-black mt-[50px]" />
                             ) : ""
                           }
 

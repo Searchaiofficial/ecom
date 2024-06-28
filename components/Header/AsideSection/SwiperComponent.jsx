@@ -58,11 +58,11 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
       className="bg-white parent min-h-fit px-4 w-full border-t"
     >
       {hoveredIndex === 3 && (
-        <div className="flex h-[55vh]">
-          <div className="grid grid-cols-5 w-[80%]">
+        <div className="flex max-h-[72vh]">
+          <div className={`grid grid-cols-4 w-[70%] overflow-y-auto my-2 ${styles['services-scrollbar']}`}>
             {roomOptions.map((data, index) => (
               <div className="bg-white parent group" onClick={handleClick} key={index}>
-                <div className="child w-full h-full pt-10 flex flex-col px-2 justify-start">
+                <div className="child w-full h-full pt-3 flex flex-col px-2 justify-start">
                   <Link
                     href={`/rooms/${data.room.replace(/\s+/g, "-")}`}
                     onClick={() => setHoveredIndex(null)}
@@ -78,7 +78,7 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
                         alt="Room Image"
                       />
                     </div>
-                    <h3 className="text-[14px] group-hover:underline font-semibold py-2 text-[#111111]">
+                    <h3 className="text-[14px] group-hover:underline font-semibold py-3 text-[#111111]">
                       {data.room}
                     </h3>
                   </Link>
@@ -86,14 +86,22 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
               </div>
             ))}
           </div>
-          <div className="border-l w-[20%] px-2 pt-8">
-            <div className={`h-full ${styles.servicesScrollbar} ${styles['services-scrollbar']}`}>
+            <div class="inline-block h-full w-[0.5px] self-stretch bg-[#e5e7eb]"></div>
+          <div className="w-[30%] p-2">
+            <div className={`h-full ${styles['services-scrollbar']}`}>
               <ul>
                 {links.map((link, index) => (
-                  <li key={index} className="pb-4 border-gray-300">
-                    <Link href={link.href} className="text-[14px] font-normal text-[#111111] lg:justify-start hover:underline">
+                  <li key={index} className="flex pb-4 border-gray-300 justify-between">
+                    <Link href={link.href} className="ftext-[14px] font-normal text-[#111111] lg:justify-start hover:underline">
                       {link.title}
                     </Link>
+                    <Image
+                      src="/icons/backarrowRevarce.svg"
+                      alt="right"
+                      width={15}
+                      height={15}
+                      className="w-[15px] h-[15px]"
+                    />
                   </li>
                 ))}
               </ul>

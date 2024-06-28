@@ -3,7 +3,7 @@ import "./TopLoader.css"
 const TopLoader = () => {
   return (
     <>
-    <div className="loader loader__element"></div>
+      <div className="loader loader__element"></div>
     </>
   )
 }

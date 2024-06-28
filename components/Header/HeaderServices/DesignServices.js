@@ -13,9 +13,10 @@ const DesignServices = () => {
     };
 
     return (
-        <div className="container mx-auto h-[64vh]">
+        <div className="container mx-auto h-[72vh]">
             <header className="flex flex-col md:flex-row w-full h-full overflow-hidden">
                 <AsideBox services={services} onMouseEnter={handleMouseEnter} selectedService={selectedService} />
+                <div class="inline-block h-full min-h-[1em] w-[0.5px] self-stretch bg-[#e5e7eb]"></div>
                 <DisplayBox selectedService={selectedService} />
             </header>
         </div>
@@ -23,8 +24,8 @@ const DesignServices = () => {
 };
 
 const AsideBox = ({ services, onMouseEnter, selectedService }) => (
-    <aside className={`w-full md:w-1/4 lg:w-1/5 md:sticky md:top-0 border-r h-full overflow-y-auto ${styles['services-scrollbar']}`}>
-        <div className="h-full">
+    <aside className={`w-full md:w-1/4 lg:w-1/5 md:sticky md:top-0 h-full my-3`}>
+        <div className={`h-full overflow-y-auto  ${styles['services-scrollbar']}`}>
             {services.map((service) => (
                 <div
                     key={service.id}
@@ -40,7 +41,7 @@ const AsideBox = ({ services, onMouseEnter, selectedService }) => (
 );
 
 const DisplayBox = ({ selectedService }) => (
-    <div className={`w-full md:w-3/4 lg:w-4/5 pl-5 h-full overflow-y-auto ${styles['services-scrollbar']}`}>
+    <div className={`w-full md:w-3/4 lg:w-4/5 pl-5 h-full overflow-y-auto ${styles['services-scrollbar']} my-2`}>
 
         <h2 className="lg:text-[14px] text-[18px] p-2 mb-2 font-semibold w-full">{selectedService.name}</h2>
         <div className="grid grid-cols-1 md:grid-cols-3">

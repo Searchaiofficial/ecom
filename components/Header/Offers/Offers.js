@@ -33,6 +33,7 @@ const OfferSection = () => {
         <div className="container mx-auto h-[50vh]">
             <header className="flex flex-col md:flex-row w-full h-full overflow-hidden">
                 <OfferAsideBox offers={allOffers} onMouseEnter={handleMouseEnter} selectedOffer={selectedOffer} />
+                <div class="inline-block h-full min-h-[1em] w-[0.5px] self-stretch bg-[#e5e7eb]"></div>
                 {selectedOffer && <OfferDisplayBox selectedOffer={selectedOffer} />}
             </header>
         </div>
@@ -41,7 +42,7 @@ const OfferSection = () => {
 
 const OfferAsideBox = ({ offers, onMouseEnter, selectedOffer }) => (
     <aside
-        className={`w-full md:w-1/4 lg:w-1/5 md:sticky md:top-0 border-r h-full overflow-y-auto ${styles.servicesScrollbar} ${styles['services-scrollbar']}`}
+        className={`w-full md:w-1/4 lg:w-1/5 md:sticky md:top-0 h-full overflow-y-auto ${styles['services-scrollbar']} my-2`}
         aria-label="Offer List"
     >
         <div className="h-full">
@@ -62,7 +63,7 @@ const OfferAsideBox = ({ offers, onMouseEnter, selectedOffer }) => (
 );
 
 const OfferDisplayBox = ({ selectedOffer }) => (
-    <div className={`w-full md:w-3/4 lg:w-4/5 pl-5 h-full overflow-y-auto ${styles.servicesScrollbar}`}>
+    <div className={`w-full md:w-3/4 lg:w-4/5 pl-5 h-full overflow-y-auto my-2 ${styles.servicesScrollbar}`}>
         <h2 className="lg:text-[14px] text-[18px] p-2 mb-2 font-semibold w-full">{selectedOffer.type}</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
             <div className="p-[15px] hover:bg-zinc-100 max-w-[270px]">

@@ -74,10 +74,10 @@ const Asidebox = (props) => {
     <>
       {asideCategory && (
         <div
-          className="absolute top-[2.7rem] bg-white flex flex-col mt-[15px] md:flex-row noto-sans-200 w-full md:left-0 min-h-[90%] lg:min-h-[20rem] md:h-auto md:px-10 border-t"
+          className="absolute top-[2.7rem] bg-white flex flex-col mt-[15px] md:flex-row noto-sans-200 w-full md:left-0 min-h-[90%] lg:min-h-[20rem] md:h-auto md:px-10 border-t max-h-[72vh]"
         >
           <aside
-            className="w-full md:w-1/4 lg:w-1/5 md:sticky md:top-0 h-full overflow-y-auto p-2"
+            className="w-full md:w-1/4 lg:w-1/5 md:sticky md:top-0 h-full overflow-y-auto p-4"
           >
             {asideCategory?.map((value, idx) => (
               <Link
@@ -95,6 +95,7 @@ const Asidebox = (props) => {
               </Link>
             ))}
           </aside>
+          <div class="inline-block h-full w-[0.5px] self-stretch bg-[#e5e7eb]"></div>
           <div
             className={`${innerData ? "block" : "hidden"} md:block absolute w-full bg-white md:h-auto md:w-auto md:static z-[99]`}
           >
