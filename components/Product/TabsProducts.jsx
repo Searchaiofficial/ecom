@@ -53,8 +53,7 @@ const Tabs = ({
   setSelectedOfferCategory,
   onPageChange,
   totalPages,
-  currentPage
-
+  currentPage,
 }) => {
   console.log({ filteredProductData });
   // console.log({ dimensions: filteredProductData[0].dimensions });
@@ -199,8 +198,8 @@ const Tabs = ({
   //   }, [filterData]);
 
   // >>>>>>> Stashed changes
-  const [selectedResult, setselectedResult] = useState(0)
-  const [clearSelectedResult, setClearSelectedResult] = useState(false)
+  const [selectedResult, setselectedResult] = useState(0);
+  const [clearSelectedResult, setClearSelectedResult] = useState(false);
   const handleColorChange = (color) => {
     console.log("Selected color:", color);
     // Filter products by color
@@ -208,8 +207,8 @@ const Tabs = ({
       return product.colors.includes(color);
     });
     setFilterdata(filteredProducts);
-    setClearSelectedResult(true)
-    setselectedResult(filteredProducts?.length)
+    setClearSelectedResult(true);
+    setselectedResult(filteredProducts?.length);
   };
 
   // >>>>>>> Stashed changes
@@ -227,8 +226,8 @@ const Tabs = ({
       return product.offer === offer;
     });
     setFilterdata(filteredProducts);
-    setClearSelectedResult(true)
-    setselectedResult(filteredProducts?.length)
+    setClearSelectedResult(true);
+    setselectedResult(filteredProducts?.length);
   };
 
   const handleDemandTypeChange = (demandType) => {
@@ -237,8 +236,8 @@ const Tabs = ({
       return product.demandtype === demandType;
     });
     setFilterdata(filteredProducts);
-    setClearSelectedResult(true)
-    setselectedResult(filteredProducts?.length)
+    setClearSelectedResult(true);
+    setselectedResult(filteredProducts?.length);
   };
 
   const [activeTab, setActiveTab] = useState("all");
@@ -261,7 +260,7 @@ const Tabs = ({
 
   const [openFilter, setOpenFilter] = useState("");
 
-  const handleFilterClick = (Filter) => { };
+  const handleFilterClick = (Filter) => {};
   const [openAllsort, setopenallsort] = useState(false);
   const handleAllsort = () => {
     setopenallsort(!openAllsort);
@@ -439,7 +438,8 @@ const Tabs = ({
     setOpenOffer(false);
   };
 
-  const commonClasses = "px-[24px] py-3 mr-2.5 rounded-full flex  whitespace-nowrap";
+  const commonClasses =
+    "px-[24px] py-3 mr-2.5 rounded-full flex  whitespace-nowrap";
 
   // logic for stikey
   useEffect(() => {
@@ -494,7 +494,7 @@ const Tabs = ({
       setFilterdata(filteredProductData);
     }
 
-    setselectedResult(filterer?.length)
+    setselectedResult(filterer?.length);
 
     // console.log(filterer);
   };
@@ -556,9 +556,9 @@ const Tabs = ({
   };
 
   // const [cartData, setCartData] = useState([]);
-  const cartData = useSelector(selecteddbItems)
+  const cartData = useSelector(selecteddbItems);
 
-  console.log(cartData)
+  console.log(cartData);
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -670,15 +670,15 @@ const Tabs = ({
 
   const handleRemoveallFilters = () => {
     setFilterdata(filteredProductData);
-    setOpenAll(false)
-    setselectedResult(0)
-    setClearSelectedResult(false)
+    setOpenAll(false);
+    setselectedResult(0);
+    setClearSelectedResult(false);
   };
 
   const handleViewResult = () => {
-    setOpenAll(false)
-    setselectedResult(0)
-  }
+    setOpenAll(false);
+    setselectedResult(0);
+  };
 
   const renderPaginationControls = () => {
     const pages = [];
@@ -686,8 +686,9 @@ const Tabs = ({
       pages.push(
         <button
           key={i}
-          className={`bg-gray-200 px-3 py-1 rounded ${currentPage === i ? "bg-gray-400" : ""
-            }`}
+          className={`bg-gray-200 px-3 py-1 rounded ${
+            currentPage === i ? "bg-gray-400" : ""
+          }`}
           onClick={() => onPageChange(i)}
         >
           {i}
@@ -975,8 +976,6 @@ const Tabs = ({
               />
             )}
 
-
-
           {filteredProductData?.length > 0 && (
             <button
               onClick={handleRemoveallFilters}
@@ -1052,49 +1051,48 @@ const Tabs = ({
           /> */}
           {/* >>>>>>> Stashed changes */}
 
-          {
-            filteredProductData &&
-            filteredProductData?.length > 0 && (
-              <div>
-                <button
-                  onClick={() => {
-                    handleAll();
-                    handleTabClick();
-                  }}
-                  className={`Tabbtn z-0 bg-gray-100
-                  ${openAll
+          {filteredProductData && filteredProductData?.length > 0 && (
+            <div>
+              <button
+                onClick={() => {
+                  handleAll();
+                  handleTabClick();
+                }}
+                className={`Tabbtn z-0 bg-gray-100
+                  ${
+                    openAll
                       ? `active-tabs  border border-black px-[24px] text-[14px] font-medium ${commonClasses}`
                       : `tabS  border border-white px-[24px] ${commonClasses} text-[14px] font-medium`
-                    }
-                  ${typeof window !== "undefined" && window.innerWidth <= 450
+                  }
+                  ${
+                    typeof window !== "undefined" && window.innerWidth <= 450
                       ? " justify-center px-[24px] text-[14px] font-medium"
                       : " justify-between px-[24px] text-[14px] font-medium"
-                    }
+                  }
                   `}
-                >
-                  All Filters &nbsp;
-                  <Image
-                    src="/icons/choserightfloor.svg"
-                    width={40}
-                    height={40}
-                    className={`w-4 h-4 mt-1  sm:block hidden
+              >
+                All Filters &nbsp;
+                <Image
+                  src="/icons/choserightfloor.svg"
+                  width={40}
+                  height={40}
+                  className={`w-4 h-4 mt-1  sm:block hidden
 
 
                 `}
-                    alt=""
-                  />
-                </button>
-
-              </div>
-            )
-          }
-
+                  alt=""
+                />
+              </button>
+            </div>
+          )}
         </div>
         <div>
           {openAll ? (
             <div className="menu-overlay z-[9999]  bg-white  border-2 fixed  sm:w-[30vw] w-[100vw] sm:h-[100vh] h-[80vh]  right-0  bottom-0 ">
               <div className="flex border-b py-4 mb-10 w-full items-center justify-center">
-                <p className="text-center text-[16px] text-[#111111] font-semibold">Filter and sort</p>
+                <p className="text-center text-[16px] text-[#111111] font-semibold">
+                  Filter and sort
+                </p>
 
                 <Image
                   className="absolute right-3 px-[2px]"
@@ -1107,8 +1105,6 @@ const Tabs = ({
               </div>
               <div className="menu-option bg-white  overflow-y-scroll mb-[20rem]  min-h-fit max-h-[50vh] md:max-h-[70vh]  pt-5  w-[100%]  border-slate-600 z-50">
                 <div className="flex flex-col gap-6 px-4">
-
-
                   <div className="flex flex-col gap-7">
                     <div
                       onClick={handleAllsort}
@@ -1128,14 +1124,13 @@ const Tabs = ({
                     </div>
                     {openAllsort ? (
                       <div className="flex flex-col gap-7">
-                        {srtarr.map((text, idx) => (
+                        {srtarr.map((text, idx) =>
                           renderSortItem(text, idx, handleSorting)
-                        ))}
+                        )}
                       </div>
                     ) : null}
                   </div>
                   <hr />
-
 
                   {/* <div className="flex flex-col gap-7">
                       <div
@@ -1185,9 +1180,7 @@ const Tabs = ({
                         </div>
                         {openAllCategory ? (
                           <div className="flex flex-col gap-7">
-
                             {categoryarr.map(rendercategory)}
-
                           </div>
                         ) : null}
                       </div>
@@ -1214,14 +1207,13 @@ const Tabs = ({
                     </div>
                     {openAllcolor ? (
                       <div className="flex flex-col gap-7">
-                        {allColors.map((text, idx) => (
+                        {allColors.map((text, idx) =>
                           renderColor(text, idx, handleColorChange)
-                        ))}
+                        )}
                       </div>
                     ) : null}
                   </div>
                   <hr />
-
 
                   {heading === "Wallpaper" ? (
                     <>
@@ -1271,9 +1263,9 @@ const Tabs = ({
                     </div>
                     {openAllDemandType ? (
                       <div className="flex flex-col gap-7">
-                        {allDemandType.map((text, idx) => (
+                        {allDemandType.map((text, idx) =>
                           renderDemand(text, idx, handleDemandTypeChange)
-                        ))}
+                        )}
                       </div>
                     ) : null}
                   </div>
@@ -1297,9 +1289,9 @@ const Tabs = ({
                     </div>
                     {openallOfferType ? (
                       <div className="flex flex-col gap-7">
-                        {allOffers.map((text, idx) => (
+                        {allOffers.map((text, idx) =>
                           renderOffer(text, idx, handleOfferChange)
-                        ))}
+                        )}
                       </div>
                     ) : null}
                   </div>
@@ -1352,15 +1344,24 @@ const Tabs = ({
                 </div>
               </div>
               <div className="flex bg-white z-50 flex-col absolute bottom-0 left-0 right-0 items-center justify-center gap-3 pt-3 px-4 pb-2">
-                <button onClick={handleViewResult} className="bg-black text-white w-full h-9 text-[14px] font-semibold rounded-full ">
+                <button
+                  onClick={handleViewResult}
+                  className="bg-black text-white w-full h-9 text-[14px] font-semibold rounded-full "
+                >
                   View {selectedResult}
                 </button>
-                <button onClick={handleRemoveallFilters} className={` ${clearSelectedResult ? "bg-white border-[1.5px] border-black" : "bg-[#929292] opacity-50"} text-[14px] font-semibold text-black  w-full h-9 rounded-full`}>
+                <button
+                  onClick={handleRemoveallFilters}
+                  className={` ${
+                    clearSelectedResult
+                      ? "bg-white border-[1.5px] border-black"
+                      : "bg-[#929292] opacity-50"
+                  } text-[14px] font-semibold text-black  w-full h-9 rounded-full`}
+                >
                   Clear all
                 </button>
               </div>
             </div>
-
           ) : null}
         </div>
         {/* iimages */}
@@ -1415,7 +1416,9 @@ const Tabs = ({
           <div className="self-center flex items-center  gap-2">
             {renderPaginationControls()}
           </div>
-          <Measure filteredProductData={filteredProductData} />
+          {filteredProductData?.length > 0 && (
+            <Measure category={filteredProductData[0].category} />
+          )}
           {/* <div className="main-image-pdt pt-[32px] grid sm:grid-cols-4 grid-cols-2 sm:gap-6 gap-0">
             {secondPart.map((text, idx) => (
               <div
