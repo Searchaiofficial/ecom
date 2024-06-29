@@ -368,7 +368,7 @@ function Card(props) {
                   width={30}
                   alt="arrow"
                   onClick={nextSlide}
-                  className="arrow arrow-right hover:opacity-[1.0]"
+                  className="arrow arrow-right hover:opacity-1"
                 // className="absolute filter drop-shadow-sm w-7 h-7 -mt-[13px] text-white opacity-85 group hover:cursor-pointer hover:opacity-100 hover:scale-104 hover:filter-drop-shadow-lg arrow-right"
                 />
               </div>

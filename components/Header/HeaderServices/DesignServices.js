@@ -14,7 +14,7 @@ const DesignServices = () => {
 
     return (
         <div className="container mx-auto h-[72vh]">
-            <header className="flex flex-col md:flex-row w-full h-full overflow-hidden">
+            <header className="flex flex-col md:flex-row w-full h-full overflow-hidden ">
                 <AsideBox services={services} onMouseEnter={handleMouseEnter} selectedService={selectedService} />
                 <div class="inline-block h-full min-h-[1em] w-[0.5px] self-stretch bg-[#e5e7eb]"></div>
                 <DisplayBox selectedService={selectedService} />
@@ -24,8 +24,8 @@ const DesignServices = () => {
 };
 
 const AsideBox = ({ services, onMouseEnter, selectedService }) => (
-    <aside className={`w-full md:w-1/4 lg:w-1/5 md:sticky md:top-0 h-full my-3`}>
-        <div className={`h-full overflow-y-auto  ${styles['services-scrollbar']}`}>
+    <aside className={`w-full md:w-1/4 lg:w-1/5 md:sticky md:top-0 h-full my-2 pb-4`}>
+        <div className={`h-full mb-2 pb-2 overflow-y-auto  ${styles['services-scrollbar']}`}>
             {services.map((service) => (
                 <div
                     key={service.id}

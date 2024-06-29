@@ -38,18 +38,7 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
     { title: "Flooring service", href: "#" },
     { title: "Kitchen Service", href: "#" },
     { title: "Room Decoration service", href: "#" },
-    { title: "Room Installation service", href: "#" },
-    { title: "Flooring service", href: "#" },
-    { title: "Kitchen Service", href: "#" },
-    { title: "Room Decoration service", href: "#" },
-    { title: "Room Installation service", href: "#" },
-    { title: "Flooring service", href: "#" },
-    { title: "Kitchen Service", href: "#" },
-    { title: "Room Decoration service", href: "#" },
-    { title: "Room Installation service", href: "#" },
-    { title: "Flooring service", href: "#" },
-    { title: "Kitchen Service", href: "#" },
-    { title: "Room Decoration service", href: "#" },
+
   ];
 
 
@@ -86,27 +75,35 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
               </div>
             ))}
           </div>
-            <div class="inline-block h-full w-[0.5px] self-stretch bg-[#e5e7eb]"></div>
-          <div className="w-[30%] p-2">
+          <div class="inline-block h-full w-[0.5px] self-stretch bg-[#e5e7eb]"></div>
+          <div className="w-[30%] p-2 border-l">
             <div className={`h-full ${styles['services-scrollbar']}`}>
               <ul>
                 {links.map((link, index) => (
-                  <li key={index} className="flex pb-4 border-gray-300 justify-between">
-                    <Link href={link.href} className="ftext-[14px] font-normal text-[#111111] lg:justify-start hover:underline">
+                  <Link
+                    href={link.href}
+                    className="text-sm font-semibold text-[#111111] hover:underline flex-1 "
+                  >
+                    <li
+                      key={index}
+                      className="flex items-center justify-between p-3 hover:bg-zinc-100"
+                    >
                       {link.title}
-                    </Link>
-                    <Image
-                      src="/icons/backarrowRevarce.svg"
-                      alt="right"
-                      width={15}
-                      height={15}
-                      className="w-[15px] h-[15px]"
-                    />
-                  </li>
+                      <Image
+                        src="/icons/backarrowRevarce.svg"
+                        alt="right"
+                        width={15}
+                        height={15}
+                        className="w-4 h-4"
+                      />
+                    </li>
+                  </Link>
+
                 ))}
               </ul>
             </div>
           </div>
+
         </div>
       )}
 
