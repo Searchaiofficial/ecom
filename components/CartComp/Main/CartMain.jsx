@@ -77,6 +77,8 @@ const CartMain = () => {
     fetchData();
   }, []);
 
+  console.log(cartdata)
+
   let totalPrice = 0;
 
   if (cartStatus === "succeeded" && selectedItems) {

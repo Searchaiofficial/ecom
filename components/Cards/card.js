@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import { selectQuantity, updateQuantity } from "../Features/Slices/calculationSlice";
 import { selecteddbItems, setDbItems } from "../Features/Slices/cartSlice";
+import ResponseCache from "next/dist/server/response-cache";
 
 function Card(props) {
   const dispatch = useDispatch();
@@ -267,6 +268,7 @@ function Card(props) {
       productId: props.id,
       quantity: 1
     })
+    console.log(response.data)
     if (response.status === 200) {
       setInCart(true)
       dispatch(setDbItems(response.data))
