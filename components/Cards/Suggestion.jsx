@@ -13,10 +13,13 @@ import { Pagination, Scrollbar, Mousewheel, FreeMode } from "swiper/modules";
 
 import SuggestionCard from "./SuggestionCard";
 import { useSelector, useDispatch } from "react-redux";
-import { selectBlogCardData } from "../Features/Slices/blogCardSlice";
+import { selectBlogCardData, selectBlogCardStatus } from "../Features/Slices/blogCardSlice";
 
 const Suggestion = () => {
   const blogCardData = useSelector(selectBlogCardData);
+  const blogCardStatus = useSelector(selectBlogCardStatus)
+  console.log(blogCardData, "blogCardData")
+  console.log(blogCardStatus, "blogCardStatus")
   const dispatch = useDispatch();
 
   const backgroundColors = [
@@ -29,16 +32,34 @@ const Suggestion = () => {
     "bg-[#FFF6EB]",
   ];
 
-  const [suggestionSlider, setSuggestionSlider] = useState([]);
+  // useEffect(() => {
+  //   console.log('suggestion')
+  //   if (blogCardData.length === 0) {
+  //     dispatch({ type: "FETCH_BLOG_CARD_DATA", payload: "blogCard" });
+  //   }
+
+
+
+  // prevent infinite loop
 
   useEffect(() => {
-    if (blogCardData.length === 0) {
+    console.log('suggestion')
+    if (blogCardStatus === "idle" || blogCardStatus === "failed") {
       dispatch({ type: "FETCH_BLOG_CARD_DATA", payload: "blogCard" });
     }
-    if (blogCardData) {
-      setSuggestionSlider(blogCardData);
-    }
-  }, [blogCardData]);
+  }
+  , [blogCardData]);
+
+  // useEffect(() => {
+  //   console.log('suggestion')
+  //   if (blogCardData.length === 0) {
+  //     dispatch({ type: "FETCH_BLOG_CARD_DATA", payload: "blogCard" });
+  //   }
+  //   if (blogCardData) {
+  //     setSuggestionSlider(blogCardData);
+  //   }
+    
+  // }, [blogCardData]);
 
   const swiperOptions2 = {
     slidesPerView: 4.08,
@@ -61,7 +82,7 @@ const Suggestion = () => {
       <div className="pt-12 mb-20  bg-white sm:pl-[50px]  pl-[20px]  lg:pl-[67px]">
         <div className="mb-2 w-full flex justify-between items-center">
           <h2 className="font-semibold text-2xl py-[15px]">
-            {suggestionSlider && suggestionSlider.length === 0
+            {blogCardData && blogCardData.length === 0
               ? "Inspiration and suggestion"
               : "Inspiration and suggestion"}
           </h2>
@@ -113,12 +134,12 @@ const Suggestion = () => {
           // onSwiper={setSwiperRef}
           className="px-10 min-h-[600px] lg:min-h-[750px]"
         >
-          {!suggestionSlider ? (
+          {!blogCardData ? (
             <SwiperSlide>
               <div className="flex"></div>
             </SwiperSlide>
           ) : (
-            suggestionSlider.map((suggestion, idx) => {
+            blogCardData.map((suggestion, idx) => {
               return (
                 <SwiperSlide key={idx} className="ml-0">
                   <div className="">
