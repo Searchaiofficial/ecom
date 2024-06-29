@@ -3,9 +3,10 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSocket } from "@/providers/SocketProvider";
 import axios from "axios";
+import Image from "next/image";
 
-const LiveRoom = ({ user }) => {
-  const { email, displayName, image } = user;
+const LiveRoom = ({ userInfo }) => {
+  // const { email, displayName, image } = user;
   const router = useRouter();
 
   const socket = useSocket();
@@ -16,13 +17,14 @@ const LiveRoom = ({ user }) => {
     setOptionClick(option);
   };
 
-  
   const [selectedCategory, setSelectedCategory] = useState({});
   const [categories, setCategories] = useState([]);
 
   const getCategories = async () => {
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/categories`);
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/categories`
+      );
       return response.data;
     } catch (error) {
       console.log(error.message);
@@ -43,23 +45,33 @@ const LiveRoom = ({ user }) => {
     });
   }, []);
 
-  // const [userData, setUserData] = useState({ name: "", mobile: "" });
-
-  // const handleOnChange = (e) => {
-  //   setUserData({ ...userData, [e.target.name]: e.target.value });
-  // };
-
   const [message, setMessage] = useState({ status: null, text: "" });
 
   const requestJoin = () => {
     if (socket) {
-      socket.emit("request_join", { email, displayName, image, category : selectedCategory.name });
+      socket.emit("request_join", {
+        email: userInfo.user.email,
+        displayName: userInfo.user.displayName,
+        image: userInfo.user.image,
+        category: selectedCategory.name,
+      });
       setMessage({ status: "pending", text: "Waiting for response..." });
     }
   };
 
+  const handleGoogleLogin = async () => {
+    try {
+      window.open(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/google?returnTo=liveroom`,
+        "_self"
+      );
+    } catch (error) {
+      console.error("Error initiating Google OAuth:", error);
+    }
+  };
+
   useEffect(() => {
-    if (socket) {
+    if (socket && userInfo && userInfo.isAuthenticated) {
       socket.on("join_accepted", ({ roomId }) => {
         setMessage({
           status: "accepted",
@@ -84,86 +96,96 @@ const LiveRoom = ({ user }) => {
       </div>
 
       <div className=" fixed h-full w-screen  bg-black/80 z-[9999] backdrop:blur-sm top-0 left-0">
-        <section className="pt-[15vh] text-black bg-white flex-col absolute right-0 top-0 h-screen p-8 gap-8 z-50  w-[30%] flex ">
-          <div className="flex justify-around text-lg font-medium">
-            <h1
-              className={`border-b-2 cursor-pointer ${
-                optionClick === "Instant Meeting"
-                  ? "border-black"
-                  : "border-transparent"
-              }`}
-              onClick={() => handleSwitchOption("Instant Meeting")}
-            >
-              Instant Meeting
-            </h1>
-            <h1
-              className={`border-b-2 cursor-pointer ${
-                optionClick === "Schedule Meeting"
-                  ? "border-black"
-                  : "border-transparent"
-              }`}
-              onClick={() => handleSwitchOption("Schedule Meeting")}
-            >
-              Schedule Meeting
-            </h1>
-          </div>
-
-          {optionClick === "Instant Meeting" && (
-            <div>
-              {/* <div className="">
-                <h1 className="text-lg font-semibold">Enter Name</h1>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="john doe"
-                  className="w-full mt-2 h-10 border-1 bg-gray-100 px-4 rounded-full py-2 focus:outline-none"
-                  onChange={handleOnChange}
+        <section className=" pt-[15vh] text-black bg-white absolute right-0 top-0 h-screen p-8 z-50 w-[90%]  sm:w-[30%]  ">
+          {userInfo && userInfo.isAuthenticated ? (
+            <div className="flex flex-col gap-8">
+              <div className="absolute left-4 top-2  flex gap-4 items-center">
+                <img
+                  className="object-cover w-12 h-12 rounded-full"
+                  src={userInfo.user.image}
+                  alt="Profile"
                 />
+                <div>
+                  <h1 className="text-sm font-semibold">{userInfo.user.displayName}</h1>
+                  <p className="text-xs text-gray-500">{userInfo.user.email}</p>
+                  
+                </div>
               </div>
-
-              <div className="mt-2">
-                <h1 className="text-lg font-semibold">Mobile no.</h1>
-                <input
-                  type="number"
-                  placeholder="9876543210"
-                  name="mobile"
-                  className="w-full mt-2 h-10 border-1 bg-gray-100  rounded-full px-4 py-2 focus:outline-none"
-                  onChange={handleOnChange}
-                />
-              </div> */}
-
-              <div className="flex flex-col gap-2">
-                <label className="font-medium text-sm">Select Category</label>
-                <select
-                  // defaultValue={initialValue}
-                  className="w-full border rounded-lg p-2"
-                  onChange={(e) => {
-                    const selectedCategory = categories.find(
-                      (category) => category._id === e.target.value
-                    );
-
-                    setSelectedCategory(selectedCategory);
-                  }}
+              <div className="flex justify-around text-lg font-medium">
+                <h1
+                  className={`text-sm sm:text-base border-b-2 cursor-pointer ${
+                    optionClick === "Instant Meeting"
+                      ? "border-black"
+                      : "border-transparent"
+                  }`}
+                  onClick={() => handleSwitchOption("Instant Meeting")}
                 >
-                  <option value="">Select Category</option>
-                  {categories.map((category) => (
-                    <option key={category._id} value={category._id}>
-                      {category.name}
-                    </option>
-                  ))}
-                </select>
+                  Instant Meeting
+                </h1>
+                <h1
+                  className={`text-sm  sm:text-base border-b-2 cursor-pointer ${
+                    optionClick === "Schedule Meeting"
+                      ? "border-black"
+                      : "border-transparent"
+                  }`}
+                  onClick={() => handleSwitchOption("Schedule Meeting")}
+                >
+                  Schedule Meeting
+                </h1>
               </div>
 
-              <button
-                className="bg-black text-white w-full h-10 rounded-full mt-4"
-                onClick={requestJoin}
-              >
-                Join
-              </button>
+              {optionClick === "Instant Meeting" && (
+                <div>
+                  <div className="flex flex-col gap-2">
+                    <label className="font-medium text-sm">
+                      Select Category
+                    </label>
+                    <select
+                      className="w-full border rounded-lg p-2"
+                      onChange={(e) => {
+                        const selectedCategory = categories.find(
+                          (category) => category._id === e.target.value
+                        );
 
-              {message.status && (
-                <p className="mt-4 text-center text-sm">{message.text}</p>
+                        setSelectedCategory(selectedCategory);
+                      }}
+                    >
+                      <option value="">Select Category</option>
+                      {categories.map((category) => (
+                        <option key={category._id} value={category._id}>
+                          {category.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <button
+                    className="bg-black text-white w-full h-10 rounded-full mt-4"
+                    onClick={requestJoin}
+                  >
+                    Join
+                  </button>
+
+                  {message.status && (
+                    <p className="mt-4 text-center text-sm">{message.text}</p>
+                  )}
+                </div>
               )}
+            </div>
+          ) : (
+            <div className="sm:block mt-[40px] flex ">
+              <button
+                onClick={handleGoogleLogin}
+                className="border-2 text-black border-solid  w-[100%] sm:h-14 h-8 gap-[5px] rounded-full  transition duration-300 font-semibold flex items-center justify-center my-[15px]"
+              >
+                <Image
+                  src="/icons/googlelogin.svg"
+                  width={20}
+                  height={20}
+                  alt="up"
+                />
+                Login with Google
+              </button>
             </div>
           )}
         </section>
