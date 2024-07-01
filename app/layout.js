@@ -53,6 +53,7 @@ export const metadata = {
       "en-US": "/en-US",
     },
   },
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({ children }) {
