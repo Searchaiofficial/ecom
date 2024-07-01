@@ -156,19 +156,23 @@ const Reviews = ({ productId, data }) => {
   }, [productId]);
 
   const addReview = async (newReview) => {
+
+    const formData = new FormData();
+    formData.append("productId", productId);
+    formData.append("name", user.displayName);
+    formData.append("userEmail", user.email);
+    formData.append("rating", newReview.rating);
+    formData.append("comment", newReview.comment);
+    formData.append("profilePic", user.image);
+    newReview.images.forEach((image) => {
+      formData.append("image", image);
+    });
+
     if (isAuthenticated) {
       try {
         const response = await axios.post(
           `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/createReview`,
-          {
-            productId: productId,
-            name: user.displayName,
-            userEmail: user.email,
-            rating: newReview.rating,
-            comment: newReview.comment,
-            profilePic: user.image,
-            image: newReview.images,
-          }
+          formData
         );
         console.log(response.data);
         fetchReviews();
@@ -268,13 +272,13 @@ const Reviews = ({ productId, data }) => {
           style={{ overflowX: "hidden" }}
         >
           {reviews.map((review, index) => (
-            <div key={index} className="sm:mr-12 m-0 sm:block ">
+            <div key={index} className="sm:mr-12 mb-8 m-0 sm:block ">
               <div className="flex justify-between">
                 <div className="review-header flex items-center">
                   <div className="w-[48px] h-[48px] mr-4">
                     <img
                       className="w-full h-full rounded-full object-cover"
-                      src={review.image}
+                      src={review.profilePic}
                       alt="User Avatar"
                     />
                   </div>
@@ -283,7 +287,7 @@ const Reviews = ({ productId, data }) => {
                       {review.name}
                     </span>
                     <span className="font-normal text-[14px] text-gray-500">
-                      {review.location}
+                      {/* {review.location} */}
                     </span>
                   </div>
                 </div>
@@ -306,12 +310,12 @@ const Reviews = ({ productId, data }) => {
                   />
                 ))}
                 <span className="text-sm font-semibold ml-2">
-                  {review.date}
+                  {Date(review.createdAt).slice(0, 15)}
                 </span>
               </div>
 
               <div className="review mt-2">
-                <p className="text-gray-600 font-[16px] leading-6 mb-6 sm:w-auto text-left w-[100%]">
+                <p className="text-gray-600 font-[16px] leading-6  sm:w-auto text-left w-[100%]">
                   {review.showFullComment
                     ? review.comment
                     : `${review.comment.slice(0, 80)}...`}
@@ -325,6 +329,21 @@ const Reviews = ({ productId, data }) => {
                   )}
                 </p>
               </div>
+              
+              {
+                review.images.length > 0 && (
+                  <div className="flex gap-2 mb-4">
+                    {review.images.map((image, index) => (
+                      <img
+                        key={index}
+                        src={image}
+                        alt="review"
+                        className="w-[100px] h-[100px] object-cover"
+                      />
+                    ))}
+                  </div>
+                )
+              }
             </div>
           ))}
         </div>
@@ -337,7 +356,7 @@ const Reviews = ({ productId, data }) => {
             {!isReview ? (
               <>
                 <button onClick={() => handleReview()}>
-                  <h2 className="text-xl font-bold mb-4">Add Review</h2>
+                  <h2 className="text-xl font-bold my-4">Add Review</h2>
                 </button>
               </>
             ) : (
