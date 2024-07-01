@@ -44,10 +44,10 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
 
   return (
     <div
-      className="bg-white parent min-h-fit px-4 w-full border-t"
+      className="bg-white parent min-h-fit px-4 w-full border-t border-solid border-[#f5f5f5]"
     >
       {hoveredIndex === 3 && (
-        <div className="flex max-h-[72vh]">
+        <div className="flex max-h-[72vh] pt-[32px] pb-[48px]">
           <div className={`grid grid-cols-4 w-[70%] overflow-y-auto my-2 ${styles['services-scrollbar']}`}>
             {roomOptions.map((data, index) => (
               <div className="bg-white parent group" onClick={handleClick} key={index}>
@@ -75,19 +75,16 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
               </div>
             ))}
           </div>
-          <div class="inline-block h-full w-[0.5px] self-stretch bg-[#e5e7eb]"></div>
-          <div className="w-[30%] p-2 border-l">
+          <div className="w-[30%]">
             <div className={`h-full ${styles['services-scrollbar']}`}>
               <ul>
                 {links.map((link, index) => (
                   <Link
                     href={link.href}
-                    className="text-sm font-semibold text-[#111111] hover:underline flex-1 "
+                    key={index}
+                    className="text-[16px] font-semibold text-[#111111] hover:underline flex-1"
                   >
-                    <li
-                      key={index}
-                      className="flex items-center justify-between p-3 hover:bg-zinc-100"
-                    >
+                    <li className="flex items-center justify-between p-3 hover:bg-zinc-100">
                       {link.title}
                       <Image
                         src="/icons/backarrowRevarce.svg"
@@ -98,13 +95,12 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
                       />
                     </li>
                   </Link>
-
                 ))}
               </ul>
             </div>
           </div>
-
         </div>
+
       )}
 
 

@@ -16,7 +16,7 @@ const DesignServices = () => {
         <div className="container mx-auto h-[72vh]">
             <header className="flex flex-col md:flex-row w-full h-full overflow-hidden ">
                 <AsideBox services={services} onMouseEnter={handleMouseEnter} selectedService={selectedService} />
-                <div class="inline-block h-full min-h-[1em] w-[0.5px] self-stretch bg-[#e5e7eb]"></div>
+                <div class="inline-block h-full min-h-[1em] w-[0.5px] self-stretch bg-[#f5f5f5] "></div>
                 <DisplayBox selectedService={selectedService} />
             </header>
         </div>

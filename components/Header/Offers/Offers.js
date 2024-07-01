@@ -33,7 +33,7 @@ const OfferSection = () => {
         <div className="container mx-auto h-[50vh]">
             <header className="flex flex-col md:flex-row w-full h-full overflow-hidden">
                 <OfferAsideBox offers={allOffers} onMouseEnter={handleMouseEnter} selectedOffer={selectedOffer} />
-                <div class="inline-block h-full min-h-[1em] w-[0.5px] self-stretch bg-[#e5e7eb]"></div>
+                <div class="inline-block h-full min-h-[1em] w-[0.5px] self-stretch bg-[#f5f5f5]"></div>
                 {selectedOffer && <OfferDisplayBox selectedOffer={selectedOffer} />}
             </header>
         </div>

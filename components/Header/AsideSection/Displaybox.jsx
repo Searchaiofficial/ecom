@@ -54,7 +54,7 @@ const Displaybox = (props) => {
   // };
 
   return (
-    <main className="w-full noto-sans-200 h-full border-l px-4">
+    <main className="w-full noto-sans-200 h-full border-l px-4 border-solid border-[#f5f5f5]">
       <h1 className="lg:text-[14px] text-[18px] py-4 px-2 mb-2 font-semibold w-full">
         {props.data?.name}
       </h1>
