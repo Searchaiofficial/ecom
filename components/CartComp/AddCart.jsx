@@ -346,7 +346,7 @@ const AddCart = () => {
             <Emptycart />
           </>
         )}
-        {cartdata && (
+        {cartdata && cartdata?.items?.length > 0 && (
           <div className="right-cart flex flex-col sm:w-1/3 w-[90vw] p-4 ">
             <h1 className="text-xl font-semibold mb-6">
               Order Summary

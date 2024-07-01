@@ -47,7 +47,7 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
       className="bg-white parent min-h-fit px-4 w-full border-t border-solid border-[#f5f5f5]"
     >
       {hoveredIndex === 3 && (
-        <div className="flex max-h-[72vh] pt-[32px] pb-[48px]">
+        <div className="flex max-h-[72vh]">
           <div className={`grid grid-cols-4 w-[70%] overflow-y-auto my-2 ${styles['services-scrollbar']}`}>
             {roomOptions.map((data, index) => (
               <div className="bg-white parent group" onClick={handleClick} key={index}>
@@ -75,25 +75,26 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
               </div>
             ))}
           </div>
-          <div className="w-[30%]">
-            <div className={`h-full ${styles['services-scrollbar']}`}>
+          <div className="inline-block h-full w-[0.5px] self-stretch bg-[#e5e7eb]"></div>
+          <div className="w-[30%] ">
+            <div className={`h-full ${styles['services-scrollbar']} pt-8 pb-12`}>
               <ul>
                 {links.map((link, index) => (
                   <Link
                     href={link.href}
                     key={index}
-                    className="text-[16px] font-semibold text-[#111111] hover:underline flex-1"
+                    className="flex items-center justify-between flex-1 hover:underline hover:bg-zinc-100 mx-5"
                   >
-                    <li className="flex items-center justify-between p-3 hover:bg-zinc-100">
+                    <li className="text-md font-semibold text-[#111111] p-3 ">
                       {link.title}
-                      <Image
-                        src="/icons/backarrowRevarce.svg"
-                        alt="right"
-                        width={15}
-                        height={15}
-                        className="w-4 h-4"
-                      />
                     </li>
+                    <Image
+                      src="/icons/backarrowRevarce.svg"
+                      alt="right"
+                      width={10}
+                      height={10}
+                      className="w-4 h-4 mr-4"
+                    />
                   </Link>
                 ))}
               </ul>
@@ -164,7 +165,7 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
           <Offers />
         )}
       </div>
-    </div>
+    </div >
   );
 };
 

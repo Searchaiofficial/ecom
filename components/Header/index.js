@@ -304,7 +304,7 @@ function Header({ setIsHeaderMounted }) {
         {!searchQuery ? (
           <>
             <div
-              className={`${isScrolled ? " border-b-[0.5px] border-slate-200" : ""
+              className={`${isScrolled ? " border-b-[0.5px] border-[#f5f5f5]" : ""
                 } flex flex-row justify-between z-[99999px] items-center sm:px-[20px] px-[20px] h-[60px]`}
             >
               {/* main-logo */}

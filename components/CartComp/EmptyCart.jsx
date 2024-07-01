@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Emptycart() {
     return (
-        <div className="flex flex-col md:flex-row items-center justify-center md:justify-between p-4 md:p-8">
+        <div className="flex flex-col md:flex-row items-center justify-center md:justify-between">
             <div className="order-1 md:order-2 mt-6 md:mt-0 md:ml-8 w-full md:w-1/2 lg:w-1/2">
                 <Image
                     src="/images/empty_bag.jpg"
