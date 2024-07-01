@@ -85,7 +85,6 @@
   width: 2rem;
   height: 2rem;
   color: white;
-  opacity: 25%;
 }
 
 .card:hover .arrow {
@@ -94,7 +93,6 @@
   width: 2rem;
   height: 2rem;
   color: white;
-  opacity: 60%;
 }
 
 .arrow:hover {

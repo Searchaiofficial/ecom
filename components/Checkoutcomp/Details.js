@@ -736,7 +736,7 @@ const Details = () => {
                 </svg>
               </span>
               <div className="text-black underline">
-                60 days and additional 30-day returns with IKEA Family
+                60 days and additional 30-day returns with Ayatrio Family
               </div>
             </div>
 

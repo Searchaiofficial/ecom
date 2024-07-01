@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import { selectQuantity, updateQuantity } from "../Features/Slices/calculationSlice";
 import { selecteddbItems, setDbItems } from "../Features/Slices/cartSlice";
+import ResponseCache from "next/dist/server/response-cache";
 
 function Card(props) {
   const dispatch = useDispatch();
@@ -267,6 +268,7 @@ function Card(props) {
       productId: props.id,
       quantity: 1
     })
+    console.log(response.data)
     if (response.status === 200) {
       setInCart(true)
       dispatch(setDbItems(response.data))
@@ -368,7 +370,7 @@ function Card(props) {
                   width={30}
                   alt="arrow"
                   onClick={nextSlide}
-                  className="arrow arrow-right hover:opacity-[1.0]"
+                  className="arrow arrow-right hover:opacity-1"
                 // className="absolute filter drop-shadow-sm w-7 h-7 -mt-[13px] text-white opacity-85 group hover:cursor-pointer hover:opacity-100 hover:scale-104 hover:filter-drop-shadow-lg arrow-right"
                 />
               </div>
@@ -503,7 +505,7 @@ function Card(props) {
                           {
                             colorImage === item.image ||
                               (index === 0 && colorImage === "") ? (
-                              <div className="w-[100%] h-[4px] bg-black mt-[50px]" />
+                              <div className="w-[100%] h-[2px] bg-black mt-[50px]" />
                             ) : ""
                           }
 

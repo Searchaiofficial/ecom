@@ -128,6 +128,18 @@ const nextConfig = withPWA({
         protocol: "https",
         hostname: "bolt-gcdn.sc-cdn.net",
       },
+      {
+        protocol: "https",
+        hostname: "scontent-sin6-3.cdninstagram.com",
+      },
+      {
+        protocol: "https",
+        hostname: "scontent-sin6-4.cdninstagram.com",
+      },
+      {
+        protocol: "https",
+        hostname: "scontent-sin6-1.cdninstagram.com",
+      },
     ],
     // domains: ["images.unsplash.com"],
   },

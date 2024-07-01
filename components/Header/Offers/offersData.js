@@ -13,13 +13,13 @@ const allOffers = [
     },
     {
         id: 2,
-        type: 'IKEA Family Offer',
-        description: 'Special discounts for IKEA Family members.',
+        type: 'Ayatrio Family Offer',
+        description: 'Special discounts for Ayatrio Family members.',
         details: [
             {
-                title: 'IKEA Family Offer',
-                link: '/offers/ikea-family',
-                image: '/images/ikea-family.jpg',
+                title: 'Ayatrio Family Offer',
+                link: '/offers/Ayatrio-family',
+                image: '/images/Ayatrio-family.jpg',
             },
         ],
     },

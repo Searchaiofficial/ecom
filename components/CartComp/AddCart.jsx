@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectRoomData } from "../Features/Slices/roomSlice";
 import { selectQuantity, updateQuantity } from "../Features/Slices/calculationSlice";
-import { setDbItems } from "../Features/Slices/cartSlice";
+import { selecteddbItems, setDbItems } from "../Features/Slices/cartSlice";
 import Link from "next/link";
 import axios from "axios";
 import Emptycart from "./EmptyCart";
@@ -16,43 +16,47 @@ const AddCart = () => {
   const roomData = useSelector(selectRoomData);
   console.log(roomData);
   const quantity = useSelector(selectQuantity);
-  const [cartdata, setcartdata] = useState("");
+  // const [cartdata, setcartdata] = useState("");
   const [cartStatus, setCartStaus] = useState("");
   const dbItems = useSelector((state) => state.cart.dbItems);
+
+  const cartdata = useSelector(selecteddbItems)
+  // console.log(cartdata)
+  // console.log()
 
   let id;
   if (typeof window !== "undefined") {
     id = localStorage.getItem("deviceId");
     console.log(id);
   }
-  const fetchData = async () => {
-    try {
-      setCartStaus("loading");
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
-        {
-          params: {
-            deviceId: id,
-          },
-        }
-      );
-      if (response.status !== 200) {
-        throw new Error("HTTP status " + response.status);
-      }
-      const data = response.data;
-      setcartdata(data);
-      setCartStaus("succeeded");
-      console.log(data)
-      dispatch(setDbItems(data));
-    } catch (error) {
-      setCartStaus("failed");
-    }
-  };
+  // const fetchData = async () => {
+  //   try {
+  //     setCartStaus("loading");
+  //     const response = await axios.get(
+  //       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
+  //       {
+  //         params: {
+  //           deviceId: id,
+  //         },
+  //       }
+  //     );
+  //     if (response.status !== 200) {
+  //       throw new Error("HTTP status " + response.status);
+  //     }
+  //     const data = response.data;
+  //     setcartdata(data);
+  //     setCartStaus("succeeded");
+  //     console.log(data)
+  //     dispatch(setDbItems(data));
+  //   } catch (error) {
+  //     setCartStaus("failed");
+  //   }
+  // };
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    fetchData();
-  }, [dispatch]);
+  //   // fetchData();
+  // }, [dispatch]);
 
   useEffect(() => {
     console.log("Updated cartdata", cartdata);
@@ -187,7 +191,8 @@ const AddCart = () => {
       console.log(response.data)
       if (response.status === 200) {
         setCartStaus("succeeded");
-        fetchData();
+        // console.log(responce.data)
+        // fetchData();
         // dispatch(setDbItems(response.data));
         dispatch(setDbItems(response.data));
       }
@@ -207,8 +212,9 @@ const AddCart = () => {
     try {
       const response = await axios.put(postUrl, postData);
       if (response.status === 200) {
-        fetchData();
+        // fetchData();
         setCartStaus("succeeded");
+        dispatch(setDbItems(response.data));
       }
 
       // Reload cart data after updating quantity in the database
@@ -244,8 +250,9 @@ const AddCart = () => {
     try {
       const response = await axios.post(postUrl, postData);
       if (response.status === 200) {
-        fetchData();
+        // fetchData();
         setCartStaus("succeeded");
+        dispatch(setDbItems(response.data));
       }
       // Reload cart data after updating quantity in the database
     } catch (error) {
@@ -282,7 +289,8 @@ const AddCart = () => {
       console.log(response.data)
       if (response.status === 200) {
 
-        fetchData();
+        // fetchData();
+        dispatch(setDbItems(response.data));
         // setcartdata(response.data)
         setCartStaus("succeeded");
       }
@@ -312,9 +320,9 @@ const AddCart = () => {
   return (
     <div className="px-[67px]">
       <div className="main-cart flex  sm:flex-row flex-col justify-between gap-10  sm:items-start items-center min-h-screen relative top-32 pb-20">
-        {cartStatus === "loading" && <p>Loading...</p>}
-        {cartStatus === "failed" && <p>Error loading data from DB.</p>}
-        {cartStatus === "succeeded" && cartdata ? (
+        {/* {cartStatus === "loading" && <p>Loading...</p>}
+        {cartStatus === "failed" && <p>Error loading data from DB.</p>} */}
+        {cartdata && cartdata?.items?.length > 0 ? (
           <div className="flex-1">
             <h1 className="text-xl font-semibold mb-6">Bag</h1>
             {cartdata && cartdata.items && cartdata.items.map((item) => (
@@ -338,7 +346,7 @@ const AddCart = () => {
             <Emptycart />
           </>
         )}
-        {cartStatus === "succeeded" && cartdata && (
+        {cartdata && (
           <div className="right-cart flex flex-col sm:w-1/3 w-[90vw] p-4 ">
             <h1 className="text-xl font-semibold mb-6">
               Order Summary

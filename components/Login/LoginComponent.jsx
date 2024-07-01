@@ -43,7 +43,7 @@ const LoginComponent = () => {
   const handleGoogleLogin = async () => {
     try {
       window.open(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/google/callback`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/google`,
         "_self"
       );
     } catch (error) {
@@ -154,7 +154,6 @@ const LoginComponent = () => {
                     height={20}
                     alt="up"
                   />
-                  {/* <Google className="mr-2" /> */}
                   Login with Google
                 </button>
               </div>
