@@ -43,6 +43,18 @@ const page = async ({ params }) => {
             },
           },
         ]}
+        reviews={response.data?.ratings.map((review) => {
+          return {
+            author: review.name,
+            name: review.comment,
+            reviewBody: review.comment,
+            reviewRating: {
+              bestRating: "5",
+              ratingValue: review.rating,
+              worstRating: "1",
+            },
+          };
+        })}
       />
       <BreadcrumbJsonLd
         useAppDir={true}
