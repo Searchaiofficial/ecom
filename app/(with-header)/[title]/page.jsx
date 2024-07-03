@@ -20,7 +20,7 @@ const page = async ({ params }) => {
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getSingleProduct?title=${params.title}`
   );
 
-  const productImages = response.data.proudctImages;
+  const productImages = response.data?.images;
 
   return (
     <>
@@ -37,9 +37,9 @@ const page = async ({ params }) => {
             priceValidUntil: response.data?.specialprice?.endDate,
             itemCondition: "https://schema.org/NewCondition",
             availability: "https://schema.org/InStock",
-            url: `https://www.ayatrio.com/product/${params.title}`,
+            url: `https://www.ayatrio.com/${params.title}`,
             seller: {
-              name: "Ayatrio",
+              name: response.data?.seller || "Ayatrio",
             },
           },
         ]}
@@ -66,13 +66,8 @@ const page = async ({ params }) => {
           },
           {
             position: 2,
-            name: "Product",
-            item: "https://www.ayatrio.com/product",
-          },
-          {
-            position: 3,
-            name: params.title,
-            item: `https://www.ayatrio.com/product/${params.title}`,
+            name: response.data?.productTitle || params.title,
+            item: `https://www.ayatrio.com/${params.title}`,
           },
         ]}
       />

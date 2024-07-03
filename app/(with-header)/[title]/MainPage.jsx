@@ -3,7 +3,7 @@ import Card from "@/components/Room/Other/Card";
 import Reviews from "@/components/Room/Other/Reviews";
 import RoomImageList from "@/components/Room/RoomImageList";
 import RoomInfo from "@/components/Room/RoomInfo";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ImageCaresoul from "@/components/Room/imagecaresoul";
 import { useDispatch, useSelector } from "react-redux";
 import {
