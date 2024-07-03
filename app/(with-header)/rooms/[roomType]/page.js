@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const generateMetadata = async ({ params }) => {
   const response = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getRoomByQuery`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getRoommain`,
     {
       params: {
         roomType: params.roomType.replace(/-/g, " "),
