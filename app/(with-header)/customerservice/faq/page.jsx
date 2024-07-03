@@ -41,7 +41,7 @@ const FaqPage = () => {
                     width={750}
                     height={433}
                     src={curElement.image}
-                    alt=""/>
+                    alt={curElement.text}/>
                     <p>{curElement.text}</p>
                   </div>
                 );

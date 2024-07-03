@@ -222,9 +222,8 @@ function TabsProductCard(props) {
         <div className="relative z[-999999] w-fit">
           <div
             onClick={(event) => event.stopPropagation()}
-            className={`flex justify-between text-black   checkbox-div absolute top-0 right-0 z-10 ${
-              props.selectedpdt.includes(props.text) ? "visible" : ""
-            }`}
+            className={`flex justify-between text-black   checkbox-div absolute top-0 right-0 z-10 ${props.selectedpdt.includes(props.text) ? "visible" : ""
+              }`}
           >
             <input
               type="checkbox"
@@ -288,10 +287,10 @@ function TabsProductCard(props) {
                       isHovered
                         ? props.images[1]
                         : colorImage
-                        ? colorImage
-                        : item
+                          ? colorImage
+                          : item
                     }
-                    alt="NA"
+                    alt={props.productTitle}
                     key={idx}
                     height={300}
                     width={300}
@@ -309,7 +308,7 @@ function TabsProductCard(props) {
                   src="/icons/rightarrow-w.svg"
                   height={20}
                   width={20}
-                  alt="arrow"
+                  alt="arrow icon"
                   onClick={nextSlide}
                   className="arrow arrow-right hover:opacity-100"
                 />
@@ -351,30 +350,28 @@ function TabsProductCard(props) {
                   {props.demandtype}
                 </p>
               )}
-              <div
-                className={` text-[14px] font-semibold ${
-                  props.demandtype === "Ayatrio Member Favorite" ? "" : ""
-                }`}
+              <h2
+                className={` text-[14px] font-semibold ${props.demandtype === "Ayatrio Member Favorite" ? "" : ""
+                  }`}
               >
                 {props.productTitle}
-              </div>
+              </h2>
             </div>
           </div>
           {/* <p className="text-sm">{props.productDescription}</p> */}
-          <div className=" font-normal mb-1 text-[14px] py-[2px] font-[400px]">
+          <p className="font-normal mb-1 text-[14px] py-[2px]">
             {props?.shortDescription}
-          </div>
+          </p>
 
           {props.productType === "normal" ? (
             <>
               <div className=" flex h-[40px] pb-[6px] items-center justify-between mt-2">
                 <div className="flex gap-1 items-end">
                   <h2
-                    className={`text-3xl flex font-semibold leading-[0.5]  tracking-wide ${
-                      props?.specialprice?.price
-                        ? "bg-[#FFC21F] px-2 pt-3 pb-1 w-fit shadow-lg"
-                        : ""
-                    } `}
+                    className={`text-3xl flex font-semibold leading-[0.5]  tracking-wide ${props?.specialprice?.price
+                      ? "bg-[#FFC21F] px-2 pt-3 pb-1 w-fit shadow-lg"
+                      : ""
+                      } `}
                     style={
                       props?.specialprice?.price
                         ? { boxShadow: "3px 3px #C31952" }
@@ -382,9 +379,8 @@ function TabsProductCard(props) {
                     }
                   >
                     <span
-                      className={`text-sm ${
-                        props?.specialprice?.price ? "" : "pt-3.5"
-                      }`}
+                      className={`text-sm ${props?.specialprice?.price ? "" : "pt-3.5"
+                        }`}
                     >
                       Rs. &nbsp;
                     </span>{" "}
@@ -410,6 +406,7 @@ function TabsProductCard(props) {
                       height={20}
                       width={20}
                       className="cursor-pointer rounded-full"
+                      alt="add to cart icon"
                     />
                   </div>
                 )}
@@ -468,12 +465,11 @@ function TabsProductCard(props) {
                         // onMouseLeave={() => setColorImage(null)}
 
                         className={`parent relative w-[40px] h-[40px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
-            ${
-              selectedColor === item.color ||
-              (index === 0 && selectedColor === "")
-                ? " border-black "
-                : " border-black"
-            }   
+            ${selectedColor === item.color ||
+                            (index === 0 && selectedColor === "")
+                            ? " border-black "
+                            : " border-black"
+                          }   
           `}
                       >
                         <Image
@@ -495,7 +491,7 @@ function TabsProductCard(props) {
                           } */}
 
                         {colorImage === item.image ||
-                        (index === 0 && colorImage === "") ? (
+                          (index === 0 && colorImage === "") ? (
                           <div className="w-[100%] h-[2px] bg-black mt-[50px]" />
                         ) : (
                           ""

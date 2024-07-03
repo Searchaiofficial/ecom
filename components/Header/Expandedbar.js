@@ -356,7 +356,7 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
                           src={item.images[0]}
                           width={170}
                           height={170}
-                          alt="Product"
+                          alt={item.productTitle}
                           className="w-[100%] h-[100%] object-fill"
                         />
                       </div>
@@ -404,7 +404,7 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
                             src={"https://bolt-gcdn.sc-cdn.net/3/Z2i0CKb1i5GtNvg8xNoP7.256.IRZXSOY?mo=GlgaFhoAGgAyAX06AQRCBgjm_5mrBlBJYAFaEERmTGFyZ2VUaHVtYm5haWyiARQIgAIiDwoCSAISACoHSVJaWFNPWaIBFAiaCiIPCgJIAxIAKgdJUlpYU09Z&uc=73"}
                             width={170}
                             height={170}
-                            alt="Product"
+                            alt={item.name}
                             className="w-[100%] h-[100%] object-fill"
                           />
                         </div>

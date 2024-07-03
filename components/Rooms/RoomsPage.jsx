@@ -361,7 +361,7 @@ export const RoomsPage = ({ params }) => {
                     src={reviewData && reviewData.image}
                     width={45}
                     height={45}
-                    alt="arrow"
+                    alt={reviewData && reviewData.name}
                     className=" aspect-square object-cover rounded-full"
                   />
                   <p>{reviewData && reviewData.name}</p>

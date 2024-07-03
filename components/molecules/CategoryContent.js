@@ -74,7 +74,7 @@ const CategoryContent = (props) => {
                   src={dataItem.image}
                   width={20}
                   height={20}
-                  alt="image"
+                  alt={dataItem.text}
                   className="rounded-full"
                 />
               ) : null}

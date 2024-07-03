@@ -32,7 +32,7 @@ function Carousel({ data }) {
         return (
           <Image
             src={item}
-            alt="NA"
+            alt="image"
             key={idx}
             height={300}
             width={300}

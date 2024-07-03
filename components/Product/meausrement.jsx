@@ -72,7 +72,7 @@ const meausrement = ({ category }) => {
                     src={reviewData && reviewData.image}
                     width={45}
                     height={45}
-                    alt="arrow"
+                    alt={reviewData && reviewData.name}
                     className="usercon aspect-square object-cover rounded-full"
                   />
                   <Link

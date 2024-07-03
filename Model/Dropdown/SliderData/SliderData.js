@@ -21,7 +21,7 @@ export const roomOptions = [
 
   {
     room: "Laundry Room",
-    src: "/images/room/laundry.jpg",
+    src: "/images/room/Laundry.jpg",
   },
 
   {

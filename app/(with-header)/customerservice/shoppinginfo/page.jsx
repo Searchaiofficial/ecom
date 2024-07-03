@@ -117,7 +117,7 @@ export default function ShoppingInfo() {
                     width={750}
                     height={422}
                     src={data.image}
-                    alt=""
+                    alt={data.heading}
                     className="pb-5"
                   />
                 </div>
@@ -153,7 +153,7 @@ export default function ShoppingInfo() {
               src="/images/customerservice/work.jpg"
               width={600}
               height={300}
-              alt=""
+              alt="work"
             />
           </div>
         </div>

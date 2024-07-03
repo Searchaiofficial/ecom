@@ -120,7 +120,7 @@ const CartProduct = ({
           {
             cartItem?.selectedServices?.length > 0 && (
               <div className="flex gap-14  py-5 border-b border-gray-400">
-                <Image src={"/icons/instalation.svg"} width={100} height={100} className="" />
+                <Image src={"/icons/instalation.svg"} width={100} height={100} alt="installation icon" className="installation icon" />
                 {/* <p className="text-[18px] font-semibold mt-4">Services for {cartItem.productId.category}</p> */}
                 <div className="flex flex-col my-5 w-full gap-1">
                   {
@@ -174,7 +174,7 @@ const CartProduct = ({
                   cartItem?.selectedAccessories && (
                     cartItem?.selectedAccessories?.map((product) => (
                       <div className="flex  ">
-                        <Image src={product?.images[0]} height={100} width={100} className="mr-[16px] h-[100px] w-[100px]" />
+                        <Image src={product?.images[0]} height={100} width={100} className="mr-[16px] h-[100px] w-[100px]" alt={product.productTitle} />
                         <div className="flex flex-col">
                           <div className="flex flex-col mx-[12px] max-w-[220px]">
                             <p className="text-[14px] font-bold text-[#484848]">{product.productTitle}</p>

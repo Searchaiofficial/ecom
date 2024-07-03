@@ -500,7 +500,7 @@ const FreeSample = () => {
 
                       }`}
                   >
-                    <Image src={data.icon} width={45} height={45} />
+                    <Image src={data.icon} width={45} height={45} alt={data.label} />
                     <span className="text-[16px] mt-[4px] font-medium">{data.label}</span>
                   </div>
                 );
@@ -515,6 +515,7 @@ const FreeSample = () => {
                     src="/icons/payment.svg"
                     width={40}
                     height={40}
+                    alt="payment icon"
                   />
                   <div className="flex flex-col">
                     <h1 className="font-semibold text-[16px]">Select your personal choice</h1>
@@ -543,6 +544,7 @@ const FreeSample = () => {
                     src="/icons/payment.svg"
                     width={40}
                     height={40}
+                    alt="payment icon"
                   />
                   <div className="flex flex-col">
                     <h1 className="font-semibold text-[16px]">Schedule your try at home</h1>
@@ -557,6 +559,7 @@ const FreeSample = () => {
                     src="/icons/payment.svg"
                     width={40}
                     height={40}
+                    alt="payment icon"
                   />
                   <div className="flex flex-col">
                     <h1 className="font-semibold text-[16px]">We respect your choice</h1>
@@ -576,6 +579,7 @@ const FreeSample = () => {
                     src="/icons/virtual-online.svg"
                     width={40}
                     height={40}
+                    alt="online icon"
                   />
                   <div className="flex flex-col">
                     <h1 className="font-semibold text-[16px]">
@@ -592,6 +596,7 @@ const FreeSample = () => {
                     src="/icons/vision.svg"
                     width={40}
                     height={40}
+                    alt="vision icon"
                   />
                   <div className="flex flex-col">
                     <h1 className="font-semibold text-[16px]">
@@ -609,6 +614,7 @@ const FreeSample = () => {
                     src="/icons/onsite-management.svg"
                     width={40}
                     height={40}
+                    alt="managemnet icon"
                   />
                   <div className="flex flex-col">
                     <h1 className="font-semibold text-[16px]">On-site measurement</h1>
@@ -624,6 +630,7 @@ const FreeSample = () => {
                     src="/icons/final-design.svg"
                     width={40}
                     height={40}
+                    alt="final design icon"
                   />
                   <div className="flex flex-col">
                     <h1 className="font-semibold text-[16px]">Final design solution</h1>
@@ -637,6 +644,7 @@ const FreeSample = () => {
                     src="/icons/instalation.svg"
                     width={40}
                     height={40}
+                    alt="installation icon"
                   />
                   <div className="flex flex-col">
                     <h1 className="font-semibold text-[16px]">Delivery and installation</h1>

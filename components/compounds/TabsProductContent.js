@@ -68,7 +68,7 @@ const TabsProductContent = (props) => {
               className={`w-4 h-4 mt-1 sm:block hidden
               ${isFilterOpen ? " rotate-90" : "-rotate-90"}
             `}
-              alt=""
+              alt="arrow icon"
             />
           </button>
           {isFilterOpen ? (

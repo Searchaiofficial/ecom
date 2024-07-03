@@ -131,7 +131,7 @@ const QuiltSelector = () => {
                     <div className="flex h-full w-full items-center justify-center cursor-pointer  overflow-hidden">
                       <Image
                         src={quilt.imageUrl}
-                        alt="NA"
+                        alt= {quilt.weatherTitle}
                         height={600}
                         width={600}
                         className={"aspect-square w-full object-cover "}

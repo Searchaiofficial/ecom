@@ -19,7 +19,7 @@ const GiftCards = () => {
                       width={600}
                       height={300}
                       src="/images/customerservice/GiftCardsImg/gift1.jpg"
-                      alt=""
+                      alt="gift"
                       className="w-full h-auto"
                     />
                   </div>
@@ -44,7 +44,7 @@ const GiftCards = () => {
                       width={600}
                       height={300}
                       src="/images/customerservice/GiftCardsImg/gift2.jpg"
-                      alt=""
+                      alt="gift"
                       className="w-full h-auto"
                     />
                   </div>
@@ -61,7 +61,7 @@ const GiftCards = () => {
                       width={600}
                       height={338}
                       src="/images/customerservice/GiftCardsImg/gift3.jpg"
-                      alt=""
+                      alt="gift"
                       className="w-full h-auto"
                     />
                   </div>
@@ -103,7 +103,7 @@ const GiftCards = () => {
                   width={750}
                   height={1001}
                   src="/images/customerservice/GiftCardsImg/woman-holding-jar.jpg"
-                  alt=""
+                  alt="woman holding jar"
                 />
               </div>
               <div className="space-y-6 md:w-1/2">

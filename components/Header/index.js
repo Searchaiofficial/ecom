@@ -491,7 +491,7 @@ function Header({ setIsHeaderMounted }) {
                   />
                   <p className="ml-3 line-clamp-1 text-[13px] mt-[2px]  text-gray-400">Search for <span ref={textElementRef2}></span></p>
                 </div>
-                <Image src={"/icons/camera.svg"} width={20} height={20} className="mr-[10px] ml-[10px]" />
+                <Image src={"/icons/camera.svg"} width={20} height={20} alt="camera icon" className="mr-[10px] ml-[10px]" />
               </div>
             </div>}
           </>
@@ -520,7 +520,7 @@ function Header({ setIsHeaderMounted }) {
                 {
                   toptext && toptext.length > 0 ? (
                     <div className="flex  items-center mt-2">
-                      <Image src={"/icons/backarrowRevarce.svg"} height={18} width={18} className="rotate-180" onClick={handlebackArraowClick} />
+                      <Image src={"/icons/backarrowRevarce.svg"} alt="arrow icon" height={18} width={18} className="rotate-180" onClick={handlebackArraowClick} />
                       <p className="text-[18px] ml-[10px] font-semibold">{toptext[toptext.length - 1]}</p>
                     </div>
                   ) : (
@@ -575,7 +575,7 @@ function Header({ setIsHeaderMounted }) {
                       {value.label}
                     </p>
                     <div className="pr-[14px]">
-                      <Image src={"/icons/backarrowRevarce.svg"} height={15} width={15} />
+                      <Image src={"/icons/backarrowRevarce.svg"} height={15} width={15} alt="arrow icon" />
 
                     </div>                  </Link>
                   {idx < 3 && hoveredIndex === idx && (

@@ -191,6 +191,7 @@ const DesignServicePage = () => {
                         height={300}
                         className="h-[300px] w-[350px] object-cover object-top"
                         src={curElement.image}
+                        alt={curElement.text}
                       />
                       <div className="items-center flex flex-col">
                         <div>

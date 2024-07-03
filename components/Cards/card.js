@@ -87,7 +87,7 @@ function Card(props) {
           height={20}
           width={20}
           alt="empty-star"
-          className="h-[0.85em] w-[0.85em] hover:text-gray-600"
+          className="h-[1em] w-[1em] hover:text-gray-600"
         />
       );
     }
@@ -334,7 +334,7 @@ function Card(props) {
                 alt="arrow"
                 onClick={prevSlide}
                 className="arrow arrow-left hover:opacity-[1.0] hover:scale-105"
-                // className="absolute filter drop-shadow-sm w-7 h-7  text-white opacity-85 group hover:cursor-pointer hover:opacity-100 hover:scale-104 hover:filter-drop-shadow-lg  arrow-left"
+              // className="absolute filter drop-shadow-sm w-7 h-7  text-white opacity-85 group hover:cursor-pointer hover:opacity-100 hover:scale-104 hover:filter-drop-shadow-lg  arrow-left"
               />
             )}
             <div className="w-[400px] overflow-hidden">
@@ -347,10 +347,10 @@ function Card(props) {
                         isHovered
                           ? props.imgSrc[1]
                           : colorImage
-                          ? colorImage
-                          : item
+                            ? colorImage
+                            : item
                       }
-                      alt="NA"
+                      alt={props.title}
                       key={idx}
                       height={300}
                       width={300}
@@ -373,7 +373,7 @@ function Card(props) {
                   alt="arrow"
                   onClick={nextSlide}
                   className="arrow arrow-right hover:opacity-1"
-                  // className="absolute filter drop-shadow-sm w-7 h-7 -mt-[13px] text-white opacity-85 group hover:cursor-pointer hover:opacity-100 hover:scale-104 hover:filter-drop-shadow-lg arrow-right"
+                // className="absolute filter drop-shadow-sm w-7 h-7 -mt-[13px] text-white opacity-85 group hover:cursor-pointer hover:opacity-100 hover:scale-104 hover:filter-drop-shadow-lg arrow-right"
                 />
               </div>
             )}
@@ -405,22 +405,21 @@ function Card(props) {
                   {props.demandtype}
                 </p>
               )}
-              <div className="text-[15px] font-semibold">{props.title}</div>
+              <h2 className="text-[15px] font-semibold">{props.title}</h2>
             </div>
           </div>
-          <div className="font-normal mb-1 text-[14px] py-[2px] font-[400px]">
+          <p className="font-normal mb-1 text-[14px] py-[2px]">
             {props?.shortDescription}
-          </div>
+          </p>
 
           <div className=" flex h-[40px] pb-[6px] items-center justify-between mt-2">
             {props?.productType === "normal" ? (
               <div className="flex gap-1 items-end">
                 <h2
-                  className={`text-3xl flex font-semibold leading-[0.5] tracking-wide ${
-                    props.specialPrice?.price
-                      ? "bg-[#FFC21F] px-2 pt-3 pb-1 w-fit shadow-lg"
-                      : ""
-                  }`}
+                  className={`text-3xl flex font-semibold leading-[0.5] tracking-wide ${props.specialPrice?.price
+                    ? "bg-[#FFC21F] px-2 pt-3 pb-1 w-fit shadow-lg"
+                    : ""
+                    }`}
                   style={
                     props?.specialPrice?.price
                       ? { boxShadow: "3px 3px #C31952" }
@@ -428,9 +427,8 @@ function Card(props) {
                   }
                 >
                   <span
-                    className={`text-sm ${
-                      props?.specialPrice?.price ? "" : "pt-3.5"
-                    }`}
+                    className={`text-sm ${props?.specialPrice?.price ? "" : "pt-3.5"
+                      }`}
                   >
                     Rs. &nbsp;
                   </span>{" "}
@@ -523,12 +521,11 @@ function Card(props) {
                         // onMouseLeave={() => setColorImage(null)}
 
                         className={`parent relative w-[40px] h-[40px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
-            ${
-              selectedColor === item.color ||
-              (index === 0 && selectedColor === "")
-                ? " border-black "
-                : " border-black"
-            }   
+            ${selectedColor === item.color ||
+                            (index === 0 && selectedColor === "")
+                            ? " border-black "
+                            : " border-black"
+                          }   
           `}
                       >
                         <Image
@@ -542,7 +539,7 @@ function Card(props) {
                         />
 
                         {colorImage === item.image ||
-                        (index === 0 && colorImage === "") ? (
+                          (index === 0 && colorImage === "") ? (
                           <div className="w-[100%] h-[2px] bg-black mt-[50px]" />
                         ) : (
                           ""

@@ -55,7 +55,7 @@ export default function PriceGuarantee() {
             </div>
             <div className="md:w-1/2">
               <Image
-                src=""
+                src="/images/temp.svg"
                 alt="mug"
                 width={500}
                 height={500}
@@ -75,7 +75,7 @@ export default function PriceGuarantee() {
               <Image
                 width={400}
                 height={800}
-                src=""
+                src="/images/temp.svg"
                 alt="front"
               />
             </div>
@@ -83,7 +83,7 @@ export default function PriceGuarantee() {
               <Image
                 width={400}
                 height={800}
-                src=""
+                src="/images/temp.svg"
                 alt="rev"
               />
             </div>
@@ -91,7 +91,7 @@ export default function PriceGuarantee() {
               <Image
                 width={400}
                 height={800}
-                src=""
+                src="/images/temp.svg"
                 alt="bottom"
               />
             </div>

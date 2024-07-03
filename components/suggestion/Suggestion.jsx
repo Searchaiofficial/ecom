@@ -127,7 +127,7 @@ const Suggestion = ({ id }) => {
             <div className="relative mt-5 w-full lg:min-h-[730px] lg:max-h-[730px] min-h-[449px]">
               <Image
                 src={suggestion.mainImage}
-                alt="Main Image"
+                alt="Suggestion Main Image"
                 layout="fill"
                 objectFit="cover"
               />
@@ -182,7 +182,7 @@ const Suggestion = ({ id }) => {
                         src={item.image}
                         width={200}
                         height={130}
-                        alt="image"
+                        alt={item.label}
                         className="h-[70px] object-cover"
                       />
                     </div>
@@ -329,7 +329,7 @@ const Suggestion = ({ id }) => {
                       src={reviewData && reviewData.image}
                       width={45}
                       height={45}
-                      alt="arrow"
+                      alt={reviewData && reviewData.name}
                       className=" aspect-square object-cover rounded-full"
                     />
                     <p>{reviewData && reviewData.name}</p>

@@ -142,7 +142,7 @@ const Card = ({ data, productId }) => {
           height={20}
           width={20}
           alt="empty-star"
-          className="h-[0.85em] w-[0.85em] hover:text-gray-600"
+          className="h-[1em] w-[1em] hover:text-gray-600"
         />
       );
     }
@@ -719,11 +719,10 @@ const Card = ({ data, productId }) => {
               <div className="price">
                 <div className="font-bold items-end flex mb-1 mt-[10px]">
                   <h2
-                    className={`text-3xl leading-[0.5] tracking-wide ${
-                      data?.specialprice?.price
-                        ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg"
-                        : ""
-                    } `}
+                    className={`text-3xl leading-[0.5] tracking-wide ${data?.specialprice?.price
+                      ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg"
+                      : ""
+                      } `}
                     style={
                       data?.specialprice?.price
                         ? { boxShadow: "3px 3px #ad3535" }
@@ -735,8 +734,8 @@ const Card = ({ data, productId }) => {
                     {data?.specialprice?.price
                       ? data?.specialprice.price
                       : selectedSpecData?.specialprice
-                      ? selectedSpecData.price
-                      : data.perUnitPrice}
+                        ? selectedSpecData.price
+                        : data.perUnitPrice}
                   </h2>{" "}
                   <span> &nbsp;/roll</span>
                 </div>
@@ -773,11 +772,10 @@ const Card = ({ data, productId }) => {
                     <button
                       key={dim._id}
                       onClick={() => handleSpecClick(dim._id)}
-                      className={`px-2 py-1  ${
-                        selectedSpec === dim._id
-                          ? "bg-green-500 text-white"
-                          : "bg-zinc-100 text-black hover:bg-zinc-200"
-                      }`}
+                      className={`px-2 py-1  ${selectedSpec === dim._id
+                        ? "bg-green-500 text-white"
+                        : "bg-zinc-100 text-black hover:bg-zinc-200"
+                        }`}
                     >
                       {`${dim.thickness.value} ${dim.length.unit}`}
                     </button>
@@ -802,12 +800,11 @@ const Card = ({ data, productId }) => {
                       key={index}
                       onClick={() => handleColor(item.color)}
                       className={`parent relative w-[60px] h-[60px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
-            ${
-              selectedColor === item.color ||
-              (index === 0 && selectedColor === "")
-                ? " border-black "
-                : " border-black"
-            }   
+            ${selectedColor === item.color ||
+                          (index === 0 && selectedColor === "")
+                          ? " border-black "
+                          : " border-black"
+                        }   
           `}
                     >
                       <Image
@@ -820,7 +817,7 @@ const Card = ({ data, productId }) => {
                         objectFit="cover"
                       />
                       {selectedColor === item.color ||
-                      (index === 0 && selectedColor === "") ? (
+                        (index === 0 && selectedColor === "") ? (
                         <div className="w-[100%] h-[4px] bg-black mt-[70px]" />
                       ) : (
                         ""
@@ -922,21 +919,19 @@ const Card = ({ data, productId }) => {
                               <div className="flex-1 flex">
                                 <div
                                   onClick={() => setIsActive("Offers for you")}
-                                  className={`flex-1 cursor-pointer flex items-center justify-center h-[50px] ${
-                                    isActive === "Offers for you"
-                                      ? "border-b-4 border-[#2e2e2e] text-black"
-                                      : "border-[#8E8E8E] text-[#8E8E8E]"
-                                  }`}
+                                  className={`flex-1 cursor-pointer flex items-center justify-center h-[50px] ${isActive === "Offers for you"
+                                    ? "border-b-4 border-[#2e2e2e] text-black"
+                                    : "border-[#8E8E8E] text-[#8E8E8E]"
+                                    }`}
                                 >
                                   <p className="text-[16px]">Offers for you</p>
                                 </div>
                                 <div
                                   onClick={() => setIsActive("EMI Plans")}
-                                  className={`flex-1 cursor-pointer flex items-center justify-center h-[50px] ${
-                                    isActive === "EMI Plans"
-                                      ? "border-b-4 border-[#2e2e2e] text-black"
-                                      : "border-[#8E8E8E] text-[#8E8E8E]"
-                                  }`}
+                                  className={`flex-1 cursor-pointer flex items-center justify-center h-[50px] ${isActive === "EMI Plans"
+                                    ? "border-b-4 border-[#2e2e2e] text-black"
+                                    : "border-[#8E8E8E] text-[#8E8E8E]"
+                                    }`}
                                 >
                                   <p className="text-[16px]">EMI Plans</p>
                                 </div>
@@ -1035,21 +1030,19 @@ const Card = ({ data, productId }) => {
                                     onClick={(e) =>
                                       setEmiOption("Credit Card EMI")
                                     }
-                                    className={`${
-                                      EmiOption === "Credit Card EMI"
-                                        ? "bg-black text-white py-[16px] hover:bg-gray-900 px-[30px] text-center text-[14px] rounded-full"
-                                        : "py-[16px] border-2  px-[30px] rounded-full  text-[14px] text-center"
-                                    }`}
+                                    className={`${EmiOption === "Credit Card EMI"
+                                      ? "bg-black text-white py-[16px] hover:bg-gray-900 px-[30px] text-center text-[14px] rounded-full"
+                                      : "py-[16px] border-2  px-[30px] rounded-full  text-[14px] text-center"
+                                      }`}
                                   >
                                     Credit Card EMI
                                   </button>
                                   <button
                                     onClick={(e) => setEmiOption("Debit Card")}
-                                    className={`${
-                                      EmiOption === "Debit Card"
-                                        ? "bg-black hover:bg-gray-900 flex-1 text-white py-[16px] px-[30px] text-center text-[14px]  rounded-full"
-                                        : "py-[16px] flex-1 border-2 px-[30px]  rounded-full  text-[14px] text-center"
-                                    }`}
+                                    className={`${EmiOption === "Debit Card"
+                                      ? "bg-black hover:bg-gray-900 flex-1 text-white py-[16px] px-[30px] text-center text-[14px]  rounded-full"
+                                      : "py-[16px] flex-1 border-2 px-[30px]  rounded-full  text-[14px] text-center"
+                                      }`}
                                   >
                                     Debit Card & EMI
                                   </button>
@@ -1611,6 +1604,7 @@ const Card = ({ data, productId }) => {
                               src={data?.images[0]}
                               height={100}
                               width={100}
+                              alt={data?.productTitle || "product image"}
                               className=" mr-[16px] mt-[6px] h-[100px] min-w-[100px]"
                             />
 
@@ -1623,11 +1617,10 @@ const Card = ({ data, productId }) => {
                               </p>
                               <div className="font-bold items-end flex mb-1 my-[5px]">
                                 <h2
-                                  className={`text-3xl leading-[0.5] tracking-wide ${
-                                    data?.specialprice?.price
-                                      ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg"
-                                      : ""
-                                  } `}
+                                  className={`text-3xl leading-[0.5] tracking-wide ${data?.specialprice?.price
+                                    ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg"
+                                    : ""
+                                    } `}
                                   style={
                                     data?.specialprice?.price
                                       ? { boxShadow: "3px 3px #ad3535" }
@@ -1664,7 +1657,7 @@ const Card = ({ data, productId }) => {
                             </h2>
                             <div className="">
                               {categoryProducts &&
-                              categoryProducts.length > 0 ? (
+                                categoryProducts.length > 0 ? (
                                 categoryProducts.map((product) => (
                                   <div
                                     key={product._id}
@@ -1678,6 +1671,7 @@ const Card = ({ data, productId }) => {
                                         height={100}
                                         width={100}
                                         className="mr-[16px] h-[100px] w-[100px]"
+                                        alt={data?.productTitle || "product image"}
                                       />
                                       <div className="flex flex-col mx-[12px] max-w-[220px]">
                                         <p className="text-[14px] font-bold text-[#484848]">
@@ -1688,17 +1682,16 @@ const Card = ({ data, productId }) => {
                                         </p>
                                         <div className="font-bold items-end flex mb-1 my-[5px]">
                                           <h2
-                                            className={`text-3xl leading-[0.5] tracking-wide ${
-                                              product?.specialprice?.price
-                                                ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg"
-                                                : ""
-                                            } `}
+                                            className={`text-3xl leading-[0.5] tracking-wide ${product?.specialprice?.price
+                                              ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg"
+                                              : ""
+                                              } `}
                                             style={
                                               product?.specialprice?.price
                                                 ? {
-                                                    boxShadow:
-                                                      "3px 3px #ad3535",
-                                                  }
+                                                  boxShadow:
+                                                    "3px 3px #ad3535",
+                                                }
                                                 : {}
                                             }
                                           >
@@ -1724,6 +1717,7 @@ const Card = ({ data, productId }) => {
                                         src={"/icons/ad-to-cart.svg"}
                                         height={20}
                                         width={20}
+                                        alt="add to cart image"
                                         className="cursor-pointer rounded-full min-w-[20px] min-h-[20px]"
                                       />
                                     </div>
@@ -1792,7 +1786,7 @@ const Card = ({ data, productId }) => {
                             >
                               <Image
                                 src="/icons/closeicon.svg"
-                                alt="close"
+                                alt="close icon"
                                 width={20}
                                 height={30}
                                 className="py-2"
@@ -1804,6 +1798,7 @@ const Card = ({ data, productId }) => {
                               src={data?.images[0]}
                               height={100}
                               width={100}
+                              alt={data?.productTitle || "product image"}
                               className=" mr-[16px] mt-[6px] h-[100px] min-w-[100px]"
                             />
 
@@ -1816,11 +1811,10 @@ const Card = ({ data, productId }) => {
                               </p>
                               <div className="font-bold items-end flex mb-1 my-[5px]">
                                 <h2
-                                  className={`text-3xl leading-[0.5] tracking-wide ${
-                                    data?.specialprice?.price
-                                      ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg"
-                                      : ""
-                                  } `}
+                                  className={`text-3xl leading-[0.5] tracking-wide ${data?.specialprice?.price
+                                    ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg"
+                                    : ""
+                                    } `}
                                   style={
                                     data?.specialprice?.price
                                       ? { boxShadow: "3px 3px #ad3535" }
@@ -1877,9 +1871,8 @@ const Card = ({ data, productId }) => {
                                   return (
                                     <div
                                       key={idx}
-                                      className={`flex items-center w-full justify-between mt-4 border p-3 cursor-pointer hover:border-black rounded-md ${
-                                        isSelected ? "border-black" : ""
-                                      }`}
+                                      className={`flex items-center w-full justify-between mt-4 border p-3 cursor-pointer hover:border-black rounded-md ${isSelected ? "border-black" : ""
+                                        }`}
                                     >
                                       <div className="flex flex-col max-w-[150px] items-start gap-1">
                                         <p className="text-[14px] font-semibold text-[#484848]">
@@ -1958,6 +1951,7 @@ const Card = ({ data, productId }) => {
                                           src={product?.images[0]}
                                           height={100}
                                           width={100}
+                                          alt={data?.productTitle || "product image"}
                                           className="mr-[16px] h-[80px] w-[80px]"
                                         />
                                         <div className="flex flex-col mx-[12px] max-w-[220px]">
@@ -1969,17 +1963,16 @@ const Card = ({ data, productId }) => {
                                           </p>
                                           <div className="font-bold items-end flex mb-1 my-[5px]">
                                             <h2
-                                              className={`text-3xl leading-[0.5] tracking-wide ${
-                                                product?.specialprice?.price
-                                                  ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg"
-                                                  : ""
-                                              }`}
+                                              className={`text-3xl leading-[0.5] tracking-wide ${product?.specialprice?.price
+                                                ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg"
+                                                : ""
+                                                }`}
                                               style={
                                                 product?.specialprice?.price
                                                   ? {
-                                                      boxShadow:
-                                                        "3px 3px #ad3535",
-                                                    }
+                                                    boxShadow:
+                                                      "3px 3px #ad3535",
+                                                  }
                                                   : {}
                                               }
                                             >

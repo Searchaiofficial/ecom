@@ -40,7 +40,6 @@ const Amenities = ({ data }) => {
               >
                 <div className="w-10 h-10 mr-4">
                   <Image
-                    className=""
                     width={30}
                     height={30}
                     src={amenity.image}

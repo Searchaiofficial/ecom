@@ -79,6 +79,7 @@ const Activities = () => {
       <Sidebar selectedPage={selectedPage} onSelectPage={handleSelectPage} />
       <Image
         src="/icons/adtocart.svg"
+        alt="Add to cart icon"
         width={30}
         height={30}
         onClick={() => {

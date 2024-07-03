@@ -101,7 +101,7 @@ const SustainabilityPage = () => {
               {gridData.map((curElement) => {
                 return (
                   <div className="flex flex-col space-y-1 cursor-pointer hover:underline">
-                    <Image width={600} height={338} src={curElement.image} alt="" />
+                    <Image width={600} height={338} src={curElement.image} alt={curElement.text} />
                     <p className="font-bold text-xl">{curElement.text}</p>
                   </div>
                 );

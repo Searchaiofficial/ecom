@@ -76,7 +76,7 @@ const Carousel = () => {
         onTouchMove={handleTouchMove}
       >
         <Link href={"/login"} className="absolute z-10 top-2 right-2 opacity-85 hover:opacity-100 bg-white p-[6px] hover:scale-105 transition-transform rounded-full" style={{ boxShadow: '0 2px 6px 0 rgba(0, 0, 0, 0.12)' }}>
-          <Image src={"/icons/like.svg"} height={20} width={20} className="cursor-pointer" />
+          <Image src={"/icons/like.svg"} height={20} width={20} className="cursor-pointer" alt="like icon" />
         </Link>
         <div className="relative flex h-full w-full items-center justify-center aspect-square">
           {images && images.length > 1 ? (

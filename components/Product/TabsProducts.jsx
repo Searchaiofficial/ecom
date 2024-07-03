@@ -260,7 +260,7 @@ const Tabs = ({
 
   const [openFilter, setOpenFilter] = useState("");
 
-  const handleFilterClick = (Filter) => {};
+  const handleFilterClick = (Filter) => { };
   const [openAllsort, setopenallsort] = useState(false);
   const handleAllsort = () => {
     setopenallsort(!openAllsort);
@@ -686,9 +686,8 @@ const Tabs = ({
       pages.push(
         <button
           key={i}
-          className={`bg-gray-200 px-3 py-1 rounded ${
-            currentPage === i ? "bg-gray-400" : ""
-          }`}
+          className={`bg-gray-200 px-3 py-1 rounded ${currentPage === i ? "bg-gray-400" : ""
+            }`}
           onClick={() => onPageChange(i)}
         >
           {i}
@@ -704,7 +703,7 @@ const Tabs = ({
       <div className="lg:px-[67px] sm:px-[50px] px-[20px]">
         <div className="flex flex-col overflow-hidden">
           <div className="mt-36" />
-          <h2 className="lg:text-[30px] text-[24px] font-semibold capitalize mb-[30px] ">
+          <h2 className="Blinds font-semibold text-2xl pb-[20px] lg:pt-[30px] capitalize">
             {heading}
           </h2>
           <div className="flex items-center">
@@ -750,7 +749,7 @@ const Tabs = ({
                                 src={curElement.img}
                                 width={200}
                                 height={130}
-                                alt="image"
+                                alt={curElement.name}
                                 className="w-[200px] h-[70px]"
                               />
                             </div>
@@ -1059,15 +1058,13 @@ const Tabs = ({
                   handleTabClick();
                 }}
                 className={`Tabbtn z-0 bg-gray-100
-                  ${
-                    openAll
-                      ? `active-tabs  border border-black px-[24px] text-[14px] font-medium ${commonClasses}`
-                      : `tabS  border border-white px-[24px] ${commonClasses} text-[14px] font-medium`
+                  ${openAll
+                    ? `active-tabs  border border-black px-[24px] text-[14px] font-medium ${commonClasses}`
+                    : `tabS  border border-white px-[24px] ${commonClasses} text-[14px] font-medium`
                   }
-                  ${
-                    typeof window !== "undefined" && window.innerWidth <= 450
-                      ? " justify-center px-[24px] text-[14px] font-medium"
-                      : " justify-between px-[24px] text-[14px] font-medium"
+                  ${typeof window !== "undefined" && window.innerWidth <= 450
+                    ? " justify-center px-[24px] text-[14px] font-medium"
+                    : " justify-between px-[24px] text-[14px] font-medium"
                   }
                   `}
               >
@@ -1101,6 +1098,7 @@ const Tabs = ({
                   height={20}
                   onClick={closeAll}
                   color="black"
+                  alt="close icon"
                 />
               </div>
               <div className="menu-option bg-white  overflow-y-scroll mb-[20rem]  min-h-fit max-h-[50vh] md:max-h-[70vh]  pt-5  w-[100%]  border-slate-600 z-50">
@@ -1119,7 +1117,7 @@ const Tabs = ({
                 ${openAllsort ? " rotate-90" : "-rotate-90"}
 
                 `}
-                        alt=""
+                        alt="arrow icon"
                       />
                     </div>
                     {openAllsort ? (
@@ -1175,7 +1173,7 @@ const Tabs = ({
                 ${openAllCategory ? " rotate-90" : "-rotate-90"}
 
                 `}
-                            alt=""
+                            alt="arrow icon"
                           />
                         </div>
                         {openAllCategory ? (
@@ -1202,7 +1200,7 @@ const Tabs = ({
                 ${openAllcolor ? " rotate-90" : "-rotate-90"}
 
                 `}
-                        alt=""
+                        alt="arrow icon"
                       />
                     </div>
                     {openAllcolor ? (
@@ -1231,7 +1229,7 @@ const Tabs = ({
                 ${openAllCategory ? " rotate-90" : "-rotate-90"}
 
                 `}
-                            alt=""
+                            alt="arrow icon"
                           />
                         </div>
                         {openAllCategory ? (
@@ -1258,7 +1256,8 @@ const Tabs = ({
                 ${openAllDemandType ? " rotate-90" : "-rotate-90"}
 
                 `}
-                        alt=""
+                        
+                        alt="arrow icon"
                       />
                     </div>
                     {openAllDemandType ? (
@@ -1284,7 +1283,7 @@ const Tabs = ({
                 ${openallOfferType ? " rotate-90" : "-rotate-90"}
 
                 `}
-                        alt=""
+                        alt="arrow icon"
                       />
                     </div>
                     {openallOfferType ? (
@@ -1352,11 +1351,10 @@ const Tabs = ({
                 </button>
                 <button
                   onClick={handleRemoveallFilters}
-                  className={` ${
-                    clearSelectedResult
-                      ? "bg-white border-[1.5px] border-black"
-                      : "bg-[#929292] opacity-50"
-                  } text-[14px] font-semibold text-black  w-full h-9 rounded-full`}
+                  className={` ${clearSelectedResult
+                    ? "bg-white border-[1.5px] border-black"
+                    : "bg-[#929292] opacity-50"
+                    } text-[14px] font-semibold text-black  w-full h-9 rounded-full`}
                 >
                   Clear all
                 </button>

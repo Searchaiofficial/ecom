@@ -45,7 +45,7 @@ const Double = () => {
               height={350}
               src={musicSwiperData[0]?.img[0]?.url}
               className="rounded-t-lg"
-              alt=""
+              alt={musicSwiperData[0]?.img[0]?.title}
             />
             <div className="bg-black sm:w-52 w-[134px] flex flex-col rounded-b-lg">
               <div className="text-white text-sm pt-3  pl-4">{musicSwiperData[0]?.img[0]?.title}</div>
@@ -61,7 +61,7 @@ const Double = () => {
               height={350}
               src={musicSwiperData[0]?.img[1]?.url}
               className="rounded-t-lg"
-              alt=""
+              alt={musicSwiperData[0]?.img[1]?.title}
             />
             <div className="bg-black sm:w-52 w-[134px] flex flex-col rounded-b-lg">
               <div className="text-white text-sm pt-3  pl-4">{musicSwiperData[0]?.img[1]?.title}</div>
@@ -75,7 +75,7 @@ const Double = () => {
               height={350}
               src={musicSwiperData[0]?.img[3]?.url}
               className="rounded-t-lg"
-              alt=""
+              alt={musicSwiperData[0]?.img[3]?.title}
             />
             <div className="bg-black sm:w-52 w-[134px] flex flex-col rounded-b-lg">
               <div className="text-white text-sm pt-3  pl-4">{musicSwiperData[0]?.img[3]?.title}</div>
@@ -91,7 +91,7 @@ const Double = () => {
                   height={350}
                   src={data.url}
                   className="rounded-t-lg"
-                  alt=""
+                  alt={data.title}
                 />
                 <div className="bg-black sm:w-52 w-[134px] flex flex-col rounded-b-lg">
                   <div className="text-white text-sm pt-3  pl-4">

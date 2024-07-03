@@ -83,7 +83,7 @@ function LiveRoomProductCard(props) {
               <Link href={`/product/${props.title}`}>
                 <Image
                   src={props.imgSrc[0]}
-                  alt="NA"
+                  alt={props.title}
                   height={300}
                   width={300}
                   onClick={() => handleclick(props.id, props.category)}

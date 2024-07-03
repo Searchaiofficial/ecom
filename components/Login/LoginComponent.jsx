@@ -102,12 +102,15 @@ const LoginComponent = () => {
                     width={200}
                     height={256}
                     src="/images/login/login1.jpg"
+                    alt="login image"
                   />
                   <Image
                     className="rounded-md"
                     width={200}
                     height={256}
                     src="/images/login/login3.jpg"
+                    alt="login image"
+
                   />
                 </div>
                 <div className="  flex flex-col gap-2 w-6/12">
@@ -116,12 +119,15 @@ const LoginComponent = () => {
                     width={200}
                     height={240}
                     src="/images/login/login2.jpg"
+                    alt="login image"
+
                   />
                   <Image
                     className="rounded-md"
                     width={200}
                     height={240}
                     src="/images/login/login4.jpg"
+                    alt="login image"
                   />
                 </div>
               </div>

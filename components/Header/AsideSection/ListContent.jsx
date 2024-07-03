@@ -45,7 +45,7 @@ const ListContent = ({ parentCategory, items }) => {
                 <div className="flex  ">
                   <img
                     src={value.image}
-                    alt="pic"
+                    alt={value.label}
                     className="w-10 h-10 rounded-full"
                   />
                   <p className="pl-4">{value.label}</p>

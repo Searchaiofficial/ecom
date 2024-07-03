@@ -64,7 +64,7 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
                         width={400}
                         height={400}
                         className="child w-[170px] h-[80px]"
-                        alt="Room Image"
+                        alt= {data.room}
                       />
                     </div>
                     <h3 className="text-[14px] group-hover:underline font-semibold py-3 text-[#111111]">

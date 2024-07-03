@@ -68,7 +68,7 @@ const OrderSum = () => {
                 {/* <img src={shoe} alt='shoes'/> */}
                 <Image
                   src={roomData.images[0]}
-                  alt="shoes"
+                  alt={roomData.productTitle}
                   width={180}
                   height={180}
                 />
@@ -129,7 +129,7 @@ const OrderSum = () => {
                       {/* <img src={shoe} alt='shoes'/> */}
                       <Image
                         src={item.productId.images[0]}
-                        alt="shoes"
+                        alt={item.productId.productTitle}
                         width={180}
                         height={180}
                       />

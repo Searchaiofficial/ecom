@@ -303,7 +303,7 @@ const Reviews = ({ productId, data }) => {
                 {[...Array(review.rating)].map((_, i) => (
                   <Image
                     key={i}
-                    src="/icons/star.svg"
+                    src="/icons/full-black.svg"
                     width={15}
                     height={15}
                     alt="star"
@@ -329,7 +329,7 @@ const Reviews = ({ productId, data }) => {
                   )}
                 </p>
               </div>
-              
+
               {
                 review.images.length > 0 && (
                   <div className="flex gap-2 mb-4">

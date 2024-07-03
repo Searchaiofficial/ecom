@@ -31,7 +31,7 @@ const RoomCard = async () => {
 
                 <div className="flex items-center gap-5 px-5">
                   <p class="text-[12px] font-semibold">Shop all New lower price</p>
-                  <Image src={"/icons/Back_arrow.svg"} height={15} width={15} />
+                  <Image src={"/icons/Back_arrow.svg"} height={15} width={15} alt="arrow icon" />
                 </div>
               </Link>
             </div>
@@ -59,7 +59,7 @@ const RoomCard = async () => {
                       className="child object-cover rounded-sm"
                       src={gallery.items[0].img}
                       layout="fill"
-                      alt="Image"
+                      alt={gallery.items[0].heading}
                     />
                     <div className="absolute md:top-[20rem] left-3  lg:left-20 lg:-bottom-72  bottom-8 flex flex-col justify-center items-center p-2">
                       <div className="flex flex-col">
@@ -185,7 +185,7 @@ const RoomCard = async () => {
             src={"/icons/backarrow.svg"}
             width={15}
             height={15}
-            className=""
+            alt="arrow icon"
           />
         </div>
       </Link>
