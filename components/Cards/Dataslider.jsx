@@ -121,6 +121,7 @@ const Dataslider = ({ category, data, sliderIndex }) => {
                     setPopupVisible={setPopupVisible}
                     cssClass={"card1flex"}
                     productImages={product?.productImages}
+                    productType={product.productType}
                   />
                 </div>
               </SwiperSlide>

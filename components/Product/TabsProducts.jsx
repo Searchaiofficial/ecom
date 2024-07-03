@@ -1404,6 +1404,7 @@ const Tabs = ({
                     inCart={inCart}
                     shortDescription={text.shortDescription}
                     perUnitPrice={text.perUnitPrice}
+                    productType={text.productType}
                   />
                 );
               })

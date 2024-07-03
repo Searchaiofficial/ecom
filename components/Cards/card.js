@@ -10,7 +10,10 @@ import axios from "axios";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
-import { selectQuantity, updateQuantity } from "../Features/Slices/calculationSlice";
+import {
+  selectQuantity,
+  updateQuantity,
+} from "../Features/Slices/calculationSlice";
 import { selecteddbItems, setDbItems } from "../Features/Slices/cartSlice";
 import ResponseCache from "next/dist/server/response-cache";
 
@@ -134,8 +137,7 @@ function Card(props) {
   //   endDate: "",
   // });
 
-  console.log(props)
-
+  console.log(props);
 
   const imageData = props.productImages?.map((item) => {
     return {
@@ -144,18 +146,18 @@ function Card(props) {
     };
   });
 
-  const [colorImage, setColorImage] = useState("")
+  const [colorImage, setColorImage] = useState("");
 
   console.log(imageData);
   const [selectedColor, setSelectedColor] = useState("");
 
   const handleColor = (imagesrc) => {
-    console.log(imagesrc)
-    setColorImage(imagesrc)
-  }
+    console.log(imagesrc);
+    setColorImage(imagesrc);
+  };
 
-  const [Reviews, setReviews] = useState([])
-  const [Starts, setStars] = useState()
+  const [Reviews, setReviews] = useState([]);
+  const [Starts, setStars] = useState();
 
   const fetchReviews = async () => {
     try {
@@ -170,7 +172,7 @@ function Card(props) {
       //   console.error("Empty or invalid response data:", response.data);
       // }
 
-      setReviews(response.data)
+      setReviews(response.data);
     } catch (error) {
       console.error("Error fetching reviews:", error);
     }
@@ -225,36 +227,31 @@ function Card(props) {
     return starsArray;
   }
 
-
-
   useEffect(() => {
     fetchReviews();
 
     // const stars = renderStars(3.6);
     // setStars(stars)
-
   }, [props.id]);
 
   // console.log(Reviews)
 
   function calculateAverageRating(reviews) {
     if (reviews.length > 0) {
-      const totalRatings = reviews.reduce((acc, review) => acc + review.rating, 0);
+      const totalRatings = reviews.reduce(
+        (acc, review) => acc + review.rating,
+        0
+      );
       const averageRating = totalRatings / reviews.length;
       return averageRating;
     }
 
-    return 0
+    return 0;
   }
 
-
-
-
-  const [inCart, setInCart] = useState(props?.inCart)
-
+  const [inCart, setInCart] = useState(props?.inCart);
 
   useEffect(() => {
-
     const averageRating = calculateAverageRating(Reviews);
     const stars = renderStars(averageRating);
     setStars(stars);
@@ -263,20 +260,22 @@ function Card(props) {
   const cartData = useSelector(selecteddbItems);
 
   const addProductToCart = async () => {
-    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`, {
-      deviceId: localStorage.getItem("deviceId"),
-      productId: props.id,
-      quantity: 1
-    })
-    console.log(response.data)
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
+      {
+        deviceId: localStorage.getItem("deviceId"),
+        productId: props.id,
+        quantity: 1,
+      }
+    );
+    console.log(response.data);
     if (response.status === 200) {
-      setInCart(true)
-      dispatch(setDbItems(response.data))
+      setInCart(true);
+      dispatch(setDbItems(response.data));
     }
-  }
+  };
 
-
-  const [showCart, SetShowCart] = useState(false)
+  const [showCart, SetShowCart] = useState(false);
 
   useEffect(() => {
     setInCart(props.inCart);
@@ -285,14 +284,11 @@ function Card(props) {
 
   useEffect(() => {
     if (imageData?.length > 0) {
-
-      setColorImage(imageData[0]?.image)
+      setColorImage(imageData[0]?.image);
     }
-  }, [])
+  }, []);
 
-  console.log(props)
-
-
+  console.log(props);
 
   return (
     <>
@@ -338,7 +334,7 @@ function Card(props) {
                 alt="arrow"
                 onClick={prevSlide}
                 className="arrow arrow-left hover:opacity-[1.0] hover:scale-105"
-              // className="absolute filter drop-shadow-sm w-7 h-7  text-white opacity-85 group hover:cursor-pointer hover:opacity-100 hover:scale-104 hover:filter-drop-shadow-lg  arrow-left"
+                // className="absolute filter drop-shadow-sm w-7 h-7  text-white opacity-85 group hover:cursor-pointer hover:opacity-100 hover:scale-104 hover:filter-drop-shadow-lg  arrow-left"
               />
             )}
             <div className="w-[400px] overflow-hidden">
@@ -347,7 +343,13 @@ function Card(props) {
                   <Link href={`/product/${props.title}`}>
                     <Image
                       // src={isHovered ? props.imgSrc[2] : item}
-                      src={isHovered ? props.imgSrc[1] : colorImage ? colorImage : item}
+                      src={
+                        isHovered
+                          ? props.imgSrc[1]
+                          : colorImage
+                          ? colorImage
+                          : item
+                      }
                       alt="NA"
                       key={idx}
                       height={300}
@@ -371,7 +373,7 @@ function Card(props) {
                   alt="arrow"
                   onClick={nextSlide}
                   className="arrow arrow-right hover:opacity-1"
-                // className="absolute filter drop-shadow-sm w-7 h-7 -mt-[13px] text-white opacity-85 group hover:cursor-pointer hover:opacity-100 hover:scale-104 hover:filter-drop-shadow-lg arrow-right"
+                  // className="absolute filter drop-shadow-sm w-7 h-7 -mt-[13px] text-white opacity-85 group hover:cursor-pointer hover:opacity-100 hover:scale-104 hover:filter-drop-shadow-lg arrow-right"
                 />
               </div>
             )}
@@ -392,58 +394,98 @@ function Card(props) {
             </span>
           </div>
         </div>
-        <div onMouseEnter={() => SetShowCart(true)} onMouseLeave={() => SetShowCart(false)}>
+        <div
+          onMouseEnter={() => SetShowCart(true)}
+          onMouseLeave={() => SetShowCart(false)}
+        >
           <div className="flex items-center justify-between pt-2">
             <div className="flex flex-col">
               {props.demandtype === "Ayatrio Member Favorite" && (
-                <p className="font-medium text-[#0152be] mb-1 text-[12px]">{props.demandtype}</p>
+                <p className="font-medium text-[#0152be] mb-1 text-[12px]">
+                  {props.demandtype}
+                </p>
               )}
               <div className="text-[15px] font-semibold">{props.title}</div>
             </div>
           </div>
-          <div className="font-normal mb-1 text-[14px] py-[2px] font-[400px]">{props?.shortDescription}</div>
+          <div className="font-normal mb-1 text-[14px] py-[2px] font-[400px]">
+            {props?.shortDescription}
+          </div>
 
           <div className=" flex h-[40px] pb-[6px] items-center justify-between mt-2">
-            {/* <span className="font-medium pr-[3px] pt-[3px]">Rs.</span>
-            <h2 className="text-xl font-medium tracking-wide">{props.price}</h2> */}
-            <div className="flex gap-1 items-end">
-              <h2 className={`text-3xl flex font-semibold leading-[0.5] tracking-wide ${props.specialPrice?.price ? "bg-[#FFC21F] px-2 pt-3 pb-1 w-fit shadow-lg" : ""}`} style={props?.specialPrice?.price ? { boxShadow: '3px 3px #C31952' } : {}}>
-                <span className={`text-sm ${props?.specialPrice?.price ? "" : "pt-3.5"}`}>Rs. &nbsp;</span>{" "}
-                {props?.specialPrice?.price ? props?.specialPrice?.price : <p className="pt-3">{props?.price}</p>}
-              </h2>
-              {props.unitType ? <span className="tracking-wide text-sm font-semibold">{`/${props.unitType}`}</span> : ''}
-            </div>
-
-
+            {props?.productType === "normal" ? (
+              <div className="flex gap-1 items-end">
+                <h2
+                  className={`text-3xl flex font-semibold leading-[0.5] tracking-wide ${
+                    props.specialPrice?.price
+                      ? "bg-[#FFC21F] px-2 pt-3 pb-1 w-fit shadow-lg"
+                      : ""
+                  }`}
+                  style={
+                    props?.specialPrice?.price
+                      ? { boxShadow: "3px 3px #C31952" }
+                      : {}
+                  }
+                >
+                  <span
+                    className={`text-sm ${
+                      props?.specialPrice?.price ? "" : "pt-3.5"
+                    }`}
+                  >
+                    Rs. &nbsp;
+                  </span>{" "}
+                  {props?.specialPrice?.price ? (
+                    props?.specialPrice?.price
+                  ) : (
+                    <p className="pt-3">{props?.price}</p>
+                  )}
+                </h2>
+                {props.unitType ? (
+                  <span className="tracking-wide text-sm font-semibold">{`/${props.unitType}`}</span>
+                ) : (
+                  ""
+                )}
+              </div>
+            ) : (
+              <div className="flex gap-1 items-end">
+                Request Now
+              </div>
+            )}
 
             {showCart && (
-              <div className="bg-[#0152be] p-1.5 mr-2 rounded-full" onClick={addProductToCart}>
-                <Image src={"/icons/ad-to-cart.svg"} height={20} width={20} className="cursor-pointer rounded-full" />
+              <div
+                className="bg-[#0152be] p-1.5 mr-2 rounded-full"
+                onClick={addProductToCart}
+              >
+                <Image
+                  src={"/icons/ad-to-cart.svg"}
+                  height={20}
+                  width={20}
+                  className="cursor-pointer rounded-full"
+                />
               </div>
             )}
           </div>
-          {
-            props?.specialPrice?.price && (
+          {props?.specialPrice?.price && (
+            <div className="flex flex-col my-3">
+              <p className="text-[#757575] text-[12px] pt-[3px]">
+                Regular price: Rs.{props?.price} (incl. of all taxes)
+              </p>
 
-              <div className="flex flex-col my-3">
-                <p className="text-[#757575] text-[12px] pt-[3px]">Regular price: Rs.{props?.price} (incl. of all taxes)</p>
-
-                {/* <div className="flex flex-col mt-[6px]">
+              {/* <div className="flex flex-col mt-[6px]">
                 <p className="text-[#757575] text-[12px] pt-[3px]">Regular price: Rs.{props?.totalPrice} (incl. of all taxes)</p> */}
 
-                {
-                  props?.specialPrice?.startDate && props?.specialPrice?.endDate && (
-                    <p className="text-[#757575] text-[12px] ">Price valid {formattedStartDate} - {formattedEndDate}</p>
-                  )
-                }
-              </div>
-            )
-          }
+              {props?.specialPrice?.startDate &&
+                props?.specialPrice?.endDate && (
+                  <p className="text-[#757575] text-[12px] ">
+                    Price valid {formattedStartDate} - {formattedEndDate}
+                  </p>
+                )}
+            </div>
+          )}
           {props?.rating > 0 && (
             <>
-              <div className="card-rating">
-                {props.rating}
-              </div>
+              <div className="card-rating">{props.rating}</div>
               {Starts && (
                 <div className="flex items-center mt-1">
                   {Starts}
@@ -466,59 +508,53 @@ function Card(props) {
             </div>
           } */}
 
-
-
-          {
-            imageData?.length > 1 && (
-
-              <div className="colorContainer flex flex-col sm:w-auto w-[80vw] mt-1 ">
-                <div className="w-full flex justify-between mb-1">
-                  <h1 className="] text-[12px] font-normal">Colours</h1>
-                </div>
-                {
-                  <>
-                    <div className="colors flex gap-1.5">
-                      {imageData?.map((item, index) => (
-                        <div
-                          key={index}
-                          onClick={() => handleColor(item.image)}
-                          // onMouseLeave={() => setColorImage(null)}
-
-                          className={`parent relative w-[40px] h-[40px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
-            ${selectedColor === item.color ||
-                              (index === 0 && selectedColor === "")
-                              ? " border-black "
-                              : " border-black"
-                            }   
-          `}
-                        >
-                          <Image
-                            className="relative w-full h-full object-cover"
-                            src={item.image}
-                            alt={item.color}
-                            width={0}
-                            height={0}
-                            layout="fill"
-                            objectFit="cover"
-                          />
-
-                          {
-                            colorImage === item.image ||
-                              (index === 0 && colorImage === "") ? (
-                              <div className="w-[100%] h-[2px] bg-black mt-[50px]" />
-                            ) : ""
-                          }
-
-                        </div>
-                      ))}
-                    </div>
-                  </>
-                }
+          {imageData?.length > 1 && (
+            <div className="colorContainer flex flex-col sm:w-auto w-[80vw] mt-1 ">
+              <div className="w-full flex justify-between mb-1">
+                <h1 className="] text-[12px] font-normal">Colours</h1>
               </div>
+              {
+                <>
+                  <div className="colors flex gap-1.5">
+                    {imageData?.map((item, index) => (
+                      <div
+                        key={index}
+                        onClick={() => handleColor(item.image)}
+                        // onMouseLeave={() => setColorImage(null)}
 
-            )}
+                        className={`parent relative w-[40px] h-[40px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
+            ${
+              selectedColor === item.color ||
+              (index === 0 && selectedColor === "")
+                ? " border-black "
+                : " border-black"
+            }   
+          `}
+                      >
+                        <Image
+                          className="relative w-full h-full object-cover"
+                          src={item.image}
+                          alt={item.color}
+                          width={0}
+                          height={0}
+                          layout="fill"
+                          objectFit="cover"
+                        />
+
+                        {colorImage === item.image ||
+                        (index === 0 && colorImage === "") ? (
+                          <div className="w-[100%] h-[2px] bg-black mt-[50px]" />
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </>
+              }
+            </div>
+          )}
         </div>
-
       </div>
     </>
   );
