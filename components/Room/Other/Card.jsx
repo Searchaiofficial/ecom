@@ -690,9 +690,9 @@ const Card = ({ data, productId }) => {
             )}
             {!data.demandtype ? (
               <div className="flex items-center justify-between">
-                <h1 className="text-2xl  font-bold mb-0.5">
+                <p className="text-2xl  font-bold mb-0.5">
                   {data?.productTitle}
-                </h1>
+                </p>
 
                 {reviews.length > 0 && (
                   <div className="flex gap-2">
@@ -789,7 +789,7 @@ const Card = ({ data, productId }) => {
           <div className="colorContainer flex flex-col mt-[10px] sm:w-auto w-[80vw]">
             <div className="w-full flex justify-between">
               {imageData && imageData?.length > 1 && (
-                <h1 className="mb-2 font-bold">Colours</h1>
+                <p className="mb-2 font-bold">Colours</p>
               )}
             </div>
             {imageData?.length > 1 && (
@@ -848,7 +848,7 @@ const Card = ({ data, productId }) => {
                     alt="icon"
                     className=" w-[23px] h-[23px]"
                   />
-                  <h1 className="font-medium text-sm">ZERO Cost EMI</h1>
+                  <p className="font-medium text-sm">ZERO Cost EMI</p>
                 </div>
                 <p className="text-[11px] pt-[5px]">Ayatrio payment option</p>
               </div>
@@ -865,7 +865,7 @@ const Card = ({ data, productId }) => {
                     alt="icon"
                     className=" w-[23px] h-[23px]"
                   />
-                  <h1 className="font-medium text-sm">In-Store Request</h1>
+                  <p className="font-medium text-sm">In-Store Request</p>
                 </div>
                 <p className="text-[11px] pt-[5px]">Check in-store stock</p>
               </div>
@@ -884,7 +884,7 @@ const Card = ({ data, productId }) => {
                     alt="icon"
                     className=" w-[25px] h-[25px]"
                   />
-                  <h1 className="font-medium text-sm">Delivery Option</h1>
+                  <p className="font-medium text-sm">Delivery Option</p>
                 </div>
                 <p className="text-[11px] pt-[5px]">Check availability</p>
               </div>
@@ -900,7 +900,7 @@ const Card = ({ data, productId }) => {
                     alt="icon"
                     className=" w-[25px] h-[25px]"
                   />
-                  <h1 className="font-medium text-sm">Calculator</h1>
+                  <p className="font-medium text-sm">Calculator</p>
                 </div>
                 <p className="text-[11px] pt-[5px]">As per your requirement</p>
               </div>
@@ -1344,9 +1344,9 @@ const Card = ({ data, productId }) => {
                             <div>
                               <div className="flex flex-col w-full">
                                 <div className="flex items-center justify-between pt-2 mt-[10px] mb-[10px] h-[72px]">
-                                  <h1 className="text-[24px] font-semibold text-[#111111]">
+                                  <p className="text-[24px] font-semibold text-[#111111]">
                                     Visit us at your preferred Ayatrio store
-                                  </h1>
+                                  </p>
                                   <button
                                     className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
                                     onClick={() => setsidebarContent(null)}
@@ -1495,9 +1495,9 @@ const Card = ({ data, productId }) => {
                         <div className="px-[40px] pb-[32px]">
                           <div>
                             <div className="flex items-center justify-between  h-[72px]">
-                              <h1 className="text-[24px] font-semibold text-[#111111]">
+                              <p className="text-[24px] font-semibold text-[#111111]">
                                 Use your location
-                              </h1>
+                              </p>
                               <button
                                 className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
                                 onClick={() => setsidebarContent(null)}
@@ -1552,9 +1552,9 @@ const Card = ({ data, productId }) => {
                       <div className="flex flex-col">
                         <div className="px-[40px] pb-[32px]">
                           <div className="flex items-center justify-between h-[72px] mb-10">
-                            <h1 className="text-[24px] font-semibold text-[#111111]">
+                            <p className="text-[24px] font-semibold text-[#111111]">
                               Calculator
-                            </h1>
+                            </p>
                             <button
                               className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
                               onClick={() => setsidebarContent(null)}
@@ -1580,9 +1580,9 @@ const Card = ({ data, productId }) => {
                       <div className="flex flex-col ">
                         <div className="md:px-[40px] pb-[32px] px-[20px]">
                           <div className="flex items-center justify-between h-[72px] mb-2">
-                            <h1 className="text-[14px] font-medium text-[#484848]">
+                            <p className="text-[14px] font-medium text-[#484848]">
                               Added to cart
-                            </h1>
+                            </p>
                             <button
                               className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
                               onClick={() => {
@@ -1774,9 +1774,9 @@ const Card = ({ data, productId }) => {
                       <div className="flex flex-col ">
                         <div className="md:px-[40px] pb-[32px] px-[20px]">
                           <div className="flex items-center justify-between h-[72px] mb-2">
-                            <h1 className="text-[14px] font-medium text-[#484848]">
+                            <p className="text-[14px] font-medium text-[#484848]">
                               Buy Now
-                            </h1>
+                            </p>
                             <button
                               className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
                               onClick={() => {

@@ -14,9 +14,9 @@ const RoomCard = async () => {
     <>
       <div className="px-[15px] mb-[32px]">
         <div>
-          <h1 className="mb-[8px] text-2xl font-semibold">
+          <h2 className="mb-[8px] text-2xl font-semibold">
             {gallery.items[0]?.mainHeading}
-          </h1>
+          </h2>
           <div className="flex items-center justify-between">
             <p className="text-[14px] lg:w-[70%] line-clamp-2 font-normal">
               {gallery.items[0]?.description}

@@ -125,7 +125,7 @@ const Carous = ({ data }) => {
   return (
     <>
       <div className="sm:w-full w-[80vw] sm:block hidden">
-        <h1 className="mb-6 text-xl mt-5 font-semibold">Similar products</h1>
+        <h2 className="mb-6 text-xl mt-5 font-semibold">Similar products</h2>
         <div className="swiper2 mt-5 sm:block hidden">
           <Swiper
             {...swiperOptions2}

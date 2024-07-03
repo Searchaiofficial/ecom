@@ -398,7 +398,7 @@ const page = ({ params }) => {
               )}
             </div>
             <div className="mt-4">
-              <h1 className="text-2xl font-semibold mb-2">Similar Products</h1>
+              <h2 className="text-2xl font-semibold mb-2">Similar Products</h2>
               {similarProducts.length > 0 ? (
                 similarProducts.map((product, idx) => (
                   <div className="grid grid-cols-1 w-full h-full fade-in ">

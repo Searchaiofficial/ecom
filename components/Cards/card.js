@@ -509,7 +509,7 @@ function Card(props) {
           {imageData?.length > 1 && (
             <div className="colorContainer flex flex-col sm:w-auto w-[80vw] mt-1 ">
               <div className="w-full flex justify-between mb-1">
-                <p className="] text-[12px] font-normal">Colours</p>
+                <p className="text-[12px] font-normal">Colours</p>
               </div>
               {
                 <>

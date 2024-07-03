@@ -177,7 +177,7 @@ const RoomPage = () => {
                       alt="tick"
                       width={10}
                       height={10}
-                      className="opacity-100 h-[6px] "
+                      className="opacity-100 h-[8px] mt-[5px]"
                     />
                   </>
                 ) : (
@@ -192,7 +192,7 @@ const RoomPage = () => {
                       alt="tick"
                       width={10}
                       height={10}
-                      className="opacity-100 h-[6px] "
+                      className="opacity-100 h-[8px] mt-[5px]"
                     />
                   </>
                 )}
@@ -208,7 +208,7 @@ const RoomPage = () => {
                   alt="tick"
                   width={10}
                   height={10}
-                  className="opacity-100 h-[6px] "
+                  className="opacity-100 h-[8px] mt-[5px]"
                 />
                 <Link
                   href={`/${data?.category?.replace(
@@ -225,7 +225,7 @@ const RoomPage = () => {
                   alt="tick"
                   width={10}
                   height={10}
-                  className="opacity-100 h-[6px] "
+                  className="opacity-100 h-[8px] mt-[5px]"
                 />
                 <span className="text-gray-500 cursor-pointer ">
                   {data?.productTitle}

@@ -14,7 +14,7 @@ const Display = async () => {
     <>
       <div className="px-[15px] mt-[20px] lg:mt-0 pt-[30px] mb-[32px]">
         <div>
-          <h1 className="mb-[8px] text-2xl font-semibold">{apiData[0]?.mainHeading}</h1>
+          <h2 className="mb-[8px] text-2xl font-semibold">{apiData[0]?.mainHeading}</h2>
           <div className="flex items-center justify-between">
             <p className="text-[14px] lg:w-[70%] line-clamp-2 lg:line-clamp-none font-normal">{apiData[0]?.description}</p>
             <div class="border hidden border-black rounded-full lg:flex items-center justify-center h-[40px] cursor-pointer hover:border-gray-700 transition-colors">
