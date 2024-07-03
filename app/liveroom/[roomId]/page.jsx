@@ -6,6 +6,7 @@ import axios from "axios";
 import LiveRoomProductCard from "@/components/LiveRoom/LiveRoomProductCard";
 import { useRouter } from "next/navigation";
 import { useSocket } from "@/providers/SocketProvider";
+import Image from "next/image";
 
 const page = ({ params }) => {
   const router = useRouter();
@@ -24,9 +25,11 @@ const page = ({ params }) => {
   const [peers, setPeers] = useState({});
   const [streams, setStreams] = useState({});
   const [myStream, setMyStream] = useState(null);
-  const [myAudioEnabled, setMyAudioEnabled] = useState(null);
-  const [myVideoEnabled, setMyVideoEnabled] = useState(null);
-  const [isScreenSharing, setIsScreenSharing] = useState(false);
+  const [myAudioEnabled, setMyAudioEnabled] = useState(false);
+  const [myVideoEnabled, setMyVideoEnabled] = useState(false);
+  const [isScreenSharing, setIsScreenSharing] = useState(false)
+  
+ 
 
   useEffect(() => {
     if (x.length > 0) {
@@ -190,8 +193,8 @@ const page = ({ params }) => {
     setPeers({});
     setStreams({});
     setMyStream(null);
-    setMyAudioEnabled(null);
-    setMyVideoEnabled(null);
+    setMyAudioEnabled(false);
+    setMyVideoEnabled(false);
 
     socket.emit("leave-room", { roomId });
   };
@@ -208,6 +211,8 @@ const page = ({ params }) => {
       audio: true,
     });
     setMyStream(stream);
+    setMyAudioEnabled(true);
+    setMyVideoEnabled(true);
     socket.emit("join-room", { roomId });
   };
 
@@ -215,6 +220,7 @@ const page = ({ params }) => {
     if (myStream) {
       myStream.getAudioTracks().forEach((track) => {
         track.enabled = !track.enabled;
+        setMyAudioEnabled(track.enabled);
       });
     }
   };
@@ -223,6 +229,7 @@ const page = ({ params }) => {
     if (myStream) {
       myStream.getVideoTracks().forEach((track) => {
         track.enabled = !track.enabled;
+        setMyVideoEnabled(track.enabled);
       });
     }
   };
@@ -268,6 +275,11 @@ const page = ({ params }) => {
     setIsScreenSharing(false);
   };
 
+  const handleHome = () =>{
+    exitCall();
+    router.push('/')
+  }
+
   return (
     <div className="">
       <div className="sm:px-4 flex px-[20px] h-screen py-4 flex-col md:flex-row">
@@ -293,15 +305,47 @@ const page = ({ params }) => {
           <div className=" absolute bottom-8 w-full flex gap-2 justify-center">
             <button
               onClick={toggleAudio}
-              className="bg-red-500 hover:bg-red-400 text-xs text-center text-white font-medium shadow-sm  rounded-full w-10 h-10"
+              className="bg-red-500 p-2 hover:bg-red-400 text-xs text-center text-white font-medium shadow-sm  rounded-full w-10 h-10"
             >
-              Audio
+              {myAudioEnabled ? (
+                <Image
+                  src="/callingicon/ic_addaudio.svg"
+                  alt="Add Microphone"
+                  width={10}
+                  height={10}
+                  className="object-cover w-full"
+                />
+              ) : (
+                <Image
+                  src="/callingicon/ic_removeaudio.svg"
+                  alt="Remove Microphone"
+                  width={10}
+                  height={10}
+                  className="object-cover w-full"
+                />
+              )}
             </button>
             <button
               onClick={toggleVideo}
-              className="bg-red-500 hover:bg-red-400 text-xs text-center text-white font-medium shadow-sm  rounded-full w-10 h-10"
+              className="bg-red-500 p-2 hover:bg-red-400 text-xs text-center text-white font-medium shadow-sm  rounded-full w-10 h-10"
             >
-              Video
+              {myVideoEnabled ? (
+                <Image
+                  src="/callingicon/ic_advideo.svg"
+                  alt="add video"
+                  width={10}
+                  height={10}
+                  className="object-cover w-full"
+                />
+              ) : (
+                <Image
+                  src="/callingicon/ic_removevideo.svg"
+                  alt="remove video"
+                  width={10}
+                  height={10}
+                  className="object-cover w-full"
+                />
+              )}
             </button>
             {myStream &&
               (hasCallStarted ? (
@@ -330,17 +374,29 @@ const page = ({ params }) => {
             {!isScreenSharing && (
               <button
                 onClick={startScreenShare}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg"
+                className="bg-red-500 p-2 hover:bg-red-400 text-xs text-center text-white font-medium shadow-sm  rounded-full w-10 h-10"
               >
-                Share Screen
+                <Image
+                  src="/callingicon/ic_adsharescreen.svg"
+                  alt="Microphone"
+                  width={10}
+                  height={10}
+                  className="object-cover w-full"
+                />
               </button>
             )}
             {isScreenSharing && (
               <button
                 onClick={stopScreenShare}
-                className="px-4 py-2 bg-yellow-600 text-white rounded-lg"
+                className="bg-red-500 p-2 hover:bg-red-400 text-xs text-center text-white font-medium shadow-sm  rounded-full w-10 h-10"
               >
-                Stop Screen Share
+                <Image
+                  src="/callingicon/ic_removesharescreen.svg"
+                  alt="Microphone"
+                  width={10}
+                  height={10}
+                  className="object-cover w-full"
+                />
               </button>
             )}
           </div>
@@ -396,6 +452,12 @@ const page = ({ params }) => {
               ) : (
                 <div className="mt-2">No products found</div>
               )}
+              <button
+              onClick={handleHome}
+                className="absolute top-0 right-2  bg-black text-white px-2 py-1 rounded-md hover:bg-gray-500 font-semibold cursor-pointer"
+              >
+                Home
+              </button>
             </div>
             <div className="mt-4">
               <h2 className="text-2xl font-semibold mb-2">Similar Products</h2>

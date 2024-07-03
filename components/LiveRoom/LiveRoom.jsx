@@ -26,6 +26,7 @@ const LiveRoom = ({ userInfo }) => {
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/categories`
       );
       console.log(response.data)
+      setCategories(response.data);
       return response.data;
     } catch (error) {
       console.log(error.message);
@@ -33,17 +34,7 @@ const LiveRoom = ({ userInfo }) => {
   };
 
   useEffect(() => {
-    getCategories().then((categories) => {
-      setCategories(() => {
-        let allCategories = [];
-
-        categories.forEach((category) => {
-          allCategories = [...allCategories, ...category.subcategories];
-        });
-
-        return allCategories;
-      });
-    });
+    getCategories();
   }, []);
 
   const [message, setMessage] = useState({ status: null, text: "" });
