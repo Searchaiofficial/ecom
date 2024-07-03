@@ -1,4 +1,3 @@
-
 import axios from "axios";
 
 // const BASE_URL = "http://52.66.30.159:8080/api";
@@ -184,10 +183,7 @@ export const fetchProductsFromDemandType = async (type) => {
   }
 };
 
-
-
 export const fetchProductsFromOffers = async (type) => {
-
   try {
     const response = await axios.get(
       createApiEndpoint(`getAllProductsByOffer/${type}`)
@@ -231,6 +227,7 @@ export const upsertUserLocation = async ({ lat, lng, pincode, deviceId }) => {
     console.error(`Error storing location: ${error.message}`);
   }
 };
+
 export const getCategoryByName = async (categoryName) => {
   try {
     const response = await axios.get(
@@ -239,5 +236,23 @@ export const getCategoryByName = async (categoryName) => {
     return response.data;
   } catch (error) {
     console.error(`Error fetching category: ${error.message}`);
+  }
+};
+
+export const getCategories = async () => {
+  try {
+    const response = await axios.get(createApiEndpoint("categories"));
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching categories: ${error.message}`);
+  }
+};
+
+export const getOffers = async () => {
+  try {
+    const response = await axios.get(createApiEndpoint("getAllOffers"));
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching offers: ${error.message}`);
   }
 };

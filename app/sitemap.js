@@ -1,4 +1,10 @@
-import { fetchHeaderCategoryData } from "@/components/Features/api";
+import {
+  fetchAllProducts,
+  fetchHeaderCategoryData,
+  getCategories,
+  getOffers,
+} from "@/components/Features/api";
+
 import { BASE_URL } from "@/constants/base-url";
 
 export default async function sitemap() {
@@ -9,7 +15,7 @@ export default async function sitemap() {
     for (let j = 0; j < homedecorData[i].subcategories.length; j++) {
       homedecorPaths.push(
         encodeURI(
-          `/homedecor/${homedecorData[i].name}/${homedecorData[i].subcategories[j].name}`
+          `/${homedecorData[i].name}/homedecor/${homedecorData[i].subcategories[j].name}`
         ).replace(/&/g, "&amp;")
       );
     }
@@ -22,7 +28,7 @@ export default async function sitemap() {
     for (let j = 0; j < walldecorData[i].subcategories.length; j++) {
       walldecorPaths.push(
         encodeURI(
-          `/walldecor/${walldecorData[i].name}/${walldecorData[i].subcategories[j].name}`
+          `/${walldecorData[i].name}/walldecor/${walldecorData[i].subcategories[j].name}`
         ).replace(/&/g, "&amp;")
       );
     }
@@ -35,11 +41,42 @@ export default async function sitemap() {
     for (let j = 0; j < flooringData[i].subcategories.length; j++) {
       flooringPaths.push(
         encodeURI(
-          `/flooring/${flooringData[i].name}/${flooringData[i].subcategories[j].name}`
+          `/${flooringData[i].name}/flooring/${flooringData[i].subcategories[j].name}`
         ).replace(/&/g, "&amp;")
       );
     }
   }
+
+  const categories = await getCategories();
+  const categoryPaths = categories.map((category) => {
+    return encodeURI(
+      `/${category.name}/category/all`.replace(" ", "-")
+    ).replace(/&/g, "&amp;");
+  });
+
+  const subcategoryPaths = [];
+  categories.forEach((category) => {
+    category.subcategories.forEach((subcategory) => {
+      subcategoryPaths.push(
+        encodeURI(
+          `/${category.name}/category/${subcategory.name}`.replace(" ", "-")
+        ).replace(/&/g, "&amp;")
+      );
+    });
+  });
+
+  const products = await fetchAllProducts(100);
+  const productPaths = products.map((product) =>
+    encodeURI(`/${product.productTitle}`)
+  );
+
+  const offers = await getOffers();
+  const offerPaths = offers.map((offer) =>
+    encodeURI(`/offers/new/${offer.type}`.replace(" ", "-")).replace(
+      /&/g,
+      "&amp;"
+    )
+  );
 
   const paths = [
     "/",
@@ -68,6 +105,10 @@ export default async function sitemap() {
     ...homedecorPaths,
     ...walldecorPaths,
     ...flooringPaths,
+    ...categoryPaths,
+    ...productPaths,
+    ...subcategoryPaths,
+    ...offerPaths,
   ];
 
   return paths.map((path) => {
