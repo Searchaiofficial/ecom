@@ -21,7 +21,7 @@ function UserReviewPostsCard(props) {
                     <div className="flex h-full w-full items-center justify-center cursor-pointer  overflow-hidden">
                         <Image
                             src={props.imgSrc}
-                            alt={props.title}
+                            alt={props.alt}
                             height={600}
                             width={600}
                             className={"aspect-square w-full h-[100%] lg:h-[100%] object-cover "}

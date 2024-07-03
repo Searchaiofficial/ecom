@@ -19,14 +19,13 @@ const Footer = () => {
 
   return (
     <div
-      className={`${
-        (pathname.includes(liveRoomRoute) ||
+      className={`${(pathname.includes(liveRoomRoute) ||
           liveRoomRoute === pathname ||
           virtualRoomRoute === pathname ||
           freeDesignRoute === pathname ||
           freeSamplesRoute === pathname) &&
         "hidden"
-      } bg-gray-100 lg:px-[67px] sm:px-[50px] px-[20px] p mt-20 pt-[70px]`}
+        } bg-gray-100 lg:px-[67px] sm:px-[50px] px-[20px] p mt-20 pt-[70px]`}
     >
       <div className="grid md:grid-cols-6 grid-cols-1 pb-9">
         <div className="md:col-span-2 row-span-1 col-span-1 mr-12 mb-5">
@@ -54,7 +53,7 @@ const Footer = () => {
                   height={35}
                   className="list-socialicon"
                   src="/icons/social-icon/facebook-icon.svg"
-                  alt=""
+                  alt="facebook icon"
                 />
               </a>
             </li>

@@ -103,7 +103,7 @@ const UserReviewPosts = ({ slidesPerView, SubcategoryName }) => {
         return new Date(dateString).toLocaleDateString("en-GB", options).replace(/ /g, '-');
     };
 
-    console.log(postsToRender)
+    console.log("postsToRender", postsToRender)
 
     if (postsToRender.length == 0) {
         return null
@@ -173,6 +173,7 @@ const UserReviewPosts = ({ slidesPerView, SubcategoryName }) => {
                                             username={item.username}
                                             imgSrc={item.mediaUrl}
                                             id={item._id}
+                                            alt={item.categoryName}
                                         />
                                     </div>
                                 </SwiperSlide>
