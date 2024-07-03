@@ -1,4 +1,4 @@
-import RoomPage from "../product/MainPage";
+// import RoomPage from "../[title]/MainPage";
 import axios from "axios";
 
 export async function generateMetadata() {
