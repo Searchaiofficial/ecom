@@ -8,7 +8,7 @@ import Link from "next/link";
 const TabImage = ({ src, alt, width, height, handleTab, labelData, href, firstData, hovered }) => {
   const circledData = Array.isArray(labelData) ? labelData : [labelData];
 
-  console.log(labelData)
+  console.log("labelData", labelData)
   console.log(circledData)
 
 

@@ -109,12 +109,12 @@ const Tabs = ({ data }) => {
       });
       // Set tabImages and labelData for the current category
       tabImages[category.toLowerCase()] = images;
-      console.log(tabImages)
+      console.log("tabImages", tabImages)
       labelData[category.toLowerCase()] = labels;
     }
   });
 
-  console.log(labelData)
+  console.log("labelData: ", labelData)
 
   uniqueRoomCategories = uniqueRoomCategories.map(category => category.toLowerCase());
 
@@ -188,7 +188,7 @@ const Tabs = ({ data }) => {
                 width={450}
                 height={700}
                 src={tabImages[uniqueRoomCategories[0]]?.[0]}
-                alt="Room"
+                alt={labelData[uniqueRoomCategories[0]]?.[0]?.productCategory || "Room image"}
                 handleTab={handleTab}
                 labelData={labelData[uniqueRoomCategories[0]]?.[0] || []}
               />
@@ -197,7 +197,7 @@ const Tabs = ({ data }) => {
                 <Image
                   className="h-full w-full object-cover "
                   src={tabImages[uniqueRoomCategories[1]]?.[0]}
-                  alt="Room"
+                  alt={labelData[uniqueRoomCategories[1]]?.[0]?.productCategory || "Room image"}
                   width={450}
                   height={350}
                 />
@@ -206,7 +206,7 @@ const Tabs = ({ data }) => {
               <TabImage
                 src={tabImages[uniqueRoomCategories[2]]?.[0]}
                 labelData={labelData[uniqueRoomCategories[2]]?.[0] || []}
-                alt="Room"
+                alt={labelData[uniqueRoomCategories[2]]?.[0]?.productCategory || "Room image"}
                 width={450}
                 height={700}
                 handleTab={handleTab}
@@ -224,7 +224,7 @@ const Tabs = ({ data }) => {
               <TabImage
                 src={tabImages[uniqueRoomCategories[3]]?.[0]}
                 labelData={labelData[uniqueRoomCategories[3]]?.[0] || []}
-                alt="Room"
+                alt={labelData[uniqueRoomCategories[3]]?.[0]?.productCategory || "Room image"}
                 handleTab={handleTab}
                 width={450}
                 height={700}
@@ -234,7 +234,7 @@ const Tabs = ({ data }) => {
                 <Image
                   className="h-full w-full object-cover 11"
                   src={tabImages[uniqueRoomCategories[4]]?.[0]}
-                  alt="Room"
+                  alt={labelData[uniqueRoomCategories[4]]?.[0]?.productCategory || "Room image"}
                   width={450}
                   height={350}
                 />
@@ -244,7 +244,7 @@ const Tabs = ({ data }) => {
                 <Image
                   className="h-full w-full object-cover"
                   src={tabImages[uniqueRoomCategories[5]]?.[0]}
-                  alt="Room"
+                  alt={labelData[uniqueRoomCategories[5]]?.[0]?.productCategory || "Room image"}
                   width={450}
                   height={350}
                 />
@@ -255,7 +255,7 @@ const Tabs = ({ data }) => {
                     width={450}
                     height={700}
                     src={tabImages[uniqueRoomCategories[6]]?.[0]}
-                    alt="Room"
+                    alt={labelData[uniqueRoomCategories[6]]?.[0]?.productCategory || "Room image"}
                     handleTab={handleTab}
                     labelData={labelData[uniqueRoomCategories[6]]?.[0] || []}
                   />
@@ -269,7 +269,7 @@ const Tabs = ({ data }) => {
                     <Image
                       className="h-full w-full object-cover "
                       src={tabImages[uniqueRoomCategories[7]]?.[0]}
-                      alt="Room"
+                      alt={labelData[uniqueRoomCategories[7]]?.[0]?.productCategory || "Room image"}
                       width={450}
                       height={350}
                     />
@@ -282,7 +282,7 @@ const Tabs = ({ data }) => {
                   <TabImage
                     src={tabImages[uniqueRoomCategories[8]]?.[0]}
                     labelData={labelData[uniqueRoomCategories[8]]?.[0] || []}
-                    alt="Room"
+                    alt={labelData[uniqueRoomCategories[8]]?.[0]?.productCategory || "Room image"}
                     width={450}
                     height={700}
                     handleTab={handleTab}
@@ -308,7 +308,7 @@ const Tabs = ({ data }) => {
                   <TabImage
                     src={tabImages[uniqueRoomCategories[9]]?.[0]}
                     labelData={labelData[uniqueRoomCategories[9]]?.[0] || []}
-                    alt="Room"
+                    alt={labelData[uniqueRoomCategories[9]]?.[0]?.productCategory || "Room image"}
                     handleTab={handleTab}
                     width={450}
                     height={700}
@@ -322,7 +322,7 @@ const Tabs = ({ data }) => {
                     <Image
                       className="h-full w-full object-cover 11"
                       src={tabImages[uniqueRoomCategories[10]]?.[0]}
-                      alt="Room"
+                      alt={labelData[uniqueRoomCategories[10]]?.[0]?.productCategory || "Room image"}
                       width={450}
                       height={350}
                     />
@@ -336,7 +336,7 @@ const Tabs = ({ data }) => {
                     <Image
                       className="h-full w-full object-cover"
                       src={tabImages[uniqueRoomCategories[11]]?.[0]}
-                      alt="Room"
+                      alt={labelData[uniqueRoomCategories[11]]?.[0]?.productCategory || "Room image"}
                       width={450}
                       height={350}
                     />
