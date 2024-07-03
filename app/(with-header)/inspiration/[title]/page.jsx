@@ -2,8 +2,8 @@ import { fetchSuggestionData } from "@/components/Features/api";
 import Suggestion from "@/components/suggestion/Suggestion";
 import { ArticleJsonLd } from "next-seo";
 
-export const generateMetadata = async ({ params: { id } }) => {
-  const suggestion = await fetchSuggestionData(id);
+export const generateMetadata = async ({ params: { title } }) => {
+  const suggestion = await fetchSuggestionData(title);
 
   return {
     title: suggestion?.metadata?.title,
@@ -23,8 +23,8 @@ export const generateMetadata = async ({ params: { id } }) => {
   };
 };
 
-const SuggestionPage = async ({ params: { id } }) => {
-  const suggestion = await fetchSuggestionData(id);
+const SuggestionPage = async ({ params: { title } }) => {
+  const suggestion = await fetchSuggestionData(title);
 
   return (
     <>
@@ -40,7 +40,7 @@ const SuggestionPage = async ({ params: { id } }) => {
           authorName={suggestion.author?.name || "Ayatrio"}
         />
       ) : null}
-      <Suggestion id={id} />;
+      <Suggestion id={title} />;
     </>
   );
 };

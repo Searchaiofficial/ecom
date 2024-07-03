@@ -143,10 +143,22 @@ export const fetchFirstImageChangerData = async () => {
   }
 };
 
-export const fetchSuggestionData = async (id) => {
+// export const fetchSuggestionData = async (id) => {
+//   try {
+//     const response = await axios.get(createApiEndpoint("fetchSuggestionById"), {
+//       params: { id },
+//     });
+//     return response.data;
+//   } catch (error) {
+//     console.error(`Error fetching suggestions: ${error.message}`);
+//     throw error;
+//   }
+// };
+
+export const fetchSuggestionData = async (heading) => {
   try {
-    const response = await axios.get(createApiEndpoint("fetchSuggestionById"), {
-      params: { id },
+    const response = await axios.get(createApiEndpoint("fetchSuggestionByTitle"), {
+      params: { heading : decodeURI(heading) },
     });
     return response.data;
   } catch (error) {
