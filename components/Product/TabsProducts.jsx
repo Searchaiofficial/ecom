@@ -260,7 +260,7 @@ const Tabs = ({
 
   const [openFilter, setOpenFilter] = useState("");
 
-  const handleFilterClick = (Filter) => {};
+  const handleFilterClick = (Filter) => { };
   const [openAllsort, setopenallsort] = useState(false);
   const handleAllsort = () => {
     setopenallsort(!openAllsort);
@@ -686,9 +686,8 @@ const Tabs = ({
       pages.push(
         <button
           key={i}
-          className={`bg-gray-200 px-3 py-1 rounded ${
-            currentPage === i ? "bg-gray-400" : ""
-          }`}
+          className={`bg-gray-200 px-3 py-1 rounded ${currentPage === i ? "bg-gray-400" : ""
+            }`}
           onClick={() => onPageChange(i)}
         >
           {i}
@@ -1059,15 +1058,13 @@ const Tabs = ({
                   handleTabClick();
                 }}
                 className={`Tabbtn z-0 bg-gray-100
-                  ${
-                    openAll
-                      ? `active-tabs  border border-black px-[24px] text-[14px] font-medium ${commonClasses}`
-                      : `tabS  border border-white px-[24px] ${commonClasses} text-[14px] font-medium`
+                  ${openAll
+                    ? `active-tabs  border border-black px-[24px] text-[14px] font-medium ${commonClasses}`
+                    : `tabS  border border-white px-[24px] ${commonClasses} text-[14px] font-medium`
                   }
-                  ${
-                    typeof window !== "undefined" && window.innerWidth <= 450
-                      ? " justify-center px-[24px] text-[14px] font-medium"
-                      : " justify-between px-[24px] text-[14px] font-medium"
+                  ${typeof window !== "undefined" && window.innerWidth <= 450
+                    ? " justify-center px-[24px] text-[14px] font-medium"
+                    : " justify-between px-[24px] text-[14px] font-medium"
                   }
                   `}
               >
@@ -1352,11 +1349,10 @@ const Tabs = ({
                 </button>
                 <button
                   onClick={handleRemoveallFilters}
-                  className={` ${
-                    clearSelectedResult
-                      ? "bg-white border-[1.5px] border-black"
-                      : "bg-[#929292] opacity-50"
-                  } text-[14px] font-semibold text-black  w-full h-9 rounded-full`}
+                  className={` ${clearSelectedResult
+                    ? "bg-white border-[1.5px] border-black"
+                    : "bg-[#929292] opacity-50"
+                    } text-[14px] font-semibold text-black  w-full h-9 rounded-full`}
                 >
                   Clear all
                 </button>
@@ -1414,12 +1410,14 @@ const Tabs = ({
               </div>
             )}
           </div>
-          <div className="self-center flex items-center  gap-2">
-            {renderPaginationControls()}
-          </div>
+
           {filteredProductData?.length > 0 && (
             <Measure category={filteredProductData[0].category} />
           )}
+
+          <div className="self-center flex items-center  gap-2 mt-20">
+            {renderPaginationControls()}
+          </div>
           {/* <div className="main-image-pdt pt-[32px] grid sm:grid-cols-4 grid-cols-2 sm:gap-6 gap-0">
             {secondPart.map((text, idx) => (
               <div

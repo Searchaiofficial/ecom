@@ -46,45 +46,50 @@ const meausrement = ({ category }) => {
     fetchReviewData();
   }, [category]);
 
+
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <>
-      { roomData && reviewData &&
+      {roomData && reviewData &&
         <div className="flex lg:mt-20 mt-10 lg:flex-row lg:max-h-[490px] w-full flex-col relative overflow-hidden ">
-          <div className="relative w-full object-cover md:w-2/3">
+          <div onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} className="relative w-full object-cover md:w-2/3">
             {/* {roomData && ( */}
-              <TabImage
-                src={roomData.imgSrc}
-                alt={`Image  of Children`}
-                width={1000}
-                height={338}
-                labelData={roomData.children}
-              />
+            <TabImage
+              src={roomData.imgSrc}
+              alt={`Image  of Children`}
+              width={1000}
+              height={338}
+              labelData={roomData.children}
+              hovered={isHovered}
+
+            />
             {/* )} */}
           </div>
           {/* {reviewData && ( */}
-            <div className="md:w-1/3  sm:h-auto min-h-[363px] sm:flex-grow bg-zinc-100  lg:p-12 p-10">
-              <div className="flex flex-col ">
-                <div>
-                  <p>{reviewData && reviewData.comment}</p>
-                </div>
-                <div className="flex flex-row feedcon mt-2 cursor-pointer">
-                  <Image
-                    src={reviewData && reviewData.image}
-                    width={45}
-                    height={45}
-                    alt="arrow"
-                    className="usercon aspect-square object-cover rounded-full"
-                  />
-                  <Link
-                    href={`${reviewData.instagramUrl}`}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <p>{reviewData && reviewData.name}</p>
-                  </Link>
-                </div>
+          <div className="md:w-1/3  sm:h-auto min-h-[363px] sm:flex-grow bg-zinc-100  lg:p-12 p-10">
+            <div className="flex flex-col ">
+              <div>
+                <p>{reviewData && reviewData.comment}</p>
+              </div>
+              <div className="flex flex-row feedcon mt-2 cursor-pointer">
+                <Image
+                  src={reviewData && reviewData.image}
+                  width={45}
+                  height={45}
+                  alt="arrow"
+                  className="usercon aspect-square object-cover rounded-full"
+                />
+                <Link
+                  href={`${reviewData.instagramUrl}`}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <p>{reviewData && reviewData.name}</p>
+                </Link>
               </div>
             </div>
+          </div>
           {/* )} */}
         </div>
       }
