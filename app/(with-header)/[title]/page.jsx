@@ -1,5 +1,5 @@
 import { BreadcrumbJsonLd, ProductJsonLd } from "next-seo";
-import RoomPage from "../MainPage";
+import RoomPage from "./MainPage";
 import axios from "axios";
 
 export async function generateMetadata({ params }) {

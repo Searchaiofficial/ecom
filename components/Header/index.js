@@ -337,14 +337,9 @@ function Header({ setIsHeaderMounted }) {
                         onMouseLeave={() => handleMouseLeave()}
                       // onClick={() => handleClick(idx)}
                       >
-                        <Link
-                          className={`text-md  font-semibold  ${isOpen ? "border-b-2 border-black" : ""
+                        <span
+                          className={`text-md cursor-pointer font-semibold  ${isOpen ? "border-b-2 border-black" : ""
                             }`}
-                          href={
-                            value.label === "Offers"
-                              ? "/heading/offers/all"
-                              : "#"
-                          }
                           onClick={() => toggleDropdown(value.label)}
                         >
                           <p
@@ -355,7 +350,7 @@ function Header({ setIsHeaderMounted }) {
                           >
                             {value.label}
                           </p>
-                        </Link>
+                        </span>
                         {hoveredIndex === idx && (
                           // <Asidebox asideSectionList={value.asideSectionList} />
                           <Asidebox handleChange={handleChange} hoveredIndex={hoveredIndex} setHoveredIndex={setHoveredIndex} label={value.label} />

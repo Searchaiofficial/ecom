@@ -107,10 +107,12 @@ const BlogRecommendedProducts = ({ relatedProducts }) => {
                   <div className="grid grid-cols-1 w-full h-full fade-in ">
                     <Card
                       title={product.productTitle}
-                      // date={product.date}
+                      productImages={product?.productImages}
+                      specialPrice={product?.specialprice}
                       price={product.perUnitPrice}
-                      demandtype={product.demandtype}
                       desc={product.productTitle}
+                      shortDescription={product.shortDescription}
+                      demandtype={product.demandtype}
                       imgSrc={product.images}
                       rating={product.ratings}
                       key={idx}
@@ -119,6 +121,10 @@ const BlogRecommendedProducts = ({ relatedProducts }) => {
                       productId={product.productId}
                       setPopupVisible={setPopupVisible}
                       cssClass={"card1flex"}
+                      // inCart={inCart}
+                      totalPrice={product.totalPrice}
+                      unitType={product.unitType}
+                      productType={product.productType}
                     />
                   </div>
                 </SwiperSlide>

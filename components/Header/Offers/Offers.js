@@ -67,7 +67,7 @@ const OfferDisplayBox = ({ selectedOffer }) => (
         <h2 className="lg:text-[14px] text-[18px] p-2 mb-2 font-semibold w-full">{selectedOffer.type}</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
             <div className="p-[15px] hover:bg-zinc-100 max-w-[270px]">
-                <Link href={`/heading/offers/${selectedOffer.type.replace(/ /g, "-")}`}>
+                <Link href={`/offers/new/${selectedOffer.type.replace(/ /g, "-")}`}>
                     <h3 className="text-[14px] font-semibold md:max-w-50% line-clamp-1">{selectedOffer.type}</h3>
                     <p className="text-[12px] line-clamp-1">Description for {selectedOffer.type}</p>
                 </Link>

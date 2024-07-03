@@ -171,7 +171,7 @@ const CategoriesSlider = () => {
                                 {categories?.map((curElement, idx) => {
                                     return (
                                         <SwiperSlide className=" max-w-[100px] lg:max-w-[120px] mr-[10px] min-h-[95px] mb-[30px] md:mb-0 " key={idx}>
-                                            <Link href={`/category/${curElement.name.replace(/ /g, "-")}/all`}
+                                            <Link href={`/${curElement.name.replace(/ /g, "-")}/category/all`}
                                                 // onClick={() => handleIncrementCategoryPopularity(curElement.name)}
                                             >
                                                 <div className="flex flex-col  items-center ">
