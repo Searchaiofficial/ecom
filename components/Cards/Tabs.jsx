@@ -143,7 +143,7 @@ const Tabs = ({ data }) => {
 
   return (
     <>
-      <div className="lg:px-[15px] px-[20px] sm:px-[50px]  py-20 h-full">
+      <div className="lg:px-[15px] px-[20px] sm:px-[50px] pb-20 pt-10 h-full">
         <div>
           <h2 className="text-xl font-bold mb-5">More ideas and inspiration</h2>
         </div>

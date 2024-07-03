@@ -113,7 +113,7 @@ const UserReviewPosts = ({ slidesPerView, SubcategoryName }) => {
     return (
         <div>
             {openModal && <div className="background-overlay open"></div>}
-            <div className={`mb-20 bg-white ${openModal ? 'overflow-hidden' : ''}`}>
+            <div className={`bg-white ${openModal ? 'overflow-hidden' : ''}`}>
                 <div className="mb-2 pr-[20px] w-full flex justify-between items-center">
                     <div className="mb-[32px]">
                         <h2 className="font-semibold text-2xl pb-[8px] ">
@@ -157,7 +157,7 @@ const UserReviewPosts = ({ slidesPerView, SubcategoryName }) => {
                     allowSlidePrev={true}
                     slideNextClass="custom-next-button"
                     slidePrevClass="custom-prev-button"
-                    className="px-10 min-h-[520px]  lg:min-h-[600px]"
+                    className="px-10"
                 >
                     {!postsToRender ? (
                         <SwiperSlide>

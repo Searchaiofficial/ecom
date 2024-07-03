@@ -29,7 +29,7 @@ const ProfileContent = ({ initialData }) => {
   }, []);
 
   return (
-    <div className=" transparent rounded-lg  pb-[80px] ">
+    <div className=" transparent rounded-lg ">
       <Swiper
         className=" h-50  lg:h-80"
         mousewheel={{

@@ -818,7 +818,7 @@ const Card = ({ data, productId }) => {
                       />
                       {selectedColor === item.color ||
                         (index === 0 && selectedColor === "") ? (
-                        <div className="w-[100%] h-[4px] bg-black mt-[70px]" />
+                        <div className="w-[100%] h-[2px] bg-black mt-[70px]" />
                       ) : (
                         ""
                       )}

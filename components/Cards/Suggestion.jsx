@@ -48,7 +48,7 @@ const Suggestion = () => {
       dispatch({ type: "FETCH_BLOG_CARD_DATA", payload: "blogCard" });
     }
   }
-  , [blogCardData]);
+    , [blogCardData]);
 
   // useEffect(() => {
   //   console.log('suggestion')
@@ -58,7 +58,7 @@ const Suggestion = () => {
   //   if (blogCardData) {
   //     setSuggestionSlider(blogCardData);
   //   }
-    
+
   // }, [blogCardData]);
 
   const swiperOptions2 = {
@@ -132,7 +132,7 @@ const Suggestion = () => {
           slideNextClass="custom-next-button"
           slidePrevClass="custom-prev-button"
           // onSwiper={setSwiperRef}
-          className="px-10 min-h-[600px] lg:min-h-[750px]"
+          className="px-10"
         >
           {!blogCardData ? (
             <SwiperSlide>

@@ -231,7 +231,7 @@ const RoomPage = () => {
                   {data?.productTitle}
                 </span>
               </div>
-              <RoomImageList images={data?.images} />
+              <RoomImageList images={data?.images} alt={data?.productTitle} />
               <ImageCaresoul images={data?.images} />
               <div className="block md:hidden">
                 <Card data={data} productId={data._id} accessories={accessories} />
