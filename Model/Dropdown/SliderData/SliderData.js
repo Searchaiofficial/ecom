@@ -20,7 +20,7 @@ export const roomOptions = [
   },
 
   {
-    room: "Balcony",
+    room: "Laundry Room",
     src: "/images/room/laundry.jpg",
   },
 
@@ -30,8 +30,8 @@ export const roomOptions = [
   },
 
   {
-    room: "Guest Room",
-    src: "/images/room/living-room.jpg",
+    room: "Outdoor",
+    src: "/images/room/outdoor.jpg",
   },
 
   {
@@ -43,7 +43,7 @@ export const roomOptions = [
     room: "Kids Room",
     src: "/images/room/children.jpg",
   },
-  
+
   {
     room: "Kitchen",
     src: "/images/room/kitchen.jpg",
