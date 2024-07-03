@@ -452,6 +452,7 @@ export const RoomsPage = ({ params }) => {
                           id={product._id}
                           category={product.category}
                           productId={product.productId}
+                          productType={product.productType}
                           cssClass={"card1flex"}
                         />
                       </div>

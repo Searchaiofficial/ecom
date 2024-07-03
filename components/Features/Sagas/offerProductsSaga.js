@@ -25,6 +25,7 @@ function* fetchProductsFromOffers(action) {
     // console.log(itemsPerPage)
     const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getAllProductsByOffer/${action.payload}?page=${currentPage}&itemsPerPage=${itemsPerPage}`;
     const response = yield call(axios.get, apiUrl);
+    console.log("saga",response.data.products)
     // console.log(response.data)
     // console.log(response.data.products.length)
     yield put(getOfferProductsSuccess(response.data.products));

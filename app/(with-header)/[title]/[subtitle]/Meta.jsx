@@ -22,7 +22,8 @@ import {
 
 const ProductPage = ({ params }) => {
   // const [parentCategory, setParentCategory] = useState(params.parentCategory.replace(/-/g, " "))
-  const parentCategory = params.parentCategory.replace(/-/g, " ")
+  const parentCategory = params.title.replace(/-/g, " ")
+  const subtitle = params.subtitle.replace(/-/g, " ")
   // console.log(parentCategory.replace(/-/g, " "))
   let queryString;
   if (typeof window !== "undefined") {
@@ -52,12 +53,13 @@ const ProductPage = ({ params }) => {
   const currentPage = useSelector(selectFilteredProductCurrentPage)
 
   let offerProduct = useSelector(selectOfferProducts);
-  console.log(offerProduct.length)
+  console.log("check", offerProduct)
+  // console.log(offerProduct.length)
   let offerProductData = offerProduct;
   const [allTypes, setAllTypes] = useState([]);
   const [selectedOfferCategory, setSelectedOfferCategory] = useState("");
   let offerCategory;
-  if (params.parentCategory === "offers" && offerProductData.length > 0) {
+  if (parentCategory === "offers" && offerProductData && offerProductData.length > 0) {
     offerCategory = offerProductData.map((product) => product.category);
     if (offerCategory.length > 0) offerCategory = [...new Set(offerCategory)];
     if (selectedOfferCategory) {
@@ -136,12 +138,11 @@ const ProductPage = ({ params }) => {
     if (parentCategory === "offers") {
       handleSetItem("Offers");
       const encodedType = encodeURI(type);
+      console.log({encodedType})
       dispatch({
         type: "FETCH_PRODUCTS_FROM_OFFER",
         payload: encodedType
       });
-
-
 
       const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getAllOffers`;
       const fetchAllOfferAndProducts = async () => {
@@ -183,12 +184,12 @@ const ProductPage = ({ params }) => {
         }
       };
       fetchVeProducts();
-    } else if (params.heading === "category" && type === "all") {
+    } else if (subtitle === "category" && type === "all") {
       handleSetItem("Products");
       dispatch({
         type: "FETCH_FILTER_PRODUCTS",
         payload: {
-          heading: params.heading,
+          heading: subtitle,
           parentCategoryVar: parentCategory,
         },
       });
@@ -226,7 +227,7 @@ const ProductPage = ({ params }) => {
         },
       });
     }
-  }, [parentCategory, params.cat, type]);
+  }, [parentCategory, subtitle, params.cat, type]);
 
   useEffect(() => {
     let prevScrollPos = window.scrollY;
@@ -316,7 +317,7 @@ const ProductPage = ({ params }) => {
       type: "FETCH_FILTER_PRODUCTS",
       payload: {
         heading: "category",
-        parentCategoryVar: params.parentCategory.replace(/-/g, " "),
+        parentCategoryVar: parentCategory.replace(/-/g, " "),
       },
     });
   };
@@ -336,32 +337,32 @@ const ProductPage = ({ params }) => {
       <div>
         <Tabproduct
           filteredProductData={
-            params.parentCategory === "virtualexperience"
+            parentCategory === "virtualexperience"
               ? filteredProducts
-              : params.parentCategory === "offers"
+              : parentCategory === "offers"
                 ? offerProductData
-                : params.parentCategory === "demandtype"
+                : parentCategory === "demandtype"
                   ? demandTypeProduct
                   : filteredProductData
           }
           heading={
-            params.parentCategory === "offers"
+            parentCategory === "offers"
               ? type === "all"
                 ? "Highest Offer"
                 : type
-              : params.parentCategory === "demandtype"
+              : parentCategory === "demandtype"
                 ? type
                 : category.name
           }
           description={category?.description}
           subCategory={category?.subcategories}
           allTypes={allTypes}
-          parentCategory={params.parentCategory}
+          parentCategory={parentCategory}
           offerCategory={offerCategory}
           setType={setType}
           setSelectedOfferCategory={setSelectedOfferCategory}
           currentPage={currentPage}
-          totalPages={params.parentCategory === "offers"
+          totalPages={parentCategory === "offers"
             ? totalPagesOffer
             : totalPages
           }

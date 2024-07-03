@@ -197,7 +197,7 @@ const RoomPage = () => {
                   </>
                 )}
                 <Link
-                  href={`/category/${data?.category?.replace(/ /g, "-")}/all`}
+                  href={`/${data?.category?.replace(/ /g, "-")}/category/all`}
                 >
                   <span className="hover:text-gray-500 cursor-pointer ">
                     {data?.category}
@@ -211,10 +211,10 @@ const RoomPage = () => {
                   className="opacity-100 h-[6px] "
                 />
                 <Link
-                  href={`/category/${data?.category?.replace(
+                  href={`/${data?.category?.replace(
                     / /g,
                     "-"
-                  )}/${data?.subcategory?.replace(/ /g, "-")}`}
+                  )}/category/${data?.subcategory?.replace(/ /g, "-")}`}
                 >
                   <span className="hover:text-gray-500 cursor-pointer ">
                     {data?.subcategory}

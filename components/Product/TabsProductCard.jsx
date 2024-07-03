@@ -279,7 +279,7 @@ function TabsProductCard(props) {
             {props.images?.map((item, idx) => {
               return (
                 <Link
-                  href={`/product/${props.productTitle}`}
+                  href={`/${props.productTitle}`}
                   onClick={() => handleclick(props.productTitle)}
                 >
                   <Image

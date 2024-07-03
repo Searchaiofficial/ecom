@@ -9,7 +9,7 @@ import { BASE_URL } from "@/constants/base-url";
 
 export async function generateMetadata({ params }) {
   const category = await getCategoryByName(
-    params.parentCategory.replace(/-/g, " ")
+    params.title.replace(/-/g, " ")
   );
 
   return {
@@ -20,31 +20,31 @@ export async function generateMetadata({ params }) {
 
 const page = async ({ params }) => {
   const category = await getCategoryByName(
-    params.parentCategory.replace(/-/g, " ")
+    params.title.replace(/-/g, " ")
   );
 
-  const subcategories = category.subcategories;
+  // const subcategories = category.subcategories;
 
-  const subcategoriesJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    itemListElement: subcategories.map((subcategory, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      name: subcategory.name,
-    })),
-  };
+  // const subcategoriesJsonLd = {
+  //   "@context": "https://schema.org",
+  //   "@type": "ItemList",
+  //   itemListElement: subcategories.map((subcategory, index) => ({
+  //     "@type": "ListItem",
+  //     position: index + 1,
+  //     name: subcategory.name,
+  //   })),
+  // };
 
-  const categoryProductsResponse = await fetch(
-    createApiEndpoint(
-      `fetchProductsByCategory/${params.parentCategory.replace(/-/g, " ")}`
-    )
-  );
-  const categoryProducts = await categoryProductsResponse.json();
+  // const categoryProductsResponse = await fetch(
+  //   createApiEndpoint(
+  //     `fetchProductsByCategory/${params.title.replace(/-/g, " ")}`
+  //   )
+  // );
+  // const categoryProducts = await categoryProductsResponse.json();
 
   return (
     <>
-      <script
+      {/* <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(subcategoriesJsonLd),
@@ -56,9 +56,9 @@ const page = async ({ params }) => {
           category?.metadata?.title || category?.name || params.parentCategory
         }
         description={category?.description || ""}
-        id={`https://www.ayatrio.com/${params.heading}/${params.parentCategory}/${params.cat}`}
-      />
-      <BreadcrumbJsonLd
+        id={`https://www.ayatrio.com/${params.title}/${params.subtitle}/${params.cat}`}
+      /> */}
+      {/* <BreadcrumbJsonLd
         useAppDir={true}
         itemListElements={[
           {
@@ -92,8 +92,8 @@ const page = async ({ params }) => {
               params.cat,
           },
         ]}
-      />
-      {categoryProducts?.map((product) => {
+      /> */}
+      {/* {categoryProducts?.map((product) => {
         return (
           <ProductJsonLd
             key={product._id}
@@ -129,7 +129,7 @@ const page = async ({ params }) => {
             })}
           />
         );
-      })}
+      })} */}
       <ProductPage params={params} />
     </>
   );
