@@ -417,7 +417,7 @@ function Card(props) {
               <div className="flex gap-1 items-end">
                 <h2
                   className={`text-3xl flex font-semibold leading-[0.5] tracking-wide ${props.specialPrice?.price
-                    ? "bg-[#FFC21F] px-2 pt-3 pb-1 w-fit shadow-lg"
+                    ? "bg-[#FFD209] px-2 pt-3 pb-1 w-fit shadow-lg"
                     : ""
                     }`}
                   style={

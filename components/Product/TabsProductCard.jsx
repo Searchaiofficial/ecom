@@ -369,7 +369,7 @@ function TabsProductCard(props) {
                 <div className="flex gap-1 items-end">
                   <h2
                     className={`text-3xl flex font-semibold leading-[0.5]  tracking-wide ${props?.specialprice?.price
-                      ? "bg-[#FFC21F] px-2 pt-3 pb-1 w-fit shadow-lg"
+                      ? "bg-[#FFD209] px-2 pt-3 pb-1 w-fit shadow-lg"
                       : ""
                       } `}
                     style={
@@ -429,7 +429,7 @@ function TabsProductCard(props) {
             <div className=" flex h-[40px] pb-[6px] items-center justify-between mt-2">
               <div className="flex gap-1 items-end">
                 <h2
-                  className={`text-xl flex font-semibold leading-[0.5]  tracking-wide bg-[#FFC21F] px-2 pt-3 pb-1 w-fit shadow-lg $ `}
+                  className={`text-xl flex font-semibold leading-[0.5]  tracking-wide bg-[#FFD209] px-2 pt-3 pb-1 w-fit shadow-lg $ `}
                   style={{ boxShadow: "3px 3px #C31952" }}
                 >
                   Request now

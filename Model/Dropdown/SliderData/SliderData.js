@@ -36,7 +36,7 @@ export const roomOptions = [
 
   {
     room: "Pooja Room",
-    src: "/images/room/living-room.jpg",
+    src: "/images/room/pooja-room.png",
   },
 
   {

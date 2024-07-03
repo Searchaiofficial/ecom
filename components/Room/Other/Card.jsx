@@ -720,7 +720,7 @@ const Card = ({ data, productId }) => {
                 <div className="font-bold items-end flex mb-1 mt-[10px]">
                   <h2
                     className={`text-3xl leading-[0.5] tracking-wide ${data?.specialprice?.price
-                      ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg"
+                      ? "bg-[#FFD209] px-2 pt-3 w-fit shadow-lg"
                       : ""
                       } `}
                     style={
@@ -1618,7 +1618,7 @@ const Card = ({ data, productId }) => {
                               <div className="font-bold items-end flex mb-1 my-[5px]">
                                 <h2
                                   className={`text-3xl leading-[0.5] tracking-wide ${data?.specialprice?.price
-                                    ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg"
+                                    ? "bg-[#FFD209] px-2 pt-3 w-fit shadow-lg"
                                     : ""
                                     } `}
                                   style={
@@ -1683,7 +1683,7 @@ const Card = ({ data, productId }) => {
                                         <div className="font-bold items-end flex mb-1 my-[5px]">
                                           <h2
                                             className={`text-3xl leading-[0.5] tracking-wide ${product?.specialprice?.price
-                                              ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg"
+                                              ? "bg-[#FFD209] px-2 pt-3 w-fit shadow-lg"
                                               : ""
                                               } `}
                                             style={
@@ -1812,7 +1812,7 @@ const Card = ({ data, productId }) => {
                               <div className="font-bold items-end flex mb-1 my-[5px]">
                                 <h2
                                   className={`text-3xl leading-[0.5] tracking-wide ${data?.specialprice?.price
-                                    ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg"
+                                    ? "bg-[#FFD209] px-2 pt-3 w-fit shadow-lg"
                                     : ""
                                     } `}
                                   style={
@@ -1964,7 +1964,7 @@ const Card = ({ data, productId }) => {
                                           <div className="font-bold items-end flex mb-1 my-[5px]">
                                             <h2
                                               className={`text-3xl leading-[0.5] tracking-wide ${product?.specialprice?.price
-                                                ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg"
+                                                ? "bg-[#FFD209] px-2 pt-3 w-fit shadow-lg"
                                                 : ""
                                                 }`}
                                               style={

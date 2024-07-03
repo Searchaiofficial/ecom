@@ -180,7 +180,7 @@ const CartProduct = ({
                             <p className="text-[14px] font-bold text-[#484848]">{product.productTitle}</p>
                             <p className="text-[#484848] text-[12px] mb-[5px] line-clamp-1">{product?.shortDescription}</p>
                             <div className="font-bold items-end flex mb-1 my-[5px]">
-                              <h2 className={`text-3xl leading-[0.5] tracking-wide ${product?.specialprice?.price ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg" : ""} `} style={product?.specialprice?.price ? { boxShadow: '3px 3px #ad3535' } : {}}>
+                              <h2 className={`text-3xl leading-[0.5] tracking-wide ${product?.specialprice?.price ? "bg-[#FFD209] px-2 pt-3 w-fit shadow-lg" : ""} `} style={product?.specialprice?.price ? { boxShadow: '3px 3px #ad3535' } : {}}>
                                 <span className="text-sm">Rs. &nbsp;</span>{" "}
                                 {product?.specialprice?.price ? product?.specialprice?.price : product.perUnitPrice}
                               </h2>{" "}

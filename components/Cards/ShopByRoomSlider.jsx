@@ -85,7 +85,7 @@ const ShopByRoomSlider = () => {
 
     const backgroundColors = [
         "bg-[#FF5B45]",
-        "bg-[#FFC21F]",
+        "bg-[#FFD209]",
         "bg-[#B6E3A0]",
         "bg-[#5680FF]",
         "bg-[#D8B4FE]",

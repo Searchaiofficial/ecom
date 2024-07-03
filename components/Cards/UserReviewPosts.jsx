@@ -221,7 +221,7 @@ const UserReviewPosts = ({ slidesPerView, SubcategoryName }) => {
                                                         {/* {
                                                             item.discountedprice ? (<p className="lg:text-[28px] text-[24px] font-semibold">{item.discountedprice}</p>) : (<p className="lg:text-[28px] text-[24px] font-semibold">{item.totalPrice}</p>)
                                                         } */}
-                                                        <h2 className={`text-3xl flex font-semibold leading-[0.5]  tracking-wide ${item.specialprice ? "bg-[#FFC21F] px-2 pt-3 w-fit shadow-lg" : ""} `} style={item?.specialprice ? { boxShadow: '3px 3px #ad3535' } : {}}>
+                                                        <h2 className={`text-3xl flex font-semibold leading-[0.5]  tracking-wide ${item.specialprice ? "bg-[#FFD209] px-2 pt-3 w-fit shadow-lg" : ""} `} style={item?.specialprice ? { boxShadow: '3px 3px #ad3535' } : {}}>
                                                             <span className={`text-sm ${item?.specialprice?.price ? "" : "pt-3.5"}`}>Rs. &nbsp;</span>{" "}
                                                             {item?.specialprice?.price ? item?.specialprice.price : <p className="pt-3">{item.totalPrice}</p>}
                                                         </h2>{" "}
