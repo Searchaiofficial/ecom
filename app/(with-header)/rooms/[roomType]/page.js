@@ -15,7 +15,7 @@ export const generateMetadata = async ({ params }) => {
 
   return {
     title: roomData.metadata?.title || roomData.roomType || params.roomType,
-    description: roomData.metadata?.description || "",
+    description: roomData.description || "",
   };
 };
 
