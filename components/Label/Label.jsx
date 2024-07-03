@@ -11,6 +11,8 @@ const Label = ({ data }) => {
   const handleTab = () => {
     router.push(`/${data?.ProductLink}`);
   };
+
+  console.log(data)
   return (
     <div className="absolute lg:top-2 lg:left-7 -left-12 top-[70px] z-50" onClick={handleTab}>
       <div
@@ -37,7 +39,7 @@ const Label = ({ data }) => {
             </div>
             <div className="flex  top-16 border-l border-zinc-200">
               <Image
-                className="flex self-center mx-[4px] "
+                className="flex self-center rotate-180   mx-[4px] "
                 src="/icons/backarrow.svg"
                 height={24}
                 width={24}

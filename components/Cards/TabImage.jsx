@@ -5,8 +5,11 @@ import "./tabs.css";
 import Image from "next/image";
 import Label from "../Label/Label";
 import Link from "next/link";
-const TabImage = ({ src, alt, width, height, handleTab, labelData, href, firstData }) => {
+const TabImage = ({ src, alt, width, height, handleTab, labelData, href, firstData, hovered }) => {
   const circledData = Array.isArray(labelData) ? labelData : [labelData];
+
+  console.log(labelData)
+  console.log(circledData)
 
 
   const [windowWidth, setWindowWidth] = useState(0);
@@ -60,27 +63,103 @@ const TabImage = ({ src, alt, width, height, handleTab, labelData, href, firstDa
         />
       )}
       <div className="cursor-pointer">
-        {circledData.map((data, idx) => (
-          <div
-            key={idx}
-            onClick={() => {
-              setOpenData((prev) => {
-                const next = [...prev];
-                next[idx] = !next[idx];
-                return next;
-              });
+        {circledData.map((data, idx) => {
+          console.log(data?.status)
+          if (data?.status === "Active") {
+            return (
+              <div
+                key={idx}
+                onClick={() => {
+                  setOpenData((prev) => {
+                    const next = [...prev];
+                    next[idx] = !next[idx];
+                    return next;
+                  });
 
-            }}
-            style={{
-              boxShadow: `0 1px 4px rgba(var(--colour-static-black, 17, 17, 17), 0.55)`,
-              top: `${data?.topPosition}%`,
-              left: `${data?.leftPosition}%`,
-            }}
-            className="border-2 border-neutral-300 bg-black/40 hover:border-white  absolute hover:bg-black/70 rounded-full size-[30px] flex items-center justify-center transition-all duration-200 before:content-[''] before:size-3 before:bg-white  before:rounded-full before:hover:size-2 before:transition-all before:duration-200"
-          >
-            {openData[idx] ? <Label data={data} /> : null}
-          </div>
-        ))}
+                }}
+                style={{
+                  boxShadow: `0 1px 4px rgba(var(--colour-static-black, 17, 17, 17), 0.55)`,
+                  top: `${data?.topPosition}%`,
+                  left: `${data?.leftPosition}%`,
+                }}
+                className={`border-2  border-neutral-300 bg-black/40 hover:border-white  absolute hover:bg-black/70 rounded-full size-[30px] flex items-center justify-center transition-all duration-200 before:content-[''] before:size-3 before:bg-white  before:rounded-full before:hover:size-2 before:transition-all before:duration-200`}
+              >
+                {openData[idx] ? <Label data={data} /> : null}
+              </div>
+            )
+          }
+          if (data?.status === "ActiveWithData") {
+            return (
+              <div
+                key={idx}
+                onClick={() => {
+                  setOpenData((prev) => {
+                    const next = [...prev];
+                    next[idx] = !next[idx];
+                    return next;
+                  });
+
+                }}
+                style={{
+                  boxShadow: `0 1px 4px rgba(var(--colour-static-black, 17, 17, 17), 0.55)`,
+                  top: `${data?.topPosition}%`,
+                  left: `${data?.leftPosition}%`,
+                }}
+                className={`border-2  border-neutral-300 bg-black/40 hover:border-white  absolute hover:bg-black/70 rounded-full size-[30px] flex items-center justify-center transition-all duration-200 before:content-[''] before:size-3 before:bg-white  before:rounded-full before:hover:size-2 before:transition-all before:duration-200`}
+              >
+                <Label data={data} />
+              </div>
+            )
+          }
+          if (data?.status === "Inactive" && hovered) {
+            return (
+              <div
+                key={idx}
+                onClick={() => {
+                  setOpenData((prev) => {
+                    const next = [...prev];
+                    next[idx] = !next[idx];
+                    return next;
+                  });
+
+                }}
+                style={{
+                  boxShadow: `0 1px 4px rgba(var(--colour-static-black, 17, 17, 17), 0.55)`,
+                  top: `${data?.topPosition}%`,
+                  left: `${data?.leftPosition}%`,
+                }}
+                className={`border-2  border-neutral-300 bg-black/40 hover:border-white  absolute hover:bg-black/70 rounded-full size-[30px] flex items-center justify-center transition-all duration-200 before:content-[''] before:size-3 before:bg-white  before:rounded-full before:hover:size-2 before:transition-all before:duration-200`}
+              >
+                {openData[idx] ? <Label data={data} /> : null}
+              </div>
+            )
+          }
+
+          if (data?.status === undefined) {
+            return (
+              <div
+                key={idx}
+                onClick={() => {
+                  setOpenData((prev) => {
+                    const next = [...prev];
+                    next[idx] = !next[idx];
+                    return next;
+                  });
+
+                }}
+                style={{
+                  boxShadow: `0 1px 4px rgba(var(--colour-static-black, 17, 17, 17), 0.55)`,
+                  top: `${data?.topPosition}%`,
+                  left: `${data?.leftPosition}%`,
+                }}
+                className={`border-2  border-neutral-300 bg-black/40 hover:border-white  absolute hover:bg-black/70 rounded-full size-[30px] flex items-center justify-center transition-all duration-200 before:content-[''] before:size-3 before:bg-white  before:rounded-full before:hover:size-2 before:transition-all before:duration-200`}
+              >
+                {openData[idx] ? <Label data={data} /> : null}
+              </div>
+            )
+          }
+
+        })}
       </div>
     </div>
   );

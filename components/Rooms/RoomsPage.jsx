@@ -140,6 +140,20 @@ export const RoomsPage = ({ params }) => {
 
   console.log(roomMain);
 
+  // console.log(roomMain.children)
+  const [hovered, setIsHovered] = useState(false)
+  const [reviewhovered, setReviewhovered] = useState(false)
+
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+
+  const handleMouseEnter = (index) => {
+    setHoveredIndex(index);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredIndex(null);
+  };
+
   return (
     // <div className="pt-12 bg-white sm:px-[50px] px-[20px]">
     <div className="w-full">
@@ -155,13 +169,14 @@ export const RoomsPage = ({ params }) => {
             click here for size guide
           </a>
 
-          <div className="w-full lg:min-h-[730px] lg:max-h-[730px] min-h-[449px]">
+          <div onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} className="w-full lg:min-h-[730px] lg:max-h-[730px] min-h-[449px]">
             <TabImage
               src={roomMain?.img}
               alt={`Image `}
               width={500}
               height={100}
               labelData={roomMain?.children}
+              hovered={hovered}
             />
           </div>
           <h1 className=" text-2xl font-semibold">
@@ -182,104 +197,48 @@ export const RoomsPage = ({ params }) => {
               <BlogRelatedProducts relatedProducts={roomMain.firstSlider} />
             )}
 
-          {roomMain &&
+          {
+            roomMain &&
             roomMain.fiveRooms &&
             roomMain.fiveRooms.length === 5 && (
               <>
-                <div className=" flex justify-between  mb-10 ">
-                  <div className=" w-full flex justify-center max-h-[915px] screens">
-                    <div className="w-full  lg:h-[730px] grid grid-cols-2 lg:grid-cols-12 gap-y-4  gap-x-4 auto-rows-fr">
-                      {/* 1 */}
-                      <div className="parent col-start-1 col-end-3 row-start-1 lg:mb-0 row-end-6 lg:col-start-1 lg:col-end-7 lg:row-start-1 lg:row-end-12">
-                        <div className="parent relative w-full h-full">
-                          <>
+                <div className="flex justify-between mb-10">
+                  <div className="w-full flex justify-center max-h-[915px] screens">
+                    <div className="w-full lg:h-[730px] grid grid-cols-2 lg:grid-cols-12 gap-y-4 gap-x-4 auto-rows-fr">
+                      {roomMain.fiveRooms.map((room, index) => (
+                        <div
+                          key={index}
+                          className={`parent ${index === 0
+                            ? "col-start-1 col-end-3 row-start-1 row-end-6 lg:col-start-1 lg:col-end-7 lg:row-start-1 lg:row-end-12"
+                            : index === 1
+                              ? "col-start-1 col-end-2 row-start-6 row-span-2 lg:col-start-7 lg:col-end-10 lg:row-start-1 lg:row-end-6"
+                              : index === 2
+                                ? "col-start-2 col-end-3 row-start-6 row-span-3 lg:col-start-10 lg:col-end-13 lg:row-start-1 lg:row-end-7"
+                                : index === 3
+                                  ? "col-start-1 col-end-2 row-start-8 row-span-3 lg:col-start-7 lg:col-end-10 lg:row-start-6 lg:row-end-12"
+                                  : "col-start-2 col-end-3 row-start-9 row-span-2 lg:col-start-10 lg:col-end-13 lg:row-start-7 lg:row-end-12"
+                            }`}
+                          onMouseEnter={() => handleMouseEnter(index)}
+                          onMouseLeave={handleMouseLeave}
+                        >
+                          <div className="relative w-full h-full">
                             <TabImage
-                              src={roomMain.fiveRooms[0].imgSrc}
-                              alt={`Image  of Children`}
+                              src={room.imgSrc}
+                              alt={`Image of Children`}
                               width={1000}
                               height={338}
-                              labelData={roomMain.fiveRooms[0].children}
+                              labelData={room.children}
+                              hovered={hoveredIndex === index}
                             />
-                          </>
+                          </div>
                         </div>
-                      </div>
-                      {/* 2 */}
-                      <div
-                        className="parent col-start-1 col-end-2 row-start-6 row-span-2
-              lg:col-start-7 lg:col-end-10 lg:row-start-1 lg:row-end-6
-            "
-                      >
-                        {
-                          <>
-                            <TabImage
-                              src={roomMain.fiveRooms[1].imgSrc}
-                              alt={`Image  of Children`}
-                              width={1000}
-                              height={338}
-                              labelData={roomMain.fiveRooms[1].children}
-                            />
-                          </>
-                        }
-                      </div>
-                      {/* 3 */}
-                      <div
-                        className=" parent  col-start-2 col-end-3 row-start-6 row-span-3
-            lg:col-start-10 lg:col-end-13 lg:row-start-1 lg:row-end-7
-            "
-                      >
-                        {
-                          <>
-                            <TabImage
-                              src={roomMain.fiveRooms[2].imgSrc}
-                              alt={`Image  of Children`}
-                              width={1000}
-                              height={338}
-                              labelData={roomMain.fiveRooms[2].children}
-                            />
-                          </>
-                        }
-                      </div>
-                      {/* 4 */}
-                      <div
-                        className=" parent col-start-1 col-end-2 row-start-8 row-span-3
-              lg:col-start-7 lg:col-end-10 lg:row-start-6 lg:row-end-12
-            "
-                      >
-                        {
-                          <>
-                            <TabImage
-                              src={roomMain.fiveRooms[3].imgSrc}
-                              alt={`Image  of Children`}
-                              width={1000}
-                              height={338}
-                              labelData={roomMain.fiveRooms[3].children}
-                            />
-                          </>
-                        }
-                      </div>
-                      {/* 5 */}
-                      <div
-                        className=" parent col-start-2 col-end-3 row-start-9 row-span-2
-              lg:col-start-10 lg:col-end-13 lg:row-start-7 lg:row-end-12
-            "
-                      >
-                        {
-                          <>
-                            <TabImage
-                              src={roomMain.fiveRooms[4].imgSrc}
-                              alt={`Image  of Children`}
-                              width={1000}
-                              height={338}
-                              labelData={roomMain.fiveRooms[4].children}
-                            />
-                          </>
-                        }
-                      </div>
+                      ))}
                     </div>
                   </div>
                 </div>
               </>
-            )}
+            )
+          }
           {roomMain &&
             roomMain.secondSlider &&
             roomMain.secondSlider.length > 0 && (
@@ -342,13 +301,16 @@ export const RoomsPage = ({ params }) => {
           <div className="flex mt-8  lg:max-h-[490px] lg:flex-row w-full flex-col relative  ">
             <div className="relative lg:w-2/3 min-h-[446px]">
               {reviewRoom && (
-                <TabImage
-                  src={reviewRoom.imgSrc}
-                  alt={`Image  of Children`}
-                  width={1000}
-                  height={338}
-                  labelData={reviewRoom.children}
-                />
+                <div onMouseEnter={() => setReviewhovered(true)} onMouseLeave={() => setReviewhovered(false)}>
+                  <TabImage
+                    src={reviewRoom.imgSrc}
+                    alt={`Image  of Children`}
+                    width={1000}
+                    height={338}
+                    labelData={reviewRoom.children}
+                    hovered={reviewhovered}
+                  />
+                </div>
               )}
             </div>
             <div className="md:w-1/3 min-h-[363px]   bg-zinc-100  lg:p-12 p-10 ">

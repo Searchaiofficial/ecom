@@ -1412,12 +1412,14 @@ const Tabs = ({
               </div>
             )}
           </div>
-          <div className="self-center flex items-center  gap-2">
-            {renderPaginationControls()}
-          </div>
+
           {filteredProductData?.length > 0 && (
             <Measure category={filteredProductData[0].category} />
           )}
+
+          <div className="self-center flex items-center  gap-2 mt-20">
+            {renderPaginationControls()}
+          </div>
           {/* <div className="main-image-pdt pt-[32px] grid sm:grid-cols-4 grid-cols-2 sm:gap-6 gap-0">
             {secondPart.map((text, idx) => (
               <div
