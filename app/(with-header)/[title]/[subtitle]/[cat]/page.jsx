@@ -17,6 +17,12 @@ export async function generateMetadata({ params }) {
 }
 
 const page = async ({ params }) => {
+  console.log(params)
+
+  if (params.title === "offers") {
+    return <ProductPage params={params} />
+  }
+
   const category = await getCategoryByName(params.title.replace(/-/g, " "));
 
   const subcategories = category.subcategories;
