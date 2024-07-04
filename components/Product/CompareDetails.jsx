@@ -8,22 +8,28 @@ import {
 } from "../Features/Slices/compareSlice";
 import { useRouter } from "next/navigation";
 
-const CompareDetails = ({ filteredProducts }) => {
-  const datas = useSelector(selectproductdata);
-  const statuses = useSelector(selectproductstatus);
+const CompareDetails = ({ data }) => {
+  // const datas = useSelector(selectproductdata);
+  // const statuses = useSelector(selectproductstatus);
+
+  // console.log(filteredProducts)
+  // console.log(datas)
+  // console.log(datas.length)
+  // console.log(statuses)
 
   const router = useRouter();
   const handlenav = (id) => {
     router.push(`/room/${id}`);
   };
-  const stars = new Array(4)
-    .fill("/icons/star.svg")
-    .concat("/icons/half-black-half-white.svg");
+  // const stars = new Array(4)
+  //   .fill("/icons/star.svg")
+  //   .concat("/icons/half-black-half-white.svg");
+  console.log(data)
   return (
-    <div className="py-20">
+    <div className="py-40">
       <div className="flex items-center justify-center sm:flex-row flex-wrap sm:gap-28 gap-10 overflow-x-auto">
-        {statuses === "succeeded" &&
-          datas.map((item) => (
+        {
+          data.map((item) => (
             <div
               className="  flex justify-center items-center flex-col gap-3"
               key={item._id}
@@ -44,11 +50,11 @@ const CompareDetails = ({ filteredProducts }) => {
               <hr className=" bg-slate-900 w-full" />
               <div className="flex flex-col gap-5 items-center justify-center">
                 <div className="flex flex-col items-center justify-center">
-                  <p className="text-sm">Length: {item.dimensions.length.value}</p>
+                  {/* <p className="text-sm">Length: {item.dimensions.length?.value}</p> */}
                 </div>
                 <div className="flex flex-col items-center justify-center">
                   {/* <p>Width</p> */}
-                  <p className="text-sm">Width: {item.dimensions.width.value}</p>
+                  {/* <p className="text-sm">Width: {item.dimensions.width.value}</p> */}
                 </div>
                 <div className="flex flex-col items-center justify-center">
                   {/* <p>Category</p> */}
@@ -68,7 +74,7 @@ const CompareDetails = ({ filteredProducts }) => {
                 </div>
                 <div className="flex flex-col items-center justify-center">
                   <p>Rating</p>
-                  <p className="text-sm flex flex-row gap-1 items-center text-black">
+                  {/* <p className="text-sm flex flex-row gap-1 items-center text-black">
                     {stars.map((star, index) => (
                       <Image
                         key={index}
@@ -78,7 +84,7 @@ const CompareDetails = ({ filteredProducts }) => {
                         height={15}
                       />
                     ))}
-                  </p>
+                  </p> */}
                 </div>
               </div>
               <hr className=" bg-slate-900 w-full" />

@@ -523,7 +523,7 @@ const Tabs = ({
     if (selectedpdt.length === 3) {
       setShowcompare(true);
       setActiveCompare(false);
-      router.push(pathname + "/compare");
+      router.push(pathname + "/compare2");
     } else if (selectedpdt.length === 2) {
       setShowcompare(true);
       setActiveCompare(false);
@@ -961,7 +961,7 @@ const Tabs = ({
             allDemandType &&
             allDemandType.length > 0 && (
               <TabsProductContent
-                filterName={"DemandType"}
+                filterName={"New"}
                 commonClasses={commonClasses}
                 isFilterOpen={openDemandTYpe}
                 handleAll={handleAll}
@@ -1256,7 +1256,7 @@ const Tabs = ({
                 ${openAllDemandType ? " rotate-90" : "-rotate-90"}
 
                 `}
-                        
+
                         alt="arrow icon"
                       />
                     </div>
@@ -1421,7 +1421,7 @@ const Tabs = ({
             {renderPaginationControls()}
           </div>
           {/* <div className="main-image-pdt pt-[32px] grid sm:grid-cols-4 grid-cols-2 sm:gap-6 gap-0">
-            {secondPart.map((text, idx) => (
+            {filteredProductData?.map((text, idx) => (
               <div
                 className="flex flex-col gap-3 p-3 border-b border-r hover-divnine sm:border-none"
                 key={idx}
@@ -1430,9 +1430,8 @@ const Tabs = ({
                 <div className=" relative w-[250px] h-[250px]">
                   <div
                     onClick={(event) => event.stopPropagation()}
-                    className={`flex justify-between text-black gap-4  checkbox-div absolute top-0 left-0 z-10 ${
-                      selectedpdt.includes(text) ? "visible" : ""
-                    }`}
+                    className={`flex justify-between text-black gap-4  checkbox-div absolute top-0 left-0 z-10 ${selectedpdt.includes(text) ? "visible" : ""
+                      }`}
                   >
                     <input
                       type="checkbox"

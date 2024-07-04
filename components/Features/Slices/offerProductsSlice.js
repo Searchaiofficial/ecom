@@ -5,7 +5,7 @@ const initialState = {
   loader: false,
   product: {},
   currentPage: 1,
-  itemsPerPage: 2,
+  itemsPerPage: 4,
   totalPages: 1,
 };
 

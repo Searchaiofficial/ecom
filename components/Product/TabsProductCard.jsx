@@ -222,7 +222,7 @@ function TabsProductCard(props) {
         <div className="relative z[-999999] w-fit">
           <div
             onClick={(event) => event.stopPropagation()}
-            className={`flex justify-between text-black   checkbox-div absolute top-0 right-0 z-10 ${props.selectedpdt.includes(props.text) ? "visible" : ""
+            className={`flex justify-between text-black   checkbox-div absolute top-0 right-0 z-50 ${props.selectedpdt.includes(props.text) ? "visible" : "visible"
               }`}
           >
             <input
@@ -314,6 +314,7 @@ function TabsProductCard(props) {
                 />
               </div>
             )}
+
             <span className="flex absolute bottom-[16px]">
               {props.images.map((_, idx) => {
                 return (
@@ -369,8 +370,8 @@ function TabsProductCard(props) {
                 <div className="flex gap-1 items-end">
                   <h2
                     className={`text-3xl flex font-semibold leading-[0.5]  tracking-wide ${props?.specialprice?.price
-                      ? "bg-[#FFD209] px-2 pt-3 pb-1 w-fit shadow-lg"
-                      : ""
+                        ? "bg-[#FFD209] px-2 pt-3 pb-1 w-fit shadow-lg"
+                        : ""
                       } `}
                     style={
                       props?.specialprice?.price

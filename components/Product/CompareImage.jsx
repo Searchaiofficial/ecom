@@ -55,7 +55,7 @@ const CompareImage = () => {
       setGetImg(false);
     }, 3000);
   }
-  let texture_type = localStorage.getItem("texture_type");
+  // let texture_type = localStorage.getItem("texture_type");
 
   // console.log("this page");
   return (

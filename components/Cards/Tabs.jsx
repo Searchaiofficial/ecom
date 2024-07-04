@@ -348,7 +348,7 @@ const Tabs = ({ data }) => {
             {
               !loadMoreAll && (
                 <div className="flex items-center justify-center">
-                  <p onClick={handleLoadMoreAll} className="text-center text-[14px] font-semibold border max-w-fit p-2 px-4 rounded-full  border-black cursor-pointer">Load 6 more</p>
+                  <p onClick={handleLoadMoreAll} className="text-center text-[14px] font-semibold border max-w-fit p-2 px-4 rounded-full  border-black cursor-pointer">More</p>
                 </div>
               )
             }
@@ -563,7 +563,7 @@ const Tabs = ({ data }) => {
             {
               !loadMore && (
                 <div className="flex items-center justify-center">
-                  <p onClick={handleLoadMore} className="text-center text-[14px] font-semibold border max-w-fit p-2 px-4 rounded-full  border-black cursor-pointer">Load 6 more</p>
+                  <p onClick={handleLoadMore} className="text-center text-[14px] font-semibold border max-w-fit p-2 px-4 rounded-full  border-black cursor-pointer">More</p>
                 </div>
               )
             }
