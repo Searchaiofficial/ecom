@@ -5,7 +5,7 @@ export default function Emptycart() {
         <div className="flex flex-col md:flex-row items-center justify-center md:justify-between">
             <div className="order-1 md:order-2 mt-6 md:mt-0 md:ml-8 w-full md:w-1/2 lg:w-1/2">
                 <Image
-                    src="/images/empty_bag.jpg"
+                    src="/images/empty_bag.webp"
                     className="w-full h-full object-cover"
                     alt="empty bag"
                     width={250}

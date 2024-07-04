@@ -16,7 +16,7 @@ const Displaybox = (props) => {
     // handleIncrementCategoryPopularity();
     // handleIncrementSubCategoryPopularity(value);
     const category = value.replace(/ /g, "-");
-    const newPath = `/${currentCategory}/${ props.parentCategory}/${category}`;
+    const newPath = `/${currentCategory}/${props.parentCategory}/${category}`;
     router.push(newPath);
     props.setAsideCategory(null);
     props.HandleClick(false);
