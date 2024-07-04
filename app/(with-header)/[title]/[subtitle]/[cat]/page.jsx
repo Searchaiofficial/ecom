@@ -9,18 +9,33 @@ import { BASE_URL } from "@/constants/base-url";
 
 export async function generateMetadata({ params }) {
   const category = await getCategoryByName(params.title.replace(/-/g, " "));
+  const subcategories = category.subcategories;
+
+  const isCategoryPage = params.title !== "offers" && params.cat === "all";
+
+  if (isCategoryPage) {
+    return {
+      title: category?.metadata?.title || category?.name || params.title,
+      description: category?.description || "",
+    };
+  }
+
+  const currentSubcategory = subcategories.find(
+    (subcategory) => subcategory.name === params.cat
+  );
 
   return {
-    title: category?.metadata?.title || category?.name || params.title,
-    description: category?.description || "",
+    title:
+      currentSubcategory?.metadata?.title ||
+      currentSubcategory?.name ||
+      params.cat,
+    description: currentSubcategory?.description || "",
   };
 }
 
 const page = async ({ params }) => {
-  console.log(params)
-
   if (params.title === "offers") {
-    return <ProductPage params={params} />
+    return <ProductPage params={params} />;
   }
 
   const category = await getCategoryByName(params.title.replace(/-/g, " "));
@@ -34,6 +49,7 @@ const page = async ({ params }) => {
       "@type": "ListItem",
       position: index + 1,
       name: subcategory.name,
+      description: subcategory.description || "",
     })),
   };
 
