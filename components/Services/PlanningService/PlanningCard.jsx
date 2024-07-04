@@ -3,9 +3,9 @@ export default function PlanningCard({ content = {} }) {
     return (
         <section className="m-10" id="appointment">
             <div>
-                <Image
+                <Image loading="lazy"
                     src={`${content.image}`}
-                    alt="image"
+                    alt={content.title}
                     width={500}
                     height={300}
                     className="h-[300px]"

@@ -170,7 +170,7 @@ const LiveRoom = ({ userInfo }) => {
                 onClick={handleGoogleLogin}
                 className="border-2 text-black border-solid  w-[100%] sm:h-14 h-8 gap-[5px] rounded-full  transition duration-300 font-semibold flex items-center justify-center my-[15px]"
               >
-                <Image
+                <Image loading="lazy"
                   src="/icons/googlelogin.svg"
                   width={20}
                   height={20}

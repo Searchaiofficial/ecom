@@ -61,6 +61,7 @@ const page = () => {
                     src={item.images[0]}
                     height={300}
                     width={300}
+                    alt={item.productTitle}
                     className=" min-h-[150px] min-w-[150px] lg:h-[300px] lg:w-[300px]"
                     style={{
                       // width: "100%",

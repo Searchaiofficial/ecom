@@ -40,7 +40,7 @@ const Double = () => {
       >
         <SwiperSlide>
           <div className="mr-2 mt-6 ">
-            <Image
+            <Image loading="lazy"
               width={208}
               height={350}
               src={musicSwiperData[0]?.img[0]?.url}
@@ -56,7 +56,7 @@ const Double = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className="mr-2 mt-6 ">
-            <Image
+            <Image loading="lazy"
               width={208}
               height={350}
               src={musicSwiperData[0]?.img[1]?.url}
@@ -70,7 +70,7 @@ const Double = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className="mr-2 mt-6 ">
-            <Image
+            <Image loading="lazy"
               width={208}
               height={350}
               src={musicSwiperData[0]?.img[3]?.url}
@@ -86,7 +86,7 @@ const Double = () => {
           return (
             <SwiperSlide>
               <div className="mr-2 mt-6 ">
-                <Image
+                <Image loading="lazy"
                   width={208}
                   height={350}
                   src={data.url}
@@ -102,14 +102,14 @@ const Double = () => {
             </SwiperSlide>
           );
         })}
-        <Image
+        <Image loading="lazy"
           src="/icons/right.svg"
           width={30}
           height={30}
           alt="arrow"
           className="swiper-button-prev sm:-translate-y-[150px] rotate-180 sm:-translate-x-[585px] sm:block hidden"
         />
-        <Image
+        <Image loading="lazy"
           src="/icons/right.svg"
           width={30}
           height={30}

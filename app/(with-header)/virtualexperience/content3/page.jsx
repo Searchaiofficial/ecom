@@ -16,7 +16,7 @@ const ActivityItem = ({ index, widthRange, selectedActivity, handleClick }) => (
     )}
     <div className={`w-${widthRange} h-20 bg-orange-400`}></div>
     <div className="flex items-center gap-2">
-      <Image
+      <Image loading="lazy"
         src="/icons/uparrow.svg"
         alt="arrow"
         width={10}
@@ -24,7 +24,7 @@ const ActivityItem = ({ index, widthRange, selectedActivity, handleClick }) => (
         className=" -rotate-90"
       />
       {widthRange} Widths{" "}
-      <Image
+      <Image loading="lazy"
         src="/icons/uparrow.svg"
         alt="arrow"
         width={10}
@@ -36,7 +36,7 @@ const ActivityItem = ({ index, widthRange, selectedActivity, handleClick }) => (
     {selectedActivity[index] && (
       <div className="room-item absolute bottom-4 z-10 flex items-center opacity-50 justify-center">
         <div className="circle-container relative flex justify-center items-center">
-          <Image
+          <Image loading="lazy"
             src="/icons/tick.svg"
             alt="tick"
             width={30}

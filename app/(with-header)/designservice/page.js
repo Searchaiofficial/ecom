@@ -40,7 +40,7 @@ const DesignServicePage = () => {
                 <div className="flex flex-col gap-5 md:w-1/4 border border-t-4 border-t-black p-4 shadow-2xl">
                   <div className="flex flex-col items-center">
                     <div className="w-4/6">
-                      <Image
+                      <Image loading="lazy"
                         width={225}
                         height={225}
                         className="p-5"
@@ -64,7 +64,7 @@ const DesignServicePage = () => {
                 <div className="flex flex-col gap-5 md:w-1/4 border border-t-4 border-t-black p-4 shadow-2xl">
                   <div className="flex flex-col items-center">
                     <div className="w-4/6">
-                      <Image
+                      <Image loading="lazy"
                         width={225}
                         height={225}
                         alt="house image"
@@ -151,7 +151,9 @@ const DesignServicePage = () => {
                   return (
                     <div className="flex items-center justify-between h-[350px] flex-col space-y-3 border-none rounded-sm bg-slate-200 p-4 pt-5">
                       {/* <div className="w-2/3"> */}
-                      <img
+                      <Image
+                        width={200}
+                        height={200}
                         className="h-[200px] w-[200px] object-cover rounded-full"
                         src={curElement.image}
                       />
@@ -185,7 +187,9 @@ const DesignServicePage = () => {
                 {ideasAndAdvice.map((curElement) => {
                   return (
                     <div className="flex flex-col items-start hover:underline cursor-pointer">
-                      <img
+                      <Image
+                        width={350}
+                        height={300}
                         className="h-[300px] w-[350px] object-cover object-top"
                         src={curElement.image}
                       />

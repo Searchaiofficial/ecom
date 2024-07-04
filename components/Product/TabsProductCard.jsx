@@ -267,7 +267,7 @@ function TabsProductCard(props) {
             onTouchEnd={() => setIsHovered(false)} // for touch devices
           >
             {isHovered && slide !== 0 && (
-              <Image
+              <Image loading="lazy"
                 src="/icons/backarrow-w.svg"
                 height={20}
                 width={20}
@@ -282,7 +282,7 @@ function TabsProductCard(props) {
                   href={`/${props.productTitle}`}
                   onClick={() => handleclick(props.productTitle)}
                 >
-                  <Image
+                  <Image loading="lazy"
                     src={
                       isHovered
                         ? props.images[1]
@@ -304,7 +304,7 @@ function TabsProductCard(props) {
 
             {isHovered && (
               <div>
-                <Image
+                <Image loading="lazy"
                   src="/icons/rightarrow-w.svg"
                   height={20}
                   width={20}
@@ -402,7 +402,7 @@ function TabsProductCard(props) {
                     className="bg-[#0152be] p-[6px] mr-2 rounded-full"
                     onClick={addProductToCart}
                   >
-                    <Image
+                    <Image loading="lazy"
                       src={"/icons/ad-to-cart.svg"}
                       height={20}
                       width={20}
@@ -473,7 +473,7 @@ function TabsProductCard(props) {
                           }   
           `}
                       >
-                        <Image
+                        <Image loading="lazy"
                           className="relative w-full h-full object-cover"
                           src={item.image}
                           alt={item.color}
@@ -540,7 +540,7 @@ function TabsProductCard(props) {
         {/* {props.ratings?.length > 0 && (
           <p className="flex flex-row items-center gap-1 text-sm text-black">
             {props.stars.map((star, index) => (
-              <Image key={index} src={star} alt="star" width={15} height={15} />
+              <Image loading="lazy" key={index} src={star} alt="star" width={15} height={15} />
             ))}
             ({props.ratings?.length})
           </p>

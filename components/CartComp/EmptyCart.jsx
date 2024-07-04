@@ -10,6 +10,7 @@ export default function Emptycart() {
                     alt="empty bag"
                     width={250}
                     height={250}
+                    loading="lazy"
                 />
             </div>
             <div className="order-2 md:order-1 text-center md:text-left w-full md:w-1/2 lg:w-1/2">

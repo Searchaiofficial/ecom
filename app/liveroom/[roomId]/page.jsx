@@ -308,7 +308,7 @@ const page = ({ params }) => {
               className="bg-red-500 p-2 hover:bg-red-400 text-xs text-center text-white font-medium shadow-sm  rounded-full w-10 h-10"
             >
               {myAudioEnabled ? (
-                <Image
+                <Image loading="lazy"
                   src="/callingicon/ic_addaudio.svg"
                   alt="Add Microphone"
                   width={10}
@@ -316,7 +316,7 @@ const page = ({ params }) => {
                   className="object-cover w-full"
                 />
               ) : (
-                <Image
+                <Image loading="lazy"
                   src="/callingicon/ic_removeaudio.svg"
                   alt="Remove Microphone"
                   width={10}
@@ -330,7 +330,7 @@ const page = ({ params }) => {
               className="bg-red-500 p-2 hover:bg-red-400 text-xs text-center text-white font-medium shadow-sm  rounded-full w-10 h-10"
             >
               {myVideoEnabled ? (
-                <Image
+                <Image loading="lazy"
                   src="/callingicon/ic_advideo.svg"
                   alt="add video"
                   width={10}
@@ -338,7 +338,7 @@ const page = ({ params }) => {
                   className="object-cover w-full"
                 />
               ) : (
-                <Image
+                <Image loading="lazy"
                   src="/callingicon/ic_removevideo.svg"
                   alt="remove video"
                   width={10}
@@ -376,7 +376,7 @@ const page = ({ params }) => {
                 onClick={startScreenShare}
                 className="bg-red-500 p-2 hover:bg-red-400 text-xs text-center text-white font-medium shadow-sm  rounded-full w-10 h-10"
               >
-                <Image
+                <Image loading="lazy"
                   src="/callingicon/ic_adsharescreen.svg"
                   alt="Microphone"
                   width={10}
@@ -390,7 +390,7 @@ const page = ({ params }) => {
                 onClick={stopScreenShare}
                 className="bg-red-500 p-2 hover:bg-red-400 text-xs text-center text-white font-medium shadow-sm  rounded-full w-10 h-10"
               >
-                <Image
+                <Image loading="lazy"
                   src="/callingicon/ic_removesharescreen.svg"
                   alt="Microphone"
                   width={10}

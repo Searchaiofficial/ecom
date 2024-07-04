@@ -81,7 +81,7 @@ function LiveRoomProductCard(props) {
           <div className="relative  flex gap-4 cursor-pointer ">
             <div className="w-[200px] aspect-square">
               <Link href={`/product/${props.title}`}>
-                <Image
+                <Image loading="lazy"
                   src={props.imgSrc[0]}
                   alt={props.title}
                   height={300}
@@ -125,7 +125,7 @@ function LiveRoomProductCard(props) {
               {/* {props.ratings?.length > 0 && ( */}
               <p className="flex flex-row items-center gap-1 text-sm text-black">
                 {props.stars.map((star, index) => (
-                  <Image
+                  <Image loading="lazy"
                     key={index}
                     src={star}
                     alt="star"

@@ -55,7 +55,7 @@ const CustomerServicePage = () => {
                   key={option.id}
                   onClick={() => handleOptionClick(option.id)}
                 >
-                  <Image width={400} height={180} src={option.image} alt={option.text} style={{ height: '180px' }} />
+                  <Image loading="lazy" width={400} height={180} src={option.image} alt={option.text} style={{ height: '180px' }} />
                   <p className="text-sm">{option.text}</p>
                 </div>
               );

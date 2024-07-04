@@ -108,7 +108,7 @@ const Content1 = () => {
                   {selectedActivity[item.title] && (
                     <div className="room-item absolute top-2 right-2 z-10  flex items-center opacity-50 justify-center">
                       <div className="circle-container relative flex justify-center items-center">
-                        <Image
+                        <Image loading="lazy"
                           src="/icons/tick.svg"
                           alt="tick"
                           width={30}

@@ -357,7 +357,7 @@ const Userpin = () => {
               {cartStatus === "succeeded" && cartdata ? (
                 cartdata.items.map((item, index) => {
                   return (
-                    <Image
+                    <Image loading="lazy"
                       src={item.productId.images[0]}
                       width={249}
                       height={249}
@@ -378,7 +378,7 @@ const Userpin = () => {
             <span className="text-[#767677]">Products price </span>
             <div className="font-[700] text-black">
               <div className="flex items-center">
-                <Image
+                <Image loading="lazy"
                   src="/icons/indianrupeesicon.svg"
                   width={18}
                   height={18}
@@ -393,7 +393,7 @@ const Userpin = () => {
             <span className="text-[#767677]">Services price </span>
             <div className="font-[700] text-black">
               <div className="flex items-center">
-                <Image
+                <Image loading="lazy"
                   src="/icons/indianrupeesicon.svg"
                   width={18}
                   height={18}
@@ -408,7 +408,7 @@ const Userpin = () => {
             <span className="text-[#767677]">Accessories price </span>
             <div className="font-[700] text-black">
               <div className="flex items-center">
-                <Image
+                <Image loading="lazy"
                   src="/icons/indianrupeesicon.svg"
                   width={18}
                   height={18}
@@ -430,7 +430,7 @@ const Userpin = () => {
             <span className="text-[#767677]">Subtotal </span>
             <div className="font-[700] text-black text-2xl">
               <div className="flex items-center">
-                <Image
+                <Image loading="lazy"
                   src="/icons/indianrupeesicon.svg"
                   width={20}
                   height={20}

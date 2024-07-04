@@ -127,14 +127,14 @@ const MulticardService = () => {
                     })}
 
                     <div className="flex flex-row items-end justify-end gap-4 pt-[32px]">
-                        <Image
+                        <Image loading="lazy"
                             src="/icons/backarrowblack.svg"
                             width={20}
                             height={20}
                             alt="Arrow"
                             className="back rounded-full h-7 w-7 "
                         />
-                        <Image
+                        <Image loading="lazy"
                             src="/icons/rightarrowblack.svg"
                             width={20}
                             height={20}

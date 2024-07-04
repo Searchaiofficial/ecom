@@ -27,7 +27,7 @@ const ratingsData = [
     label: "Accuracy",
     value: "5.0",
     icon: (
-      <Image
+      <Image loading="lazy"
         src="/icons/checkmark-icon.svg"
         width={36}
         height={36}
@@ -40,7 +40,7 @@ const ratingsData = [
     label: "Communication",
     value: "4.9",
     icon: (
-      <Image
+      <Image loading="lazy"
         src="/icons/message-icon.svg"
         width={36}
         height={36}
@@ -53,7 +53,7 @@ const ratingsData = [
     label: "Location",
     value: "4.0",
     icon: (
-      <Image
+      <Image loading="lazy"
         src="/icons/location-pin-icon.svg"
         width={36}
         height={36}
@@ -66,7 +66,7 @@ const ratingsData = [
     label: "Value",
     value: "5.0",
     icon: (
-      <Image
+      <Image loading="lazy"
         src="/icons/price-tag-icon.svg"
         width={36}
         height={36}
@@ -301,7 +301,7 @@ const Reviews = ({ productId, data }) => {
               </div>
               <div className="ratings flex mt-3">
                 {[...Array(review.rating)].map((_, i) => (
-                  <Image
+                  <Image loading="lazy"
                     key={i}
                     src="/icons/full-black.svg"
                     width={15}

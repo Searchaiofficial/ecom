@@ -45,7 +45,7 @@ const Colours = ({ props }) => {
           {colours.map((color) => (
             // <li className="color_item" onClick={()=>handleClick(color)}>
             <li className="color_item">
-              <Image
+              <Image loading="lazy"
                 className="color_photo"
                 src={color.image}
                 alt={color.name}

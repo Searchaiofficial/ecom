@@ -153,7 +153,7 @@ const DesignServicePage = () => {
                       <Image
                         width={200}
                         height={200}
-                        alt="expert"
+                        alt={curElement.name}
                         className="h-[200px] w-[200px] object-cover rounded-full"
                         src={curElement.image}
                       />

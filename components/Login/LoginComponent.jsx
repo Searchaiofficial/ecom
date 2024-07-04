@@ -98,14 +98,14 @@ const LoginComponent = () => {
               </p>
               <div className="flex flex-row gap-2">
                 <div className="  flex flex-col gap-2 w-6/12">
-                  <Image
+                  <Image loading="lazy"
                     className="rounded-md"
                     width={200}
                     height={256}
                     src="/images/login/login1.jpg"
                     alt="login image"
                   />
-                  <Image
+                  <Image loading="lazy"
                     className="rounded-md"
                     width={200}
                     height={256}
@@ -115,7 +115,7 @@ const LoginComponent = () => {
                   />
                 </div>
                 <div className="  flex flex-col gap-2 w-6/12">
-                  <Image
+                  <Image loading="lazy"
                     className="rounded-md"
                     width={200}
                     height={240}
@@ -123,7 +123,7 @@ const LoginComponent = () => {
                     alt="login image"
 
                   />
-                  <Image
+                  <Image loading="lazy"
                     className="rounded-md"
                     width={200}
                     height={240}
@@ -155,7 +155,7 @@ const LoginComponent = () => {
                   onClick={handleGoogleLogin}
                   className="border-2 text-black border-solid  w-[100%] sm:h-14 h-8 gap-[5px] rounded-full  transition duration-300 font-semibold flex items-center justify-center mb-[15px]"
                 >
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/googlelogin.svg"
                     width={20}
                     height={20}

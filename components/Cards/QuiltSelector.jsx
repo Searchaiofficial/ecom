@@ -129,7 +129,7 @@ const QuiltSelector = () => {
                 <SwiperSlide key={idx} className="ml-0">
                   <div className="pb-8  cursor-pointer ">
                     <div className="flex h-full w-full items-center justify-center cursor-pointer  overflow-hidden">
-                      <Image
+                      <Image loading="lazy"
                         src={quilt.imageUrl}
                         alt= {quilt.weatherTitle}
                         height={600}

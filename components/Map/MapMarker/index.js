@@ -92,7 +92,7 @@ const MapMarker = ({ place, idx }) => {
                 </p>
               </div> */}
               <div className="flex flex-col rounded-lg">
-                <Image
+                <Image loading="lazy"
                   src={defaultImageUrl}
                   height={100}
                   width={200}

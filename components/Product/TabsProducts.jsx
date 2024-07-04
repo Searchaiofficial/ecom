@@ -651,7 +651,7 @@ const Tabs = ({
   //       {text}
   //     </label>
   //     <div className="flex gap-2">
-  //       {/* <Image src={text.image} width={25} height={15} className="rounded-full w-5 h-5" /> */}
+  //       {/* <Image loading="lazy" src={text.image} width={25} height={15} className="rounded-full w-5 h-5" /> */}
   //       <input type="radio" onClick={() => handleColorChange(text)} />
   //     </div>
   //   </div>
@@ -662,7 +662,7 @@ const Tabs = ({
   //       {text}
   //     </label>
   //     <div className="flex gap-2">
-  //       {/* <Image src={text.image} width={25} height={15} className="rounded-full w-5 h-5" /> */}
+  //       {/* <Image loading="lazy" src={text.image} width={25} height={15} className="rounded-full w-5 h-5" /> */}
   //       <input type="radio" onClick={() => handleDemandTypeChange(text)} />
   //     </div>
   //   </div>
@@ -745,7 +745,7 @@ const Tabs = ({
                         >
                           <div className="flex flex-col ">
                             <div className="lg:mb-[12px] ">
-                              <Image
+                              <Image loading="lazy"
                                 src={curElement.img}
                                 width={200}
                                 height={130}
@@ -1069,7 +1069,7 @@ const Tabs = ({
                   `}
               >
                 All Filters &nbsp;
-                <Image
+                <Image loading="lazy"
                   src="/icons/choserightfloor.svg"
                   width={40}
                   height={40}
@@ -1091,7 +1091,7 @@ const Tabs = ({
                   Filter and sort
                 </p>
 
-                <Image
+                <Image loading="lazy"
                   className="absolute right-3 px-[2px]"
                   src="/icons/closeicon.svg"
                   width={20}
@@ -1109,7 +1109,7 @@ const Tabs = ({
                       className="flex justify-between text-left text-[14px] font-semibold "
                     >
                       Sort &nbsp;
-                      <Image
+                      <Image loading="lazy"
                         src="/icons/backarrow.svg"
                         width={40}
                         height={40}
@@ -1136,7 +1136,7 @@ const Tabs = ({
                         className="flex justify-between text-left"
                       >
                         Size &nbsp;
-                        <Image
+                        <Image loading="lazy"
                           src="/icons/backarrow.svg"
                           width={40}
                           height={40}
@@ -1165,7 +1165,7 @@ const Tabs = ({
                           className="flex justify-between text-left"
                         >
                           Design style &nbsp;
-                          <Image
+                          <Image loading="lazy"
                             src="/icons/backarrow.svg"
                             width={40}
                             height={40}
@@ -1192,7 +1192,7 @@ const Tabs = ({
                       className="flex justify-between text-left text-[14px] font-semibold "
                     >
                       Color &nbsp;
-                      <Image
+                      <Image loading="lazy"
                         src="/icons/backarrow.svg"
                         width={40}
                         height={40}
@@ -1221,7 +1221,7 @@ const Tabs = ({
                           className="flex justify-between text-left text-[14px] font-semibold "
                         >
                           Design style &nbsp;
-                          <Image
+                          <Image loading="lazy"
                             src="/icons/backarrow.svg"
                             width={40}
                             height={40}
@@ -1248,7 +1248,7 @@ const Tabs = ({
                       className="flex justify-between text-left text-[14px] font-semibold "
                     >
                       Latest &nbsp;
-                      <Image
+                      <Image loading="lazy"
                         src="/icons/backarrow.svg"
                         width={40}
                         height={40}
@@ -1275,7 +1275,7 @@ const Tabs = ({
                       className="flex justify-between text-left text-[14px] font-semibold "
                     >
                       Offer &nbsp;
-                      <Image
+                      <Image loading="lazy"
                         src="/icons/backarrow.svg"
                         width={40}
                         height={40}
@@ -1302,7 +1302,7 @@ const Tabs = ({
                         className="flex justify-between text-left text-[14px] font-semibold"
                       >
                         Type &nbsp;
-                        <Image
+                        <Image loading="lazy"
                           src="/icons/backarrow.svg"
                           width={40}
                           height={40}
@@ -1442,7 +1442,7 @@ const Tabs = ({
                       checked={selectedpdt.includes(text)}
                     />
                   </div>
-                  <Image
+                  <Image loading="lazy"
                     src={text.images[0]}
                     alt=""
                     className="absolute "
@@ -1461,7 +1461,7 @@ const Tabs = ({
                 </p>
                 <p className="flex flex-row items-center gap-1 text-sm text-black">
                   {stars.map((star, index) => (
-                    <Image
+                    <Image loading="lazy"
                       key={index}
                       src={star}
                       alt="star"

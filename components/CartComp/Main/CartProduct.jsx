@@ -30,12 +30,13 @@ const CartProduct = ({
       <div className="">
         <div className=" py-[24px] items-start flex gap-5 lg:gap-8 border-b border-slate-400 mt-3 ">
           {/* <!-- image of product --> */}
-          <Image
+          <Image loading="lazy"
             src={cartItem.productId.images[0]}
             width={249}
             height={249}
             alt={cartItem.name}
             className="w-[88px] h-[88px] lg:w-32 lg:h-40 "
+            
           />
 
           <div className="flex">
@@ -78,7 +79,7 @@ const CartProduct = ({
                 </div>
 
                 <div className="">
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/like.svg"
                     width={20}
                     height={20}
@@ -90,7 +91,7 @@ const CartProduct = ({
                   onClick={() => handleItemDelete(cartItem?.productId._id)}
                   className=""
                 >
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/delete-icon.svg"
                     width={20}
                     height={20}
@@ -104,7 +105,7 @@ const CartProduct = ({
             <div className="w-[100px] lg:w-auto">
               <div className="sm:text-xl text-md sm:font-semibold font-medium ">
                 <div className="flex items-center">
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/indianrupeesicon.svg"
                     width={18}
                     height={18}
@@ -120,7 +121,7 @@ const CartProduct = ({
           {
             cartItem?.selectedServices?.length > 0 && (
               <div className="flex gap-14  py-5 border-b border-gray-400">
-                <Image src={"/icons/instalation.svg"} width={100} height={100} alt="installation icon" className="installation icon" />
+                <Image loading="lazy" src={"/icons/instalation.svg"} width={100} height={100} alt="installation icon" className="installation icon" />
                 {/* <p className="text-[18px] font-semibold mt-4">Services for {cartItem.productId.category}</p> */}
                 <div className="flex flex-col my-5 w-full gap-1">
                   {
@@ -148,7 +149,7 @@ const CartProduct = ({
                             </div>
                           </div>
                           <div className="text-xl flex items-center  font-semibold "><span className=" font-semibold text-[12px]">
-                            <Image
+                            <Image loading="lazy"
                               src="/icons/indianrupeesicon.svg"
                               width={18}
                               height={18}
@@ -174,7 +175,7 @@ const CartProduct = ({
                   cartItem?.selectedAccessories && (
                     cartItem?.selectedAccessories?.map((product) => (
                       <div className="flex  ">
-                        <Image src={product?.images[0]} height={100} width={100} className="mr-[16px] h-[100px] w-[100px]" alt={product.productTitle} />
+                        <Image loading="lazy" src={product?.images[0]} height={100} width={100} className="mr-[16px] h-[100px] w-[100px]" alt={product.productTitle} />
                         <div className="flex flex-col">
                           <div className="flex flex-col mx-[12px] max-w-[220px]">
                             <p className="text-[14px] font-bold text-[#484848]">{product.productTitle}</p>
@@ -208,7 +209,7 @@ const CartProduct = ({
                           </div>
                         </div>
                         <div className="text-xl flex self-start md:ml-44 items-center  font-semibold "><span className=" font-semibold text-[12px]">
-                          <Image
+                          <Image loading="lazy"
                             src="/icons/indianrupeesicon.svg"
                             width={18}
                             height={18}

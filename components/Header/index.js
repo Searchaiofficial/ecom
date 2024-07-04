@@ -372,7 +372,7 @@ function Header({ setIsHeaderMounted }) {
                   className="bg-[#f5f5f5] items-center justify-end rounded-full w-[13rem] h-10 p-[9px] hover:bg-[#e5e5e5] hover:rounded-full cursor-pointer lg:block hidden"
                 >
                   <span>
-                    <Image
+                    <Image loading="lazy"
                       src="/icons/search.svg"
                       alt="Search Icon"
                       className="absolute z-10 seachbar-div2-icon"
@@ -386,7 +386,7 @@ function Header({ setIsHeaderMounted }) {
                   className="md:hidden block w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer"
                   onClick={handleModalOpen}
                 >
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/search.svg"
                     alt="Search Icon"
                     width={20}
@@ -396,7 +396,7 @@ function Header({ setIsHeaderMounted }) {
                 </div> */}
                 <div className="sm:block hidden w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer">
                   <Link href={"/login"}>
-                    <Image
+                    <Image loading="lazy"
                       src="/icons/like.svg"
                       alt="Like Icon"
                       className="header-div-icon"
@@ -408,7 +408,7 @@ function Header({ setIsHeaderMounted }) {
                 <div className="flex items-center flex-row-reverse lg:flex-row">
                   <div className="w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer">
                     <Link href={"/cart"}>
-                      <Image
+                      <Image loading="lazy"
                         src="/icons/adtocart.svg"
                         alt="Cart Icon"
                         className="header-div-icon"
@@ -425,7 +425,7 @@ function Header({ setIsHeaderMounted }) {
                       className="pro w-10 h-10 flex p-[9px] hover:bg-zinc-100 hover:rounded-full whitespace-nowrap "
                       onClick={handleProfileNav}
                     >
-                      <Image
+                      <Image loading="lazy"
                         src="/icons/profile.svg"
                         alt="Profile Icon"
                         className="header-div-icon"
@@ -438,7 +438,7 @@ function Header({ setIsHeaderMounted }) {
                       className="pro w-10 h-10 flex p-[9px] hover:bg-zinc-100 hover:rounded-full whitespace-nowrap cursor-pointer "
                       onClick={handleProfileNav}
                     >
-                      <Image
+                      <Image loading="lazy"
                         src="/icons/profile.svg"
                         onClick={handleLoginNav}
                         alt="Profile Icon"
@@ -451,7 +451,7 @@ function Header({ setIsHeaderMounted }) {
                 </div>
 
                 <div className="w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer md:hidden">
-                  <Image src={"/icons/menu.svg"} height={50} width={50} alt="Menu Icon" className="h-[21px] w-[21px]" onClick={toggleMobileMenu} />
+                  <Image loading="lazy" src={"/icons/menu.svg"} height={50} width={50} alt="Menu Icon" className="h-[21px] w-[21px]" onClick={toggleMobileMenu} />
                 </div>
 
                 {/* for only mobole search */}
@@ -477,7 +477,7 @@ function Header({ setIsHeaderMounted }) {
                 onClick={handleModalOpen}
               >
                 <div className="flex items-center">
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/search.svg"
                     alt="Search Icon"
                     width={20}
@@ -486,7 +486,7 @@ function Header({ setIsHeaderMounted }) {
                   />
                   <p className="ml-3 line-clamp-1 text-[13px] mt-[2px]  text-gray-400">Search for <span ref={textElementRef2}></span></p>
                 </div>
-                <Image src={"/icons/camera.svg"} width={20} height={20} alt="camera icon" className="mr-[10px] ml-[10px]" />
+                <Image loading="lazy" src={"/icons/camera.svg"} width={20} height={20} alt="camera icon" className="mr-[10px] ml-[10px]" />
               </div>
             </div>}
           </>
@@ -511,11 +511,11 @@ function Header({ setIsHeaderMounted }) {
           >
             <div className="flex justify-between items-center py-[5px] w-full h-fit mb-4">
               <div className=" flex items-center">
-                {/* <Image src={"/icons/backarrow.svg"} height={20} width={20} className="rotate-180" /> */}
+                {/* <Image loading="lazy" src={"/icons/backarrow.svg"} height={20} width={20} className="rotate-180" /> */}
                 {
                   toptext && toptext.length > 0 ? (
                     <div className="flex  items-center mt-2">
-                      <Image src={"/icons/backarrowRevarce.svg"} alt="arrow icon" height={18} width={18} className="rotate-180" onClick={handlebackArraowClick} />
+                      <Image loading="lazy" src={"/icons/backarrowRevarce.svg"} alt="arrow icon" height={18} width={18} className="rotate-180" onClick={handlebackArraowClick} />
                       <p className="text-[18px] ml-[10px] font-semibold">{toptext[toptext.length - 1]}</p>
                     </div>
                   ) : (
@@ -570,7 +570,7 @@ function Header({ setIsHeaderMounted }) {
                       {value.label}
                     </p>
                     <div className="pr-[14px]">
-                      <Image src={"/icons/backarrowRevarce.svg"} height={15} width={15} alt="arrow icon" />
+                      <Image loading="lazy" src={"/icons/backarrowRevarce.svg"} height={15} width={15} alt="arrow icon" />
 
                     </div>                  </Link>
                   {idx < 3 && hoveredIndex === idx && (

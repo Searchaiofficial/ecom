@@ -318,7 +318,7 @@ function Card(props) {
           )}
 
           {/* <div className="absolute z-10 top-2 right-2 opacity-85 hover:opacity-100 bg-white p-[6px] hover:scale-105 transition-transform rounded-full" style={{ boxShadow: '0 2px 6px 0 rgba(0, 0, 0, 0.12)' }}>
-            <Image src={"/icons/like.svg"} height={20} width={20} className="cursor-pointer" />
+            <Image loading="lazy" src={"/icons/like.svg"} height={20} width={20} className="cursor-pointer" />
           </div> */}
 
           <div
@@ -327,7 +327,7 @@ function Card(props) {
             onMouseLeave={() => setIsHovered(false)}
           >
             {isHovered && slide !== 0 && (
-              <Image
+              <Image loading="lazy"
                 src="/icons/backarrow-w.svg"
                 height={20}
                 width={20}
@@ -341,7 +341,7 @@ function Card(props) {
               {props.imgSrc?.map((item, idx) => {
                 return (
                   <Link href={`/${props.title}`}>
-                    <Image
+                    <Image loading="lazy"
                       // src={isHovered ? props.imgSrc[2] : item}
                       src={
                         isHovered
@@ -366,7 +366,7 @@ function Card(props) {
 
             {isHovered && (
               <div className="z-50">
-                <Image
+                <Image loading="lazy"
                   src="/icons/rightarrow-w.svg"
                   height={30}
                   width={30}
@@ -455,7 +455,7 @@ function Card(props) {
                 className="bg-[#0152be] p-1.5 mr-2 rounded-full"
                 onClick={addProductToCart}
               >
-                <Image
+                <Image loading="lazy"
                   src={"/icons/ad-to-cart.svg"}
                   height={20}
                   width={20}
@@ -494,8 +494,8 @@ function Card(props) {
           )}
 
           {/* <div className="flex lg:gap-2 gap-1 mt-2 ">
-            <Image src={"/icons/adtocart.svg"} height={25} width={25} className="mr-2 cursor-pointer" />
-            <Image src={"/icons/like.svg"} height={30} width={25} className=" cursor-pointer" />
+            <Image loading="lazy" src={"/icons/adtocart.svg"} height={25} width={25} className="mr-2 cursor-pointer" />
+            <Image loading="lazy" src={"/icons/like.svg"} height={30} width={25} className=" cursor-pointer" />
           </div> */}
 
           {/* {
@@ -528,7 +528,7 @@ function Card(props) {
                           }   
           `}
                       >
-                        <Image
+                        <Image loading="lazy"
                           className="relative w-full h-full object-cover"
                           src={item.image}
                           alt={item.color}

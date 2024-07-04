@@ -52,15 +52,15 @@ const RoomInfo = ({ data }) => {
       {/* <div className="flex mb-10 justify-center">
 
           <div className="flex flex-col items-center max-w-48  gap-2">
-            <Image src={"/icons/backarrowRevarce.svg"} height={35} width={35} alt="downarrow" className="rotate-90  hover:text-gray-600" />
+            <Image loading="lazy"src={"/icons/backarrowRevarce.svg"} height={35} width={35} alt="downarrow" className="rotate-90  hover:text-gray-600" />
             <p className="text-[#1D1D1F] font-semibold   text-xs">Get free delivery, or pick up available items at an Apple Store</p>
           </div>
           <div className="flex flex-col items-center max-w-48  gap-2">
-            <Image src={"/icons/backarrowRevarce.svg"} height={35} width={35} alt="downarrow" className="rotate-90 hover:text-gray-600" />
+            <Image loading="lazy"src={"/icons/backarrowRevarce.svg"} height={35} width={35} alt="downarrow" className="rotate-90 hover:text-gray-600" />
             <p className="text-[#1D1D1F] font-semibold text-xs">Get 6 months of Ayatrio free with your HomePod miniFootnote*</p>
           </div>
           <div className="flex flex-col items-center max-w-48  gap-2">
-            <Image src={"/icons/backarrowRevarce.svg"} height={35} width={35} alt="downarrow" className="rotate-90 hover:text-gray-600" />
+            <Image loading="lazy"src={"/icons/backarrowRevarce.svg"} height={35} width={35} alt="downarrow" className="rotate-90 hover:text-gray-600" />
             <p className="text-[#1D1D1F] font-semibold text-xs">Free and easy returns</p>
           </div>
 
@@ -250,6 +250,7 @@ const RoomInfo = ({ data }) => {
                     {[1, 1, 1, 1, 1].map((item, idx) => {
                       return (
                         <Image
+                          loading="lazy"
                           key={idx}
                           src="/icons/full-black.svg"
                           width={20}

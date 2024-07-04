@@ -199,10 +199,10 @@ const UserReviewPosts = ({ slidesPerView, SubcategoryName }) => {
                             <div className="lg:px-[32px] px-[24px] cursor-pointer flex justify-between">
                                 <div className="group hidden md:flex mr-[40px]">
                                     <div className="absolute top-[90px] left-12 p-2 rounded-full flex items-center gap-2">
-                                        <Image src={"/icons/instagram-white-icon.svg"} height={25} width={25} alt="instagram icon" />
+                                        <Image src={"/icons/instagram-white-icon.svg"} height={25} width={25} alt="instagram icon" loading="lazy" />
                                         <p className="text-[14px] font-semibold text-white transition-all duration-300">@{selectedPost.username}</p>
                                     </div>
-                                    <Image src={selectedPost.mediaUrl} width={200} height={200} className="w-[400px] h-[550px]" alt={`${selectedPost.username} post`} />
+                                    <Image src={selectedPost.mediaUrl} width={200} height={200} className="w-[400px] h-[550px]" alt={`${selectedPost.username} post`} loading="lazy" />
                                 </div>
                                 <div className="flex-1">
                                     {
@@ -211,7 +211,7 @@ const UserReviewPosts = ({ slidesPerView, SubcategoryName }) => {
                                             <Link href={`product/${item.productTitle}`} key={item._id}>
                                                 <div className="flex w-full pr-[20px] lg:pr-[0px] py-[30px] gap-5 items-center justify-between border-b">
                                                     <div>
-                                                        <Image src={item.images[0]} height={100} width={100} className="object-cover min-h-[85px] min-w-[85px] lg:min-w-[100px] lg:min-h-[100px]" alt={item.productTitle} />
+                                                        <Image src={item.images[0]} height={100} width={100} className="object-cover min-h-[85px] min-w-[85px] lg:min-w-[100px] lg:min-h-[100px]" alt={item.productTitle} loading="lazy" />
                                                     </div>
                                                     <div className="flex flex-col flex-1 w-full">
                                                         <p className="text-[12px] font-semibold text-red-500 mb-[4px]">{item.demandtype}</p>
@@ -240,8 +240,8 @@ const UserReviewPosts = ({ slidesPerView, SubcategoryName }) => {
                                                         }
 
                                                         <div className="flex lg:gap-2 gap-1">
-                                                            <Image src={"/icons/adtocart.svg"} height={35} width={35} className="border-2 rounded-full p-1" alt="add to cart icon" />
-                                                            <Image src={"/icons/like.svg"} height={35} width={35} className="border-2 rounded-full p-1" alt="like icon" />
+                                                            <Image src={"/icons/adtocart.svg"} loading="lazy" height={35} width={35} className="border-2 rounded-full p-1" alt="add to cart icon" />
+                                                            <Image src={"/icons/like.svg"} loading="lazy" height={35} width={35} className="border-2 rounded-full p-1" alt="like icon" />
                                                         </div>
                                                     </div>
                                                 </div>

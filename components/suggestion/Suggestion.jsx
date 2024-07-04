@@ -125,9 +125,9 @@ const Suggestion = ({ id }) => {
               </p>
             </div>
             <div className="relative mt-5 w-full lg:min-h-[730px] lg:max-h-[730px] min-h-[449px]">
-              <Image
+              <Image loading="lazy"
                 src={suggestion.mainImage}
-                alt="Suggestion Main Image"
+                alt={suggestion.heading}
                 layout="fill"
                 objectFit="cover"
               />
@@ -178,7 +178,7 @@ const Suggestion = ({ id }) => {
                 <SwiperSlide key={idx} className="max-w-[130px]">
                   <div className="flex flex-col ">
                     <div className="mb-[12px] ">
-                      <Image
+                      <Image loading="lazy"
                         src={item.image}
                         width={200}
                         height={130}
@@ -213,7 +213,7 @@ const Suggestion = ({ id }) => {
                 <div className="mt-6 flex flex-col md:flex-row gap-3  items-center justify-between mx-auto">
                   {subHeadingItem.subHeadingImages.map((img) => (
                     <div className="relative h-[449px]  lg:min-h-[730px] w-full">
-                      <Image
+                      <Image loading="lazy"
                         src={img}
                         alt="Sub Image"
                         layout="fill"
@@ -325,7 +325,7 @@ const Suggestion = ({ id }) => {
                     <p>{reviewData && reviewData.comment}</p>
                   </div>
                   <div className="flex mt-5 flex-row items-center gap-2 ">
-                    <Image
+                    <Image loading="lazy"
                       src={reviewData && reviewData.image}
                       width={45}
                       height={45}

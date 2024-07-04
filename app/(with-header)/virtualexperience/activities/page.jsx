@@ -77,7 +77,7 @@ const Activities = () => {
   return (
     <div className=" py-4 relative w-full h-full flex justify-center flex-col bg-[#f4e3dd]">
       <Sidebar selectedPage={selectedPage} onSelectPage={handleSelectPage} />
-      <Image
+      <Image loading="lazy"
         src="/icons/adtocart.svg"
         alt="Add to cart icon"
         width={30}
@@ -127,7 +127,7 @@ const Activities = () => {
                 <div className="circle-container relative flex justify-center items-center">
 
 
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/tick.svg"
                     alt="tick"
                     width={30}

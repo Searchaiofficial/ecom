@@ -18,7 +18,7 @@ const page = () => {
           </h2>
         }
 
-        <Image src="/icons/tick.svg" alt="tick" width={80} height={80} />
+        <Image src="/icons/tick.svg" alt="tick" width={80} height={80} loading="lazy" />
         <div className="w-full flex flex-row">
           <div className="text-left w-1/2">
             <p className="my-1">Payment Type</p>

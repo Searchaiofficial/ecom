@@ -84,4 +84,4 @@ export const colorTiles = [
 ];
 
 
-// <Image src="/images/virtualexperience/diningroom.jpg" alt="BATHROOM" width={30} height={30} />,
+// <Image loading="lazy"src="/images/virtualexperience/diningroom.jpg" alt="BATHROOM" width={30} height={30} />,

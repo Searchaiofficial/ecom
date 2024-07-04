@@ -28,7 +28,7 @@ export default function ShoppingInfo() {
         </div>
         <div className="basis-2/4 flex grow">
           <div>
-            <Image
+            <Image loading="lazy"
               src="/images/customerservice/service3.jpg"
               alt="décor"
               width={550}
@@ -42,7 +42,7 @@ export default function ShoppingInfo() {
       </h2>
       <div className="sm:flex sm:flex-row flex-col pb-6">
         <div className="basis-2/4 flex-grow">
-          <Image
+          <Image loading="lazy"
             src="/images/customerservice/shop.jpg"
             alt="décor"
             width={600}
@@ -113,7 +113,7 @@ export default function ShoppingInfo() {
               <div className="basis-2/4 flex-grow">
                 <h2 className="font-bold text-xl pb-5">{data.heading}</h2>
                 <div>
-                  <Image
+                  <Image loading="lazy"
                     width={750}
                     height={422}
                     src={data.image}
@@ -149,11 +149,12 @@ export default function ShoppingInfo() {
       <div className="sm:flex sm:flex-row flex-col gap-3 pb-8">
         <div className="basis-2/4 flex-grow">
           <div>
-            <Image
+            <Image loading="lazy"
               src="/images/customerservice/work.jpg"
               width={600}
               height={300}
               alt="work"
+
             />
           </div>
         </div>

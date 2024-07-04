@@ -38,7 +38,7 @@ const Label = ({ data }) => {
               </div>
             </div>
             <div className="flex  top-16 border-l border-zinc-200">
-              <Image
+              <Image loading="lazy"
                 className="flex self-center rotate-180   mx-[4px] "
                 src="/icons/backarrow.svg"
                 height={24}

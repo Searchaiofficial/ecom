@@ -36,7 +36,7 @@ export default function FinanceServicesPage() {
                         </ul>
                     </div>
                     <div className="w-full md:w-3/5 flex items-center justify-center">
-                        <Image
+                        <Image loading="lazy"
                             src="/images/services/FinanceServices/services.jpg"
                             width={300}
                             height={300}
@@ -55,7 +55,7 @@ export default function FinanceServicesPage() {
             {/* 2nd div */}
             <section className="flex flex-col md:flex-row bg-gray-100 my-12" id='payment'>
                 <div className="w-full md:w-[70%]">
-                    <Image
+                    <Image loading="lazy"
                         src="/images/services/FinanceServices/a-man-tossing-a-plush-toy-to-a-young-child.jpg"
                         alt="A man tossing a plush toy to a young child."
                         width={300}
@@ -89,7 +89,7 @@ export default function FinanceServicesPage() {
             <section className="flex flex-col md:flex-row-reverse bg-gray-100 my-12" id='RBC'>
 
                 <div className="w-full md:w-[70%]">
-                    <Image
+                    <Image loading="lazy"
                         src="/images/services/FinanceServices/a-couple-inside-an-store.jpg"
                         alt="A couple inside an Ayatrio store shopping for a kitchen sink."
                         width={300}
@@ -134,11 +134,13 @@ export default function FinanceServicesPage() {
 
                 <div className="flex flex-col justify-center lg:col-span-1">
                     <div className="flex justify-center mb-6">
-                        <Image src="/images/services/FinanceServices/in-store-payment-options.jpg"
+                        <Image loading="lazy" src="/images/services/FinanceServices/in-store-payment-options.jpg"
                             alt="In store payment options"
                             width={800}
                             height={500}
-                            className="max-w-full h-auto" />
+                            className="max-w-full h-auto" 
+                            
+                        />
                     </div>
                     <div className="opacity-90 mb-20">
                         <p className="font-bold mb-4">In store payment options:</p>
@@ -158,7 +160,7 @@ export default function FinanceServicesPage() {
 
                 <div className="flex flex-col justify-center lg:col-span-1 lg:mb-20">
                     <div className="flex justify-center mb-6">
-                        <Image
+                        <Image loading="lazy"
                             src="/images/services/FinanceServices/online-payment-options.jpg"
                             alt="Online payment options"
                             width={800}

@@ -66,7 +66,7 @@ const Displaybox = (props) => {
               className="flex flex-row gap-1 lg:gap-4 p-2 items-center cursor-pointer hover:bg-[#f5f5f5]  min-w-[200px]"
               onClick={() => handleClick(item.name)}
             >
-              <Image
+              <Image loading="lazy"
                 src={item.img}
                 alt={item.name}
                 width={100}

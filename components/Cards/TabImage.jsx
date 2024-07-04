@@ -45,7 +45,7 @@ const TabImage = ({ src, alt, width, height, handleTab, labelData, href, firstDa
     <div className="child w-full h-full row-span-2 relative">
       {href ? (
         <Link href={href} className="h-full w-full">
-          <Image
+          <Image loading="lazy"
             className="h-full w-full object-cover"
             src={src}
             alt={alt}
@@ -54,7 +54,7 @@ const TabImage = ({ src, alt, width, height, handleTab, labelData, href, firstDa
           />
         </Link>
       ) : (
-        <Image
+        <Image loading="lazy"
           className="h-full w-full object-cover"
           src={src}
           alt={alt}

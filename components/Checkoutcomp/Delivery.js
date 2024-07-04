@@ -369,7 +369,7 @@ const Delivery = () => {
                       <div>
                         <div className="text-md font-bold">
                           <div className="flex items-center">
-                            <Image
+                            <Image loading="lazy"
                               src="/icons/indianrupeesicon.svg"
                               width={18}
                               height={18}
@@ -438,7 +438,7 @@ const Delivery = () => {
                       <div>
                         <div className="text-md font-bold">
                           <div className="flex items-center">
-                            <Image
+                            <Image loading="lazy"
                               src="/icons/indianrupeesicon.svg"
                               width={18}
                               height={18}
@@ -517,7 +517,7 @@ const Delivery = () => {
                         <div>
                           <div className="text-md font-bold">
                             <div className="flex items-center">
-                              <Image
+                              <Image loading="lazy"
                                 src="/icons/indianrupeesicon.svg"
                                 width={18}
                                 height={18}
@@ -634,7 +634,7 @@ const Delivery = () => {
               {cartStatus === "succeeded" && cartdata ? (
                 cartdata.items.map((item, index) => {
                   return (
-                    <Image
+                    <Image loading="lazy"
                       src={item.productId.images[0]}
                       width={249}
                       height={249}
@@ -655,7 +655,7 @@ const Delivery = () => {
             <span className="text-[#767677]">Products price </span>
             <div className="text-black font-[700]">
               <div className="flex items-center">
-                <Image
+                <Image loading="lazy"
                   src="/icons/indianrupeesicon.svg"
                   width={18}
                   height={18}
@@ -670,7 +670,7 @@ const Delivery = () => {
             <span className="text-[#767677]">Services price </span>
             <div className="text-black font-[700]">
               <div className="flex items-center">
-                <Image
+                <Image loading="lazy"
                   src="/icons/indianrupeesicon.svg"
                   width={18}
                   height={18}
@@ -685,7 +685,7 @@ const Delivery = () => {
             <span className="text-[#767677]">Accessory price </span>
             <div className="text-black font-[700]">
               <div className="flex items-center">
-                <Image
+                <Image loading="lazy"
                   src="/icons/indianrupeesicon.svg"
                   width={18}
                   height={18}
@@ -700,7 +700,7 @@ const Delivery = () => {
             <span className="text-[#767677]">Delivery charge </span>
             <span className="text-black">
               <div className="flex items-center">
-                <Image
+                <Image loading="lazy"
                   src="/icons/indianrupeesicon.svg"
                   width={18}
                   height={18}
@@ -718,7 +718,7 @@ const Delivery = () => {
             <span className="text-black">Subtotal </span>
             <span className="font-[700] text-black text-2xl">
               <div className="flex items-center">
-                <Image
+                <Image loading="lazy"
                   src="/icons/indianrupeesicon.svg"
                   width={20}
                   height={20}

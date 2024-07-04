@@ -36,7 +36,7 @@ const InstallationServicePage = () => {
               <h1 className="font-bold text-4xl">Kitchen Installation</h1>
               <div className="flex w-full gap-4 flex-col md:flex-row">
                 <div className="md:w-1/2">
-                  <Image width={300} height={300} src="/icons/instalation.svg" alt="instalation" />
+                  <Image loading="lazy" width={300} height={300} src="/icons/instalation.svg" alt="instalation" />
                 </div>
                 <div className="flex-col gap-4 md:w-1/2">
                   <p>

@@ -589,7 +589,7 @@ const Details = () => {
                   cartdata.items &&
                   cartdata.items.length > 0 &&
                   cartdata.items.map((item, index) => (
-                    <Image
+                    <Image loading="lazy"
                       key={index}
                       src={item.productId.images[0]}
                       width={249}
@@ -600,7 +600,7 @@ const Details = () => {
                   ))}
                 {CartData && CartData.items && CartData.items.length > 0 ? (
                   CartData.items.map((item, index) => (
-                    <Image
+                    <Image loading="lazy"
                       key={index}
                       src={item.productId.images[0]}
                       width={249}
@@ -621,7 +621,7 @@ const Details = () => {
               <span className="text-black">Products price </span>
               <div className=" text-black font-[700]">
                 <div className="flex items-center">
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/indianrupeesicon.svg"
                     width={18}
                     height={18}
@@ -636,7 +636,7 @@ const Details = () => {
               <span className="text-black">Services price </span>
               <div className=" text-black font-[700]">
                 <div className="flex items-center">
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/indianrupeesicon.svg"
                     width={18}
                     height={18}
@@ -651,7 +651,7 @@ const Details = () => {
               <span className="text-black">Accessories price </span>
               <div className=" text-black font-[700]">
                 <div className="flex items-center">
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/indianrupeesicon.svg"
                     width={18}
                     height={18}
@@ -666,7 +666,7 @@ const Details = () => {
               <span className="text-black">Delivery charge </span>
               <div className="text-black">
                 <div className="flex items-center">
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/indianrupeesicon.svg"
                     width={18}
                     height={18}
@@ -684,7 +684,7 @@ const Details = () => {
               <span className="text-black">Subtotal </span>
               <div className="font-[700] text-black text-2xl">
                 <div className="flex items-center">
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/indianrupeesicon.svg"
                     width={20}
                     height={20}

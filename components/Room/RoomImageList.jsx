@@ -17,14 +17,14 @@ export default function RoomImageList({ alt }) {
       <div className="imggallery w-[60vw]">
         <div className="sm:grid hidden sm:grid-cols-2 sm:grid-rows-2 gap-3">
           <Link href={"/login"} className="absolute z-10 top-12 right-3 opacity-85 hover:opacity-100 bg-white p-[6px] hover:scale-105 transition-transform rounded-full" style={{ boxShadow: '0 2px 6px 0 rgba(0, 0, 0, 0.12)' }}>
-            <Image src={"/icons/like.svg"} height={20} width={20} className="cursor-pointer" alt="like icon" />
+            <Image loading="lazy" src={"/icons/like.svg"} height={20} width={20} className="cursor-pointer" alt="like icon" />
           </Link>
           {imagesToDisplay?.map((image, index) => (
             <div
               key={index}
               className={`sm:col-span-1 sm:row-start-${index + 1}`}
             >
-              <Image
+              <Image loading="lazy"
                 src={image}
                 alt={alt}
                 width={800}
@@ -41,7 +41,7 @@ export default function RoomImageList({ alt }) {
         >
           Show more
         </button>
-        <Image
+        <Image loading="lazy"
           src={"/icons/backarrowRevarce.svg"}
           height={25}
           width={25}

@@ -500,7 +500,7 @@ const FreeSample = () => {
 
                       }`}
                   >
-                    <Image src={data.icon} width={45} height={45} alt={data.label} />
+                    <Image src={data.icon} width={45} height={45} alt={data.label} loading="lazy"/>
                     <span className="text-[16px] mt-[4px] font-medium">{data.label}</span>
                   </div>
                 );
@@ -511,7 +511,7 @@ const FreeSample = () => {
             {pathname === "/freesample" && (
               <div className="bg-zinc-50 md:w-[22rem]  px-6 py-6">
                 <div className="flex gap-4 items-center mb-6">
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/payment.svg"
                     width={40}
                     height={40}
@@ -526,7 +526,7 @@ const FreeSample = () => {
                   </div>
                 </div>
                 {/* <div className="flex gap-4 items-center mb-6">
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/payment.svg"
                     width={40}
                     height={40}
@@ -540,7 +540,7 @@ const FreeSample = () => {
                   </div>
                 </div> */}
                 <div className="flex gap-4 items-center mb-6">
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/payment.svg"
                     width={40}
                     height={40}
@@ -555,7 +555,7 @@ const FreeSample = () => {
                   </div>
                 </div>
                 <div className="flex gap-4 items-center mb-6">
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/payment.svg"
                     width={40}
                     height={40}
@@ -575,7 +575,7 @@ const FreeSample = () => {
             {pathname === "/freedesign" && (
               <div className="bg-zinc-50 md:w-[22rem]  px-6 py-6">
                 <div className="flex gap-4 items-center mb-6">
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/virtual-online.svg"
                     width={40}
                     height={40}
@@ -592,7 +592,7 @@ const FreeSample = () => {
                   </div>
                 </div>
                 <div className="flex gap-4 items-center mb-6">
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/vision.svg"
                     width={40}
                     height={40}
@@ -610,7 +610,7 @@ const FreeSample = () => {
                   </div>
                 </div>
                 <div className="flex gap-4 items-center mb-6">
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/onsite-management.svg"
                     width={40}
                     height={40}
@@ -626,7 +626,7 @@ const FreeSample = () => {
                   </div>
                 </div>
                 <div className="flex gap-4 items-center mb-6">
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/final-design.svg"
                     width={40}
                     height={40}
@@ -640,7 +640,7 @@ const FreeSample = () => {
                   </div>
                 </div>
                 <div className="flex gap-4 items-center mb-6">
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/instalation.svg"
                     width={40}
                     height={40}
@@ -695,7 +695,7 @@ const FreeSample = () => {
                       className={`relative flex flex-col  w-full opacity-100 h-full cursor-pointer `}
                     >
                       <div className="hover:border-2 border border-black">
-                        <Image
+                        <Image loading="lazy"
                           className={`object-cover w-[272px]  h-[150px]  ${categoryState === index && "border-black border-[3px]"
                             }`}
                           width={300}
@@ -750,7 +750,7 @@ const FreeSample = () => {
                     >
                       <div className="hover:border-2 border border-black">
 
-                        <Image
+                        <Image loading="lazy"
                           className={`object-cover w-[272px] h-[150px]  ${roomstate === index && "border-black border-[3px]"
                             }`}
                           width={300}

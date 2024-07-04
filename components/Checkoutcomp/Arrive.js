@@ -44,7 +44,7 @@ const Arrive = () => {
                   Arrives Thu,14 Dec-Wed,3 Jan
                 </h3>
                 {/* <img src={shoe} alt="shoe" className="h-20 w-20" /> */}
-                <Image
+                <Image loading="lazy"
                   src={roomData.images[0]}
                   alt="shoe"
                   width={80}

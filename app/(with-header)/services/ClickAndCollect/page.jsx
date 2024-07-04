@@ -16,7 +16,7 @@ export default function ClickAndCollectServicePage() {
 
                     </div>
                     <div className="w-full md:w-3/5 flex items-center justify-center">
-                        <Image
+                        <Image loading="lazy"
                             src="/images/services/ClickCollectService/services.jpg"
                             alt="Financial service"
                             width={300}
@@ -75,14 +75,11 @@ export default function ClickAndCollectServicePage() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div className="col-span-1">
                         <div className="pb-[56.49761904761905%] relative">
-                            <Image src="/images/services/ClickCollectService/car.jpg"
+                            <Image loading="lazy" src="/images/services/ClickCollectService/car.jpg"
                                 alt="Cars parked in front of an Ayatrio store"
                                 width={300}
                                 height={300}
-                                className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-                            <a href="" className="absolute inset-0 flex items-center justify-center">
-                                {null}
-                            </a>
+                                className="absolute inset-0 w-full h-full object-cover"  />
                         </div>
                         <div className="p-4">
                             <h3 className="text-lg font-semibold">Collect at an Ayatrio store</h3>
@@ -99,15 +96,14 @@ export default function ClickAndCollectServicePage() {
                     </div>
                     <div className="col-span-1">
                         <div className="pb-[56.2%] relative">
-                            <Image src="/images/services/ClickCollectService/pickup.jpg"
+                            <Image loading="lazy" 
+                            src="/images/services/ClickCollectService/pickup.jpg"
                                 alt="A person riding a cargo bicycle with Ayatrio boxes"
                                 className="absolute inset-0 w-full h-full object-cover"
                                 width={300}
                                 height={300}
-                                loading="lazy" />
-                            <a href="" className="absolute inset-0 flex items-center justify-center ">
-                                {null}
-                            </a>
+                                 />
+
                         </div>
                         <div className="p-4">
                             <h3 className="text-lg font-semibold">Use a Pick-up location</h3>
@@ -119,12 +115,12 @@ export default function ClickAndCollectServicePage() {
                     </div>
                     <div className="col-span-1">
                         <div className="pb-[56.2%] relative">
-                            <Image src="/images/services/ClickCollectService/deliver.jpg"
+                            <Image loading="lazy" src="/images/services/ClickCollectService/deliver.jpg"
                                 alt="FedEx worker helping a customer"
                                 width={300}
                                 height={300}
-                                className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-                            <a href="" className="absolute inset-0 flex items-center justify-center ">{null}</a>
+                                className="absolute inset-0 w-full h-full object-cover"  />
+
                         </div>
                         <div className="p-4">
                             <h3 className="text-lg font-semibold">Pickup your small packages at a FedEx retail location near you</h3>
@@ -145,7 +141,7 @@ export default function ClickAndCollectServicePage() {
 
                     <ul type='1' className="pl-8 opacity-90">
                         <li className="mb-3"><strong className="opacity-90">Step 1:</strong> Choose ‘Click and collect’ at checkout and you will be able to select an <a href="" className="underline">Ayatrio Store</a>,
-                            <a href="" className="underline">Pick-up locker</a> or a nearby <a href="" className="underline">Pick-up location</a>, operated by a third-party partner.</li>
+                            <a href="#" className="underline">Pick-up locker</a> or a nearby <a href="#" className="underline">Pick-up location</a>, operated by a third-party partner.</li>
 
                         <li className="mb-3"><strong className="opacity-90">Step 2:</strong> Wait until you receive the “Ready for pickup” email before heading to the store or the Pick-up location.</li>
 

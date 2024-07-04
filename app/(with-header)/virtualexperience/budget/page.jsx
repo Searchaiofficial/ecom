@@ -100,7 +100,7 @@ const Budget = () => {
                 <div className="overlay rounded-full absolute top-0 left-0 w-full h-full opacity-50 bg-black">
                   <div className="room-item absolute bottom-4 z-10 flex items-center opacity-50 justify-center">
                     <div className="circle-container relative flex justify-center items-center">
-                      <Image src="/icons/tick.svg" alt="tick" width={30} height={30} className="opacity-100" />
+                      <Image src="/icons/tick.svg" alt="tick" width={30} height={30} className="opacity-100" loading="lazy" />
                     </div>
                   </div>
                 </div>

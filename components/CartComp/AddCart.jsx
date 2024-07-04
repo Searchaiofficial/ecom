@@ -359,6 +359,7 @@ const AddCart = () => {
                   width={20}
                   height={20}
                   alt="rupees"
+                  loading="lazy"
                 />
                 {totalPrice}
               </div>
@@ -371,6 +372,8 @@ const AddCart = () => {
                   width={20}
                   height={20}
                   alt="rupees"
+                  loading="lazy"
+
                 />
                 {totalServicesPrice}
               </div>
@@ -383,6 +386,8 @@ const AddCart = () => {
                   width={20}
                   height={20}
                   alt="rupees"
+                  loading="lazy"
+
                 />
                 {totalAccessoryPrice}
               </div>
@@ -410,6 +415,8 @@ const AddCart = () => {
                   width={25}
                   height={25}
                   alt="rupees"
+                  loading="lazy"
+
                 />
                 {SumtotalPrice}
               </div>
@@ -469,7 +476,8 @@ const AddCart = () => {
                     width={20}
                     height={15}
                     alt="rupees"
-                    className=""
+                    loading="lazy"
+
                   />{item?.price}
                 </div>
                 <div className="icons flex items-center space-x-2 mt-4 justify-around">

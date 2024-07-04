@@ -25,6 +25,7 @@ function Carousel({ data }) {
         <Image src='/icons/leftvector.svg' height={20} width={20} alt="arrow"
           onClick={prevSlide}
           className="arrow arrow-left"
+          loading="lazy"
         />
       )}
       {data?.map((item, idx) => {
@@ -47,6 +48,7 @@ function Carousel({ data }) {
           <Image src='/icons/right.svg' height={20} width={20} alt="arrow"
             onClick={nextSlide}
             className="arrow arrow-right"
+            loading="lazy"
           />
         </div>
       )}

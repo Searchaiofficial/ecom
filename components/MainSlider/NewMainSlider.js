@@ -123,7 +123,7 @@ export default function NewMainSlider({ initialData }) {
         }}
       >
         <div className={`${navigationVisible ? "block" : "hidden"}`}>
-          <Image
+          <Image loading="lazy"
             src="/icons/backarrow-w.svg"
             width={30}
             height={30}
@@ -154,7 +154,7 @@ export default function NewMainSlider({ initialData }) {
                     />
                   </Link>
                 ) : (
-                  <Image
+                  <Image 
                     src={
                       windowWidth > 600
                         ? data?.desktopImgSrc
@@ -213,7 +213,7 @@ export default function NewMainSlider({ initialData }) {
                                   </p>
                                 </div>
                                 <div className="absolute top-0 right-0 flex items-center justify-end h-full">
-                                  <Image
+                                  <Image loading="lazy"
                                     className="flex mx-1 rotate-90"
                                     src="/icons/uparrow.svg"
                                     height={20}
@@ -233,7 +233,7 @@ export default function NewMainSlider({ initialData }) {
           );
         })}
         <div className={`${navigationVisible ? "block" : "hidden"}`}>
-          <Image
+          <Image loading="lazy"
             src="/icons/rightarrow-w.svg"
             width={30}
             height={30}

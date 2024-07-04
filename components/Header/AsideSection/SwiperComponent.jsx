@@ -59,7 +59,7 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
                     className="flex flex-col gap-1"
                   >
                     <div className="parent w-[170px] h-[80px]">
-                      <Image
+                      <Image loading="lazy"
                         src={data.src}
                         width={400}
                         height={400}
@@ -88,7 +88,7 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
                     <li className="text-md font-semibold text-[#111111] p-3 ">
                       {link.title}
                     </li>
-                    <Image
+                    <Image loading="lazy"
                       src="/icons/backarrowRevarce.svg"
                       alt="right"
                       width={10}
@@ -122,7 +122,7 @@ const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange }) => {
             //           className="flex items-center gap-4"
             //         //PassHref
             //         >
-            //           {/* <Image src={service.image} height={100} width={100} alt="service" /> */}
+            //           {/* <Image loading="lazy" src={service.image} height={100} width={100} alt="service" /> */}
             //           {/* <p className="text-[8px]">⚫</p> */}
             //           <h3 className="text-[14px] py-2 text-gray-700 hover:underline">
             //             {service.label}
