@@ -268,7 +268,7 @@ const Reviews = ({ productId, data }) => {
           Average rating will appear after 3 reviews
         </span>
         <div
-          className="reviews-container mt-6 grid sm:grid-cols-2 grids-col-1 grid-rows-2 gap-4 mx-auto "
+          className="reviews-container mt-6 grid sm:grid-cols-2 grids-col-1  gap-4 mx-auto "
           style={{ overflowX: "hidden" }}
         >
           {reviews.map((review, index) => (
@@ -307,6 +307,7 @@ const Reviews = ({ productId, data }) => {
                     width={15}
                     height={15}
                     alt="star"
+                    className="m-[2px]"
                   />
                 ))}
                 <span className="text-sm font-semibold ml-2">

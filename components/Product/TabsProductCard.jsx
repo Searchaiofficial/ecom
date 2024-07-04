@@ -351,12 +351,12 @@ function TabsProductCard(props) {
                   {props.demandtype}
                 </p>
               )}
-              <h2
+              <h3
                 className={` text-[14px] font-semibold ${props.demandtype === "Ayatrio Member Favorite" ? "" : ""
                   }`}
               >
                 {props.productTitle}
-              </h2>
+              </h3>
             </div>
           </div>
           {/* <p className="text-sm">{props.productDescription}</p> */}
@@ -370,8 +370,8 @@ function TabsProductCard(props) {
                 <div className="flex gap-1 items-end">
                   <h2
                     className={`text-3xl flex font-semibold leading-[0.5]  tracking-wide ${props?.specialprice?.price
-                        ? "bg-[#FFD209] px-2 pt-3 pb-1 w-fit shadow-lg"
-                        : ""
+                      ? "bg-[#FFD209] px-2 pt-3 pb-1 w-fit shadow-lg"
+                      : ""
                       } `}
                     style={
                       props?.specialprice?.price

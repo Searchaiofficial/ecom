@@ -1,5 +1,5 @@
 import Faq from '../../../../components/Services/Faq'
-
+import Image from 'next/image';
 
 export default function FinanceServicesPage() {
     return (
@@ -8,9 +8,9 @@ export default function FinanceServicesPage() {
             <section className="w-full pt-40">
                 <div className="flex flex-wrap md:flex-nowrap gap-y-3">
                     <div className="w-full md:w-2/5 flex flex-col justify-center">
-                        <h1 className="text-black text-4xl font-semibold mb-12 px-3">
+                        <h2 className="text-black text-2xl font-semibold mb-12 px-3">
                             Financial services
-                        </h1>
+                        </h2>
                         <p className="text-justify px-3 opacity-90 mb-3">
                             At Ayatrio, we think everyone deserves a well-designed, functional home – and that paying for it shouldn’t be difficult.
                         </p>
@@ -36,8 +36,10 @@ export default function FinanceServicesPage() {
                         </ul>
                     </div>
                     <div className="w-full md:w-3/5 flex items-center justify-center">
-                        <img
+                        <Image
                             src="/images/services/FinanceServices/services.jpg"
+                            width={300}
+                            height={300}
                             alt="Financial service"
                             className="w-full h-full object-cover"
                         />
@@ -46,21 +48,23 @@ export default function FinanceServicesPage() {
             </section>
 
 
-            <h1 className="text-black text-2xl lg:text-4xl font-semibold my-6 lg:mb-12 px-3">
+            <h2 className="text-black text-2xl font-semibold mb-12 px-3 pt-[20px]">
                 Explore our financial service options
-            </h1>
+            </h2>
 
             {/* 2nd div */}
             <section className="flex flex-col md:flex-row bg-gray-100 my-12" id='payment'>
                 <div className="w-full md:w-[70%]">
-                    <img
+                    <Image
                         src="/images/services/FinanceServices/a-man-tossing-a-plush-toy-to-a-young-child.jpg"
                         alt="A man tossing a plush toy to a young child."
+                        width={300}
+                        height={300}
                         className="w-full h-full object-cover"
                     />
                 </div>
                 <div className="w-full md:w-[30%] flex flex-col justify-center p-6 md:p-12">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                    <h2 className="text-black text-2xl font-semibold mb-6">
                         Four interest-free* payments with Afterpay
                     </h2>
                     <div className="text-gray-900 space-y-4">
@@ -85,14 +89,16 @@ export default function FinanceServicesPage() {
             <section className="flex flex-col md:flex-row-reverse bg-gray-100 my-12" id='RBC'>
 
                 <div className="w-full md:w-[70%]">
-                    <img
+                    <Image
                         src="/images/services/FinanceServices/a-couple-inside-an-store.jpg"
                         alt="A couple inside an Ayatrio store shopping for a kitchen sink."
+                        width={300}
+                        height={300}
                         className="w-full h-full object-cover"
                     />
                 </div>
                 <div className="w-full md:w-[30%] flex flex-col justify-center p-6 md:p-12 bg-gray-100">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                    <h2 className="text-black text-2xl font-semibold mb-6">
                         PayPlan by RBC™
                     </h2>
                     <div className="text-gray-900 space-y-4">
@@ -121,14 +127,18 @@ export default function FinanceServicesPage() {
 
 
             {/* Payment */}
-            <h1 className="text-black text-2xl lg:text-4xl font-semibold mb-6 lg:mb-12 px-3" id='options'>
+            <h2 className="text-black text-2xl font-semibold mb-12" id='options'>
                 Payment Options
-            </h1>
+            </h2>
             <div className="flex flex-col lg:flex-row lg:gap-6">
 
                 <div className="flex flex-col justify-center lg:col-span-1">
                     <div className="flex justify-center mb-6">
-                        <img src="/images/services/FinanceServices/in-store-payment-options.jpg" alt="In store payment options" className="max-w-full h-auto" />
+                        <Image src="/images/services/FinanceServices/in-store-payment-options.jpg"
+                            alt="In store payment options"
+                            width={800}
+                            height={500}
+                            className="max-w-full h-auto" />
                     </div>
                     <div className="opacity-90 mb-20">
                         <p className="font-bold mb-4">In store payment options:</p>
@@ -148,7 +158,12 @@ export default function FinanceServicesPage() {
 
                 <div className="flex flex-col justify-center lg:col-span-1 lg:mb-20">
                     <div className="flex justify-center mb-6">
-                        <img src="/images/services/FinanceServices/online-payment-options.jpg" alt="Online payment options" className="max-w-full h-auto" />
+                        <Image
+                            src="/images/services/FinanceServices/online-payment-options.jpg"
+                            alt="Online payment options"
+                            width={800}
+                            height={500}
+                            className="max-w-full h-auto" />
                     </div>
                     <div className="opacity-90 mb-8">
                         <p className="font-bold mb-4">Online payment options:</p>
@@ -167,9 +182,9 @@ export default function FinanceServicesPage() {
             </div>
 
             <section id="faq" className='mt-8'>
-                <h1 className="text-black text-2xl lg:text-4xl font-semibold mb-6 lg:mb-12 px-3 lg:text-left">
+                <h2 className="text-black text-2xl font-semibold mb-12 px-3 lg:text-left">
                     Frequently asked questions
-                </h1>
+                </h2>
                 <Faq faqFor='payment' />
             </section>
 

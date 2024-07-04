@@ -44,9 +44,9 @@ export default function WarrantyClaim() {
 
     return (
         <div className="md:px-[67px] mx-auto px-[20px] pt-[170px]">
-            <h1 className="text-black text-4xl font-bold mb-12 pr-3">
+            <h2 className="text-black text-2xl font-semibold mb-12 mt[20px] pr-3">
                 Warranty Claim Form
-            </h1>
+            </h2>
             <div className="container mx-auto p-4">
                 <div className="bg-white px-10">
                     <form id="myform" noValidate onSubmit={handleSubmit}>

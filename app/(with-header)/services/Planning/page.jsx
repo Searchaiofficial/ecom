@@ -1,14 +1,14 @@
 import content from '../../../../components/Services/PlanningService/PlanningContent.json';
 import Plannings from '../../../../components/Services/PlanningService/Plannings';
 import Checkout from '../../../../components/Services/PlanningService/Checkout';
-
+import Image from 'next/image';
 export default function PlanningServicesPage() {
     return (
         <div className='md:px-[67px] mx-auto px-[20px]'>
             <div className="w-full pt-40">
-                <h1 className="text-black text-4xl font-semibold mb-12">
+                <h2 className="text-black text-2xl font-semibold mb-12 mt[20px] px-3">
                     Planning services
-                </h1>
+                </h2>
                 <div className="flex flex-wrap md:flex-nowrap gap-y-3">
                     <div className=" w-full md:w-1/2">
                         <p className="text-justify px-3 opacity-90">
@@ -30,9 +30,12 @@ export default function PlanningServicesPage() {
 
                     </div>
                     <div className="w-full md:w-1/2 mt-3 md:mt-0">
-                        <img
+                        <Image
                             src="/images/services/PlanningServices/services.jpg"
                             alt="Planning service example"
+                            width={800}
+                            height={800}
+
                             className="w-full h-[306px]"
                         />
                     </div>
@@ -41,7 +44,7 @@ export default function PlanningServicesPage() {
             </div>
 
             <section className="w-full md:w-1/2 mb-16" id='works'>
-                <h1 className="text-black text-2xl font-bold my-10">How Ayatrio planning services work</h1>
+                <h3 className="text-black text-2xl font-bold my-10">How Ayatrio planning services work</h3>
 
                 <ol type='1' className="list-decimal pl-8 ">
                     <li className="ml-4 my-4 opacity-70 text-[15px]">

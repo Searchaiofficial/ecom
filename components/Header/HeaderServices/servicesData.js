@@ -26,10 +26,10 @@ const services = [
         name: 'Planning Service',
         description: 'Plan your space with our expert tools.',
         details: [
-            { title: 'Room Planning', description: 'Detailed room planning service.', image: '/images/room/bed-room.jpg', link: '/services/Plannin' },
-            { title: 'Furniture Planning', description: 'Expert furniture placement planning.', image: '/images/room/bathroom.jpg', link: '/services/Plannin' },
-            { title: 'Custom Planning', description: 'Personalized planning services.', image: '/images/room/Laundry.jpg', link: '/services/Plannin' },
-            { title: 'Accessory Planning', description: 'Plan for accessories and fixtures.', image: '/images/room/living-room.jpg', link: '/services/Plannin' }
+            { title: 'Room Planning', description: 'Detailed room planning service.', image: '/images/room/bed-room.jpg', link: '/services/Planning' },
+            { title: 'Furniture Planning', description: 'Expert furniture placement planning.', image: '/images/room/bathroom.jpg', link: '/services/Planning' },
+            { title: 'Custom Planning', description: 'Personalized planning services.', image: '/images/room/Laundry.jpg', link: '/services/Planning' },
+            { title: 'Accessory Planning', description: 'Plan for accessories and fixtures.', image: '/images/room/living-room.jpg', link: '/services/Planning' }
         ]
     },
     {
@@ -48,10 +48,10 @@ const services = [
         name: 'Click and Collect Service',
         description: 'Order online and collect in store.',
         details: [
-            { title: 'Furniture Collection', description: 'Collect your ordered furniture.', image: '/images/room/bed-room.jpg', link: '/services/ClickAndCollec' },
-            { title: 'Accessory Collection', description: 'Collect your ordered accessories.', image: '/images/room/bathroom.jpg', link: '/services/ClickAndCollec' },
-            { title: 'Appliance Collection', description: 'Collect your ordered appliances.', image: '/images/room/Laundry.jpg', link: '/services/ClickAndCollec' },
-            { title: 'Custom Collection', description: 'Personalized collection service.', image: '/images/room/living-room.jpg', link: '/services/ClickAndCollec' }
+            { title: 'Furniture Collection', description: 'Collect your ordered furniture.', image: '/images/room/bed-room.jpg', link: '/services/ClickAndCollect' },
+            { title: 'Accessory Collection', description: 'Collect your ordered accessories.', image: '/images/room/bathroom.jpg', link: '/services/ClickAndCollect' },
+            { title: 'Appliance Collection', description: 'Collect your ordered appliances.', image: '/images/room/Laundry.jpg', link: '/services/ClickAndCollect' },
+            { title: 'Custom Collection', description: 'Personalized collection service.', image: '/images/room/living-room.jpg', link: '/services/ClickAndCollect' }
         ]
     },
     {

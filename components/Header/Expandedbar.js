@@ -234,7 +234,7 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
       >
         <div className="flex flex-row pl-[24px] lg:pl-[0px] items-center  justify-between bg-white  w-full absolute left-0">
           <div className="logo hidden sm:block pl-[48px]">
-            <Image src={ayatrioLogo} className="w-36 z-30" alt="Ayatrio Logo" />
+            <Image src={ayatrioLogo} className="w-36 z-30" alt="Ayatrio Logo" priority />
           </div>
           <div className="searchDiv lg:px-40 lg:mr-[100px] h-[36px] lg:h-[45px] flex-1 rounded-full  flex flex-col">
             <div className="searchCon rounded-full relative w-full bg-zinc-100 p-2 ">

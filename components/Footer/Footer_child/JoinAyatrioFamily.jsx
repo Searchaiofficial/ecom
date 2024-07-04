@@ -4,7 +4,7 @@ const JoinAyatrioFamily = () => {
     <div className="space-y-4">
       <h4 className="sm:text-base text-xl">Join Ayatrio Family</h4>
       <div>
-        <Image width={200} height={40} src="/images/ayatriologo.webp" alt="Ayatrio Logo" />
+        <Image width={200} height={40} src="/images/ayatriologo.webp" alt="Ayatrio Logo" priority />
       </div>
       <div>
         <h4>

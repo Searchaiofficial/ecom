@@ -718,7 +718,7 @@ const Card = ({ data, productId }) => {
             {data?.productType === "normal" && (
               <div className="price">
                 <div className="font-bold items-end flex mb-1 mt-[10px]">
-                  <h2
+                  <p
                     className={`text-3xl leading-[0.5] tracking-wide ${data?.specialprice?.price
                       ? "bg-[#FFD209] px-2 pt-3 w-fit shadow-lg"
                       : ""
@@ -736,7 +736,7 @@ const Card = ({ data, productId }) => {
                       : selectedSpecData?.specialprice
                         ? selectedSpecData.price
                         : data.perUnitPrice}
-                  </h2>{" "}
+                  </p>{" "}
                   <span> &nbsp;/roll</span>
                 </div>
 

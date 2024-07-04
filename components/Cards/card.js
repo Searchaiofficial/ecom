@@ -405,7 +405,7 @@ function Card(props) {
                   {props.demandtype}
                 </p>
               )}
-              <h2 className="text-[15px] font-semibold">{props.title}</h2>
+              <h3 className="text-[15px] font-semibold">{props.title}</h3>
             </div>
           </div>
           <p className="font-normal mb-1 text-[14px] py-[2px]">
@@ -415,7 +415,7 @@ function Card(props) {
           <div className=" flex h-[40px] pb-[6px] items-center justify-between mt-2">
             {props?.productType === "normal" ? (
               <div className="flex gap-1 items-end">
-                <h2
+                <p
                   className={`text-3xl flex font-semibold leading-[0.5] tracking-wide ${props.specialPrice?.price
                     ? "bg-[#FFD209] px-2 pt-3 pb-1 w-fit shadow-lg"
                     : ""
@@ -437,7 +437,7 @@ function Card(props) {
                   ) : (
                     <p className="pt-3">{props?.price}</p>
                   )}
-                </h2>
+                </p>
                 {props.unitType ? (
                   <span className="tracking-wide text-sm font-semibold">{`/${props.unitType}`}</span>
                 ) : (

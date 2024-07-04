@@ -1,13 +1,14 @@
 import CabinetItem from '../../../../components/Services/CabinetItem'
 import Faq from '../../../../components/Services/Faq'
+import Image from 'next/image'
 
 export default function BuyBackPage() {
     return (
         <div className='md:px-[67px] mx-auto px-[20px]'>
             <section className="w-full pt-40">
-                <h1 className="text-black text-4xl font-semibold mb-12">
+                <h2 className="text-black text-2xl font-semibold mb-12">
                     Ayatrio Sell-back programs
-                </h1>
+                </h2>
                 <div className="flex flex-wrap md:flex-nowrap gap-y-3">
                     <div className="w-full md:w-1/2 mr-3">
                         <p className="text-justify px-3 opacity-90 mb-3">
@@ -43,9 +44,11 @@ export default function BuyBackPage() {
 
                     </div>
                     <div className="w-full md:w-3/5 flex items-center justify-center">
-                        <img
+                        <Image
                             src="/images/services/Buy-Back/buyback.jpg"
                             alt="Financial service"
+                            width={500}
+                            height={500}
                             className="w-full h-full object-cover"
                         />
                     </div>
@@ -56,7 +59,7 @@ export default function BuyBackPage() {
 
             <section id="works">
                 <div className="w-full md:w-1/2 mb-16">
-                    <h1 className="text-black text-2xl font-bold my-10">How the Ayatrio Sell-back program works</h1>
+                    <h2 className="text-black text-2xl font-semibold mb-12 mt-[20px]">How the Ayatrio Sell-back program works</h2>
 
                     <ol type='1' className="list-decimal pl-8 ">
 
@@ -86,7 +89,7 @@ export default function BuyBackPage() {
 
             <section id='product'>
                 <div className="md:w-2/3 mt-6">
-                    <h1 className="text-black text-2xl font-bold my-10">What second hand Ayatrio furniture does Ayatrio buy back?</h1>
+                    <h2 className="text-black text-2xl font-semibold mb-12">What second hand Ayatrio furniture does Ayatrio buy back?</h2>
 
                     <h4 className='text-black text-lg font-bold my-6'>Ayatrio products that qualify for sell-back must be:</h4>
                     <ol className="px-10 opacity-80 list-decimal">
@@ -161,9 +164,9 @@ export default function BuyBackPage() {
             </section>
 
             <section id="faq" className='mt-8'>
-                <h1 className="text-black text-2xl lg:text-4xl font-semibold mb-6 lg:mb-12 px-3 lg:text-left">
+                <h2 className="text-black text-2xl font-semibold mb-12 px-3">
                     Frequently asked questions
-                </h1>
+                </h2>
                 <Faq faqFor='buy-back' />
             </section>
         </div>

@@ -68,6 +68,7 @@ const LoginComponent = () => {
                 height={100}
                 alt="Ayatrio"
                 className="w-48 m-2"
+                priority
               />
             </div>
 

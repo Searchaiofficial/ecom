@@ -1,5 +1,7 @@
 "use client"
 import React, { useState } from 'react';
+import Image from 'next/image';
+
 const faqsDataJson = {
     "installation": [
         {
@@ -66,8 +68,10 @@ const Faq = ({ faqFor }) => {
                                 onClick={() => toggleAccordion(index)}
                             >
                                 <span className="font-semibold">{faq.title}</span>
-                                <img
+                                <Image
                                     src={`/icons/${index === activeIndex ? 'uparrow.svg' : 'downarrow.svg'}`}
+                                    width={300}
+                                    height={300}
                                     alt={index === activeIndex ? 'Collapse' : 'Expand'}
                                     className="w-4 h-4 transition-transform transform"
                                 />
@@ -85,19 +89,21 @@ const Faq = ({ faqFor }) => {
 
 const CabinetItem = ({ imageSrc, title, price, description }) => {
     return (
-        <div className="pub-layout-50-50 s1cmcu6f flex flex-wrap">
-            <div className=" w-full p-4">
-                <div className=" vz2frqh v18by0fb">
-                    <img
-                        className="w-full h-auto"
+        <div className="pub-layout-50-50 flex flex-wrap">
+            <div className="p-4">
+                <div className="b">
+                    <Image
+                        width={600}
+                        height={300}
                         src={imageSrc}
-                        alt="Cabinet"
+                        alt="Cabinet image"
+                        className='h-[300px]'
                     />
                 </div>
             </div>
-            <div className=" w-full p-4">
+            <div className="w-full p-4 pt-0">
                 <div className="">
-                    <h3 className="text-xl font-semibold mb-4">{title}</h3>
+                    <h3 className="Blinds font-semibold text-2xl pb-[20px] lg:pt-[30px]">{title}</h3>
                     <ul className="list-disc pl-4">
                         {description.map((item, index) => (
                             <li key={index} className="mb-2">{item}</li>
@@ -115,9 +121,9 @@ export default function Installation() {
             <section className="w-full mb-12 pt-40">
                 <div className="flex flex-wrap md:flex-nowrap gap-y-3">
                     <div className="w-full md:w-2/5 flex flex-col justify-center">
-                        <h1 className="text-black text-4xl font-bold mb-12 ">
+                        <h2 className="Blinds font-semibold text-2xl pb-[20px] lg:pt-[30px] text-black ">
                             Installation service
-                        </h1>
+                        </h2>
                         <p className="text-justify px-3 opacity-90 mb-3">
                             <strong>Do you need your kitchen installed?</strong> Start by booking a planning service. Our Ayatrio Home Services Provider will guide you through the process from start to finish. Their knowledge and experience will help you build the kitchen of your dreams.
                         </p>
@@ -125,10 +131,12 @@ export default function Installation() {
 
                     </div>
                     <div className="w-full md:w-3/5 flex items-center justify-center">
-                        <img
+                        <Image
                             src="/images/services/installation/installation.jpg"
+                            width={600}
+                            height={300}
                             alt="Financial service"
-                            className="w-full h-full object-cover"
+                            className="object-cover"
                         />
                     </div>
                 </div>
@@ -184,14 +192,14 @@ export default function Installation() {
 
 
             <section id='pricing'>
-                <h1 className="text-black text-3xl font-bold mb-12 px-3">
+                <h2 className="Blinds font-semibold text-2xl pb-[20px] lg:pt-[30px]">
                     Kitchen installation service pricing
-                </h1>
+                </h2>
                 <div className="md:w-2/3 mt-6">
                     <p className="text-justify px-3 opacity-80 mb-3">
                         Our kitchen installation service pricing is based on the type of cabinet (base, wall, or high) and whether it has a door, drawer, or corner carousel. Determine what kind and how many cabinets you’ll have. Then use the information below to help estimate your total installation cost. The more precise you are, the more accurate your quote will be when booking. Additional installation work is also available.
                     </p>
-                    <h1 className="ml-3 text-lg mb-3"><strong>All basic installation services below include:</strong></h1>
+                    <h2 className="Blinds font-semibold text-2xl pb-[20px] lg:pt-[30px]">All basic installation services below include:</h2>
                     <ol className="px-10 opacity-80 list-disc">
                         <li className="mb-3">Daily broom of the job site.</li>
                         <li className="mb-3">Vacuuming inside Ayatrio SEKTION cabinets and floor upon completion of installation.</li>
@@ -257,9 +265,9 @@ export default function Installation() {
 
             <section id='works'>
                 <div className="md:w-2/3 mt-6">
-                    <h1 className="text-black text-2xl font-semibold mb-12">
-                        <strong>How Ayatrio kitchen installation service works</strong>
-                    </h1>
+                    <h2 className="text-black text-2xl font-semibold mb-12">
+                        How Ayatrio kitchen installation service works
+                    </h2>
                     <h4 className='text-black text-lg font-bold my-6'>Before an Ayatrio kitchen installation</h4>
                     <ol className="px-10 opacity-80 list-decimal">
                         <li className="mb-3">Measure, plan and buy your Ayatrio kitchen. If you haven’t done this already, we can help! Start things off right with correct specifications from our kitchen measuring service. Then, let us design your new kitchen with our kitchen planning service.</li>
@@ -281,9 +289,9 @@ export default function Installation() {
             </section>
 
             <section id="faq" className='mt-8'>
-                <h1 className="text-black text-2xl lg:text-4xl font-semibold mb-6 lg:mb-12 px-3 lg:text-left">
+                <h2 className="text-black text-2xl font-semibold mb-12">
                     Frequently asked questions
-                </h1>
+                </h2>
                 <Faq faqFor='installation' />
             </section>
 

@@ -47,6 +47,7 @@ const page = async ({ params }) => {
   return (
     <>
       <script
+        defer
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(subcategoriesJsonLd),

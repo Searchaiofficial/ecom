@@ -1,13 +1,14 @@
 import Faq from '../../../../components/Services/Faq'
+import Image from 'next/image'
 export default function ClickAndCollectServicePage() {
     return (
         <div className='md:px-[67px] mx-auto px-[20px]'>
             <section className="w-full pt-40">
                 <div className="flex flex-wrap md:flex-nowrap gap-y-3">
                     <div className="w-full md:w-2/5 flex flex-col justify-center">
-                        <h1 className="text-black text-4xl font-bold mb-12 px-3">
+                        <h2 className="text-black text-2xl font-semibold mb-12 mb-12 px-3">
                             Click and collect
-                        </h1>
+                        </h2>
                         <p className="text-justify px-3 opacity-90 mb-3">
                             With Ayatrio Click and collect, you’re in control. Place an order online when it’s convenient and choose when and where to collect it. You’ll still make a trip, but we’ll gather your items so that you have more time and energy for assembling instead.
                         </p>
@@ -15,9 +16,11 @@ export default function ClickAndCollectServicePage() {
 
                     </div>
                     <div className="w-full md:w-3/5 flex items-center justify-center">
-                        <img
+                        <Image
                             src="/images/services/ClickCollectService/services.jpg"
                             alt="Financial service"
+                            width={300}
+                            height={300}
                             className="w-full h-full object-cover"
                         />
                     </div>
@@ -64,7 +67,7 @@ export default function ClickAndCollectServicePage() {
 
             <section id='options'>
                 <div className='flex-col md:w-2/3 my-8'>
-                    <h1 className='text-black text-4xl font-semibold mb-12'>Click and collect options and pricing</h1>
+                    <h2 className='text-black text-2xl font-semibold mb-12'>Click and collect options and pricing</h2>
                     <p className='text-justify px-3 opacity-90 my-3'>
                         You can collect your order at an Ayatrio store or a local Pick-up location. Pricing details, approximate lead time, maximum package specifications, Pick-up locations, etc. are specified below.
                     </p>
@@ -72,7 +75,11 @@ export default function ClickAndCollectServicePage() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div className="col-span-1">
                         <div className="pb-[56.49761904761905%] relative">
-                            <img src="/images/services/ClickCollectService/car.jpg" alt="Cars parked in front of an Ayatrio store" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                            <Image src="/images/services/ClickCollectService/car.jpg"
+                                alt="Cars parked in front of an Ayatrio store"
+                                width={300}
+                                height={300}
+                                className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
                             <a href="" className="absolute inset-0 flex items-center justify-center">
                                 {null}
                             </a>
@@ -92,7 +99,12 @@ export default function ClickAndCollectServicePage() {
                     </div>
                     <div className="col-span-1">
                         <div className="pb-[56.2%] relative">
-                            <img src="/images/services/ClickCollectService/pickup.jpg" alt="A person riding a cargo bicycle with Ayatrio boxes" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                            <Image src="/images/services/ClickCollectService/pickup.jpg"
+                                alt="A person riding a cargo bicycle with Ayatrio boxes"
+                                className="absolute inset-0 w-full h-full object-cover"
+                                width={300}
+                                height={300}
+                                loading="lazy" />
                             <a href="" className="absolute inset-0 flex items-center justify-center ">
                                 {null}
                             </a>
@@ -107,7 +119,11 @@ export default function ClickAndCollectServicePage() {
                     </div>
                     <div className="col-span-1">
                         <div className="pb-[56.2%] relative">
-                            <img src="/images/services/ClickCollectService/deliver.jpg" alt="FedEx worker helping a customer" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                            <Image src="/images/services/ClickCollectService/deliver.jpg"
+                                alt="FedEx worker helping a customer"
+                                width={300}
+                                height={300}
+                                className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
                             <a href="" className="absolute inset-0 flex items-center justify-center ">{null}</a>
                         </div>
                         <div className="p-4">
@@ -125,7 +141,7 @@ export default function ClickAndCollectServicePage() {
 
             <section id='works'>
                 <div className="w-full md:w-2/3 mb-16">
-                    <h1 className="text-black text-2xl font-bold my-10">How Click and collect works </h1>
+                    <h2 className="text-black text-2xl font-semibold mb-12 mt[20px]">How Click and collect works </h2>
 
                     <ul type='1' className="pl-8 opacity-90">
                         <li className="mb-3"><strong className="opacity-90">Step 1:</strong> Choose ‘Click and collect’ at checkout and you will be able to select an <a href="" className="underline">Ayatrio Store</a>,
@@ -145,7 +161,7 @@ export default function ClickAndCollectServicePage() {
 
             <section className='mb-4' id='know'>
                 <div className="w-full md:w-2/3 mb-16">
-                    <h1 className="text-black text-2xl font-bold my-10">Good-to-know basics </h1>
+                    <h2 className="ttext-black text-2xl font-semibold mb-12 mt-[20px]">Good-to-know basics </h2>
 
                     <ul className="list-disc list-inside opacity-90">
                         <li className="mb-3 ml-6 ">Due to high demand, time slots may be limited. Available times are listed during online check-out.</li>
@@ -159,9 +175,9 @@ export default function ClickAndCollectServicePage() {
                 <hr className="mt-20" />
             </section>
             <section id="faq" className='mt-8'>
-            <h1 className="text-black text-2xl lg:text-4xl font-semibold mb-6 lg:mb-12 px-3 lg:text-left">
+                <h2 className="text-black text-2xl font-semibold mb-12">
                     Frequently asked questions
-                </h1>
+                </h2>
                 <Faq faqFor='clickandcollect' />
             </section>
 

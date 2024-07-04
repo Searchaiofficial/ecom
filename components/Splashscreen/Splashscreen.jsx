@@ -11,6 +11,7 @@ const Splashscreen = () => {
           width={200}
           height={100}
           className="w-80 h-auto transition-all ease-linear duration-500"
+          priority
         ></Image>
       </div>
     </div>
