@@ -47,19 +47,16 @@ const MainSlider = ({ initialData: { result: sliderData } }) => {
         nextEl: ".nav-next",
         prevEl: ".nav-prev",
       },
-      spaceBetween: 5,
+      spaceBetween: 12,
       breakpoints: {
         350: {
           slidesPerView: 1,
-          spaceBetween: 5,
         },
         640: {
           slidesPerView: 1.25,
-          spaceBetween: 5,
         },
         1024: {
           slidesPerView: 1.36,
-          spaceBetween: 5,
         },
       },
     };
@@ -77,7 +74,7 @@ const MainSlider = ({ initialData: { result: sliderData } }) => {
       onMouseLeave={() => {
         setIsHovering(false);
       }}
-      className="w-full h-[78vh] sm:mt-[96px]"
+      className="w-full h-[78vh] sm:mt-[96px] px-[12px] sm:px-0"
     >
       <div
         className={`${
