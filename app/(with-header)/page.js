@@ -23,29 +23,7 @@ export default async function Home() {
         type={"Organization"}
         url="https://www.ayatrio.com"
         name="Ayatrio"
-        // logo="https://ayatrio.com/api/og"
-        contactPoint={[
-          {
-            telephone: "(+91) 9007404292",
-            areaServed: "IN",
-            email: "info.ayatrio@gmail.com",
-            contactType: "Customer Service",
-          },
-        ]}
-        sameAs={[
-          // "https://www.facebook.com/ayatrio.india/",
-          // "https://twitter.com/ayatrio_india/",
-          // "https://www.instagram.com/ayatrio_india/",
-          // "https://in.pinterest.com/ayatrio_india/",
-          // "https://www.youtube.com/ayatrio/",
-        ]}
-        address={{
-          type: "PostalAddress",
-          streetAddress: "25C, Elliot Road",
-          addressLocality: "Kolkata",
-          postalCode: "700016",
-          contactType: "Customer Service",
-        }}
+        logo="https://ayatrio.com/api/og"
       />
       <SiteLinksSearchBoxJsonLd
         useAppDir={true}
