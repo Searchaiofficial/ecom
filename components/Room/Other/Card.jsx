@@ -667,6 +667,41 @@ const Card = ({ data, productId }) => {
     }
   };
 
+  const contentData = [
+    {
+      title: "Free Delivery, Free Returns",
+      content: (
+        <>
+          For all orders, delivery and Returns are free. If you are not entirely satisfied with your order, you may be entitled to a refund. Read our <Link href="/customerservice/returnpolicy" className="underline cursor-pointer">Returns Terms & Conditions</Link> for more details.
+        </>
+      ),
+    },
+    {
+      title: "Delivery: Metro cities: 2-5 days, Others: 5-15 days",
+      content: (
+        <>
+          Get free delivery on all orders above ₹3000. A shipping charge of ₹100 is applicable on orders below ₹3000. Check out our <Link href="/customerservice/returnpolicy" className="underline cursor-pointer">delivery Terms & Conditions</Link> for more details.
+        </>
+      ),
+    },
+    {
+      title: "COD available for orders below ₹3000",
+      content: "Cash on Delivery is available for all orders below ₹3000."
+    },
+    {
+      title: "Secure transactions with hassle free 14 days Exchange and Returns",
+      content: (
+        <>
+          Tried on your item(s) and need a different size? Exchange your item(s) within 14 days and have your perfect fit shipped for free. Or did you change your mind? You can also return your item(s) for free within 14 days for a full refund. Read more on <Link href="/customerservice/returnpolicy" className="underline cursor-pointer" >Exchange</Link> and <Link href="/customerservice/returnpolicy" className="underline cursor-pointer" >Return</Link>.
+        </>
+      ),
+    },
+    {
+      title: "Save 5% on all Online Payments under ₹3000",
+      content: "Pay 5% less on all orders under ₹3000 when you choose online payment options. That's right – simply opt for online payment at checkout and enjoy instant savings on your purchase."
+    }
+  ];
+
   return (
     <>
       <div className="flex justify-start md:min-w-[25vw] gap-1 mt-2.5 w-[100%] ml-0">
@@ -807,7 +842,7 @@ const Card = ({ data, productId }) => {
                         }   
           `}
                     >
-                      <Image loading="lazy"
+                      <Image 
                         className="relative w-full h-full object-cover"
                         src={item.image}
                         alt={item.color}
@@ -2082,7 +2117,7 @@ const Card = ({ data, productId }) => {
             </div>
           )}
           <div className="flex gap-3 mt-8 items-center justify-center">
-            <Image loading="lazy"
+            {/* <Image 
               src={"/icons/ayatrio_comment_button.svg"}
               height={30}
               width={30}
@@ -2097,7 +2132,21 @@ const Card = ({ data, productId }) => {
               <p className="text-[#0066CC] text-xs cursor-pointer font-normal hover:underline">
                 Chat with a Specialist
               </p>
+            </div> */}
+
+            <div className="flex flex-col items-center">
+              {contentData.map((item, index) => (
+                <div key={index} className="w-full max-w-md px-4 py-2">
+                  <details className="cursor-pointer">
+                    <summary className="text-md font-semibold hover:underline" style={{ listStyle: 'none' }}>
+                      {item.title}
+                    </summary>
+                    <p>{item.content}</p>
+                  </details>
+                </div>
+              ))}
             </div>
+
           </div>
         </div>
         <ToastContainer

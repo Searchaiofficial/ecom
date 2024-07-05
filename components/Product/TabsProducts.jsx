@@ -745,7 +745,7 @@ const Tabs = ({
                         >
                           <div className="flex flex-col ">
                             <div className="lg:mb-[12px] ">
-                              <Image loading="lazy"
+                              <Image
                                 src={curElement.img}
                                 width={200}
                                 height={130}

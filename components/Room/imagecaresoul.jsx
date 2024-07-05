@@ -83,7 +83,7 @@ const Carousel = () => {
             images?.map((src, idx) => {
               return (
                 <div key={idx}>
-                  <Image loading="lazy"
+                  <Image
                     src={src}
                     alt="NA"
                     height={400}

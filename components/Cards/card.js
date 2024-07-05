@@ -528,7 +528,7 @@ function Card(props) {
                           }   
           `}
                       >
-                        <Image loading="lazy"
+                        <Image
                           className="relative w-full h-full object-cover"
                           src={item.image}
                           alt={item.color}

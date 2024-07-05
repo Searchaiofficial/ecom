@@ -282,7 +282,7 @@ function TabsProductCard(props) {
                   href={`/${props.productTitle.replace(/ /g, "-")}`}
                   onClick={() => handleclick(props.productTitle)}
                 >
-                  <Image loading="lazy"
+                  <Image
                     src={
                       isHovered
                         ? props.images[1]
@@ -473,7 +473,7 @@ function TabsProductCard(props) {
                           }   
           `}
                       >
-                        <Image loading="lazy"
+                        <Image
                           className="relative w-full h-full object-cover"
                           src={item.image}
                           alt={item.color}
