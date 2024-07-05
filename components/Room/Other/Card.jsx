@@ -679,7 +679,7 @@ const Card = ({ data, productId }) => {
     },
     {
       title: "Delivery: Metro cities: 2-5 days, Others: 5-15 days",
-      icon: "delivary",
+      icon: "speeddelivery",
       content: (
         <>
           Get free delivery on all orders above ₹3000. A shipping charge of ₹100 is applicable on orders below ₹3000. Check out our <Link href="/customerservice/returnpolicy" className="underline cursor-pointer">delivery Terms & Conditions</Link> for more details.

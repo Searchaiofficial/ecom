@@ -275,7 +275,7 @@ const RoomInfo = ({ data }) => {
         </div>
       </div>
 
-      <div className="font-normal text-sm  flex flex-col gap-4 mb-6">
+      <div className="font-normal text-sm  flex flex-col gap-4 my-6">
         <>
 
           <div>
@@ -293,8 +293,6 @@ const RoomInfo = ({ data }) => {
               </span>
             )}
           </div>
-
-
           {
             categoryDetails?.maintenanceDetails && categoryDetails?.certification && (
 

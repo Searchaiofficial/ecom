@@ -35,20 +35,23 @@ export default function RoomImageList({ alt }) {
           ))}
         </div>
       </div>
-      <div className="hidden lg:flex items-center self-center border-2 relative -top-7 bg-white py-3 px-6 gap-4">
-        <button
-          className="bg-white text-gray-800 hover:text-gray-600 font-bold text-[14px] uppercase"
-        >
-          Show more
-        </button>
-        <Image loading="lazy"
-          src={"/icons/backarrowRevarce.svg"}
-          height={25}
-          width={25}
-          alt="downarrow"
-          className="rotate-90 hover:text-gray-600"
-        />
-      </div>
+      {imagesToDisplay.length > 4 && (
+        <div className="hidden lg:flex items-center self-center border-2 relative -top-7 bg-white py-3 px-6 gap-4">
+          <button
+            className="bg-white text-gray-800 hover:text-gray-600 font-bold text-[14px] uppercase"
+          >
+            Show more
+          </button>
+          <Image loading="lazy"
+            src={"/icons/backarrowRevarce.svg"}
+            height={25}
+            width={25}
+            alt="downarrow"
+            className="rotate-90 hover:text-gray-600"
+          />
+        </div>)
+      }
+
     </div >
   );
 }
