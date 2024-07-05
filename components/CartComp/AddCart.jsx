@@ -29,34 +29,7 @@ const AddCart = () => {
     id = localStorage.getItem("deviceId");
     console.log(id);
   }
-  // const fetchData = async () => {
-  //   try {
-  //     setCartStaus("loading");
-  //     const response = await axios.get(
-  //       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
-  //       {
-  //         params: {
-  //           deviceId: id,
-  //         },
-  //       }
-  //     );
-  //     if (response.status !== 200) {
-  //       throw new Error("HTTP status " + response.status);
-  //     }
-  //     const data = response.data;
-  //     setcartdata(data);
-  //     setCartStaus("succeeded");
-  //     console.log(data)
-  //     dispatch(setDbItems(data));
-  //   } catch (error) {
-  //     setCartStaus("failed");
-  //   }
-  // };
 
-  // useEffect(() => {
-
-  //   // fetchData();
-  // }, [dispatch]);
 
   useEffect(() => {
     console.log("Updated cartdata", cartdata);
@@ -69,7 +42,7 @@ const AddCart = () => {
 
   let totalServicesPrice = 0;
 
-  if (cartStatus === "succeeded" && cartdata) {
+  if (cartdata) {
     totalServicesPrice = cartdata.items.reduce((total, item) => {
       const serviceTotalCost = item.selectedServices.reduce(
         (serviceTotal, service) => serviceTotal + parseFloat(service.cost * service.quantity),
@@ -85,7 +58,7 @@ const AddCart = () => {
 
   let totalAccessoryPrice = 0;
 
-  if (cartStatus === "succeeded" && cartdata) {
+  if (cartdata) {
     totalAccessoryPrice = cartdata.items.reduce((total, item) => {
       const serviceTotalCost = item.selectedAccessories.reduce(
         (serviceTotal, service) => serviceTotal + parseFloat(service.perUnitPrice * service.quantity),
@@ -100,7 +73,7 @@ const AddCart = () => {
 
   let SumtotalPrice = 0;
 
-  if (cartStatus === "succeeded" && cartdata) {
+  if (cartdata) {
     SumtotalPrice = cartdata.items.reduce((total, item) => {
       const serviceTotalCost = item.selectedServices.reduce(
         (serviceTotal, service) => serviceTotal + parseFloat(service.cost * service?.quantity),
@@ -115,7 +88,7 @@ const AddCart = () => {
     }, 0);
   }
 
-  if (cartStatus === "succeeded" && cartdata && cartdata.items) {
+  if (cartdata && cartdata.items) {
     totalPrice = cartdata.items.reduce((total, item) => {
       return total + (item?.productId?.totalPrice || 0) * (item?.quantity || 0);
     }, 0);
