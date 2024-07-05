@@ -39,7 +39,9 @@ const RoomPage = () => {
 
   const dispatch = useDispatch();
   const quantity = useSelector(selectQuantity);
-  const { title } = useParams();
+  // const { title } = useParams();
+  const params = useParams();
+  const title = params.title.replace(/-/g, " ");
   let url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getSingleProduct?id=`;
   const [data, setData] = useState([]);
   const selectedData = useSelector(selectRoomData);

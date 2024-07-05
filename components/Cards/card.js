@@ -340,7 +340,7 @@ function Card(props) {
             <div className="w-[400px] overflow-hidden">
               {props.imgSrc?.map((item, idx) => {
                 return (
-                  <Link href={`/${props.title}`}>
+                  <Link href={`/${props.title.replace(/ /g, "-")}`}>
                     <Image loading="lazy"
                       // src={isHovered ? props.imgSrc[2] : item}
                       src={
