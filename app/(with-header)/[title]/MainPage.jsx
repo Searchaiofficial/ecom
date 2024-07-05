@@ -160,11 +160,16 @@ const RoomPage = () => {
     }
   }, [data]);
 
+  const handleJoinLive = () => {
+    // Store category data in local storage
+    localStorage.setItem('selectedCategory', category);
+  };
+
   return (
     <>
       <div className="overflow-y-auto overflow-x-hidden container-rooms flex sm:block items-center px-[20px] sm:px-[50px] lg:px-[27px] ">
         <div className="sm:mt-[65px] w-full">
-        {/* <div className="mt-[65px] w-full"> */}
+          {/* <div className="mt-[65px] w-full"> */}
           <div className=" sm:flex-row gap-8 flex-col flex overflow-hidden">
             {/* <div className="relative sm:basis-2/3 flex lg:pl-[40px] mt-[50px] sm:mt-[40px] flex-col sm:flex-grow"> */}
             <div className="relative sm:basis-2/3 flex lg:pl-[40px]  sm:mt-[40px] flex-col sm:flex-grow">
@@ -240,6 +245,31 @@ const RoomPage = () => {
               <ImageCaresoul images={data?.images} />
               <div className="block md:hidden">
                 <Card data={data} productId={data._id} accessories={accessories} />
+              </div>
+              <div className="my-2 flex flex-col items-center mt-5">
+                <div className="flex space-x-4">
+                  <div className="flex flex-col items-center">
+                    <Link
+                      href={{
+                        pathname: '/liveroom',
+                      }}
+                      passHref
+                      onClick={handleJoinLive}
+                      className="px-6 py-2 rounded-full focus:outline-none bg-zinc-100 hover:bg-zinc-200 max-h-10"
+                    >
+                      Join Live
+                    </Link>
+                    <div className="text-xs mt-2 text-center">
+                      Still unable to decide?
+                    </div>
+                  </div>
+                  <Link
+                    className="px-6 py-2 rounded-full focus:outline-none bg-zinc-100 hover:bg-zinc-200 max-h-10"
+                    href="#"
+                  >
+                    Free Sampling
+                  </Link>
+                </div>
               </div>
               <RoomInfo data={data} />
               <Reviews productId={data._id} data={data} />

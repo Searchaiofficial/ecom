@@ -219,6 +219,7 @@ const Trending = () => {
                       totalPrice={product.totalPrice}
                       unitType={product.unitType}
                       productType={product.productType}
+                      expectedDelivery={product.expectedDelivery}
                     />
                   </div>
                 </SwiperSlide>

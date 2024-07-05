@@ -122,6 +122,7 @@ const Dataslider = ({ category, data, sliderIndex }) => {
                     cssClass={"card1flex"}
                     productImages={product?.productImages}
                     productType={product.productType}
+                    expectedDelivery={product.expectedDelivery}
                   />
                 </div>
               </SwiperSlide>

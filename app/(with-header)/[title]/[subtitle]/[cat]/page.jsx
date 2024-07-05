@@ -9,7 +9,7 @@ import { BASE_URL } from "@/constants/base-url";
 
 export async function generateMetadata({ params }) {
   const category = await getCategoryByName(params.title.replace(/-/g, " "));
-  const subcategories = category.subcategories;
+  const subcategories = category?.subcategories;
 
   const isCategoryPage = params.title !== "offers" && params.cat === "all";
 
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }) {
     };
   }
 
-  const currentSubcategory = subcategories.find(
+  const currentSubcategory = subcategories?.find(
     (subcategory) => subcategory.name === params.cat
   );
 

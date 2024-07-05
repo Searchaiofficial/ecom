@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../MainSlider/Mainslidestyle.css";
 // import work from "@/public/images/work.webp";
 import "./tabs.css";
@@ -43,23 +43,30 @@ const Tabs = ({ data }) => {
   //   }
   // }, [data]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const thirdDiv = document.querySelector(".classic-tabs");
+  const navbarRef = useRef(null)
 
-      if (thirdDiv) {
-        const thirdDivTop = thirdDiv.getBoundingClientRect().top;
-        const elementVisible =
-          thirdDivTop <= 0 && thirdDivTop + thirdDiv.clientHeight > 0;
-        setIsSticky(elementVisible);
+
+  useEffect(() => {
+    let throttleTimeout = null;
+
+    const handleScroll = () => {
+      if (!throttleTimeout) {
+        throttleTimeout = setTimeout(() => {
+          throttleTimeout = null;
+
+          const navbar = navbarRef.current; // Access the navbar element using the ref
+          if (navbar) {
+            const navbarTop = navbar.getBoundingClientRect().top;
+            const elementVisible = navbarTop <= 0 && navbarTop + navbar.clientHeight > 0;
+            setIsSticky(elementVisible);
+          }
+        }, 200); // Adjust throttle time interval (in milliseconds)
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const recommendedProducts = newdata.flatMap((product) => product.roomType);
@@ -140,50 +147,40 @@ const Tabs = ({ data }) => {
   }
 
   console.log(tabImages)
+  console.log(isSticky)
 
   return (
     <>
-      <div className="lg:px-[15px] px-[20px] sm:px-[50px] pb-20 pt-10 h-full">
+      <div className="lg:px-[15px] px-[20px] sm:px-[50px] pb-20 pt-10 h-full ">
         <div>
           <h2 className="text-xl font-bold mb-5">More ideas and inspiration</h2>
         </div>
         <div
-          className={` py-2.5 bloc-tabsnone flex flex-row tabcategory ${isSticky ? "sticky-tabcategory" : ""
-            }`}
+
+          className={`py-2.5 bloc-tabsnone flex flex-row tabcategory ${isSticky ? "sticky-tabcategory " : ""}`}
           style={{ overflowX: "auto", WebkitOverflowScrolling: "touch" }}
         >
-          <div
-            className={` px-5 py-2 tabS cursor-pointer
-            ${activeTab === "all"
-                ? "active-tabs  border border-black mr-2.5 rounded-full flex items-center justify-center bg-gray-100 whitespace-nowrap"
-                : "tabs  border border-white mr-2.5 rounded-full flex items-center justify-center bg-gray-100 whitespace-nowrap"
-              }`}
-            onClick={() => setActiveTab("all")}
-          >
+          <div className={`px-5 py-2 tabS cursor-pointer ${activeTab === "all" ? "active-tabs border border-black mr-2.5 rounded-full flex items-center justify-center bg-gray-100 whitespace-nowrap" : "tabs border border-white mr-2.5 rounded-full flex items-center justify-center bg-gray-100 whitespace-nowrap"}`} onClick={() => setActiveTab("all")}>
             All
           </div>
           {tabsData.map((tab, i) => (
             <div
               key={i}
-              className={` px-5 py-2 tabS cursor-pointer
-            ${activeTab === tab.key
-                  ? "active-tabs  border border-black mr-2.5 rounded-full flex items-center justify-center bg-gray-100 whitespace-nowrap"
-                  : "tabs  border border-white mr-2.5 rounded-full flex items-center justify-center bg-gray-100 whitespace-nowrap"
-                }`}
+              className={`px-5 py-2 tabS cursor-pointer ${activeTab === tab.key ? "active-tabs border border-black mr-2.5 rounded-full flex items-center justify-center bg-gray-100 whitespace-nowrap" : "tabs border border-white mr-2.5 rounded-full flex items-center justify-center bg-gray-100 whitespace-nowrap"}`}
               onClick={() => setActiveTab(tab.key)}
             >
               {tab.label}
             </div>
           ))}
-
         </div>
 
 
 
-        {activeTab === "all" ? (
-          <>
 
-            <div className="classic-tabs text-green-800 grid sm:grid-cols-3 grid-cols-2 gap-3 grid-rows-3">
+        {activeTab === "all" ? (
+          <div ref={navbarRef} className={`classic-tabs ${isSticky ? "mt-20" : ""}`}>
+
+            <div className=" text-green-800 grid sm:grid-cols-3 grid-cols-2 gap-3 grid-rows-3">
               <TabImage
                 width={450}
                 height={700}
@@ -352,11 +349,11 @@ const Tabs = ({ data }) => {
                 </div>
               )
             }
-          </>
+          </div>
         ) : (
-          <>
+          <div ref={navbarRef} className={`classic-tabs ${isSticky ? "mt-20" : ""}`}>
 
-            <div className="classic-tabs text-green-800 grid sm:grid-cols-3 grid-cols-2 gap-3 grid-rows-3">
+            <div className=" text-green-800 grid sm:grid-cols-3 grid-cols-2 gap-3 grid-rows-3">
               <TabImage
                 width={450}
                 height={700}
@@ -568,7 +565,7 @@ const Tabs = ({ data }) => {
               )
             }
 
-          </>
+          </div>
         )}
       </div>
     </>

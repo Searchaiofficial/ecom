@@ -290,6 +290,14 @@ function Card(props) {
 
   console.log(props);
 
+  const getExpectedDeliveryDate = (expectedDelivery) => {
+    const today = new Date();
+    const expectedDate = new Date(today);
+    expectedDate.setDate(today.getDate() + expectedDelivery);
+    return expectedDate.toDateString(); // Format the date as a readable string
+  };
+
+
   return (
     <>
       <div
@@ -464,6 +472,27 @@ function Card(props) {
               </div>
             )}
           </div>
+
+          {props.expectedDelivery && (
+            <div className="flex items-center">
+              {props.expectedDelivery <= 5 && (
+                <Image
+                  alt="speedDelivery"
+                  loading="lazy"
+                  src={"/icons/speeddelevary.svg"}
+                  height={70}
+                  width={70}
+                />
+              )}
+              <p className="text-[#757575] text-[12px]  ml-2">
+                Expected delivery on &nbsp;
+                <span className="text-[#0152be] font-md font-semibold">
+                  {getExpectedDeliveryDate(props.expectedDelivery)}
+                </span>
+              </p>
+            </div>
+          )}
+
           {props?.specialPrice?.price && (
             <div className="flex flex-col my-3">
               <p className="text-[#757575] text-[12px] pt-[3px]">
