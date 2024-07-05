@@ -87,7 +87,8 @@ export default function NewMainSlider({ initialData }) {
       onMouseLeave={() => setNavigationVisible(false)}
     >
       <Swiper
-        className="swiper-slider h-[78vh]"
+        // className="swiper-slider h-[78vh]"
+        className="md:mt-[6rem] h-[78vh]"
         centeredSlides={true}
         grabCursor={true}
         loop={true}
@@ -136,7 +137,8 @@ export default function NewMainSlider({ initialData }) {
           return (
             <SwiperSlide key={data?._id}>
               <div
-                className={`relative mt-[60px] sm:mt-0 group h-[78vh]  lg:-translate-x-[5px] -translate-x-[10px] translate-r md:translate-x-0`}
+                // className={`relative mt-[60px] sm:mt-0 group h-[78vh]  lg:-translate-x-[5px] -translate-x-[10px] translate-r md:translate-x-0`}
+                className={`relative  sm:mt-0 group h-[78vh]  lg:-translate-x-[5px] -translate-x-[10px] translate-r md:translate-x-0`}
               >
                 {data.link ? (
                   <Link href={`https://ayatrio.com//category/${data?.link}`}>

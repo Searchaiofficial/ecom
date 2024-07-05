@@ -10,7 +10,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import TopHeader from "./TopHeader";
-import { selectQuantity, updateQuantity } from "../Features/Slices/calculationSlice";
+import {
+  selectQuantity,
+  updateQuantity,
+} from "../Features/Slices/calculationSlice";
 import { headerLinks } from "@/Model/Dropdown/AsideData/AsideData";
 import Midsection from "./Midsection/Midsection";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,14 +33,12 @@ function Header({ setIsHeaderMounted }) {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const CartItems = useSelector(selecteddbItems);
-  const [sidebarNavigationItem, setSidebarNavigationItem] = useState("")
-  const dispatch = useDispatch()
-
+  const [sidebarNavigationItem, setSidebarNavigationItem] = useState("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
           {
@@ -52,16 +53,12 @@ function Header({ setIsHeaderMounted }) {
         const data = response.data;
 
         dispatch(setDbItems(data));
-
-      } catch (error) {
-
-      }
+      } catch (error) {}
     };
     fetchData();
   }, []);
 
-  console.log(CartItems)
-
+  console.log(CartItems);
 
   // Filter
 
@@ -76,42 +73,35 @@ function Header({ setIsHeaderMounted }) {
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
     // setSidebarNavigationItem("")
     // setIsOpen(false)
-    setHoveredIndex(null)
+    setHoveredIndex(null);
     if (toptext !== "") {
-      setTopText("")
+      setTopText("");
     }
 
     if (document.body.style.overflow != "hidden") {
-      document.body.style.overflow = "hidden"
-    }
-    else if (document.body.style.overflow = "hidden") {
+      document.body.style.overflow = "hidden";
+    } else if ((document.body.style.overflow = "hidden")) {
       document.body.style.overflow = "auto";
     }
 
     if (pathname !== "/") {
-      if (document.body.style.overflow = "visible") {
-        document.body.style.overflow = "visible"
+      if ((document.body.style.overflow = "visible")) {
+        document.body.style.overflow = "visible";
       }
     }
-
   };
 
   const toggleDropdown = (item) => {
-    console.log(item)
-    setSidebarNavigationItem(item)
-    console.log(open)
+    console.log(item);
+    setSidebarNavigationItem(item);
+    console.log(open);
     setIsOpen(!isOpen);
-
   };
   const [isHovered, setIsHovered] = useState(false);
-
-
-
 
   const handleMouseEnter = (index) => {
     setHoveredIndex(index);
@@ -126,7 +116,6 @@ function Header({ setIsHeaderMounted }) {
 
   // const handleClick = (idx) => {
   //   if (idx === 3) router.push("/customerservice");
-
 
   // };
 
@@ -198,17 +187,20 @@ function Header({ setIsHeaderMounted }) {
       setAtTop(window.scrollY === 0);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   const homeRoute = "/";
 
-  console.log(pathname)
+  console.log(pathname);
 
-  const phrases = pathname !== "/ayatrio-map" ? [` ' Wallpapers '`, ` ' Curtains '`, ` ' Blinds '`] : [` ' Bengaluru '`, ` ' Kolkata '`, ` ' Mumbai '`];
+  const phrases =
+    pathname !== "/ayatrio-map"
+      ? [` ' Wallpapers '`, ` ' Curtains '`, ` ' Blinds '`]
+      : [` ' Bengaluru '`, ` ' Kolkata '`, ` ' Mumbai '`];
 
   const displayedTextRef = useRef("");
   const currentPhraseIndex = useRef(0);
@@ -223,7 +215,8 @@ function Header({ setIsHeaderMounted }) {
 
       if (nextCharIndex > currentPhrase.length) {
         currentCharIndex.current = 0;
-        currentPhraseIndex.current = (currentPhraseIndex.current + 1) % phrases.length;
+        currentPhraseIndex.current =
+          (currentPhraseIndex.current + 1) % phrases.length;
       } else {
         displayedTextRef.current = currentPhrase.substring(0, nextCharIndex);
         currentCharIndex.current = nextCharIndex;
@@ -242,46 +235,44 @@ function Header({ setIsHeaderMounted }) {
   }, [phrases]);
 
   const handleLoginClick = () => {
-    router.push("/login")
-  }
+    router.push("/login");
+  };
 
   const handleLogoutClick = () => {
     localStorage?.removeItem("token");
     window?.open(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/logout", "_self"`
     );
-  }
-
+  };
 
   const handleClick = (link) => {
-
-    toggleMobileMenu()
+    toggleMobileMenu();
     // router.push("/customerservice")
-    router.push(link)
-  }
-  const [toptext, setTopText] = useState([])
+    router.push(link);
+  };
+  const [toptext, setTopText] = useState([]);
 
   const handlebackArraowClick = () => {
-    setTopText([])
-  }
+    setTopText([]);
+  };
 
   const handleTopValue = (text) => {
-    setTopText(prev => [...prev, text])
-  }
+    setTopText((prev) => [...prev, text]);
+  };
 
   // console.log(toptext)
 
   const handleItemClick = (data) => {
-    console.log(data)
-    setTopText(prev => [...prev, data.name])
-  }
+    console.log(data);
+    setTopText((prev) => [...prev, data.name]);
+  };
 
-  const [selectedValue, setSelectedValue] = useState('');
+  const [selectedValue, setSelectedValue] = useState("");
 
   const handleChange = (value) => {
-    console.log(value)
-    setIsHovered(value)
-  }
+    console.log(value);
+    setIsHovered(value);
+  };
 
   return (
     <div className="">
@@ -290,12 +281,13 @@ function Header({ setIsHeaderMounted }) {
       </TopHeaderWrapper>
       {isHovered && <div className="overlay"></div>}
       <div
-        className={`fixed w-full sm:bg-none ${(!pathname.includes("/checkout") && !pathname.includes("/ayatrio-map"))
-          ? typeof window !== "undefined" && window.scrollY < 20
-            ? "md:top-[35px] top-[0px]"
+        className={`fixed w-full sm:bg-none ${
+          !pathname.includes("/checkout") && !pathname.includes("/ayatrio-map")
+            ? typeof window !== "undefined" && window.scrollY < 20
+              ? "md:top-[35px] top-[0px]"
+              : "top-0"
             : "top-0"
-          : "top-0"
-          } z-[9998]
+        } z-[9998]
        ${isScrolled ? "bg-white" : "bg-white"} 
       ${isFilterVisible ? "block" : "hidden"}
       `}
@@ -304,8 +296,9 @@ function Header({ setIsHeaderMounted }) {
         {!searchQuery ? (
           <>
             <div
-              className={`${isScrolled ? " border-b-[0.5px] border-[#f5f5f5]" : ""
-                } flex flex-row justify-between z-[99999px] items-center sm:px-[20px] px-[20px] h-[60px]`}
+              className={`${
+                isScrolled ? " border-b-[0.5px] border-[#f5f5f5]" : ""
+              } flex flex-row justify-between z-[99999px] items-center sm:px-[20px] px-[20px] h-[60px]`}
             >
               {/* main-logo */}
               <div className=" flex mainlogo items-center mr-20 justify-start">
@@ -335,25 +328,32 @@ function Header({ setIsHeaderMounted }) {
                         key={idx}
                         onMouseEnter={() => handleMouseEnter(idx)}
                         onMouseLeave={() => handleMouseLeave()}
-                      // onClick={() => handleClick(idx)}
+                        // onClick={() => handleClick(idx)}
                       >
                         <span
-                          className={`text-md cursor-pointer font-semibold  ${isOpen ? "border-b-2 border-black" : ""
-                            }`}
+                          className={`text-md cursor-pointer font-semibold  ${
+                            isOpen ? "border-b-2 border-black" : ""
+                          }`}
                           onClick={() => toggleDropdown(value.label)}
                         >
                           <p
-                            className={`block font-medium py-[15px] px-[5px] border-b-2  ${hoveredIndex === idx
-                              ? "border-black"
-                              : "border-transparent"
-                              }`}
+                            className={`block font-medium py-[15px] px-[5px] border-b-2  ${
+                              hoveredIndex === idx
+                                ? "border-black"
+                                : "border-transparent"
+                            }`}
                           >
                             {value.label}
                           </p>
                         </span>
                         {hoveredIndex === idx && (
                           // <Asidebox asideSectionList={value.asideSectionList} />
-                          <Asidebox handleChange={handleChange} hoveredIndex={hoveredIndex} setHoveredIndex={setHoveredIndex} label={value.label} />
+                          <Asidebox
+                            handleChange={handleChange}
+                            hoveredIndex={hoveredIndex}
+                            setHoveredIndex={setHoveredIndex}
+                            label={value.label}
+                          />
                         )}
                         {/* {value.label === "Rooms" && hoveredIndex === idx && (
                           <Midsection />
@@ -372,7 +372,8 @@ function Header({ setIsHeaderMounted }) {
                   className="bg-[#f5f5f5] items-center justify-end rounded-full w-[13rem] h-10 p-[9px] hover:bg-[#e5e5e5] hover:rounded-full cursor-pointer lg:block hidden"
                 >
                   <span>
-                    <Image loading="lazy"
+                    <Image
+                      loading="lazy"
                       src="/icons/search.svg"
                       alt="Search Icon"
                       className="absolute z-10 seachbar-div2-icon"
@@ -380,7 +381,10 @@ function Header({ setIsHeaderMounted }) {
                       height={27}
                     />
                   </span>
-                  <p className="ml-7 self-center lg:text-[13px] text-[12px] mt-0.5   text-gray-400"> Search for <span ref={textElementRef}></span></p>
+                  <p className="ml-7 self-center lg:text-[13px] text-[12px] mt-0.5   text-gray-400">
+                    {" "}
+                    Search for <span ref={textElementRef}></span>
+                  </p>
                 </div>
                 {/* <div
                   className="md:hidden block w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer"
@@ -396,7 +400,8 @@ function Header({ setIsHeaderMounted }) {
                 </div> */}
                 <div className="sm:block hidden w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer">
                   <Link href={"/login"}>
-                    <Image loading="lazy"
+                    <Image
+                      loading="lazy"
                       src="/icons/like.svg"
                       alt="Like Icon"
                       className="header-div-icon"
@@ -408,7 +413,8 @@ function Header({ setIsHeaderMounted }) {
                 <div className="flex items-center flex-row-reverse lg:flex-row">
                   <div className="w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer">
                     <Link href={"/cart"}>
-                      <Image loading="lazy"
+                      <Image
+                        loading="lazy"
                         src="/icons/adtocart.svg"
                         alt="Cart Icon"
                         className="header-div-icon"
@@ -416,16 +422,19 @@ function Header({ setIsHeaderMounted }) {
                         height={22}
                       />
                     </Link>
-                    {
-                      CartItems?.items?.length > 0 && <div className="cart-notification bg-black">{CartItems?.items?.length}</div>
-                    }
+                    {CartItems?.items?.length > 0 && (
+                      <div className="cart-notification bg-black">
+                        {CartItems?.items?.length}
+                      </div>
+                    )}
                   </div>
                   {loginStatus === "true" ? (
                     <div
                       className="pro w-10 h-10 flex p-[9px] hover:bg-zinc-100 hover:rounded-full whitespace-nowrap "
                       onClick={handleProfileNav}
                     >
-                      <Image loading="lazy"
+                      <Image
+                        loading="lazy"
                         src="/icons/profile.svg"
                         alt="Profile Icon"
                         className="header-div-icon"
@@ -438,7 +447,8 @@ function Header({ setIsHeaderMounted }) {
                       className="pro w-10 h-10 flex p-[9px] hover:bg-zinc-100 hover:rounded-full whitespace-nowrap cursor-pointer "
                       onClick={handleProfileNav}
                     >
-                      <Image loading="lazy"
+                      <Image
+                        loading="lazy"
                         src="/icons/profile.svg"
                         onClick={handleLoginNav}
                         alt="Profile Icon"
@@ -451,7 +461,15 @@ function Header({ setIsHeaderMounted }) {
                 </div>
 
                 <div className="w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer md:hidden">
-                  <Image loading="lazy" src={"/icons/menu.svg"} height={50} width={50} alt="Menu Icon" className="h-[21px] w-[21px]" onClick={toggleMobileMenu} />
+                  <Image
+                    loading="lazy"
+                    src={"/icons/menu.svg"}
+                    height={50}
+                    width={50}
+                    alt="Menu Icon"
+                    className="h-[21px] w-[21px]"
+                    onClick={toggleMobileMenu}
+                  />
                 </div>
 
                 {/* for only mobole search */}
@@ -471,7 +489,7 @@ function Header({ setIsHeaderMounted }) {
                 )}
               </div>
             </div>
-            {atTop && <div className="flex  w-full items-center  md:hidden px-[20px] sm:px-[50px] lg:px-[67px] mb-3">
+            {/* {atTop && <div className="flex  w-full items-center  md:hidden px-[20px] sm:px-[50px] lg:px-[67px] mb-3">
               <div
                 className="md:hidden py-[8px] flex items-center justify-between w-full bg-zinc-100 rounded-full   h-[45px] p-[9px] hover:bg-zinc-200 hover:rounded-full cursor-pointer"
                 onClick={handleModalOpen}
@@ -488,7 +506,7 @@ function Header({ setIsHeaderMounted }) {
                 </div>
                 <Image loading="lazy" src={"/icons/camera.svg"} width={20} height={20} alt="camera icon" className="mr-[10px] ml-[10px]" />
               </div>
-            </div>}
+            </div>} */}
           </>
         ) : (
           <Expandedbar
@@ -498,6 +516,34 @@ function Header({ setIsHeaderMounted }) {
           />
         )}
       </div>
+        <div className="flex mt-16  w-full items-center  md:hidden px-[20px] sm:px-[50px] lg:px-[67px] mb-3">
+          <div
+            className="md:hidden py-[8px] flex items-center justify-between w-full bg-zinc-100 rounded-full   h-[45px] p-[9px] hover:bg-zinc-200 hover:rounded-full cursor-pointer"
+            onClick={handleModalOpen}
+          >
+            <div className="flex items-center">
+              <Image
+                loading="lazy"
+                src="/icons/search.svg"
+                alt="Search Icon"
+                width={20}
+                height={20}
+                className="ml-[10px]"
+              />
+              <p className="ml-3 line-clamp-1 text-[13px] mt-[2px]  text-gray-400">
+                Search for <span ref={textElementRef2}></span>
+              </p>
+            </div>
+            <Image
+              loading="lazy"
+              src={"/icons/camera.svg"}
+              width={20}
+              height={20}
+              alt="camera icon"
+              className="mr-[10px] ml-[10px]"
+            />
+          </div>
+        </div>
       {isMobileMenuOpen && (
         <>
           <div
@@ -512,69 +558,86 @@ function Header({ setIsHeaderMounted }) {
             <div className="flex justify-between items-center py-[5px] w-full h-fit mb-4">
               <div className=" flex items-center">
                 {/* <Image loading="lazy" src={"/icons/backarrow.svg"} height={20} width={20} className="rotate-180" /> */}
-                {
-                  toptext && toptext.length > 0 ? (
-                    <div className="flex  items-center mt-2">
-                      <Image loading="lazy" src={"/icons/backarrowRevarce.svg"} alt="arrow icon" height={18} width={18} className="rotate-180" onClick={handlebackArraowClick} />
-                      <p className="text-[18px] ml-[10px] font-semibold">{toptext[toptext.length - 1]}</p>
-                    </div>
-                  ) : (
-                    <div className="mainlogo">
-                      <Link href="/">
-                        <Image
-                          src="/images/ayatriologo.webp"
-                          alt="logo"
-                          width={300}
-                          height={40}
-                          priority
-                          className=" max-w-[135px] mt-[10px] ml-[10px]  h-[29px]  sm:w-44"
-                        />
-                      </Link>
-                    </div>
-                  )
-                }
+                {toptext && toptext.length > 0 ? (
+                  <div className="flex  items-center mt-2">
+                    <Image
+                      loading="lazy"
+                      src={"/icons/backarrowRevarce.svg"}
+                      alt="arrow icon"
+                      height={18}
+                      width={18}
+                      className="rotate-180"
+                      onClick={handlebackArraowClick}
+                    />
+                    <p className="text-[18px] ml-[10px] font-semibold">
+                      {toptext[toptext.length - 1]}
+                    </p>
+                  </div>
+                ) : (
+                  <div className="mainlogo">
+                    <Link href="/">
+                      <Image
+                        src="/images/ayatriologo.webp"
+                        alt="logo"
+                        width={300}
+                        height={40}
+                        priority
+                        className=" max-w-[135px] mt-[10px] ml-[10px]  h-[29px]  sm:w-44"
+                      />
+                    </Link>
+                  </div>
+                )}
               </div>
 
-              {
-                toptext.length === 0 && (
-                  <div className="w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer md:hidden">
-                    <X onClick={toggleMobileMenu} />
-                  </div>
-                )
-              }
+              {toptext.length === 0 && (
+                <div className="w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer md:hidden">
+                  <X onClick={toggleMobileMenu} />
+                </div>
+              )}
             </div>
 
             {/* <div className="flex"> */}
             <div className="flex flex-col space-y-2  ">
               {headerLinks.map((value, idx) => (
-
                 <div
                   key={idx}
                   onMouseEnter={() => handleMouseEnter(idx)}
                   onMouseLeave={handleMouseLeave}
-                // onClick={() => handleClick(idx)}
+                  // onClick={() => handleClick(idx)}
                 >
                   <Link
-                    className={`text-md  font-semibold flex items-center justify-between  ${isOpen ? "border-b-2 border-black" : ""
-                      }`}
+                    className={`text-md  font-semibold flex items-center justify-between  ${
+                      isOpen ? "border-b-2 border-black" : ""
+                    }`}
                     href="#"
                     onClick={() => toggleDropdown(value.label)}
                   >
                     <p
-                      className={`block p-2 text-lg font-medium border-b-2 ${hoveredIndex === idx
-                        ? "border-black"
-                        : "border-transparent"
-                        }`}
+                      className={`block p-2 text-lg font-medium border-b-2 ${
+                        hoveredIndex === idx
+                          ? "border-black"
+                          : "border-transparent"
+                      }`}
                       onClick={() => handleTopValue(value.label)}
                     >
                       {value.label}
                     </p>
                     <div className="pr-[14px]">
-                      <Image loading="lazy" src={"/icons/backarrowRevarce.svg"} height={15} width={15} alt="arrow icon" />
-
-                    </div>                  </Link>
+                      <Image
+                        loading="lazy"
+                        src={"/icons/backarrowRevarce.svg"}
+                        height={15}
+                        width={15}
+                        alt="arrow icon"
+                      />
+                    </div>{" "}
+                  </Link>
                   {idx < 3 && hoveredIndex === idx && (
-                    <Asidebox hoveredIndex={hoveredIndex} toggleMobileMenu={toggleMobileMenu} onItemClick={handleItemClick} />
+                    <Asidebox
+                      hoveredIndex={hoveredIndex}
+                      toggleMobileMenu={toggleMobileMenu}
+                      onItemClick={handleItemClick}
+                    />
                   )}
                   {idx === 3 && hoveredIndex === idx && <Midsection />}
                 </div>
@@ -582,28 +645,48 @@ function Header({ setIsHeaderMounted }) {
             </div>
             <div className="border-t pt-6 pl-2">
               <div className="flex flex-col">
-                <div onClick={() => handleClick("category/virtualexperience")} className="">
-                  <p className="text-[14px] py-[8px] font-normal">Live shopping</p>
+                <div
+                  onClick={() => handleClick("category/virtualexperience")}
+                  className=""
+                >
+                  <p className="text-[14px] py-[8px] font-normal">
+                    Live shopping
+                  </p>
                 </div>
                 <div onClick={() => handleClick("/freedesign")}>
-                  <p className="text-[14px] py-[8px] font-normal">Designer request</p>
+                  <p className="text-[14px] py-[8px] font-normal">
+                    Designer request
+                  </p>
                 </div>
-                <div onClick={() => handleClick("/freesample")} >
-                  <p className="text-[14px] py-[8px] font-normal">Free sample request</p>
+                <div onClick={() => handleClick("/freesample")}>
+                  <p className="text-[14px] py-[8px] font-normal">
+                    Free sample request
+                  </p>
                 </div>
                 <div onClick={() => handleClick("/customerservice")}>
                   <p className="text-[14px] py-[8px] font-normal">Help</p>
                 </div>
-                {
-                  loginStatus === true ? <p className="text-[14px] font-medium" onClick={handleLogoutClick}>Logout</p> : <p className="text-[14px] font-medium" onClick={handleLoginClick}>Login</p>
-                }
+                {loginStatus === true ? (
+                  <p
+                    className="text-[14px] font-medium"
+                    onClick={handleLogoutClick}
+                  >
+                    Logout
+                  </p>
+                ) : (
+                  <p
+                    className="text-[14px] font-medium"
+                    onClick={handleLoginClick}
+                  >
+                    Login
+                  </p>
+                )}
               </div>
             </div>
             {/* </div> */}
           </div>
         </>
       )}
-
     </div>
   );
 }
