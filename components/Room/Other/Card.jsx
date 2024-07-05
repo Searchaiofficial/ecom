@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
-import IncDecCounter from "@/components/Count/Count";
+// import IncDecCounter from "@/components/Count/Count";
 import "react-toastify/dist/ReactToastify.css";
 import React from "react";
 import { useState, useEffect } from "react";
@@ -113,10 +113,10 @@ const Card = ({ data, productId }) => {
         <img
           key={i}
           src={"/icons/full-black.svg"}
-          height={20}
-          width={20}
+          height={15}
+          width={15}
           alt="star"
-          className="h-[1em] w-[1em] hover:text-gray-600"
+          className="h-[1em] w-[0.8em] hover:text-gray-600 ml-[2px]"
         />
       );
     }
@@ -126,10 +126,10 @@ const Card = ({ data, productId }) => {
         <img
           key={fullStars}
           src={"/icons/half-black-half-white.svg"}
-          height={20}
-          width={20}
+          height={15}
+          width={15}
           alt="half-star"
-          className="h-[1em] w-[1em] hover:text-gray-600"
+          className="h-[1em] w-[0.8em] hover:text-gray-600 ml-[2px]"
         />
       );
     }
@@ -142,7 +142,7 @@ const Card = ({ data, productId }) => {
           height={20}
           width={20}
           alt="empty-star"
-          className="h-[1em] w-[1em] hover:text-gray-600"
+          className="h-[1em] w-[0.8em] hover:text-gray-600 ml-[2px]"
         />
       );
     }
@@ -670,6 +670,7 @@ const Card = ({ data, productId }) => {
   const contentData = [
     {
       title: "Free Delivery, Free Returns",
+      icon: "delivary",
       content: (
         <>
           For all orders, delivery and Returns are free. If you are not entirely satisfied with your order, you may be entitled to a refund. Read our <Link href="/customerservice/returnpolicy" className="underline cursor-pointer">Returns Terms & Conditions</Link> for more details.
@@ -678,6 +679,7 @@ const Card = ({ data, productId }) => {
     },
     {
       title: "Delivery: Metro cities: 2-5 days, Others: 5-15 days",
+      icon: "delivary",
       content: (
         <>
           Get free delivery on all orders above ₹3000. A shipping charge of ₹100 is applicable on orders below ₹3000. Check out our <Link href="/customerservice/returnpolicy" className="underline cursor-pointer">delivery Terms & Conditions</Link> for more details.
@@ -686,10 +688,12 @@ const Card = ({ data, productId }) => {
     },
     {
       title: "COD available for orders below ₹3000",
+      icon: "tick",
       content: "Cash on Delivery is available for all orders below ₹3000."
     },
     {
       title: "Secure transactions with hassle free 14 days Exchange and Returns",
+      icon: "payment",
       content: (
         <>
           Tried on your item(s) and need a different size? Exchange your item(s) within 14 days and have your perfect fit shipped for free. Or did you change your mind? You can also return your item(s) for free within 14 days for a full refund. Read more on <Link href="/customerservice/returnpolicy" className="underline cursor-pointer" >Exchange</Link> and <Link href="/customerservice/returnpolicy" className="underline cursor-pointer" >Return</Link>.
@@ -698,6 +702,7 @@ const Card = ({ data, productId }) => {
     },
     {
       title: "Save 5% on all Online Payments under ₹3000",
+      icon: "price-tag-icon",
       content: "Pay 5% less on all orders under ₹3000 when you choose online payment options. That's right – simply opt for online payment at checkout and enjoy instant savings on your purchase."
     }
   ];
@@ -715,7 +720,7 @@ const Card = ({ data, productId }) => {
 
                 {reviews.length > 0 && (
                   <div className="flex gap-2">
-                    <div className="flex items-center">{Stars}</div>
+                    <div className="flex items-center mt-1">{Stars}</div>
                     <p className="text-gray-800 underline h-[20px] cursor-pointer">
                       {reviews.length}
                     </p>
@@ -793,9 +798,9 @@ const Card = ({ data, productId }) => {
               </div>
             )}
 
-            <div className="py-2 mt-[10px]">
+            {/* <div className="py-2 mt-[10px]">
               <IncDecCounter />
-            </div>
+            </div> */}
           </div>
 
           {data?.dimensions?.length > 0 && (
@@ -842,7 +847,7 @@ const Card = ({ data, productId }) => {
                         }   
           `}
                     >
-                      <Image 
+                      <Image
                         className="relative w-full h-full object-cover"
                         src={item.image}
                         alt={item.color}
@@ -2136,16 +2141,25 @@ const Card = ({ data, productId }) => {
 
             <div className="flex flex-col items-center">
               {contentData.map((item, index) => (
-                <div key={index} className="w-full max-w-md px-4 py-2">
+                <div key={index} className="w-full max-w-md py-1">
                   <details className="cursor-pointer">
-                    <summary className="text-md font-semibold hover:underline" style={{ listStyle: 'none' }}>
+                    <summary className="text-normal underline" style={{ listStyle: 'none', display: 'flex', alignItems: 'center' }}>
+                      <Image
+                        laoding="lazy"
+                        src={`/icons/${item.icon}.svg`}
+                        alt={item.icon}
+                        width={25}
+                        height={25}
+                        className="mr-2"
+                      />
                       {item.title}
                     </summary>
-                    <p>{item.content}</p>
+                    <p className="mb-2">{item.content}</p>
                   </details>
                 </div>
               ))}
             </div>
+
 
           </div>
         </div>

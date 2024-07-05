@@ -28,7 +28,7 @@ const CartProduct = ({
   return (
     <>
       <div className="">
-        <div className=" py-[24px] items-start flex gap-5 lg:gap-8 border-b border-slate-400 mt-3 ">
+        <div className=" py-[24px] items-start flex gap-5 lg:gap-8 border-b border-[#e5e7eb] mt-3 ">
           {/* <!-- image of product --> */}
           <Image loading="lazy"
             src={cartItem.productId.images[0]}
@@ -36,7 +36,7 @@ const CartProduct = ({
             height={249}
             alt={cartItem.name}
             className="w-[88px] h-[88px] lg:w-32 lg:h-40 "
-            
+
           />
 
           <div className="flex">
@@ -50,17 +50,17 @@ const CartProduct = ({
                 Room darkening curtains, 1 pair, yellow-beige
               </p> */}
               <p className="my-1 text-gray-600 text-[12px] md:text-[16px]  lg:text-md">{cartItem?.productId.productTitle}</p>
-              <p className=" text-gray-600 text-[12px] md:text-[16px]  lg:text-md"></p>
+              <p className=" text-zinc-600 text-[12px] md:text-[16px]  lg:text-md"></p>
               <p className=" my-2">
-                <span className=" box-border h-1 w-10 rounded-xl mr-3 text-xs text-gray-400 bg-slate-400">
+                <span className=" box-border h-1 w-10 rounded-xl mr-3 text-xs text-gray-400 bg-zinc-400">
                   .d.
                 </span>
-                <span className=" text-gray-600 text-xs underline">
+                <span className=" text-zinc-600 text-xs underline">
                   Go to checkout for delivery information
                 </span>
               </p>
               <div className="flex items-center justify-between mt-2 ">
-                <div className="rounded-3xl p-1 w-28 border border-gray-400 flex justify-between items-center mr-[20px]">
+                <div className="rounded-3xl p-1 w-28 border border-[#e5e7eb] flex justify-between items-center mr-20px">
                   <button
                     onClick={() => handleItemDecr(cartItem?.productId._id, cartItem.quantity)}
                     className="hover:bg-zinc-200 w-9 h-9 rounded-full flex items-center justify-center focus:outline-none"
@@ -130,7 +130,7 @@ const CartProduct = ({
                         <div className="flex w-full  items-center justify-between mt-2">
                           <p className="text-[18px] text-gray-600 font-medium hover:underline cursor-pointer">{service.name} for {cartItem.productId.category}</p>
                           <div className="flex items-center justify-between mt-2 ">
-                            <div className="rounded-3xl p-1 w-28 border border-gray-400 flex justify-between items-center mr-[20px]">
+                            <div className="rounded-3xl p-1 w-28 border border-zinc-200 flex justify-between items-center mr-[20px]">
                               <button
                                 onClick={() => handleServiceDecrease(cartItem?.productId._id, service._id, service.quantity)}
                                 className="hover:bg-zinc-200 w-9 h-9 rounded-full flex items-center justify-center focus:outline-none"
@@ -168,7 +168,7 @@ const CartProduct = ({
         {
           cartItem?.selectedAccessories?.length > 0 && (
 
-            <div className="flex flex-col  pb-5 border-b border-gray-400">
+            <div className="flex flex-col  pb-5 border-b border-[#e5e7eb]">
               <p className="text-[18px] font-semibold mt-4">Accessories</p>
               <div className="flex  flex-col gap-10 mt-2">
                 {

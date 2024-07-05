@@ -177,7 +177,7 @@ const CategoriesSlider = () => {
                                                 <div className="flex flex-col  items-center ">
                                                     <div className="mb-[12px] ">
 
-                                                        <Image loading="lazy" src={curElement.image || "/images/temp.svg"} width={200} height={130} alt={curElement.name || "Swiper image"} className="w-[200px] h-[62px] lg:h-[95px] " />
+                                                        <Image src={curElement.image || "/images/temp.svg"} width={200} height={130} alt={curElement.name || "Swiper image"} className="w-[200px] h-[62px] lg:h-[95px] " />
 
                                                     </div>
                                                     <h2 className="text-[#333333] lg:text-center line-clamp-1 font-semibold text-[14px] hover:underline">{curElement.name}</h2>

@@ -580,7 +580,6 @@ const CartMain = () => {
                       alt="rupees"
                       className="mr-1"
                       loading="lazy"
-
                     />
                     {totalPrice}
                   </div>

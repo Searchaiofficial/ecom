@@ -84,13 +84,13 @@ const Asidebox = (props) => {
                 key={idx}
                 onMouseEnter={() => handleMouseEnter(idx, value)}
                 className={`lg:block flex items-center justify-between w-full lg:text-[14px] text-[18px] font-semibold ${defaultLinkIndex === idx ? "text-blue-600" : ""
-                  } p-2 pt-0 hover:underline`}
+                  } p-2 pt-0 hover:underline mb-2`}
                 href="#"
                 onClick={() => handleItemClick(value)} // Handle click event
               >
                 <span>{value.name}</span>
                 <div className="pr-[24px] sm:hidden right-0">
-                  <Image  loading="lazy" src={"/icons/backarrowRevarce.svg"} height={15} width={15} alt="arrow" />
+                  <Image loading="lazy" src={"/icons/backarrowRevarce.svg"} height={15} width={15} alt="arrow" />
                 </div>
               </Link>
             ))}
