@@ -12,7 +12,7 @@
     color: #000;
     background-color: rgba(0, 0, 0, 0.1)
   }
-  .sticky-tabcategory {
+  /* .sticky-tabcategory {
     position: fixed;
     top: 0;
     left: 0;
@@ -38,4 +38,22 @@
     z-index: 1000;
     background-color: white; 
   }
-  }
+  } */
+
+    .sticky-tabcategory {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      margin-inline: 20px; /* Adjust margin as per your design */
+      z-index: 1000;
+      background-color: white;
+    }
+    
+    @media screen and (max-width: 450px) {
+      .sticky-tabcategory {
+        margin-inline: 20px; /* Adjust margin for smaller screens */
+      }
+    }
+    
+    
