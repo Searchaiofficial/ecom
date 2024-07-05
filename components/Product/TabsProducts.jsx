@@ -1403,6 +1403,7 @@ const Tabs = ({
                     shortDescription={text.shortDescription}
                     perUnitPrice={text.perUnitPrice}
                     productType={text.productType}
+                    expectedDelivery={text.expectedDelivery}
                   />
                 );
               })

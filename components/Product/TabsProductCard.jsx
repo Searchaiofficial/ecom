@@ -212,6 +212,13 @@ function TabsProductCard(props) {
   }, []);
 
   console.log(props);
+
+  const getExpectedDeliveryDate = (expectedDelivery) => {
+    const today = new Date();
+    const expectedDate = new Date(today);
+    expectedDate.setDate(today.getDate() + expectedDelivery);
+    return expectedDate.toDateString(); // Format the date as a readable string
+  };
   return (
     <>
       <div
@@ -222,8 +229,9 @@ function TabsProductCard(props) {
         <div className="relative z[-999999] w-fit">
           <div
             onClick={(event) => event.stopPropagation()}
-            className={`flex justify-between text-black   checkbox-div absolute top-0 right-0 z-50 ${props.selectedpdt.includes(props.text) ? "visible" : "visible"
-              }`}
+            className={`flex justify-between text-black   checkbox-div absolute top-0 right-0 z-50 ${
+              props.selectedpdt.includes(props.text) ? "visible" : "visible"
+            }`}
           >
             <input
               type="checkbox"
@@ -267,7 +275,8 @@ function TabsProductCard(props) {
             onTouchEnd={() => setIsHovered(false)} // for touch devices
           >
             {isHovered && slide !== 0 && (
-              <Image loading="lazy"
+              <Image
+                loading="lazy"
                 src="/icons/backarrow-w.svg"
                 height={20}
                 width={20}
@@ -283,12 +292,13 @@ function TabsProductCard(props) {
                   onClick={() => handleclick(props.productTitle)}
                 >
                   <Image
+                    loading="lazy"
                     src={
                       isHovered
                         ? props.images[1]
                         : colorImage
-                          ? colorImage
-                          : item
+                        ? colorImage
+                        : item
                     }
                     alt={props.productTitle}
                     key={idx}
@@ -304,7 +314,8 @@ function TabsProductCard(props) {
 
             {isHovered && (
               <div>
-                <Image loading="lazy"
+                <Image
+                  loading="lazy"
                   src="/icons/rightarrow-w.svg"
                   height={20}
                   width={20}
@@ -352,8 +363,9 @@ function TabsProductCard(props) {
                 </p>
               )}
               <h3
-                className={` text-[14px] font-semibold ${props.demandtype === "Ayatrio Member Favorite" ? "" : ""
-                  }`}
+                className={` text-[14px] font-semibold ${
+                  props.demandtype === "Ayatrio Member Favorite" ? "" : ""
+                }`}
               >
                 {props.productTitle}
               </h3>
@@ -363,16 +375,36 @@ function TabsProductCard(props) {
           <p className="font-normal mb-1 text-[14px] py-[2px]">
             {props?.shortDescription}
           </p>
+          {props.expectedDelivery && (
+            <div className="flex items-center">
+              {props.expectedDelivery <= 5 && (
+                <Image
+                  alt="speedDelivery"
+                  loading="lazy"
+                  src={"/icons/speeddelevary.svg"}
+                  height={70}
+                  width={70}
+                />
+              )}
+              <p className="text-[#757575] text-[12px]  ml-2">
+                Expected delivery on &nbsp;
+                <span className="text-[#0152be] font-md font-semibold">
+                  {getExpectedDeliveryDate(props.expectedDelivery)}
+                </span>
+              </p>
+            </div>
+          )}
 
           {props.productType === "normal" ? (
             <>
               <div className=" flex h-[40px] pb-[6px] items-center justify-between mt-2">
                 <div className="flex gap-1 items-end">
                   <h2
-                    className={`text-3xl flex font-semibold leading-[0.5]  tracking-wide ${props?.specialprice?.price
-                      ? "bg-[#FFD209] px-2 pt-3 pb-1 w-fit shadow-lg"
-                      : ""
-                      } `}
+                    className={`text-3xl flex font-semibold leading-[0.5]  tracking-wide ${
+                      props?.specialprice?.price
+                        ? "bg-[#FFD209] px-2 pt-3 pb-1 w-fit shadow-lg"
+                        : ""
+                    } `}
                     style={
                       props?.specialprice?.price
                         ? { boxShadow: "3px 3px #C31952" }
@@ -380,8 +412,9 @@ function TabsProductCard(props) {
                     }
                   >
                     <span
-                      className={`text-sm ${props?.specialprice?.price ? "" : "pt-3.5"
-                        }`}
+                      className={`text-sm ${
+                        props?.specialprice?.price ? "" : "pt-3.5"
+                      }`}
                     >
                       Rs. &nbsp;
                     </span>{" "}
@@ -402,7 +435,8 @@ function TabsProductCard(props) {
                     className="bg-[#0152be] p-[6px] mr-2 rounded-full"
                     onClick={addProductToCart}
                   >
-                    <Image loading="lazy"
+                    <Image
+                      loading="lazy"
                       src={"/icons/ad-to-cart.svg"}
                       height={20}
                       width={20}
@@ -466,14 +500,16 @@ function TabsProductCard(props) {
                         // onMouseLeave={() => setColorImage(null)}
 
                         className={`parent relative w-[40px] h-[40px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
-            ${selectedColor === item.color ||
-                            (index === 0 && selectedColor === "")
-                            ? " border-black "
-                            : " border-black"
-                          }   
+            ${
+              selectedColor === item.color ||
+              (index === 0 && selectedColor === "")
+                ? " border-black "
+                : " border-black"
+            }   
           `}
                       >
                         <Image
+                          loading="lazy"
                           className="relative w-full h-full object-cover"
                           src={item.image}
                           alt={item.color}
@@ -492,7 +528,7 @@ function TabsProductCard(props) {
                           } */}
 
                         {colorImage === item.image ||
-                          (index === 0 && colorImage === "") ? (
+                        (index === 0 && colorImage === "") ? (
                           <div className="w-[100%] h-[2px] bg-black mt-[50px]" />
                         ) : (
                           ""
