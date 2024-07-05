@@ -80,7 +80,7 @@ const MainSlider = ({ initialData: { result: sliderData } }) => {
       onMouseLeave={() => {
         setIsHovering(false);
       }}
-      className="w-full h-[78vh] mt-[6.3rem]"
+      className="w-full h-[78vh] sm:mt-[6.3rem]"
     >
       <div
         className={`${
