@@ -13,9 +13,6 @@ const MainSlider = ({ initialData: { result: sliderData } }) => {
 
   const handleResize = () => {
     setWindowWidth(window.innerWidth);
-    if (window.innerWidth <= 600) {
-      setIsHovering(true);
-    }
   };
 
   useEffect(() => {
@@ -80,14 +77,14 @@ const MainSlider = ({ initialData: { result: sliderData } }) => {
       onMouseLeave={() => {
         setIsHovering(false);
       }}
-      className="w-full h-[78vh] sm:mt-[6.3rem]"
+      className="w-full h-[78vh] sm:mt-[96px]"
     >
       <div
         className={`${
           isHovering
             ? "opacity-65 pointer-events-auto"
             : "opacity-0 pointer-events-none"
-        } transition absolute nav-prev left-2 sm:left-4 top-1/2 cursor-pointer translate-y-1/2 z-30 rounded-full bg-white flex items-center justify-center p-1`}
+        } transition absolute nav-prev left-2 sm:left-4 top-1/2 cursor-pointer translate-y-1/2 z-30 rounded-full bg-white hidden sm:flex items-center justify-center p-1`}
       >
         <Image
           src="/icons/backarrow.svg"
@@ -102,7 +99,7 @@ const MainSlider = ({ initialData: { result: sliderData } }) => {
           isHovering
             ? "opacity-65 pointer-events-auto"
             : "opacity-0 pointer-events-none"
-        } transition absolute nav-next right-2 sm:right-4 rotate-180 cursor-pointer top-1/2 translate-y-1/2 z-30 rounded-full bg-white flex items-center justify-center p-1`}
+        } transition absolute nav-next right-2 sm:right-4 rotate-180 cursor-pointer top-1/2 translate-y-1/2 z-30 rounded-full bg-white hidden sm:flex items-center justify-center p-1`}
       >
         <Image
           src="/icons/backarrow.svg"
@@ -121,7 +118,7 @@ const MainSlider = ({ initialData: { result: sliderData } }) => {
           position: "relative",
         }}
       >
-        {sliderData.map((data) => {
+        {sliderData.concat(sliderData).map((data) => {
           return (
             <>
               <swiper-slide>
