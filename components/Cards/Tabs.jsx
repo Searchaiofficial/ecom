@@ -194,7 +194,7 @@ const Tabs = ({ data }) => {
               />
 
               <div className="overflow-hidden relative">
-                <Image
+                <Image loading="lazy"
                   className="h-full w-full object-cover "
                   src={tabImages[uniqueRoomCategories[1]]?.[0]}
                   alt={labelData[uniqueRoomCategories[1]]?.[0]?.productCategory || "Room image"}
@@ -212,7 +212,7 @@ const Tabs = ({ data }) => {
                 handleTab={handleTab}
               />
               <div className="overflow-hidden sm:hidden block">
-                <Image
+                <Image loading="lazy"
                   className="h-full w-full object-cover "
                   src="/images/temp.svg"
                   alt="Room"
@@ -231,7 +231,7 @@ const Tabs = ({ data }) => {
               />
 
               <div className="overflow-hidden">
-                <Image
+                <Image loading="lazy"
                   className="h-full w-full object-cover 11"
                   src={tabImages[uniqueRoomCategories[4]]?.[0]}
                   alt={labelData[uniqueRoomCategories[4]]?.[0]?.productCategory || "Room image"}
@@ -241,7 +241,7 @@ const Tabs = ({ data }) => {
 
               </div>
               <div className="bg-teal-100 overflow-hidden ">
-                <Image
+                <Image loading="lazy"
                   className="h-full w-full object-cover"
                   src={tabImages[uniqueRoomCategories[5]]?.[0]}
                   alt={labelData[uniqueRoomCategories[5]]?.[0]?.productCategory || "Room image"}
@@ -266,7 +266,7 @@ const Tabs = ({ data }) => {
               {
                 loadMoreAll && (
                   <div className="overflow-hidden relative">
-                    <Image
+                    <Image loading="lazy"
                       className="h-full w-full object-cover "
                       src={tabImages[uniqueRoomCategories[7]]?.[0]}
                       alt={labelData[uniqueRoomCategories[7]]?.[0]?.productCategory || "Room image"}
@@ -292,7 +292,7 @@ const Tabs = ({ data }) => {
               {
                 loadMoreAll && (
                   <div className="overflow-hidden sm:hidden block">
-                    <Image
+                    <Image loading="lazy"
                       className="h-full w-full object-cover "
                       src="/images/temp.svg"
                       alt="Room"
@@ -319,7 +319,7 @@ const Tabs = ({ data }) => {
               {
                 loadMoreAll && (
                   <div className="overflow-hidden">
-                    <Image
+                    <Image loading="lazy"
                       className="h-full w-full object-cover 11"
                       src={tabImages[uniqueRoomCategories[10]]?.[0]}
                       alt={labelData[uniqueRoomCategories[10]]?.[0]?.productCategory || "Room image"}
@@ -333,7 +333,7 @@ const Tabs = ({ data }) => {
               {
                 loadMoreAll && (
                   <div className="bg-teal-100 overflow-hidden ">
-                    <Image
+                    <Image loading="lazy"
                       className="h-full w-full object-cover"
                       src={tabImages[uniqueRoomCategories[11]]?.[0]}
                       alt={labelData[uniqueRoomCategories[11]]?.[0]?.productCategory || "Room image"}
@@ -371,7 +371,7 @@ const Tabs = ({ data }) => {
               />
 
               <div className="overflow-hidden relative">
-                <Image
+                <Image loading="lazy"
                   className="h-full w-full object-cover "
                   src={
                     tabImages[activeTab]
@@ -397,7 +397,7 @@ const Tabs = ({ data }) => {
                 handleTab={handleTab}
               />
               <div className="overflow-hidden sm:hidden block">
-                <Image
+                <Image loading="lazy"
                   className="h-full w-full object-cover "
                   src="/images/temp.svg"
                   alt="Room"
@@ -419,7 +419,7 @@ const Tabs = ({ data }) => {
                 height={700}
               />
               <div className="overflow-hidden">
-                <Image
+                <Image loading="lazy"
                   className="h-full w-full object-cover"
                   src={
                     tabImages[activeTab]
@@ -432,7 +432,7 @@ const Tabs = ({ data }) => {
                 />
               </div>
               <div className="bg-teal-100 overflow-hidden ">
-                <Image
+                <Image loading="lazy"
                   className="h-full w-full object-cover"
                   src={
                     tabImages[activeTab]
@@ -464,7 +464,7 @@ const Tabs = ({ data }) => {
               {
                 loadMore && (
                   <div className="overflow-hidden relative">
-                    <Image
+                    <Image loading="lazy"
                       className="h-full w-full object-cover "
                       src={
                         tabImages[activeTab]
@@ -498,7 +498,7 @@ const Tabs = ({ data }) => {
               {
                 loadMore && (
                   <div className="overflow-hidden sm:hidden block">
-                    <Image
+                    <Image loading="lazy"
                       className="h-full w-full object-cover "
                       src="/images/temp.svg"
                       alt="Room"
@@ -528,7 +528,7 @@ const Tabs = ({ data }) => {
               {
                 loadMore && (
                   <div className="overflow-hidden">
-                    <Image
+                    <Image loading="lazy"
                       className="h-full w-full object-cover"
                       src={
                         tabImages[activeTab]
@@ -545,7 +545,7 @@ const Tabs = ({ data }) => {
               {
                 loadMore && (
                   <div className="bg-teal-100 overflow-hidden ">
-                    <Image
+                    <Image loading="lazy"
                       className="h-full w-full object-cover"
                       src={
                         tabImages[activeTab]

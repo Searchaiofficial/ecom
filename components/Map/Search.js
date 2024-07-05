@@ -168,7 +168,7 @@ const Search = ({ places, onResultClick }) => {
 
               >
 
-                <Image
+                <Image loading="lazy"
                   src="icons/search.svg"
                   alt="Search Icon"
                   width={20}
@@ -183,7 +183,7 @@ const Search = ({ places, onResultClick }) => {
 
                 />
 
-                <Image src={"/icons/camera.svg"} width={20} height={20} className="mr-[10px] ml-[10px]" />
+                <Image loading="lazy" src={"/icons/camera.svg"} width={20} height={20} className="mr-[10px] ml-[10px]" />
 
               </div>
             </div> */}
@@ -205,7 +205,7 @@ const Search = ({ places, onResultClick }) => {
                   onMouseLeave={() => handleItemHover(null)}
                 >
                   {/* {index === 0 ? (
-                    <Image
+                    <Image loading="lazy"
                       src="/icons/info.svg"
                       height={20}
                       width={20}
@@ -213,7 +213,7 @@ const Search = ({ places, onResultClick }) => {
                       className="text-xl text-gray-700"
                     />
                   ) : ( */}
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/info.svg"
                     height={20}
                     width={20}
@@ -224,7 +224,7 @@ const Search = ({ places, onResultClick }) => {
                   <div className="px-4 py-2 text-gray-700 cursor-pointer">
                     {index === 0 ? "India" : `${item.name}`}
                   </div>
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/closeicon.svg"
                     height={20}
                     width={20}
@@ -255,7 +255,7 @@ const Search = ({ places, onResultClick }) => {
               }}
             />
             <div className="searchIcon bg-white flex justify-center items-center w-[1rem] mr-3">
-              <Image
+              <Image loading="lazy"
                 src="/icons/search.svg"
                 height={20}
                 width={20}
@@ -282,7 +282,7 @@ const Search = ({ places, onResultClick }) => {
                   onMouseEnter={() => handleItemHover(item)}
                   onMouseLeave={() => handleItemHover(null)}
                 >
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/info.svg"
                     height={20}
                     width={20}
@@ -290,7 +290,7 @@ const Search = ({ places, onResultClick }) => {
                     className="text-xl text-gray-700"
                   />
                   {/* ) : (
-                    <Image
+                    <Image loading="lazy"
                       src="/svg/icons/time.svg"
                       height={20}
                       width={20}
@@ -301,7 +301,7 @@ const Search = ({ places, onResultClick }) => {
                   <div className="px-4 py-2 text-gray-700 cursor-pointer">
                     {`${item.name} ${item.address.streetAddress.slice(0, 20)}`}
                   </div>
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/closeicon.svg"
                     height={20}
                     width={20}

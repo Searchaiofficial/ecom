@@ -280,7 +280,7 @@ export const RoomsPage = ({ params }) => {
           </div>
           {/* <div className="mt-8 flex w-[100%] lg:max-h-[490px] lg:flex-row flex-col screens bg-orange-500">
             <div className="lg:w-2/3">
-              <Image
+              <Image loading="lazy"
                 src={bedimageh}
                 width={850}
                 className="w-full min-h-[446px] object-cover"
@@ -319,7 +319,7 @@ export const RoomsPage = ({ params }) => {
                   <p>{reviewData && reviewData.comment}</p>
                 </div>
                 <div className="flex mt-5 flex-row items-center gap-2 ">
-                  <Image
+                  <Image loading="lazy"
                     src={reviewData && reviewData.image}
                     width={45}
                     height={45}

@@ -132,7 +132,7 @@ const CategoriesSlider = () => {
                     categories.length > 0 && (
                         <div className="flex flex-row group items-center justify-end gap-2 lg:mb-4">
                             <div className="back rounded-full   group-hover:opacity-60  opacity-0  absolute left-5 z-10">
-                                <Image
+                                <Image loading="lazy"
                                     src="/icons/backarrow-w.svg"
                                     width={20}
                                     height={20}
@@ -188,7 +188,7 @@ const CategoriesSlider = () => {
                                 })}
                             </Swiper>
                             <div className="right rounded-full   group-hover:opacity-60 opacity-0   absolute right-5 z-10">
-                                <Image
+                                <Image loading="lazy"
                                     src="/icons/rightarrow-w.svg"
                                     width={20}
                                     height={20}

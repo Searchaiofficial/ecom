@@ -49,7 +49,7 @@ const Dataslider = ({ category, data, sliderIndex }) => {
               onClick={() => swiperRef.current.swiper.slidePrev()}
               className={`custom-prev-button-${sliderIndex} hover:bg-400 hover:scale-110 hover:text-slate-100 pr-6`}
             >
-              <Image
+              <Image loading="lazy"
                 src="/icons/backarrow-w.svg"
                 width={20}
                 height={20}
@@ -61,7 +61,7 @@ const Dataslider = ({ category, data, sliderIndex }) => {
               onClick={() => swiperRef.current.swiper.slideNext()}
               className={`custom-next-button-${sliderIndex} hover:bg-400 sm:translate-y-0 translate-y-10 hover:scale-110 hover:text-slate-100`}
             >
-              <Image
+              <Image loading="lazy"
                 src="/icons/rightarrow-w.svg"
                 width={20}
                 height={20}

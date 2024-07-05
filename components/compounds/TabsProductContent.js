@@ -61,7 +61,7 @@ const TabsProductContent = (props) => {
           `}
           >
             {filterName} &nbsp;
-            <Image
+            <Image loading="lazy"
               src="/icons/backarrow.svg"
               width={40}
               height={40}

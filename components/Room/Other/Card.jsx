@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
-import IncDecCounter from "@/components/Count/Count";
+// import IncDecCounter from "@/components/Count/Count";
 import "react-toastify/dist/ReactToastify.css";
 import React from "react";
 import { useState, useEffect } from "react";
@@ -113,10 +113,10 @@ const Card = ({ data, productId }) => {
         <img
           key={i}
           src={"/icons/full-black.svg"}
-          height={20}
-          width={20}
+          height={15}
+          width={15}
           alt="star"
-          className="h-[1em] w-[1em] hover:text-gray-600"
+          className="h-[1em] w-[0.8em] hover:text-gray-600 ml-[2px]"
         />
       );
     }
@@ -126,10 +126,10 @@ const Card = ({ data, productId }) => {
         <img
           key={fullStars}
           src={"/icons/half-black-half-white.svg"}
-          height={20}
-          width={20}
+          height={15}
+          width={15}
           alt="half-star"
-          className="h-[1em] w-[1em] hover:text-gray-600"
+          className="h-[1em] w-[0.8em] hover:text-gray-600 ml-[2px]"
         />
       );
     }
@@ -142,7 +142,7 @@ const Card = ({ data, productId }) => {
           height={20}
           width={20}
           alt="empty-star"
-          className="h-[1em] w-[1em] hover:text-gray-600"
+          className="h-[1em] w-[0.8em] hover:text-gray-600 ml-[2px]"
         />
       );
     }
@@ -667,6 +667,46 @@ const Card = ({ data, productId }) => {
     }
   };
 
+  const contentData = [
+    {
+      title: "Free Delivery, Free Returns",
+      icon: "delivary",
+      content: (
+        <>
+          For all orders, delivery and Returns are free. If you are not entirely satisfied with your order, you may be entitled to a refund. Read our <Link href="/customerservice/returnpolicy" className="underline cursor-pointer">Returns Terms & Conditions</Link> for more details.
+        </>
+      ),
+    },
+    {
+      title: "Delivery: Metro cities: 2-5 days, Others: 5-15 days",
+      icon: "delivary",
+      content: (
+        <>
+          Get free delivery on all orders above ₹3000. A shipping charge of ₹100 is applicable on orders below ₹3000. Check out our <Link href="/customerservice/returnpolicy" className="underline cursor-pointer">delivery Terms & Conditions</Link> for more details.
+        </>
+      ),
+    },
+    {
+      title: "COD available for orders below ₹3000",
+      icon: "tick",
+      content: "Cash on Delivery is available for all orders below ₹3000."
+    },
+    {
+      title: "Secure transactions with hassle free 14 days Exchange and Returns",
+      icon: "payment",
+      content: (
+        <>
+          Tried on your item(s) and need a different size? Exchange your item(s) within 14 days and have your perfect fit shipped for free. Or did you change your mind? You can also return your item(s) for free within 14 days for a full refund. Read more on <Link href="/customerservice/returnpolicy" className="underline cursor-pointer" >Exchange</Link> and <Link href="/customerservice/returnpolicy" className="underline cursor-pointer" >Return</Link>.
+        </>
+      ),
+    },
+    {
+      title: "Save 5% on all Online Payments under ₹3000",
+      icon: "price-tag-icon",
+      content: "Pay 5% less on all orders under ₹3000 when you choose online payment options. That's right – simply opt for online payment at checkout and enjoy instant savings on your purchase."
+    }
+  ];
+
   return (
     <>
       <div className="flex justify-start md:min-w-[25vw] gap-1 mt-2.5 w-[100%] ml-0">
@@ -680,7 +720,7 @@ const Card = ({ data, productId }) => {
 
                 {reviews.length > 0 && (
                   <div className="flex gap-2">
-                    <div className="flex items-center">{Stars}</div>
+                    <div className="flex items-center mt-1">{Stars}</div>
                     <p className="text-gray-800 underline h-[20px] cursor-pointer">
                       {reviews.length}
                     </p>
@@ -758,9 +798,9 @@ const Card = ({ data, productId }) => {
               </div>
             )}
 
-            <div className="py-2 mt-[10px]">
+            {/* <div className="py-2 mt-[10px]">
               <IncDecCounter />
-            </div>
+            </div> */}
           </div>
 
           {data?.dimensions?.length > 0 && (
@@ -841,7 +881,7 @@ const Card = ({ data, productId }) => {
                 onClick={() => handleOptionClick("zeroCostEMI")}
               >
                 <div className="flex flex-row gap-1">
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/payment.svg"
                     height={25}
                     width={25}
@@ -858,7 +898,7 @@ const Card = ({ data, productId }) => {
                 onClick={() => handleOptionClick("inStoreRequest")}
               >
                 <div className="flex flex-row gap-1">
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/ayatrio_store_black.svg"
                     height={25}
                     width={25}
@@ -877,7 +917,7 @@ const Card = ({ data, productId }) => {
                 onClick={() => handleOptionClick("deliveryOption")}
               >
                 <div className="flex flex-row gap-2">
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/delivary.svg"
                     height={25}
                     width={25}
@@ -893,7 +933,7 @@ const Card = ({ data, productId }) => {
                 onClick={() => handleOptionClick("calculator")}
               >
                 <div className="flex flex-row gap-2">
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/calculator.svg"
                     height={25}
                     width={25}
@@ -941,7 +981,7 @@ const Card = ({ data, productId }) => {
                                   className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
                                   onClick={() => setsidebarContent(null)}
                                 >
-                                  <Image
+                                  <Image loading="lazy"
                                     src="/icons/closeicon.svg"
                                     alt="close"
                                     width={20}
@@ -969,7 +1009,7 @@ const Card = ({ data, productId }) => {
                                 >
                                   <div className="flex items-center">
                                     <div className="mr-[15px] p-1  ">
-                                      <Image
+                                      <Image loading="lazy"
                                         src="/icons/adtocart.svg"
                                         height={25}
                                         width={25}
@@ -981,7 +1021,7 @@ const Card = ({ data, productId }) => {
                                       UPI
                                     </p>
                                     {openOfferDetails ? (
-                                      <Image
+                                      <Image loading="lazy"
                                         src="/icons/arrow_right.svg"
                                         className="-rotate-90"
                                         height={20}
@@ -989,7 +1029,7 @@ const Card = ({ data, productId }) => {
                                         alt="arrow-right"
                                       />
                                     ) : (
-                                      <Image
+                                      <Image loading="lazy"
                                         src="/icons/arrow_right.svg"
                                         className="rotate-90"
                                         height={20}
@@ -1065,7 +1105,7 @@ const Card = ({ data, productId }) => {
                                     >
                                       <div className="flex items-center w-full ">
                                         <div className="mr-[15px] p-1 ">
-                                          <Image
+                                          <Image loading="lazy"
                                             src="/icons/icic.svg"
                                             height={24}
                                             width={24}
@@ -1081,7 +1121,7 @@ const Card = ({ data, productId }) => {
                                           </p>
                                         </div>
                                         {openEmiDetails ? (
-                                          <Image
+                                          <Image loading="lazy"
                                             src="/icons/arrow_right.svg"
                                             className="-rotate-90"
                                             height={20}
@@ -1089,7 +1129,7 @@ const Card = ({ data, productId }) => {
                                             alt="arrow-right"
                                           />
                                         ) : (
-                                          <Image
+                                          <Image loading="lazy"
                                             src="/icons/arrow_right.svg"
                                             className="rotate-90"
                                             height={20}
@@ -1191,13 +1231,13 @@ const Card = ({ data, productId }) => {
                                     </div>
                                     {/* <div className="flex items-center py-[20px] border-b cursor-pointer">
                                           <div className="mr-[15px] p-1 shadow-lg ">
-                                            <Image src="/icons/utib.svg" height={24} width={24} alt="arrow-right" />
+                                            <Image loading="lazy" src="/icons/utib.svg" height={24} width={24} alt="arrow-right" />
                                           </div>
                                           <div className="flex flex-col flex-1 ">
                                             <p className="text-[#2E2E2E] text-[14px]">ICIC Bank</p>
                                             <p className="text-[#8E8E8E] text-xs">from ₹294/month</p>
                                           </div>
-                                          <Image src="/icons/arrow_right.svg" className="rotate-90" height={20} width={20} alt="arrow-right" />
+                                          <Image loading="lazy" src="/icons/arrow_right.svg" className="rotate-90" height={20} width={20} alt="arrow-right" />
                                         </div> */}
                                     <div
                                       onClick={(e) =>
@@ -1207,7 +1247,7 @@ const Card = ({ data, productId }) => {
                                     >
                                       <div className="flex items-center w-full ">
                                         <div className="mr-[15px] p-1 ">
-                                          <Image
+                                          <Image loading="lazy"
                                             src="/icons/icic.svg"
                                             height={24}
                                             width={24}
@@ -1223,7 +1263,7 @@ const Card = ({ data, productId }) => {
                                           </p>
                                         </div>
                                         {openEmiDetails ? (
-                                          <Image
+                                          <Image loading="lazy"
                                             src="/icons/arrow_right.svg"
                                             className="-rotate-90"
                                             height={20}
@@ -1231,7 +1271,7 @@ const Card = ({ data, productId }) => {
                                             alt="arrow-right"
                                           />
                                         ) : (
-                                          <Image
+                                          <Image loading="lazy"
                                             src="/icons/arrow_right.svg"
                                             className="rotate-90"
                                             height={20}
@@ -1351,7 +1391,7 @@ const Card = ({ data, productId }) => {
                                     className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
                                     onClick={() => setsidebarContent(null)}
                                   >
-                                    <Image
+                                    <Image loading="lazy"
                                       src="/icons/closeicon.svg"
                                       alt="close"
                                       width={30}
@@ -1406,7 +1446,7 @@ const Card = ({ data, productId }) => {
                                   </div>
                                 </div>
                                 <div>
-                                  <Image
+                                  <Image loading="lazy"
                                     src="/icons/arrow_right.svg"
                                     height={50}
                                     width={50}
@@ -1439,7 +1479,7 @@ const Card = ({ data, productId }) => {
                                   </div>
                                 </div>
                                 <div>
-                                  <Image
+                                  <Image loading="lazy"
                                     src="/icons/arrow_right.svg"
                                     height={50}
                                     width={50}
@@ -1472,7 +1512,7 @@ const Card = ({ data, productId }) => {
                                   </div>
                                 </div>
                                 <div>
-                                  <Image
+                                  <Image loading="lazy"
                                     src="/icons/arrow_right.svg"
                                     height={50}
                                     width={50}
@@ -1502,7 +1542,7 @@ const Card = ({ data, productId }) => {
                                 className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
                                 onClick={() => setsidebarContent(null)}
                               >
-                                <Image
+                                <Image loading="lazy"
                                   src="/icons/closeicon.svg"
                                   alt="close"
                                   width={20}
@@ -1559,7 +1599,7 @@ const Card = ({ data, productId }) => {
                               className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
                               onClick={() => setsidebarContent(null)}
                             >
-                              <Image
+                              <Image loading="lazy"
                                 src="/icons/closeicon.svg"
                                 alt="close"
                                 width={20}
@@ -1590,7 +1630,7 @@ const Card = ({ data, productId }) => {
                                 document.body.style.overflow = "auto";
                               }}
                             >
-                              <Image
+                              <Image loading="lazy"
                                 src="/icons/closeicon.svg"
                                 alt="close"
                                 width={20}
@@ -1600,7 +1640,7 @@ const Card = ({ data, productId }) => {
                             </button>
                           </div>
                           <div className="flex items-start w-[100%]  pb-10 absolute ">
-                            <Image
+                            <Image loading="lazy"
                               src={data?.images[0]}
                               height={100}
                               width={100}
@@ -1666,7 +1706,7 @@ const Card = ({ data, productId }) => {
                                     onMouseLeave={() => setShowCart(false)}
                                   >
                                     <div className="flex">
-                                      <Image
+                                      <Image loading="lazy"
                                         src={product?.images[0]}
                                         height={100}
                                         width={100}
@@ -1713,7 +1753,7 @@ const Card = ({ data, productId }) => {
                                         handleAddToCart(product._id)
                                       }
                                     >
-                                      <Image
+                                      <Image loading="lazy"
                                         src={"/icons/ad-to-cart.svg"}
                                         height={20}
                                         width={20}
@@ -1730,7 +1770,7 @@ const Card = ({ data, productId }) => {
                               )}
                               {/* <div className="flex items-start  justify-between cursor-pointer  mt-[30px]  pb-10" onMouseEnter={() => setShowCart(true)} onMouseLeave={() => setShowCart(false)}>
                                 <div className="flex">
-                                  <Image src={"/images/room/bathroom.jpg"} height={100} width={100} className="mr-[16px] h-[100px] w-[100px]" />
+                                  <Image loading="lazy" src={"/images/room/bathroom.jpg"} height={100} width={100} className="mr-[16px] h-[100px] w-[100px]" />
                                   <div className="flex flex-col mx-[12px] max-w-[220px]">
                                     <p className="text-[14px] font-bold text-[#484848]">Baggego</p>
                                     <p className="text-[#484848] text-[12px] mb-[5px] line-clamp-1">Cabinate with door</p>
@@ -1742,7 +1782,7 @@ const Card = ({ data, productId }) => {
                                 </div>
 
                                 <div className="bg-[#0152be] p-1.5 rounded-full max-w-fit self-center md:mr-10 ">
-                                  <Image src={"/icons/ad-to-cart.svg"} height={20} width={20} className="cursor-pointer rounded-full min-w-[20px] min-h-[20px]" />
+                                  <Image loading="lazy" src={"/icons/ad-to-cart.svg"} height={20} width={20} className="cursor-pointer rounded-full min-w-[20px] min-h-[20px]" />
                                 </div>
                               </div> */}
                             </div>
@@ -1784,7 +1824,7 @@ const Card = ({ data, productId }) => {
                                 document.body.style.overflow = "auto";
                               }}
                             >
-                              <Image
+                              <Image loading="lazy"
                                 src="/icons/closeicon.svg"
                                 alt="close icon"
                                 width={20}
@@ -1794,7 +1834,7 @@ const Card = ({ data, productId }) => {
                             </button>
                           </div>
                           <div className="flex items-start w-[100%]  pb-10 absolute ">
-                            <Image
+                            <Image loading="lazy"
                               src={data?.images[0]}
                               height={100}
                               width={100}
@@ -1947,7 +1987,7 @@ const Card = ({ data, productId }) => {
                                       onMouseLeave={() => setShowCart(false)}
                                     >
                                       <div className="flex">
-                                        <Image
+                                        <Image loading="lazy"
                                           src={product?.images[0]}
                                           height={100}
                                           width={100}
@@ -2082,7 +2122,7 @@ const Card = ({ data, productId }) => {
             </div>
           )}
           <div className="flex gap-3 mt-8 items-center justify-center">
-            <Image
+            {/* <Image 
               src={"/icons/ayatrio_comment_button.svg"}
               height={30}
               width={30}
@@ -2097,7 +2137,30 @@ const Card = ({ data, productId }) => {
               <p className="text-[#0066CC] text-xs cursor-pointer font-normal hover:underline">
                 Chat with a Specialist
               </p>
+            </div> */}
+
+            <div className="flex flex-col items-center">
+              {contentData.map((item, index) => (
+                <div key={index} className="w-full max-w-md py-1">
+                  <details className="cursor-pointer">
+                    <summary className="text-normal underline" style={{ listStyle: 'none', display: 'flex', alignItems: 'center' }}>
+                      <Image
+                        laoding="lazy"
+                        src={`/icons/${item.icon}.svg`}
+                        alt={item.icon}
+                        width={25}
+                        height={25}
+                        className="mr-2"
+                      />
+                      {item.title}
+                    </summary>
+                    <p className="mb-2">{item.content}</p>
+                  </details>
+                </div>
+              ))}
             </div>
+
+
           </div>
         </div>
         <ToastContainer

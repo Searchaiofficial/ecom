@@ -23,7 +23,7 @@ export default async function Home() {
         type={"Organization"}
         url="https://www.ayatrio.com"
         name="Ayatrio"
-        logo="https://ayatrio.com/api/og"
+        // logo="https://ayatrio.com/api/og"
         contactPoint={[
           {
             telephone: "(+91) 9007404292",
@@ -33,11 +33,11 @@ export default async function Home() {
           },
         ]}
         sameAs={[
-          "https://www.facebook.com/ayatrio.india/",
-          "https://twitter.com/ayatrio_india/",
-          "https://www.instagram.com/ayatrio_india/",
-          "https://in.pinterest.com/ayatrio_india/",
-          "https://www.youtube.com/ayatrio/",
+          // "https://www.facebook.com/ayatrio.india/",
+          // "https://twitter.com/ayatrio_india/",
+          // "https://www.instagram.com/ayatrio_india/",
+          // "https://in.pinterest.com/ayatrio_india/",
+          // "https://www.youtube.com/ayatrio/",
         ]}
         address={{
           type: "PostalAddress",

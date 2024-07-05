@@ -579,6 +579,7 @@ const CartMain = () => {
                       height={18}
                       alt="rupees"
                       className="mr-1"
+                      loading="lazy"
                     />
                     {totalPrice}
                   </div>
@@ -594,6 +595,8 @@ const CartMain = () => {
                       height={18}
                       alt="rupees"
                       className="mr-1"
+                      loading="lazy"
+
                     />
                     {totalServicesPrice}
                   </div>
@@ -609,6 +612,8 @@ const CartMain = () => {
                       height={18}
                       alt="rupees"
                       className="mr-1"
+                      loading="lazy"
+
                     />
                     {totalAccessoryPrice}
                   </div>
@@ -633,6 +638,8 @@ const CartMain = () => {
                       height={20}
                       alt="rupees"
                       className="mr-1"
+                      loading="lazy"
+
                     />
                     {SumtotalPrice}
                   </div>

@@ -48,7 +48,7 @@ const DisplayBox = ({ selectedService }) => (
             {selectedService.details.map((detail, index) => (
                 <div key={index} className="p-[10px] hover:bg-zinc-100 max-w-[270px] m-0">
                     <Link href={detail.link}>
-                        <Image
+                        <Image loading="lazy"
                             src={detail.image}
                             alt={detail.title}
                             width={170}

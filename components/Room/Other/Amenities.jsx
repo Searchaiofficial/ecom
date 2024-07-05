@@ -39,7 +39,7 @@ const Amenities = ({ data }) => {
                 key={amenity._id}
               >
                 <div className="w-10 h-10 mr-4">
-                  <Image
+                  <Image loading="lazy"
                     width={30}
                     height={30}
                     src={amenity.image}
@@ -62,7 +62,7 @@ const Amenities = ({ data }) => {
             Show All amenities
           </button> */}
           {/* <div className="flex gap-6 mt-8 items-center justify-center">
-            <Image src={"/icons/backarrowRevarce.svg"} height={35} width={35} alt="downarrow" className="rotate-90 h-[35px] w-[35px]  hover:text-gray-600" />
+            <Image loading="lazy" src={"/icons/backarrowRevarce.svg"} height={35} width={35} alt="downarrow" className="rotate-90 h-[35px] w-[35px]  hover:text-gray-600" />
 
             <div className="flex flex-col items-center">
               <p className="font-semibold text-[#1D1D1F] text-xs">Have questions about Ayatrio?</p>

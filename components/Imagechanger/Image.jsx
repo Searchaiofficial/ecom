@@ -114,7 +114,7 @@ const Imagechanger = () => {
                   {value}
                 </h1>
                 {openStates[idx] ? (
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/uparrow.svg"
                     width={20}
                     height={20}
@@ -122,7 +122,7 @@ const Imagechanger = () => {
                     className="text-2xl p-1 ml-3 my-4 text-gray-500 text-left cursor-pointer"
                   />
                 ) : (
-                  <Image
+                  <Image loading="lazy"
                     src="/icons/downarrow.svg"
                     width={20}
                     height={20}

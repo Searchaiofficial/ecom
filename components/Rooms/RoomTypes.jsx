@@ -16,7 +16,7 @@ const RoomTypes = () => {
                     <div key={index} className="w-1/5 p-4">
                         <Link href={`/rooms/${room.replace(/\s+/g, '-')}`} passHref>
                             <div className="flex rounded-md overflow-hidden">
-                                <Image src={temp} className="w-16 h-16 object-cover rounded-md" alt={room || "room"} />
+                                <Image loading="lazy"src={temp} className="w-16 h-16 object-cover rounded-md" alt={room || "room"} />
                                 <div className="p-2">
                                     <h3 className="text-lg font-semibold text-gray-900">{room}</h3>
                                     <p className="text-sm text-gray-500">Description</p>

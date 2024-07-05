@@ -3,7 +3,7 @@ import Suggestion from "@/components/suggestion/Suggestion";
 import { ArticleJsonLd } from "next-seo";
 
 export const generateMetadata = async ({ params: { title } }) => {
-  const suggestion = await fetchSuggestionData(title);
+  const suggestion = await fetchSuggestionData(title?.replace(/-/g, " "));
 
   return {
     title: suggestion?.metadata?.title,
@@ -24,7 +24,7 @@ export const generateMetadata = async ({ params: { title } }) => {
 };
 
 const SuggestionPage = async ({ params: { title } }) => {
-  const suggestion = await fetchSuggestionData(title);
+  const suggestion = await fetchSuggestionData(title?.replace(/-/g, " "));
 
   return (
     <>
@@ -40,7 +40,7 @@ const SuggestionPage = async ({ params: { title } }) => {
           authorName={suggestion.author?.name || "Ayatrio"}
         />
       ) : null}
-      <Suggestion id={title} />;
+      <Suggestion id={title.replace(/-/g, " ")} />;
     </>
   );
 };

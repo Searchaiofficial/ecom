@@ -248,7 +248,7 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
                   setSearchQuery(e.target.value);
                 }}
               />
-              <Image
+              <Image loading="lazy"
                 src="/icons/search.svg"
                 alt="Search icon"
                 width={20}
@@ -352,7 +352,7 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
                       onClick={() => handleRoute(item)}
                     >
                       <div className="lg:w-[170px] w-[150px] h-[150px] lg:h-[170px]">
-                        <Image
+                        <Image loading="lazy"
                           src={item.images[0]}
                           width={170}
                           height={170}
@@ -400,7 +400,7 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
                         }, item)}
                       >
                         <div className="lg:w-[170px] w-[150px] h-[150px] lg:h-[170px]">
-                          <Image
+                          <Image loading="lazy"
                             src={"https://bolt-gcdn.sc-cdn.net/3/Z2i0CKb1i5GtNvg8xNoP7.256.IRZXSOY?mo=GlgaFhoAGgAyAX06AQRCBgjm_5mrBlBJYAFaEERmTGFyZ2VUaHVtYm5haWyiARQIgAIiDwoCSAISACoHSVJaWFNPWaIBFAiaCiIPCgJIAxIAKgdJUlpYU09Z&uc=73"}
                             width={170}
                             height={170}

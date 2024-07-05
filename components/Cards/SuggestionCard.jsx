@@ -11,7 +11,7 @@ function SuggestionCard(props) {
   return (
     <>
       <div key={props.cardkey} className="pb-8  cursor-pointer ">
-        <Link href={`/inspiration/${props.title}`}>
+        <Link href={`/inspiration/${props.title.replace(/ /g, "-")}`}>
           <div className="flex h-full w-full items-center justify-center cursor-pointer  overflow-hidden">
             <Image
               src={props.imgSrc}
@@ -32,7 +32,7 @@ function SuggestionCard(props) {
               {props.desc}
             </div>
             <div className="bg-[#333336] rounded-full max-w-fit p-2 mt-[60px] lg:mt-[90px]">
-              <Image src={"/icons/Back_arrow_white.svg"} height={25} width={25} className="p-1" alt="arrow icon"/>
+              <Image src={"/icons/Back_arrow_white.svg"} height={25} width={25} className="p-1" alt="arrow icon" loading="lazy"/>
             </div>
           </div>
 

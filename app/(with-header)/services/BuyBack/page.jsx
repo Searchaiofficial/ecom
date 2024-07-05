@@ -44,7 +44,7 @@ export default function BuyBackPage() {
 
                     </div>
                     <div className="w-full md:w-3/5 flex items-center justify-center">
-                        <Image
+                        <Image loading="lazy"
                             src="/images/services/Buy-Back/buyback.jpg"
                             alt="Financial service"
                             width={500}

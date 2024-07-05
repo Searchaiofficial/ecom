@@ -39,7 +39,9 @@ const RoomPage = () => {
 
   const dispatch = useDispatch();
   const quantity = useSelector(selectQuantity);
-  const { title } = useParams();
+  // const { title } = useParams();
+  const params = useParams();
+  const title = params.title.replace(/-/g, " ");
   let url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getSingleProduct?id=`;
   const [data, setData] = useState([]);
   const selectedData = useSelector(selectRoomData);
@@ -161,10 +163,13 @@ const RoomPage = () => {
   return (
     <>
       <div className="overflow-y-auto overflow-x-hidden container-rooms flex sm:block items-center px-[20px] sm:px-[50px] lg:px-[27px] ">
-        <div className="mt-[65px] w-full">
+        <div className="sm:mt-[65px] w-full">
+        {/* <div className="mt-[65px] w-full"> */}
           <div className=" sm:flex-row gap-8 flex-col flex overflow-hidden">
-            <div className="relative sm:basis-2/3 flex lg:pl-[40px] mt-[50px] sm:mt-[40px] flex-col sm:flex-grow">
-              <div className=" font-sans font-normal text-xs sm:text-sm md:pb-[10px]  sticky top-10 mb-[20px] md:mb-[7px] md:mt-0 mt-[20px] flex items-center gap-1">
+            {/* <div className="relative sm:basis-2/3 flex lg:pl-[40px] mt-[50px] sm:mt-[40px] flex-col sm:flex-grow"> */}
+            <div className="relative sm:basis-2/3 flex lg:pl-[40px]  sm:mt-[40px] flex-col sm:flex-grow">
+              {/* <div className=" font-sans font-normal text-xs sm:text-sm md:pb-[10px]  sticky top-10 mb-[20px] md:mb-[7px] md:mt-0 mt-[20px] flex items-center gap-1"> */}
+              <div className=" font-sans font-normal text-xs sm:text-sm md:pb-[10px]  sticky top-2 mb-[20px] md:mb-[7px] md:mt-0 mt-[20px] flex items-center gap-1">
                 {navigationItemData ? (
                   <>
                     <Link href={`${navigationItemData.href}`}>

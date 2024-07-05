@@ -11,7 +11,7 @@ const DeliveryServicePage = () => {
               <h1 className="font-bold text-4xl">Delivery Service</h1>
               <div className="flex flex-col md:flex-row w-full space-x-4">
                 <div className="md:w-1/2">
-                  <Image width={600} height={338} src="/icons/delivary.svg" alt="truck" />
+                  <Image loading="lazy" width={600} height={338} src="/icons/delivary.svg" alt="truck" />
                 </div>
                 <div className="flex-col space-y-7 md:w-1/2">
                   <p>

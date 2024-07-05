@@ -70,7 +70,7 @@ const CategoryContent = (props) => {
               onClick={() => handleClick(dataItem)}
             >
               {dataItem.image ? (
-                <Image
+                <Image loading="lazy"
                   src={dataItem.image}
                   width={20}
                   height={20}

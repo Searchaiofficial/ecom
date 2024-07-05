@@ -54,7 +54,7 @@ export default function PriceGuarantee() {
               </p>
             </div>
             <div className="md:w-1/2">
-              <Image
+              <Image loading="lazy"
                 src="/images/temp.svg"
                 alt="mug"
                 width={500}
@@ -72,7 +72,7 @@ export default function PriceGuarantee() {
           </div>
           <div className="flex flex-col md:flex-row space-x-2">
             <div>
-              <Image
+              <Image loading="lazy"
                 width={400}
                 height={800}
                 src="/images/temp.svg"
@@ -80,7 +80,7 @@ export default function PriceGuarantee() {
               />
             </div>
             <div>
-              <Image
+              <Image loading="lazy"
                 width={400}
                 height={800}
                 src="/images/temp.svg"
@@ -88,7 +88,7 @@ export default function PriceGuarantee() {
               />
             </div>
             <div>
-              <Image
+              <Image loading="lazy"
                 width={400}
                 height={800}
                 src="/images/temp.svg"

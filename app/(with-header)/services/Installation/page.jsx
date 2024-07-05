@@ -68,7 +68,7 @@ const Faq = ({ faqFor }) => {
                                 onClick={() => toggleAccordion(index)}
                             >
                                 <span className="font-semibold">{faq.title}</span>
-                                <Image
+                                <Image loading="lazy"
                                     src={`/icons/${index === activeIndex ? 'uparrow.svg' : 'downarrow.svg'}`}
                                     width={300}
                                     height={300}
@@ -92,7 +92,7 @@ const CabinetItem = ({ imageSrc, title, price, description }) => {
         <div className="pub-layout-50-50 flex flex-wrap">
             <div className="p-4">
                 <div className="b">
-                    <Image
+                    <Image loading="lazy"
                         width={600}
                         height={300}
                         src={imageSrc}
@@ -131,7 +131,7 @@ export default function Installation() {
 
                     </div>
                     <div className="w-full md:w-3/5 flex items-center justify-center">
-                        <Image
+                        <Image loading="lazy"
                             src="/images/services/installation/installation.jpg"
                             width={600}
                             height={300}

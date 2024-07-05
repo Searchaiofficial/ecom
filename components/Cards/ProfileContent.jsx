@@ -63,7 +63,7 @@ const ProfileContent = ({ initialData }) => {
           <SwiperSlide className="bg-[#fafafa]  pr-3" key={index}>
             <div className="flex flex-col items-center">
               <div className="parent flex flex-col items-center relative bg-black rounded-full md:h-36 h-28 md:w-36 w-28 mb-2 md:mt-8 mt-4">
-                <Image
+                <Image loading="lazy"
                   src={person.image}
                   alt={person.name}
                   className="rounded-full w-full h-full object-cover"
@@ -74,7 +74,7 @@ const ProfileContent = ({ initialData }) => {
               <div className="text-[13px] lg:text-[16px] p-1 flex  items-center font-bold ">
                 <p className="line-clamp-1">{person.name}</p>
                 <a href="#" className="flex items-center" target="_blank">
-                  <Image
+                  <Image loading="lazy"
                     className="sm:h-6 h-6 sm:w-6 w-6"
                     src="/icons/social-icon/linkedln.svg"
                     alt={`LinkedIn for ${person.name}`}
@@ -89,14 +89,14 @@ const ProfileContent = ({ initialData }) => {
         ))}
       </Swiper>
       <div className=" flex flex-row items-end justify-end gap-6 mt-[25px]">
-        <Image
+        <Image loading="lazy"
           src="/icons/backarrow-w.svg"
           width={20}
           height={20}
           alt="Arrow"
           className="vector-two rounded-full h-7 w-7"
         />
-        <Image
+        <Image loading="lazy"
           src="/icons/rightarrow-w.svg"
           width={20}
           height={20}

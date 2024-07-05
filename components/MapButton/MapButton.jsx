@@ -20,7 +20,7 @@ const MapButton = ({ }) => {
         onClick={() => router.push("/ayatrio-map")}
       >
         Map{" "}
-        <Image
+        <Image loading="lazy"
           width={25}
           height={25}
           src="/icons/ayatrio_store.svg"
@@ -34,7 +34,7 @@ const MapButton = ({ }) => {
         onClick={() => router.push("/ayatrio-map")}
       >
         Near Ayatrio{" "}
-        <Image
+        <Image loading="lazy"
           width={25}
           height={25}
           src="/icons/ayatrio_store.svg"

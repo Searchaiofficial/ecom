@@ -9,20 +9,20 @@ import { selectVirtualData } from "@/components/Features/Slices/virtualSlice";
 import { allSelectedData, selectBudget, selectCategory, selectColor, selectData, selectRoom, selectSelectiveProduct, selectStyle, setSelectedColor } from "@/components/Features/Slices/virtualDataSlice";
 
 const Content2 = () => {
-    const router = useRouter();
-    const search = useSearchParams();
-    const [data, setData] = useState([]);
-    const dataSelector = useSelector(selectVirtualData);
-    useEffect(() => {
-      if(dataSelector===null||dataSelector===undefined||dataSelector.length===0){
-        router.push("/virtualexperience/category");
-      }
-      else{
-        let tempData = dataSelector?.filter((item) => item.category===search.get("category")?.toLocaleLowerCase());
-        setData(tempData);
-      }
+  const router = useRouter();
+  const search = useSearchParams();
+  const [data, setData] = useState([]);
+  const dataSelector = useSelector(selectVirtualData);
+  useEffect(() => {
+    if (dataSelector === null || dataSelector === undefined || dataSelector.length === 0) {
+      router.push("/virtualexperience/category");
+    }
+    else {
+      let tempData = dataSelector?.filter((item) => item.category === search.get("category")?.toLocaleLowerCase());
+      setData(tempData);
+    }
 
-    }, []);
+  }, []);
   const prevHandler = () => {
     router.push("/virtualexperience/flooring");
   };
@@ -30,7 +30,7 @@ const Content2 = () => {
     router.push("/products/virtualexperience/ayatrio");
   };
 
-  
+
   const [selectedActivity, setSelectedActivity] = useState({});
   const [showCircle, setShowCircle] = useState(false);
   const [showbuttoncontent, setShowbuttoncontent] = useState(false);
@@ -61,13 +61,13 @@ const Content2 = () => {
 
   // // Function to check if a string is a numeric string
   // const isNumericString = (str) => /^\d+$/.test(str);
-  
+
   // // Remove entries with titles that are numeric strings
   // const filteredRooms = Object.entries(x.room).filter(([roomId, isSelected]) => isSelected && !isNumericString(roomId)).map(([roomId]) => ({ title: roomId }));
   // const filteredStyle = Object.entries(x.style).filter(([styleId, isSelected]) => isSelected && !isNumericString(styleId)).map(([styleId]) => ({ title: styleId }));
   // const filteredSelectiveProducts = Object.entries(x.selectiveproduct).filter(([productId, isSelected]) => isSelected && !isNumericString(productId)).map(([productId]) => ({ title: productId }));
   // const filteredColors = Object.entries(x.color).filter(([color, isSelected]) => isSelected && !isNumericString(color)).map(([color]) => ({ title: color }));
-  
+
   // // Create the transformed data object
   // const transformedData = {
   //   category: x.category,
@@ -77,10 +77,10 @@ const Content2 = () => {
   //   price: [{ Label: x.budget.toString() }],
   //   colors: filteredColors
   // };
-  
+
   // console.log("transformedData", transformedData);
-  
-  
+
+
   return (
     <div className="py-4 w-full h-full pb-4 bg-[#f4e3dd] text-sm">
       {/* <Header /> */}
@@ -104,11 +104,10 @@ const Content2 = () => {
               }}
               className={`flex items-center justify-center rounded-full  relative p-1  w-12 h-12 
               
-                    ${
-                      selectedActivity[item.title]
-                        ? " border-2 border-red-500"
-                        : ""
-                    }
+                    ${selectedActivity[item.title]
+                  ? " border-2 border-red-500"
+                  : ""
+                }
               `}
             />
             <p>{item.title}</p>
@@ -116,11 +115,11 @@ const Content2 = () => {
             {selectedActivity[item.title] && (
               <div
                 className="room-item absolute top-2 right-12 z-10  flex items-center opacity-50 justify-center"
-               
+
               >
                 <div className="circle-container relative flex justify-center items-center">
-                  
-                  <Image src="/icons/tick.svg" alt="tick" width={30} height={30} className=" opacity-100" />
+
+                  <Image src="/icons/tick.svg" alt="tick" width={30} height={30} className=" opacity-100" loading="lazy" />
                 </div>
               </div>
             )}

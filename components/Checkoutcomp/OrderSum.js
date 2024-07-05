@@ -66,7 +66,7 @@ const OrderSum = () => {
             <div className="grid grid-cols-2 gap-10">
               <div className="col-span-1">
                 {/* <img src={shoe} alt='shoes'/> */}
-                <Image
+                <Image loading="lazy"
                   src={roomData.images[0]}
                   alt={roomData.productTitle}
                   width={180}
@@ -127,7 +127,7 @@ const OrderSum = () => {
                   <div className="grid grid-cols-2 gap-10">
                     <div className="col-span-1">
                       {/* <img src={shoe} alt='shoes'/> */}
-                      <Image
+                      <Image loading="lazy"
                         src={item.productId.images[0]}
                         alt={item.productId.productTitle}
                         width={180}

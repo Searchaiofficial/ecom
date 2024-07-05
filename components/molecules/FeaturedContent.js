@@ -18,7 +18,7 @@ const FeaturedContent = (props) => {
   return (
     <div className={`flex flex-col ${verticalSpacingBetween}`}>
       <h2 className='text-black font-bold text-2xl'>Featured</h2>
-      <div><Image src={featured.image} width={imageWidth} height={imageHeight} alt={featured.text || 'football'} /></div>
+      <div><Image loading="lazy" src={featured.image} width={imageWidth} height={imageHeight} alt={featured.text || 'football'} /></div>
       <div><h2 className={`${textSize} ${textStyle}`}>{featured.text}</h2></div>
       <div><h3 className='text-xl font-semibold text-gray-500'>View the collection</h3></div>
     </div>

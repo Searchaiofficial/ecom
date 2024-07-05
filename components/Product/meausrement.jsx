@@ -73,11 +73,11 @@ const meausrement = ({ category }) => {
                 <p>{reviewData && reviewData.comment}</p>
               </div>
               <div className="flex flex-row feedcon mt-2 cursor-pointer">
-                <Image
+                <Image loading="lazy"
                   src={reviewData && reviewData.image}
                   width={45}
                   height={45}
-                  alt="arrow"
+                  alt={reviewData && reviewData.name}
                   className="usercon aspect-square object-cover rounded-full"
                 />
                 <Link

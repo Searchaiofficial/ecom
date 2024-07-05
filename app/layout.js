@@ -32,6 +32,7 @@ export const metadata = {
         url: "https://ayatrio.com/api/og",
         width: 1200,
         height: 630,
+        rel: "preload"
       },
     ],
   },

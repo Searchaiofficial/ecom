@@ -341,7 +341,7 @@ function App() {
                                         background: `url('${subcategory.img}')`,
                                       }}
                                     >
-                                      <Image
+                                      <Image loading="lazy"
                                         src="/icons/tick.svg"
                                         height={20}
                                         width={20}
@@ -359,14 +359,14 @@ function App() {
                             </div>
                           )}
                           <div className="swiper-pagination"></div>
-                          <Image
+                          <Image loading="lazy"
                             src="/icons/leftvector.svg"
                             width={30}
                             height={30}
                             alt="arrow"
                             className="swiper-button-prev sm:-translate-y-[150px] sm:-translate-x-[460px]"
                           />
-                          <Image
+                          <Image loading="lazy"
                             src="/icons/right-white.svg"
                             width={30}
                             height={30}
@@ -416,7 +416,7 @@ function App() {
                         backgroundSize: "cover",
                       }}
                     >
-                      <Image
+                      <Image loading="lazy"
                         src="/icons/tick.svg"
                         height={20}
                         width={20}
