@@ -26,11 +26,7 @@ const page = async ({ params }) => {
 
   const productImages = response.data?.images;
 
-  const ratingValue = response.data?.ratings.reduce((prev, current) => {
-    return prev + current.rating;
-  });
-
-  const avgRating = ratingValue / response.data?.ratings.length;
+  const ratings = response.data?.ratings;
 
   return (
     <>
@@ -53,22 +49,33 @@ const page = async ({ params }) => {
             },
           },
         ]}
-        reviews={response.data?.ratings.map((review) => {
-          return {
-            author: review.name,
-            name: review.comment,
-            reviewBody: review.comment,
-            reviewRating: {
-              bestRating: "5",
-              ratingValue: review.rating,
-              worstRating: "1",
-            },
-          };
-        })}
-        aggregateRating={{
-          ratingValue: avgRating,
-          reviewCount: response.data?.ratings.length,
-        }}
+        reviews={
+          !!ratings && !!ratings.length
+            ? ratings.map((review) => {
+                return {
+                  author: review.name,
+                  name: review.comment,
+                  reviewBody: review.comment,
+                  reviewRating: {
+                    bestRating: "5",
+                    ratingValue: review.rating,
+                    worstRating: "1",
+                  },
+                };
+              })
+            : []
+        }
+        aggregateRating={
+          !!ratings && !!ratings.length
+            ? {
+                ratingValue:
+                  ratings.reduce((prev, current) => {
+                    return prev + current.rating;
+                  }) / ratings.length,
+                reviewCount: ratings.length,
+              }
+            : undefined
+        }
       />
       <BreadcrumbJsonLd
         useAppDir={true}

@@ -110,7 +110,35 @@ const page = async ({ params }) => {
         ]}
       />
       {categoryProducts?.map((product) => {
-        const ratingValue = product.ratings.reduce((prev, current) => {
+        const ratings = product.ratings;
+
+        if (!ratings || !ratings.length) {
+          return (
+            <ProductJsonLd
+              key={product._id}
+              useAppDir={true}
+              productName={product.productTitle}
+              description={product.productDescription}
+              images={product.productImages}
+              brand={product.brand || "Ayatrio"}
+              offers={[
+                {
+                  price: product.specialprice?.price,
+                  priceCurrency: "INR",
+                  priceValidUntil: product.specialprice?.endDate,
+                  itemCondition: "https://schema.org/NewCondition",
+                  availability: "https://schema.org/InStock",
+                  url: `${BASE_URL}/product/${product.productTitle}`,
+                  seller: {
+                    name: "Ayatrio",
+                  },
+                },
+              ]}
+            />
+          );
+        }
+
+        const ratingValue = ratings.reduce((prev, current) => {
           return prev + current.rating;
         });
 
