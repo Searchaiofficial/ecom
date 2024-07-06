@@ -137,7 +137,7 @@ const Delivery = () => {
       //   (serviceTotal, service) => serviceTotal + parseFloat(service.cost),
       //   0
       // );
-      const itemTotalPrice = (item.productId.totalPrice) * item.quantity;
+      const itemTotalPrice = (item.price) * item.quantity;
       return total + itemTotalPrice;
     }, 0);
   }
@@ -154,7 +154,7 @@ const Delivery = () => {
         (accessoryTotal, accessory) => accessoryTotal + parseFloat(accessory.totalPrice * accessory?.quantity),
         0
       );
-      const itemTotalPrice = (item.productId.totalPrice + serviceTotalCost + accessoriesTotalCost) * item.quantity;
+      const itemTotalPrice = (item.price + serviceTotalCost + accessoriesTotalCost) * item.quantity;
       return total + itemTotalPrice;
     }, 0);
   }

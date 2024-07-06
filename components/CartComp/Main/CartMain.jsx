@@ -91,7 +91,7 @@ const CartMain = () => {
       //   (accessoryTotal, accessory) => accessoryTotal + parseFloat(accessory.totalPrice),
       //   0
       // );
-      const itemTotalPrice = (item.productId.totalPrice) * item.quantity;
+      const itemTotalPrice = (item.price) * item.quantity;
       return total + itemTotalPrice;
     }, 0);
   }
@@ -107,7 +107,7 @@ const CartMain = () => {
         (accessoryTotal, accessory) => accessoryTotal + parseFloat(accessory.totalPrice * accessory?.quantity),
         0
       );
-      const itemTotalPrice = (item.productId.totalPrice + serviceTotalCost + accessoriesTotalCost) * item.quantity;
+      const itemTotalPrice = (item.price + serviceTotalCost + accessoriesTotalCost) * item.quantity;
       return total + itemTotalPrice;
     }, 0);
   }
@@ -286,8 +286,9 @@ const CartMain = () => {
 
   function handleItemDecr(productId, quantity) {
     let quant = quantity - 1;
-    if (quant >= 1) {
+    if (quant < 1) {
       handleItemDelete(productId);
+      return
     }
     updateQuantityInDatabase(productId, quant);
   }

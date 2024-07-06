@@ -73,6 +73,8 @@ const AddCart = () => {
 
   let SumtotalPrice = 0;
 
+  console.log(cartdata)
+
   if (cartdata) {
     SumtotalPrice = cartdata.items.reduce((total, item) => {
       const serviceTotalCost = item.selectedServices.reduce(
@@ -83,14 +85,14 @@ const AddCart = () => {
         (accessoryTotal, accessory) => accessoryTotal + parseFloat(accessory.totalPrice * accessory?.quantity),
         0
       );
-      const itemTotalPrice = (item.productId.totalPrice + serviceTotalCost + accessoriesTotalCost) * item.quantity;
+      const itemTotalPrice = (item.price + serviceTotalCost + accessoriesTotalCost) * item.quantity;
       return total + itemTotalPrice;
     }, 0);
   }
 
   if (cartdata && cartdata.items) {
     totalPrice = cartdata.items.reduce((total, item) => {
-      return total + (item?.productId?.totalPrice || 0) * (item?.quantity || 0);
+      return total + (item?.price || 0) * (item?.quantity || 0);
     }, 0);
     quantities = cartdata.items.reduce((total, item) => {
       return total + (item?.quantity || 0);
