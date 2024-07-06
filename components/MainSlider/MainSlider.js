@@ -115,7 +115,7 @@ const MainSlider = ({ initialData: { result: sliderData } }) => {
           position: "relative",
         }}
       >
-        {sliderData.concat(sliderData).map((data) => {
+        {sliderData.map((data) => {
           return (
             <>
               <swiper-slide>
