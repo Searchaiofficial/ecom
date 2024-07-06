@@ -110,6 +110,12 @@ const page = async ({ params }) => {
         ]}
       />
       {categoryProducts?.map((product) => {
+        const ratingValue = product.ratings.reduce((prev, current) => {
+          return prev + current.rating;
+        });
+
+        const avgRating = ratingValue / response.data?.ratings.length;
+
         return (
           <ProductJsonLd
             key={product._id}
@@ -143,6 +149,10 @@ const page = async ({ params }) => {
                 },
               };
             })}
+            aggregateRating={{
+              ratingValue: avgRating,
+              reviewCount: response.data?.ratings.length,
+            }}
           />
         );
       })}

@@ -4,7 +4,9 @@ import axios from "axios";
 
 export async function generateMetadata({ params }) {
   const response = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getSingleProduct?title=${params.title?.replace(/-/g, " ")}`
+    `${
+      process.env.NEXT_PUBLIC_API_BASE_URL
+    }/api/getSingleProduct?title=${params.title?.replace(/-/g, " ")}`
   );
 
   return {
@@ -17,10 +19,18 @@ export async function generateMetadata({ params }) {
 
 const page = async ({ params }) => {
   const response = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getSingleProduct?title=${params.title?.replace(/-/g, " ")}`
+    `${
+      process.env.NEXT_PUBLIC_API_BASE_URL
+    }/api/getSingleProduct?title=${params.title?.replace(/-/g, " ")}`
   );
 
   const productImages = response.data?.images;
+
+  const ratingValue = response.data?.ratings.reduce((prev, current) => {
+    return prev + current.rating;
+  });
+
+  const avgRating = ratingValue / response.data?.ratings.length;
 
   return (
     <>
@@ -55,6 +65,10 @@ const page = async ({ params }) => {
             },
           };
         })}
+        aggregateRating={{
+          ratingValue: avgRating,
+          reviewCount: response.data?.ratings.length,
+        }}
       />
       <BreadcrumbJsonLd
         useAppDir={true}
@@ -66,7 +80,8 @@ const page = async ({ params }) => {
           },
           {
             position: 2,
-            name: response.data?.productTitle || params.title?.replace(/-/g, " "),
+            name:
+              response.data?.productTitle || params.title?.replace(/-/g, " "),
             item: `https://www.ayatrio.com/${params.title?.replace(/-/g, " ")}`,
           },
         ]}
