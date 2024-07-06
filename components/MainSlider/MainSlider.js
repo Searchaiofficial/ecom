@@ -8,7 +8,7 @@ import Link from "next/link";
 const MainSlider = ({ initialData: { result: sliderData } }) => {
   const swiperRef = useRef(null);
 
-  const [windowWidth, setWindowWidth] = useState(-1);
+  const [windowWidth, setWindowWidth] = useState(600);
   const [isHovering, setIsHovering] = useState(false);
 
   const handleResize = () => {
