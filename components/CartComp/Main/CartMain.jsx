@@ -78,6 +78,7 @@ const CartMain = () => {
   }, []);
 
   console.log(cartdata)
+  console.log(cartdata.freeSamples)
 
   let totalPrice = 0;
 
@@ -300,6 +301,31 @@ const CartMain = () => {
     localStorage?.getItem("userCoordinates") &&
       setUserCoordinates(JSON.parse(localStorage.getItem("userCoordinates")));
   }, []);
+
+  const handleSampleDelete = async (sampleId) => {
+    try {
+      const responce = await axios.delete(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart/freeSampling`, {
+        params: {
+          deviceId: localStorage.getItem("deviceId"),
+          freeSampleId: sampleId
+        }
+      })
+
+      console.log(responce.data)
+
+
+      if (responce.status === 200) {
+        setCartStaus("succeeded");
+        fetchData();
+        // dispatch(setDbItems(response.data));
+        dispatch(setDbItems(responce.data));
+      }
+
+      console.log(responce.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   useEffect(() => {
     if (localStorage?.getItem("userPincode")) {
@@ -526,24 +552,81 @@ const CartMain = () => {
               {cartStatus === "loading" && <p>Loading...</p>}
               {cartStatus === "failed" && <p>Error loading data from DB.</p>}
               {cartStatus === "succeeded" && cartdata ? (
-                cartdata.items.map((item, index) => {
-                  return (
-                    <CartProduct
-                      cartItem={item}
-                      key={index}
-                      cartStatus={cartStatus}
-                      id={id}
-                      setCartStaus={setCartStaus}
-                      handleItemDecr={handleItemDecr}
-                      handleItemIncr={handleItemIncr}
-                      handleItemDelete={handleItemDelete}
-                      handleServiceIncrease={handleServiceIncrease}
-                      handleServiceDecrease={handleServiceDecrease}
-                      handleAccessoriesIncrease={handleAccessoriesIncrease}
-                      handleAccessoriesDecrease={handleAccessoriesDecrease}
-                    />
-                  );
-                })
+                <>
+                  {
+                    cartdata.items.map((item, index) => {
+                      return (
+                        <CartProduct
+                          cartItem={item}
+                          key={index}
+                          cartStatus={cartStatus}
+                          id={id}
+                          setCartStaus={setCartStaus}
+                          handleItemDecr={handleItemDecr}
+                          handleItemIncr={handleItemIncr}
+                          handleItemDelete={handleItemDelete}
+                          handleServiceIncrease={handleServiceIncrease}
+                          handleServiceDecrease={handleServiceDecrease}
+                          handleAccessoriesIncrease={handleAccessoriesIncrease}
+                          handleAccessoriesDecrease={handleAccessoriesDecrease}
+                        />
+                      );
+                    })
+                  }
+
+                  {
+                    cartdata && cartdata.freeSamples.length > 0 && (
+                      <div className="mt-5 flex flex-col gap-4">
+                        {
+                          cartdata.freeSamples.map((sample) => (
+                            <div className="flex  lg:gap-8 gap-4">
+                              <Image loading="lazy"
+                                src={sample.images[0]}
+                                width={249}
+                                height={249}
+                                alt={sample.productTitle}
+                                className="w-[88px] h-[88px] lg:w-32 lg:h-40 "
+
+                              />
+                              <div className="flex flex-col gap-2">
+                                <p className=" font-[700] flex justify-between ">
+                                  <div className="sm:text-xl text-md sm:font-semibold font-medium truncate">
+                                    {sample?.productTitle} {"( Sample )"}
+                                  </div>
+                                </p>
+                                <p className=" my-2">
+                                  <span className=" box-border h-1 w-10 rounded-xl mr-3 text-xs text-gray-400 bg-zinc-400">
+                                    .d.
+                                  </span>
+                                  <span className=" text-zinc-600 text-xs underline">
+                                    Go to checkout for delivery information
+                                  </span>
+                                </p>
+                                <div onClick={() => handleSampleDelete(sample._id)}>
+                                  <Image loading="lazy"
+                                    src="/icons/delete-icon.svg"
+                                    width={20}
+                                    height={20}
+                                    alt="Arrow"
+                                    className="w-6 h-6 cursor-pointer mt-2"
+                                  />
+                                </div>
+                              </div>
+                              <div className="text-xl flex self-start md:ml-44 items-center  font-semibold "><span className=" font-semibold text-[12px]">
+                                <Image loading="lazy"
+                                  src="/icons/indianrupeesicon.svg"
+                                  width={18}
+                                  height={18}
+                                  alt="rupees"
+                                  className="mr-1"
+                                /></span>00.00</div>
+                            </div>
+                          ))
+                        }
+                      </div>
+                    )
+                  }
+                </>
               ) : (
                 <>
                   <div className="p-10">

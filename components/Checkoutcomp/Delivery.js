@@ -649,6 +649,24 @@ const Delivery = () => {
                 </div>
               )}
             </div>
+            <div className="flex my-3 flex-col gap-4">
+              {cartdata && cartdata.freeSamples.length > 0 && (
+                cartdata.freeSamples.map((item, index) => {
+                  return (
+                    <div>
+                      <Image loading="lazy"
+                        src={item.images[0]}
+                        width={249}
+                        height={249}
+                        alt={""}
+                        className="w-20 h-20 mr-5"
+                      />
+                      {/* <p className="mt-[2px] text-[12px]  font-semibold">(Sample)</p> */}
+                    </div>
+                  );
+                })
+              )}
+            </div>
           </div>
           <h2 className="text-xl pb-3 font-bold">Order summary</h2>
           <div className="flex items-center justify-between  border-slate-500 pb-3  ">

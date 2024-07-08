@@ -12,7 +12,8 @@ const CartProduct = ({
   handleServiceIncrease,
   handleServiceDecrease,
   handleAccessoriesIncrease,
-  handleAccessoriesDecrease
+  handleAccessoriesDecrease,
+  freeSample
 }) => {
   // Calculate the total cost of selected services
   // const totalServiceCost = cartItem?.selectedServices.reduce((total, service) => total + parseFloat(service.cost), 0);
@@ -22,6 +23,8 @@ const CartProduct = ({
   const totalPrice = cartItem?.price;
 
   console.log("cartItem : ", cartItem);
+
+  console.log(freeSample)
 
 
 
@@ -223,6 +226,22 @@ const CartProduct = ({
               </div>
             </div>
           )
+        }
+        {
+          freeSample?.map((smaple) => {
+            return (
+              <div>
+                <Image loading="lazy"
+                  src={smaple.images[0]}
+                  width={249}
+                  height={249}
+                  alt={cartItem.name}
+                  className="w-[88px] h-[88px] lg:w-32 lg:h-40 "
+
+                />
+              </div>
+            )
+          })
         }
       </div>
     </>

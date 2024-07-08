@@ -16,14 +16,17 @@ import {
 } from "@/components/Features/Slices/roomSlice";
 import axios from "axios";
 import Carous from "@/components/Carousel/Carous";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import UserReviewPosts from "@/components/Cards/UserReviewPosts";
 import AccessoriesPosts from "@/components/Cards/AccessoriesPosts";
 import Link from "next/link";
 import Image from "next/image";
+import { setDbItems } from "@/components/Features/Slices/cartSlice";
+import { Router } from "next/dist/client/router";
 
 const RoomPage = () => {
   const [navigationItemData, setNavigationItemData] = useState(null);
+  const router = useRouter()
 
   useEffect(() => {
     if (window !== undefined) {
@@ -165,6 +168,23 @@ const RoomPage = () => {
     localStorage.setItem('selectedCategory', category);
   };
 
+  const handleFreeSampling = async () => {
+    try {
+      const responce = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart/freeSampling`, {
+        deviceId: localStorage.getItem("deviceId"),
+        freeSampleId: data?._id
+      });
+      console.log("Free Sampling :", responce.data)
+      if (responce.status === 200) {
+        dispatch(setDbItems(responce.data));
+        router.push("/checkout")
+
+      }
+    } catch (error) {
+      console.log("Free Sampling error", error)
+    }
+  }
+
   return (
     <>
       <div className="overflow-y-auto overflow-x-hidden container-rooms flex sm:block items-center px-[20px] sm:px-[50px] lg:px-[27px] ">
@@ -246,7 +266,6 @@ const RoomPage = () => {
               <div className="block md:hidden">
                 <Card data={data} productId={data._id} accessories={accessories} />
               </div>
-
               <div className="flex items-center space-x-2 mt-4">
                 <div className="flex flex-row bg-red-500 gap-2 p-1">
                   <Image
@@ -268,12 +287,10 @@ const RoomPage = () => {
                 >
                   <span className="text-sm">Join Live</span>
                 </Link>
-
-                <span>|</span>
-
-                <Link
-                  className="py-2 focus:outline-none h-8 flex items-center space-x-2 "
-                  href="#"
+                <span></span>
+                <div
+                  onClick={handleFreeSampling}
+                  className="py-2 focus:outline-none h-8 flex items-center cursor-pointer space-x-2 "
                 >
                   <Image
                     src="/icons/free-sample.svg"
@@ -283,7 +300,7 @@ const RoomPage = () => {
                     loading="lazy"
                   />
                   <span className="text-sm">Free Sampling</span>
-                </Link>
+                </div>
               </div>
 
               <RoomInfo data={data} />

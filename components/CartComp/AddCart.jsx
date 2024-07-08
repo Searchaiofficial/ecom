@@ -300,19 +300,73 @@ const AddCart = () => {
         {cartdata && cartdata?.items?.length > 0 ? (
           <div className="flex-1">
             <h1 className="text-xl font-semibold mb-6">Bag</h1>
-            {cartdata && cartdata.items && cartdata.items.map((item) => (
-              <CartProduct
-                cartItem={item}
-                handleItemDelete={handleItemDelete}
-                handleItemIncr={handleItemIncr}
-                handleItemDecr={handleItemDecr}
-                handleServiceIncrease={handleServiceIncrease}
-                handleServiceDecrease={handleServiceDecrease}
-                handleAccessoriesIncrease={handleAccessoriesIncrease}
-                handleAccessoriesDecrease={handleAccessoriesDecrease}
+            <>
+              {cartdata && cartdata.items && cartdata.items.map((item) => (
+                <CartProduct
+                  cartItem={item}
+                  handleItemDelete={handleItemDelete}
+                  handleItemIncr={handleItemIncr}
+                  handleItemDecr={handleItemDecr}
+                  handleServiceIncrease={handleServiceIncrease}
+                  handleServiceDecrease={handleServiceDecrease}
+                  handleAccessoriesIncrease={handleAccessoriesIncrease}
+                  handleAccessoriesDecrease={handleAccessoriesDecrease}
 
-              />
-            ))}
+                />
+              ))}
+              {/* {
+                cartdata && cartdata.freeSamples.length > 0 && (
+                  <div className="mt-5 flex flex-col gap-4">
+                    {
+                      cartdata.freeSamples.map((sample) => (
+                        <div className="flex  lg:gap-8 gap-4">
+                          <Image loading="lazy"
+                            src={sample.images[0]}
+                            width={249}
+                            height={249}
+                            alt={sample.productTitle}
+                            className="w-[88px] h-[88px] lg:w-32 lg:h-40 "
+
+                          />
+                          <div className="flex flex-col gap-2">
+                            <p className=" font-[700] flex justify-between ">
+                              <div className="sm:text-xl text-md sm:font-semibold font-medium truncate">
+                                {sample?.productTitle} {"( Sample )"}
+                              </div>
+                            </p>
+                            <p className=" my-2">
+                              <span className=" box-border h-1 w-10 rounded-xl mr-3 text-xs text-gray-400 bg-zinc-400">
+                                .d.
+                              </span>
+                              <span className=" text-zinc-600 text-xs underline">
+                                Go to checkout for delivery information
+                              </span>
+                            </p>
+                            <div onClick={() => handleSampleDelete(sample._id)}>
+                              <Image loading="lazy"
+                                src="/icons/delete-icon.svg"
+                                width={20}
+                                height={20}
+                                alt="Arrow"
+                                className="w-6 h-6 cursor-pointer mt-2"
+                              />
+                            </div>
+                          </div>
+                          <div className="text-xl flex self-start md:ml-44 items-center  font-semibold "><span className=" font-semibold text-[12px]">
+                            <Image loading="lazy"
+                              src="/icons/indianrupeesicon.svg"
+                              width={18}
+                              height={18}
+                              alt="rupees"
+                              className="mr-1"
+                            /></span>00.00</div>
+                        </div>
+                      ))
+                    }
+                  </div>
+                )
+              } */}
+            </>
 
           </div>
         ) : (

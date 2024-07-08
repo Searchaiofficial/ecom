@@ -613,6 +613,26 @@ const Details = () => {
                   <div className="text-lg text-gray-500 font-bold px-5">
                     {cartdata !== null ? "" : "Empty cart"}
                   </div>
+
+
+                )}
+              </div>
+              <div className="flex my-3">
+                {cartdata && cartdata.freeSamples.length > 0 && (
+                  cartdata.freeSamples.map((item, index) => {
+                    return (
+                      <div>
+                        <Image loading="lazy"
+                          src={item.images[0]}
+                          width={249}
+                          height={249}
+                          alt={""}
+                          className="w-20 h-20 mr-5"
+                        />
+                        {/* <p className="mt-[2px] text-[12px]  font-semibold">(Sample)</p> */}
+                      </div>
+                    );
+                  })
                 )}
               </div>
             </div>
