@@ -160,7 +160,8 @@ const Carous = ({ data }) => {
                       // inCart={inCart}
                       totalPrice={product.totalPrice}
                       unitType={product.unitType}
-                      // date={product.date}
+                      productType={product.productType}
+                      expectedDelivery={product.expectedDelivery}
                     />
                   </div>
                 </SwiperSlide>

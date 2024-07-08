@@ -252,9 +252,9 @@ const Reviews = ({ productId, data }) => {
                 </div>
               )}
               <div className="flex justify-center items-center flex-col ">
-                <div className="text-xl font-bold -mt-5">Guest favourite</div>
+                <div className={`text-xl font-bold -mt-5  ${data.productType === "requested" ? "text-[#bf9b30]" : "text-black" }`} >Guest favourite</div>
                 <div className="text-lg text-gray-500">
-                  One of the most loved homes on Airbnb
+                  One of the most loved homes on Ayatrio
                   <br />
                   based on ratings, reviews, and reliability
                 </div>
