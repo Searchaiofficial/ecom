@@ -253,13 +253,13 @@ function TabsProductCard(props) {
             >
               {props.offer}
             </div>
-          ) : props.demandtype ? (
+          ) : (props.demandtype || props.productType === "special") ? (
             <div
               className={
                 "flex text-[12px] justify-between text-black font-normal bg-white py-[.1rem] px-[.5rem] absolute top-2 left-2 z-10"
               }
             >
-              {props.demandtype === "Ayatrio Member Favorite"
+              {props.productType === "special"
                 ? "Top Rated"
                 : props.demandtype}
             </div>
@@ -356,14 +356,13 @@ function TabsProductCard(props) {
         >
           <div className="flex items-center justify-between pt-2 ">
             <div className=" flex flex-col">
-              {props.demandtype === "Ayatrio Member Favorite" && (
+              {props.productType === "special" && (
                 <p className="font-medium text-[#0152be]  mb-[3px] text-[12px]">
-                  {props.demandtype}
+                  Ayatrio Member Favorite 
                 </p>
               )}
               <h3
-                className={` text-[14px] font-semibold ${props.demandtype === "Ayatrio Member Favorite" ? "" : ""
-                  }`}
+                className={` text-[14px] font-semibold `}
               >
                 {props.productTitle}
               </h3>
@@ -374,7 +373,7 @@ function TabsProductCard(props) {
             {props?.shortDescription}
           </p>
 
-          {props.productType === "normal" ? (
+          {props.productType === "normal" || props.productType === "special" ? (
             <>
               <div className=" flex h-[40px] pb-[6px] items-center justify-between mt-2">
                 <div className="flex gap-1 items-end">

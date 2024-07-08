@@ -297,7 +297,6 @@ function Card(props) {
     return expectedDate.toDateString(); // Format the date as a readable string
   };
 
-
   return (
     <>
       <div
@@ -317,9 +316,10 @@ function Card(props) {
                 "flex text-[12px] justify-between text-black font-normal bg-white absolute top-2 left-2 z-10 py-[.1rem] px-[.5rem]"
               }
             >
-              {props.demandtype === "Ayatrio Member Favorite"
+              {props.productType === "special"
                 ? "Top Rated"
                 : props.demandtype}
+              {/* {props.demandtype} */}
             </div>
           ) : (
             ""
@@ -335,28 +335,30 @@ function Card(props) {
             onMouseLeave={() => setIsHovered(false)}
           >
             {isHovered && slide !== 0 && (
-              <Image loading="lazy"
+              <Image
+                loading="lazy"
                 src="/icons/backarrow-w.svg"
                 height={20}
                 width={20}
                 alt="arrow"
                 onClick={prevSlide}
                 className="arrow arrow-left hover:opacity-[1.0] hover:scale-105"
-              // className="absolute filter drop-shadow-sm w-7 h-7  text-white opacity-85 group hover:cursor-pointer hover:opacity-100 hover:scale-104 hover:filter-drop-shadow-lg  arrow-left"
+                // className="absolute filter drop-shadow-sm w-7 h-7  text-white opacity-85 group hover:cursor-pointer hover:opacity-100 hover:scale-104 hover:filter-drop-shadow-lg  arrow-left"
               />
             )}
             <div className="w-[400px] overflow-hidden">
               {props.imgSrc?.map((item, idx) => {
                 return (
                   <Link href={`/${props.title.replace(/ /g, "-")}`}>
-                    <Image loading="lazy"
+                    <Image
+                      loading="lazy"
                       // src={isHovered ? props.imgSrc[2] : item}
                       src={
                         isHovered
                           ? props.imgSrc[1]
                           : colorImage
-                            ? colorImage
-                            : item
+                          ? colorImage
+                          : item
                       }
                       alt={props.title}
                       key={idx}
@@ -374,14 +376,15 @@ function Card(props) {
 
             {isHovered && (
               <div className="z-50">
-                <Image loading="lazy"
+                <Image
+                  loading="lazy"
                   src="/icons/rightarrow-w.svg"
                   height={30}
                   width={30}
                   alt="arrow"
                   onClick={nextSlide}
                   className="arrow arrow-right hover:opacity-1"
-                // className="absolute filter drop-shadow-sm w-7 h-7 -mt-[13px] text-white opacity-85 group hover:cursor-pointer hover:opacity-100 hover:scale-104 hover:filter-drop-shadow-lg arrow-right"
+                  // className="absolute filter drop-shadow-sm w-7 h-7 -mt-[13px] text-white opacity-85 group hover:cursor-pointer hover:opacity-100 hover:scale-104 hover:filter-drop-shadow-lg arrow-right"
                 />
               </div>
             )}
@@ -408,9 +411,9 @@ function Card(props) {
         >
           <div className="flex items-center justify-between pt-2">
             <div className="flex flex-col">
-              {props.demandtype === "Ayatrio Member Favorite" && (
+              {props.productType === "special" && (
                 <p className="font-medium text-[#0152be] mb-1 text-[12px]">
-                  {props.demandtype}
+                  Ayatrio Member Favorite
                 </p>
               )}
               <h3 className="text-[15px] font-semibold">{props.title}</h3>
@@ -421,13 +424,15 @@ function Card(props) {
           </p>
 
           <div className=" flex h-[40px] pb-[6px] items-center justify-between mt-2">
-            {props?.productType === "normal" ? (
+            {props.productType === "normal" ||
+            props.productType === "special" ? (
               <div className="flex gap-1 items-end">
                 <p
-                  className={`text-3xl flex font-semibold leading-[0.5] tracking-wide ${props.specialPrice?.price
-                    ? "bg-[#FFD209] px-2 pt-3 pb-1 w-fit shadow-lg"
-                    : ""
-                    }`}
+                  className={`text-3xl flex font-semibold leading-[0.5] tracking-wide ${
+                    props.specialPrice?.price
+                      ? "bg-[#FFD209] px-2 pt-3 pb-1 w-fit shadow-lg"
+                      : ""
+                  }`}
                   style={
                     props?.specialPrice?.price
                       ? { boxShadow: "3px 3px #C31952" }
@@ -435,8 +440,9 @@ function Card(props) {
                   }
                 >
                   <span
-                    className={`text-sm ${props?.specialPrice?.price ? "" : "pt-3.5"
-                      }`}
+                    className={`text-sm ${
+                      props?.specialPrice?.price ? "" : "pt-3.5"
+                    }`}
                   >
                     Rs. &nbsp;
                   </span>{" "}
@@ -453,9 +459,7 @@ function Card(props) {
                 )}
               </div>
             ) : (
-              <div className="flex gap-1 items-end">
-                Request Now
-              </div>
+              <div className="flex gap-1 items-end">Request Now</div>
             )}
 
             {showCart && (
@@ -463,7 +467,8 @@ function Card(props) {
                 className="bg-[#0152be] p-1.5 mr-2 rounded-full"
                 onClick={addProductToCart}
               >
-                <Image loading="lazy"
+                <Image
+                  loading="lazy"
                   src={"/icons/ad-to-cart.svg"}
                   height={20}
                   width={20}
@@ -521,7 +526,6 @@ function Card(props) {
               )}
             </>
           )}
-
           {props.expectedDelivery && (
             <div className="flex flex-col items-start mt-2">
               <div className="flex items-center">
@@ -572,11 +576,12 @@ function Card(props) {
                         // onMouseLeave={() => setColorImage(null)}
 
                         className={`parent relative w-[40px] h-[40px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
-            ${selectedColor === item.color ||
-                            (index === 0 && selectedColor === "")
-                            ? " border-black "
-                            : " border-black"
-                          }   
+            ${
+              selectedColor === item.color ||
+              (index === 0 && selectedColor === "")
+                ? " border-black "
+                : " border-black"
+            }   
           `}
                       >
                         <Image
@@ -590,7 +595,7 @@ function Card(props) {
                         />
 
                         {colorImage === item.image ||
-                          (index === 0 && colorImage === "") ? (
+                        (index === 0 && colorImage === "") ? (
                           <div className="w-[100%] h-[2px] bg-black mt-[50px]" />
                         ) : (
                           ""
