@@ -267,7 +267,7 @@ const RoomPage = () => {
                         }}
                         passHref
                         onClick={handleJoinLive}
-                        className="px-3 py-1 focus:outline-none text-black hover:bg-zinc-200 flex items-center ml-2  bg-zinc-100 max-h-8"
+                        className="px-3 py-1 focus:outline-none text-black hover:bg-zinc-50 flex items-center ml-2 max-h-8"
                       >
                         <span className="text-sm">Join Live</span>
                       </Link>
@@ -277,7 +277,7 @@ const RoomPage = () => {
                     </div>
                   </div>
                   <Link
-                    className="px-3 py-2 focus:outline-none hover:bg-zinc-200 bg-zinc-100 max-h-8 flex items-center space-x-2"
+                    className="px-3 py-2 focus:outline-none hover:bg-zinc-50 max-h-8 flex items-center space-x-2"
                     href="#"
                   >
                     <Image
