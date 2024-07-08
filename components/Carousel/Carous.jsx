@@ -36,11 +36,13 @@ const Carous = ({ data }) => {
     fetchData();
   }, [data]);
 
-  const [newRelatedData, setNewrelatedData] = useState([])
+  const [newRelatedData, setNewrelatedData] = useState([]);
 
   useEffect(() => {
-    const Data = relatedData.filter((item) => item.subcategory !== "Accessories")
-    console.log(Data)
+    const Data = relatedData.filter(
+      (item) => item.subcategory !== "Accessories"
+    );
+    console.log(Data);
     if (Data.length > 0) {
       setNewrelatedData(Data);
     }
@@ -158,7 +160,7 @@ const Carous = ({ data }) => {
                       cssClass={"card1flex"}
                       totalPrice={product.totalPrice}
                       unitType={product.unitType}
-                    // date={product.date}
+                      // date={product.date}
                     />
                   </div>
                 </SwiperSlide>
@@ -186,9 +188,7 @@ const Carous = ({ data }) => {
                       desc={product.subcategory}
                       imgSrc={product.images[0]}
                       imagesArr={product.images}
-                      rating={
-                        product.ratings.length > 0 ? product.ratings[0] : 0
-                      }
+                      ratings={product.ratings}
                       key={idx}
                       setPopupVisible={setPopupVisible}
                       cssClass={"card1flex"}

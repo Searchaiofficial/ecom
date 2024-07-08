@@ -1,6 +1,7 @@
 import { BreadcrumbJsonLd, ProductJsonLd } from "next-seo";
 import RoomPage from "./MainPage";
 import axios from "axios";
+import { getAggregateRating } from "@/utils/getAggregateRating";
 
 export async function generateMetadata({ params }) {
   const response = await axios.get(
@@ -26,7 +27,20 @@ const page = async ({ params }) => {
 
   const productImages = response.data?.images;
 
-  const ratings = response.data?.ratings;
+  const ratings = response.data.ratings;
+
+  const reviews = ratings?.map((review) => {
+    return {
+      author: review.name,
+      name: review.comment,
+      reviewBody: review.comment,
+      reviewRating: {
+        ratingValue: `${review.rating}`,
+      },
+    };
+  });
+
+  const aggregateRating = getAggregateRating(ratings);
 
   return (
     <>
@@ -49,33 +63,8 @@ const page = async ({ params }) => {
             },
           },
         ]}
-        reviews={
-          !!ratings && !!ratings.length
-            ? ratings.map((review) => {
-                return {
-                  author: review.name,
-                  name: review.comment,
-                  reviewBody: review.comment,
-                  reviewRating: {
-                    bestRating: "5",
-                    ratingValue: review.rating,
-                    worstRating: "1",
-                  },
-                };
-              })
-            : []
-        }
-        aggregateRating={
-          !!ratings && !!ratings.length
-            ? {
-                ratingValue:
-                  ratings.reduce((prev, current) => {
-                    return prev + current.rating;
-                  }) / ratings.length,
-                reviewCount: ratings.length,
-              }
-            : undefined
-        }
+        reviews={!!reviews.length ? reviews : null}
+        aggregateRating={!!reviews.length ? aggregateRating : null}
       />
       <BreadcrumbJsonLd
         useAppDir={true}

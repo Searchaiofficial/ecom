@@ -6,6 +6,8 @@ import {
   getCategoryByName,
 } from "@/components/Features/api";
 import { BASE_URL } from "@/constants/base-url";
+import { getAggregateRating } from "@/utils/getAggregateRating";
+import axios from "axios";
 
 export async function generateMetadata({ params }) {
   const category = await getCategoryByName(params.title.replace(/-/g, " "));
@@ -53,12 +55,12 @@ const page = async ({ params }) => {
     })),
   };
 
-  const categoryProductsResponse = await fetch(
+  const categoryProductsResponse = await axios.get(
     createApiEndpoint(
       `fetchProductsByCategory/${params.title.replace(/-/g, " ")}`
     )
   );
-  const categoryProducts = await categoryProductsResponse.json();
+  const categoryProducts = categoryProductsResponse.data;
 
   return (
     <>
@@ -112,37 +114,18 @@ const page = async ({ params }) => {
       {categoryProducts?.map((product) => {
         const ratings = product.ratings;
 
-        if (!ratings || !ratings.length) {
-          return (
-            <ProductJsonLd
-              key={product._id}
-              useAppDir={true}
-              productName={product.productTitle}
-              description={product.productDescription}
-              images={product.productImages}
-              brand={product.brand || "Ayatrio"}
-              offers={[
-                {
-                  price: product.specialprice?.price,
-                  priceCurrency: "INR",
-                  priceValidUntil: product.specialprice?.endDate,
-                  itemCondition: "https://schema.org/NewCondition",
-                  availability: "https://schema.org/InStock",
-                  url: `${BASE_URL}/product/${product.productTitle}`,
-                  seller: {
-                    name: "Ayatrio",
-                  },
-                },
-              ]}
-            />
-          );
-        }
-
-        const ratingValue = ratings.reduce((prev, current) => {
-          return prev + current.rating;
+        const reviews = ratings?.map((review) => {
+          return {
+            author: review.name,
+            name: review.comment,
+            reviewBody: review.comment,
+            reviewRating: {
+              ratingValue: `${review.rating}`,
+            },
+          };
         });
 
-        const avgRating = ratingValue / response.data?.ratings.length;
+        const aggregateRating = getAggregateRating(ratings);
 
         return (
           <ProductJsonLd
@@ -165,22 +148,8 @@ const page = async ({ params }) => {
                 },
               },
             ]}
-            reviews={product.ratings.map((review) => {
-              return {
-                author: review.name,
-                name: review.comment,
-                reviewBody: review.comment,
-                reviewRating: {
-                  bestRating: "5",
-                  ratingValue: review.rating,
-                  worstRating: "1",
-                },
-              };
-            })}
-            aggregateRating={{
-              ratingValue: avgRating,
-              reviewCount: response.data?.ratings.length,
-            }}
+            reviews={!!reviews.length ? reviews : null}
+            aggregateRating={!!reviews.length ? aggregateRating : null}
           />
         );
       })}
