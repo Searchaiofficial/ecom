@@ -213,11 +213,11 @@ const Reviews = ({ productId, data }) => {
   return (
     <>
       <div className="pb-12 sm:w-auto w-[90vw] overflow-x-hidden">
-        {/* {data.demandtype === "Ayatrio Member Favorite" && ( */}
+        {(data.productType === "special" ||
+          data.productType === "requested") && (
           <div>
             <div className="flex flex-col justify-center mx-auto">
-              {data.productType === "special" ||
-              data.productType === "requested" ? (
+              {data.productType === "requested" && (
                 <div className="flex items-center justify-center overflow-hidden flex-row ">
                   <img
                     className="h-36 scale-x-[-1]"
@@ -233,7 +233,8 @@ const Reviews = ({ productId, data }) => {
                     src="/icons/amf/rightGold.svg"
                   />
                 </div>
-              ) : (
+              )}
+              {data.productType === "special" && (
                 <div className="flex items-center justify-center overflow-hidden flex-row ">
                   <img
                     className="h-36 scale-x-[-1]"
@@ -276,7 +277,7 @@ const Reviews = ({ productId, data }) => {
               ))}
             </div>
           </div>
-        {/* )} */}
+        )}
 
         <br />
 
