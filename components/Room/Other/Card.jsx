@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
-// import IncDecCounter from "@/components/Count/Count";
+import IncDecCounter from "@/components/Count/Count";
 import "react-toastify/dist/ReactToastify.css";
 import React from "react";
 import { useState, useEffect } from "react";
@@ -334,10 +334,10 @@ const Card = ({ data, productId }) => {
     }
   }, [roomData._id, cartData]);
 
-  const handleBuyNow = async () => {
-    setsidebarContent("buyNow");
-    document.body.style.overflow = "hidden";
-  };
+  // const handleBuyNow = async () => {
+  //   setsidebarContent("buyNow");
+  //   document.body.style.overflow = "hidden";
+  // };
 
   const handleClickDB = async () => {
     setsidebarContent("addToBag");
@@ -679,7 +679,7 @@ const Card = ({ data, productId }) => {
     },
     {
       title: "Delivery: Metro cities: 2-5 days, Others: 5-15 days",
-      icon: "speeddelivery",
+      icon: "free-shipping",
       content: (
         <>
           Get free delivery on all orders above ₹3000. A shipping charge of ₹100 is applicable on orders below ₹3000. Check out our <Link href="/customerservice/returnpolicy" className="underline cursor-pointer">delivery Terms & Conditions</Link> for more details.
@@ -797,7 +797,6 @@ const Card = ({ data, productId }) => {
                 )}
               </div>
             )}
-
             {/* <div className="py-2 mt-[10px]">
               <IncDecCounter />
             </div> */}
@@ -1808,305 +1807,28 @@ const Card = ({ data, productId }) => {
                     </section>
                   </div>
                 )}
-                {sidebarContect === "buyNow" && (
-                  <div className=" fixed h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0 z-[99999]">
-                    <section className="text-black bg-white flex-col absolute right-0 top-0 h-screen z-[99999] w-full  lg:w-[35%] flex ">
-                      <div className="flex flex-col ">
-                        <div className="md:px-[40px] pb-[32px] px-[20px]">
-                          <div className="flex items-center justify-between h-[72px] mb-2">
-                            <p className="text-[14px] font-medium text-[#484848]">
-                              Buy Now
-                            </p>
-                            <button
-                              className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
-                              onClick={() => {
-                                setsidebarContent(null);
-                                document.body.style.overflow = "auto";
-                              }}
-                            >
-                              <Image loading="lazy"
-                                src="/icons/closeicon.svg"
-                                alt="close icon"
-                                width={20}
-                                height={30}
-                                className="py-2"
-                              />
-                            </button>
-                          </div>
-                          <div className="flex items-start w-[100%]  pb-10 absolute ">
-                            <Image loading="lazy"
-                              src={data?.images[0]}
-                              height={100}
-                              width={100}
-                              alt={data?.productTitle || "product image"}
-                              className=" mr-[16px] mt-[6px] h-[100px] min-w-[100px]"
-                            />
-
-                            <div className="flex flex-col mx-[12px] md:w-[100%] w-[50%]">
-                              <p className="text-[14px] font-bold text-[#484848]">
-                                {data?.productTitle}
-                              </p>
-                              <p className="text-[#484848] text-[12px] mb-[5px] line-clamp-1">
-                                {data?.shortDescription}
-                              </p>
-                              <div className="font-bold items-end flex mb-1 my-[5px]">
-                                <h2
-                                  className={`text-3xl leading-[0.5] tracking-wide ${data?.specialprice?.price
-                                    ? "bg-[#FFD209] px-2 pt-3 w-fit shadow-lg"
-                                    : ""
-                                    } `}
-                                  style={
-                                    data?.specialprice?.price
-                                      ? { boxShadow: "3px 3px #ad3535" }
-                                      : {}
-                                  }
-                                >
-                                  <span className="text-sm">Rs. &nbsp;</span>{" "}
-                                  {data?.specialprice?.price
-                                    ? data?.specialprice?.price
-                                    : data.perUnitPrice}
-                                </h2>{" "}
-                                <span> &nbsp;/roll</span>
-                              </div>
-                              {data?.specialprice?.price && (
-                                <div className="flex flex-col">
-                                  <p className="text-[#757575] text-[12px] pt-[3px]">
-                                    Regular price: Rs.{data?.totalPrice}{" "}
-                                  </p>
-                                  {data?.specialprice?.startDate &&
-                                    data?.specialprice?.endDate && (
-                                      <p className="text-[#757575] text-[12px] pb-[10px]">
-                                        Price valid {formattedStartDate} -{" "}
-                                        {formattedEndDate}{" "}
-                                      </p>
-                                    )}
-                                  {/* <p className="text-[#757575] text-[12px] pb-[10px]">Price valid May 02 - May 29 or while supply lasts</p> */}
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                          <div className="w-full border-t mt-[155px] pb-28 h-[500px] overflow-y-auto">
-                            {avaliableServices &&
-                              avaliableServices.length > 0 && (
-                                <div className="flex items-center justify-between">
-                                  <h2 className="md:text-[24px] text-[18px] font-bold mt-2">
-                                    Add other services
-                                  </h2>
-                                  <p className="text-[#111111] text-[14px] mr-2 cursor-pointer hover:underline font-medium">
-                                    View More
-                                  </p>
-                                </div>
-                              )}
-                            <div className="">
-                              {avaliableServices &&
-                                avaliableServices.length > 0 &&
-                                avaliableServices.map((service, idx) => {
-                                  const isSelected = selectedServices.some(
-                                    (s) => s._id === service._id
-                                  );
-                                  const selectedService = selectedServices.find(
-                                    (s) => s._id === service._id
-                                  );
-
-                                  return (
-                                    <div
-                                      key={idx}
-                                      className={`flex items-center w-full justify-between mt-4 border p-3 cursor-pointer hover:border-black rounded-md ${isSelected ? "border-black" : ""
-                                        }`}
-                                    >
-                                      <div className="flex flex-col max-w-[150px] items-start gap-1">
-                                        <p className="text-[14px] font-semibold text-[#484848]">
-                                          {service?.name}
-                                        </p>
-                                        <p className="text-[14px] font-semibold text-[#484848]">
-                                          <span className="text-[10px] font-bold">
-                                            Rs
-                                          </span>{" "}
-                                          {service?.cost}
-                                        </p>
-                                      </div>
-                                      {isSelected && (
-                                        <div className="flex items-center justify-between">
-                                          <div className="rounded-3xl w-24 border border-gray-400 flex justify-between items-center">
-                                            <button
-                                              onClick={() =>
-                                                handleServiceDecrease(
-                                                  service._id
-                                                )
-                                              }
-                                              className="hover:bg-zinc-200 w-9 h-9 rounded-full flex items-center justify-center focus:outline-none"
-                                            >
-                                              -
-                                            </button>
-                                            <p className="font-bold text-center mx-2">
-                                              {selectedService.quantity}
-                                            </p>
-                                            <button
-                                              onClick={() =>
-                                                handleServiceIncrease(
-                                                  service._id
-                                                )
-                                              }
-                                              className="hover:bg-zinc-200 w-9 h-9 rounded-full flex items-center justify-center focus:outline-none"
-                                            >
-                                              +
-                                            </button>
-                                          </div>
-                                        </div>
-                                      )}
-                                      <input
-                                        type="checkbox"
-                                        onChange={() =>
-                                          handleServiceChange(service)
-                                        }
-                                        checked={isSelected}
-                                        className="form-checkbox h-4 w-4 text-blue-600 border-gray-300"
-                                      />
-                                    </div>
-                                  );
-                                })}
-                              {accessories && accessories.length > 0 && (
-                                <h2 className="md:text-[24px] mb-2 text-[18px] font-bold mt-2">
-                                  Accessories
-                                </h2>
-                              )}
-
-                              {accessories &&
-                                accessories.length > 0 &&
-                                accessories.map((product) => {
-                                  const selectedAccessory =
-                                    selectedAccessories.find(
-                                      (s) => s._id === product._id
-                                    );
-
-                                  return (
-                                    <div
-                                      key={product._id}
-                                      className="flex mb-10 p-2.5 items-center justify-between cursor-pointer mt-[10px] pb-5"
-                                      onMouseEnter={() => setShowCart(true)}
-                                      onMouseLeave={() => setShowCart(false)}
-                                    >
-                                      <div className="flex">
-                                        <Image loading="lazy"
-                                          src={product?.images[0]}
-                                          height={100}
-                                          width={100}
-                                          alt={data?.productTitle || "product image"}
-                                          className="mr-[16px] h-[80px] w-[80px]"
-                                        />
-                                        <div className="flex flex-col mx-[12px] max-w-[220px]">
-                                          <p className="text-[14px] font-bold text-[#484848]">
-                                            {product.productTitle}
-                                          </p>
-                                          <p className="text-[#484848] text-[12px] mb-[5px] line-clamp-1">
-                                            {product?.shortDescription}
-                                          </p>
-                                          <div className="font-bold items-end flex mb-1 my-[5px]">
-                                            <h2
-                                              className={`text-3xl leading-[0.5] tracking-wide ${product?.specialprice?.price
-                                                ? "bg-[#FFD209] px-2 pt-3 w-fit shadow-lg"
-                                                : ""
-                                                }`}
-                                              style={
-                                                product?.specialprice?.price
-                                                  ? {
-                                                    boxShadow:
-                                                      "3px 3px #ad3535",
-                                                  }
-                                                  : {}
-                                              }
-                                            >
-                                              <span className="text-sm">
-                                                Rs. &nbsp;
-                                              </span>{" "}
-                                              {product?.specialprice?.price
-                                                ? product?.specialprice?.price
-                                                : product.perUnitPrice}
-                                            </h2>{" "}
-                                            <span> &nbsp;/roll</span>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      {selectedAccessory && (
-                                        <div className="flex items-center justify-between">
-                                          <div className="rounded-3xl w-24 border border-gray-400 flex justify-between items-center">
-                                            <button
-                                              onClick={() =>
-                                                handleDecreaseAccessory(
-                                                  product._id
-                                                )
-                                              }
-                                              className="hover:bg-zinc-200 w-9 h-9 rounded-full flex items-center justify-center focus:outline-none"
-                                            >
-                                              -
-                                            </button>
-                                            <p className="font-bold text-center mx-2">
-                                              {selectedAccessory.quantity || 1}
-                                            </p>
-                                            <button
-                                              onClick={() =>
-                                                handleIncreaseAccessory(
-                                                  product._id
-                                                )
-                                              }
-                                              className="hover:bg-zinc-200 w-9 h-9 rounded-full flex items-center justify-center focus:outline-none"
-                                            >
-                                              +
-                                            </button>
-                                          </div>
-                                        </div>
-                                      )}
-                                      <input
-                                        type="checkbox"
-                                        onChange={() =>
-                                          handleAccessoriesChange(product)
-                                        }
-                                        checked={!!selectedAccessory}
-                                        className="form-checkbox h-4 w-4 text-blue-600 border-gray-300 self-center"
-                                      />
-                                    </div>
-                                  );
-                                })}
-                            </div>
-                          </div>
-                        </div>
-                        <div className="flex w-full px-[16px] py-[24px] gap-4  md:py-0 md:px-0  md:flex-row flex-col items-center justify-around absolute bottom-0 left-0 border-t bg-white z-10 ">
-                          <button className="md:px-[42px] w-full px-[24px] md:h-[56px] h-[40px] border rounded-full md:my-[24px] bg-black text-white text-[12px] md:text-[14px] font-semibold md:mx-[24px] hover:bg-gray-900">
-                            <div onClick={handleBuy}>Go to shopping bag</div>
-                          </button>
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                )}
               </div>
             )}
           </div>
 
           {/* //buttons */}
           {data.productType === "normal" ? (
-            <div className="buttons mt-4 sm:w-auto w-[100%] sm:block flex flex-col items-center justify-center">
-              <div className="guestCheckout w-[100%] flex justify-center items-center mb-[10px] ">
-                <button
-                  onClick={() => {
-                    handleBuyNow();
-                  }}
-                  className={` bg-black hover:bg-gray-900 text-white px-4   w-[100%] sm:h-14 h-10 rounded-full  transition duration-300`}
-                >
-                  Buy Now
-                </button>
+            <div className="flex items-center justify-between mt-4">
+              <div className="">
+                <IncDecCounter />
               </div>
-              <div className="guestCheckout w-[100%] flex justify-center items-center mb-[16px] ">
+              <div className="flex-shrink-0 mt-[4px]">
                 <button
                   onClick={() => {
                     handleClickDB();
                   }}
-                  className={` bg-black hover:bg-gray-900 text-white px-4   w-[100%] sm:h-14 h-10 rounded-full  transition duration-300`}
+                  className={`bg-black hover:bg-gray-900 text-white px-4 w-full sm:h-11 h-9 rounded-full transition duration-300`}
                 >
                   Add to bag
                 </button>
               </div>
             </div>
+
           ) : (
             <div className="buttons mt-4 sm:w-auto w-[100%] sm:block flex flex-col items-center justify-center">
               <div className="guestCheckout w-[100%] flex justify-center items-center mb-[10px] ">
@@ -2121,7 +1843,7 @@ const Card = ({ data, productId }) => {
               </div>
             </div>
           )}
-          <div className="flex gap-3 mt-8 items-center justify-center">
+          <div className="flex gap-3 mt-4 items-center justify-center">
             {/* <Image 
               src={"/icons/ayatrio_comment_button.svg"}
               height={30}
