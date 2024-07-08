@@ -38,6 +38,10 @@ const Trending = () => {
   };
 
   useEffect(() => {
+    dispatch({ type: "FETCH_TRENDING_DATA", payload: "trending" });
+  }, []);
+
+  useEffect(() => {
     if (trendingData.length === 0) {
       dispatch({ type: "FETCH_TRENDING_DATA", payload: "trending" });
     }
