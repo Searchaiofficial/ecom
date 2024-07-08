@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
-// import IncDecCounter from "@/components/Count/Count";
+import IncDecCounter from "@/components/Count/Count";
 import "react-toastify/dist/ReactToastify.css";
 import React from "react";
 import { useState, useEffect } from "react";
@@ -679,7 +679,7 @@ const Card = ({ data, productId }) => {
     },
     {
       title: "Delivery: Metro cities: 2-5 days, Others: 5-15 days",
-      icon: "speeddelivery",
+      icon: "free-shipping",
       content: (
         <>
           Get free delivery on all orders above ₹3000. A shipping charge of ₹100 is applicable on orders below ₹3000. Check out our <Link href="/customerservice/returnpolicy" className="underline cursor-pointer">delivery Terms & Conditions</Link> for more details.
@@ -798,9 +798,9 @@ const Card = ({ data, productId }) => {
               </div>
             )}
 
-            {/* <div className="py-2 mt-[10px]">
+            <div className="py-2 mt-[10px]">
               <IncDecCounter />
-            </div> */}
+            </div>
           </div>
 
           {data?.dimensions?.length > 0 && (

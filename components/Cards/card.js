@@ -473,13 +473,13 @@ function Card(props) {
             )}
           </div>
 
-          {props.expectedDelivery && (
+          {/* {props.expectedDelivery && (
             <div className="flex items-center">
               {props.expectedDelivery <= 5 && (
                 <Image
                   alt="speedDelivery"
                   loading="lazy"
-                  src={"/icons/speeddelevary.svg"}
+                  src={"/icons/speeddelivery.svg"}
                   height={70}
                   width={70}
                 />
@@ -491,7 +491,7 @@ function Card(props) {
                 </span>
               </p>
             </div>
-          )}
+          )} */}
 
           {props?.specialPrice?.price && (
             <div className="flex flex-col my-3">
@@ -520,6 +520,28 @@ function Card(props) {
                 </div>
               )}
             </>
+          )}
+
+          {props.expectedDelivery && (
+            <div className="flex flex-col items-start mt-2">
+              <div className="flex items-center">
+                {props.expectedDelivery <= 5 && (
+                  <img
+                    alt="speedDelivery"
+                    loading="lazy"
+                    src={"/icons/speeddelivery.svg"}
+                    height={25}
+                    width={25}
+                  />
+                )}
+              </div>
+              <p className="text-[#757575] text-[12px] mt-2">
+                Expected delivery on &nbsp;
+                <span className="text-[#0152be] font-md font-semibold">
+                  {getExpectedDeliveryDate(props.expectedDelivery)}
+                </span>
+              </p>
+            </div>
           )}
 
           {/* <div className="flex lg:gap-2 gap-1 mt-2 ">
