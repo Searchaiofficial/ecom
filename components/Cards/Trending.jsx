@@ -21,7 +21,6 @@ import {
 } from "swiper/modules";
 import { useSelector, useDispatch } from "react-redux";
 import { selectTrendingData } from "../Features/Slices/trendingSlice";
-import axios from "axios";
 import { selecteddbItems } from "../Features/Slices/cartSlice";
 
 const Trending = () => {
@@ -31,9 +30,8 @@ const Trending = () => {
   const dispatch = useDispatch();
   const [swiperRef, setSwiperRef] = useState(null);
   const [isPopupVisible, setPopupVisible] = useState(false);
-  const cartData = useSelector(selecteddbItems)
-  const [TrendingData, setTrendingData] = useState([])
-
+  const cartData = useSelector(selecteddbItems);
+  const [TrendingData, setTrendingData] = useState([]);
 
   const handleImageClick = () => {
     setPopupVisible(true);
@@ -48,15 +46,17 @@ const Trending = () => {
     }
   }, [trendingData]);
 
-  console.log(newTrendingData)
+  console.log(newTrendingData);
 
   useEffect(() => {
-    const trendindData = newTrendingData.filter((item) => item.subcategory !== "Accessories")
-    console.log(trendindData)
+    const trendindData = newTrendingData.filter(
+      (item) => item.subcategory !== "Accessories"
+    );
+    console.log(trendindData);
     if (trendindData.length > 0) {
-      setTrendingData(trendindData)
+      setTrendingData(trendindData);
     }
-  }, [newTrendingData])
+  }, [newTrendingData]);
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -89,7 +89,7 @@ const Trending = () => {
   //   fetchData();
   // }, []);
 
-  console.log(cartData)
+  console.log(cartData);
 
   const swiperOptions2 = {
     slidesPerView: 4.08,
@@ -115,16 +115,13 @@ const Trending = () => {
   const isProductInCart = (productId) => {
     console.log("Checking product ID:", productId);
     return cartData?.items?.some((cartItem) => {
-      console.log("Comparing with cart item product ID:", cartItem?.productId?._id);
+      console.log(
+        "Comparing with cart item product ID:",
+        cartItem?.productId?._id
+      );
       return cartItem?.productId?._id === productId;
     });
   };
-
-
-
-
-
-
 
   return (
     <div>
@@ -154,6 +151,7 @@ const Trending = () => {
           scrollbar={{
             hide: false,
             draggable: true,
+            el: ".swiper-scrollbar-custom",
           }}
           mousewheel={{
             forceToAxis: true,
@@ -227,6 +225,7 @@ const Trending = () => {
             })
           )}
         </Swiper>
+        <div className="swiper-scrollbar-custom h-[2px]"></div>
       </div>
     </div>
   );
