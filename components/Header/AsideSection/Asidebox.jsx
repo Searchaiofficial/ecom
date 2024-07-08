@@ -74,7 +74,7 @@ const Asidebox = (props) => {
     <>
       {asideCategory && (
         <div
-          className="absolute top-[2.7rem] bg-white flex flex-col mt-[15px] md:flex-row noto-sans-200 w-full md:left-0 min-h-[90%] lg:min-h-[20rem] md:h-auto md:px-10 border-t border-solid border-[#f5f5f5] max-h-[72vh] "
+          className="absolute top-[2.7rem] bg-white flex flex-col mt-[15px] md:flex-row noto-sans-200 w-full md:left-0 min-h-[90%] lg:min-h-[20rem] md:h-auto md:px-10 border-t border-solid border-[#f5f5f5] sm:max-h-[72vh] "
         >
           <aside
             className="w-full md:w-1/4 lg:w-1/5 md:sticky md:top-0 h-full overflow-y-auto py-4 px-2"
@@ -119,6 +119,8 @@ const Asidebox = (props) => {
             handleChange={props.handleChange}
             setHoveredIndex={props.setHoveredIndex}
             hoveredIndex={props.hoveredIndex}
+            toggleMobileMenu={props.toggleMobileMenu}
+            handleClick={props.HandleClick}
           />
         </div>
       )}

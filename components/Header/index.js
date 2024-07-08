@@ -53,7 +53,7 @@ function Header({ setIsHeaderMounted }) {
         const data = response.data;
 
         dispatch(setDbItems(data));
-      } catch (error) {}
+      } catch (error) { }
     };
     fetchData();
   }, []);
@@ -74,6 +74,7 @@ function Header({ setIsHeaderMounted }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
+    console.log(isMobileMenuOpen);
     setIsMobileMenuOpen(!isMobileMenuOpen);
     // setSidebarNavigationItem("")
     // setIsOpen(false)
@@ -281,13 +282,12 @@ function Header({ setIsHeaderMounted }) {
       </TopHeaderWrapper>
       {isHovered && <div className="overlay"></div>}
       <div
-        className={`fixed w-full sm:bg-none ${
-          !pathname.includes("/checkout") && !pathname.includes("/ayatrio-map")
-            ? typeof window !== "undefined" && window.scrollY < 20
-              ? "md:top-[35px] top-[0px]"
-              : "top-0"
+        className={`fixed w-full sm:bg-none ${!pathname.includes("/checkout") && !pathname.includes("/ayatrio-map")
+          ? typeof window !== "undefined" && window.scrollY < 20
+            ? "md:top-[35px] top-[0px]"
             : "top-0"
-        } z-[9998]
+          : "top-0"
+          } z-[9998]
        ${isScrolled ? "bg-white" : "bg-white"} 
       ${isFilterVisible ? "block" : "hidden"}
       `}
@@ -296,9 +296,8 @@ function Header({ setIsHeaderMounted }) {
         {!searchQuery ? (
           <>
             <div
-              className={`${
-                isScrolled ? " border-b-[0.5px] border-[#f5f5f5]" : ""
-              } flex flex-row justify-between z-[99999px] items-center sm:px-[20px] px-[20px] h-[60px]`}
+              className={`${isScrolled ? " border-b-[0.5px] border-[#f5f5f5]" : ""
+                } flex flex-row justify-between z-[99999px] items-center sm:px-[20px] px-[20px] h-[60px]`}
             >
               {/* main-logo */}
               <div className=" flex mainlogo items-center mr-20 justify-start">
@@ -328,20 +327,18 @@ function Header({ setIsHeaderMounted }) {
                         key={idx}
                         onMouseEnter={() => handleMouseEnter(idx)}
                         onMouseLeave={() => handleMouseLeave()}
-                        // onClick={() => handleClick(idx)}
+                      // onClick={() => handleClick(idx)}
                       >
                         <span
-                          className={`text-md cursor-pointer font-semibold  ${
-                            isOpen ? "border-b-2 border-black" : ""
-                          }`}
+                          className={`text-md cursor-pointer font-semibold  ${isOpen ? "border-b-2 border-black" : ""
+                            }`}
                           onClick={() => toggleDropdown(value.label)}
                         >
                           <p
-                            className={`block font-medium py-[15px] px-[5px] border-b-2  ${
-                              hoveredIndex === idx
-                                ? "border-black"
-                                : "border-transparent"
-                            }`}
+                            className={`block font-medium py-[15px] px-[5px] border-b-2  ${hoveredIndex === idx
+                              ? "border-black"
+                              : "border-transparent"
+                              }`}
                           >
                             {value.label}
                           </p>
@@ -516,34 +513,34 @@ function Header({ setIsHeaderMounted }) {
           />
         )}
       </div>
-        <div className="flex mt-16  w-full items-center  md:hidden px-[20px] sm:px-[50px] lg:px-[67px] mb-3">
-          <div
-            className="md:hidden py-[8px] flex items-center justify-between w-full bg-zinc-100 rounded-full   h-[45px] p-[9px] hover:bg-zinc-200 hover:rounded-full cursor-pointer"
-            onClick={handleModalOpen}
-          >
-            <div className="flex items-center">
-              <Image
-                loading="lazy"
-                src="/icons/search.svg"
-                alt="Search Icon"
-                width={20}
-                height={20}
-                className="ml-[10px]"
-              />
-              <p className="ml-3 line-clamp-1 text-[13px] mt-[2px]  text-gray-400">
-                Search for <span ref={textElementRef2}></span>
-              </p>
-            </div>
+      <div className="flex mt-16  w-full items-center  md:hidden px-[20px] sm:px-[50px] lg:px-[67px] mb-3">
+        <div
+          className="md:hidden py-[8px] flex items-center justify-between w-full bg-zinc-100 rounded-full   h-[45px] p-[9px] hover:bg-zinc-200 hover:rounded-full cursor-pointer"
+          onClick={handleModalOpen}
+        >
+          <div className="flex items-center">
             <Image
               loading="lazy"
-              src={"/icons/camera.svg"}
+              src="/icons/search.svg"
+              alt="Search Icon"
               width={20}
               height={20}
-              alt="camera icon"
-              className="mr-[10px] ml-[10px]"
+              className="ml-[10px]"
             />
+            <p className="ml-3 line-clamp-1 text-[13px] mt-[2px]  text-gray-400">
+              Search for <span ref={textElementRef2}></span>
+            </p>
           </div>
+          <Image
+            loading="lazy"
+            src={"/icons/camera.svg"}
+            width={20}
+            height={20}
+            alt="camera icon"
+            className="mr-[10px] ml-[10px]"
+          />
         </div>
+      </div>
       {isMobileMenuOpen && (
         <>
           <div
@@ -603,21 +600,19 @@ function Header({ setIsHeaderMounted }) {
                   key={idx}
                   onMouseEnter={() => handleMouseEnter(idx)}
                   onMouseLeave={handleMouseLeave}
-                  // onClick={() => handleClick(idx)}
+                // onClick={() => handleClick(idx)}
                 >
                   <Link
-                    className={`text-md  font-semibold flex items-center justify-between  ${
-                      isOpen ? "border-b-2 border-black" : ""
-                    }`}
+                    className={`text-md  font-semibold flex items-center justify-between  ${isOpen ? "border-b-2 border-black" : ""
+                      }`}
                     href="#"
                     onClick={() => toggleDropdown(value.label)}
                   >
                     <p
-                      className={`block p-2 text-lg font-medium border-b-2 ${
-                        hoveredIndex === idx
-                          ? "border-black"
-                          : "border-transparent"
-                      }`}
+                      className={`block p-2 text-lg font-medium border-b-2 ${hoveredIndex === idx
+                        ? "border-black"
+                        : "border-transparent"
+                        }`}
                       onClick={() => handleTopValue(value.label)}
                     >
                       {value.label}
@@ -632,11 +627,12 @@ function Header({ setIsHeaderMounted }) {
                       />
                     </div>{" "}
                   </Link>
-                  {idx < 3 && hoveredIndex === idx && (
+                  {hoveredIndex === idx && (
                     <Asidebox
                       hoveredIndex={hoveredIndex}
                       toggleMobileMenu={toggleMobileMenu}
                       onItemClick={handleItemClick}
+                      handleClick={handleClick}
                     />
                   )}
                   {idx === 3 && hoveredIndex === idx && <Midsection />}

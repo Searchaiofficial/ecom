@@ -1,7 +1,12 @@
 /* styles.module.css */
+/* styles.module.css */
+/* styles.module.css */
 .services-scrollbar {
-    overflow-y: hidden; 
-}
+    overflow-y: auto;
+    height: 100%;
+  }
+  
+  
 
 .services-scrollbar:hover {
     overflow-y: auto; 
