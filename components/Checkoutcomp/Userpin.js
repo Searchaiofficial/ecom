@@ -344,7 +344,7 @@ const Userpin = () => {
         </div>
         <div className="lg:col-span-4 col-span-1 sm:block order-1 lg:order-2 bg-white  border-gray-300 rounded-lg  overflow-hidden  p-[0.6rem]  text-slate-600 pt-[20px]">
           <div className="flex justify-between">
-            <h3 className="text-black text-xl font-semibold mb-6">Your Order</h3>
+            <h3 className="text-black text-xl font-semibold mb-2">Your Order</h3>
             <Link href={"/cart"} className="underline">
               {" "}
               Edit
@@ -371,7 +371,7 @@ const Userpin = () => {
                   Empty cart
                 </div>
               )}
-              <div className="flex my-3">
+              <div className="flex ">
                 {cartdata && cartdata.freeSamples.length > 0 && (
                   cartdata.freeSamples.map((item, index) => {
                     return (

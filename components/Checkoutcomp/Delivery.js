@@ -627,7 +627,7 @@ const Delivery = () => {
               Edit
             </Link>
           </div>
-          <div className="">
+          <div className="flex">
             <div className="flex my-4">
               {cartStatus === "loading" && <p>Loading...</p>}
               {cartStatus === "failed" && <p>Error loading data from DB.</p>}
@@ -649,7 +649,7 @@ const Delivery = () => {
                 </div>
               )}
             </div>
-            <div className="flex my-3 flex-col gap-4">
+            <div className="flex my-4 flex-col gap-4">
               {cartdata && cartdata.freeSamples.length > 0 && (
                 cartdata.freeSamples.map((item, index) => {
                   return (

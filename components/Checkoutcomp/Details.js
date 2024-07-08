@@ -583,7 +583,7 @@ const Details = () => {
                 Edit
               </Link>
             </div>
-            <div className="">
+            <div className="flex">
               <div className="flex my-4">
                 {cartdata &&
                   cartdata.items &&
@@ -610,14 +610,14 @@ const Details = () => {
                     />
                   ))
                 ) : (
-                  <div className="text-lg text-gray-500 font-bold px-5">
+                  <div className="text-lg text-gray-500 font-bold ">
                     {cartdata !== null ? "" : "Empty cart"}
                   </div>
 
 
                 )}
               </div>
-              <div className="flex my-3">
+              <div className="flex my-4">
                 {cartdata && cartdata.freeSamples.length > 0 && (
                   cartdata.freeSamples.map((item, index) => {
                     return (
