@@ -32,23 +32,22 @@ const Amenities = ({ data }) => {
           <h3 className="mb-6 text-xl font-semibold">
             What this place offers
           </h3>
-          <div className="amenities grid grid-cols-1 sm:grid-cols-2 sm:w-auto">
+          <div className={`amenities grid ${amenities.length > 5 ? 'grid-cols-2' : 'grid-cols-1'} sm:w-auto`}>
             {amenities.map((amenity, index) => (
               <div
-                className={`flex my-2 items-center ${index < 3 ? 'sm:col-span-1' : 'sm:col-span-2'}`}
+                className={`flex my-2 items-center ${amenities.length > 5 ? 'col-span-1' : 'col-span-1'} min-h-10`}
                 key={amenity._id}
               >
-                <div className="w-10 h-10 mr-4">
-                  <Image loading="lazy"
-                    width={30}
-                    height={30}
+                <div className="mr-4">
+                  <Image
+                    loading="lazy"
+                    width={24}
+                    height={24}
                     src={amenity.image}
                     alt={amenity.name}
                   />
                 </div>
-                <span className={`font-medium `}
-                // ${!amenity.available ? 'line-through' : ''}
-                >
+                <span className={`font-medium `}>
                   {amenity.text}
                 </span>
               </div>

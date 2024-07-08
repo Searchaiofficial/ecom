@@ -247,49 +247,43 @@ const RoomPage = () => {
                 <Card data={data} productId={data._id} accessories={accessories} />
               </div>
 
-              <div className="my-2 flex flex-col mt-5">
-                <div className="flex space-x-4 items-start">
-                  <div className="flex flex-col items-start">
-                    <div className="flex items-center space-x-2">
-                      <div className="flex flex-row bg-red-500 gap-2 p-1">
-                        <Image
-                          src="/icons/golive.svg"
-                          alt="live icon"
-                          width={16}
-                          height={16}
-                          loading="lazy"
-                        />
-                        <span className="text-white text-xs">Live</span>
-                      </div>
-                      <Link
-                        href={{
-                          pathname: '/liveroom',
-                        }}
-                        passHref
-                        onClick={handleJoinLive}
-                        className="px-3 py-1 focus:outline-none text-black hover:bg-zinc-50 flex items-center ml-2 max-h-8"
-                      >
-                        <span className="text-sm">Join Live</span>
-                      </Link>
-                    </div>
-                    <div className="text-xs mt-2">
-                      Still unable to decide?
-                    </div>
-                  </div>
-                  <Link
-                    className="px-3 py-2 focus:outline-none hover:bg-zinc-50 max-h-8 flex items-center space-x-2"
-                    href="#"
-                  >
-                    <Image
-                      src="/icons/free-sample.svg"
-                      alt="free-sample"
-                      width={20}
-                      height={25}
-                      loading="lazy"
-                    />
-                    <span className="text-sm">Free Sampling</span>
-                  </Link>
+              <div className="flex items-center space-x-2 mt-4">
+                <div className="flex flex-row bg-red-500 gap-2 p-1">
+                  <Image
+                    src="/icons/golive.svg"
+                    alt="live icon"
+                    width={16}
+                    height={16}
+                    loading="lazy"
+                  />
+                  <span className="text-white text-xs">Live</span>
                 </div>
+                <Link
+                  href={{
+                    pathname: '/liveroom',
+                  }}
+                  passHref
+                  onClick={handleJoinLive}
+                  className="py-2 focus:outline-none text-black flex items-center ml-2 h-8"
+                >
+                  <span className="text-sm">Join Live</span>
+                </Link>
+
+                <span>|</span>
+
+                <Link
+                  className="py-2 focus:outline-none h-8 flex items-center space-x-2 "
+                  href="#"
+                >
+                  <Image
+                    src="/icons/free-sample.svg"
+                    alt="free-sample"
+                    width={20}
+                    height={25}
+                    loading="lazy"
+                  />
+                  <span className="text-sm">Free Sampling</span>
+                </Link>
               </div>
 
               <RoomInfo data={data} />

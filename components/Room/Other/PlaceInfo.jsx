@@ -8,11 +8,10 @@ const PlaceInfo = (data) => {
     <>
       {data?.data?.coreValues ? (
         <>
-          <div className="place-features mb-4 sm:w-auto  ">
+          <div className={`place-features mb-4 sm:w-auto ${data?.data?.coreValues.length > 3 ? 'grid grid-cols-2 gap-4' : ''}`}>
             {
-              data?.data?.coreValues.length > 0 && data?.data?.coreValues.map((item) => (
-
-                <div className="hosted-by flex flex-start items-center py-4 font-lg">
+              data?.data?.coreValues.length > 0 && data?.data?.coreValues.map((item, index) => (
+                <div className="hosted-by flex flex-start items-center py-4 font-lg" key={index}>
                   <div className="mr-4 w-[40px] h-[40px]">
                     <img
                       className="w-full min-w-[40px] min-h-[40px]"
@@ -31,7 +30,6 @@ const PlaceInfo = (data) => {
                 </div>
               ))
             }
-
           </div>
         </>
       ) : (

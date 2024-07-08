@@ -838,7 +838,7 @@ const Card = ({ data, productId }) => {
                     <div
                       key={index}
                       onClick={() => handleColor(item.color)}
-                      className={`parent relative w-[60px] h-[60px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
+                      className={`parent relative w-[55px] h-[55px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
             ${selectedColor === item.color ||
                           (index === 0 && selectedColor === "")
                           ? " border-black "
@@ -1817,7 +1817,7 @@ const Card = ({ data, productId }) => {
               <div className="">
                 <IncDecCounter />
               </div>
-              <div className="flex-shrink-0 mt-[4px]">
+              <div className="ml-3 w-full mt-[4px]">
                 <button
                   onClick={() => {
                     handleClickDB();
