@@ -196,6 +196,48 @@ const RoomInfo = ({ data }) => {
 
       {/* ----------------- what this place offers ------------ */}
       <Amenities data={data} />
+
+      {data?.author && (
+        <div className="flex flex-col mt-10 gap-4 p-4 w-full max-w-sm bg-zinc-100 rounded-2xl">
+          <div className="flex gap-8 ">
+            <div className="flex w-1/2 p-4 flex-col gap-2">
+              <Image
+                src={data.author.image}
+                height={4000}
+                width={4000}
+                alt="avatar"
+                className="rounded-full w-full "
+              />
+              <p className="text-[#1D1D1F] text-center font-semibold text-sm md:text-lg">
+                {data.author.name}
+              </p>
+            </div>
+            <div className="flex  w-1/2 flex-col px-4 pb-4 pt-4 gap-3">
+              <div className="flex flex-col gap-1">
+                <p className="text-[#1D1D1F] font-semibold text-">
+                  {data.author.purchase}
+                </p>
+                <p className="text-[#1D1D1F]  text-xs">Purchase</p>
+              </div>
+              <div className="flex flex-col gap-1">
+                <p className="text-[#1D1D1F] font-semibold text-">
+                  {data.author.rating}
+                </p>
+                <p className="text-[#1D1D1F]  text-xs">Rating</p>
+              </div>
+              <div className="flex flex-col gap-1">
+                <p className="text-[#1D1D1F] font-semibold text-">
+                  {data.author.experience}
+                </p>
+                <p className="text-[#1D1D1F]  text-xs">Year of Creation</p>
+              </div>
+            </div>
+          </div>
+          <p className="text-[#1D1D1F] px-4 font-semibold text-sm">
+            {data.author.description}
+          </p>
+        </div>
+      )}
     </div>
   );
 };

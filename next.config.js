@@ -140,6 +140,10 @@ const nextConfig = withPWA({
         protocol: "https",
         hostname: "scontent-sin6-1.cdninstagram.com",
       },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+      },
     ],
     // domains: ["images.unsplash.com"],
   },
