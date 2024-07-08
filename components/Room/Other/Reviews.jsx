@@ -13,8 +13,9 @@ const ratingsData = [
         {[5, 4, 3, 2, 1].map((number, index) => (
           <div
             key={index}
-            className={`border mb-2 ${index === 0 ? "border-black bg-black" : "bg-gray-300"
-              } rounded-full w-32 h-1.5 flex flex-row items-center ml-4 justify-start`}
+            className={`border mb-2 ${
+              index === 0 ? "border-black bg-black" : "bg-gray-300"
+            } rounded-full w-32 h-1.5 flex flex-row items-center ml-4 justify-start`}
           >
             <span className="-ml-3">{number}</span>
           </div>
@@ -27,7 +28,8 @@ const ratingsData = [
     label: "Accuracy",
     value: "5.0",
     icon: (
-      <Image loading="lazy"
+      <Image
+        loading="lazy"
         src="/icons/checkmark-icon.svg"
         width={36}
         height={36}
@@ -40,7 +42,8 @@ const ratingsData = [
     label: "Communication",
     value: "4.9",
     icon: (
-      <Image loading="lazy"
+      <Image
+        loading="lazy"
         src="/icons/message-icon.svg"
         width={36}
         height={36}
@@ -53,7 +56,8 @@ const ratingsData = [
     label: "Location",
     value: "4.0",
     icon: (
-      <Image loading="lazy"
+      <Image
+        loading="lazy"
         src="/icons/location-pin-icon.svg"
         width={36}
         height={36}
@@ -66,7 +70,8 @@ const ratingsData = [
     label: "Value",
     value: "5.0",
     icon: (
-      <Image loading="lazy"
+      <Image
+        loading="lazy"
         src="/icons/price-tag-icon.svg"
         width={36}
         height={36}
@@ -85,7 +90,7 @@ const Reviews = ({ productId, data }) => {
   const [isReview, setIsReview] = useState(false);
 
   console.log(data._id);
-  console.log("Reviews data", data)
+  console.log("Reviews data", data);
 
   const handleReview = () => {
     setIsReview(!isReview);
@@ -156,7 +161,6 @@ const Reviews = ({ productId, data }) => {
   }, [productId]);
 
   const addReview = async (newReview) => {
-
     const formData = new FormData();
     formData.append("productId", productId);
     formData.append("name", user.displayName);
@@ -209,54 +213,70 @@ const Reviews = ({ productId, data }) => {
   return (
     <>
       <div className="pb-12 sm:w-auto w-[90vw] overflow-x-hidden">
-        {
-          data.demandtype === "Ayatrio Member Favorite" && (
-            <div>
-              <div className="flex flex-col justify-center mx-auto">
+        {/* {data.demandtype === "Ayatrio Member Favorite" && ( */}
+          <div>
+            <div className="flex flex-col justify-center mx-auto">
+              {data.productType === "special" ||
+              data.productType === "requested" ? (
                 <div className="flex items-center justify-center overflow-hidden flex-row ">
                   <img
-                    src="https://a0.muscache.com/pictures/ec500a26-609d-440f-b5d0-9e5f92afd478.jpg"
-                    className="h-28"
+                    className="h-36 scale-x-[-1]"
                     alt=""
-                    data-original-uri="https://a0.muscache.com/pictures/ec500a26-609d-440f-b5d0-9e5f92afd478.jpg"
+                    src="/icons/amf/rightGold.svg"
+                  />
+                  <div className="text-[6rem] font-bold text-[#bf9b30] pb-5">
+                    5.0
+                  </div>
+                  <img
+                    className="h-36 "
+                    alt=""
+                    src="/icons/amf/rightGold.svg"
+                  />
+                </div>
+              ) : (
+                <div className="flex items-center justify-center overflow-hidden flex-row ">
+                  <img
+                    className="h-36 scale-x-[-1]"
+                    alt=""
+                    src="/icons/amf/rightBlack.svg"
                   />
                   <div className="text-[6rem] font-bold text-gray-700 pb-5">
                     5.0
                   </div>
                   <img
-                    className="h-28"
+                    className="h-36 "
                     alt=""
-                    src="https://a0.muscache.com/pictures/65bb2a6c-0bdf-42fc-8e1c-38cec04b2fa5.jpg"
-                    data-original-uri="https://a0.muscache.com/pictures/65bb2a6c-0bdf-42fc-8e1c-38cec04b2fa5.jpg"
+                    src="/icons/amf/rightBlack.svg"
                   />
                 </div>
-                <div className="flex justify-center items-center flex-col ">
-                  <div className="text-xl font-bold -mt-5">Guest favourite</div>
-                  <div className="text-lg text-gray-500">
-                    One of the most loved homes on Airbnb
-                    <br />
-                    based on ratings, reviews, and reliability
-                  </div>
+              )}
+              <div className="flex justify-center items-center flex-col ">
+                <div className="text-xl font-bold -mt-5">Guest favourite</div>
+                <div className="text-lg text-gray-500">
+                  One of the most loved homes on Airbnb
+                  <br />
+                  based on ratings, reviews, and reliability
                 </div>
               </div>
-              <div className="rating-map flex flex-row justify-between mt-12 sm:w-auto w-[90vw] overflow-x-auto">
-                {ratingsData.map((item, index) => (
-                  <div
-                    key={index}
-                    className={` basis-1/7 flex pr-6 ${index < ratingsData.length - 1
+            </div>
+            <div className="rating-map flex flex-row justify-between mt-12 sm:w-auto w-[90vw] overflow-x-auto">
+              {ratingsData.map((item, index) => (
+                <div
+                  key={index}
+                  className={` basis-1/7 flex pr-6 ${
+                    index < ratingsData.length - 1
                       ? "border-r border-gray-400 h-32 "
                       : ""
-                      }flex-col pl-6`}
-                  >
-                    {item.label}
-                    <div>{item.value}</div>
-                    <div>{item.icon}</div>
-                  </div>
-                ))}
-              </div>
+                  }flex-col pl-6`}
+                >
+                  {item.label}
+                  <div>{item.value}</div>
+                  <div>{item.icon}</div>
+                </div>
+              ))}
             </div>
-          )
-        }
+          </div>
+        {/* )} */}
 
         <br />
 
@@ -301,7 +321,8 @@ const Reviews = ({ productId, data }) => {
               </div>
               <div className="ratings flex mt-3">
                 {[...Array(review.rating)].map((_, i) => (
-                  <Image loading="lazy"
+                  <Image
+                    loading="lazy"
                     key={i}
                     src="/icons/full-black.svg"
                     width={15}
@@ -331,20 +352,18 @@ const Reviews = ({ productId, data }) => {
                 </p>
               </div>
 
-              {
-                review.images.length > 0 && (
-                  <div className="flex gap-2 mb-4">
-                    {review.images.map((image, index) => (
-                      <img
-                        key={index}
-                        src={image}
-                        alt="review"
-                        className="w-[100px] h-[100px] object-cover"
-                      />
-                    ))}
-                  </div>
-                )
-              }
+              {review.images.length > 0 && (
+                <div className="flex gap-2 mb-4">
+                  {review.images.map((image, index) => (
+                    <img
+                      key={index}
+                      src={image}
+                      alt="review"
+                      className="w-[100px] h-[100px] object-cover"
+                    />
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>
