@@ -13,7 +13,7 @@ const TrendingSlider = ({ trendingData, isProductInCart, setPopupVisible }) => {
     const params = {
       slidesPerView: 4.08,
       centeredSlides: false,
-      spaceBetween: 5,
+      spaceBetween: 12,
       navigation: {
         nextEl: ".custom-next-button",
         prevEl: ".custom-prev-button",
