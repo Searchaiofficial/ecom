@@ -755,7 +755,7 @@ const Card = ({ data, productId }) => {
               Pattern Number:&nbsp;
               <h3>{data?.patternNumber}</h3>
             </div> */}
-            {data?.productType === "normal" && (
+            {(data?.productType === "normal" || data?.productType === "special" ) && (
               <div className="price">
                 <div className="font-bold items-end flex mb-1 mt-[10px]">
                   <p
