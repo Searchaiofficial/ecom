@@ -63,8 +63,8 @@ const page = async ({ params }) => {
             },
           },
         ]}
-        reviews={!!reviews.length ? reviews : null}
-        aggregateRating={!!reviews.length ? aggregateRating : null}
+        reviews={!!reviews?.length ? reviews : null}
+        aggregateRating={!!reviews?.length ? aggregateRating : null}
       />
       <BreadcrumbJsonLd
         useAppDir={true}
