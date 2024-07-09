@@ -1,10 +1,19 @@
-import Beding from "./Other/Beding";
 import PlaceInfo from "./Other/PlaceInfo";
 import Amenities from "./Other/Amenities";
 import Image from "next/image";
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import Link from "next/link";
+import "./styles.css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import {
+  A11y,
+  FreeMode,
+  Mousewheel,
+  Navigation,
+  Pagination,
+  Scrollbar,
+} from "swiper/modules";
 
 const RoomInfo = ({ data }) => {
   const [categoryDetails, setCategoryDetails] = useState();
@@ -30,7 +39,23 @@ const RoomInfo = ({ data }) => {
   const [isClamped, setIsClamped] = useState(false);
   const descriptionRef = useRef(null);
 
+  const [otherProductByAuthorId, setOtherProductByAuthorId] = useState([]);
+  const fetchOtherProductByAuthorId = async (authorId) => {
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getAllProductByAuthorId/${authorId}`
+    );
+    console.log(response.data);
+    // story only those product which are not the current product
+
+    setOtherProductByAuthorId(
+      response.data.filter((item) => item._id !== data._id)
+    );
+  };
+
   useEffect(() => {
+    if (data?.author) {
+      fetchOtherProductByAuthorId(data?.author?._id);
+    }
     const descriptionElement = descriptionRef.current;
     if (descriptionElement.scrollHeight > descriptionElement.clientHeight) {
       setIsClamped(true);
@@ -38,6 +63,17 @@ const RoomInfo = ({ data }) => {
       setIsClamped(false);
     }
   }, [data]);
+
+  const swiperOptions2 = {
+    slidesPerView: 4.08,
+    centeredSlides: false,
+    spaceBetween: 5,
+    modules: [Pagination, Scrollbar, Mousewheel, FreeMode],
+    noSwiping: true,
+    allowSlidePrev: true,
+    allowSlideNext: true,
+  };
+  const swiper1Ref = useRef(null);
 
   return (
     <div className="w-full">
@@ -236,6 +272,62 @@ const RoomInfo = ({ data }) => {
           <p className="text-[#1D1D1F] px-4 font-semibold text-sm">
             {data.author.description}
           </p>
+          <Swiper
+            className="w-full"
+            ref={swiper1Ref}
+            {...swiperOptions2}
+            modules={[Navigation, Pagination, A11y]}
+            navigation={{
+              nextEl: ".right",
+              prevEl: ".back",
+            }}
+            draggable={true}
+            style={{
+              "--swiper-navigation-size": "24px",
+              maxHeight: "120px",
+            }}
+            mousewheel={{
+              forceToAxis: true,
+              invert: false,
+            }}
+            freeMode={{
+              enabled: false,
+              sticky: true,
+            }}
+            breakpoints={{
+              300: {
+                slidesPerView: 1,
+                spaceBetween: 10,
+              },
+              768: {
+                slidesPerView: 2,
+                spaceBetween: 10,
+              },
+              1024: {
+                slidesPerView: 2,
+                spaceBetween: 10,
+              },
+            }}
+          >
+            {otherProductByAuthorId.map((item, idx) => (
+              <SwiperSlide key={idx} className="max-w-[130px]">
+                <Link className="flex flex-col"  href={`/${item.productTitle.replace(/ /g, "-")}`}>
+                  <div className="mb-[12px] ">
+                    <Image
+                      loading="lazy"
+                      src={item.images[0]}
+                      width={200}
+                      height={130}
+                      className="h-[70px] object-cover"
+                    />
+                  </div>
+                  <h2 className="text-[#333333] text-[14px] hover:underline line-clamp-1 ">
+                    {item.productTitle}
+                  </h2>
+                </Link>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       )}
     </div>
