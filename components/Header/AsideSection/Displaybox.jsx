@@ -71,7 +71,7 @@ const Displaybox = (props) => {
                 alt={item.name}
                 width={100}
                 height={100}
-                className="w-[50px] h-[56px] bg-transparent"
+                className="w-[50px] h-[50px] bg-transparent"
               />
               <h2 className="text-[14px] font-normal text-[#111111] lg:justify-start">
                 {item.name}

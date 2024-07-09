@@ -13,9 +13,8 @@ const ratingsData = [
         {[5, 4, 3, 2, 1].map((number, index) => (
           <div
             key={index}
-            className={`border mb-2 ${
-              index === 0 ? "border-black bg-black" : "bg-gray-300"
-            } rounded-full w-32 h-1.5 flex flex-row items-center ml-4 justify-start`}
+            className={`border mb-2 ${index === 0 ? "border-black bg-black" : "bg-gray-300"
+              } rounded-full w-32 h-1.5 flex flex-row items-center ml-4 justify-start`}
           >
             <span className="-ml-3">{number}</span>
           </div>
@@ -215,76 +214,90 @@ const Reviews = ({ productId, data }) => {
       <div className="pb-12 sm:w-auto w-[90vw] overflow-x-hidden">
         {(data.productType === "special" ||
           data.productType === "requested") && (
-          <div>
-            <div className="flex flex-col justify-center mx-auto">
-              {data.productType === "requested" && (
-                <div className="flex items-center justify-center overflow-hidden flex-row ">
-                  <img
-                    className="h-36 scale-x-[-1]"
-                    alt=""
-                    src="/icons/amf/rightGold.svg"
-                  />
-                  <div className="text-[6rem] font-bold text-[#bf9b30] pb-5">
-                    5.0
+            <div>
+              <div className="flex flex-col justify-center mx-auto">
+                {data.productType === "requested" && (
+                  <div className="flex items-center justify-center overflow-hidden flex-row ">
+                    <img
+                      className="h-36 scale-x-[-1]"
+                      alt=""
+                      src="/icons/amf/rightGold.svg"
+                    />
+                    <div className="text-[6rem] font-bold text-[#bf9b30] pb-5">
+                      5.0
+                    </div>
+                    <img
+                      className="h-36 "
+                      alt=""
+                      src="/icons/amf/rightGold.svg"
+                    />
                   </div>
-                  <img
-                    className="h-36 "
-                    alt=""
-                    src="/icons/amf/rightGold.svg"
-                  />
-                </div>
-              )}
-              {data.productType === "special" && (
-                <div className="flex items-center justify-center overflow-hidden flex-row ">
-                  <img
-                    className="h-36 scale-x-[-1]"
-                    alt=""
-                    src="/icons/amf/rightBlack.svg"
-                  />
-                  <div className="text-[6rem] font-bold text-gray-700 pb-5">
-                    5.0
+                )}
+                {data.productType === "special" && (
+                  <div className="flex items-center justify-center overflow-hidden flex-row ">
+                    <img
+                      className="h-36 scale-x-[-1]"
+                      alt=""
+                      src="/icons/amf/rightBlack.svg"
+                    />
+                    <div className="text-[6rem] font-bold text-gray-700 pb-5">
+                      5.0
+                    </div>
+                    <img
+                      className="h-36 "
+                      alt=""
+                      src="/icons/amf/rightBlack.svg"
+                    />
                   </div>
-                  <img
-                    className="h-36 "
-                    alt=""
-                    src="/icons/amf/rightBlack.svg"
-                  />
-                </div>
-              )}
-              <div className="flex justify-center items-center flex-col ">
-                <div className={`text-xl font-bold -mt-5  ${data.productType === "requested" ? "text-[#bf9b30]" : "text-black" }`} >Guest favourite</div>
-                <div className="text-lg text-gray-500">
-                  One of the most loved homes on Ayatrio
-                  <br />
-                  based on ratings, reviews, and reliability
+                )}
+                <div className="flex justify-center items-center flex-col ">
+                  <div className={`text-xl font-bold -mt-5  ${data.productType === "requested" ? "text-[#bf9b30]" : "text-black"}`} >Guest favourite</div>
+                  <div className="text-lg text-gray-500">
+                    One of the most loved homes on Ayatrio
+                    <br />
+                    based on ratings, reviews, and reliability
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="rating-map flex flex-row justify-between mt-12 sm:w-auto w-[90vw] overflow-x-auto">
-              {ratingsData.map((item, index) => (
-                <div
-                  key={index}
-                  className={` basis-1/7 flex pr-6 ${
-                    index < ratingsData.length - 1
+              <div className="rating-map flex flex-row justify-between mt-12 sm:w-auto w-[90vw] overflow-x-auto">
+                {ratingsData.map((item, index) => (
+                  <div
+                    key={index}
+                    className={` basis-1/7 flex pr-6 ${index < ratingsData.length - 1
                       ? "border-r border-gray-400 h-32 "
                       : ""
-                  }flex-col pl-6`}
-                >
-                  {item.label}
-                  <div>{item.value}</div>
-                  <div>{item.icon}</div>
-                </div>
-              ))}
+                      }flex-col pl-6`}
+                  >
+                    {item.label}
+                    <div>{item.value}</div>
+                    <div>{item.icon}</div>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
         <br />
 
-        <h3 className="mb-1 text-xl font-semibold pt-4">
-          {reviews.length}
-          <span> reviews</span>
-        </h3>
+        <div className="flex justify-between items-baseline pt-4">
+          <h3 className="mb-1 text-xl font-semibold ">
+            {reviews.length}
+            <span> reviews</span>
+          </h3>
+          <>
+            {isLoading ? (
+              <p>Loading...</p>
+            ) : (
+              !isReview ? (
+                <ReviewForm addReview={addReview} />
+              ) : (
+                <div>
+                  {/* This section can be used for further review-related content */}
+                </div>
+              )
+            )}
+          </>
+        </div>
         <span className="font-normal text-sm text-gray-500">
           Average rating will appear after 3 reviews
         </span>
@@ -368,35 +381,8 @@ const Reviews = ({ productId, data }) => {
             </div>
           ))}
         </div>
-        {isLoading ? (
-          <>
-            <p>Loading...</p>
-          </>
-        ) : (
-          <>
-            {!isReview ? (
-              <>
-                <button onClick={() => handleReview()}>
-                  <h2 className="text-xl font-bold my-4">Add Review</h2>
-                </button>
-              </>
-            ) : (
-              <>
-                <div>
-                  <div className="w-full">
-                    <button
-                      className="text-lg flex justify-end font-bold mb-4"
-                      onClick={() => handleReview()}
-                    >
-                      Close
-                    </button>
-                  </div>
-                  <ReviewForm addReview={addReview} />
-                </div>
-              </>
-            )}
-          </>
-        )}
+
+
         {/* <Carous data={data} /> */}
       </div>
     </>

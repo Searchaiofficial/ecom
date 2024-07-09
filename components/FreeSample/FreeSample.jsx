@@ -500,7 +500,7 @@ const FreeSample = () => {
 
                       }`}
                   >
-                    <Image src={data.icon} width={45} height={45} alt={data.label} loading="lazy"/>
+                    <Image src={data.icon} width={45} height={45} alt={data.label} loading="lazy" />
                     <span className="text-[16px] mt-[4px] font-medium">{data.label}</span>
                   </div>
                 );
@@ -833,7 +833,7 @@ const FreeSample = () => {
             );
           })}
         </div>
-        <div className="h-14 flex justify-between items-center  container mx-auto px-[10px] md:px-0 ">
+        <div className="h-14 flex justify-between items-center  container mx-auto px-[10px] md:px-0 pt-6">
           <button
             className="text-lg font-medium underline border-transparent hover:border-black  py-1 px-6 hover:bg-gray-100 cursor-pointer"
             disabled={dataStep.step === 1}
