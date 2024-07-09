@@ -145,8 +145,8 @@ const Search = ({ places, onResultClick }) => {
   return (
     <>
       {isMobile ? (
-        <div className="flex flex-row items-center justify-between w-full h-16 map-bg">
-          <div
+        <div className="flex flex-row items-center justify-between w-full lg:h-16 map-bg">
+          {/* <div
             className=" font-bold p-[7px] hover:bg-slate-200 hover:rounded-full bg-opacity-5 bg-transparent"
             style={{
               backgroundColor: "transparent",
@@ -154,7 +154,7 @@ const Search = ({ places, onResultClick }) => {
             }}
           >
             <Menu />
-          </div>
+          </div> */}
           <div
             className="w-full absolute shadow-lg z-20 top-[20%] "
             style={{

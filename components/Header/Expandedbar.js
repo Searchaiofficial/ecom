@@ -229,7 +229,7 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
         <div className="md:fixed md:inset-0 md:bg-black md:opacity-50 md:z-[9998]"></div>
       )}
       <div
-        className={`expanded-search-box block pt-[12px]  bg-white sm:h-310px h-full  sm:w-full w-[100vw]  absolute right-0 top-0  z-[9999] md:mt-[-36px] ${path == "/" ? "sm:mt-[-36px]" : ""
+        className={`expanded-search-box block ${path === "/ayatrio-map" ? "lg:pt-[50px] pt-[12px]" : "pt-[12px]"}  bg-white sm:h-310px h-full  sm:w-full w-[100vw]  absolute right-0 top-0  z-[9999] md:mt-[-36px] ${path == "/" ? "sm:mt-[-36px]" : ""
           } `} style={overflowStyle}
       >
         <div className="flex flex-row pl-[24px] lg:pl-[0px] items-center  justify-between bg-white  w-full absolute left-0">
@@ -265,7 +265,7 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
           </div>
         </div>
         <div
-          className={`dropdown lg:mt-[48px] lg:pt-[32px] pb-[60px] mt-[60px]  sm:pb-[50px]  flex sm:flex-row flex-col   max-w-full bg-white ${searchQuery
+          className={`dropdown lg:mt-[40px] lg:pt-[32px] pb-[60px] mt-[60px]  sm:pb-[50px]  flex sm:flex-row flex-col   max-w-full bg-white ${searchQuery
             ? "sm:px-[48px] pl-0"
             : "sm:pr-[48px] sm:pl-[360px]"
             }`}
