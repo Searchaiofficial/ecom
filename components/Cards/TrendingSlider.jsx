@@ -25,6 +25,17 @@ const TrendingSlider = ({ trendingData, isProductInCart, setPopupVisible }) => {
         el: ".swiper-scrollbar-custom",
         draggable: true,
       },
+      mousewheel: {
+        forceToAxis: true,
+        invert: false,
+      },
+      freeMode: {
+        enabled: false,
+        sticky: true,
+        momentum: true,
+        momentumRatio: 0.5,
+        momentumBounceRatio: 0.5,
+      },
       breakpoints: {
         300: {
           slidesPerView: 1.2,
