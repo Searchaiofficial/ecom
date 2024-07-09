@@ -48,7 +48,7 @@ const ReviewForm = ({ addReview }) => {
       </button>
 
       {sidebarContent === "addReview" && (
-        <div className="fixed z-[99999] h-full w-screen bg-black/50 backdrop:blur-sm top-0 left-0">
+        <div className="fixed z-[99999] h-full w-screen bg-black/50 backdrop-blur-sm top-0 left-0">
           <section className="text-black bg-white flex-col absolute right-0 top-0 h-full z-[99999] w-full lg:w-[35%] flex overflow-y-auto">
             <div className="flex flex-col">
               <div className="px-[40px] pb-[32px]">
@@ -128,7 +128,7 @@ const ReviewForm = ({ addReview }) => {
                     </div>
                     <button
                       type="submit"
-                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                      className="bg-black hover:bg-grey-900 text-white font-bold py-2 px-4 rounded-full"
                     >
                       Submit Review
                     </button>

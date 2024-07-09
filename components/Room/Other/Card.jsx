@@ -1822,7 +1822,7 @@ const Card = ({ data, productId }) => {
                   onClick={() => {
                     handleClickDB();
                   }}
-                  className={`bg-black hover:bg-gray-900 text-white px-4 w-full sm:h-11 h-9 rounded-full transition duration-300`}
+                  className={`bg-black hover:bg-gray-900 text-white px-4 w-full h-11 rounded-full transition duration-300`}
                 >
                   Add to bag
                 </button>
@@ -1865,9 +1865,9 @@ const Card = ({ data, productId }) => {
               {contentData.map((item, index) => (
                 <div key={index} className="w-full max-w-md py-1">
                   <details className="cursor-pointer">
-                    <summary className="text-normal underline" style={{ listStyle: 'none', display: 'flex', alignItems: 'center' }}>
+                    <summary className="custom-summary underline">
                       <Image
-                        laoding="lazy"
+                        loading="lazy"
                         src={`/icons/${item.icon}.svg`}
                         alt={item.icon}
                         width={25}
@@ -1881,6 +1881,7 @@ const Card = ({ data, productId }) => {
                 </div>
               ))}
             </div>
+
 
 
           </div>

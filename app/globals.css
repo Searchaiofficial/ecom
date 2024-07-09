@@ -58,5 +58,20 @@ body {
 
 
 .no-scroll {
-  overflow: hidden;
+  overflow: hidden !important; 
+}
+
+details summary {
+  list-style: none; 
+  display: flex;
+  align-items: center; 
+  cursor: pointer; 
+}
+
+details summary::-webkit-details-marker {
+  display: none; /* Hide marker in WebKit browsers (e.g., Safari, Chrome) */
+}
+
+details summary::marker {
+  display: none; /* Hide marker in other browsers */
 }
