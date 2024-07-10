@@ -95,7 +95,7 @@ const ProductPage = ({ title }) => {
   return (
     <div className="px-4 sm:px-6">
       <div className="w-full gap-2 sm:mt-[96px] md:grid grid-cols-[2fr,1fr]">
-        <div className="h-full w-full font-sans text-xs sm:text-sm sm:px-10 py-2 flex flex-col">
+        <div className="h-full w-full font-sans text-xs sm:text-sm sm:pl-10 py-2 flex flex-col">
           <div className="mb-4">
             <NavigationItem product={data} />
           </div>
@@ -119,7 +119,9 @@ const ProductPage = ({ title }) => {
           </div>
         </div>
       </div>
-      <Carous data={data} />
+      <div className="sm:pl-10 sm:pr-4">
+        <Carous data={data} />
+      </div>
     </div>
   );
 };
