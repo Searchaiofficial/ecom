@@ -94,7 +94,7 @@ const Profile = ({ id }) => {
     if (loggedInUser && user) {
       setIsCurrentUser(loggedInUser._id === user._id);
     }
-  }, [user]);
+  }, [user, loggedInUser]);
 
   useEffect(() => {
     storeTokenInLocalStorage();
