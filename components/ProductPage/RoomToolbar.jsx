@@ -193,6 +193,17 @@ const RoomToolbar = ({ data }) => {
     fetchProductsbyCategory("All Categories")
   }
 
+  const handleCategoryFilterOpen = () => {
+    if (ColorfilterOpen === false) {
+      setCategoryFilterOpen(!categoryFilterOpen)
+    }
+  }
+  const handleColorFilterOpen = () => {
+    if (categoryFilterOpen === false) {
+      setColorFilterOpen(!ColorfilterOpen)
+    }
+  }
+
 
 
   return (
@@ -405,7 +416,7 @@ const RoomToolbar = ({ data }) => {
 
 
               <div className="flex overflow-x-scroll lg:overflow-x-hidden items-center lg:gap-2 gap-2 my-3">
-                <div onClick={() => setCategoryFilterOpen(!categoryFilterOpen)} className={`${commonClasses} text-[14px] flex items-center gap-2 font-semibold rounded-full bg-gray-100`}>
+                <div onClick={handleCategoryFilterOpen} className={`${commonClasses} text-[14px] flex items-center gap-2 font-semibold rounded-full bg-gray-100`}>
                   <p>{selectedCategory}</p>
                   <Image loading="lazy"
                     src="/icons/backarrow.svg"
@@ -416,7 +427,7 @@ const RoomToolbar = ({ data }) => {
                   />
                   {
                     categoryFilterOpen && allCategories && allCategories.length > 0 && (
-                      <div className={`w-[300px] cursor-pointer absolute ${selectedSamples.length > 0 ? "top-64" : "top-40"}  z-50 h-fit bg-white border border-gray-200 rounded-lg`}>
+                      <div className={`md:w-[300px] w-[150px] cursor-pointer absolute ${selectedSamples.length > 0 ? "top-[270px] md:top-[125px]" : "top-[150px] md:top-[125px]"}  z-50 h-fit bg-white border border-gray-200 rounded-lg`}>
                         <p onClick={() => handleCategoryFilter("All Categories")} className="flex text-[14px] font-semibold px-4 py-2">All Categories</p>
                         {
                           allCategories.map((item) => {
@@ -431,7 +442,7 @@ const RoomToolbar = ({ data }) => {
                   }
 
                 </div>
-                <div onClick={() => setColorFilterOpen(!ColorfilterOpen)} className={`${commonClasses} text-[14px] flex items-center gap-2 font-semibold rounded-full bg-gray-100`}>
+                <div onClick={handleColorFilterOpen} className={`${commonClasses} text-[14px] flex items-center gap-2 font-semibold rounded-full bg-gray-100`}>
                   <p>{selectedColor}</p>
                   <Image loading="lazy"
                     src="/icons/backarrow.svg"
@@ -442,7 +453,7 @@ const RoomToolbar = ({ data }) => {
                   />
                   {
                     ColorfilterOpen && allColors && allColors.length > 0 && (
-                      <div className={`w-[300px] cursor-pointer absolute ${selectedSamples.length > 0 ? "top-64" : "top-40"}  z-50 h-fit bg-white border border-gray-200 rounded-lg`}>
+                      <div className={`md:w-[300px] w-[150px] cursor-pointer absolute ${selectedSamples.length > 0 ? "top-[270px] md:top-[125px]" : "top-[150px] md:top-[125px]"}  z-50 h-fit bg-white border border-gray-200 rounded-lg`}>
                         <p onClick={() => handleColorFilter("All Colors")} className="flex text-[14px] font-semibold px-4 py-2">All Colors</p>
                         {
                           allColors.map((item) => {
