@@ -258,7 +258,8 @@ const RoomPage = () => {
     localStorage.setItem('selectedCategory', category);
   };
 
-  const handleFreeSampling = async () => {
+  const handleFreeSampling = () => {
+    console.log("Free Sampling")
     setOpenFreeSample(true)
     document.body.style.overflow = "hidden";
     if (selectedSamples.length < 3) {
@@ -268,20 +269,7 @@ const RoomPage = () => {
         setSelectedSamples((prev) => [...prev, data])
       }
     }
-    // try {
-    //   const responce = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart/freeSampling`, {
-    //     deviceId: localStorage.getItem("deviceId"),
-    //     freeSampleId: data?._id
-    //   });
-    //   console.log("Free Sampling :", responce.data)
-    //   if (responce.status === 200) {
-    //     dispatch(setDbItems(responce.data));
-    //     router.push("/checkout")
 
-    //   }
-    // } catch (error) {
-    //   console.log("Free Sampling error", error)
-    // }
   }
 
   const handleClose = () => {
