@@ -25,9 +25,18 @@ const ReviewForm = ({ addReview }) => {
     document.querySelectorAll("input[type=file]").forEach(input => (input.value = ""));
   };
 
-  const handleImageChange = (e) => {
-    const files = Array.from(e.target.files);
-    setImages((prevImages) => [...prevImages, ...files]);
+  // const handleImageChange = (e) => {
+  //   const files = Array.from(e.target.files);
+  //   setImages((prevImages) => [...prevImages, ...files]);
+  // };
+
+  const handleImageChange = (event) => {
+    const selectedFiles = Array.from(event.target.files);
+    if (selectedFiles.length + images.length > 4) {
+      alert("You can only upload up to 4 images.");
+      return;
+    }
+    setImages((prevImages) => [...prevImages, ...selectedFiles]);
   };
 
   useEffect(() => {
@@ -74,7 +83,7 @@ const ReviewForm = ({ addReview }) => {
                     </div>
                   </div>
                   <form onSubmit={handleSubmit}>
-                    <div className="grid grid-cols-2 gap-x-5">
+                    {/* <div className="grid grid-cols-2 gap-x-5">
                       {[...Array(4)].map((_, index) => (
                         <div className="mb-4" key={index}>
                           <label
@@ -91,6 +100,34 @@ const ReviewForm = ({ addReview }) => {
                           />
                         </div>
                       ))}
+                    </div> */}
+                    <div>
+                      <label htmlFor="images" className="block text-gray-700 font-bold mb-2">
+                        Upload Images
+                      </label>
+                      <label htmlFor="imageUpload" className="w-full cursor-pointer bg-white border border-black rounded-lg flex items-center justify-center px-3 py-1 h-12">
+                        Upload Image(s)
+                        <input
+                          id="imageUpload"
+                          type="file"
+                          multiple
+                          accept=".jpg, .jpeg, .png"
+                          className="hidden"
+                          onChange={handleImageChange}
+                        />
+                      </label>
+
+                      <div className="grid grid-cols-5 gap-x-5 mt-4">
+                        {images.map((image, index) => (
+                          <div className="mb-4" key={index}>
+                            <img
+                              src={URL.createObjectURL(image)}
+                              alt={`Preview ${index + 1}`}
+                              className="w-full h-auto rounded"
+                            />
+                          </div>
+                        ))}
+                      </div>
                     </div>
                     <div className="mb-4">
                       <label
@@ -128,7 +165,7 @@ const ReviewForm = ({ addReview }) => {
                     </div>
                     <button
                       type="submit"
-                      className="bg-black hover:bg-grey-900 text-white font-bold py-2 px-4 rounded-full"
+                      className="bg-black hover:bg-grey-900 text-white font-bold py-2 px-4 rounded-full h-9"
                     >
                       Submit Review
                     </button>
