@@ -83,7 +83,7 @@ const page = async ({ params }) => {
           },
         ]}
       />
-      <ProductPage title={params.title} />
+      <ProductPage title={params.title.replace(/-/g, " ")} />
     </>
   );
 };
