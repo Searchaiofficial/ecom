@@ -198,7 +198,7 @@ const Suggestion = ({ id }) => {
           {suggestion &&
             suggestion.firstSlider &&
             suggestion.firstSlider.length > 0 && (
-              <BlogRelatedProducts relatedProducts={suggestion.firstSlider} />
+              <BlogRelatedProducts relatedProducts={suggestion.firstSlider} title="Related Product"/>
             )}
 
           {suggestion?.subHeading &&
@@ -269,6 +269,7 @@ const Suggestion = ({ id }) => {
               suggestion.secondSlider.length > 0 && (
                 <BlogRelatedProducts
                   relatedProducts={suggestion.secondSlider}
+                   title="Related Product"
                 />
               )}
             <div>
@@ -341,7 +342,7 @@ const Suggestion = ({ id }) => {
             {suggestion &&
               suggestion.thirdSlider &&
               suggestion.thirdSlider.length > 0 && (
-                <BlogRelatedProducts relatedProducts={suggestion.thirdSlider} />
+                <BlogRelatedProducts relatedProducts={suggestion.thirdSlider}  title="Related Product"/>
               )}
 
             <Tabs data={recommended} />

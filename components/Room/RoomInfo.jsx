@@ -236,7 +236,7 @@ const RoomInfo = ({ data }) => {
       {data?.author && (
         <div className="flex flex-col mt-10 gap-4 p-4 w-full max-w-sm bg-zinc-100 rounded-2xl">
           <div className="flex gap-8 ">
-            <div className="flex w-1/2 p-4 flex-col gap-2">
+            <Link href={`/profile/${data.author.userId}`} className="flex w-1/2 p-4 flex-col gap-2">
               <Image
                 src={data.author.image}
                 height={4000}
@@ -247,7 +247,7 @@ const RoomInfo = ({ data }) => {
               <p className="text-[#1D1D1F] text-center font-semibold text-sm md:text-lg">
                 {data.author.name}
               </p>
-            </div>
+            </Link>
             <div className="flex  w-1/2 flex-col px-4 pb-4 pt-4 gap-3">
               <div className="flex flex-col gap-1">
                 <p className="text-[#1D1D1F] font-semibold text-">
