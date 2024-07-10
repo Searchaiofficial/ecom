@@ -18,7 +18,7 @@ import {
 } from "swiper/modules";
 // import axios from "axios";;
 
-const BlogRecommendedProducts = ({ relatedProducts }) => {
+const BlogRecommendedProducts = ({ relatedProducts, title }) => {
   const [isPopupVisible, setPopupVisible] = useState(false);
 
   const swiperOptions2 = {
@@ -46,7 +46,7 @@ const BlogRecommendedProducts = ({ relatedProducts }) => {
           <h2 className="font-semibold text-2xl py-[15px]">
             {relatedProducts && relatedProducts.length === 0
               ? ""
-              : "Related Products"}
+              : title}
           </h2>
           <div className="Slidenav flex  bg-white text-2xl cursor-pointer  text-white rounded-full gap-2">
             <div
@@ -107,7 +107,7 @@ const BlogRecommendedProducts = ({ relatedProducts }) => {
                   <div className="grid grid-cols-1 w-full h-full fade-in ">
                     <Card
                       title={product.productTitle}
-                      productImages={product?.productImages}
+                      productImages={product.productImages}
                       specialPrice={product?.specialprice}
                       price={product.perUnitPrice}
                       desc={product.productTitle}
@@ -125,6 +125,7 @@ const BlogRecommendedProducts = ({ relatedProducts }) => {
                       totalPrice={product.totalPrice}
                       unitType={product.unitType}
                       productType={product.productType}
+                      expectedDelivery={product.expectedDelivery}
                     />
                   </div>
                 </SwiperSlide>

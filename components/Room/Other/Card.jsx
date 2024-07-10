@@ -1812,7 +1812,7 @@ const Card = ({ data, productId }) => {
           </div>
 
           {/* //buttons */}
-          {data.productType === "normal" ? (
+          {(data.productType === "normal" || data.productType === "special" )? (
             <div className="flex items-center justify-between mt-4">
               <div className="">
                 <IncDecCounter />
