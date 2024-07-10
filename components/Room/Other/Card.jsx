@@ -673,7 +673,15 @@ const Card = ({ data, productId }) => {
       icon: "delivary",
       content: (
         <>
-          For all orders, delivery and Returns are free. If you are not entirely satisfied with your order, you may be entitled to a refund. Read our <Link href="/customerservice/returnpolicy" className="underline cursor-pointer">Returns Terms & Conditions</Link> for more details.
+          For all orders, delivery and Returns are free. If you are not entirely
+          satisfied with your order, you may be entitled to a refund. Read our{" "}
+          <Link
+            href="/customerservice/returnpolicy"
+            className="underline cursor-pointer"
+          >
+            Returns Terms & Conditions
+          </Link>{" "}
+          for more details.
         </>
       ),
     },
@@ -682,29 +690,56 @@ const Card = ({ data, productId }) => {
       icon: "free-shipping",
       content: (
         <>
-          Get free delivery on all orders above ₹3000. A shipping charge of ₹100 is applicable on orders below ₹3000. Check out our <Link href="/customerservice/returnpolicy" className="underline cursor-pointer">delivery Terms & Conditions</Link> for more details.
+          Get free delivery on all orders above ₹3000. A shipping charge of ₹100
+          is applicable on orders below ₹3000. Check out our{" "}
+          <Link
+            href="/customerservice/returnpolicy"
+            className="underline cursor-pointer"
+          >
+            delivery Terms & Conditions
+          </Link>{" "}
+          for more details.
         </>
       ),
     },
     {
       title: "COD available for orders below ₹3000",
       icon: "tick",
-      content: "Cash on Delivery is available for all orders below ₹3000."
+      content: "Cash on Delivery is available for all orders below ₹3000.",
     },
     {
-      title: "Secure transactions with hassle free 14 days Exchange and Returns",
+      title:
+        "Secure transactions with hassle free 14 days Exchange and Returns",
       icon: "payment",
       content: (
         <>
-          Tried on your item(s) and need a different size? Exchange your item(s) within 14 days and have your perfect fit shipped for free. Or did you change your mind? You can also return your item(s) for free within 14 days for a full refund. Read more on <Link href="/customerservice/returnpolicy" className="underline cursor-pointer" >Exchange</Link> and <Link href="/customerservice/returnpolicy" className="underline cursor-pointer" >Return</Link>.
+          Tried on your item(s) and need a different size? Exchange your item(s)
+          within 14 days and have your perfect fit shipped for free. Or did you
+          change your mind? You can also return your item(s) for free within 14
+          days for a full refund. Read more on{" "}
+          <Link
+            href="/customerservice/returnpolicy"
+            className="underline cursor-pointer"
+          >
+            Exchange
+          </Link>{" "}
+          and{" "}
+          <Link
+            href="/customerservice/returnpolicy"
+            className="underline cursor-pointer"
+          >
+            Return
+          </Link>
+          .
         </>
       ),
     },
     {
       title: "Save 5% on all Online Payments under ₹3000",
       icon: "price-tag-icon",
-      content: "Pay 5% less on all orders under ₹3000 when you choose online payment options. That's right – simply opt for online payment at checkout and enjoy instant savings on your purchase."
-    }
+      content:
+        "Pay 5% less on all orders under ₹3000 when you choose online payment options. That's right – simply opt for online payment at checkout and enjoy instant savings on your purchase.",
+    },
   ];
 
   return (
@@ -759,10 +794,11 @@ const Card = ({ data, productId }) => {
               <div className="price">
                 <div className="font-bold items-end flex mb-1 mt-[10px]">
                   <p
-                    className={`text-3xl leading-[0.5] tracking-wide ${data?.specialprice?.price
-                      ? "bg-[#FFD209] px-2 pt-3 w-fit shadow-lg"
-                      : ""
-                      } `}
+                    className={`text-3xl leading-[0.5] tracking-wide ${
+                      data?.specialprice?.price
+                        ? "bg-[#FFD209] px-2 pt-3 w-fit shadow-lg"
+                        : ""
+                    } `}
                     style={
                       data?.specialprice?.price
                         ? { boxShadow: "3px 3px #ad3535" }
@@ -774,8 +810,8 @@ const Card = ({ data, productId }) => {
                     {data?.specialprice?.price
                       ? data?.specialprice.price
                       : selectedSpecData?.specialprice
-                        ? selectedSpecData.price
-                        : data.perUnitPrice}
+                      ? selectedSpecData.price
+                      : data.perUnitPrice}
                   </p>{" "}
                   <span> &nbsp;/roll</span>
                 </div>
@@ -811,10 +847,11 @@ const Card = ({ data, productId }) => {
                     <button
                       key={dim._id}
                       onClick={() => handleSpecClick(dim._id)}
-                      className={`px-2 py-1  ${selectedSpec === dim._id
-                        ? "bg-green-500 text-white"
-                        : "bg-zinc-100 text-black hover:bg-zinc-200"
-                        }`}
+                      className={`px-2 py-1  ${
+                        selectedSpec === dim._id
+                          ? "bg-green-500 text-white"
+                          : "bg-zinc-100 text-black hover:bg-zinc-200"
+                      }`}
                     >
                       {`${dim.thickness.value} ${dim.length.unit}`}
                     </button>
@@ -839,11 +876,12 @@ const Card = ({ data, productId }) => {
                       key={index}
                       onClick={() => handleColor(item.color)}
                       className={`parent relative w-[55px] h-[55px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
-            ${selectedColor === item.color ||
-                          (index === 0 && selectedColor === "")
-                          ? " border-black "
-                          : " border-black"
-                        }   
+            ${
+              selectedColor === item.color ||
+              (index === 0 && selectedColor === "")
+                ? " border-black "
+                : " border-black"
+            }   
           `}
                     >
                       <Image
@@ -856,7 +894,7 @@ const Card = ({ data, productId }) => {
                         objectFit="cover"
                       />
                       {selectedColor === item.color ||
-                        (index === 0 && selectedColor === "") ? (
+                      (index === 0 && selectedColor === "") ? (
                         <div className="w-[100%] h-[2px] bg-black mt-[70px]" />
                       ) : (
                         ""
@@ -880,7 +918,8 @@ const Card = ({ data, productId }) => {
                 onClick={() => handleOptionClick("zeroCostEMI")}
               >
                 <div className="flex flex-row gap-1">
-                  <Image loading="lazy"
+                  <Image
+                    loading="lazy"
                     src="/icons/payment.svg"
                     height={25}
                     width={25}
@@ -897,7 +936,8 @@ const Card = ({ data, productId }) => {
                 onClick={() => handleOptionClick("inStoreRequest")}
               >
                 <div className="flex flex-row gap-1">
-                  <Image loading="lazy"
+                  <Image
+                    loading="lazy"
                     src="/icons/ayatrio_store_black.svg"
                     height={25}
                     width={25}
@@ -916,7 +956,8 @@ const Card = ({ data, productId }) => {
                 onClick={() => handleOptionClick("deliveryOption")}
               >
                 <div className="flex flex-row gap-2">
-                  <Image loading="lazy"
+                  <Image
+                    loading="lazy"
                     src="/icons/delivary.svg"
                     height={25}
                     width={25}
@@ -932,7 +973,8 @@ const Card = ({ data, productId }) => {
                 onClick={() => handleOptionClick("calculator")}
               >
                 <div className="flex flex-row gap-2">
-                  <Image loading="lazy"
+                  <Image
+                    loading="lazy"
                     src="/icons/calculator.svg"
                     height={25}
                     width={25}
@@ -958,19 +1000,21 @@ const Card = ({ data, productId }) => {
                               <div className="flex-1 flex">
                                 <div
                                   onClick={() => setIsActive("Offers for you")}
-                                  className={`flex-1 cursor-pointer flex items-center justify-center h-[50px] ${isActive === "Offers for you"
-                                    ? "border-b-4 border-[#2e2e2e] text-black"
-                                    : "border-[#8E8E8E] text-[#8E8E8E]"
-                                    }`}
+                                  className={`flex-1 cursor-pointer flex items-center justify-center h-[50px] ${
+                                    isActive === "Offers for you"
+                                      ? "border-b-4 border-[#2e2e2e] text-black"
+                                      : "border-[#8E8E8E] text-[#8E8E8E]"
+                                  }`}
                                 >
                                   <p className="text-[16px]">Offers for you</p>
                                 </div>
                                 <div
                                   onClick={() => setIsActive("EMI Plans")}
-                                  className={`flex-1 cursor-pointer flex items-center justify-center h-[50px] ${isActive === "EMI Plans"
-                                    ? "border-b-4 border-[#2e2e2e] text-black"
-                                    : "border-[#8E8E8E] text-[#8E8E8E]"
-                                    }`}
+                                  className={`flex-1 cursor-pointer flex items-center justify-center h-[50px] ${
+                                    isActive === "EMI Plans"
+                                      ? "border-b-4 border-[#2e2e2e] text-black"
+                                      : "border-[#8E8E8E] text-[#8E8E8E]"
+                                  }`}
                                 >
                                   <p className="text-[16px]">EMI Plans</p>
                                 </div>
@@ -980,7 +1024,8 @@ const Card = ({ data, productId }) => {
                                   className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
                                   onClick={() => setsidebarContent(null)}
                                 >
-                                  <Image loading="lazy"
+                                  <Image
+                                    loading="lazy"
                                     src="/icons/closeicon.svg"
                                     alt="close"
                                     width={20}
@@ -1008,7 +1053,8 @@ const Card = ({ data, productId }) => {
                                 >
                                   <div className="flex items-center">
                                     <div className="mr-[15px] p-1  ">
-                                      <Image loading="lazy"
+                                      <Image
+                                        loading="lazy"
                                         src="/icons/adtocart.svg"
                                         height={25}
                                         width={25}
@@ -1020,7 +1066,8 @@ const Card = ({ data, productId }) => {
                                       UPI
                                     </p>
                                     {openOfferDetails ? (
-                                      <Image loading="lazy"
+                                      <Image
+                                        loading="lazy"
                                         src="/icons/arrow_right.svg"
                                         className="-rotate-90"
                                         height={20}
@@ -1028,7 +1075,8 @@ const Card = ({ data, productId }) => {
                                         alt="arrow-right"
                                       />
                                     ) : (
-                                      <Image loading="lazy"
+                                      <Image
+                                        loading="lazy"
                                         src="/icons/arrow_right.svg"
                                         className="rotate-90"
                                         height={20}
@@ -1069,19 +1117,21 @@ const Card = ({ data, productId }) => {
                                     onClick={(e) =>
                                       setEmiOption("Credit Card EMI")
                                     }
-                                    className={`${EmiOption === "Credit Card EMI"
-                                      ? "bg-black text-white py-[16px] hover:bg-gray-900 px-[30px] text-center text-[14px] rounded-full"
-                                      : "py-[16px] border-2  px-[30px] rounded-full  text-[14px] text-center"
-                                      }`}
+                                    className={`${
+                                      EmiOption === "Credit Card EMI"
+                                        ? "bg-black text-white py-[16px] hover:bg-gray-900 px-[30px] text-center text-[14px] rounded-full"
+                                        : "py-[16px] border-2  px-[30px] rounded-full  text-[14px] text-center"
+                                    }`}
                                   >
                                     Credit Card EMI
                                   </button>
                                   <button
                                     onClick={(e) => setEmiOption("Debit Card")}
-                                    className={`${EmiOption === "Debit Card"
-                                      ? "bg-black hover:bg-gray-900 flex-1 text-white py-[16px] px-[30px] text-center text-[14px]  rounded-full"
-                                      : "py-[16px] flex-1 border-2 px-[30px]  rounded-full  text-[14px] text-center"
-                                      }`}
+                                    className={`${
+                                      EmiOption === "Debit Card"
+                                        ? "bg-black hover:bg-gray-900 flex-1 text-white py-[16px] px-[30px] text-center text-[14px]  rounded-full"
+                                        : "py-[16px] flex-1 border-2 px-[30px]  rounded-full  text-[14px] text-center"
+                                    }`}
                                   >
                                     Debit Card & EMI
                                   </button>
@@ -1104,7 +1154,8 @@ const Card = ({ data, productId }) => {
                                     >
                                       <div className="flex items-center w-full ">
                                         <div className="mr-[15px] p-1 ">
-                                          <Image loading="lazy"
+                                          <Image
+                                            loading="lazy"
                                             src="/icons/icic.svg"
                                             height={24}
                                             width={24}
@@ -1120,7 +1171,8 @@ const Card = ({ data, productId }) => {
                                           </p>
                                         </div>
                                         {openEmiDetails ? (
-                                          <Image loading="lazy"
+                                          <Image
+                                            loading="lazy"
                                             src="/icons/arrow_right.svg"
                                             className="-rotate-90"
                                             height={20}
@@ -1128,7 +1180,8 @@ const Card = ({ data, productId }) => {
                                             alt="arrow-right"
                                           />
                                         ) : (
-                                          <Image loading="lazy"
+                                          <Image
+                                            loading="lazy"
                                             src="/icons/arrow_right.svg"
                                             className="rotate-90"
                                             height={20}
@@ -1246,7 +1299,8 @@ const Card = ({ data, productId }) => {
                                     >
                                       <div className="flex items-center w-full ">
                                         <div className="mr-[15px] p-1 ">
-                                          <Image loading="lazy"
+                                          <Image
+                                            loading="lazy"
                                             src="/icons/icic.svg"
                                             height={24}
                                             width={24}
@@ -1262,7 +1316,8 @@ const Card = ({ data, productId }) => {
                                           </p>
                                         </div>
                                         {openEmiDetails ? (
-                                          <Image loading="lazy"
+                                          <Image
+                                            loading="lazy"
                                             src="/icons/arrow_right.svg"
                                             className="-rotate-90"
                                             height={20}
@@ -1270,7 +1325,8 @@ const Card = ({ data, productId }) => {
                                             alt="arrow-right"
                                           />
                                         ) : (
-                                          <Image loading="lazy"
+                                          <Image
+                                            loading="lazy"
                                             src="/icons/arrow_right.svg"
                                             className="rotate-90"
                                             height={20}
@@ -1390,7 +1446,8 @@ const Card = ({ data, productId }) => {
                                     className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
                                     onClick={() => setsidebarContent(null)}
                                   >
-                                    <Image loading="lazy"
+                                    <Image
+                                      loading="lazy"
                                       src="/icons/closeicon.svg"
                                       alt="close"
                                       width={30}
@@ -1445,7 +1502,8 @@ const Card = ({ data, productId }) => {
                                   </div>
                                 </div>
                                 <div>
-                                  <Image loading="lazy"
+                                  <Image
+                                    loading="lazy"
                                     src="/icons/arrow_right.svg"
                                     height={50}
                                     width={50}
@@ -1478,7 +1536,8 @@ const Card = ({ data, productId }) => {
                                   </div>
                                 </div>
                                 <div>
-                                  <Image loading="lazy"
+                                  <Image
+                                    loading="lazy"
                                     src="/icons/arrow_right.svg"
                                     height={50}
                                     width={50}
@@ -1511,7 +1570,8 @@ const Card = ({ data, productId }) => {
                                   </div>
                                 </div>
                                 <div>
-                                  <Image loading="lazy"
+                                  <Image
+                                    loading="lazy"
                                     src="/icons/arrow_right.svg"
                                     height={50}
                                     width={50}
@@ -1541,7 +1601,8 @@ const Card = ({ data, productId }) => {
                                 className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
                                 onClick={() => setsidebarContent(null)}
                               >
-                                <Image loading="lazy"
+                                <Image
+                                  loading="lazy"
                                   src="/icons/closeicon.svg"
                                   alt="close"
                                   width={20}
@@ -1598,7 +1659,8 @@ const Card = ({ data, productId }) => {
                               className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
                               onClick={() => setsidebarContent(null)}
                             >
-                              <Image loading="lazy"
+                              <Image
+                                loading="lazy"
                                 src="/icons/closeicon.svg"
                                 alt="close"
                                 width={20}
@@ -1629,7 +1691,8 @@ const Card = ({ data, productId }) => {
                                 document.body.style.overflow = "auto";
                               }}
                             >
-                              <Image loading="lazy"
+                              <Image
+                                loading="lazy"
                                 src="/icons/closeicon.svg"
                                 alt="close"
                                 width={20}
@@ -1639,7 +1702,8 @@ const Card = ({ data, productId }) => {
                             </button>
                           </div>
                           <div className="flex items-start w-[100%]  pb-10 absolute ">
-                            <Image loading="lazy"
+                            <Image
+                              loading="lazy"
                               src={data?.images[0]}
                               height={100}
                               width={100}
@@ -1656,10 +1720,11 @@ const Card = ({ data, productId }) => {
                               </p>
                               <div className="font-bold items-end flex mb-1 my-[5px]">
                                 <h2
-                                  className={`text-3xl leading-[0.5] tracking-wide ${data?.specialprice?.price
-                                    ? "bg-[#FFD209] px-2 pt-3 w-fit shadow-lg"
-                                    : ""
-                                    } `}
+                                  className={`text-3xl leading-[0.5] tracking-wide ${
+                                    data?.specialprice?.price
+                                      ? "bg-[#FFD209] px-2 pt-3 w-fit shadow-lg"
+                                      : ""
+                                  } `}
                                   style={
                                     data?.specialprice?.price
                                       ? { boxShadow: "3px 3px #ad3535" }
@@ -1696,7 +1761,7 @@ const Card = ({ data, productId }) => {
                             </h2>
                             <div className="">
                               {categoryProducts &&
-                                categoryProducts.length > 0 ? (
+                              categoryProducts.length > 0 ? (
                                 categoryProducts.map((product) => (
                                   <div
                                     key={product._id}
@@ -1705,12 +1770,15 @@ const Card = ({ data, productId }) => {
                                     onMouseLeave={() => setShowCart(false)}
                                   >
                                     <div className="flex">
-                                      <Image loading="lazy"
+                                      <Image
+                                        loading="lazy"
                                         src={product?.images[0]}
                                         height={100}
                                         width={100}
                                         className="mr-[16px] h-[100px] w-[100px]"
-                                        alt={data?.productTitle || "product image"}
+                                        alt={
+                                          data?.productTitle || "product image"
+                                        }
                                       />
                                       <div className="flex flex-col mx-[12px] max-w-[220px]">
                                         <p className="text-[14px] font-bold text-[#484848]">
@@ -1721,16 +1789,17 @@ const Card = ({ data, productId }) => {
                                         </p>
                                         <div className="font-bold items-end flex mb-1 my-[5px]">
                                           <h2
-                                            className={`text-3xl leading-[0.5] tracking-wide ${product?.specialprice?.price
-                                              ? "bg-[#FFD209] px-2 pt-3 w-fit shadow-lg"
-                                              : ""
-                                              } `}
+                                            className={`text-3xl leading-[0.5] tracking-wide ${
+                                              product?.specialprice?.price
+                                                ? "bg-[#FFD209] px-2 pt-3 w-fit shadow-lg"
+                                                : ""
+                                            } `}
                                             style={
                                               product?.specialprice?.price
                                                 ? {
-                                                  boxShadow:
-                                                    "3px 3px #ad3535",
-                                                }
+                                                    boxShadow:
+                                                      "3px 3px #ad3535",
+                                                  }
                                                 : {}
                                             }
                                           >
@@ -1752,7 +1821,8 @@ const Card = ({ data, productId }) => {
                                         handleAddToCart(product._id)
                                       }
                                     >
-                                      <Image loading="lazy"
+                                      <Image
+                                        loading="lazy"
                                         src={"/icons/ad-to-cart.svg"}
                                         height={20}
                                         width={20}
@@ -1828,7 +1898,6 @@ const Card = ({ data, productId }) => {
                 </button>
               </div>
             </div>
-
           ) : (
             <div className="buttons mt-4 sm:w-auto w-[100%] sm:block flex flex-col items-center justify-center">
               <div className="guestCheckout w-[100%] flex justify-center items-center mb-[10px] ">
@@ -1881,9 +1950,6 @@ const Card = ({ data, productId }) => {
                 </div>
               ))}
             </div>
-
-
-
           </div>
         </div>
         <ToastContainer

@@ -2,6 +2,7 @@ import { BreadcrumbJsonLd, ProductJsonLd } from "next-seo";
 import RoomPage from "./MainPage";
 import axios from "axios";
 import { getAggregateRating } from "@/utils/getAggregateRating";
+import ProductPage from "@/components/ProductPage/ProductPage";
 
 export async function generateMetadata({ params }) {
   const response = await axios.get(
@@ -82,7 +83,7 @@ const page = async ({ params }) => {
           },
         ]}
       />
-      <RoomPage />
+      <ProductPage title={params.title} />
     </>
   );
 };
