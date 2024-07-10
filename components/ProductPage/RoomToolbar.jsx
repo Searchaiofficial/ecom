@@ -265,7 +265,14 @@ const RoomToolbar = ({ data }) => {
                               onClick={() => removeItem(item)}
                               className="absolute top-0 right-0 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white cursor-pointer"
                             >
-                              <p className="text-sm">X</p>
+                              <Image
+                                loading="lazy"
+                                src="/icons/closeicon.svg"
+                                alt="close"
+                                width={15}
+                                height={15}
+                                className="py-1"
+                              />
                             </div>
                           </div>
                           <h2 className="text-[#333333] text-[14px] hover:underline line-clamp-1">
@@ -357,7 +364,14 @@ const RoomToolbar = ({ data }) => {
 
                 </div>
                 <button className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer" onClick={handleClose} >
-                  X
+                  <Image
+                    loading="lazy"
+                    src="/icons/closeicon.svg"
+                    alt="close"
+                    width={15}
+                    height={15}
+                    className="py-2"
+                  />
                 </button>
               </div>
 
