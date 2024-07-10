@@ -790,15 +790,14 @@ const Card = ({ data, productId }) => {
               Pattern Number:&nbsp;
               <h3>{data?.patternNumber}</h3>
             </div> */}
-            {(data?.productType === "normal" || data?.productType === "special" ) && (
+            {(data?.productType === "normal" || data?.productType === "special") && (
               <div className="price">
                 <div className="font-bold items-end flex mb-1 mt-[10px]">
                   <p
-                    className={`text-3xl leading-[0.5] tracking-wide ${
-                      data?.specialprice?.price
-                        ? "bg-[#FFD209] px-2 pt-3 w-fit shadow-lg"
-                        : ""
-                    } `}
+                    className={`text-3xl leading-[0.5] tracking-wide ${data?.specialprice?.price
+                      ? "bg-[#FFD209] px-2 pt-3 w-fit shadow-lg"
+                      : ""
+                      } `}
                     style={
                       data?.specialprice?.price
                         ? { boxShadow: "3px 3px #ad3535" }
@@ -810,8 +809,8 @@ const Card = ({ data, productId }) => {
                     {data?.specialprice?.price
                       ? data?.specialprice.price
                       : selectedSpecData?.specialprice
-                      ? selectedSpecData.price
-                      : data.perUnitPrice}
+                        ? selectedSpecData.price
+                        : data.perUnitPrice}
                   </p>{" "}
                   <span> &nbsp;/roll</span>
                 </div>
@@ -847,11 +846,10 @@ const Card = ({ data, productId }) => {
                     <button
                       key={dim._id}
                       onClick={() => handleSpecClick(dim._id)}
-                      className={`px-2 py-1  ${
-                        selectedSpec === dim._id
-                          ? "bg-green-500 text-white"
-                          : "bg-zinc-100 text-black hover:bg-zinc-200"
-                      }`}
+                      className={`px-2 py-1  ${selectedSpec === dim._id
+                        ? "bg-green-500 text-white"
+                        : "bg-zinc-100 text-black hover:bg-zinc-200"
+                        }`}
                     >
                       {`${dim.thickness.value} ${dim.length.unit}`}
                     </button>
@@ -876,12 +874,11 @@ const Card = ({ data, productId }) => {
                       key={index}
                       onClick={() => handleColor(item.color)}
                       className={`parent relative w-[55px] h-[55px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
-            ${
-              selectedColor === item.color ||
-              (index === 0 && selectedColor === "")
-                ? " border-black "
-                : " border-black"
-            }   
+            ${selectedColor === item.color ||
+                          (index === 0 && selectedColor === "")
+                          ? " border-black "
+                          : " border-black"
+                        }   
           `}
                     >
                       <Image
@@ -894,7 +891,7 @@ const Card = ({ data, productId }) => {
                         objectFit="cover"
                       />
                       {selectedColor === item.color ||
-                      (index === 0 && selectedColor === "") ? (
+                        (index === 0 && selectedColor === "") ? (
                         <div className="w-[100%] h-[2px] bg-black mt-[70px]" />
                       ) : (
                         ""
@@ -992,7 +989,7 @@ const Card = ({ data, productId }) => {
               <div className="">
                 <div className="w-1/2 flex flex-col justify-between gap-4 h-full bg-white rounded-3xl p-7">
                   {sidebarContect === "zeroCostEMI" && (
-                    <div className="fixed z-[9999] h-full w-screen bg-black/50 backdrop:blur-sm top-0 left-0">
+                    <div className="fixed z-[9999] h-full w-screen bg-black/50 backdrop-blur-sm top-0 left-0">
                       <section className="text-black bg-white flex-col absolute right-0 top-0 h-full  z-[99999] w-full  lg:w-[35%] flex overflow-y-auto">
                         <div className="flex flex-col w-full">
                           <div className="px-[40px] pb-[32px]">
@@ -1000,21 +997,19 @@ const Card = ({ data, productId }) => {
                               <div className="flex-1 flex">
                                 <div
                                   onClick={() => setIsActive("Offers for you")}
-                                  className={`flex-1 cursor-pointer flex items-center justify-center h-[50px] ${
-                                    isActive === "Offers for you"
-                                      ? "border-b-4 border-[#2e2e2e] text-black"
-                                      : "border-[#8E8E8E] text-[#8E8E8E]"
-                                  }`}
+                                  className={`flex-1 cursor-pointer flex items-center justify-center h-[50px] ${isActive === "Offers for you"
+                                    ? "border-b-4 border-[#2e2e2e] text-black"
+                                    : "border-[#8E8E8E] text-[#8E8E8E]"
+                                    }`}
                                 >
                                   <p className="text-[16px]">Offers for you</p>
                                 </div>
                                 <div
                                   onClick={() => setIsActive("EMI Plans")}
-                                  className={`flex-1 cursor-pointer flex items-center justify-center h-[50px] ${
-                                    isActive === "EMI Plans"
-                                      ? "border-b-4 border-[#2e2e2e] text-black"
-                                      : "border-[#8E8E8E] text-[#8E8E8E]"
-                                  }`}
+                                  className={`flex-1 cursor-pointer flex items-center justify-center h-[50px] ${isActive === "EMI Plans"
+                                    ? "border-b-4 border-[#2e2e2e] text-black"
+                                    : "border-[#8E8E8E] text-[#8E8E8E]"
+                                    }`}
                                 >
                                   <p className="text-[16px]">EMI Plans</p>
                                 </div>
@@ -1117,21 +1112,19 @@ const Card = ({ data, productId }) => {
                                     onClick={(e) =>
                                       setEmiOption("Credit Card EMI")
                                     }
-                                    className={`${
-                                      EmiOption === "Credit Card EMI"
-                                        ? "bg-black text-white py-[16px] hover:bg-gray-900 px-[30px] text-center text-[14px] rounded-full"
-                                        : "py-[16px] border-2  px-[30px] rounded-full  text-[14px] text-center"
-                                    }`}
+                                    className={`${EmiOption === "Credit Card EMI"
+                                      ? "bg-black text-white py-[16px] hover:bg-gray-900 px-[30px] text-center text-[14px] rounded-full"
+                                      : "py-[16px] border-2  px-[30px] rounded-full  text-[14px] text-center"
+                                      }`}
                                   >
                                     Credit Card EMI
                                   </button>
                                   <button
                                     onClick={(e) => setEmiOption("Debit Card")}
-                                    className={`${
-                                      EmiOption === "Debit Card"
-                                        ? "bg-black hover:bg-gray-900 flex-1 text-white py-[16px] px-[30px] text-center text-[14px]  rounded-full"
-                                        : "py-[16px] flex-1 border-2 px-[30px]  rounded-full  text-[14px] text-center"
-                                    }`}
+                                    className={`${EmiOption === "Debit Card"
+                                      ? "bg-black hover:bg-gray-900 flex-1 text-white py-[16px] px-[30px] text-center text-[14px]  rounded-full"
+                                      : "py-[16px] flex-1 border-2 px-[30px]  rounded-full  text-[14px] text-center"
+                                      }`}
                                   >
                                     Debit Card & EMI
                                   </button>
@@ -1432,7 +1425,7 @@ const Card = ({ data, productId }) => {
                     </div>
                   )}
                   {sidebarContect === "inStoreRequest" && (
-                    <div className="fixed z-[99999] h-full w-screen bg-black/50 backdrop:blur-sm top-0 left-0">
+                    <div className="fixed z-[99999] h-full w-screen bg-black/50 backdrop-blur-sm top-0 left-0">
                       <section className="text-black bg-white flex-col absolute right-0 top-0 h-full z-[99999] w-full  lg:w-[35%] flex overflow-y-auto">
                         <div className="flex flex-col">
                           <div className="px-[40px] pb-[32px]">
@@ -1588,7 +1581,7 @@ const Card = ({ data, productId }) => {
                 </div>
 
                 {sidebarContect === "deliveryOption" && (
-                  <div className=" fixed z-[99999] h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0">
+                  <div className=" fixed z-[99999] h-full w-screen  bg-black/50  backdrop-blur-sm top-0 left-0">
                     <section className="text-black z-[99999] bg-white flex-col absolute right-0 top-0 h-screen w-full  lg:w-[35%] flex ">
                       <div className="flex flex-col">
                         <div className="px-[40px] pb-[32px]">
@@ -1647,7 +1640,7 @@ const Card = ({ data, productId }) => {
                   </div>
                 )}
                 {sidebarContect === "calculator" && (
-                  <div className=" fixed h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0 z-[99999]">
+                  <div className=" fixed h-full w-screen  bg-black/50  backdrop-blur-sm top-0 left-0 z-[99999]">
                     <section className="text-black bg-white flex-col absolute right-0 top-0 h-screen z-[99999] w-full  lg:w-[35%] flex ">
                       <div className="flex flex-col">
                         <div className="px-[40px] pb-[32px]">
@@ -1676,7 +1669,7 @@ const Card = ({ data, productId }) => {
                   </div>
                 )}
                 {sidebarContect === "addToBag" && (
-                  <div className=" fixed h-full w-screen  bg-black/50  backdrop:blur-sm top-0 left-0 z-[99999]">
+                  <div className=" fixed h-full w-screen  bg-black/50  backdrop-blur-sm top-0 left-0 z-[99999]">
                     <section className="text-black bg-white flex-col absolute right-0 top-0 h-screen z-[99999] w-full  lg:w-[35%] flex ">
                       <div className="flex flex-col ">
                         <div className="md:px-[40px] pb-[32px] px-[20px]">
@@ -1720,11 +1713,10 @@ const Card = ({ data, productId }) => {
                               </p>
                               <div className="font-bold items-end flex mb-1 my-[5px]">
                                 <h2
-                                  className={`text-3xl leading-[0.5] tracking-wide ${
-                                    data?.specialprice?.price
-                                      ? "bg-[#FFD209] px-2 pt-3 w-fit shadow-lg"
-                                      : ""
-                                  } `}
+                                  className={`text-3xl leading-[0.5] tracking-wide ${data?.specialprice?.price
+                                    ? "bg-[#FFD209] px-2 pt-3 w-fit shadow-lg"
+                                    : ""
+                                    } `}
                                   style={
                                     data?.specialprice?.price
                                       ? { boxShadow: "3px 3px #ad3535" }
@@ -1761,7 +1753,7 @@ const Card = ({ data, productId }) => {
                             </h2>
                             <div className="">
                               {categoryProducts &&
-                              categoryProducts.length > 0 ? (
+                                categoryProducts.length > 0 ? (
                                 categoryProducts.map((product) => (
                                   <div
                                     key={product._id}
@@ -1789,17 +1781,16 @@ const Card = ({ data, productId }) => {
                                         </p>
                                         <div className="font-bold items-end flex mb-1 my-[5px]">
                                           <h2
-                                            className={`text-3xl leading-[0.5] tracking-wide ${
-                                              product?.specialprice?.price
-                                                ? "bg-[#FFD209] px-2 pt-3 w-fit shadow-lg"
-                                                : ""
-                                            } `}
+                                            className={`text-3xl leading-[0.5] tracking-wide ${product?.specialprice?.price
+                                              ? "bg-[#FFD209] px-2 pt-3 w-fit shadow-lg"
+                                              : ""
+                                              } `}
                                             style={
                                               product?.specialprice?.price
                                                 ? {
-                                                    boxShadow:
-                                                      "3px 3px #ad3535",
-                                                  }
+                                                  boxShadow:
+                                                    "3px 3px #ad3535",
+                                                }
                                                 : {}
                                             }
                                           >
@@ -1882,7 +1873,7 @@ const Card = ({ data, productId }) => {
           </div>
 
           {/* //buttons */}
-          {(data.productType === "normal" || data.productType === "special" )? (
+          {(data.productType === "normal" || data.productType === "special") ? (
             <div className="flex items-center justify-between mt-4">
               <div className="">
                 <IncDecCounter />

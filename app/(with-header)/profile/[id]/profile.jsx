@@ -100,11 +100,7 @@ const Profile = ({ id }) => {
     storeTokenInLocalStorage();
     fetchUerById();
   }, []);
-  //   if (!user) {
-  //     return <div>User Not Found</div>;
-  //   }
 
-  // console.log(user);
   const handleLogout = () => {
     localStorage?.removeItem("token");
     window?.open(
@@ -114,87 +110,96 @@ const Profile = ({ id }) => {
   };
 
   return (
-    <div>
+    <div className="flex flex-col items-center w-full px-4 sm:px-6 lg:px-8 pt-20">
       {user ? (
-        <div className="sm:mt-[7rem] w-full px-[20px] sm:px-[50px] lg:px-[67px]">
-          {isAuthenticated && isCurrentUser && (
-            <div className="flex justify-end w-full gap-2 mb-2">
-              <button
-                //   onClick={handleUpdateProfile}
-                className="bg-blue-500 text-white px-4 text-sm py-2 rounded-md"
-              >
-                Edit Profile
-              </button>
-
-              <button
-                onClick={handleLogout}
-                className="bg-red-500 text-white px-4 text-sm py-2 rounded-md"
-              >
-                Logout
-              </button>
+        <>
+          <div className="flex flex-col items-center w-full mt-10">
+            <div className="relative w-24 h-24 sm:w-32 sm:h-32">
+              <Image
+                src={user.image}
+                alt="profile"
+                layout="fill"
+                className="rounded-full object-cover"
+              />
             </div>
-          )}
-          <div className="flex flex-col p-4 items-center justify-center ">
-            <Image
-              src={user.image}
-              alt="profile"
-              width={100}
-              height={100}
-              className="rounded-full"
-            />
-            <h1 className="text-xl ">{user.displayName}</h1>
-            <h1 className="text-gray-600">{user.email}</h1>
-            <h1 className="text-slate-400">
-              {user?.isLiveStreamHost && "Liveroom Host"}
+            <h1 className="mt-4 text-2xl sm:text-3xl font-semibold">
+              {user.displayName}
             </h1>
-
-            {user.authorDetails && user.authorDetails.author && (
-              <div className="mt-8 flex flex-col items-center justify-center">
-                <h1 className="text-xl text-red-500 font-bold">Author</h1>
-                <h1 className="text-gray-600">
-                  {user.authorDetails.author.description}
-                </h1>
-                <div className="mt-4">
-                  <div className="mt-2 flex gap-2 ">
-                    <h1 className=" font-semibold">Experience :</h1>
-                    <h1 className="text-gray-600 ">
-                      {user.authorDetails.author.experience} year of experience
-                    </h1>
-                  </div>
-                  <div className="mt-2 flex gap-2 ">
-                    <h1 className=" font-semibold">Rating :</h1>
-                    <h1 className="text-gray-600 ">
-                      {user.authorDetails.author.rating}
-                    </h1>
-                  </div>
-                  <div className="mt-2 flex gap-2 ">
-                    <h1 className=" font-semibold">Purchases :</h1>
-                    <h1 className="text-gray-600 ">
-                      {user.authorDetails.author.purchase}
-                    </h1>
-                  </div>
-                  <div className="mt-2 flex gap-2 ">
-                    <h1 className=" font-semibold">Awards :</h1>
-                    <h1 className="text-gray-600 ">
-                      {user.authorDetails.author.awards.join(", ")}
-                    </h1>
-                  </div>
-                </div>
+            <h2 className="text-gray-600">{user.email}</h2>
+            <h3 className="text-slate-400">
+              {user?.isLiveStreamHost && "Liveroom Host"}
+            </h3>
+            {isAuthenticated && isCurrentUser && (
+              <div className="flex justify-center w-full mt-4 gap-2">
+                <button
+                  className="bg-blue-500 text-white px-4 text-sm py-2 rounded-full"
+                >
+                  Edit Profile
+                </button>
+                <button
+                  onClick={handleLogout}
+                  className="bg-red-500 text-white px-4 text-sm py-2 rounded-full"
+                >
+                  Logout
+                </button>
               </div>
             )}
           </div>
+
+          {user.authorDetails && user.authorDetails.author && (
+            <div className="mt-8 flex flex-col items-center w-full">
+              <h2 className="text-xl text-red-500 font-bold">Author</h2>
+              <p className="text-gray-600 text-center">
+                {user.authorDetails.author.description}
+              </p>
+              <div className="mt-4 w-full max-w-2xl">
+                <div className="mt-2 flex gap-2 ">
+                  <span className="font-semibold">Experience:</span>
+                  <span className="text-gray-600 ">
+                    {user.authorDetails.author.experience} year of experience
+                  </span>
+                </div>
+                <div className="mt-2 flex gap-2 ">
+                  <span className="font-semibold">Rating:</span>
+                  <span className="text-gray-600 ">
+                    {user.authorDetails.author.rating}
+                  </span>
+                </div>
+                <div className="mt-2 flex gap-2 ">
+                  <span className="font-semibold">Purchases:</span>
+                  <span className="text-gray-600 ">
+                    {user.authorDetails.author.purchase}
+                  </span>
+                </div>
+                <div className="mt-2 flex gap-2 ">
+                  <span className="font-semibold">Awards:</span>
+                  <span className="text-gray-600 ">
+                    {user.authorDetails.author.awards.join(", ")}
+                  </span>
+                </div>
+              </div>
+            </div>
+          )}
+
           {user.authorDetails &&
             user.authorDetails.author &&
             authorProduct &&
             authorProduct.length > 0 && (
-              <div className="mt-8">
-                <BlogRelatedProducts
-                  relatedProducts={authorProduct}
-                  title="Products by Author"
-                />
+              <div className="mt-8 w-full">
+                <h2 className="text-xl text-center font-bold">
+                  Products by Author
+                </h2>
+                <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                  {authorProduct.map((product) => (
+                    <BlogRelatedProducts
+                      key={product.id}
+                      product={product}
+                    />
+                  ))}
+                </div>
               </div>
             )}
-        </div>
+        </>
       ) : (
         <div className="flex justify-center items-center h-screen text-2xl">
           User not found

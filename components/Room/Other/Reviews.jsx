@@ -16,7 +16,7 @@ const ratingsData = [
             className={`border mb-2 ${index === 0 ? "border-black bg-black" : "bg-gray-300"
               } rounded-full w-32 h-1.5 flex flex-row items-center ml-4 justify-start`}
           >
-            <span className="-ml-3">{number}</span>
+            <span className="-ml-3 text-sm">{number}</span>
           </div>
         ))}
       </div>
@@ -67,6 +67,20 @@ const ratingsData = [
   },
   {
     label: "Value",
+    value: "5.0",
+    icon: (
+      <Image
+        loading="lazy"
+        src="/icons/price-tag-icon.svg"
+        width={36}
+        height={36}
+        alt="value"
+        className="mt-5"
+      />
+    ),
+  },
+  {
+    label: "waterprof",
     value: "5.0",
     icon: (
       <Image
@@ -259,21 +273,17 @@ const Reviews = ({ productId, data }) => {
                   </div>
                 </div>
               </div>
-              <div className="rating-map flex flex-row justify-between mt-12 sm:w-auto w-[90vw] overflow-x-auto">
+
+              <div className="rating-map flex justify-around mt-12 w-full overflow-x-auto">
                 {ratingsData.map((item, index) => (
-                  <div
-                    key={index}
-                    className={` basis-1/7 flex pr-6 ${index < ratingsData.length - 1
-                      ? "border-r border-gray-400 h-32 "
-                      : ""
-                      }flex-col pl-6`}
-                  >
-                    {item.label}
-                    <div>{item.value}</div>
+                  <div key={index} className={`flex flex-col items-center text-center flex-grow px-4 ${ratingsData.length - 1 !== index ? 'border-r' : ''}`}>
+                    <div className="font-semibold text-gray-700 mb-2">{item.label}</div>
+                    <div className="text-lg font-semibold text-gray-900">{item.value}</div>
                     <div>{item.icon}</div>
                   </div>
                 ))}
               </div>
+
             </div>
           )}
 
