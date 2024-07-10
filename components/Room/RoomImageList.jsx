@@ -8,9 +8,9 @@ import {
 import "./styles.css";
 import Link from "next/link";
 
-export default function RoomImageList({ alt }) {
+export default function RoomImageList({images, alt }) {
   const productImages = useSelector(selectProductImages);
-  const images = useSelector(selectImages);
+  // const images = useSelector(selectImages);
 
   const imagesToDisplay =
     productImages.length > 0 ? productImages[0].images : images;
