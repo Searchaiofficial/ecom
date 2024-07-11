@@ -185,6 +185,12 @@ const Reviews = ({ productId, data }) => {
       formData.append("image", image);
     });
 
+    // Append dynamicRatings to FormData
+    newReview.dynamicRatings?.forEach((rating, index) => {
+      formData.append(`dynamicRatings[${index}][name]`, rating.name);
+      formData.append(`dynamicRatings[${index}][value]`, rating.value);
+    });
+
     if (isAuthenticated) {
       try {
         const response = await axios.post(
