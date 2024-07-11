@@ -1,26 +1,16 @@
 import axios from "axios";
 
 export const getPinFromCoordinates = async (lat, lng) => {
-  const rapidApiKey = process.env.NEXT_PUBLIC_RAPID_API_KEY;
-  const rapidApiHost = process.env.NEXT_PUBLIC_RAPID_API_HOST;
+  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
-  const options = {
-    method: "GET",
-    url: "https://trueway-geocoding.p.rapidapi.com/ReverseGeocode",
-    params: {
-      location: `${lat},${lng}`,
-      language: "en",
-    },
-    headers: {
-      "X-RapidAPI-Key": rapidApiKey,
-      "X-RapidAPI-Host": rapidApiHost,
-    },
-  };
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${apiKey}`;
 
   try {
-    const response = await axios.request(options);
+    const response = await axios.get(url);
 
-    return response.data.results[0].postal_code;
+    return response.data.results[0].address_components.find((component) => {
+      return component.types.includes("postal_code");
+    }).long_name;
   } catch (error) {
     console.error(error);
   }
