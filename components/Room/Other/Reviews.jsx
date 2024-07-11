@@ -299,7 +299,7 @@ const Reviews = ({ productId, data }) => {
               <p>Loading...</p>
             ) : (
               !isReview ? (
-                <ReviewForm addReview={addReview} />
+                <ReviewForm addReview={addReview} data={data} />
               ) : (
                 <div>
                   {/* This section can be used for further review-related content */}
