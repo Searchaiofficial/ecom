@@ -33,6 +33,7 @@ import {
   renderColor,
   renderOffer,
   renderDemand,
+  renderSubCategory,
 } from "./tabsRender";
 import TabsProductContent from "../compounds/TabsProductContent";
 import Measure from "./meausrement";
@@ -145,6 +146,14 @@ const Tabs = ({
       const uniqueDemandTypes = [...new Set(demandTypes)];
       console.log(uniqueDemandTypes);
       setAllDemandType(uniqueDemandTypes);
+
+      const subcategory = filteredProductData
+        .map((product) => product.subcategory)
+        .filter((subcategory) => subcategory);
+      const uniqueSubcategory = [...new Set(subcategory)];
+      console.log(uniqueSubcategory);
+
+      setAllSubcategory(uniqueSubcategory);
     }
   }, [filteredProductData]);
 
@@ -153,6 +162,7 @@ const Tabs = ({
   // <<<<<<< Updated upstream
   const [allOffers, setAllOffers] = useState([]);
   const [allDemandType, setAllDemandType] = useState([]);
+  const [AllsubCategory, setAllSubcategory] = useState([]);
   // <<<<<<< Updated upstream
   //   // const [allDimensions, setAllDimensions] = useState([]);
   // =======
@@ -210,6 +220,19 @@ const Tabs = ({
     setClearSelectedResult(true);
     setselectedResult(filteredProducts?.length);
   };
+
+  const handleSubCategoryChange = (selectedSubCategory) => {
+    console.log("Selected subcategory:", selectedSubCategory);
+    // Filter products by color
+    const filteredProducts = filteredProductData.filter((product) => {
+      return product.subcategory === selectedSubCategory;
+    });
+
+    console.log(filteredProducts)
+    setFilterdata(filteredProducts);
+    setClearSelectedResult(true);
+    setselectedResult(filteredProducts?.length);
+  }
 
   // >>>>>>> Stashed changes
 
@@ -347,6 +370,12 @@ const Tabs = ({
   const handleAllcolor = () => {
     setOpenAllcolor(!openAllcolor);
   };
+
+  const [openAllSubCategory, setOpenAllSuvbCategory] = useState(false);
+
+  const handleallSubcategory = () => {
+    setOpenAllSuvbCategory(!openAllSubCategory);
+  };
   const [openCaategory, setOpenCategory] = useState(false);
   const handleCategory = () => {
     if (
@@ -356,7 +385,8 @@ const Tabs = ({
       openType === false &&
       openAll === false &&
       openSize === false &&
-      openOffer === false
+      openOffer === false &&
+      opensubcategory === false
     ) {
       setOpenCategory(!openCaategory);
     }
@@ -388,7 +418,8 @@ const Tabs = ({
       openDemandTYpe === false &&
       openAll === false &&
       openCaategory === false &&
-      openOffer === false
+      openOffer === false &&
+      opensubcategory === false
     ) {
       setOpenType(!openType);
     }
@@ -407,7 +438,8 @@ const Tabs = ({
       openDemandTYpe === false &&
       openType === false &&
       openCaategory === false &&
-      openOffer === false
+      openOffer === false &&
+      opensubcategory === false
     ) {
       setOpenAll(true);
     }
@@ -422,9 +454,26 @@ const Tabs = ({
       openDemandTYpe === false &&
       openType === false &&
       openCaategory === false &&
-      openAll === false
+      openAll === false &&
+      opensubcategory === false
     ) {
       setOpenOffer(!openOffer);
+    }
+  };
+
+  const [opensubcategory, setOpensubcategory] = useState(false);
+
+  const handlesubCategory = () => {
+    if (
+      openSize === false &&
+      openSort === false &&
+      opencolor === false &&
+      openDemandTYpe === false &&
+      openType === false &&
+      openCaategory === false &&
+      openAll === false
+    ) {
+      setOpensubcategory(!opensubcategory);
     }
   };
 
@@ -697,6 +746,20 @@ const Tabs = ({
     return pages;
   };
 
+  console.log(pathname.split("/")[3]);
+  const [filteredSubCategory, setSubCategory] = useState(null)
+
+  console.log(subCategory)
+
+  useEffect(() => {
+    if (pathname.split("/")[3] !== "all") {
+      const filtered = subCategory?.filter((data) => data.name === pathname.split("/")[3].replace(/-/g, " "))
+      setSubCategory(filtered)
+      console.log(filteredSubCategory)
+    }
+  }, [subCategory])
+
+
   return (
     <div className="">
       {openAll && <div className="background-overlay open"></div>}
@@ -704,7 +767,16 @@ const Tabs = ({
         <div className="flex flex-col overflow-hidden">
           <div className="mt-36" />
           <h2 className="Blinds font-semibold text-2xl pb-[20px] lg:pt-[30px] capitalize">
-            {heading}
+            {
+              pathname.split("/")[3] === "all" && (
+                <p>{heading}</p>
+              )
+            }
+            {
+              pathname.split("/")[3] !== "all" && (
+                <p>{pathname.split("/")[3].replace(/-/g, " ")}</p>
+              )
+            }
           </h2>
           <div className="flex items-center">
             {subCategory ? (
@@ -736,31 +808,62 @@ const Tabs = ({
                   }}
                   breakpoints={breakpoints}
                 >
-                  {subCategory?.map((curElement, idx) => {
-                    return (
-                      <SwiperSlide className="max-w-[130px]" key={idx}>
-                        <div
-                          className="cursor-pointer"
-                          onClick={() => setType(curElement.name)}
-                        >
-                          <div className="flex flex-col ">
-                            <div className="lg:mb-[12px] ">
-                              <Image
-                                src={curElement.img}
-                                width={200}
-                                height={130}
-                                alt={curElement.name}
-                                className="w-[200px] h-[70px]"
-                              />
+                  {
+                    pathname.split("/")[3] === "all" ? (
+                      subCategory?.map((curElement, idx) => {
+                        return (
+                          <SwiperSlide className="max-w-[130px]" key={idx}>
+                            <div
+                              className="cursor-pointer"
+                              onClick={() => setType(curElement.name)}
+                            >
+                              <div className="flex flex-col ">
+                                <div className="lg:mb-[12px] ">
+                                  <Image
+                                    src={curElement.img}
+                                    width={200}
+                                    height={130}
+                                    alt={curElement.name}
+                                    className="w-[200px] h-[70px]"
+                                  />
+                                </div>
+                                <h2 className="text-[#333333] text-[14px] hover:underline line-clamp-1">
+                                  {curElement.name}
+                                </h2>
+                              </div>
                             </div>
-                            <h2 className="text-[#333333] text-[14px] hover:underline line-clamp-1">
-                              {curElement.name}
-                            </h2>
-                          </div>
-                        </div>
-                      </SwiperSlide>
-                    );
-                  })}
+                          </SwiperSlide>
+                        );
+                      })
+                    ) :
+                      (
+                        filteredSubCategory?.map((curElement, idx) => {
+                          return (
+                            <div className="max-w-[130px]" key={idx}>
+                              <div
+                                className="cursor-pointer"
+                                onClick={() => setType(curElement.name)}
+                              >
+                                <div className="flex flex-col ">
+                                  <div className="lg:mb-[12px] ">
+                                    <Image
+                                      src={curElement.img}
+                                      width={200}
+                                      height={130}
+                                      alt={curElement.name}
+                                      className="w-[200px] h-[70px]"
+                                    />
+                                  </div>
+                                  <h2 className="text-[#333333] text-[14px] hover:underline line-clamp-1">
+                                    {curElement.name}
+                                  </h2>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })
+                      )
+                  }
                 </Swiper>
               </div>
             ) : (
@@ -886,6 +989,24 @@ const Tabs = ({
           ) : null} */}
 
           {/* Color dropdown */}
+          {filteredProductData &&
+            filteredProductData?.length > 0 &&
+            AllsubCategory &&
+            AllsubCategory.length > 0 && (
+              <TabsProductContent
+                filterName={"Sub Category"}
+                commonClasses={commonClasses}
+                isFilterOpen={opensubcategory}
+                handleAll={handleAll}
+                handleTabClick={handleTabClick}
+                handleFilter={handlesubCategory}
+                handleAllFilter={handleallSubcategory}
+                filterArr={AllsubCategory}
+                renderFilter={(text, idx) =>
+                  renderSubCategory(text, idx, handleSubCategoryChange)
+                }
+              />
+            )}
           {/* <<<<<<< Updated upstream */}
           {filteredProductData &&
             filteredProductData?.length > 0 &&

@@ -27,6 +27,21 @@ export const renderColor = (text, idx, handlechange) => (
   </div>
 );
 
+export const renderSubCategory = (text, idx, handleChange) => (
+
+  console.log(text),
+  <div
+    className="flex justify-between"
+    onClick={() => handleChange(text)}
+    key={idx}
+  >
+    <label htmlFor="age1" className="text-[14px] text-[#111111]">
+      {text}
+    </label>
+    <input type="radio" id="age1" name="age" value="30" />
+  </div>
+)
+
 export const renderDemand = (text, idx, handlechange) => (
   <div
     className="flex justify-between"
