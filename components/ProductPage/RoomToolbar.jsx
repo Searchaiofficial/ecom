@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import "./styles.css"
 import { useRouter } from "next/navigation";
+import ImageCaresoul from "@/components/Room/imagecaresoul";
 
 const { default: axios } = require("axios");
 const { default: Image } = require("next/image");
@@ -17,7 +18,7 @@ const RoomToolbar = ({ data }) => {
   // const [openFreeSAmple, setOpenFreeSample] = useState(false)
   const [categoryFilterOpen, setCategoryFilterOpen] = useState(false)
   const [ColorfilterOpen, setColorFilterOpen] = useState(false)
-  const [selectedCategory, setSelectedCategory] = useState("All Categories")
+  const [selectedSubCategory, setSelectedSubCategory] = useState("All Subcategories")
   const [selectedColor, setSelectedColor] = useState("All Colors")
   const [allColors, setAllColors] = useState([])
 
@@ -30,32 +31,49 @@ const RoomToolbar = ({ data }) => {
   };
 
   const [allProducts, setAllProducts] = useState([])
-  const [allCategories, setAllCategories] = useState([])
+  const [allSubCategories, setAllSubCategories] = useState([])
 
-  const fetchAllProducts = async () => {
+  console.log(data)
+
+  const fetchAllProductsByCatgory = async () => {
+    console.log(data?.category)
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/products?limit=1000`);
-      console.log("AllProducts :", response.data);
-      setAllProducts(response.data)
+      let response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/fetchProductsByCategory/${data?.category}`
+      );
+      console.log(selectedSamples)
+
+      const excludeCurrentProduct = response.data.filter(item => item?._id !== data?._id)
+      console.log(excludeCurrentProduct)
+      setAllProducts(excludeCurrentProduct);
+
+      // console.log(response.data);
+      console.log("Thsi run")
+      // setAllProducts(response.data);
+
+
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching data:", error);
+
     }
   };
-  const fetchAllCategories = async () => {
+  const fetchAllSubCategories = async () => {
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/categories`);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getSubCategories/${data?.category}`);
       console.log("AllCategories :", response.data);
-      setAllCategories(response.data)
+
+      const filteredSubcategories = response.data?.filter((subcategory) => subcategory.name !== "Accessories");
+      setAllSubCategories(filteredSubcategories)
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    fetchAllProducts()
-    fetchAllCategories()
+    fetchAllProductsByCatgory()
+    fetchAllSubCategories()
 
-  }, []);
+  }, [data]);
 
   const [FilteredProducts, setFilteredProducts] = useState([])
 
@@ -147,36 +165,42 @@ const RoomToolbar = ({ data }) => {
   };
 
 
-  const fetchProductsbyCategory = async (category) => {
-    console.log(category)
+  const fetchProductsbySubCategory = async (category) => {
     try {
-      if (category === "All Categories") {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/products?limit=1000`);
+      if (category === "All Subcategories") {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/fetchProductsByCategory/${data?.category}`);
         console.log("AllProducts :", response.data);
         const excludeAccessories = response.data?.filter(item => item?.subcategory !== "Accessories")
-        setFilteredProducts(excludeAccessories)
+        const excludeCurrentProduct = excludeAccessories.filter(item => item?._id !== data?._id)
+        console.log(excludeCurrentProduct)
+        setAllProducts(excludeCurrentProduct);
+        // setFilteredProducts(excludeAccessories)
       } else {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/fetchProductsByCategory/${category}`);
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getallProductsBySubCategory?categoryName=${data?.category}&subCategoryName=${category}`);
         console.log("AllCategories :", response.data);
         const excludeAccessories = response.data?.filter(item => item?.subcategory !== "Accessories")
-        setFilteredProducts(excludeAccessories)
+        const excludeCurrentProduct = excludeAccessories.filter(item => item?._id !== data?._id)
+        console.log(excludeCurrentProduct)
+        setAllProducts(excludeCurrentProduct);
+        // setFilteredProducts(excludeAccessories)
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleCategoryFilter = (item) => {
-    setSelectedCategory(item)
+  const handleSubCategoryFilter = (item) => {
+    setSelectedSubCategory(item)
     console.log(item)
-    fetchProductsbyCategory(item)
+    fetchProductsbySubCategory(item)
 
   }
 
   const handleColorFilter = async (color) => {
     setSelectedColor(color)
     if (color === "All Colors") {
-      setFilteredProducts(FilteredProducts)
+      // setFilteredProducts(FilteredProducts)
+      fetchAllProductsByCatgory()
     } else {
       // await fetchProductsbyCategory("All Categories")
       const filteredProducts = FilteredProducts.filter((product) => {
@@ -188,9 +212,9 @@ const RoomToolbar = ({ data }) => {
   }
 
   const handleRemoveAllFilters = () => {
-    setSelectedCategory("All Categories")
+    setSelectedSubCategory("All Subcategories")
     setSelectedColor("All Colors")
-    fetchProductsbyCategory("All Categories")
+    fetchAllProductsByCatgory()
   }
 
   const handleCategoryFilterOpen = () => {
@@ -203,6 +227,34 @@ const RoomToolbar = ({ data }) => {
       setColorFilterOpen(!ColorfilterOpen)
     }
   }
+
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const goToSlide = (index) => {
+    setActiveIndex(index);
+  };
+
+  const goToPrevSlide = () => {
+    let index = activeIndex;
+    let length = selectedSamples[selectedSamples.length - 1]?.images.length || data.images.length
+    if (index < 1) {
+      index = length - 1;
+    } else {
+      index--;
+    }
+    goToSlide(index);
+  };
+
+  const goToNextSlide = () => {
+    let index = activeIndex;
+    let length = selectedSamples[selectedSamples.length - 1]?.images.length || data.images.length
+    if (index === length - 1) {
+      index = 0;
+    } else {
+      index++;
+    }
+    goToSlide(index);
+  };
 
 
 
@@ -261,19 +313,16 @@ const RoomToolbar = ({ data }) => {
                               alt={item.productTitle}
                               className="w-[200px] h-[70px]"
                             />
-                            <div
-                              onClick={() => removeItem(item)}
-                              className="absolute top-0 right-0 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white cursor-pointer"
-                            >
-                              <Image
-                                loading="lazy"
-                                src="/icons/closeicon.svg"
-                                alt="close"
-                                width={15}
-                                height={15}
-                                className="py-1"
-                              />
-                            </div>
+                            {
+                              item._id !== data._id && (
+                                <div
+                                  onClick={() => removeItem(item)}
+                                  className="absolute top-0 right-0 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white cursor-pointer"
+                                >
+                                  <p className="text-sm">X</p>
+                                </div>
+                              )
+                            }
                           </div>
                           <h2 className="text-[#333333] text-[14px] hover:underline line-clamp-1">
                             {item.productTitle}
@@ -305,7 +354,77 @@ const RoomToolbar = ({ data }) => {
 
             </div>
             <div className=" flex flex-col">
-              <Image src={selectedSamples[selectedSamples.length - 1]?.images[0] || data.images[0]} height={250} width={300} className="w-full h-[300px]" />
+              <div className="relative w-full h-[300px]">
+                {/* Render Images */}
+                {selectedSamples[selectedSamples.length - 1]?.images ? (
+                  selectedSamples[selectedSamples.length - 1]?.images.map((src, idx) => (
+                    <div key={idx} className={activeIndex === idx ? "absolute inset-0" : "hidden"}>
+                      <Image
+                        src={src}
+                        alt="NA"
+                        layout="fill"
+                        objectFit="cover"
+                        className="w-full h-full"
+                      />
+                    </div>
+                  ))
+                ) : (
+                  data?.images.map((src, idx) => (
+                    <div key={idx} className={activeIndex === idx ? "absolute inset-0" : "hidden"}>
+                      <Image
+                        src={src}
+                        alt="NA"
+                        layout="fill"
+                        objectFit="cover"
+                        className="w-full h-full"
+                      />
+                    </div>
+                  ))
+                )}
+
+                {/* Slide Indicators */}
+                <span className="flex absolute bottom-4 left-1/2 transform -translate-x-1/2">
+                  {selectedSamples[selectedSamples.length - 1]?.images?.map((_, idx) => (
+                    <button
+                      key={idx}
+                      className={`${activeIndex === idx ? "bg-white" : "bg-[#cccc]"
+                        } h-[0.4rem] w-[0.4rem] rounded-full mr-1`}
+                      onClick={() => goToSlide(idx)}
+                    ></button>
+                  ))}
+                </span>
+
+                {/* Left Arrow */}
+                <div onClick={goToPrevSlide} className="absolute top-1/2 transform -translate-y-1/2 left-4 z-50">
+                  <Image
+                    loading="lazy"
+                    src="/icons/backarrow-w.svg"
+                    height={20}
+                    width={20}
+                    alt="arrow"
+                    className="h-8 w-8 hover:opacity-100 cursor-pointer"
+                  />
+                </div>
+
+                {/* Right Arrow */}
+                <div onClick={goToNextSlide} className="absolute top-1/2 transform -translate-y-1/2 right-4 z-50">
+                  <Image
+                    loading="lazy"
+                    src="/icons/rightarrow-w.svg"
+                    height={30}
+                    width={30}
+                    alt="arrow"
+                    className="h-8 w-8 hover:opacity-100 cursor-pointer"
+                  />
+                </div>
+              </div>
+
+              {/* <ImageCaresoul images={selectedSamples[selectedSamples.length - 1]?.images || data?.images} forFreeSamples={true} /> */}
+              {/* <ImageCaresoul
+                key={selectedSamples[selectedSamples.length - 1]?.images.join(',') || data.images.join(',')}
+                images={selectedSamples[selectedSamples.length - 1]?.images || data?.images}
+                forFreeSamples={true}
+              /> */}
               <div>
                 <div className="flex items-center justify-between pt-2">
                   <div className="flex flex-col">
@@ -390,12 +509,16 @@ const RoomToolbar = ({ data }) => {
                                 alt={item.productTitle}
                                 className="w-[200px] h-[70px]"
                               />
-                              <div
-                                onClick={() => removeItem(item)}
-                                className="absolute top-0 right-0 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white cursor-pointer"
-                              >
-                                <p className="text-sm">X</p>
-                              </div>
+                              {
+                                item._id !== data._id && (
+                                  <div
+                                    onClick={() => removeItem(item)}
+                                    className="absolute top-0 right-0 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white cursor-pointer"
+                                  >
+                                    <p className="text-sm">X</p>
+                                  </div>
+                                )
+                              }
                             </div>
                             <h2 className="text-[#333333] text-[14px] hover:underline line-clamp-1">
                               {item.productTitle}
@@ -431,7 +554,7 @@ const RoomToolbar = ({ data }) => {
 
               <div className="flex overflow-x-scroll lg:overflow-x-hidden items-center lg:gap-2 gap-2 my-3">
                 <div onClick={handleCategoryFilterOpen} className={`${commonClasses} text-[14px] flex items-center gap-2 font-semibold rounded-full bg-gray-100`}>
-                  <p>{selectedCategory}</p>
+                  <p>{selectedSubCategory === "All Subcategories" ? "All Styles" : selectedSubCategory}</p>
                   <Image loading="lazy"
                     src="/icons/backarrow.svg"
                     width={40}
@@ -440,14 +563,14 @@ const RoomToolbar = ({ data }) => {
                     alt="arrow icon"
                   />
                   {
-                    categoryFilterOpen && allCategories && allCategories.length > 0 && (
+                    categoryFilterOpen && allSubCategories && allSubCategories.length > 0 && (
                       <div className={`md:w-[300px] w-[150px] cursor-pointer absolute ${selectedSamples.length > 0 ? "top-[270px] md:top-[125px]" : "top-[150px] md:top-[125px]"}  z-50 h-fit bg-white border border-gray-200 rounded-lg`}>
-                        <p onClick={() => handleCategoryFilter("All Categories")} className="flex text-[14px] font-semibold px-4 py-2">All Categories</p>
+                        <p onClick={() => handleSubCategoryFilter("All Subcategories")} className="flex text-[14px] font-semibold px-4 py-2"> All Styles</p>
                         {
-                          allCategories.map((item) => {
+                          allSubCategories.map((item) => {
                             console.log(item)
                             return (
-                              <p onClick={() => handleCategoryFilter(item.name)} className="flex cursor-pointer text-[14px] font-semibold px-4 py-2">{item.name}</p>
+                              <p onClick={() => handleSubCategoryFilter(item.name)} className="flex cursor-pointer text-[14px] font-semibold px-4 py-2">{item.name}</p>
                             )
                           })
                         }
@@ -501,7 +624,8 @@ const RoomToolbar = ({ data }) => {
                               width={200}
                               height={130}
                               alt={item.productTitle}
-                              className="w-full h-[150px] lg:h-[180px]"
+                              className="w-full h-[150px] lg:h-[180px] "
+                              onClick={() => handleChecked(item)}
                             />
                             {
                               selectedSamples && selectedSamples.length < 3 && (
