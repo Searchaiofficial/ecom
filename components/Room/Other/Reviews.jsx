@@ -4,6 +4,7 @@ import Carous from "@/components/Carousel/Carous";
 import Image from "next/image";
 import axios from "axios";
 import ReviewForm from "../../../app/(with-header)/profile/ReviewForm";
+import Link from "next/link";
 
 const ratingsData = [
   {
@@ -178,6 +179,7 @@ const Reviews = ({ productId, data }) => {
     formData.append("productId", productId);
     formData.append("name", user.displayName);
     formData.append("userEmail", user.email);
+    formData.append("userId", user._id);
     formData.append("rating", newReview.rating);
     formData.append("comment", newReview.comment);
     formData.append("profilePic", user.image);
@@ -324,7 +326,7 @@ const Reviews = ({ productId, data }) => {
           {reviews.map((review, index) => (
             <div key={index} className="sm:mr-12 mb-8 m-0 sm:block ">
               <div className="flex justify-between">
-                <div className="review-header flex items-center">
+                <Link className="review-header flex items-center" href={`/profile/${review?.userId}`}>
                   <div className="w-[48px] h-[48px] mr-4">
                     <img
                       className="w-full h-full rounded-full object-cover"
@@ -340,7 +342,7 @@ const Reviews = ({ productId, data }) => {
                       {/* {review.location} */}
                     </span>
                   </div>
-                </div>
+                </Link>
                 {isAuthenticated && user.email === review.userEmail && (
                   <div className="flex items-center">
                     <button onClick={() => handleDelete(review._id)}>
