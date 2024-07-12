@@ -282,7 +282,7 @@ function Header({ setIsHeaderMounted }) {
       </TopHeaderWrapper>
       {isHovered && <div className="overlay"></div>}
       <div
-        className={`fixed w-full sm:bg-none ${!pathname.includes("/checkout") && !pathname.includes("/ayatrio-map")
+        className={`fixed w-full sm:bg-none ${!pathname.includes("/checkout") && !pathname.includes("/ayatrio-map") && !pathname.includes("/profile")
           ? typeof window !== "undefined" && window.scrollY < 20
             ? "md:top-[35px] top-[0px]"
             : "top-0"

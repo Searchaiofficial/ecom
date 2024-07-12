@@ -6,6 +6,7 @@ const TopHeaderWrapper = ({ children }) => {
   const pathname = usePathname();
 
   if (pathname.includes("/checkout")) return null;
+  if (pathname.includes("/profile")) return null;
 
   if (typeof window === "undefined") return null;
 
