@@ -101,6 +101,53 @@ const RoomInfo = ({ data }) => {
           </div>
 
         </div> */}
+
+
+      <div className="font-normal text-sm  flex flex-col gap-4 my-6">
+        <>
+          <div>
+            <div
+              className={`relative ${showMore ? "" : "line-clamp-2"
+                } overflow-hidden`}
+              ref={descriptionRef}
+            >
+              <p className="inline">{data?.productDescription}</p>
+            </div>
+            {isClamped && (
+              <span
+                className="cursor-pointer hover:underline font-semibold"
+                onClick={() => setShowMore(!showMore)}
+              >
+                {showMore ? "View less" : "View more"}
+              </span>
+            )}
+          </div>
+          {categoryDetails?.maintenanceDetails &&
+            categoryDetails?.certification && (
+              <p className="font-medium ">
+                <span className="font-normal">More information: </span>
+                <Link
+                  href={categoryDetails.maintenanceDetails}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline hover:text-gray-900 font-semibold "
+                >
+                  Maintenance Details
+                </Link>
+                {" | "}
+                <Link
+                  href={categoryDetails.certification}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline hover:text-gray-900 font-semibold "
+                >
+                  Certification Download
+                </Link>
+              </p>
+            )}
+        </>
+      </div>
+
       <div>
         <div>
           {(data.productType === "special" ||
@@ -179,51 +226,6 @@ const RoomInfo = ({ data }) => {
         </div>
       </div>
 
-      <div className="font-normal text-sm  flex flex-col gap-4 my-6">
-        <>
-          <div>
-            <div
-              className={`relative ${showMore ? "" : "line-clamp-2"
-                } overflow-hidden`}
-              ref={descriptionRef}
-            >
-              <p className="inline">{data?.productDescription}</p>
-            </div>
-            {isClamped && (
-              <span
-                className="cursor-pointer hover:underline font-semibold"
-                onClick={() => setShowMore(!showMore)}
-              >
-                {showMore ? "View less" : "View more"}
-              </span>
-            )}
-          </div>
-          {categoryDetails?.maintenanceDetails &&
-            categoryDetails?.certification && (
-              <p className="font-medium ">
-                <span className="font-normal">More information: </span>
-                <Link
-                  href={categoryDetails.maintenanceDetails}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:underline hover:text-gray-900 font-semibold "
-                >
-                  Maintenance Details
-                </Link>
-                {" | "}
-                <Link
-                  href={categoryDetails.certification}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:underline hover:text-gray-900 font-semibold "
-                >
-                  Certification Download
-                </Link>
-              </p>
-            )}
-        </>
-      </div>
-
       {/* place features and information */}
       <PlaceInfo data={data} />
 
@@ -232,11 +234,11 @@ const RoomInfo = ({ data }) => {
       {/* ----------------- what this place offers ------------ */}
       <Amenities data={data} />
 
-      <div className="flex justify-center">
+      <div className="flex">
         {data?.author && (
-          <div className="flex flex-col mt-10 gap-6 p-4 w-full max-w-md bg-[#F5F0EA] rounded-2xl">
-            <div className="flex flex-col items-center">
-              <Link href={`/profile/${data.author.userId}`} className="flex flex-col items-center gap-4">
+          <div className="flex flex-col my-10 gap-6 p-4 w-full ">
+            <div className="flex items-start gap-4">
+              <Link href={`/profile/${data.author.userId}`} className="flex-shrink-0">
                 <Image
                   src={data.author.image}
                   height={150}
@@ -244,34 +246,37 @@ const RoomInfo = ({ data }) => {
                   alt="avatar"
                   className="rounded-full"
                 />
-                <p className="text-[#1D1D1F] font-semibold text-lg">
-                  {data.author.name}
-                </p>
               </Link>
-              <div className="grid grid-cols-3 gap-4 mt-4 w-full">
-                <div className="flex flex-col items-center">
-                  <p className="text-[#1D1D1F] font-semibold text-lg">
-                    {data.author.purchase}
-                  </p>
-                  <p className="text-[#1D1D1F] text-sm">Purchase</p>
-                </div>
-                <div className="flex flex-col items-center">
-                  <p className="text-[#1D1D1F] font-semibold text-lg">
-                    {data.author.rating}
-                  </p>
-                  <p className="text-[#1D1D1F] text-sm">Rating</p>
-                </div>
-                <div className="flex flex-col items-center">
-                  <p className="text-[#1D1D1F] font-semibold text-lg">
-                    {data.author.experience}
-                  </p>
-                  <p className="text-[#1D1D1F] text-sm">Year of Creation</p>
-                </div>
+              <div className="flex flex-col">
+                <Link href={`/profile/${data.author.userId}`} className=" text-[#1D1D1F] font-bold text-xl">
+                  {data.author.name}
+                </Link>
+                <p className="text-[#1D1D1F] font-semibold text-sm pt-3 line-clamp-5">
+                  {data.author.description}
+                </p>
+                {/* <div className="grid grid-cols-3 gap-4 mt-4 w-full">
+                  <div className="flex flex-col items-center">
+                    <p className="text-[#1D1D1F] font-semibold text-lg">
+                      {data.author.purchase}
+                    </p>
+                    <p className="text-[#1D1D1F] text-sm">Purchase</p>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <p className="text-[#1D1D1F] font-semibold text-lg">
+                      {data.author.rating}
+                    </p>
+                    <p className="text-[#1D1D1F] text-sm">Rating</p>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <p className="text-[#1D1D1F] font-semibold text-lg">
+                      {data.author.experience}
+                    </p>
+                    <p className="text-[#1D1D1F] text-sm">Year of Creation</p>
+                  </div>
+                </div> */}
               </div>
             </div>
-            <p className="text-[#1D1D1F] px-4 font-semibold text-sm">
-              {data.author.description}
-            </p>
+
             <Swiper
               className="w-full mt-4"
               ref={swiper1Ref}
