@@ -133,7 +133,7 @@ const Reviews = ({ productId, data }) => {
     };
 
     fetchCategoryRatingTypes();
-  }, [data.category]);
+  }, [data, data.category]);
 
 
   console.log(data._id);
@@ -371,13 +371,13 @@ const Reviews = ({ productId, data }) => {
         </div> */}
 
         {reviews.length > 0 && showRatingTypes && (
-          <div className="rating-map flex justify-around mt-2 w-full overflow-x-auto">
+          <div className="rating-map flex justify-between mt-2 w-full overflow-x-auto">
             {/* Overall Ratings */}
 
-            <div className="flex flex-col items-center pr-4 border-r">
+            <div className="flex flex-col items-center pr-4">
               <div className="font-semibold text-gray-700 mb-2 capitalize">Overall Ratings</div>
-              <div className="ml-4 mt-2">
-                {[1, 2, 3, 4, 5].map((number, index) => (
+              <div className="mt-2">
+                {[5, 4, 3, 2, 1].map((number, index) => (
                   <div className="flex">
                     <span className="mr-2 text-sm">{number}</span>
                     <div className="flex items-center w-20">
@@ -395,10 +395,10 @@ const Reviews = ({ productId, data }) => {
             </div>
 
             {/* Rating Types */}
-            {showRatingTypes.map((item, index) => (
-              <div key={item._id} className={`flex flex-col items-center text-center ${index !== showRatingTypes.length - 1 ? 'border-r pr-4' : 'pr-4'}`}>
-                <div className="font-semibold text-gray-700 mb-5 capitalize">{item.name}</div>
-                <div className="text-lg font-semibold text-gray-900 mb-2">{computeAverageRatings[item._id]}</div>
+            {showRatingTypes?.map((item, index) => (
+              <div key={item._id} className={`flex flex-col items-center text-center pr-4`}>
+                <div className="font-semibold text-gray-700 mb-4 capitalize">{item.name}</div>
+                <div className="text-lg font-semibold text-gray-900 my-2">{computeAverageRatings[item._id]}</div>
                 <Image
                   src={item.image}
                   alt={item.name}
