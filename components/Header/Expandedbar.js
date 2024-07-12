@@ -30,18 +30,34 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
   const [isModalOpen, setIsModalOpen] = useState(true)
 
   useEffect(() => {
-    if (searchQuery !== "") {
-      setIsStoreLoading(true);
-      fetchStores(searchQuery).then((stores) => {
-        setStores(stores);
-        setIsStoreLoading(false);
-      });
+    const fetchData = async () => {
+      if (searchQuery !== "") {
+        setIsStoreLoading(true);
+        // fetchStores(searchQuery).then((stores) => {
+        //   setStores(stores);
+        //   setIsStoreLoading(false);
+        // });
+        try {
+          const responce = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/searchMapStore?search=${searchQuery}`)
+          console.log(responce.data)
+          setStores(responce.data);
+          setIsStoreLoading(false);
+        } catch (error) {
+          console.log(error)
+          setIsStoreLoading(false);
+        }
+      }
     }
+    fetchData()
   }, [searchQuery]);
+
+
 
   let cacheddata = JSON.parse(sessionStorage.getItem("cachedData"));
 
   console.log(searchQuery)
+
+  console.log(stores)
 
   const fetchData = async () => {
     try {
@@ -388,38 +404,41 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
                   (stores && stores?.length > 0
                     ? stores
                     : []
-                  ).map((item) => (
-                    <div >
-                      <div
-                        key={item._id}
-                        className="col-span-1 cursor-pointer"
-                        // onClick={() => handleRoute(item)}
-                        onClick={() => handleResultClick({
-                          lat: item.address.lat,
-                          lng: item.address.lng,
-                        }, item)}
-                      >
-                        <div className="lg:w-[170px] w-[150px] h-[150px] lg:h-[170px]">
-                          <Image loading="lazy"
-                            src={"https://bolt-gcdn.sc-cdn.net/3/Z2i0CKb1i5GtNvg8xNoP7.256.IRZXSOY?mo=GlgaFhoAGgAyAX06AQRCBgjm_5mrBlBJYAFaEERmTGFyZ2VUaHVtYm5haWyiARQIgAIiDwoCSAISACoHSVJaWFNPWaIBFAiaCiIPCgJIAxIAKgdJUlpYU09Z&uc=73"}
-                            width={170}
-                            height={170}
-                            alt={item.name}
-                            className="w-[100%] h-[100%] object-fill"
-                          />
-                        </div>
-                        <div className="lg:text-[16px] text-[14px] font-medium text-black pt-2 ">
-                          {item.name}
-                        </div>
-                        <div className="lg:text-[12px] text-[12px]  font-normal py-[2px] line-clamp-2 text-[#707072]">
-                          {item.address.streetAddress}
-                        </div>
-                        <div className="lg:text-[12px] text-[12px]  font-semibold  text-black">
-                          {item.phone}
+                  ).map((item) => {
+                    console.log(item)
+                    return (
+                      <div >
+                        <div
+                          key={item._id}
+                          className="col-span-1 cursor-pointer"
+                          // onClick={() => handleRoute(item)}
+                          onClick={() => handleResultClick({
+                            lat: item.geo_location.latitude,
+                            lng: item.geo_location.longitude,
+                          }, item)}
+                        >
+                          <div className="lg:w-[170px] w-[150px] h-[150px] lg:h-[170px]">
+                            <Image loading="lazy"
+                              src={item.images[0]}
+                              width={170}
+                              height={170}
+                              alt={item.name}
+                              className="w-[100%] h-[100%] object-fill"
+                            />
+                          </div>
+                          <div className="lg:text-[16px] text-[14px] font-medium text-black pt-2 ">
+                            {item.name}
+                          </div>
+                          <div className="lg:text-[12px] text-[12px]  font-normal py-[2px] line-clamp-2 text-[#707072]">
+                            {item.address}
+                          </div>
+                          <div className="lg:text-[12px] text-[12px]  font-semibold  text-black">
+                            {item.phone}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))
+                    )
+                  })
                 )}
               </div>
             )
