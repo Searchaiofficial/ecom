@@ -5,7 +5,7 @@ import Header from "@/components/Header";
 import { getPlaceData } from "@/components/Map/api/index";
 import Map from "@/components/Map/index";
 import axios from "axios";
-import { STORE_MAP_DATA } from "@/constants/store-map-data";
+// import { STORE_MAP_DATA } from "@/constants/store-map-data";
 import SaveUserCoordinates from "@/utils/SaveUserCoordinates";
 
 const MapPage = () => {
@@ -13,6 +13,22 @@ const MapPage = () => {
 
   const [coords, setCoords] = useState({ lat: 20.5937, lng: 78.9629 });
   const [boundaries, setBoundaries] = useState(null);
+
+  const [STORE_MAP_DATA, SET_STORE_MAP_DATA] = useState([])
+
+  const fetchMapData = async () => {
+    try {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/mapPlaces`);
+      console.log(response.data);
+      SET_STORE_MAP_DATA(response.data);
+    } catch (error) {
+      console.error("Error fetching map data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchMapData();
+  }, []);
 
   useEffect(() => {
     // pass boundaries.sw boundaries.ne to getPlaceData

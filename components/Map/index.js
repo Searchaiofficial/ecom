@@ -13,14 +13,32 @@ import {
 import { fetchStores } from "../Features/api";
 const Map = ({ setBoundaries, coords, places, PlacesData }) => {
   const [stores, setStores] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    fetchStores().then((stores) => {
-      setStores(stores);
-      setIsLoading(false);
-    });
-  }, []);
+  console.log(PlacesData);
+
+  // const [STORE_MAP_DATA, SET_STORE_MAP_DATA] = useState([])
+
+  // useEffect(() => {
+  //   fetchStores().then((stores) => {
+  //     setStores(stores);
+  //     setIsLoading(false);
+  //   });
+  // }, []);
+
+  // const fetchMapData = async () => {
+  //   try {
+  //     const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/mapPlaces`);
+  //     console.log(response.data);
+  //     SET_STORE_MAP_DATA(response.data);
+  //   } catch (error) {
+  //     console.error("Error fetching map data:", error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchMapData();
+  // }, []);
 
   // console.log(PlacesData);
   const { isLoaded } = useLoadScript({
@@ -105,15 +123,20 @@ const Map = ({ setBoundaries, coords, places, PlacesData }) => {
             }}
           // onBoundsChanged={handleBoundsChanged}
           >
-            {!isLoading &&
-              stores.map((store, i) => (
-                <CustomMarker
-                  lat={store.address.lat}
-                  lng={store.address.lng}
-                  key={store._id}
-                  content={<MapMarker place={store} idx={i} />}
-                />
-              ))}
+            {
+              PlacesData.map((store, i) => {
+                console.log(store)
+                return (
+                  (
+                    <CustomMarker
+                      lat={store.geo_location.latitude}
+                      lng={store.geo_location.longitude}
+                      key={store._id}
+                      content={<MapMarker place={store} idx={i} />}
+                    />
+                  )
+                )
+              })}
           </GoogleMap>
 
           <div />

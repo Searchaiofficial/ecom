@@ -18,6 +18,8 @@ const MapMarker = ({ place, idx }) => {
   const clickedItem = useSelector(selectClickedItem)
   const dispatch = useDispatch()
 
+  console.log(place)
+
   // console.log(clickedItem)
   const [isPopupOpen, setPopupOpen] = useState(false);
   // console.log(place)
@@ -93,7 +95,7 @@ const MapMarker = ({ place, idx }) => {
               </div> */}
               <div className="flex flex-col rounded-lg">
                 <Image loading="lazy"
-                  src={defaultImageUrl}
+                  src={place.images[0]}
                   height={100}
                   width={200}
                   alt="store-image"
@@ -105,7 +107,7 @@ const MapMarker = ({ place, idx }) => {
                     {place.name}
                   </p>
                   <p className="text-[12px] text-gray-500">
-                    {place.address.streetAddress} {place.address.pincode}
+                    {place.address}
                   </p>
                   <p className="text-gray-600 text-[14px] my-1 font-semibold w-full text-left">
                     {place.phone}
