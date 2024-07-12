@@ -350,37 +350,40 @@ const Reviews = ({ productId, data }) => {
 
         <div className="rating-map flex justify-around mt-2 w-full overflow-x-auto">
 
-          <div className="flex flex-col items-center pr-4 border-r ">
-            <div className="font-semibold text-gray-700 mb-2 capitalize">overall ratings</div>
-            <div className="ml-4 mt-3">
-              {[1, 2, 3, 4, 5].map((number, index) => (
-                <div
-                  key={index}
-                  className={`border mb-2 ${index === 0 ? "border-black bg-black" : "bg-gray-300"
-                    }  w-32 h-1.5 flex flex-row items-center justify-start`}
-                >
-                  <span className="-ml-3 text-sm">{number}</span>
+          {showRatingTypes && (
+            <>
+              {/* Overall Ratings */}
+              <div className="flex flex-col items-center pr-4 border-r">
+                <div className="font-semibold text-gray-700 mb-2 capitalize">overall ratings</div>
+                <div className="ml-4 mt-3 space-y-2">
+                  {[1, 2, 3, 4, 5].map((number, index) => (
+                    <div
+                      key={index}
+                      className={`border ${index === 0 ? "border-black bg-black" : "border-gray-300 bg-gray-300"} w-32 h-1.5 flex items-center justify-start`}
+                    >
+                      <span className="-ml-3 text-sm">{number}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Rating Types */}
+              {showRatingTypes.map((item, index) => (
+                <div key={item._id} className={`flex flex-col items-center text-center px-4 ${index !== showRatingTypes.length - 1 ? 'border-r' : ''}`}>
+                  <div className="font-semibold text-gray-700 mb-2 capitalize">{item.name}</div>
+                  <div className="text-lg font-semibold text-gray-900 mb-2 capitalize">{averageRatings[item._id]}</div>
+                  <Image
+                    src={`${item.image}`}
+                    alt={`${item.name}`}
+                    width={30}
+                    height={30}
+                    loading="lazy"
+                  />
                 </div>
               ))}
-            </div>
-
-          </div>
-
-          {showRatingTypes && showRatingTypes.map((item, index) => (
-            <div key={item._id} className={`flex flex-col items-center text-center flex-grow px-4 ${showRatingTypes.length - 1 !== index ? 'border-r' : ''}`}>
-              <div className="font-semibold text-gray-700 mb-2 capitalize">{item.name}</div>
-              <div className="text-lg font-semibold text-gray-900 my-2">{averageRatings[item._id]}</div>
-              <Image
-                src={`${item.image}`}
-                alt={`${item.name}`}
-                width={30}
-                height={30}
-                loading="lazy"
-              />
-            </div>
-          ))}
+            </>
+          )}
         </div>
-
 
         <div className="flex justify-between items-baseline pt-4">
           <h3 className="mb-1 text-xl font-semibold ">
