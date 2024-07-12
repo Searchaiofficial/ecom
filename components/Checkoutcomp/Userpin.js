@@ -9,6 +9,7 @@ import Link from "next/link";
 import axios from "axios";
 import { getPinFromCoordinates } from "@/utils/getPinFromCoordinates";
 import { upsertUserLocation } from "../Features/api";
+import { useRouter } from "next/navigation";
 
 const Userpin = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,8 @@ const Userpin = () => {
   const [cartdata, setcartdata] = useState("");
   const [cartStatus, setCartStaus] = useState("");
   const [sideMenu, setSideMenu] = useState(false);
+  const [newUserPin, setNewUserPin] = useState("")
+  const router = useRouter()
 
   const dbItems = useSelector((state) => state.cart.dbItems);
   if (typeof window !== "undefined") {
@@ -169,6 +172,15 @@ const Userpin = () => {
 
   const delcharge = 100;
 
+  const handleClick = () => {
+    if (newUserPin !== "") {
+      const currentPinCode = localStorage.getItem('userPincode');
+      console.log('Current Pin Code:', currentPinCode);
+      localStorage.setItem('userPincode', newUserPin);
+    }
+    router.push("/checkout/delivery")
+  }
+
   return (
     <div className="p-2 lg:px-[67px] pt-[6rem] pb-[3rem] ">
       <div className="grid -grid-cols-1 lg:grid-cols-12 gap-10 border-b-2">
@@ -254,14 +266,14 @@ const Userpin = () => {
                   )}
                 </h3>
                 <div className="mb-8 mt-4">
-                  <input className="w-full h-10  border-solid border border-gray-400 rounded-sm focus:border-blue-800 outline-none px-4 " />
+                  <input onChange={(e) => setNewUserPin(e.target.value)} className="w-full h-10  border-solid border border-gray-400 rounded-sm focus:border-blue-800 outline-none px-4 " />
                   <span className="text-xs text-gray-400">eg:500001</span>
                 </div>
-                <Link href={"/checkout/delivery"}>
+                <div onClick={handleClick} >
                   <button className="bg-black text-sm font-bold h-12 text-white w-full rounded-full p-2 mb-8">
                     View delivery options
                   </button>
-                </Link>
+                </div>
                 <hr></hr>
                 <h3 className="text-md font-bold text-gray-500 my-4 py-4">
                   Your details

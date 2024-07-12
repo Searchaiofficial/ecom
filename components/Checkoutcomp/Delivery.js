@@ -19,6 +19,110 @@ import axios from "axios";
 import { setDbItems } from "../Features/Slices/cartSlice";
 import { getPinFromCoordinates } from "@/utils/getPinFromCoordinates";
 import { upsertUserLocation } from "../Features/api";
+import { useRouter } from "next/navigation";
+// import STORE_MAP_DATA from "@/constants/store-map-data"
+
+// const STORE_MAP_DATA = [
+//   {
+//     id: 1,
+//     name: "Ayatrio",
+//     lat: 28.633877147236543,
+//     lng: 77.21840632912071,
+//     address: "Block-B Connaught Place, 9, Om Nagar, Block B,New Delhi 110044",
+//     phone: "90074 04292",
+//     pincode: "110044"
+//   },
+//   {
+//     id: 2,
+//     name: "Ayatrio",
+//     lat: 12.974699599092192,
+//     lng: 77.60696152629579,
+//     address:
+//       "Pavilion Mall, 62/63, Church St, Haridevpur, Shanthala Nagar,Ashok Nagar, Bengaluru, Karnataka 560001",
+//     phone: "90074 04292",
+//     pincode: "560001"
+//   },
+//   {
+//     id: 3,
+//     name: "Ayatrio",
+//     lat: 19.08155129722011,
+//     lng: 72.89401257671673,
+//     address:
+//       "Thakor Industrial Estate, Kurla Kirol Road, Vidyavihar (W),   Mumbai, Maharashtra 400086",
+//     phone: "90074 04292",
+//     pincode: "400086"
+//   },
+//   {
+//     id: 4,
+//     name: "Ayatrio",
+//     lat: 19.077088018562975,
+//     lng: 72.83409450344794,
+//     address:
+//       "Linking Rd, Vithaldas Nagar, Santacruz West, Mumbai, Maharashtra 400052",
+//     phone: "90074 04292",
+//     pincode: "400052"
+//   },
+//   {
+//     id: 5,
+//     name: "Ayatrio",
+//     lat: 17.404908440825366,
+//     lng: 78.48098805293411,
+//     address:
+//       "3-6-387/B, 2nd floor, Harmony plaza, Above Wrangler Showroom,, Himayatnagar,, Hyderabad, Telangana 500029",
+//     phone: "90074 04292",
+//     pincode: "500029"
+//   },
+//   {
+//     id: 6,
+//     name: "Ayatrio",
+//     lat: 23.030200018340906,
+//     lng: 72.5076108911838,
+//     address: "Sarkhej - Gandhinagar Hwy, Bodakdev, Ahmedabad, Gujarat 380054",
+//     phone: "90074 04292",
+//     pincode: "380054"
+//   },
+//   {
+//     id: 7,
+//     name: "Ayatrio",
+//     lat: 28.570131617708157,
+//     lng: 77.21800970668014,
+//     address:
+//       "Arrow outlet, South Extension I, Block F, New Delhi, Delhi 110049",
+//     phone: "90074 04292",
+//     pincode: "110049"
+//   },
+//   {
+//     id: 8,
+//     name: "Ayatrio",
+//     lat: 22.540952974012374,
+//     lng: 88.35682951170868,
+//     address: "AJC Bose Rd, Sreepally, Bhowanipore, Kolkata, West Bengal 700020",
+//     phone: "90074 04292",
+//     pincode: "700020"
+//   },
+//   {
+//     id: 9,
+//     name: "Ayatrio",
+//     lat: 20.285848403707593,
+//     lng: 85.84372854653733,
+//     address: "Saheed Nagar, Bhubaneswar, Odisha 751007",
+//     phone: "90074 04292",
+//     pincode: "751007"
+//   },
+//   {
+//     id: 10,
+//     name: "Ayatrio",
+//     lat: 21.14844544254148,
+//     lng: 79.13361691774666,
+//     address:
+//       "279, Central Ave, near IDBI Bank, Lakadganj, Nagpur, Maharashtra 440008",
+//     phone: "90074 04292",
+//     pincode: "440008"
+//   },
+// ];
+
+
+
 
 const Delivery = () => {
   const [selectedOption, setSelectedOption] = useState("option3");
@@ -30,14 +134,23 @@ const Delivery = () => {
   const [cartStatus, setCartStaus] = useState("");
   const [sideMenu, setSideMenu] = useState(false);
   const [deliveryChoice, setDeliveryChoice] = useState(99);
+  const [STORE_MAP_DATA, SET_STORE_MAP_DATA] = useState([])
 
   const [userCoordinates, setUserCoordinates] = useState(null);
+  // const [userPinCode, setUserPincode] = useState(null);
   const [userPincode, setUserPincode] = useState(null);
+  const [previousUserPinCode, setPreviousUserPinCode] = useState(localStorage.getItem('userPincode'));
+  const router = useRouter()
+
+
 
   useEffect(() => {
     localStorage?.getItem("userCoordinates") &&
       setUserCoordinates(JSON.parse(localStorage.getItem("userCoordinates")));
   }, []);
+
+  console.log(userCoordinates)
+  console.log(userPincode)
 
   useEffect(() => {
     if (localStorage?.getItem("userPincode")) {
@@ -190,7 +303,24 @@ const Delivery = () => {
   console.log(totalAccessoryPrice)
 
   const handlePrice = () => {
-    dispatch(deliveryPrice(deliveryChoice));
+    // if (nearestDistance <= 2) {
+    //   console.log("This run");
+    //   setDeliveryChoice((prevChoice) => {
+    //     const newChoice = 0;
+    //     dispatch(deliveryPrice(newChoice));
+    //     console.log("deliveryChoice", newChoice);
+    //     router.push("/checkout/details");
+    //     return newChoice;
+    //   });
+    // } else {
+    //   console.log("no this run");
+    //   dispatch(deliveryPrice(deliveryChoice));
+    //   router.push("/checkout/details");
+    // }
+    console.log(deliveryCost)
+    dispatch(deliveryPrice(deliveryCost));
+
+    router.push("/checkout/details");
   };
 
   console.log(cartStatus);
@@ -206,7 +336,7 @@ const Delivery = () => {
         setDeliveryChoice(79);
         break;
       case "option3":
-        setDeliveryChoice(99);
+        setDeliveryChoice(deliveryCost)
         break;
       default:
         setDeliveryChoice(99);
@@ -214,19 +344,191 @@ const Delivery = () => {
     }
   };
 
-  console.log(typeof deliveryChoice);
-  console.log(deliveryChoice);
-  // console.log(cartItems);
+
+  console.log(localStorage.getItem("userCoordinates"));
+
+
+
+  console.log(userCoordinates)
+  console.log(deliveryChoice)
+
+  // console.log(STORE_MAP_DATA)
+
+  const [nearestDistance, setNearestDistance] = useState(null)
+  const [deliveryCost, setDeliveryCost] = useState(null)
+
+
+  // console.log(typeof deliveryChoice);
+  // console.log(deliveryChoice);
+  // console.log(nearestDistance)
+
   const subtotal = 786;
-  //   const subtotal = cartItems
-  //     .reduce((acc, currentItem) => {
-  //       return acc + currentItem.price * currentItem.qty;
-  //     }, 0)
-  //     .toFixed(2);
-  // console.log(subtotal);
+
   const delcharge = 100;
-  //   const delcharge = (subtotal * 20) / 100;
-  //   const totlaCharge = parseFloat(subtotal) + parseFloat(delcharge);
+  const fetchMapData = async () => {
+    try {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/mapPlaces`);
+      console.log(response.data);
+      SET_STORE_MAP_DATA(response.data);
+    } catch (error) {
+      console.error("Error fetching map data:", error);
+    }
+  };
+
+  // useEffect(() => {
+  //   fetchMapData()
+  // }, [])
+
+
+
+  const fetchDistances = async () => {
+    try {
+      const distances = await Promise.all(
+        STORE_MAP_DATA.map(async (store) => {
+          const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/distance`, {
+            params: {
+              origins: userPincode,
+              destinations: store.pincode
+            }
+          });
+          const distanceText = response.data.rows[0].elements[0].distance.text;
+          const distanceValue = response.data.rows[0].elements[0].distance.value;
+          return {
+            id: store.id,
+            name: store.name,
+            address: store.address,
+            pincode: store.pincode,
+            distanceText: distanceText,
+            distanceValue: distanceValue
+          };
+        })
+      );
+
+
+      distances.sort((a, b) => a.distanceValue - b.distanceValue);
+
+      console.log("Distances sorted by ascending order:");
+      console.log(distances);
+      const distance = (distances[0].distanceValue / 1000).toFixed(1);
+      console.log(distance);
+      setNearestDistance(distance);
+      // FetchCost()
+
+      // localStorage.setItem("nearestStore", JSON.stringify(distances[0]));
+
+      localStorage.setItem("nearestStore", JSON.stringify({
+        nearestStore: distances[0],
+        userPincode
+      }));
+    } catch (error) {
+      console.error("Error fetching distances:", error);
+    }
+  };
+
+
+
+  const FetchCost = async (distance) => {
+    console.log(nearestDistance)
+
+    if (nearestDistance === null) return
+    const responce = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/calculateShippingCharge/${distance}`)
+    setDeliveryCost(responce.data.charge)
+    console.log(responce.data.charge)
+  }
+
+
+  console.log(deliveryCost)
+
+
+  // const fetchDistancesIfNeeded = async () => {
+  //   const nearestStore = localStorage.getItem('nearestStore');
+
+  //   if (nearestStore) {
+  //     console.log("Fetching distances from localStorage...");
+  //     const nearestStoreDetails = JSON.parse(nearestStore);
+  //     console.log("Distances from localStorage:", nearestStoreDetails);
+  //     const distance = (nearestStoreDetails.distanceValue / 1000).toFixed(1);
+  //     setNearestDistance(distance);
+  //     // FetchCost()
+  //   } else {
+  //     console.log("Fetching distances from API...");
+  //     if (STORE_MAP_DATA.length > 0) {
+  //       console.log("This will run")
+  //       fetchDistances();
+  //     } else {
+  //       console.log("No data in STORE_MAP_DATA")
+  //     }
+  //   }
+  // };
+
+  const fetchDistancesIfNeeded = async () => {
+    const storedData = localStorage.getItem('nearestStore');
+
+    if (storedData) {
+      const nearestStoreDetails = JSON.parse(storedData);
+
+      if (nearestStoreDetails.userPincode === userPincode) {
+        console.log("Fetching distances from localStorage...");
+        const { nearestStore } = nearestStoreDetails;
+        console.log("Distances from localStorage:", nearestStore);
+        const distance = (nearestStore.distanceValue / 1000).toFixed(1);
+        setNearestDistance(distance);
+        return;
+      }
+    }
+
+    console.log("Fetching distances from API...");
+    if (STORE_MAP_DATA.length > 0) {
+      fetchDistances();
+    } else {
+      console.log("No data in STORE_MAP_DATA");
+    }
+  };
+
+
+
+  // useEffect(() => {
+  //   console.log(userPincode);
+  //   // fetchMapData()
+  //   fetchDistancesIfNeeded();
+  // }, [userPincode]);
+
+  useEffect(() => {
+    fetchMapData();
+  }, []);
+
+  useEffect(() => {
+    console.log(STORE_MAP_DATA.length)
+    if (STORE_MAP_DATA.length > 0) {
+      fetchDistancesIfNeeded();
+    }
+  }, [STORE_MAP_DATA, userPincode]);
+
+  useEffect(() => {
+    if (nearestDistance !== null) {
+      FetchCost(nearestDistance);
+    }
+  }, [nearestDistance]);
+
+
+  useEffect(() => {
+    if (userPincode && userPincode !== previousUserPinCode) {
+      setPreviousUserPinCode(userPincode);
+      fetchDistancesIfNeeded();
+    }
+  }, [userPincode]);
+
+
+
+
+
+  // useEffect(() => {
+  //   if (nearestDistance !== null) {
+  //     FetchCost(nearestDistance);
+  //   }
+  // }, [nearestDistance]);
+
+
   return (
     <div className="p-2 lg:px-[67px]  pt-[6rem] pb-[3rem] ">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 border-b-2">
@@ -495,7 +797,9 @@ const Delivery = () => {
                             className="lg:text-lg text-[18px] font-bold mb-6"
                             htmlFor="option1"
                           >
-                            Regular delivery
+                            {
+                              deliveryCost === 0 ? "Free delivery" : "Regular delivery"
+                            }
                           </label>
                           {selectedOption !== "option3" ? (
                             <>
@@ -524,7 +828,9 @@ const Delivery = () => {
                                 alt="rupees"
                                 className="mr-1"
                               />
-                              99
+                              {
+                                deliveryCost
+                              }
                             </div>
                           </div>
                         </div>
@@ -532,14 +838,14 @@ const Delivery = () => {
                     </label>
                   </div>
                   <div className="mt-4">{isSchedular ? <Calender /> : ""}</div>
-                  <Link href={"/checkout/details"}>
+                  <div>
                     <button
                       onClick={handlePrice}
                       className="bg-[#0058a3] text-white flex justify-center items-center border-solid border border-gray-300 p-8 h-12 rounded-full my-4 text-md font-bold w-full m-auto"
                     >
                       Continue{" "}
                     </button>
-                  </Link>
+                  </div>
                 </div>
 
                 {/* ---------------------- */}
@@ -649,7 +955,7 @@ const Delivery = () => {
                 </div>
               )}
             </div>
-            <div className="flex my-4 flex-col gap-4">
+            <div className="flex my-4 ">
               {cartdata && cartdata.freeSamples.length > 0 && (
                 cartdata.freeSamples.map((item, index) => {
                   return (
@@ -725,7 +1031,7 @@ const Delivery = () => {
                   alt="rupees"
                   className="mr-1"
                 />
-                {deliveryChoice}
+                {deliveryCost}
               </div>
             </span>
           </div>
@@ -743,7 +1049,7 @@ const Delivery = () => {
                   alt="rupees"
                   className="mr-1"
                 />
-                {SumtotalPrice + deliveryChoice}
+                {SumtotalPrice + deliveryCost}
               </div>
             </span>
           </div>

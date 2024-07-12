@@ -36,6 +36,8 @@ const Details = () => {
   }, [pickup]);
 
   const deliveryPrice = useSelector(selectDeliveryPrice);
+
+  console.log(deliveryPrice)
   const cartdata = useSelector(selecteddbItems);
 
 
@@ -254,7 +256,7 @@ const Details = () => {
           method: "POST",
           url: `${apiBaseUrl}/api/makepayment`,
           data: {
-            amount: (SumtotalPrice + DeliverCost || deliveryPrice) * 100,
+            amount: (SumtotalPrice + deliveryPrice) * 100,
             callbackUrl: `${BASE_URL}/success`,
             redirectUrl: `${BASE_URL}/success`,
           },
@@ -711,7 +713,7 @@ const Details = () => {
                     alt="rupees"
                     className="mr-1"
                   />
-                  {SumtotalPrice + DeliverCost || deliveryPrice}
+                  {SumtotalPrice + deliveryPrice}
                 </div>
               </div>
             </div>
