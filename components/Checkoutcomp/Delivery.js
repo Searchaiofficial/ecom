@@ -139,46 +139,51 @@ const Delivery = () => {
   const [userCoordinates, setUserCoordinates] = useState(null);
   // const [userPinCode, setUserPincode] = useState(null);
   const [userPincode, setUserPincode] = useState(null);
-  const [previousUserPinCode, setPreviousUserPinCode] = useState(localStorage.getItem('userPincode'));
+  const [previousUserPinCode, setPreviousUserPinCode] = useState(null);
   const router = useRouter()
 
 
 
   useEffect(() => {
-    localStorage?.getItem("userCoordinates") &&
-      setUserCoordinates(JSON.parse(localStorage.getItem("userCoordinates")));
+    if (window !== "undefined") {
+      localStorage?.getItem("userCoordinates") &&
+        setUserCoordinates(JSON.parse(localStorage?.getItem("userCoordinates")));
+      setPreviousUserPinCode(localStorage?.getItem('userPincode'))
+    }
   }, []);
 
   console.log(userCoordinates)
   console.log(userPincode)
 
   useEffect(() => {
-    if (localStorage?.getItem("userPincode")) {
-      setUserPincode(localStorage.getItem("userPincode"));
-    } else if (userCoordinates) {
-      getPinFromCoordinates(userCoordinates.lat, userCoordinates.lng).then(
-        (data) => {
-          if (data) {
-            setUserPincode(data);
-            localStorage.setItem("userPincode", data);
+    if (window !== "undefined") {
+      if (localStorage?.getItem("userPincode")) {
+        setUserPincode(localStorage?.getItem("userPincode"));
+      } else if (userCoordinates) {
+        getPinFromCoordinates(userCoordinates.lat, userCoordinates.lng).then(
+          (data) => {
+            if (data) {
+              setUserPincode(data);
+              localStorage?.setItem("userPincode", data);
 
-            const deviceId = localStorage.getItem("deviceId");
+              const deviceId = localStorage?.getItem("deviceId");
 
-            upsertUserLocation({
-              deviceId,
-              pincode: pin,
-              lat: userCoordinates.lat,
-              lng: userCoordinates.lng,
-            })
-              .then(() => {
-                console.log("User location saved");
+              upsertUserLocation({
+                deviceId,
+                pincode: pin,
+                lat: userCoordinates.lat,
+                lng: userCoordinates.lng,
               })
-              .catch((error) => {
-                console.error(`Error saving user location: ${error.message}`);
-              });
+                .then(() => {
+                  console.log("User location saved");
+                })
+                .catch((error) => {
+                  console.error(`Error saving user location: ${error.message}`);
+                });
+            }
           }
-        }
-      );
+        );
+      }
     }
   }, [userCoordinates]);
 
@@ -195,7 +200,7 @@ const Delivery = () => {
 
   const dbItems = useSelector((state) => state.cart.dbItems);
   if (typeof window !== "undefined") {
-    var id = localStorage.getItem("deviceId");
+    var id = localStorage?.getItem("deviceId");
     console.log(id);
   }
 
@@ -345,7 +350,7 @@ const Delivery = () => {
   };
 
 
-  console.log(localStorage.getItem("userCoordinates"));
+  // console.log(localStorage?.getItem("userCoordinates"));
 
 
 
@@ -416,10 +421,16 @@ const Delivery = () => {
 
       // localStorage.setItem("nearestStore", JSON.stringify(distances[0]));
 
-      localStorage.setItem("nearestStore", JSON.stringify({
-        nearestStore: distances[0],
-        userPincode
-      }));
+      // localStorage?.setItem("nearestStore", JSON.stringify({
+      //   nearestStore: distances[0],
+      //   userPincode
+      // }));
+      if (typeof window !== "undefined") {
+        localStorage.setItem("nearestStore", JSON.stringify({
+          nearestStore: distances[0],
+          userPincode
+        }));
+      }
     } catch (error) {
       console.error("Error fetching distances:", error);
     }
@@ -461,27 +472,54 @@ const Delivery = () => {
   //   }
   // };
 
+  // const fetchDistancesIfNeeded = async () => {
+  //   const storedData = localStorage?.getItem('nearestStore');
+
+  //   if (storedData) {
+  //     const nearestStoreDetails = JSON.parse(storedData);
+
+  //     if (nearestStoreDetails.userPincode === userPincode) {
+  //       console.log("Fetching distances from localStorage...");
+  //       const { nearestStore } = nearestStoreDetails;
+  //       console.log("Distances from localStorage:", nearestStore);
+  //       const distance = (nearestStore.distanceValue / 1000).toFixed(1);
+  //       setNearestDistance(distance);
+  //       return;
+  //     }
+  //   }
+
+  //   console.log("Fetching distances from API...");
+  //   if (STORE_MAP_DATA.length > 0) {
+  //     fetchDistances();
+  //   } else {
+  //     console.log("No data in STORE_MAP_DATA");
+  //   }
+  // };
+
+
   const fetchDistancesIfNeeded = async () => {
-    const storedData = localStorage.getItem('nearestStore');
+    if (typeof window !== "undefined") {
+      const storedData = localStorage.getItem('nearestStore');
 
-    if (storedData) {
-      const nearestStoreDetails = JSON.parse(storedData);
+      if (storedData) {
+        const nearestStoreDetails = JSON.parse(storedData);
 
-      if (nearestStoreDetails.userPincode === userPincode) {
-        console.log("Fetching distances from localStorage...");
-        const { nearestStore } = nearestStoreDetails;
-        console.log("Distances from localStorage:", nearestStore);
-        const distance = (nearestStore.distanceValue / 1000).toFixed(1);
-        setNearestDistance(distance);
-        return;
+        if (nearestStoreDetails.userPincode === userPincode) {
+          console.log("Fetching distances from localStorage...");
+          const { nearestStore } = nearestStoreDetails;
+          console.log("Distances from localStorage:", nearestStore);
+          const distance = (nearestStore.distanceValue / 1000).toFixed(1);
+          setNearestDistance(distance);
+          return;
+        }
       }
-    }
 
-    console.log("Fetching distances from API...");
-    if (STORE_MAP_DATA.length > 0) {
-      fetchDistances();
-    } else {
-      console.log("No data in STORE_MAP_DATA");
+      console.log("Fetching distances from API...");
+      if (STORE_MAP_DATA.length > 0) {
+        fetchDistances();
+      } else {
+        console.log("No data in STORE_MAP_DATA");
+      }
     }
   };
 
