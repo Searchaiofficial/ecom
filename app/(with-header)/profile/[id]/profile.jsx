@@ -126,10 +126,10 @@ const Profile = ({ id }) => {
   };
 
   return (
-    <div className="flex flex-col items-center w-full px-4 sm:px-6 lg:px-8 pt-20">
+    <div className="flex flex-col items-start w-full px-4 sm:px-6 lg:px-8 pt-5 sm:pt-20">
       {user ? (
         <>
-          <div className="flex items-center gap-4 w-full mt-10 justify-center">
+          <div className="flex items-center gap-4 w-full mt-10 pb-8 border-b">
             <div className="relative w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0">
               <Image
                 src={user.image}
@@ -240,7 +240,7 @@ const Profile = ({ id }) => {
             <div className="mt-8 w-full">
               <h2 className="text-2xl  font-bold">Reviews</h2>
               <div
-                className="w-full mt-6 grid sm:grid-cols-2 grids-col-1  gap-4 mx-auto "
+                className="w-full mt-6 grid sm:grid-cols-3 grids-col-1  gap-4 mx-auto "
                 style={{ overflowX: "hidden" }}
               >
                 {reviews.map((review, index) => (
