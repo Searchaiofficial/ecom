@@ -74,13 +74,14 @@ const MainSlider = ({ initialData: { result: sliderData } }) => {
       onMouseLeave={() => {
         setIsHovering(false);
       }}
-      className="w-full h-[78vh] sm:mt-[96px] px-[12px] sm:px-0"
+      className="w-full h-[78vh] max-h-[546px] min-h-[300px] sm:mt-[96px] px-[12px] sm:px-0"
     >
       <div
-        className={`${isHovering
-          ? "opacity-100 pointer-events-auto"
-          : "opacity-0 pointer-events-none"
-          } transition absolute nav-prev left-2 sm:left-4 top-1/2 cursor-pointer translate-y-1/2 z-30 rounded-full  hidden sm:flex items-center justify-center p-1 rotate-180`}
+        className={`${
+          isHovering
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
+        } transition absolute nav-prev left-2 sm:left-4 top-1/2 cursor-pointer translate-y-1/2 z-30 rounded-full  hidden sm:flex items-center justify-center p-1 rotate-180`}
       >
         <Image
           src="/icons/rightarrow-w.svg"
@@ -91,10 +92,11 @@ const MainSlider = ({ initialData: { result: sliderData } }) => {
         />
       </div>
       <div
-        className={`${isHovering
-          ? "opacity-100 pointer-events-auto"
-          : "opacity-0 pointer-events-none"
-          } transition absolute nav-next right-2 sm:right-4 cursor-pointer top-1/2 translate-y-1/2 z-30 rounded-full hidden sm:flex items-center justify-center p-1`}
+        className={`${
+          isHovering
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
+        } transition absolute nav-next right-2 sm:right-4 cursor-pointer top-1/2 translate-y-1/2 z-30 rounded-full hidden sm:flex items-center justify-center p-1`}
       >
         <Image
           src="/icons/rightarrow-w.svg"
