@@ -1,69 +1,47 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import {
-  createApiEndpoint,
-  getCategoryByName,
-} from "@/components/Features/api";
 
-const ReviewForm = ({ addReview, data }) => {
+const ReviewForm = ({ addReview, categoryData }) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   const [images, setImages] = useState([]);
   const [sidebarContent, setSidebarContent] = useState(null);
-  const [categoryData, setCategoryData] = useState(null); // State to store category data
   const [dynamicRatings, setDynamicRatings] = useState([]);
-  const [overallRating, setOverallRating] = useState(0); // State for overall rating
+  const [overallRating, setOverallRating] = useState(0);
+  
 
   useEffect(() => {
-    const fetchCategoryRatingTypes = async () => {
-      try {
-        if (data && data.category) {
-          // Fetch category data
-          const category = await getCategoryByName(data.category);
-          // Store category data in state
-          setCategoryData(category);
-          // Initialize dynamic ratings based on available rating types
-          setDynamicRatings(
-            category.availableRatingTypes.map((ratingType) => ({
-              id: ratingType.id,
-              name: ratingType.name,
-              value: 0, // Initialize each rating type value
-            }))
-          );
-        }
-      } catch (error) {
-        console.error("Error fetching category:", error);
-      }
-    };
+    if (categoryData) {
+      setDynamicRatings(
+        categoryData.availableRatingTypes.map((ratingType) => ({
+          id: ratingType.id,
+          name: ratingType.name,
+          value: 0,
+        }))
+      );
+    }
+  }, [categoryData]);
 
-    fetchCategoryRatingTypes();
-  }, [data]);
-
-  // Update overall rating whenever dynamic ratings change
   useEffect(() => {
-    // Calculate average of dynamic ratings
     const totalDynamicRatings = dynamicRatings.reduce((acc, rating) => acc + rating.value, 0);
     const averageRating = dynamicRatings.length > 0 ? totalDynamicRatings / dynamicRatings.length : 0;
-    // Update overall rating state
-    setOverallRating(averageRating);
+    setOverallRating(Math.floor(averageRating));
   }, [dynamicRatings]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const newReview = {
-      rating: overallRating, // Use overallRating in the review object
+      rating: overallRating,
       comment: comment,
       images: images,
       dynamicRatings: dynamicRatings,
     };
     addReview(newReview);
-    // Reset form state
     setRating(0);
     setComment("");
     setImages([]);
     setSidebarContent(null);
     document.body.classList.remove("no-scroll");
-    // Reset file input fields
     document.querySelectorAll("input[type=file]").forEach((input) => (input.value = ""));
   };
 
@@ -73,7 +51,6 @@ const ReviewForm = ({ addReview, data }) => {
       alert("You can only upload up to 4 images.");
       return;
     }
-    // Check if the selected file already exists in images state
     const newImages = selectedFiles.filter((selectedFile) =>
       images.every((image) => image.name !== selectedFile.name)
     );

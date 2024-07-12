@@ -5,17 +5,21 @@ import Image from "next/image";
 import axios from "axios";
 import ReviewForm from "../../../app/(with-header)/profile/ReviewForm";
 import Link from "next/link";
+import {
+  createApiEndpoint,
+  getCategoryByName,
+} from "@/components/Features/api";
 
 const ratingsData = [
   {
     label: "Overall rating",
     value: (
       <div className="-ml-3 mt-3">
-        {[5, 4, 3, 2, 1].map((number, index) => (
+        {[1, 2, 3, 4, 5].map((number, index) => (
           <div
             key={index}
             className={`border mb-2 ${index === 0 ? "border-black bg-black" : "bg-gray-300"
-              } rounded-full w-32 h-1.5 flex flex-row items-center ml-4 justify-start`}
+              } rounded-full w-32 h-1.5 flex flex-row items-center justify-start`}
           >
             <span className="-ml-3 text-sm">{number}</span>
           </div>
@@ -103,8 +107,58 @@ const Reviews = ({ productId, data }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isReview, setIsReview] = useState(false);
 
+  const [categoryData, setCategoryData] = useState(null);
+  const [showRatingTypes, setShowRatingTypes] = useState(null);
+  const [averageRatings, setAverageRatings] = useState({});
+
+
+  useEffect(() => {
+    const fetchCategoryRatingTypes = async () => {
+      try {
+        if (data && data.category) {
+          const category = await getCategoryByName(data.category);
+          setCategoryData(category);
+          setShowRatingTypes(category.availableRatingTypes)
+        }
+      } catch (error) {
+        console.error("Error fetching category:", error);
+      }
+    };
+
+    fetchCategoryRatingTypes();
+  }, [data.category]);
+
+
   console.log(data._id);
   console.log("Reviews data", data);
+  console.log("ratings  data", showRatingTypes);
+  console.log("category  data", reviews);
+
+  useEffect(() => {
+    const computeAverageRatings = () => {
+      const avgRatings = {};
+
+      if (reviews.length > 0 && showRatingTypes) {
+        showRatingTypes.forEach((type) => {
+          const ratingsForType = reviews.map((review) => {
+            const dynamicRating = review.dynamicRatings.find(
+              (r) => r.name === type.name
+            );
+            return dynamicRating ? Number(dynamicRating.value) : 0;
+          });
+          const sum = ratingsForType.reduce((acc, rating) => acc + rating, 0);
+          const avg = sum / ratingsForType.length || 0; // Handle division by zero
+
+          avgRatings[type._id] = avg.toFixed(1); // Store the average with one decimal place
+        });
+      }
+
+      setAverageRatings(avgRatings);
+    };
+
+    computeAverageRatings();
+  }, [reviews, showRatingTypes]);
+
 
   const handleReview = () => {
     setIsReview(!isReview);
@@ -282,20 +336,38 @@ const Reviews = ({ productId, data }) => {
                 </div>
               </div>
 
-              <div className="rating-map flex justify-around mt-12 w-full overflow-x-auto">
-                {ratingsData.map((item, index) => (
-                  <div key={index} className={`flex flex-col items-center text-center flex-grow px-4 ${ratingsData.length - 1 !== index ? 'border-r' : ''}`}>
-                    <div className="font-semibold text-gray-700 mb-2">{item.label}</div>
-                    <div className="text-lg font-semibold text-gray-900">{item.value}</div>
-                    <div>{item.icon}</div>
-                  </div>
-                ))}
-              </div>
 
             </div>
           )}
 
         <br />
+
+        <div className="rating-map flex justify-around mt-12 w-full overflow-x-auto">
+          {ratingsData.map((item, index) => (
+            <div key={index} className={`flex flex-col items-center text-center flex-grow px-4 ${ratingsData.length - 1 !== index ? 'border-r' : ''}`}>
+              <div className="font-semibold text-gray-700 mb-2">{item.label}</div>
+              <div className="text-lg font-semibold text-gray-900">{item.value}</div>
+              <div>{item.icon}</div>
+            </div>
+          ))}
+        </div>
+
+        <div className="rating-map flex justify-around mt-12 w-full overflow-x-auto">
+          {showRatingTypes && showRatingTypes.map((item, index) => (
+            <div key={item._id} className={`flex flex-col items-center text-center flex-grow px-4 ${ratingsData.length - 1 !== index ? 'border-r' : ''}`}>
+              <div className="font-semibold text-gray-700 mb-2">{item.name}</div>
+              <div className="text-lg font-semibold text-gray-900 mb-2">{averageRatings[item._id]}</div>
+              <Image
+                src={`${item.image}`}
+                alt={`${item.name}`}
+                width={30}
+                height={30}
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
+
 
         <div className="flex justify-between items-baseline pt-4">
           <h3 className="mb-1 text-xl font-semibold ">
@@ -307,7 +379,7 @@ const Reviews = ({ productId, data }) => {
               <p>Loading...</p>
             ) : (
               !isReview ? (
-                <ReviewForm addReview={addReview} data={data} />
+                <ReviewForm addReview={addReview} categoryData={categoryData} />
               ) : (
                 <div>
                   {/* This section can be used for further review-related content */}

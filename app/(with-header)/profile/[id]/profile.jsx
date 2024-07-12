@@ -129,8 +129,8 @@ const Profile = ({ id }) => {
     <div className="flex flex-col items-center w-full px-4 sm:px-6 lg:px-8 pt-20">
       {user ? (
         <>
-          <div className="flex flex-col items-center w-full mt-10">
-            <div className="relative w-24 h-24 sm:w-32 sm:h-32">
+          <div className="flex items-center gap-4 w-full mt-10 justify-center">
+            <div className="relative w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0">
               <Image
                 src={user.image}
                 alt="profile"
@@ -138,27 +138,31 @@ const Profile = ({ id }) => {
                 className="rounded-full object-cover"
               />
             </div>
-            <h1 className="mt-4 text-2xl sm:text-3xl font-semibold">
-              {user.displayName}
-            </h1>
-            <h2 className="text-gray-600">{user.email}</h2>
-            <h3 className="text-slate-400">
-              {user?.isLiveStreamHost && "Liveroom Host"}
-            </h3>
-            {isAuthenticated && isCurrentUser && (
-              <div className="flex justify-center w-full mt-4 gap-2">
-                <button className="bg-blue-500 text-white px-4 text-sm py-2 rounded-full">
-                  Edit Profile
-                </button>
-                <button
-                  onClick={handleLogout}
-                  className="bg-red-500 text-white px-4 text-sm py-2 rounded-full"
-                >
-                  Logout
-                </button>
-              </div>
-            )}
+            <div className="flex flex-col">
+              <h1 className="text-2xl sm:text-3xl font-semibold">
+                {user.displayName}
+              </h1>
+              <h2 className="text-gray-600">{user.email}</h2>
+              <h3 className="text-slate-400">
+                {user?.isLiveStreamHost && "Liveroom Host"}
+              </h3>
+              {isAuthenticated && isCurrentUser && (
+                <div className="flex justify-start w-full mt-4 gap-2">
+                  <button className="bg-blue-500 text-white px-4 text-sm py-2 rounded-full">
+                    Edit Profile
+                  </button>
+                  <button
+                    onClick={handleLogout}
+                    className="bg-red-500 text-white px-4 text-sm py-2 rounded-full"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
+
+
 
           {user.authorDetails && user.authorDetails.author && (
             <div className="mt-8 flex flex-col items-center w-full">
