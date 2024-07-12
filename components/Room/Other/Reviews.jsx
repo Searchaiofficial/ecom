@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import "../styles.css";
 import Carous from "@/components/Carousel/Carous";
 import Image from "next/image";
@@ -110,6 +110,13 @@ const Reviews = ({ productId, data }) => {
   const [categoryData, setCategoryData] = useState(null);
   const [showRatingTypes, setShowRatingTypes] = useState(null);
   const [averageRatings, setAverageRatings] = useState({});
+  const [ratingCounts, setRatingCounts] = useState({
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0
+  });
 
 
   useEffect(() => {
@@ -134,30 +141,45 @@ const Reviews = ({ productId, data }) => {
   console.log("ratings  data", showRatingTypes);
   console.log("category  data", reviews);
 
-  useEffect(() => {
-    const computeAverageRatings = () => {
-      const avgRatings = {};
+  const computeAverageRatings = useMemo(() => {
+    const avgRatings = {};
 
-      if (reviews.length > 0 && showRatingTypes) {
-        showRatingTypes.forEach((type) => {
-          const ratingsForType = reviews.map((review) => {
-            const dynamicRating = review.dynamicRatings.find(
-              (r) => r.name === type.name
-            );
-            return dynamicRating ? Number(dynamicRating.value) : 0;
-          });
-          const sum = ratingsForType.reduce((acc, rating) => acc + rating, 0);
-          const avg = sum / ratingsForType.length || 0; // Handle division by zero
-
-          avgRatings[type._id] = avg.toFixed(1); // Store the average with one decimal place
+    if (reviews.length > 0 && showRatingTypes) {
+      showRatingTypes.forEach((type) => {
+        const ratingsForType = reviews.map((review) => {
+          const dynamicRating = review.dynamicRatings.find(
+            (r) => r.name === type.name
+          );
+          return dynamicRating ? Number(dynamicRating.value) : 0;
         });
-      }
+        const sum = ratingsForType.reduce((acc, rating) => acc + rating, 0);
+        const avg = sum / ratingsForType.length || 0; // Handle division by zero
 
-      setAverageRatings(avgRatings);
-    };
+        avgRatings[type._id] = avg.toFixed(1); // Store the average with one decimal place
+      });
+    }
 
-    computeAverageRatings();
+    return avgRatings;
   }, [reviews, showRatingTypes]);
+
+  useEffect(() => {
+    if (reviews.length > 0) {
+      const counts = {
+        1: 0,
+        2: 0,
+        3: 0,
+        4: 0,
+        5: 0
+      };
+
+      // Count ratings
+      reviews.forEach(review => {
+        counts[review.rating]++;
+      });
+
+      setRatingCounts(counts);
+    }
+  }, [reviews]);
 
 
   const handleReview = () => {
@@ -348,42 +370,48 @@ const Reviews = ({ productId, data }) => {
           ))}
         </div> */}
 
-        <div className="rating-map flex justify-around mt-2 w-full overflow-x-auto">
+        {reviews.length > 0 && showRatingTypes && (
+          <div className="rating-map flex justify-around mt-2 w-full overflow-x-auto">
+            {/* Overall Ratings */}
 
-          {showRatingTypes && (
-            <>
-              {/* Overall Ratings */}
-              <div className="flex flex-col items-center pr-4 border-r">
-                <div className="font-semibold text-gray-700 mb-2 capitalize">overall ratings</div>
-                <div className="ml-4 mt-3 space-y-2">
-                  {[1, 2, 3, 4, 5].map((number, index) => (
-                    <div
-                      key={index}
-                      className={`border ${index === 0 ? "border-black bg-black" : "border-gray-300 bg-gray-300"} w-32 h-1.5 flex items-center justify-start`}
-                    >
-                      <span className="-ml-3 text-sm">{number}</span>
+            <div className="flex flex-col items-center pr-4 border-r">
+              <div className="font-semibold text-gray-700 mb-2 capitalize">Overall Ratings</div>
+              <div className="ml-4 mt-2">
+                {[1, 2, 3, 4, 5].map((number, index) => (
+                  <div className="flex">
+                    <span className="mr-2 text-sm">{number}</span>
+                    <div className="flex items-center w-20">
+                      <div className="h-1 bg-gray-300 w-full overflow-hidden">
+                        <div
+                          className="h-full bg-black"
+                          style={{ width: `${(ratingCounts[number] / reviews.length) * 100}%` }}
+                        ></div>
+                      </div>
                     </div>
-                  ))}
-                </div>
-              </div>
 
-              {/* Rating Types */}
-              {showRatingTypes.map((item, index) => (
-                <div key={item._id} className={`flex flex-col items-center text-center px-4 ${index !== showRatingTypes.length - 1 ? 'border-r' : ''}`}>
-                  <div className="font-semibold text-gray-700 mb-2 capitalize">{item.name}</div>
-                  <div className="text-lg font-semibold text-gray-900 mb-2 capitalize">{averageRatings[item._id]}</div>
-                  <Image
-                    src={`${item.image}`}
-                    alt={`${item.name}`}
-                    width={30}
-                    height={30}
-                    loading="lazy"
-                  />
-                </div>
-              ))}
-            </>
-          )}
-        </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Rating Types */}
+            {showRatingTypes.map((item, index) => (
+              <div key={item._id} className={`flex flex-col items-center text-center ${index !== showRatingTypes.length - 1 ? 'border-r pr-4' : 'pr-4'}`}>
+                <div className="font-semibold text-gray-700 mb-5 capitalize">{item.name}</div>
+                <div className="text-lg font-semibold text-gray-900 mb-2">{computeAverageRatings[item._id]}</div>
+                <Image
+                  src={item.image}
+                  alt={item.name}
+                  width={30}
+                  height={30}
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
+        )}
+
+
 
         <div className="flex justify-between items-baseline pt-4">
           <h3 className="mb-1 text-xl font-semibold ">
@@ -404,9 +432,6 @@ const Reviews = ({ productId, data }) => {
             )}
           </>
         </div>
-        <span className="font-normal text-sm text-gray-500">
-          Average rating will appear after 3 reviews
-        </span>
         <div
           className="reviews-container mt-6 grid sm:grid-cols-2 grids-col-1  gap-4 mx-auto "
           style={{ overflowX: "hidden" }}
@@ -426,9 +451,9 @@ const Reviews = ({ productId, data }) => {
                     <span className="font-semibold text-[16px]">
                       {review.name}
                     </span>
-                    <span className="font-normal text-[14px] text-gray-500">
-                      {/* {review.location} */}
-                    </span>
+                    {/* <span className="font-normal text-[14px] text-gray-500">
+                      {review.location}
+                    </span> */}
                   </div>
                 </Link>
                 {isAuthenticated && user.email === review.userEmail && (
