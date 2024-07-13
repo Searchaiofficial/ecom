@@ -14,7 +14,7 @@ function SuggestionCard(props) {
         <Link href={`/inspiration/${props.title.replace(/ /g, "-")}`}>
           <div className="flex h-full w-full items-center justify-center cursor-pointer  overflow-hidden">
             <Image
-              src={props.imgSrc}
+              src={props.mainImage.imgSrc}
               alt={props.title}
               height={600}
               width={600}

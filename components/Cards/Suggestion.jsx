@@ -146,7 +146,8 @@ const Suggestion = () => {
                     <SuggestionCard
                       title={suggestion.heading}
                       desc={suggestion.shortSummary}
-                      imgSrc={suggestion.suggestionCardImage}
+                      // imgSrc={suggestion.suggestionCardImage}
+                      mainImage={suggestion.mainImage}
                       key={idx}
                       bgColorClass={
                         backgroundColors[idx % backgroundColors.length]

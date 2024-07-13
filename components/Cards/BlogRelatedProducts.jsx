@@ -41,7 +41,7 @@ const BlogRecommendedProducts = ({ relatedProducts, title }) => {
 
   return (
     <div>
-      <div className="pt-10  mb-20  bg-white ">
+      <div className=" mt-20  bg-white ">
         <div className="mb-2 w-full flex justify-between items-center">
           <h2 className="font-semibold text-2xl py-[15px]">
             {relatedProducts && relatedProducts.length === 0
