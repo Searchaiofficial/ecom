@@ -555,7 +555,7 @@ const Reviews = ({ productId, data }) => {
           ))}
         </div>
 
-        <div className="md:hidden  w-full">
+        <div className="md:hidden max-h-[300px]  w-full">
           <Swiper
             ref={swiper1Ref}
             {...swiperOptions}
@@ -596,8 +596,50 @@ const Reviews = ({ productId, data }) => {
             {reviews.map((review, index) => (
               <SwiperSlide>
 
-                <div key={index} className="sm:mr-12 mb-8 m-0 sm:block ">
-                  <div className="flex justify-between">
+                <div key={index} className="sm:mr-12 mb-8 flex flex-col justify-between m-0 sm:block rounded-sm p-4 border shadow-sm min-h-[230px] ">
+                  <div className="flex flex-col justify-between h-full">
+                    <div>
+                      <div className="ratings flex mt-3">
+                        {[...Array(review.rating)].map((_, i) => (
+                          <Image
+                            loading="lazy"
+                            key={i}
+                            src="/icons/full-black.svg"
+                            width={10}
+                            height={10}
+                            alt="star"
+                            className="m-[2px]"
+                          />
+                        ))}
+                        <span className="text-sm font-semibold ml-2 text-gray-600">
+                          {new Date(review.createdAt).toLocaleString('default', { month: 'long', year: 'numeric' })}
+                        </span>
+                      </div>
+
+
+
+                      <div className="review mt-1">
+                        <p className="text-gray-600 font-[16px]  text-[14px] leading-6  sm:w-auto text-left w-[100%]">
+                          {review.showFullComment
+                            ? review.comment
+                            : `${review.comment.slice(0, 100)}...`}
+
+
+                        </p>
+                        {review.comment.length > 100 && (
+                          <button
+                            className="underline font-medium cursor-pointer text-[14px] mt-1"
+                            onClick={() => toggleShowMore(index)}
+                          >
+                            {review.showFullComment ? "Show Less" : "Show More"}
+                          </button>
+                        )}
+                      </div>
+                    </div>
+
+
+                  </div>
+                  <div className="flex justify-between mt-5">
                     <Link className="review-header flex items-center" href={`/profile/${review?.userId}`}>
                       <div className="w-[48px] h-[48px] mr-4">
                         <img
@@ -611,7 +653,7 @@ const Reviews = ({ productId, data }) => {
                           {review.name}
                         </span>
                         <span className="font-normal text-[14px] text-gray-500">
-                          {/* {review.location} */}
+
                         </span>
                       </div>
                     </Link>
@@ -623,41 +665,11 @@ const Reviews = ({ productId, data }) => {
                       </div>
                     )}
                   </div>
-                  <div className="ratings flex mt-3">
-                    {[...Array(review.rating)].map((_, i) => (
-                      <Image
-                        loading="lazy"
-                        key={i}
-                        src="/icons/full-black.svg"
-                        width={15}
-                        height={15}
-                        alt="star"
-                        className="m-[2px]"
-                      />
-                    ))}
-                    <span className="text-sm font-semibold ml-2">
-                      {Date(review.createdAt).slice(0, 15)}
-                    </span>
-                  </div>
 
-                  <div className="review mt-2">
-                    <p className="text-gray-600 font-[16px] leading-6  sm:w-auto text-left w-[100%]">
-                      {review.showFullComment
-                        ? review.comment
-                        : `${review.comment.slice(0, 80)}...`}
-                      {review.comment.length > 80 && (
-                        <button
-                          className="underline font-medium cursor-pointer ml-1"
-                          onClick={() => toggleShowMore(index)}
-                        >
-                          {review.showFullComment ? "Show Less" : "Show More"}
-                        </button>
-                      )}
-                    </p>
-                  </div>
+
 
                   {review.images.length > 0 && (
-                    <div className="flex gap-2 mb-4">
+                    <div className="flex gap-2 mb-4 mt-4">
                       {review.images.map((image, index) => (
                         <img
                           key={index}
