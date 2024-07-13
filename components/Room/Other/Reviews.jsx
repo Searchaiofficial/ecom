@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import "../styles.css";
 import Carous from "@/components/Carousel/Carous";
 import Image from "next/image";
@@ -9,96 +9,98 @@ import {
   createApiEndpoint,
   getCategoryByName,
 } from "@/components/Features/api";
+import { FreeMode, Mousewheel, Pagination, Scrollbar } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-// const ratingsData = [
-//   {
-//     label: "Overall rating",
-//     value: (
-//       <div className="-ml-3 mt-3">
-//         {[1, 2, 3, 4, 5].map((number, index) => (
-//           <div
-//             key={index}
-//             className={`border mb-2 ${index === 0 ? "border-black bg-black" : "bg-gray-300"
-//               }  w-32 h-1.5 flex flex-row items-center justify-start`}
-//           >
-//             <span className="-ml-3 text-sm">{number}</span>
-//           </div>
-//         ))}
-//       </div>
-//     ),
-//     icon: null,
-//   },
-//   {
-//     label: "Accuracy",
-//     value: "5.0",
-//     icon: (
-//       <Image
-//         loading="lazy"
-//         src="/icons/checkmark-icon.svg"
-//         width={36}
-//         height={36}
-//         alt="accuracy"
-//         className="mt-5"
-//       />
-//     ),
-//   },
-//   {
-//     label: "Communication",
-//     value: "4.9",
-//     icon: (
-//       <Image
-//         loading="lazy"
-//         src="/icons/message-icon.svg"
-//         width={36}
-//         height={36}
-//         alt="communication"
-//         className="mt-5"
-//       />
-//     ),
-//   },
-//   {
-//     label: "Location",
-//     value: "4.0",
-//     icon: (
-//       <Image
-//         loading="lazy"
-//         src="/icons/location-pin-icon.svg"
-//         width={36}
-//         height={36}
-//         alt="map"
-//         className="mt-5"
-//       />
-//     ),
-//   },
-//   {
-//     label: "Value",
-//     value: "5.0",
-//     icon: (
-//       <Image
-//         loading="lazy"
-//         src="/icons/price-tag-icon.svg"
-//         width={36}
-//         height={36}
-//         alt="value"
-//         className="mt-5"
-//       />
-//     ),
-//   },
-//   {
-//     label: "waterprof",
-//     value: "5.0",
-//     icon: (
-//       <Image
-//         loading="lazy"
-//         src="/icons/price-tag-icon.svg"
-//         width={36}
-//         height={36}
-//         alt="value"
-//         className="mt-5"
-//       />
-//     ),
-//   },
-// ];
+const ratingsData = [
+  {
+    label: "Overall rating",
+    value: (
+      <div className="-ml-3 mt-3">
+        {[1, 2, 3, 4, 5].map((number, index) => (
+          <div
+            key={index}
+            className={`border mb-2 ${index === 0 ? "border-black bg-black" : "bg-gray-300"
+              }  w-32 h-1.5 flex flex-row items-center justify-start`}
+          >
+            <span className="-ml-3 text-sm">{number}</span>
+          </div>
+        ))}
+      </div>
+    ),
+    icon: null,
+  },
+  {
+    label: "Accuracy",
+    value: "5.0",
+    icon: (
+      <Image
+        loading="lazy"
+        src="/icons/checkmark-icon.svg"
+        width={36}
+        height={36}
+        alt="accuracy"
+        className="mt-5"
+      />
+    ),
+  },
+  {
+    label: "Communication",
+    value: "4.9",
+    icon: (
+      <Image
+        loading="lazy"
+        src="/icons/message-icon.svg"
+        width={36}
+        height={36}
+        alt="communication"
+        className="mt-5"
+      />
+    ),
+  },
+  {
+    label: "Location",
+    value: "4.0",
+    icon: (
+      <Image
+        loading="lazy"
+        src="/icons/location-pin-icon.svg"
+        width={36}
+        height={36}
+        alt="map"
+        className="mt-5"
+      />
+    ),
+  },
+  {
+    label: "Value",
+    value: "5.0",
+    icon: (
+      <Image
+        loading="lazy"
+        src="/icons/price-tag-icon.svg"
+        width={36}
+        height={36}
+        alt="value"
+        className="mt-5"
+      />
+    ),
+  },
+  {
+    label: "waterprof",
+    value: "5.0",
+    icon: (
+      <Image
+        loading="lazy"
+        src="/icons/price-tag-icon.svg"
+        width={36}
+        height={36}
+        alt="value"
+        className="mt-5"
+      />
+    ),
+  },
+];
 
 const Reviews = ({ productId, data }) => {
   const [reviews, setReviews] = useState([]);
@@ -319,9 +321,24 @@ const Reviews = ({ productId, data }) => {
     setReviews(updatedReviews);
   };
 
+  const swiper1Ref = useRef(null);
+
+  const swiperOptions = {
+    centeredSlides: false,
+    spaceBetween: 1,
+    modules: [Pagination, Scrollbar, Mousewheel, FreeMode],
+    navigation: {
+      nextEl: ".custom-next-button",
+      prevEl: ".custom-prev-button",
+    },
+    noSwiping: true,
+    allowSlidePrev: true,
+    allowSlideNext: true,
+  };
+
   return (
     <>
-      <div className="pb-12 sm:w-auto w-[80vw] overflow-x-hidden">
+      <div className="pb-12 sm:w-auto w-[90vw] overflow-x-hidden">
         {(data.productType === "special" ||
           data.productType === "requested") && (
             <div>
@@ -458,7 +475,7 @@ const Reviews = ({ productId, data }) => {
           </>
         </div>
         <div
-          className="reviews-container mt-6 grid sm:grid-cols-2 grids-col-1  gap-4 mx-auto "
+          className="reviews-container hidden mt-6 md:grid sm:grid-cols-2 grids-col-1  gap-4 mx-auto "
           style={{ overflowX: "hidden" }}
         >
           {reviews.map((review, index) => (
@@ -536,6 +553,126 @@ const Reviews = ({ productId, data }) => {
               )}
             </div>
           ))}
+        </div>
+
+        <div className="md:hidden  w-full">
+          <Swiper
+            ref={swiper1Ref}
+            {...swiperOptions}
+            scrollbar={{
+              hide: false,
+              draggable: true,
+            }}
+            mousewheel={{
+              forceToAxis: true,
+              invert: false,
+            }}
+            freeMode={{
+              enabled: true,
+              sticky: true,
+            }}
+            breakpoints={{
+              300: {
+                slidesPerView: 1.1,
+                spaceBetween: 10,
+              },
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 10,
+              },
+              1024: {
+                slidesPerView: 1.1,
+                spaceBetween: 10,
+              },
+            }}
+            allowSlideNext={true}
+            allowSlidePrev={true}
+            slideNextClass="custom-next-button"
+            slidePrevClass="custom-prev-button"
+            className="px-10 "
+          >
+
+
+            {reviews.map((review, index) => (
+              <SwiperSlide>
+
+                <div key={index} className="sm:mr-12 mb-8 m-0 sm:block ">
+                  <div className="flex justify-between">
+                    <Link className="review-header flex items-center" href={`/profile/${review?.userId}`}>
+                      <div className="w-[48px] h-[48px] mr-4">
+                        <img
+                          className="w-full h-full rounded-full object-cover"
+                          src={review.profilePic}
+                          alt="User Avatar"
+                        />
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="font-semibold text-[16px]">
+                          {review.name}
+                        </span>
+                        <span className="font-normal text-[14px] text-gray-500">
+                          {/* {review.location} */}
+                        </span>
+                      </div>
+                    </Link>
+                    {isAuthenticated && user.email === review.userEmail && (
+                      <div className="flex items-center">
+                        <button onClick={() => handleDelete(review._id)}>
+                          Delete
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                  <div className="ratings flex mt-3">
+                    {[...Array(review.rating)].map((_, i) => (
+                      <Image
+                        loading="lazy"
+                        key={i}
+                        src="/icons/full-black.svg"
+                        width={15}
+                        height={15}
+                        alt="star"
+                        className="m-[2px]"
+                      />
+                    ))}
+                    <span className="text-sm font-semibold ml-2">
+                      {Date(review.createdAt).slice(0, 15)}
+                    </span>
+                  </div>
+
+                  <div className="review mt-2">
+                    <p className="text-gray-600 font-[16px] leading-6  sm:w-auto text-left w-[100%]">
+                      {review.showFullComment
+                        ? review.comment
+                        : `${review.comment.slice(0, 80)}...`}
+                      {review.comment.length > 80 && (
+                        <button
+                          className="underline font-medium cursor-pointer ml-1"
+                          onClick={() => toggleShowMore(index)}
+                        >
+                          {review.showFullComment ? "Show Less" : "Show More"}
+                        </button>
+                      )}
+                    </p>
+                  </div>
+
+                  {review.images.length > 0 && (
+                    <div className="flex gap-2 mb-4">
+                      {review.images.map((image, index) => (
+                        <img
+                          key={index}
+                          src={image}
+                          alt="review"
+                          className="w-[100px] h-[100px] object-cover"
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </SwiperSlide>
+            ))}
+
+          </Swiper>
         </div>
 
 
