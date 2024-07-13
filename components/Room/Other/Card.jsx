@@ -765,7 +765,7 @@ const Card = ({ data, productId }) => {
             )}
             {!data.demandtype ? (
               <div className="flex items-center justify-between">
-                <p className="text-2xl  font-bold mb-0.5">
+                <p className="text-2xl  font-bold mb-0.5 mt-3">
                   {data?.productTitle}
                 </p>
 

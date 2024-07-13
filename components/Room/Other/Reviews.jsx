@@ -137,10 +137,11 @@ const Reviews = ({ productId, data }) => {
 
 
   console.log(data._id);
-  console.log("Reviews data", data);
+  console.log("product data", data);
   console.log("ratings  data", showRatingTypes);
-  console.log("category  data", reviews);
+  console.log("reviews  data", reviews);
 
+  // avg rating of each dynamic rating [e.g waterproof, quality,...]
   const computeAverageRatings = useMemo(() => {
     const avgRatings = {};
 
@@ -179,6 +180,15 @@ const Reviews = ({ productId, data }) => {
 
       setRatingCounts(counts);
     }
+  }, [reviews]);
+
+
+  // overall avg rating of the product
+  const calculateOverallAverageRating = useMemo(() => {
+    if (reviews.length === 0) return 0;
+
+    const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+    return (totalRating / reviews.length).toFixed(1);
   }, [reviews]);
 
 
@@ -243,10 +253,12 @@ const Reviews = ({ productId, data }) => {
       }
     } catch (error) {
       console.error("Error fetching reviews:", error);
+      setReviews([]);
     }
   };
 
   useEffect(() => {
+    setReviews([]);
     fetchReviews();
   }, [productId]);
 
@@ -370,11 +382,11 @@ const Reviews = ({ productId, data }) => {
           ))}
         </div> */}
 
-        {reviews.length > 0 && showRatingTypes && (
+        {reviews.length > 0 && showRatingTypes.length > 0 && (
           <div className="rating-map flex justify-between mt-2 w-full overflow-x-auto">
             {/* Overall Ratings */}
 
-            <div className="flex flex-col items-center pr-4">
+            <div className="flex flex-col items-center">
               <div className="font-semibold text-gray-700 mb-2 capitalize">Overall Ratings</div>
               <div className="mt-2">
                 {[5, 4, 3, 2, 1].map((number, index) => (
@@ -383,12 +395,11 @@ const Reviews = ({ productId, data }) => {
                     <div className="flex items-center w-20">
                       <div className="h-1 bg-gray-300 w-full overflow-hidden">
                         <div
-                          className="h-full bg-black"
+                          className="h-full bg-black rounded-r-full"
                           style={{ width: `${(ratingCounts[number] / reviews.length) * 100}%` }}
                         ></div>
                       </div>
                     </div>
-
                   </div>
                 ))}
               </div>
@@ -396,7 +407,7 @@ const Reviews = ({ productId, data }) => {
 
             {/* Rating Types */}
             {showRatingTypes?.map((item, index) => (
-              <div key={item._id} className={`flex flex-col items-center text-center pr-4`}>
+              <div key={item._id} className={`flex flex-col items-center text-center pr-4 ${index === showRatingTypes.length - 1 ? 'mr-8' : ''}`}>
                 <div className="font-semibold text-gray-700 mb-4 capitalize">{item.name}</div>
                 <div className="text-lg font-semibold text-gray-900 my-2">{computeAverageRatings[item._id]}</div>
                 <Image
@@ -411,13 +422,27 @@ const Reviews = ({ productId, data }) => {
           </div>
         )}
 
-
-
         <div className="flex justify-between items-baseline pt-4">
-          <h3 className="mb-1 text-xl font-semibold ">
-            {reviews.length}
-            <span> reviews</span>
-          </h3>
+          <div className="flex mb-1 text-xl font-semibold space-x-1">
+            {calculateOverallAverageRating > 0 &&
+              <>
+                <Image
+                  loading="lazy"
+                  src="/icons/full-black.svg"
+                  width={15}
+                  height={15}
+                  alt="star"
+                  className="m-[2px]"
+                />
+                {calculateOverallAverageRating}
+                <span aria-hidden="true">·</span>
+              </>
+            }
+            <div className="text-lg underline">
+              {reviews.length}
+              <span> reviews</span>
+            </div>
+          </div>
           <>
             {isLoading ? (
               <p>Loading...</p>

@@ -236,7 +236,7 @@ const RoomInfo = ({ data }) => {
 
       <div className="flex">
         {data?.author && (
-          <div className="flex flex-col my-10 gap-6 p-4 w-full ">
+          <div className="flex flex-col my-10 gap-6 w-full ">
             <div className="flex items-start gap-4">
               <Link href={`/profile/${data.author.userId}`} className="flex-shrink-0">
                 <Image
@@ -251,7 +251,7 @@ const RoomInfo = ({ data }) => {
                 <Link href={`/profile/${data.author.userId}`} className=" text-[#1D1D1F] font-bold text-xl">
                   {data.author.name}
                 </Link>
-                <p className="text-[#1D1D1F] font-semibold text-sm pt-3 line-clamp-5">
+                <p className="text-[#1D1D1F] font-semibold text-sm pt-3 line-clamp-5 md:w-[70%]">
                   {data.author.description}
                 </p>
                 {/* <div className="grid grid-cols-3 gap-4 mt-4 w-full">
@@ -277,71 +277,72 @@ const RoomInfo = ({ data }) => {
               </div>
             </div>
 
-            <Swiper
-              className="w-full mt-4"
-              ref={swiper1Ref}
-              {...swiperOptions2}
-              modules={[Navigation, Pagination, A11y]}
-              navigation={{
-                nextEl: ".right",
-                prevEl: ".back",
-              }}
-              draggable={true}
-              style={{
-                "--swiper-navigation-size": "24px",
-                maxHeight: "120px",
-              }}
-              mousewheel={{
-                forceToAxis: true,
-                invert: false,
-              }}
-              freeMode={{
-                enabled: false,
-                sticky: true,
-              }}
-              breakpoints={{
-                300: {
-                  slidesPerView: 1,
-                  spaceBetween: 10,
-                },
-                768: {
-                  slidesPerView: 2,
-                  spaceBetween: 10,
-                },
-                1024: {
-                  slidesPerView: 2,
-                  spaceBetween: 10,
-                },
-              }}
-            >
-              {otherProductByAuthorId.map((item, idx) => (
-                <SwiperSlide key={idx} className="max-w-[130px] px-1">
-                  <Link className="flex flex-col items-center" href={`/${item.productTitle.replace(/ /g, "-")}`}>
-                    <div className="mb-[12px] ">
-                      <Image
-                        loading="lazy"
-                        src={item.images[0]}
-                        width={200}
-                        height={130}
-                        className="h-[70px] object-cover"
-                      />
-                    </div>
-                    <div className="flex justify-between">
-                      <h2 className="text-[#333333] text-[14px] hover:underline line-clamp-1">
-                        {item.productTitle}
-                      </h2>
-                      <Image
-                        src="/icons/Back_arrow.svg"
-                        alt="arrow"
-                        width={15}
-                        height={15}
-                        loading="lazy"
-                      />
-                    </div>
-                  </Link>
-                </SwiperSlide>
-              ))}
-            </Swiper>
+            {otherProductByAuthorId.length > 0 &&
+              <Swiper
+                className="w-full mt-4"
+                ref={swiper1Ref}
+                {...swiperOptions2}
+                modules={[Navigation, Pagination, A11y]}
+                navigation={{
+                  nextEl: ".right",
+                  prevEl: ".back",
+                }}
+                draggable={true}
+                style={{
+                  "--swiper-navigation-size": "24px",
+                  maxHeight: "120px",
+                }}
+                mousewheel={{
+                  forceToAxis: true,
+                  invert: false,
+                }}
+                freeMode={{
+                  enabled: false,
+                  sticky: true,
+                }}
+                breakpoints={{
+                  300: {
+                    slidesPerView: 1,
+                    spaceBetween: 10,
+                  },
+                  768: {
+                    slidesPerView: 2,
+                    spaceBetween: 10,
+                  },
+                  1024: {
+                    slidesPerView: 2,
+                    spaceBetween: 10,
+                  },
+                }}
+              >
+                {otherProductByAuthorId.map((item, idx) => (
+                  <SwiperSlide key={idx} className="max-w-[130px] px-1">
+                    <Link className="flex flex-col items-center" href={`/${item.productTitle.replace(/ /g, "-")}`}>
+                      <div className="mb-[12px] ">
+                        <Image
+                          loading="lazy"
+                          src={item.images[0]}
+                          width={200}
+                          height={130}
+                          className="h-[70px] object-cover"
+                        />
+                      </div>
+                      <div className="flex justify-between">
+                        <h2 className="text-[#333333] text-[14px] hover:underline line-clamp-1">
+                          {item.productTitle}
+                        </h2>
+                        <Image
+                          src="/icons/Back_arrow.svg"
+                          alt="arrow"
+                          width={15}
+                          height={15}
+                          loading="lazy"
+                        />
+                      </div>
+                    </Link>
+                  </SwiperSlide>
+                ))}
+              </Swiper>}
           </div>
         )}
       </div>
