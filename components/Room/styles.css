@@ -211,3 +211,19 @@
 .rating-map::-webkit-scrollbar {
   display: none;
 }
+
+
+.image-container {
+  position: relative;
+  overflow: hidden;
+  cursor: url('/icons/plus.svg'), auto; /* Default custom cursor */
+}
+
+.image-container img {
+  transition: transform 0.5s ease;
+}
+
+.zoomed {
+  transform: scale(2); /* Adjust the scale as needed */
+  cursor: url('/icons/single line.svg'), auto; /* Custom cursor for zoomed state */
+}
