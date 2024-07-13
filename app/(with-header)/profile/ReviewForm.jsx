@@ -81,7 +81,7 @@ const ReviewForm = ({ addReview, categoryData }) => {
       </button>
 
       {sidebarContent === "addReview" && (
-        <div className="fixed z-[99999] h-full w-screen bg-black/50 backdrop-blur-sm top-0 left-0">
+        <div className="fixed z-[99999] h-full w-screen bg-black/50 top-0 left-0">
           <section className="text-black bg-white flex-col absolute right-0 top-0 h-full z-[99999] w-full lg:w-[35%] flex overflow-y-auto">
             <div className="flex flex-col">
               <div className="px-[25px] pb-[32px]">

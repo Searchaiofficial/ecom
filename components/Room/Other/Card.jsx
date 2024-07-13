@@ -989,7 +989,7 @@ const Card = ({ data, productId }) => {
               <div className="">
                 <div className="w-1/2 flex flex-col justify-between gap-4 h-full bg-white rounded-3xl p-7">
                   {sidebarContect === "zeroCostEMI" && (
-                    <div className="fixed z-[9999] h-full w-screen bg-black/50 backdrop-blur-sm top-0 left-0">
+                    <div className="fixed z-[9999] h-full w-screen bg-black/50 top-0 left-0">
                       <section className="text-black bg-white flex-col absolute right-0 top-0 h-full  z-[99999] w-full  lg:w-[35%] flex overflow-y-auto">
                         <div className="flex flex-col w-full">
                           <div className="px-[40px] pb-[32px]">
@@ -1425,7 +1425,7 @@ const Card = ({ data, productId }) => {
                     </div>
                   )}
                   {sidebarContect === "inStoreRequest" && (
-                    <div className="fixed z-[99999] h-full w-screen bg-black/50 backdrop-blur-sm top-0 left-0">
+                    <div className="fixed z-[99999] h-full w-screen bg-black/50 top-0 left-0">
                       <section className="text-black bg-white flex-col absolute right-0 top-0 h-full z-[99999] w-full  lg:w-[35%] flex overflow-y-auto">
                         <div className="flex flex-col">
                           <div className="px-[40px] pb-[32px]">
@@ -1581,7 +1581,7 @@ const Card = ({ data, productId }) => {
                 </div>
 
                 {sidebarContect === "deliveryOption" && (
-                  <div className=" fixed z-[99999] h-full w-screen  bg-black/50  backdrop-blur-sm top-0 left-0">
+                  <div className=" fixed z-[99999] h-full w-screen  bg-black/50  top-0 left-0">
                     <section className="text-black z-[99999] bg-white flex-col absolute right-0 top-0 h-screen w-full  lg:w-[35%] flex ">
                       <div className="flex flex-col">
                         <div className="px-[40px] pb-[32px]">
@@ -1640,7 +1640,7 @@ const Card = ({ data, productId }) => {
                   </div>
                 )}
                 {sidebarContect === "calculator" && (
-                  <div className=" fixed h-full w-screen  bg-black/50  backdrop-blur-sm top-0 left-0 z-[99999]">
+                  <div className=" fixed h-full w-screen  bg-black/50  top-0 left-0 z-[99999]">
                     <section className="text-black bg-white flex-col absolute right-0 top-0 h-screen z-[99999] w-full  lg:w-[35%] flex ">
                       <div className="flex flex-col">
                         <div className="px-[40px] pb-[32px]">
@@ -1669,7 +1669,7 @@ const Card = ({ data, productId }) => {
                   </div>
                 )}
                 {sidebarContect === "addToBag" && (
-                  <div className=" fixed h-full w-screen  bg-black/50  backdrop-blur-sm top-0 left-0 z-[99999]">
+                  <div className=" fixed h-full w-screen  bg-black/50  top-0 left-0 z-[99999]">
                     <section className="text-black bg-white flex-col absolute right-0 top-0 h-screen z-[99999] w-full  lg:w-[35%] flex ">
                       <div className="flex flex-col ">
                         <div className="md:px-[40px] pb-[32px] px-[20px]">

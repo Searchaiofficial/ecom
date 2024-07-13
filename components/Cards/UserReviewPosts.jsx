@@ -119,7 +119,7 @@ const UserReviewPosts = ({ slidesPerView, SubcategoryName }) => {
                         <h2 className="font-semibold text-2xl pb-[8px] ">
                             As seen on Instagram
                         </h2>
-                        <p className="text-[14px] line-clamp-2 lg:line-clamp-none">
+                        <p className="text-[14px] line-clamp-2 lg:line-clamp-none md:w-[75%]">
                             Get inspired by other Ayatrio shoppers! Share your photos on Instagram and tag @Ayatrio for a chance to be featured.
                         </p>
                     </div>

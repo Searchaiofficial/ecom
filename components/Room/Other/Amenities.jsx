@@ -30,7 +30,7 @@ const Amenities = ({ data }) => {
       {amenities.length > 0 && (
         <div className="place-offerings mt-[16px] pt-[32px] ">
           <h3 className="mb-6 text-xl font-semibold">
-            What this place offers
+            Amenities
           </h3>
           <div className={`amenities grid ${amenities.length > 5 ? 'grid-cols-2' : 'grid-cols-1'} sm:w-auto`}>
             {amenities.map((amenity, index) => (

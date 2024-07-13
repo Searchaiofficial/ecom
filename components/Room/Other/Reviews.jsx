@@ -338,7 +338,7 @@ const Reviews = ({ productId, data }) => {
 
   return (
     <>
-      <div className="pb-12 sm:w-auto w-[90vw] overflow-x-hidden">
+      <div className="pb-12 sm:w-auto overflow-x-hidden">
         {(data.productType === "special" ||
           data.productType === "requested") && (
             <div>
