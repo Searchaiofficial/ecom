@@ -165,13 +165,13 @@ const Suggestion = ({ id }) => {
                   <div className="mt-6 flex flex-col md:flex-row gap-3  items-center justify-between mx-auto">
                     <div className="relative h-[449px]  lg:min-h-[730px] w-full">
                       <TabImage
-                        src={suggestion.twoGrid.twoGridRooms[1].imgSrc}
+                        src={suggestion.twoGrid.twoGridRooms[0].imgSrc}
                         alt={`Image  of Children`}
                         layout="fill"
                         width={1000}
                         height={1000}
                         objectFit="cover"
-                        labelData={suggestion.twoGrid.twoGridRooms[1].children}
+                        labelData={suggestion.twoGrid.twoGridRooms[0].children}
                       />
                     </div>
                     <div className="relative h-[449px]  lg:min-h-[730px] w-full">
