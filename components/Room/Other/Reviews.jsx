@@ -382,7 +382,7 @@ const Reviews = ({ productId, data }) => {
           ))}
         </div> */}
 
-        {reviews.length > 0 && showRatingTypes.length > 0 && (
+        {reviews?.length > 0 && showRatingTypes?.length > 0 && (
           <div className="rating-map flex justify-between mt-2 w-full overflow-x-auto">
             {/* Overall Ratings */}
 
