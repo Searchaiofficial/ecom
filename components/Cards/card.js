@@ -57,7 +57,7 @@ function Card(props) {
       starsArray.push(
         <img
           key={i}
-          src={"/icons/star.svg"}
+          src={"/icons/star-full-black.svg"}
           height={20}
           width={20}
           alt="star"
@@ -70,7 +70,7 @@ function Card(props) {
       starsArray.push(
         <img
           key={fullStars}
-          src={"/icons/half-black-half-white.svg"}
+          src={"/icons/star-half-black-half-white.svg"}
           height={20}
           width={20}
           alt="half-star"
@@ -83,7 +83,7 @@ function Card(props) {
       starsArray.push(
         <img
           key={fullStars + halfStar + i}
-          src={"/icons/no-fill-star.svg"}
+          src={"/icons/no-fill-star-full-black.svg"}
           height={20}
           width={20}
           alt="empty-star"
@@ -189,7 +189,7 @@ function Card(props) {
       starsArray.push(
         <img
           key={i}
-          src={"/icons/full-black.svg"}
+          src={"/icons/star-full-black.svg"}
           height={15}
           width={15}
           alt="star"
@@ -202,7 +202,7 @@ function Card(props) {
       starsArray.push(
         <img
           key={fullStars}
-          src={"/icons/half-black-half-white.svg"}
+          src={"/icons/star-half-black-half-white.svg"}
           height={15}
           width={15}
           alt="half-star"
@@ -215,7 +215,7 @@ function Card(props) {
       starsArray.push(
         <img
           key={fullStars + halfStar + i}
-          src={"/icons/full-white.svg"}
+          src={"/icons/star-full-white.svg"}
           height={15}
           width={15}
           alt="empty-star"
@@ -298,187 +298,158 @@ function Card(props) {
   };
 
   return (
-    <>
-      <div
-        key={props.cardkey}
-        className="card pb-12 "
-        style={{
-          width: "100%",
-          height: "100%",
-        }}
-        onTouchStart={() => setIsHovered(true)} // for touch devices
-        onTouchEnd={() => setIsHovered(false)} // for touch devices
-      >
-        <div className={`relative`}>
-          {props.demandtype ? (
-            <div
-              className={
-                "flex text-[12px] justify-between text-black font-normal bg-white absolute top-2 left-2 z-10 py-[.1rem] px-[.5rem]"
-              }
-            >
-              {props.productType === "special"
-                ? "Top Rated"
-                : props.demandtype}
-              {/* {props.demandtype} */}
-            </div>
-          ) : (
-            ""
+
+    <div
+      key={props.cardkey}
+      className="card pb-12 "
+      style={{
+        width: "100%",
+        height: "100%",
+      }}
+      onTouchStart={() => setIsHovered(true)} // for touch devices
+      onTouchEnd={() => setIsHovered(false)} // for touch devices
+    >
+      <div className={`relative`}>
+        {props.demandtype && (
+          <div
+            className={
+              "flex text-[12px] justify-between text-black font-normal bg-white absolute top-2 left-2 z-10 py-[.1rem] px-[.5rem]"
+            }
+          >
+            {props.productType === "special"
+              ? "Top Rated"
+              : props.demandtype}
+            {/* {props.demandtype} */}
+          </div>
+        )}
+
+        <div
+          className="relative flex h-full w-full items-center justify-center cursor-pointer aspect-square"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          {isHovered && slide !== 0 && (
+            <Image
+              loading="lazy"
+              src="/icons/backarrow-w.svg"
+              height={20}
+              width={20}
+              alt="arrow"
+              onClick={prevSlide}
+              className="arrow arrow-left hover:opacity-[1.0] hover:scale-105"
+            />
           )}
 
-          {/* <div className="absolute z-10 top-2 right-2 opacity-85 hover:opacity-100 bg-white p-[6px] hover:scale-105 transition-transform rounded-full" style={{ boxShadow: '0 2px 6px 0 rgba(0, 0, 0, 0.12)' }}>
-            <Image loading="lazy" src={"/icons/like.svg"} height={20} width={20} className="cursor-pointer" />
-          </div> */}
-
-          <div
-            className="relative flex h-full w-full items-center justify-center cursor-pointer aspect-square"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            {isHovered && slide !== 0 && (
-              <Image
-                loading="lazy"
-                src="/icons/backarrow-w.svg"
-                height={20}
-                width={20}
-                alt="arrow"
-                onClick={prevSlide}
-                className="arrow arrow-left hover:opacity-[1.0] hover:scale-105"
-                // className="absolute filter drop-shadow-sm w-7 h-7  text-white opacity-85 group hover:cursor-pointer hover:opacity-100 hover:scale-104 hover:filter-drop-shadow-lg  arrow-left"
-              />
-            )}
-            <div className="w-[400px] overflow-hidden">
-              {props.imgSrc?.map((item, idx) => {
-                return (
-                  <Link href={`/${props.title.replace(/ /g, "-")}`}>
-                    <Image
-                      loading="lazy"
-                      // src={isHovered ? props.imgSrc[2] : item}
-                      src={
-                        isHovered
-                          ? props.imgSrc[1]
-                          : colorImage
-                          ? colorImage
-                          : item
-                      }
-                      alt={props.title}
-                      key={idx}
-                      height={300}
-                      width={300}
-                      onClick={() => handleclick(props.title, props.category)}
-                      className={
-                        slide === idx ? "aspect-square w-full" : "slide-hidden"
-                      }
-                    />
-                  </Link>
-                );
-              })}
-            </div>
-
-            {isHovered && (
-              <div className="z-50">
+          <div className="">
+            {props.imgSrc?.map((item, idx) => (
+              <Link href={`/${props.title.replace(/ /g, "-")}`} key={idx} aria-label={`View details about ${props.title}`} >
                 <Image
-                  loading="lazy"
-                  src="/icons/rightarrow-w.svg"
-                  height={30}
-                  width={30}
-                  alt="arrow"
-                  onClick={nextSlide}
-                  className="arrow arrow-right hover:opacity-1"
-                  // className="absolute filter drop-shadow-sm w-7 h-7 -mt-[13px] text-white opacity-85 group hover:cursor-pointer hover:opacity-100 hover:scale-104 hover:filter-drop-shadow-lg arrow-right"
+                  src={isHovered ? props.imgSrc[1] : colorImage || item}
+                  alt={`Image of ${props.title}`}
+                  height={300}
+                  width={300}
+                  onClick={() => handleClick(props.title, props.category)}
+                  className={slide === idx ? "aspect-square w-[400px]" : "slide-hidden"}
                 />
-              </div>
+              </Link>
+            ))}
+          </div>
+
+          {isHovered && (
+            <Image
+              src="/icons/rightarrow-w.svg"
+              height={30}
+              width={30}
+              alt="arrow"
+              onClick={nextSlide}
+              className="arrow arrow-right hover:opacity-1"
+            />
+          )}
+
+          <span className="flex items-center absolute bottom-[16px]">
+            {props.imgSrc.map((_, idx) => (
+              <div
+                key={idx}
+                className={`h-[0.4rem] w-[0.4rem] rounded-[50%] mr-1 ${slide === idx ? 'bg-white' : 'bg-[#cccc]'}`}
+
+              // onClick={() => setSlide(idx)}
+              ></div>
+            ))}
+          </span>
+        </div>
+      </div>
+      <div
+        onMouseEnter={() => SetShowCart(true)}
+        onMouseLeave={() => SetShowCart(false)}
+      >
+        <div className="flex items-center justify-between pt-2">
+          <div className="flex flex-col">
+            {props.productType === "special" && (
+              <p className="font-medium text-[#0152be] mb-1 text-[12px]">
+                Ayatrio Member Favorite
+              </p>
             )}
-            <span className="flex absolute bottom-[16px]">
-              {props.imgSrc.map((_, idx) => {
-                return (
-                  <button
-                    key={idx}
-                    className={
-                      slide === idx
-                        ? "bg-white h-[0.4rem] w-[0.4rem] rounded-[50%] mr-1"
-                        : "bg-[#cccc] h-[0.4rem] w-[0.4rem] rounded-[50%] mr-1"
-                    }
-                    onClick={() => setSlide(idx)}
-                  ></button>
-                );
-              })}
-            </span>
+            <h3 className="text-[15px] font-semibold">{props.title}</h3>
           </div>
         </div>
-        <div
-          onMouseEnter={() => SetShowCart(true)}
-          onMouseLeave={() => SetShowCart(false)}
-        >
-          <div className="flex items-center justify-between pt-2">
-            <div className="flex flex-col">
-              {props.productType === "special" && (
-                <p className="font-medium text-[#0152be] mb-1 text-[12px]">
-                  Ayatrio Member Favorite
-                </p>
-              )}
-              <h3 className="text-[15px] font-semibold">{props.title}</h3>
-            </div>
-          </div>
-          <p className="font-normal mb-1 text-[14px] py-[2px]">
-            {props?.shortDescription}
-          </p>
+        <p className="font-normal mb-1 text-[14px] py-[2px]">
+          {props?.shortDescription}
+        </p>
 
-          <div className=" flex h-[40px] pb-[6px] items-center justify-between mt-2">
-            {props.productType === "normal" ||
+        <div className=" flex h-[40px] pb-[6px] items-center justify-between mt-2">
+          {props.productType === "normal" ||
             props.productType === "special" ? (
-              <div className="flex gap-1 items-end">
-                <p
-                  className={`text-3xl flex font-semibold leading-[0.5] tracking-wide ${
-                    props.specialPrice?.price
-                      ? "bg-[#FFD209] px-2 pt-3 pb-1 w-fit shadow-lg"
-                      : ""
+            <div className="flex gap-1 items-end">
+              <p
+                className={`text-3xl flex font-semibold leading-[0.5] tracking-wide ${props.specialPrice?.price
+                  ? "bg-[#FFD209] px-2 pt-3 pb-1 w-fit shadow-lg"
+                  : ""
                   }`}
-                  style={
-                    props?.specialPrice?.price
-                      ? { boxShadow: "3px 3px #C31952" }
-                      : {}
-                  }
-                >
-                  <span
-                    className={`text-sm ${
-                      props?.specialPrice?.price ? "" : "pt-3.5"
-                    }`}
-                  >
-                    Rs. &nbsp;
-                  </span>{" "}
-                  {props?.specialPrice?.price ? (
-                    props?.specialPrice?.price
-                  ) : (
-                    <p className="pt-3">{props?.price}</p>
-                  )}
-                </p>
-                {props.unitType ? (
-                  <span className="tracking-wide text-sm font-semibold">{`/${props.unitType}`}</span>
-                ) : (
-                  ""
-                )}
-              </div>
-            ) : (
-              <div className="flex gap-1 items-end">Request Now</div>
-            )}
-
-            {showCart && (
-              <div
-                className="bg-[#0152be] p-1.5 mr-2 rounded-full"
-                onClick={addProductToCart}
+                style={
+                  props?.specialPrice?.price
+                    ? { boxShadow: "3px 3px #C31952" }
+                    : {}
+                }
               >
-                <Image
-                  loading="lazy"
-                  src={"/icons/ad-to-cart.svg"}
-                  height={20}
-                  width={20}
-                  className="cursor-pointer rounded-full"
-                />
-              </div>
-            )}
-          </div>
+                <span
+                  className={`text-sm ${props?.specialPrice?.price ? "" : "pt-3.5"
+                    }`}
+                >
+                  Rs. &nbsp;
+                </span>{" "}
+                {props?.specialPrice?.price ? (
+                  props?.specialPrice?.price
+                ) : (
+                  <p className="pt-3">{props?.price}</p>
+                )}
+              </p>
+              {props.unitType ? (
+                <span className="tracking-wide text-sm font-semibold">{`/${props.unitType}`}</span>
+              ) : (
+                ""
+              )}
+            </div>
+          ) : (
+            <div className="flex gap-1 items-end">Request Now</div>
+          )}
 
-          {/* {props.expectedDelivery && (
+          {showCart && (
+            <div
+              className="bg-[#0152be] p-1.5 mr-2 rounded-full"
+              onClick={addProductToCart}
+            >
+              <Image
+                loading="lazy"
+                src={"/icons/ad-to-cart.svg"}
+                height={20}
+                width={20}
+                className="cursor-pointer rounded-full"
+              />
+            </div>
+          )}
+        </div>
+
+        {/* {props.expectedDelivery && (
             <div className="flex items-center">
               {props.expectedDelivery <= 5 && (
                 <Image
@@ -498,62 +469,62 @@ function Card(props) {
             </div>
           )} */}
 
-          {props?.specialPrice?.price && (
-            <div className="flex flex-col my-3">
-              <p className="text-[#757575] text-[12px] pt-[3px]">
-                Regular price: Rs.{props?.price} (incl. of all taxes)
-              </p>
+        {props?.specialPrice?.price && (
+          <div className="flex flex-col my-3">
+            <p className="text-[#757575] text-[12px] pt-[3px]">
+              Regular price: Rs.{props?.price} (incl. of all taxes)
+            </p>
 
-              {/* <div className="flex flex-col mt-[6px]">
+            {/* <div className="flex flex-col mt-[6px]">
                 <p className="text-[#757575] text-[12px] pt-[3px]">Regular price: Rs.{props?.totalPrice} (incl. of all taxes)</p> */}
 
-              {props?.specialPrice?.startDate &&
-                props?.specialPrice?.endDate && (
-                  <p className="text-[#757575] text-[12px] ">
-                    Price valid {formattedStartDate} - {formattedEndDate}
-                  </p>
-                )}
-            </div>
-          )}
-          {props?.rating > 0 && (
-            <>
-              <div className="card-rating">{props.rating}</div>
-              {Starts && (
-                <div className="flex items-center mt-1">
-                  {Starts}
-                  <p className="text-[14px] mt-1 ml-2">({Reviews?.length})</p>
-                </div>
+            {props?.specialPrice?.startDate &&
+              props?.specialPrice?.endDate && (
+                <p className="text-[#757575] text-[12px] ">
+                  Price valid {formattedStartDate} - {formattedEndDate}
+                </p>
               )}
-            </>
-          )}
-          {props.expectedDelivery && (
-            <div className="flex flex-col items-start mt-2">
-              <div className="flex items-center">
-                {props.expectedDelivery <= 5 && (
-                  <img
-                    alt="speedDelivery"
-                    loading="lazy"
-                    src={"/icons/speeddelivery.svg"}
-                    height={25}
-                    width={25}
-                  />
-                )}
+          </div>
+        )}
+        {props?.rating > 0 && (
+          <>
+            <div className="card-rating">{props.rating}</div>
+            {Starts && (
+              <div className="flex items-center mt-1">
+                {Starts}
+                <p className="text-[14px] mt-1 ml-2">({Reviews?.length})</p>
               </div>
-              <p className="text-[#757575] text-[12px] mt-2">
-                Expected delivery on &nbsp;
-                <span className="text-[#0152be] font-md font-semibold">
-                  {getExpectedDeliveryDate(props.expectedDelivery)}
-                </span>
-              </p>
+            )}
+          </>
+        )}
+        {props.expectedDelivery && (
+          <div className="flex flex-col items-start mt-2">
+            <div className="flex items-center">
+              {props.expectedDelivery <= 5 && (
+                <img
+                  alt="speedDelivery"
+                  loading="lazy"
+                  src={"/icons/speeddelivery.svg"}
+                  height={25}
+                  width={25}
+                />
+              )}
             </div>
-          )}
+            <p className="text-[#757575] text-[12px] mt-2">
+              Expected delivery on &nbsp;
+              <span className="text-[#0152be] font-md font-semibold">
+                {getExpectedDeliveryDate(props.expectedDelivery)}
+              </span>
+            </p>
+          </div>
+        )}
 
-          {/* <div className="flex lg:gap-2 gap-1 mt-2 ">
+        {/* <div className="flex lg:gap-2 gap-1 mt-2 ">
             <Image loading="lazy" src={"/icons/adtocart.svg"} height={25} width={25} className="mr-2 cursor-pointer" />
             <Image loading="lazy" src={"/icons/like.svg"} height={30} width={25} className=" cursor-pointer" />
           </div> */}
 
-          {/* {
+        {/* {
             Starts &&
             <div className="flex items-center mt-1">
               {Starts}
@@ -561,55 +532,39 @@ function Card(props) {
             </div>
           } */}
 
-          {imageData?.length > 1 && (
-            <div className="colorContainer flex flex-col sm:w-auto w-[80vw] mt-1 ">
-              <div className="w-full flex justify-between mb-1">
-                <p className="text-[12px] font-normal">Colours</p>
-              </div>
-              {
-                <>
-                  <div className="colors flex gap-1.5">
-                    {imageData?.map((item, index) => (
-                      <div
-                        key={index}
-                        onClick={() => handleColor(item.image)}
-                        // onMouseLeave={() => setColorImage(null)}
-
-                        className={`parent relative w-[40px] h-[40px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
-            ${
-              selectedColor === item.color ||
-              (index === 0 && selectedColor === "")
-                ? " border-black "
-                : " border-black"
-            }   
-          `}
-                      >
-                        <Image
-                          className="relative w-full h-full object-cover"
-                          src={item.image}
-                          alt={item.color}
-                          width={0}
-                          height={0}
-                          layout="fill"
-                          objectFit="cover"
-                        />
-
-                        {colorImage === item.image ||
-                        (index === 0 && colorImage === "") ? (
-                          <div className="w-[100%] h-[2px] bg-black mt-[50px]" />
-                        ) : (
-                          ""
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </>
-              }
+        {imageData?.length > 1 && (
+          <div className="colorContainer flex flex-col sm:w-auto w-[80vw] mt-1">
+            <div className="w-full flex justify-between mb-1">
+              <p className="text-[12px] font-normal">Colours</p>
             </div>
-          )}
-        </div>
+            <div className="colors flex gap-1.5">
+              {imageData.map((item, index) => (
+                <div
+                  key={index}
+                  onClick={() => handleColor(item.image)}
+                  className={`relative w-[40px] h-[40px] text-center flex justify-center items-center cursor-pointer
+            ${selectedColor === item.color || (index === 0 && selectedColor === "") ? "border-black" : "border-black"}
+          `}
+                >
+                  <Image
+                    className="w-full h-full object-cover"
+                    src={item.image}
+                    alt={item.color}
+                    layout="fill"
+                    objectFit="cover"
+                    loading="lazy"
+                  />
+                  {colorImage === item.image || (index === 0 && colorImage === "") ? (
+                    <div className="w-full h-[2px] bg-black mt-[50px]" />
+                  ) : null}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
-    </>
+    </div>
+
   );
 }
 

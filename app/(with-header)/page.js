@@ -1,4 +1,5 @@
 import HomePage from "@/components/home/HomePage";
+import dynamic from "next/dynamic";
 import Splashscreen from "@/components/Splashscreen/Splashscreen";
 import SaveDeviceIdLocalstorage from "@/utils/SaveDeviceIdLocalstorage ";
 // <<<<<<< HEAD
@@ -11,7 +12,8 @@ import SaveDeviceIdLocalstorage from "@/utils/SaveDeviceIdLocalstorage ";
 // const HomePage = dynamic(() => import("@/components/home/HomePage"));
 
 import { Suspense } from "react";
-import ChatPrompt from "../../components/ChatPromptWidget/chatprompt";
+// import ChatPrompt from "../../components/ChatPromptWidget/chatprompt";
+const ChatPrompt = dynamic(() => import("../../components/ChatPromptWidget/chatprompt"));
 import SaveUserCoordinatesOnscroll from "@/utils/SaveUserCoordinatesOnScroll";
 import { OrganizationJsonLd, SiteLinksSearchBoxJsonLd } from "next-seo";
 

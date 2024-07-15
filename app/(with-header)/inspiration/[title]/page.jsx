@@ -13,10 +13,7 @@ export const generateMetadata = async ({ params: { title } }) => {
       description: suggestion.summary,
       images: [
         {
-          url: suggestion.mainImage,
-        },
-        {
-          url: suggestion.suggestionCardImage,
+          url: suggestion.mainImage.imgSrc,
         },
       ],
     },

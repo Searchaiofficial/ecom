@@ -46,13 +46,13 @@ function ItemCard(props) {
         </div>
         <div
           className="card-title"
-          // onClick={() => navigate('/rooms')}
+        // onClick={() => navigate('/rooms')}
         >
           <div className="card-title-desc">{props.title}</div>
           <div className="card-rating">
             <Image
               loading="lazy"
-              src="/icons/star.svg"
+              src="/icons/star-full-black.svg"
               width={20}
               height={20}
               alt="star"

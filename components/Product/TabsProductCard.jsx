@@ -52,7 +52,7 @@ function TabsProductCard(props) {
       starsArray.push(
         <img
           key={i}
-          src={"/icons/full-black.svg"}
+          src={"/icons/star-full-black.svg"}
           height={15}
           width={15}
           alt="star"
@@ -65,7 +65,7 @@ function TabsProductCard(props) {
       starsArray.push(
         <img
           key={fullStars}
-          src={"/icons/half-black-half-white.svg"}
+          src={"/icons/star-half-black-half-white.svg"}
           height={15}
           width={15}
           alt="half-star"
@@ -78,7 +78,7 @@ function TabsProductCard(props) {
       starsArray.push(
         <img
           key={fullStars + halfStar + i}
-          src={"/icons/full-white.svg"}
+          src={"/icons/star-full-white.svg"}
           height={15}
           width={15}
           alt="empty-star"
@@ -358,7 +358,7 @@ function TabsProductCard(props) {
             <div className=" flex flex-col">
               {props.productType === "special" && (
                 <p className="font-medium text-[#0152be]  mb-[3px] text-[12px]">
-                  Ayatrio Member Favorite 
+                  Ayatrio Member Favorite
                 </p>
               )}
               <h3

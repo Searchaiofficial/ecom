@@ -172,12 +172,12 @@ const CategoriesSlider = () => {
                                     return (
                                         <SwiperSlide className=" max-w-[100px] lg:max-w-[120px] mr-[10px] min-h-[95px] mb-[30px] md:mb-0 " key={idx}>
                                             <Link href={`/${curElement.name.replace(/ /g, "-")}/category/all`}
-                                                // onClick={() => handleIncrementCategoryPopularity(curElement.name)}
+                                            // onClick={() => handleIncrementCategoryPopularity(curElement.name)}
                                             >
                                                 <div className="flex flex-col  items-center ">
                                                     <div className="mb-[12px] ">
 
-                                                        <Image src={curElement.image || "/images/temp.svg"} width={200} height={130} alt={curElement.name || "Swiper image"} className="w-[200px] h-[62px] lg:h-[95px] " />
+                                                        <Image src={curElement.image || "/images/temp.svg"} width={200} height={130} alt={"category image"} className="w-[200px] h-[62px] lg:h-[95px] " />
 
                                                     </div>
                                                     <h2 className="text-[#333333] lg:text-center line-clamp-1 font-semibold text-[14px] hover:underline">{curElement.name}</h2>

@@ -24,6 +24,7 @@ import {
   FreeMode,
 } from "swiper/modules";
 import TabImage from "../Cards/TabImage";
+import Multicard from "@/components/Imagechanger/Multicard"
 import Card from "../Cards/card";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -36,7 +37,6 @@ import axios from "axios";
 import Tabs from "../Cards/Tabs";
 import BlogRelatedProducts from "../Cards/BlogRelatedProducts";
 import { usePathname } from "next/navigation";
-
 
 export const RoomsPage = ({ params }) => {
   const pathname = usePathname();
@@ -141,8 +141,8 @@ export const RoomsPage = ({ params }) => {
   console.log(roomMain);
 
   // console.log(roomMain.children)
-  const [hovered, setIsHovered] = useState(false)
-  const [reviewhovered, setReviewhovered] = useState(false)
+  const [hovered, setIsHovered] = useState(false);
+  const [reviewhovered, setReviewhovered] = useState(false);
 
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
@@ -155,9 +155,185 @@ export const RoomsPage = ({ params }) => {
   };
 
   return (
-    // <div className="pt-12 bg-white sm:px-[50px] px-[20px]">
     <div className="w-full">
-      <div className=" px-[20px] sm:px-[50px] lg:px-[67px] flex justify-center ">
+      <div className=" md:pt-10 px-[20px] sm:px-[50px] lg:px-[67px]">
+        {roomMain &&
+          roomMain.position &&
+          roomMain.position.length > 0 &&
+          roomMain.position.map((name, idx) => (
+            <div key={idx} className="">
+              {name === "heading" && (
+                <div>
+                  <div className="mt-20">
+                    <h1 className="lg:text-[30px] text-[24px] font-semibold ">
+                      {roomMain.heading}
+                    </h1>
+                    <p className="mt-5 line-clamp-3 lg:line-clamp-none lg:w-[70%] ">
+                      {roomMain.summary}
+                    </p>
+                  </div>
+                </div>
+              )}
+              {name === "mainImage" && (
+                <div className="mt-20 relative w-full h-[550px]">
+                  <TabImage
+                    src={roomMain.mainImage.imgSrc}
+                    alt={`Image  of Children`}
+                    layout="fill"
+                    width={1000}
+                    height={1000}
+                    objectFit="cover"
+                    labelData={roomMain.mainImage.children}
+                  />
+                </div>
+              )}
+              {name === "twoGrid" && (
+                <div className="mt-20">
+                  <h1 className="text-2xl font-semibold">
+                    {roomMain.twoGrid.twoGridHeader}
+                  </h1>
+                  <p className="text-gray-700 mt-5 lg:w-[70%] line-clamp-3 lg:line-clamp-none ">
+                    {roomMain.twoGrid.twoGridDescription}
+                  </p>
+                  <div className="mt-6 flex flex-col md:flex-row gap-3  items-center justify-between mx-auto">
+                    <div className="relative h-[449px]  lg:min-h-[730px] w-full">
+                      <TabImage
+                        src={roomMain.twoGrid.twoGridRooms[0].imgSrc}
+                        alt={`Image  of Children`}
+                        layout="fill"
+                        width={1000}
+                        height={1000}
+                        objectFit="cover"
+                        labelData={roomMain.twoGrid.twoGridRooms[0].children}
+                      />
+                    </div>
+                    <div className="relative h-[449px]  lg:min-h-[730px] w-full">
+                      <TabImage
+                        src={roomMain.twoGrid.twoGridRooms[1].imgSrc}
+                        alt={`Image  of Children`}
+                        layout="fill"
+                        width={1000}
+                        height={1000}
+                        objectFit="cover"
+                        labelData={roomMain.twoGrid.twoGridRooms[1].children}
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
+              {name === "fiveGrid" && (
+                <div className="mt-20">
+                  <h1 className="text-2xl font-semibold">
+                    {roomMain.fiveGrid.fiveGridHeader}
+                  </h1>
+                  <p className="text-gray-700 my-5 lg:w-[70%] line-clamp-3 lg:line-clamp-none ">
+                    {roomMain.fiveGrid.fiveGridDescription}
+                  </p>
+                  <div className="flex justify-between mb-10">
+                    <div className="w-full flex justify-center max-h-[915px] screens">
+                      <div className="w-full lg:h-[730px] grid grid-cols-2 lg:grid-cols-12 gap-y-4 gap-x-4 auto-rows-fr">
+                        {roomMain.fiveGrid.fiveGridRooms.map((room, index) => (
+                          <div
+                            key={index}
+                            className={`parent ${index === 0
+                              ? "col-start-1 col-end-3 row-start-1 row-end-6 lg:col-start-1 lg:col-end-7 lg:row-start-1 lg:row-end-12"
+                              : index === 1
+                                ? "col-start-1 col-end-2 row-start-6 row-span-2 lg:col-start-7 lg:col-end-10 lg:row-start-1 lg:row-end-6"
+                                : index === 2
+                                  ? "col-start-2 col-end-3 row-start-6 row-span-3 lg:col-start-10 lg:col-end-13 lg:row-start-1 lg:row-end-7"
+                                  : index === 3
+                                    ? "col-start-1 col-end-2 row-start-8 row-span-3 lg:col-start-7 lg:col-end-10 lg:row-start-6 lg:row-end-12"
+                                    : "col-start-2 col-end-3 row-start-9 row-span-2 lg:col-start-10 lg:col-end-13 lg:row-start-7 lg:row-end-12"
+                              }`}
+                            onMouseEnter={() => handleMouseEnter(index)}
+                            onMouseLeave={handleMouseLeave}
+                          >
+                            <div className="relative w-full h-full">
+                              <TabImage
+                                src={room.imgSrc}
+                                alt={`Image of Children`}
+                                width={1000}
+                                height={338}
+                                labelData={room.children}
+                                hovered={hoveredIndex === index}
+                              />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {name === "firstSlider" && (
+                <BlogRelatedProducts
+                  relatedProducts={roomMain.firstSlider}
+                />
+              )}
+              {name === "secondSlider" && (
+                <BlogRelatedProducts
+                  relatedProducts={roomMain.secondSlider}
+                />
+              )}
+              {name === "thirdSlider" && (
+                <BlogRelatedProducts
+                  relatedProducts={roomMain.firstSlider}
+                />
+              )}
+              {name === "forthSlider" && (
+                <BlogRelatedProducts
+                  relatedProducts={roomMain.secondSlider}
+                />
+              )}
+              {name === "fifthSlider" && (
+                <BlogRelatedProducts
+                  relatedProducts={roomMain.secondSlider}
+                />
+              )}
+            </div>
+          ))}
+
+
+        <div className="flex mt-20  lg:max-h-[490px] lg:flex-row w-full flex-col">
+          <div className="lg:w-2/3 h-[446px]">
+            {reviewRoom && (
+              <TabImage
+                src={reviewRoom.imgSrc}
+                alt={`Image  of Children`}
+                width={1000}
+                height={446}
+                labelData={reviewRoom.children}
+              />
+            )}
+          </div>
+          <div className="lg:w-1/3 min-h-[363px]  bg-zinc-100 p-10  lg:p-12">
+            <div className="flex flex-col ">
+              <div>
+                <p>{reviewData && reviewData.comment}</p>
+              </div>
+              <div className="flex mt-5 flex-row items-center gap-2 ">
+                <Image
+                  loading="lazy"
+                  src={reviewData && reviewData.image}
+                  width={45}
+                  height={45}
+                  alt={reviewData && reviewData.name}
+                  className=" aspect-square object-cover rounded-full"
+                />
+                <p>{reviewData && reviewData.name}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <Multicard forhomePage={false} />
+
+        {productSelect && productSelect.length > 0 && (
+          <Tabs data={productSelect} />
+        )}
+      </div>
+      {/* <div className=" px-[20px] sm:px-[50px] lg:px-[67px] flex justify-center ">
         <div className="mt-36 w-full flex flex-col">
           <h1 className="lg:text-[30px] text-[24px] font-semibold">
             {roomMain?.title}
@@ -244,32 +420,6 @@ export const RoomsPage = ({ params }) => {
             roomMain.secondSlider.length > 0 && (
               <BlogRelatedProducts relatedProducts={roomMain.secondSlider} />
             )}
-          {/* <div>
-                        <div className="mt-5 gap-3 flex">
-                            <div className="w-1/2">
-                                {roomData?.length > 0 && (
-                                    <img
-                                        className=" object-cover"
-                                        src={roomData[0].imgSrc}
-                                        alt="First Image of First Product"
-                                    />
-                                )}
-                            </div>
-                            <div className=" grid grid-cols-2 gap-3">
-                                {roomData?.slice(1, 5).map((product, index) => (
-                                    <div key={index}>
-                                        <img
-                                            key={product._id}
-                                            src={product.imgSrc}
-                                            className="object-cover"
-                                            alt={`Image of Product ${index + 2}`}
-                                        />
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div> */}
-
           <div className="flex lg:flex-row flex-col justify-between items-center">
             <h1 className=" text-[24x] lg:text-[30px] font-semibold">
               Looking for Bedroom Storage options ?
@@ -278,25 +428,6 @@ export const RoomsPage = ({ params }) => {
               Explore all Bedroom storage solution
             </button>
           </div>
-          {/* <div className="mt-8 flex w-[100%] lg:max-h-[490px] lg:flex-row flex-col screens bg-orange-500">
-            <div className="lg:w-2/3">
-              <Image loading="lazy"
-                src={bedimageh}
-                width={850}
-                className="w-full min-h-[446px] object-cover"
-                height={100}
-                alt="Image of bed"
-              />
-            </div>
-            <div className="lg:p-12 p-10 lg:w-1/3  flex flex-col min-h-[363px]  justify-between ">
-              <h1 className="text-xl  w-3/4 font-semibold">
-                Explore all Bedroom storage solution
-              </h1>
-              <div className="bg-black w-14 h-14 flex justify-center items-center text-white rounded-full">
-                A
-              </div>
-            </div>
-          </div> */}
 
           <div className="flex mt-8  lg:max-h-[490px] lg:flex-row w-full flex-col relative  ">
             <div className="relative lg:w-2/3 min-h-[446px]">
@@ -415,10 +546,6 @@ export const RoomsPage = ({ params }) => {
                   spaceBetween: 1,
                 },
 
-                // 640: {
-                //   slidesPerView: 1.25,
-                //   spaceBetween: 5,
-                // },
                 1024: {
                   slidesPerView: 4.07,
                   spaceBetween: 5,
@@ -443,7 +570,6 @@ export const RoomsPage = ({ params }) => {
                       <div className="grid grid-cols-1 mt-2 w-full  h-full fade-in ">
                         <Card
                           title={product.productTitle}
-                          // date={product.date}
                           price={product.perUnitPrice}
                           desc={product.productTitle}
                           imgSrc={product.images}
@@ -467,7 +593,7 @@ export const RoomsPage = ({ params }) => {
             <Tabs data={productSelect} />
           )}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
