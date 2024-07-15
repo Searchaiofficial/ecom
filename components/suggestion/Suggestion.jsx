@@ -24,6 +24,7 @@ import {
   Scrollbar,
 } from "swiper/modules";
 import { usePathname } from "next/navigation";
+import Multicard from "../Imagechanger/Multicard";
 
 const Suggestion = ({ id }) => {
   const pathname = usePathname();
@@ -203,17 +204,16 @@ const Suggestion = ({ id }) => {
                           (room, index) => (
                             <div
                               key={index}
-                              className={`parent ${
-                                index === 0
-                                  ? "col-start-1 col-end-3 row-start-1 row-end-6 lg:col-start-1 lg:col-end-7 lg:row-start-1 lg:row-end-12"
-                                  : index === 1
+                              className={`parent ${index === 0
+                                ? "col-start-1 col-end-3 row-start-1 row-end-6 lg:col-start-1 lg:col-end-7 lg:row-start-1 lg:row-end-12"
+                                : index === 1
                                   ? "col-start-1 col-end-2 row-start-6 row-span-2 lg:col-start-7 lg:col-end-10 lg:row-start-1 lg:row-end-6"
                                   : index === 2
-                                  ? "col-start-2 col-end-3 row-start-6 row-span-3 lg:col-start-10 lg:col-end-13 lg:row-start-1 lg:row-end-7"
-                                  : index === 3
-                                  ? "col-start-1 col-end-2 row-start-8 row-span-3 lg:col-start-7 lg:col-end-10 lg:row-start-6 lg:row-end-12"
-                                  : "col-start-2 col-end-3 row-start-9 row-span-2 lg:col-start-10 lg:col-end-13 lg:row-start-7 lg:row-end-12"
-                              }`}
+                                    ? "col-start-2 col-end-3 row-start-6 row-span-3 lg:col-start-10 lg:col-end-13 lg:row-start-1 lg:row-end-7"
+                                    : index === 3
+                                      ? "col-start-1 col-end-2 row-start-8 row-span-3 lg:col-start-7 lg:col-end-10 lg:row-start-6 lg:row-end-12"
+                                      : "col-start-2 col-end-3 row-start-9 row-span-2 lg:col-start-10 lg:col-end-13 lg:row-start-7 lg:row-end-12"
+                                }`}
                               onMouseEnter={() => handleMouseEnter(index)}
                               onMouseLeave={handleMouseLeave}
                             >
@@ -264,7 +264,7 @@ const Suggestion = ({ id }) => {
             </div>
           ))}
 
-        <QuiltSelector />
+        {/* <QuiltSelector /> */}
 
         <div className="flex my-8  lg:max-h-[490px] lg:flex-row w-full flex-col">
           <div className="lg:w-2/3 h-[446px]">
@@ -297,6 +297,8 @@ const Suggestion = ({ id }) => {
             </div>
           </div>
         </div>
+
+        <Multicard forhomePage={false} />
 
         <Tabs data={recommended} />
       </div>

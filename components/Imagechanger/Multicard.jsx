@@ -16,7 +16,7 @@ import { selectMultiCardData } from "../Features/Slices/multiCardSlice";
 
 
 
-const Multicard = () => {
+const Multicard = ({ forhomePage }) => {
   const swiper1Ref = useRef(null);
   const multiCardData = useSelector(selectMultiCardData);
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const Multicard = () => {
 
   return (
     <div>
-      <div className="bg-zinc-50 pb-[20px] pt-[30px] sm:pl-[50px] pl-[20px] lg:mt-0 lg:pl-[67px] overflow-x-auto">
+      <div className={`bg-zinc-50 pb-[20px] pt-[30px] ${forhomePage !== false ? "sm:pl-[50px] pl-[20px] lg:mt-0 lg:pl-[67px]" : "pl-0 lg:mt-0"}  overflow-x-auto`}>
         <div className="text-2xl flex flex-col gap-[2px] font-semibold w-full">
           <h2>Why Ayatrio so innovative</h2>
 

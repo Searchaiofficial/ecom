@@ -24,6 +24,7 @@ import {
   FreeMode,
 } from "swiper/modules";
 import TabImage from "../Cards/TabImage";
+import Multicard from "@/components/Imagechanger/Multicard"
 import Card from "../Cards/card";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -234,17 +235,16 @@ export const RoomsPage = ({ params }) => {
                         {roomMain.fiveGrid.fiveGridRooms.map((room, index) => (
                           <div
                             key={index}
-                            className={`parent ${
-                              index === 0
-                                ? "col-start-1 col-end-3 row-start-1 row-end-6 lg:col-start-1 lg:col-end-7 lg:row-start-1 lg:row-end-12"
-                                : index === 1
+                            className={`parent ${index === 0
+                              ? "col-start-1 col-end-3 row-start-1 row-end-6 lg:col-start-1 lg:col-end-7 lg:row-start-1 lg:row-end-12"
+                              : index === 1
                                 ? "col-start-1 col-end-2 row-start-6 row-span-2 lg:col-start-7 lg:col-end-10 lg:row-start-1 lg:row-end-6"
                                 : index === 2
-                                ? "col-start-2 col-end-3 row-start-6 row-span-3 lg:col-start-10 lg:col-end-13 lg:row-start-1 lg:row-end-7"
-                                : index === 3
-                                ? "col-start-1 col-end-2 row-start-8 row-span-3 lg:col-start-7 lg:col-end-10 lg:row-start-6 lg:row-end-12"
-                                : "col-start-2 col-end-3 row-start-9 row-span-2 lg:col-start-10 lg:col-end-13 lg:row-start-7 lg:row-end-12"
-                            }`}
+                                  ? "col-start-2 col-end-3 row-start-6 row-span-3 lg:col-start-10 lg:col-end-13 lg:row-start-1 lg:row-end-7"
+                                  : index === 3
+                                    ? "col-start-1 col-end-2 row-start-8 row-span-3 lg:col-start-7 lg:col-end-10 lg:row-start-6 lg:row-end-12"
+                                    : "col-start-2 col-end-3 row-start-9 row-span-2 lg:col-start-10 lg:col-end-13 lg:row-start-7 lg:row-end-12"
+                              }`}
                             onMouseEnter={() => handleMouseEnter(index)}
                             onMouseLeave={handleMouseLeave}
                           >
@@ -326,6 +326,8 @@ export const RoomsPage = ({ params }) => {
             </div>
           </div>
         </div>
+
+        <Multicard forhomePage={false} />
 
         {productSelect && productSelect.length > 0 && (
           <Tabs data={productSelect} />
