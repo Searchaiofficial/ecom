@@ -33,39 +33,16 @@ const Amenities = ({ data }) => {
   const swiper1Ref = useRef(null);
 
   const swiperOptions = {
-    slidesPerView: 3,
-    spaceBetween: 10,
+    centeredSlides: false,
+    spaceBetween: 1,
     modules: [Pagination, Scrollbar, Mousewheel, FreeMode],
     navigation: {
       nextEl: ".custom-next-button",
       prevEl: ".custom-prev-button",
     },
-    scrollbar: {
-      hide: false,
-      draggable: true,
-    },
-    mousewheel: {
-      forceToAxis: true,
-      invert: false,
-    },
-    freeMode: {
-      enabled: true,
-      sticky: true,
-    },
-    breakpoints: {
-      300: {
-        slidesPerView: 1.1,
-        spaceBetween: 10,
-      },
-      640: {
-        slidesPerView: 2.1,
-        spaceBetween: 10,
-      },
-      1024: {
-        slidesPerView: 3,
-        spaceBetween: 10,
-      },
-    },
+    noSwiping: true,
+    allowSlidePrev: true,
+    allowSlideNext: true,
   };
 
   const groupedAmenities = [];
@@ -98,8 +75,43 @@ const Amenities = ({ data }) => {
             ))}
           </div>
 
-          <div className="md:hidden">
-            <Swiper {...swiperOptions} ref={swiper1Ref}>
+          <div className="md:hidden m-0 p-0">
+            <Swiper
+              {...swiperOptions}
+              ref={swiper1Ref}
+              {...swiperOptions}
+              scrollbar={{
+                hide: false,
+                draggable: true,
+              }}
+              mousewheel={{
+                forceToAxis: true,
+                invert: false,
+              }}
+              freeMode={{
+                enabled: true,
+                sticky: true,
+              }}
+              breakpoints={{
+                300: {
+                  slidesPerView: 1.1,
+                  spaceBetween: 10,
+                },
+                640: {
+                  slidesPerView: 2,
+                  spaceBetween: 10,
+                },
+                1024: {
+                  slidesPerView: 1.1,
+                  spaceBetween: 10,
+                },
+              }}
+              allowSlideNext={true}
+              allowSlidePrev={true}
+              slideNextClass="custom-next-button"
+              slidePrevClass="custom-prev-button"
+              className="px-10 "
+            >
               {groupedAmenities.map((group, index) => (
                 <SwiperSlide key={index}>
                   {group.map((amenity) => (

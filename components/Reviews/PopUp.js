@@ -43,7 +43,7 @@ function PopUp({ isPopupVisible, setPopupVisible, closePopup }) {
                   <div className="flex flex-col">
                     <span className="font-bold text-2xl">
                       4.87
-                      <Image loading="lazy" src="/icons/star.svg" width={10} height={10} alt="star" />
+                      <Image loading="lazy" src="/icons/star-full-black.svg" width={10} height={10} alt="star" />
                     </span>
                     <span className="font-medium text-xs ">Reviews</span>
                     <hr className="mt-4 mr-6"></hr>

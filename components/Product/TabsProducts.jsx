@@ -586,7 +586,7 @@ const Tabs = ({
     selectedpdt.length < 2 ? "bg-gray-300 text-white" : "bg-black text-white";
 
   const stars = new Array(4)
-    .fill("/icons/star.svg")
+    .fill("/icons/star-full-black.svg")
     .concat("/icons/star-half-black-half-white.svg");
 
   // const firstPart = filterData;

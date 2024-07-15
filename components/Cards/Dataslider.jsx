@@ -50,11 +50,11 @@ const Dataslider = ({ category, data, sliderIndex }) => {
               className={`custom-prev-button-${sliderIndex} hover:bg-400 hover:scale-110 hover:text-slate-100 pr-6`}
             >
               <Image loading="lazy"
-                src="/icons/backarrow-w.svg"
+                src="/icons/left-icon.svg"
                 width={20}
                 height={20}
                 alt="Arrow"
-                className="bg-gray-300 rounded-full h-7 w-7 sm:block hidden"
+                className="rounded-full h-7 w-7 sm:block hidden"
               />
             </div>
             <div
@@ -62,11 +62,11 @@ const Dataslider = ({ category, data, sliderIndex }) => {
               className={`custom-next-button-${sliderIndex} hover:bg-400 sm:translate-y-0 translate-y-10 hover:scale-110 hover:text-slate-100`}
             >
               <Image loading="lazy"
-                src="/icons/rightarrow-w.svg"
+                src="/icons/right-icon.svg"
                 width={20}
                 height={20}
                 alt="Arrow"
-                className="bg-gray-300 rounded-full h-7 w-7 sm:block hidden"
+                className=" rounded-full h-7 w-7 sm:block hidden"
               />
             </div>
           </div>

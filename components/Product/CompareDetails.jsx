@@ -22,7 +22,7 @@ const CompareDetails = ({ data }) => {
     router.push(`/room/${id}`);
   };
   // const stars = new Array(4)
-  //   .fill("/icons/star.svg")
+  //   .fill("/icons/star-full-black.svg")
   //   .concat("/icons/star-half-black-half-white.svg");
   console.log(data)
   return (

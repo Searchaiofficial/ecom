@@ -31,7 +31,7 @@ const Multicard = ({ forhomePage }) => {
     <div>
       <div className={`bg-zinc-50 pb-[20px] pt-[30px] ${forhomePage !== false ? "sm:pl-[50px] pl-[20px] lg:mt-0 lg:pl-[67px]" : "pl-0 lg:mt-0"}  overflow-x-auto`}>
         <div className="text-2xl flex flex-col gap-[2px] font-semibold w-full">
-          <h2>Why Ayatrio so innovative</h2>
+          <h2>Ways to shopping at Ayatrio</h2>
 
           <h2>for home furnishing.</h2>
         </div>
@@ -86,18 +86,18 @@ const Multicard = ({ forhomePage }) => {
 
           <div className="flex flex-row items-end justify-end gap-4">
             <Image
-              src="/icons/backarrow-w.svg"
+              src="/icons/left-icon.svg"
               width={20}
               height={20}
               alt="Arrow"
-              className="back rounded-full h-7 w-7 hover:opacity-100"
+              className="back rounded-full h-7 w-7"
             />
             <Image
-              src="/icons/rightarrow-w.svg"
+              src="/icons/right-icon.svg"
               width={20}
               height={20}
               alt="Arrow"
-              className="right lg:mr-16 mr-6 rounded-full h-7 w-7 hover:opacity-100"
+              className="right lg:mr-16 mr-6 rounded-full h-7 w-7 hover:opacity-100 mt-2"
             />
           </div>
         </Swiper>

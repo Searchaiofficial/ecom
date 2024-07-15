@@ -57,7 +57,7 @@ function Card(props) {
       starsArray.push(
         <img
           key={i}
-          src={"/icons/star.svg"}
+          src={"/icons/star-full-black.svg"}
           height={20}
           width={20}
           alt="star"
@@ -83,7 +83,7 @@ function Card(props) {
       starsArray.push(
         <img
           key={fullStars + halfStar + i}
-          src={"/icons/no-fill-star.svg"}
+          src={"/icons/no-fill-star-full-black.svg"}
           height={20}
           width={20}
           alt="empty-star"

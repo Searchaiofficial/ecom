@@ -17,41 +17,17 @@ const PlaceInfo = (data) => {
   const swiper2Ref = useRef(null);
 
   const swiperOptions = {
-    slidesPerView: 3,
-    spaceBetween: 10,
+    centeredSlides: false,
+    spaceBetween: 1,
     modules: [Pagination, Scrollbar, Mousewheel, FreeMode],
     navigation: {
       nextEl: ".custom-next-button",
       prevEl: ".custom-prev-button",
     },
-    scrollbar: {
-      hide: false,
-      draggable: true,
-    },
-    mousewheel: {
-      forceToAxis: true,
-      invert: false,
-    },
-    freeMode: {
-      enabled: true,
-      sticky: true,
-    },
-    breakpoints: {
-      300: {
-        slidesPerView: 1.1,
-        spaceBetween: 10,
-      },
-      640: {
-        slidesPerView: 2.1,
-        spaceBetween: 10,
-      },
-      1024: {
-        slidesPerView: 3,
-        spaceBetween: 10,
-      },
-    },
+    noSwiping: true,
+    allowSlidePrev: true,
+    allowSlideNext: true,
   };
-
 
   console.log("Place info", data)
   const groupedCoreValues = groupIntoThrees(data?.data?.coreValues);
@@ -85,8 +61,41 @@ const PlaceInfo = (data) => {
             }
           </div>
 
-          <div className="md:hidden">
-            <Swiper {...swiperOptions} ref={swiper2Ref}>
+          <div className="md:hidden m-0 p-0">
+            <Swiper
+              ref={swiper2Ref}
+              {...swiperOptions}
+              scrollbar={{
+                hide: false,
+                draggable: true,
+              }}
+              mousewheel={{
+                forceToAxis: true,
+                invert: false,
+              }}
+              freeMode={{
+                enabled: true,
+                sticky: true,
+              }}
+              breakpoints={{
+                300: {
+                  slidesPerView: 1.1,
+                  spaceBetween: 10,
+                },
+                640: {
+                  slidesPerView: 2,
+                  spaceBetween: 10,
+                },
+                1024: {
+                  slidesPerView: 1.1,
+                  spaceBetween: 10,
+                },
+              }}
+              allowSlideNext={true}
+              allowSlidePrev={true}
+              slideNextClass="custom-next-button"
+              slidePrevClass="custom-prev-button"
+              className="px-10 ">
               {groupedCoreValues.map((group, groupIndex) => (
                 <SwiperSlide key={groupIndex}>
                   {group.map((item, index) => (

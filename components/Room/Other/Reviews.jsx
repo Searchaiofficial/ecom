@@ -424,7 +424,7 @@ const Reviews = ({ productId, data }) => {
 
             {/* Rating Types */}
             {showRatingTypes?.map((item, index) => (
-              <div key={item._id} className={`flex flex-col items-center text-center pr-4 ${index === showRatingTypes.length - 1 ? 'mr-8' : ''}`}>
+              <div key={item._id} className={`flex flex-col items-center text-center min-w-[110px] ${index === showRatingTypes.length - 1 ? 'mr-8' : ''}`}>
                 <div className="font-semibold text-gray-700 mb-4 capitalize">{item.name}</div>
                 <div className="text-lg font-semibold text-gray-900 my-2">{computeAverageRatings[item._id]}</div>
                 <Image
