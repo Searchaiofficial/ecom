@@ -75,11 +75,10 @@ const Amenities = ({ data }) => {
             ))}
           </div>
 
-          <div className="md:hidden m-0 p-0">
+          <div className="md:hidden h-auto max-h-[300px] w-full">
             <Swiper
               {...swiperOptions}
               ref={swiper1Ref}
-              {...swiperOptions}
               scrollbar={{
                 hide: false,
                 draggable: true,
@@ -94,7 +93,7 @@ const Amenities = ({ data }) => {
               }}
               breakpoints={{
                 300: {
-                  slidesPerView: 1.1,
+                  slidesPerView: 2,
                   spaceBetween: 10,
                 },
                 640: {
@@ -102,7 +101,7 @@ const Amenities = ({ data }) => {
                   spaceBetween: 10,
                 },
                 1024: {
-                  slidesPerView: 1.1,
+                  slidesPerView: 2,
                   spaceBetween: 10,
                 },
               }}
@@ -110,12 +109,12 @@ const Amenities = ({ data }) => {
               allowSlidePrev={true}
               slideNextClass="custom-next-button"
               slidePrevClass="custom-prev-button"
-              className="px-10 "
+              className="p-10"
             >
               {groupedAmenities.map((group, index) => (
                 <SwiperSlide key={index}>
                   {group.map((amenity) => (
-                    <div key={amenity._id} className="flex my-4 items-center">
+                    <div key={amenity._id} className="flex my-4 items-center w-auto">
                       <div className="mr-4">
                         <Image
                           loading="lazy"

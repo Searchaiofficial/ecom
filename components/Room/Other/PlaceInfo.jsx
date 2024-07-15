@@ -61,7 +61,7 @@ const PlaceInfo = (data) => {
             }
           </div>
 
-          <div className="md:hidden m-0 p-0">
+          <div className="md:hidden h-auto max-h-[300px] w-full">
             <Swiper
               ref={swiper2Ref}
               {...swiperOptions}

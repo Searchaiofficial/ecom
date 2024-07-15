@@ -555,7 +555,7 @@ const Reviews = ({ productId, data }) => {
           ))}
         </div>
 
-        <div className="md:hidden max-h-[300px]  w-full">
+        <div className="md:hidden max-h-[300px] w-full">
           <Swiper
             ref={swiper1Ref}
             {...swiperOptions}
@@ -591,11 +591,8 @@ const Reviews = ({ productId, data }) => {
             slidePrevClass="custom-prev-button"
             className="px-10 "
           >
-
-
             {reviews.map((review, index) => (
               <SwiperSlide>
-
                 <div key={index} className="sm:mr-12 mb-8 flex flex-col justify-between m-0 sm:block rounded-sm p-4 border shadow-sm min-h-[230px] ">
                   <div className="flex flex-col justify-between h-full">
                     <div>
@@ -615,8 +612,6 @@ const Reviews = ({ productId, data }) => {
                           {new Date(review.createdAt).toLocaleString('default', { month: 'long', year: 'numeric' })}
                         </span>
                       </div>
-
-
 
                       <div className="review mt-1">
                         <p className="text-gray-600 font-[16px]  text-[14px] leading-6  sm:w-auto text-left w-[100%]">
