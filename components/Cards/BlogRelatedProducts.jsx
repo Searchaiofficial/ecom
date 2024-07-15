@@ -39,6 +39,10 @@ const BlogRecommendedProducts = ({ relatedProducts, title }) => {
   };
   const swiper1Ref = useRef(null);
 
+  const filteredProducts = relatedProducts?.filter(
+    (product) => product.subcategory !== 'Accessories'
+  );
+
   return (
     <div>
       <div className=" mt-20  bg-white ">
@@ -96,12 +100,12 @@ const BlogRecommendedProducts = ({ relatedProducts, title }) => {
           slidePrevClass="custom-prev-button"
           className="px-10"
         >
-          {!relatedProducts ? (
+          {!filteredProducts ? (
             <SwiperSlide>
               <div className="flex"></div>
             </SwiperSlide>
           ) : (
-            relatedProducts.map((product, idx) => {
+            filteredProducts.map((product, idx) => {
               return (
                 <SwiperSlide key={idx} className="ml-0">
                   <div className="grid grid-cols-1 w-full h-full fade-in ">

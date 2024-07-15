@@ -39,6 +39,7 @@ const Details = () => {
 
   console.log(deliveryPrice)
   const cartdata = useSelector(selecteddbItems);
+  console.log(cartdata)
 
 
   if (typeof window !== "undefined") {
@@ -46,31 +47,31 @@ const Details = () => {
     console.log(id);
   }
 
-  useEffect(() => {
-    if (!cartdata) {
-      const fetchData = async () => {
-        try {
-          const id = localStorage.getItem("deviceId");
-          const response = await axios.get(
-            `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
-            {
-              params: {
-                deviceId: id,
-              },
-            }
-          );
-          if (response.status !== 200) {
-            throw new Error("HTTP status " + response.status);
-          }
-          const data = response.data;
-          setCartData(data);
-        } catch (error) {
-          console.log("Error fetching data from API:", error);
-        }
-      };
-      fetchData();
-    }
-  }, [cartdata, dispatch]);
+  // useEffect(() => {
+  //   if (!cartdata) {
+  //     const fetchData = async () => {
+  //       try {
+  //         const id = localStorage.getItem("deviceId");
+  //         const response = await axios.get(
+  //           `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
+  //           {
+  //             params: {
+  //               deviceId: id,
+  //             },
+  //           }
+  //         );
+  //         if (response.status !== 200) {
+  //           throw new Error("HTTP status " + response.status);
+  //         }
+  //         const data = response.data;
+  //         setCartData(data);
+  //       } catch (error) {
+  //         console.log("Error fetching data from API:", error);
+  //       }
+  //     };
+  //     fetchData();
+  //   }
+  // }, [cartdata, dispatch]);
 
   // console.log("Card Data", cartdata)
   console.log("Fetched Card Data", CartData);
@@ -587,7 +588,7 @@ const Details = () => {
             </div>
             <div className="flex">
               <div className="flex my-4">
-                {cartdata &&
+                {/* {cartdata &&
                   cartdata.items &&
                   cartdata.items.length > 0 &&
                   cartdata.items.map((item, index) => (
@@ -599,9 +600,9 @@ const Details = () => {
                       alt={item.name}
                       className="w-20 h-20 mr-4"
                     />
-                  ))}
-                {CartData && CartData.items && CartData.items.length > 0 ? (
-                  CartData.items.map((item, index) => (
+                  ))} */}
+                {cartdata && cartdata.items && cartdata.items.length > 0 ? (
+                  cartdata.items.map((item, index) => (
                     <Image loading="lazy"
                       key={index}
                       src={item.productId.images[0]}

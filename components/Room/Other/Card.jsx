@@ -812,7 +812,7 @@ const Card = ({ data, productId }) => {
                         ? selectedSpecData.price
                         : data.perUnitPrice}
                   </p>{" "}
-                  <span> &nbsp;/roll</span>
+                  <span> &nbsp;/{data.unitType}</span>
                 </div>
 
                 {data?.specialprice?.price && (
