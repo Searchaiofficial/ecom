@@ -342,10 +342,10 @@ function Card(props) {
 
           <div className="">
             {props.imgSrc?.map((item, idx) => (
-              <Link href={`/${props.title.replace(/ /g, "-")}`} key={idx}>
+              <Link href={`/${props.title.replace(/ /g, "-")}`} key={idx} aria-label={`View details about ${props.title}`} >
                 <Image
                   src={isHovered ? props.imgSrc[1] : colorImage || item}
-                  alt={props.title}
+                  alt={`Image of ${props.title}`}
                   height={300}
                   width={300}
                   onClick={() => handleClick(props.title, props.category)}
@@ -366,13 +366,14 @@ function Card(props) {
             />
           )}
 
-          <span className="flex absolute bottom-[16px]">
+          <span className="flex items-center absolute bottom-[16px]">
             {props.imgSrc.map((_, idx) => (
-              <button
+              <div
                 key={idx}
                 className={`h-[0.4rem] w-[0.4rem] rounded-[50%] mr-1 ${slide === idx ? 'bg-white' : 'bg-[#cccc]'}`}
-                onClick={() => setSlide(idx)}
-              ></button>
+
+              // onClick={() => setSlide(idx)}
+              ></div>
             ))}
           </span>
         </div>

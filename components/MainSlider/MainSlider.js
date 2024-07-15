@@ -79,6 +79,9 @@ const MainSlider = ({ initialData: { result: sliderData } }) => {
       className="w-full h-[78vh] max-h-[546px] min-h-[300px] sm:mt-[96px] px-[12px] sm:px-0"
     >
       <div
+        role="button"
+        aria-label="Previous slide"
+        tabindex="0"
         className={`${isHovering
           ? "opacity-100 pointer-events-auto"
           : "opacity-0 pointer-events-none"
@@ -93,6 +96,9 @@ const MainSlider = ({ initialData: { result: sliderData } }) => {
         />
       </div>
       <div
+        role="button"
+        aria-label="Next slide"
+        tabindex="1"
         className={`${isHovering
           ? "opacity-100 pointer-events-auto"
           : "opacity-0 pointer-events-none"

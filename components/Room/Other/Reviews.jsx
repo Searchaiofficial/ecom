@@ -248,11 +248,9 @@ const Reviews = ({ productId, data }) => {
       );
       console.log("reviews", response.data);
 
-      if (Array.isArray(response.data) && response.data.length > 0) {
-        setReviews(response.data);
-      } else {
-        console.error("Empty or invalid response data:", response.data);
-      }
+
+      setReviews(response.data);
+
     } catch (error) {
       console.error("Error fetching reviews:", error);
       setReviews([]);
@@ -262,7 +260,7 @@ const Reviews = ({ productId, data }) => {
   useEffect(() => {
     setReviews([]);
     fetchReviews();
-  }, [productId]);
+  }, [productId, data]);
 
   const addReview = async (newReview) => {
     const formData = new FormData();

@@ -74,12 +74,12 @@ const FooterContent = (props) => {
     <div>
       {screenSize < 801 ? (
         <div>
-          <h3
+          <h1
             className="py-2 px-1 font-semibold border-b-2 border-t-2"
             onClick={() => setShow(!show)}
           >
             {categoryHeading}
-          </h3>
+          </h1>
           {show &&
             categoryData.map((curElement) => {
               return (
@@ -95,7 +95,7 @@ const FooterContent = (props) => {
         </div>
       ) : (
         <div className="col-span-1 space-y-5">
-          <h3 className="font-semibold">{categoryHeading}</h3>
+          <h1 className="font-semibold">{categoryHeading}</h1>
           <div className="space-y-3">
             {categoryData.map((curElement) => {
               return (

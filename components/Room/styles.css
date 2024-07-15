@@ -216,7 +216,7 @@
 .image-container {
   position: relative;
   overflow: hidden;
-  cursor: url('/icons/plus.svg'), auto; /* Default custom cursor */
+  cursor: url('/icons/plus.svg'), auto; 
 }
 
 .image-container img {
@@ -224,6 +224,6 @@
 }
 
 .zoomed {
-  transform: scale(2); /* Adjust the scale as needed */
-  cursor: url('/icons/single line.svg'), auto; /* Custom cursor for zoomed state */
+  transform: scale(2);
+  cursor: url('/icons/single line.svg'), auto; 
 }

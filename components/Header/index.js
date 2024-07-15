@@ -378,7 +378,7 @@ function Header({ setIsHeaderMounted }) {
                       height={27}
                     />
                   </span>
-                  <p className="ml-7 self-center lg:text-[13px] text-[12px] mt-0.5   text-gray-400">
+                  <p className="ml-7 self-center lg:text-[13px] text-[12px] mt-0.5   text-gray-600">
                     {" "}
                     Search for <span ref={textElementRef}></span>
                   </p>

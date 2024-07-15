@@ -20,10 +20,10 @@ const Footer = () => {
   return (
     <div
       className={`${(pathname.includes(liveRoomRoute) ||
-          liveRoomRoute === pathname ||
-          virtualRoomRoute === pathname ||
-          freeDesignRoute === pathname ||
-          freeSamplesRoute === pathname) &&
+        liveRoomRoute === pathname ||
+        virtualRoomRoute === pathname ||
+        freeDesignRoute === pathname ||
+        freeSamplesRoute === pathname) &&
         "hidden"
         } bg-gray-100 lg:px-[67px] sm:px-[50px] px-[20px] p mt-20 pt-[70px]`}
     >
@@ -88,7 +88,7 @@ const Footer = () => {
         </div>
 
         <div className="flex gap-3">
-          <ul className="flex flex-wrap pt-2.5 justify-center text-gray-900 dark:text-white">
+          <ul className="flex flex-wrap pt-2.5 justify-center text-gray-900 ">
             <li>
               <a href="#" className="me-4 text-xs">
                 © Ayatrio furnishing · 2015-2023

@@ -53,7 +53,7 @@ const Amenities = ({ data }) => {
   return (
     <>
       {amenities.length > 0 && (
-        <div className="place-offerings mt-[16px] pt-[32px] ">
+        <div className="place-offerings mt-[16px] pt-[32px] mb-[25px] ">
           <h3 className="mb-6 text-xl font-semibold">
             Amenities
           </h3>
