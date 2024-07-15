@@ -112,7 +112,7 @@ const Card = ({ data, productId }) => {
       starsArray.push(
         <img
           key={i}
-          src={"/icons/full-black.svg"}
+          src={"/icons/star-full-black.svg"}
           height={15}
           width={15}
           alt="star"
@@ -125,7 +125,7 @@ const Card = ({ data, productId }) => {
       starsArray.push(
         <img
           key={fullStars}
-          src={"/icons/half-black-half-white.svg"}
+          src={"/icons/star-half-black-half-white.svg"}
           height={15}
           width={15}
           alt="half-star"
@@ -138,7 +138,7 @@ const Card = ({ data, productId }) => {
       starsArray.push(
         <img
           key={fullStars + halfStar + i}
-          src={"/icons/full-white.svg"}
+          src={"/icons/star-full-white.svg"}
           height={20}
           width={20}
           alt="empty-star"
@@ -935,7 +935,7 @@ const Card = ({ data, productId }) => {
                 <div className="flex flex-row gap-1">
                   <Image
                     loading="lazy"
-                    src="/icons/ayatrio_store_black.svg"
+                    src="/icons/store-b.svg"
                     height={25}
                     width={25}
                     alt="icon"

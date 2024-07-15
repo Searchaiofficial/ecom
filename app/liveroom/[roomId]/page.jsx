@@ -28,8 +28,8 @@ const page = ({ params }) => {
   const [myAudioEnabled, setMyAudioEnabled] = useState(false);
   const [myVideoEnabled, setMyVideoEnabled] = useState(false);
   const [isScreenSharing, setIsScreenSharing] = useState(false)
-  
- 
+
+
 
   useEffect(() => {
     if (x.length > 0) {
@@ -68,7 +68,7 @@ const page = ({ params }) => {
 
   const stars = new Array(4)
     .fill("/icons/star.svg")
-    .concat("/icons/half-black-half-white.svg");
+    .concat("/icons/star-half-black-half-white.svg");
 
   useEffect(() => {
     if (sessionStorage.getItem("roomId") !== roomId) {
@@ -275,7 +275,7 @@ const page = ({ params }) => {
     setIsScreenSharing(false);
   };
 
-  const handleHome = () =>{
+  const handleHome = () => {
     exitCall();
     router.push('/')
   }
@@ -453,7 +453,7 @@ const page = ({ params }) => {
                 <div className="mt-2">No products found</div>
               )}
               <button
-              onClick={handleHome}
+                onClick={handleHome}
                 className="absolute top-0 right-2  bg-black text-white px-2 py-1 rounded-md hover:bg-gray-500 font-semibold cursor-pointer"
               >
                 Home

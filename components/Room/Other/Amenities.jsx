@@ -1,6 +1,10 @@
 import axios from "axios";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+
+import { FreeMode, Mousewheel, Pagination, Scrollbar } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+
 
 const Amenities = ({ data }) => {
   const amenities = data.features || [];
@@ -25,6 +29,50 @@ const Amenities = ({ data }) => {
       fetchCategoryDetails()
     }
   }, [data?.category])
+
+  const swiper1Ref = useRef(null);
+
+  const swiperOptions = {
+    slidesPerView: 3,
+    spaceBetween: 10,
+    modules: [Pagination, Scrollbar, Mousewheel, FreeMode],
+    navigation: {
+      nextEl: ".custom-next-button",
+      prevEl: ".custom-prev-button",
+    },
+    scrollbar: {
+      hide: false,
+      draggable: true,
+    },
+    mousewheel: {
+      forceToAxis: true,
+      invert: false,
+    },
+    freeMode: {
+      enabled: true,
+      sticky: true,
+    },
+    breakpoints: {
+      300: {
+        slidesPerView: 1.1,
+        spaceBetween: 10,
+      },
+      640: {
+        slidesPerView: 2.1,
+        spaceBetween: 10,
+      },
+      1024: {
+        slidesPerView: 3,
+        spaceBetween: 10,
+      },
+    },
+  };
+
+  const groupedAmenities = [];
+  for (let i = 0; i < amenities?.length; i += 3) {
+    groupedAmenities.push(amenities.slice(i, i + 3));
+  }
+
   return (
     <>
       {amenities.length > 0 && (
@@ -32,12 +80,10 @@ const Amenities = ({ data }) => {
           <h3 className="mb-6 text-xl font-semibold">
             Amenities
           </h3>
-          <div className={`amenities grid ${amenities.length > 5 ? 'grid-cols-2' : 'grid-cols-1'} sm:w-auto`}>
-            {amenities.map((amenity, index) => (
-              <div
-                className={`flex my-2 items-center ${amenities.length > 5 ? 'col-span-1' : 'col-span-1'} min-h-10`}
-                key={amenity._id}
-              >
+
+          <div className={`hidden amenities md:grid ${amenities.length > 5 ? 'grid-cols-2' : 'grid-cols-1'} sm:w-auto`}>
+            {amenities.map((amenity) => (
+              <div key={amenity._id} className="flex items-center my-2">
                 <div className="mr-4">
                   <Image
                     loading="lazy"
@@ -47,12 +93,34 @@ const Amenities = ({ data }) => {
                     alt={amenity.name}
                   />
                 </div>
-                <span className={`font-medium `}>
-                  {amenity.text}
-                </span>
+                <span className="font-medium">{amenity.text}</span>
               </div>
             ))}
           </div>
+
+          <div className="md:hidden">
+            <Swiper {...swiperOptions} ref={swiper1Ref}>
+              {groupedAmenities.map((group, index) => (
+                <SwiperSlide key={index}>
+                  {group.map((amenity) => (
+                    <div key={amenity._id} className="flex my-4 items-center">
+                      <div className="mr-4">
+                        <Image
+                          loading="lazy"
+                          width={24}
+                          height={24}
+                          src={amenity.image}
+                          alt={amenity.name}
+                        />
+                      </div>
+                      <span className="font-medium">{amenity.text}</span>
+                    </div>
+                  ))}
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+
 
           {/* <button
             type="button"
@@ -68,7 +136,7 @@ const Amenities = ({ data }) => {
               <p className="text-[#0066CC] text-xs cursor-pointer font-normal hover:underline">Chat with a Specialist</p>
             </div>
           </div> */}
-        </div>
+        </div >
       )}
     </>
   );

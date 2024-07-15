@@ -1,14 +1,67 @@
 import Image from "next/image";
-import React from "react";
+import React, { useRef } from "react";
 // import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
+import { FreeMode, Mousewheel, Pagination, Scrollbar } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+const groupIntoThrees = (items) => {
+  const groupedItems = [];
+  for (let i = 0; i < items?.length; i += 3) {
+    groupedItems.push(items.slice(i, i + 3));
+  }
+  return groupedItems;
+};
+
 const PlaceInfo = (data) => {
+  const swiper2Ref = useRef(null);
+
+  const swiperOptions = {
+    slidesPerView: 3,
+    spaceBetween: 10,
+    modules: [Pagination, Scrollbar, Mousewheel, FreeMode],
+    navigation: {
+      nextEl: ".custom-next-button",
+      prevEl: ".custom-prev-button",
+    },
+    scrollbar: {
+      hide: false,
+      draggable: true,
+    },
+    mousewheel: {
+      forceToAxis: true,
+      invert: false,
+    },
+    freeMode: {
+      enabled: true,
+      sticky: true,
+    },
+    breakpoints: {
+      300: {
+        slidesPerView: 1.1,
+        spaceBetween: 10,
+      },
+      640: {
+        slidesPerView: 2.1,
+        spaceBetween: 10,
+      },
+      1024: {
+        slidesPerView: 3,
+        spaceBetween: 10,
+      },
+    },
+  };
+
+
   console.log("Place info", data)
+  const groupedCoreValues = groupIntoThrees(data?.data?.coreValues);
+
+
   return (
     <>
       {data?.data?.coreValues ? (
         <>
-          <div className={`place-features mb-4 sm:w-auto ${data?.data?.coreValues.length > 3 ? 'grid grid-cols-2 gap-4' : ''}`}>
+          <div className={`place-features mb-4 hidden md:grid ${data?.data?.coreValues.length > 3 ? 'grid grid-cols-2 gap-4' : ''}`}>
             {
               data?.data?.coreValues.length > 0 && data?.data?.coreValues.map((item, index) => (
                 <div className="hosted-by flex flex-start items-center py-4 font-lg" key={index}>
@@ -30,6 +83,26 @@ const PlaceInfo = (data) => {
                 </div>
               ))
             }
+          </div>
+
+          <div className="md:hidden">
+            <Swiper {...swiperOptions} ref={swiper2Ref}>
+              {groupedCoreValues.map((group, groupIndex) => (
+                <SwiperSlide key={groupIndex}>
+                  {group.map((item, index) => (
+                    <div className="hosted-by flex flex-start items-center py-4 font-lg" key={index}>
+                      <div className="mr-4 w-[40px] h-[40px]">
+                        <img className="w-full min-w-[40px] min-h-[40px]" src={item.image} alt="" />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold">{item.heading}</h4>
+                        <span className="mt-1 text-gray-500">{item.text}</span>
+                      </div>
+                    </div>
+                  ))}
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </div>
         </>
       ) : (

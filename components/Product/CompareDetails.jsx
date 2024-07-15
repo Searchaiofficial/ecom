@@ -23,7 +23,7 @@ const CompareDetails = ({ data }) => {
   };
   // const stars = new Array(4)
   //   .fill("/icons/star.svg")
-  //   .concat("/icons/half-black-half-white.svg");
+  //   .concat("/icons/star-half-black-half-white.svg");
   console.log(data)
   return (
     <div className="py-40">

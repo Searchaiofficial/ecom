@@ -58,7 +58,7 @@ export default function RoomImageList({ images, alt }) {
           {imagesToDisplay?.map((image, index) => (
             <div
               key={index}
-              className={`sm:col-span-1 sm:row-start-${index + 1} image-container`}
+              className={`sm:col-span-1 sm:row-start-${index + 1} image-container `}
               onClick={(e) => handleImageClick(index, e)}
               onMouseMove={(e) => handleMouseMove(e, index)}
               ref={(el) => (imageContainerRefs.current[index] = el)}
@@ -69,11 +69,12 @@ export default function RoomImageList({ images, alt }) {
                 alt={alt}
                 width={800}
                 height={800}
-                className={`sm:w-full aspect-square object-cover ${zoomedImageIndex === index ? "zoomed" : ""
-                  }`}
+                className={`sm:w-full aspect-square object-cover ${zoomedImageIndex === index ? "zoomed" : ""}`}
               />
+
             </div>
           ))}
+
         </div>
       </div>
       {imagesToDisplay?.length > 4 && (
