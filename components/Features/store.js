@@ -28,6 +28,7 @@ import suggestionDataReducer from "./Slices/suggestionDataSlice";
 import roomMainReducer from "./Slices/roomMainSlice";
 import demandTypeProductsSlice from "./Slices/demandTypeProductsSlice";
 import offerProductsSlice from "./Slices/offerProductsSlice";
+import freeSampleSliceReducer from "./Slices/freeSampleSlice";
 
 import filteredProductReducer from "./Slices/FilteredProduct";
 import roomCardReducer from "./Slices/roomCardSlice";
@@ -85,7 +86,8 @@ export const store = configureStore({
     roomMainDetails: roomMainReducer,
     demandTypeProducts: demandTypeProductsSlice,
     offerProducts: offerProductsSlice,
-    map: mapSlice
+    map: mapSlice,
+    freeSample: freeSampleSliceReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(sagaMiddleware),

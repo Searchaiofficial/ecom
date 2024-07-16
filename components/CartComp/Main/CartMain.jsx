@@ -18,6 +18,11 @@ import CartProduct from "./CartProduct";
 import { ArrowRight, X } from "lucide-react";
 import { getPinFromCoordinates } from "@/utils/getPinFromCoordinates";
 import { upsertUserLocation } from "@/components/Features/api";
+import { useSearchParams } from "next/navigation";
+import {
+  selectFreeSampleItems,
+  setFreeSamples,
+} from "@/components/Features/Slices/freeSampleSlice";
 const CartMain = () => {
   const dispatch = useDispatch();
   const selectedItems = useSelector(selecteddbItems);
@@ -28,6 +33,47 @@ const CartMain = () => {
   const [sideMenu, setSideMenu] = useState(false);
   const [pickup, setPickup] = useState("");
   const [schedular, setSchedular] = useState(false);
+
+  const searchParams = useSearchParams();
+
+  const isFreeSample = searchParams.get("freeSamples") === "true";
+  const freeSamples = useSelector(selectFreeSampleItems);
+  const [deviceId, setDeviceId] = useState(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const id = localStorage.getItem("deviceId");
+      setDeviceId(id);
+    }
+  }, []);
+
+  const fetchFreeSamples = async () => {
+    if (!deviceId) return;
+
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart/freeSampling`,
+        {
+          params: {
+            deviceId,
+          },
+        }
+      );
+
+      const data = response.data;
+      dispatch(setFreeSamples(data));
+    } catch (error) {
+      console.error("Error Fetching samples from DB : ", error);
+    } finally {
+      setIsLoadingSamples(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isFreeSample) {
+      fetchFreeSamples();
+    }
+  }, [isFreeSample, deviceId]);
 
   if (typeof window !== "undefined") {
     var id = localStorage.getItem("deviceId");
@@ -45,8 +91,6 @@ const CartMain = () => {
     console.log(value);
     dispatch(schedularToogle(value));
   };
-
-
 
   const fetchData = async () => {
     try {
@@ -73,12 +117,14 @@ const CartMain = () => {
   };
 
   useEffect(() => {
-    setCartStaus("loading");
-    fetchData();
+    if (!isFreeSample) {
+      setCartStaus("loading");
+      fetchData();
+    }
   }, []);
 
-  console.log(cartdata)
-  console.log(cartdata.freeSamples)
+  console.log({ cartdata });
+  console.log(cartdata.freeSamples);
 
   let totalPrice = 0;
 
@@ -92,7 +138,7 @@ const CartMain = () => {
       //   (accessoryTotal, accessory) => accessoryTotal + parseFloat(accessory.totalPrice),
       //   0
       // );
-      const itemTotalPrice = (item.price) * item.quantity;
+      const itemTotalPrice = item.price * item.quantity;
       return total + itemTotalPrice;
     }, 0);
   }
@@ -101,14 +147,18 @@ const CartMain = () => {
   if (cartStatus === "succeeded" && selectedItems) {
     SumtotalPrice = selectedItems.items.reduce((total, item) => {
       const serviceTotalCost = item.selectedServices.reduce(
-        (serviceTotal, service) => serviceTotal + parseFloat(service.cost * service?.quantity),
+        (serviceTotal, service) =>
+          serviceTotal + parseFloat(service.cost * service?.quantity),
         0
       );
       const accessoriesTotalCost = item.selectedAccessories.reduce(
-        (accessoryTotal, accessory) => accessoryTotal + parseFloat(accessory.totalPrice * accessory?.quantity),
+        (accessoryTotal, accessory) =>
+          accessoryTotal +
+          parseFloat(accessory.totalPrice * accessory?.quantity),
         0
       );
-      const itemTotalPrice = (item.price + serviceTotalCost + accessoriesTotalCost) * item.quantity;
+      const itemTotalPrice =
+        (item.price + serviceTotalCost + accessoriesTotalCost) * item.quantity;
       return total + itemTotalPrice;
     }, 0);
   }
@@ -118,30 +168,32 @@ const CartMain = () => {
   if (cartStatus === "succeeded" && selectedItems) {
     totalServicesPrice = selectedItems.items.reduce((total, item) => {
       const serviceTotalCost = item.selectedServices.reduce(
-        (serviceTotal, service) => serviceTotal + parseFloat(service.cost * service.quantity),
-        0
-      );
-      return (total + serviceTotalCost);
-    }, 0);
-  }
-
-  console.log(selectedItems)
-
-  console.log(totalServicesPrice)
-
-  let totalAccessoryPrice = 0;
-
-  if (cartStatus === "succeeded" && selectedItems) {
-    totalAccessoryPrice = selectedItems.items.reduce((total, item) => {
-      const serviceTotalCost = item.selectedAccessories.reduce(
-        (serviceTotal, service) => serviceTotal + parseFloat(service.perUnitPrice * service.quantity),
+        (serviceTotal, service) =>
+          serviceTotal + parseFloat(service.cost * service.quantity),
         0
       );
       return total + serviceTotalCost;
     }, 0);
   }
 
-  console.log(totalAccessoryPrice)
+  console.log(selectedItems);
+
+  console.log(totalServicesPrice);
+
+  let totalAccessoryPrice = 0;
+
+  if (cartStatus === "succeeded" && selectedItems) {
+    totalAccessoryPrice = selectedItems.items.reduce((total, item) => {
+      const serviceTotalCost = item.selectedAccessories.reduce(
+        (serviceTotal, service) =>
+          serviceTotal + parseFloat(service.perUnitPrice * service.quantity),
+        0
+      );
+      return total + serviceTotalCost;
+    }, 0);
+  }
+
+  console.log(totalAccessoryPrice);
 
   //delete items from DB
   const postUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`;
@@ -155,8 +207,8 @@ const CartMain = () => {
 
   //delete handle function
   const handleItemDelete = async (productId) => {
-    console.log(productId)
-    console.log(id)
+    console.log(productId);
+    console.log(id);
     try {
       const response = await axios.delete(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
@@ -167,7 +219,7 @@ const CartMain = () => {
           },
         }
       );
-      console.log(response.data)
+      console.log(response.data);
       if (response.status === 200) {
         setCartStaus("succeeded");
         fetchData();
@@ -202,7 +254,6 @@ const CartMain = () => {
     }
   }
 
-
   const updateServiceQuantity = async (productId, serviceId, Quant) => {
     const postUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart/service/quantity`;
     const postData = {
@@ -224,7 +275,7 @@ const CartMain = () => {
       setCartStaus("failed");
       console.error("Error updating quantity in database:", error);
     }
-  }
+  };
 
   const updateAccessoryQuantity = async (productId, accessoryId, Quant) => {
     const postUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart/accessory/quantity`;
@@ -235,12 +286,11 @@ const CartMain = () => {
       quantity: Quant,
     };
 
-    console.log(postData)
+    console.log(postData);
     try {
       const response = await axios.post(postUrl, postData);
-      console.log(response.data)
+      console.log(response.data);
       if (response.status === 200) {
-
         await fetchData();
         // setcartdata(response.data)
         setCartStaus("succeeded");
@@ -251,34 +301,32 @@ const CartMain = () => {
       setCartStaus("failed");
       console.error("Error updating quantity in database:", error);
     }
-  }
+  };
 
   const handleServiceIncrease = (productId, serviceId, quantity) => {
-
-    let Quant = quantity + 1
-    updateServiceQuantity(productId, serviceId, Quant)
-  }
+    let Quant = quantity + 1;
+    updateServiceQuantity(productId, serviceId, Quant);
+  };
 
   const handleServiceDecrease = (productId, serviceId, quantity) => {
-    let Quant = quantity - 1
+    let Quant = quantity - 1;
     if (Quant > 0) {
-      updateServiceQuantity(productId, serviceId, Quant)
+      updateServiceQuantity(productId, serviceId, Quant);
     }
-  }
+  };
 
   const handleAccessoriesIncrease = (productId, accessoryId, quantity) => {
-    let Quant = quantity + 1
-    console.log(Quant)
-    updateAccessoryQuantity(productId, accessoryId, Quant)
-  }
+    let Quant = quantity + 1;
+    console.log(Quant);
+    updateAccessoryQuantity(productId, accessoryId, Quant);
+  };
   const handleAccessoriesDecrease = (productId, accessoryId, quantity) => {
-    let Quant = quantity - 1
-    console.log(Quant)
+    let Quant = quantity - 1;
+    console.log(Quant);
     if (Quant >= 1) {
-      updateAccessoryQuantity(productId, accessoryId, Quant)
+      updateAccessoryQuantity(productId, accessoryId, Quant);
     }
-
-  }
+  };
 
   function handleItemIncr(productId, quantity) {
     let quant = quantity + 1;
@@ -289,7 +337,7 @@ const CartMain = () => {
     let quant = quantity - 1;
     if (quant < 1) {
       handleItemDelete(productId);
-      return
+      return;
     }
     updateQuantityInDatabase(productId, quant);
   }
@@ -304,28 +352,29 @@ const CartMain = () => {
 
   const handleSampleDelete = async (sampleId) => {
     try {
-      const responce = await axios.delete(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart/freeSampling`, {
-        params: {
-          deviceId: localStorage.getItem("deviceId"),
-          freeSampleId: sampleId
+      const responce = await axios.delete(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart/freeSampling`,
+        {
+          data: {
+            deviceId: id,
+            freeSampleId: sampleId,
+          },
         }
-      })
+      );
 
-      console.log(responce.data)
-
+      console.log(responce.data);
 
       if (responce.status === 200) {
-        setCartStaus("succeeded");
-        fetchData();
+        fetchFreeSamples();
         // dispatch(setDbItems(response.data));
-        dispatch(setDbItems(responce.data));
+        dispatch(setFreeSamples(responce.data));
       }
 
-      console.log(responce.data)
+      console.log(responce.data);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
     if (localStorage?.getItem("userPincode")) {
@@ -476,7 +525,8 @@ const CartMain = () => {
                 </svg>
                 {userPincode ? (
                   <p className=" ml-3 w-full font-[300] text-[15.5px]">
-                    Your pincode: <span className="underline">{userPincode}</span>
+                    Your pincode:{" "}
+                    <span className="underline">{userPincode}</span>
                   </p>
                 ) : null}
               </div>
@@ -492,8 +542,9 @@ const CartMain = () => {
                   onClick={() => {
                     handlePickupType("delivery");
                   }}
-                  className={`cursor-pointer box-border  border-[1.5px] ${pickup === "delivery" ? "border-black" : "border-[#e5e5e5]"
-                    } h-24 w-[50%]`}
+                  className={`cursor-pointer box-border  border-[1.5px] ${
+                    pickup === "delivery" ? "border-black" : "border-[#e5e5e5]"
+                  } h-24 w-[50%]`}
                 >
                   <div className="flex px-6 py-5 h-24 items-center">
                     <div className="pr-5">
@@ -522,8 +573,9 @@ const CartMain = () => {
                   onClick={() => {
                     handlePickupType("collect");
                   }}
-                  className={`cursor-pointer box-border border-[1.5px] ${pickup === "collect" ? "border-black" : "border-[#e5e5e5]"
-                    } h-24 w-[50%]`}
+                  className={`cursor-pointer box-border border-[1.5px] ${
+                    pickup === "collect" ? "border-black" : "border-[#e5e5e5]"
+                  } h-24 w-[50%]`}
                 >
                   <div className="flex px-6 py-5 h-24 items-center">
                     <div className="pr-5">
@@ -549,104 +601,253 @@ const CartMain = () => {
                 </div>
               </div>
               {/*  code */}
+              {freeSamples && freeSamples.products.length > 0 && (
+                <div className="mt-5 flex flex-col gap-4">
+                  {freeSamples.products.map((sample) => (
+                    <div className="flex  lg:gap-8 gap-4">
+                      <Image
+                        loading="lazy"
+                        src={sample.images?.[0]}
+                        width={249}
+                        height={249}
+                        alt={sample.productTitle}
+                        className="w-[88px] h-[88px] lg:w-32 lg:h-40 "
+                      />
+                      <div className="flex flex-col gap-2">
+                        <p className=" font-[700] flex justify-between ">
+                          <div className="sm:text-xl text-md sm:font-semibold font-medium truncate">
+                            {sample?.productTitle} {"( Sample )"}
+                          </div>
+                        </p>
+                        <p className=" my-2">
+                          <span className=" box-border h-1 w-10 rounded-xl mr-3 text-xs text-gray-400 bg-zinc-400">
+                            .d.
+                          </span>
+                          <span className=" text-zinc-600 text-xs underline">
+                            Go to checkout for delivery information
+                          </span>
+                        </p>
+                        <div onClick={() => handleSampleDelete(sample._id)}>
+                          <Image
+                            loading="lazy"
+                            src="/icons/delete-icon.svg"
+                            width={20}
+                            height={20}
+                            alt="Arrow"
+                            className="w-6 h-6 cursor-pointer mt-2"
+                          />
+                        </div>
+                      </div>
+                      <div className="text-xl flex self-start md:ml-44 items-center  font-semibold ">
+                        <span className=" font-semibold text-[12px]">
+                          <Image
+                            loading="lazy"
+                            src="/icons/indianrupeesicon.svg"
+                            width={18}
+                            height={18}
+                            alt="rupees"
+                            className="mr-1"
+                          />
+                        </span>
+                        00.00
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
               {cartStatus === "loading" && <p>Loading...</p>}
               {cartStatus === "failed" && <p>Error loading data from DB.</p>}
               {cartStatus === "succeeded" && cartdata ? (
                 <>
-                  {
-                    cartdata.items.map((item, index) => {
-                      return (
-                        <CartProduct
-                          cartItem={item}
-                          key={index}
-                          cartStatus={cartStatus}
-                          id={id}
-                          setCartStaus={setCartStaus}
-                          handleItemDecr={handleItemDecr}
-                          handleItemIncr={handleItemIncr}
-                          handleItemDelete={handleItemDelete}
-                          handleServiceIncrease={handleServiceIncrease}
-                          handleServiceDecrease={handleServiceDecrease}
-                          handleAccessoriesIncrease={handleAccessoriesIncrease}
-                          handleAccessoriesDecrease={handleAccessoriesDecrease}
-                        />
-                      );
-                    })
-                  }
-
-                  {
-                    cartdata && cartdata.freeSamples.length > 0 && (
-                      <div className="mt-5 flex flex-col gap-4">
-                        {
-                          cartdata.freeSamples.map((sample) => (
-                            <div className="flex  lg:gap-8 gap-4">
-                              <Image loading="lazy"
-                                src={sample.images[0]}
-                                width={249}
-                                height={249}
-                                alt={sample.productTitle}
-                                className="w-[88px] h-[88px] lg:w-32 lg:h-40 "
-
-                              />
-                              <div className="flex flex-col gap-2">
-                                <p className=" font-[700] flex justify-between ">
-                                  <div className="sm:text-xl text-md sm:font-semibold font-medium truncate">
-                                    {sample?.productTitle} {"( Sample )"}
-                                  </div>
-                                </p>
-                                <p className=" my-2">
-                                  <span className=" box-border h-1 w-10 rounded-xl mr-3 text-xs text-gray-400 bg-zinc-400">
-                                    .d.
-                                  </span>
-                                  <span className=" text-zinc-600 text-xs underline">
-                                    Go to checkout for delivery information
-                                  </span>
-                                </p>
-                                <div onClick={() => handleSampleDelete(sample._id)}>
-                                  <Image loading="lazy"
-                                    src="/icons/delete-icon.svg"
-                                    width={20}
-                                    height={20}
-                                    alt="Arrow"
-                                    className="w-6 h-6 cursor-pointer mt-2"
-                                  />
-                                </div>
-                              </div>
-                              <div className="text-xl flex self-start md:ml-44 items-center  font-semibold "><span className=" font-semibold text-[12px]">
-                                <Image loading="lazy"
-                                  src="/icons/indianrupeesicon.svg"
-                                  width={18}
-                                  height={18}
-                                  alt="rupees"
-                                  className="mr-1"
-                                /></span>00.00</div>
-                            </div>
-                          ))
-                        }
-                      </div>
-                    )
-                  }
+                  {cartdata.items.map((item, index) => {
+                    return (
+                      <CartProduct
+                        cartItem={item}
+                        key={index}
+                        cartStatus={cartStatus}
+                        id={id}
+                        setCartStaus={setCartStaus}
+                        handleItemDecr={handleItemDecr}
+                        handleItemIncr={handleItemIncr}
+                        handleItemDelete={handleItemDelete}
+                        handleServiceIncrease={handleServiceIncrease}
+                        handleServiceDecrease={handleServiceDecrease}
+                        handleAccessoriesIncrease={handleAccessoriesIncrease}
+                        handleAccessoriesDecrease={handleAccessoriesDecrease}
+                      />
+                    );
+                  })}
                 </>
               ) : (
-                <>
-                  <div className="p-10">
-                    <h1 className="text-2xl font-bold">No Item added</h1>
-                    <p>
-                      No data is available here. Please add some item in cart
-                      page
-                    </p>
-                    <div className="box-border font-bold border-2 bg-sky-800 text-white p-4 rounded-lg h-20 w-[40%] flex items-center justify-between">
-                      <a className=" font-[700] text-xl  " href="/">
-                        Continue Shopping
-                      </a>
+                !freeSamples && (
+                  <>
+                    <div className="p-10">
+                      <h1 className="text-2xl font-bold">No Item added</h1>
+                      <p>
+                        No data is available here. Please add some item in cart
+                        page
+                      </p>
+                      <div className="box-border font-bold border-2 bg-sky-800 text-white p-4 rounded-lg h-20 w-[40%] flex items-center justify-between">
+                        <a className=" font-[700] text-xl  " href="/">
+                          Continue Shopping
+                        </a>
+                      </div>
                     </div>
-                  </div>
-                </>
+                  </>
+                )
               )}
             </div>
 
             <div className="">{/* CART1 */}</div>
           </div>
+
+          {freeSamples && (
+            <div className="lg:col-span-4  bg-white  border-gray-300 rounded-lg  overflow-hidden pt-[0.6rem]  text-black ">
+              <h2 className="text-[16px] pb-3 font-bold ">Order summary</h2>
+              <div className="flex items-center justify-between  border-slate-500 pb-3 ">
+                <span className="text-[#767677]">Products price </span>
+                <div className="text-black font-[700]">
+                  <div className="flex items-center">
+                    <Image
+                      src="/icons/indianrupeesicon.svg"
+                      width={18}
+                      height={18}
+                      alt="rupees"
+                      className="mr-1"
+                      loading="lazy"
+                    />
+                    {0}
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center justify-between  border-slate-500 pb-3 ">
+                <span className="text-[#767677]">Services price </span>
+                <div className="text-black font-[700]">
+                  <div className="flex items-center">
+                    <Image
+                      src="/icons/indianrupeesicon.svg"
+                      width={18}
+                      height={18}
+                      alt="rupees"
+                      className="mr-1"
+                      loading="lazy"
+                    />
+                    {0}
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center justify-between  border-slate-500 pb-3 ">
+                <span className="text-[#767677]">Accessories price </span>
+                <div className="text-black font-[700]">
+                  <div className="flex items-center">
+                    <Image
+                      src="/icons/indianrupeesicon.svg"
+                      width={18}
+                      height={18}
+                      alt="rupees"
+                      className="mr-1"
+                      loading="lazy"
+                    />
+                    {0}
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center justify-between ">
+                <span className="text-[#767677]">Delivery charge </span>
+                <span>-</span>
+              </div>
+              <p className="text-xs text-[#767677] border-b-2 lg:border-b-4 border-black pb-6">
+                calculated on distance and weight
+              </p>
+              <div className="flex items-center justify-between pb-4 mt-2">
+                <span className="text-black text-[14px] font-semibold">
+                  Subtotal{" "}
+                </span>
+                <span className="font-[700] text-black text-2xl">
+                  <div className="flex items-center">
+                    <Image
+                      src="/icons/indianrupeesicon.svg"
+                      width={20}
+                      height={20}
+                      alt="rupees"
+                      className="mr-1"
+                      loading="lazy"
+                    />
+                    {0}
+                  </div>
+                </span>
+              </div>
+              <div className="flex items-center justify-between pb-4">
+                <span className="text-black">Total weight </span>
+                <span className="text-black">1.9 kg</span>
+              </div>
+              <div
+                onClick={() => handleSchedular(!schedular)}
+                className={`border border-[1.5px] p-[20px] w-[100%] h-auto ${
+                  schedular ? "border-black" : "border-[#e5e5e5]"
+                }`}
+              >
+                <p className="text-black font-[600] ">
+                  Make the most of delivery charges
+                </p>
+                <p className="text-[#757575] text-[12px] pt-[5px]">
+                  The current delivery price of your order is Rs. 99 for up to 5
+                  kg.
+                </p>
+              </div>
+
+              <button
+                className="border  rounded-[64px] lg:rounded-none text-[14px] border-slate-500 p-5 text-white font-[700] w-[100%] h-[56px] lg:h-28  my-5 flex items-center justify-center lg:justify-between lg:text-xl bg-[#007b34] hover:bg-[#013fa3]"
+                onClick={() => setSideMenu(true)}
+              >
+                Continue to checkout
+                <div className=" hidden lg:flex w-10 h-10  items-center rounded-3xl bg-white ">
+                  <ArrowRight className="translate-x-2 text-black" />
+                </div>
+              </button>
+
+              <div className="flex gap-4  items-center font-bold mt-14">
+                <span>
+                  <svg
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                    className="cart-ingka-svg-icon"
+                    aria-hidden="true"
+                  >
+                    <path d="M19.205 5.599c.9541.954 1.4145 2.2788 1.4191 3.6137 0 3.0657-2.2028 5.7259-4.1367 7.5015-1.2156 1.1161-2.5544 2.1393-3.9813 2.9729L12 20.001v-2.3516c.6699-.4304 1.9095-1.2834 3.1347-2.4084 1.8786-1.7247 3.4884-3.8702 3.4894-6.0264-.0037-.849-.2644-1.6326-.8333-2.2015-1.1036-1.1035-2.9413-1.0999-4.0445.0014l-1.7517 1.7448-1.7461-1.7462c-1.1165-1.1164-2.9267-1.1164-4.0431 0-1.6837 1.6837-.5313 4.4136.6406 6.0155.3487.4768.7386.9326 1.1472 1.3617L8 11.9982l2 .0057-.017 6-6-.0171.0056-2 2.7743.0079c-.5387-.5472-1.0629-1.1451-1.5311-1.7852-1.0375-1.4183-1.8594-3.1249-1.8597-4.9957-.0025-1.2512.3936-2.5894 1.419-3.6149 1.8976-1.8975 4.974-1.8975 6.8716 0l.3347.3347.336-.3347c1.8728-1.8722 4.9989-1.8727 6.8716 0z"></path>
+                  </svg>
+                </span>
+                <div className="text-black  underline">
+                  60 days and additional 30-day returns with Ayatrio Family
+                </div>
+              </div>
+
+              <div className="flex gap-4  items-center font-bold mt-4">
+                <span className="">
+                  <svg
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                    className="cart-ingka-svg-icon"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M12 3C9.7909 3 8 4.7909 8 7v4H5v11h14V11h-3V7c0-2.2091-1.7909-4-4-4zm2 8V7c0-1.1046-.8954-2-2-2s-2 .8954-2 2v4h4zm-7 9v-7h10v7H7z"
+                    ></path>
+                  </svg>
+                </span>
+                <div className=" text-black  underline">
+                  Secure shopping with SSL data encryption
+                </div>
+              </div>
+            </div>
+          )}
 
           {cartStatus === "loading" && <p>Loading...</p>}
           {cartStatus === "failed" && <p>Error loading data from DB.</p>}
@@ -680,7 +881,6 @@ const CartMain = () => {
                       alt="rupees"
                       className="mr-1"
                       loading="lazy"
-
                     />
                     {totalServicesPrice}
                   </div>
@@ -697,7 +897,6 @@ const CartMain = () => {
                       alt="rupees"
                       className="mr-1"
                       loading="lazy"
-
                     />
                     {totalAccessoryPrice}
                   </div>
@@ -723,7 +922,6 @@ const CartMain = () => {
                       alt="rupees"
                       className="mr-1"
                       loading="lazy"
-
                     />
                     {SumtotalPrice}
                   </div>
@@ -735,8 +933,9 @@ const CartMain = () => {
               </div>
               <div
                 onClick={() => handleSchedular(!schedular)}
-                className={`border border-[1.5px] p-[20px] w-[100%] h-auto ${schedular ? "border-black" : "border-[#e5e5e5]"
-                  }`}
+                className={`border border-[1.5px] p-[20px] w-[100%] h-auto ${
+                  schedular ? "border-black" : "border-[#e5e5e5]"
+                }`}
               >
                 <p className="text-black font-[600] ">
                   Make the most of delivery charges

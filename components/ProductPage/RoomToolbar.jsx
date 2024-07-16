@@ -155,9 +155,9 @@ const RoomToolbar = ({ data }) => {
         freeSampleIds: selectedSamples.map(sample => sample._id),
       });
       console.log("Free Sampling:", response.data);
-      if (response.status === 200) {
+      if (response.status === 200 || response.status === 201) {
         dispatch(setDbItems(response.data));
-        router.push("/checkout");
+        router.push("/checkout?freeSamples=true");
       }
     } catch (error) {
       console.log("Free Sampling error", error);
