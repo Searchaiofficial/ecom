@@ -50,12 +50,12 @@ const data = [
     {
         id: 7,
         headerTitle: "Gift registry",
-        iconPath: "/icons/ayatrio-giftcard.svg",
+        iconPath: "/icons/gift.svg",
     },
     {
         id: 8,
         headerTitle: "Ayatrio Famaly Card",
-        iconPath: "/icons/ayatrio-giftcard.svg",
+        iconPath: "/icons/gift.svg",
     },
 ]
 
