@@ -119,7 +119,7 @@ const CartMain = () => {
       setCartStaus("loading");
       fetchData();
     }
-  }, []);
+  }, [isFreeSample]);
 
   console.log({ cartdata });
   console.log(cartdata.freeSamples);
@@ -599,64 +599,66 @@ const CartMain = () => {
                 </div>
               </div>
               {/*  code */}
-              {freeSamples && freeSamples.products.length > 0 && (
-                <div className="mt-5 flex flex-col gap-4">
-                  {freeSamples.products.map((sample) => (
-                    <div className="flex  lg:gap-8 gap-4">
-                      <Image
-                        loading="lazy"
-                        src={sample.images?.[0]}
-                        width={249}
-                        height={249}
-                        alt={sample.productTitle}
-                        className="w-[88px] h-[88px] lg:w-32 lg:h-40 "
-                      />
-                      <div className="flex flex-col gap-2">
-                        <p className=" font-[700] flex justify-between ">
-                          <div className="sm:text-xl text-md sm:font-semibold font-medium truncate">
-                            {sample?.productTitle} {"( Sample )"}
+              {isFreeSample &&
+                freeSamples &&
+                freeSamples.products.length > 0 && (
+                  <div className="mt-5 flex flex-col gap-4">
+                    {freeSamples.products.map((sample) => (
+                      <div className="flex  lg:gap-8 gap-4">
+                        <Image
+                          loading="lazy"
+                          src={sample.images?.[0]}
+                          width={249}
+                          height={249}
+                          alt={sample.productTitle}
+                          className="w-[88px] h-[88px] lg:w-32 lg:h-40 "
+                        />
+                        <div className="flex flex-col gap-2">
+                          <p className=" font-[700] flex justify-between ">
+                            <div className="sm:text-xl text-md sm:font-semibold font-medium truncate">
+                              {sample?.productTitle} {"( Sample )"}
+                            </div>
+                          </p>
+                          <p className=" my-2">
+                            <span className=" box-border h-1 w-10 rounded-xl mr-3 text-xs text-gray-400 bg-zinc-400">
+                              .d.
+                            </span>
+                            <span className=" text-zinc-600 text-xs underline">
+                              Go to checkout for delivery information
+                            </span>
+                          </p>
+                          <div onClick={() => handleSampleDelete(sample._id)}>
+                            <Image
+                              loading="lazy"
+                              src="/icons/delete-icon.svg"
+                              width={20}
+                              height={20}
+                              alt="Arrow"
+                              className="w-6 h-6 cursor-pointer mt-2"
+                            />
                           </div>
-                        </p>
-                        <p className=" my-2">
-                          <span className=" box-border h-1 w-10 rounded-xl mr-3 text-xs text-gray-400 bg-zinc-400">
-                            .d.
+                        </div>
+                        <div className="text-xl flex self-start md:ml-44 items-center  font-semibold ">
+                          <span className=" font-semibold text-[12px]">
+                            <Image
+                              loading="lazy"
+                              src="/icons/indianrupeesicon.svg"
+                              width={18}
+                              height={18}
+                              alt="rupees"
+                              className="mr-1"
+                            />
                           </span>
-                          <span className=" text-zinc-600 text-xs underline">
-                            Go to checkout for delivery information
-                          </span>
-                        </p>
-                        <div onClick={() => handleSampleDelete(sample._id)}>
-                          <Image
-                            loading="lazy"
-                            src="/icons/delete-icon.svg"
-                            width={20}
-                            height={20}
-                            alt="Arrow"
-                            className="w-6 h-6 cursor-pointer mt-2"
-                          />
+                          00.00
                         </div>
                       </div>
-                      <div className="text-xl flex self-start md:ml-44 items-center  font-semibold ">
-                        <span className=" font-semibold text-[12px]">
-                          <Image
-                            loading="lazy"
-                            src="/icons/indianrupeesicon.svg"
-                            width={18}
-                            height={18}
-                            alt="rupees"
-                            className="mr-1"
-                          />
-                        </span>
-                        00.00
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
+                    ))}
+                  </div>
+                )}
 
               {cartStatus === "loading" && <p>Loading...</p>}
               {cartStatus === "failed" && <p>Error loading data from DB.</p>}
-              {cartStatus === "succeeded" && cartdata ? (
+              {cartdata && cartdata.items?.length > 0 ? (
                 <>
                   {cartdata.items.map((item, index) => {
                     return (
@@ -700,7 +702,7 @@ const CartMain = () => {
             <div className="">{/* CART1 */}</div>
           </div>
 
-          {freeSamples && (
+          {isFreeSample && freeSamples && (
             <div className="lg:col-span-4  bg-white  border-gray-300 rounded-lg  overflow-hidden pt-[0.6rem]  text-black ">
               <h2 className="text-[16px] pb-3 font-bold ">Order summary</h2>
               <div className="flex items-center justify-between  border-slate-500 pb-3 ">
