@@ -58,7 +58,7 @@ const Amenities = ({ data }) => {
             Amenities
           </h3>
 
-          <div className={`hidden amenities md:grid ${amenities.length > 5 ? 'grid-cols-2' : 'grid-cols-1'} sm:w-auto`}>
+          <div className={`hidden amenities md:grid ${amenities.length > 5 ? 'grid-cols-2' : 'grid-cols-1'} sm:w-auto mb-6`}>
             {amenities.map((amenity) => (
               <div key={amenity._id} className="flex items-center my-2">
                 <div className="mr-4">
@@ -75,7 +75,7 @@ const Amenities = ({ data }) => {
             ))}
           </div>
 
-          <div className="md:hidden h-auto max-h-[300px] w-full">
+          <div className="md:hidden h-auto max-h-[300px] w-full mb-6">
             <Swiper
               {...swiperOptions}
               ref={swiper1Ref}
