@@ -797,6 +797,8 @@ const Details = () => {
                   />
                   {deliveryPrice === null ? (
                     <span className="text-xs">Calculating...</span>
+                  ) : deliveryPrice === 0 ? (
+                    <span className="text-xs">Free Delivery</span>
                   ) : (
                     deliveryPrice
                   )}
