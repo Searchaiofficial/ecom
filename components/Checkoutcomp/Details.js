@@ -103,7 +103,7 @@ const Details = () => {
   const FetchCost = async (distance) => {
     if (nearestDistance === null) return;
     const responce = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/calculateShippingCharge/${distance}`
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/calculateShippingDetails/${distance}`
     );
     setDeliveryCost(responce.data.charge);
     setDeliveryPrice(responce.data.charge);

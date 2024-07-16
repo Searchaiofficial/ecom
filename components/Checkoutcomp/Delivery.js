@@ -142,6 +142,9 @@ const Delivery = () => {
   const [previousUserPinCode, setPreviousUserPinCode] = useState(null);
   const router = useRouter()
 
+  
+  const [estimatedDelivery, setEstimatedDelivery] = useState(null);
+
 
 
   useEffect(() => {
@@ -435,14 +438,20 @@ const Delivery = () => {
     }
   };
 
-
+  const getExpectedDeliveryDate = (expectedDelivery) => {
+    const today = new Date();
+    const expectedDate = new Date(today);
+    expectedDate.setDate(today.getDate() + expectedDelivery);
+    return expectedDate.toDateString(); // Format the date as a readable string
+  };
 
   const FetchCost = async (distance) => {
     console.log(nearestDistance)
 
     if (nearestDistance === null) return
-    const responce = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/calculateShippingCharge/${distance}`)
+    const responce = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/calculateShippingDetails/${distance}`)
     setDeliveryCost(responce.data.charge)
+    setEstimatedDelivery(responce.data.estimatedDelivery)
     console.log(responce.data.charge)
   }
 
@@ -697,7 +706,7 @@ const Delivery = () => {
                               Estimated pick-up Date
                             </p>
                             <p className="text-md text-gray-500 py-2">
-                              24.3.2024 11:00 AM - 5:00 PM
+                               11:00 AM - 5:00 PM
                             </p>
                             <button className="rounded-full text-black text-sm font-bold border border-solid border-black p-2 my-2">
                               Change slot
@@ -769,7 +778,7 @@ const Delivery = () => {
                               Estimated collection time:
                             </p>
                             <p className="text-md text-gray-500 py-2">
-                              24.3.2024 11:00 AM - 5:00 PM
+                               11:00 AM - 5:00 PM
                             </p>
                           </>
                         )}
@@ -841,7 +850,7 @@ const Delivery = () => {
                           {selectedOption !== "option3" ? (
                             <>
                               <p className="lg:text-md text-[14px] text-gray-500 py-2">
-                                Estimated delivery 25.4.2024
+                                Estimated delivery {getExpectedDeliveryDate(estimatedDelivery)}
                               </p>
                             </>
                           ) : (
@@ -850,7 +859,7 @@ const Delivery = () => {
                                 Estimated delivery
                               </h3>
                               <p className="text-md font-bold text-gray-500 py-2">
-                                25.4.2024 9:00 AM - 9:00 PM
+                              {getExpectedDeliveryDate(estimatedDelivery)} 9:00 AM - 9:00 PM
                               </p>
                             </>
                           )}
