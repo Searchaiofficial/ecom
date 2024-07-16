@@ -78,7 +78,7 @@ const ratingsData = [
     icon: (
       <Image
         loading="lazy"
-        src="/icons/price-tag-icon.svg"
+        src="icons/offer.svg"
         width={36}
         height={36}
         alt="value"
@@ -92,7 +92,7 @@ const ratingsData = [
     icon: (
       <Image
         loading="lazy"
-        src="/icons/price-tag-icon.svg"
+        src="icons/offer.svg"
         width={36}
         height={36}
         alt="value"

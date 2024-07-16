@@ -1021,7 +1021,7 @@ const Card = ({ data, productId }) => {
                                 >
                                   <Image
                                     loading="lazy"
-                                    src="/icons/closeicon.svg"
+                                    src="icons/cancel.svg"
                                     alt="close"
                                     width={20}
                                     height={30}
@@ -1441,7 +1441,7 @@ const Card = ({ data, productId }) => {
                                   >
                                     <Image
                                       loading="lazy"
-                                      src="/icons/closeicon.svg"
+                                      src="icons/cancel.svg"
                                       alt="close"
                                       width={30}
                                       height={30}
@@ -1596,7 +1596,7 @@ const Card = ({ data, productId }) => {
                               >
                                 <Image
                                   loading="lazy"
-                                  src="/icons/closeicon.svg"
+                                  src="icons/cancel.svg"
                                   alt="close"
                                   width={20}
                                   height={30}
@@ -1654,7 +1654,7 @@ const Card = ({ data, productId }) => {
                             >
                               <Image
                                 loading="lazy"
-                                src="/icons/closeicon.svg"
+                                src="icons/cancel.svg"
                                 alt="close"
                                 width={20}
                                 height={30}
@@ -1686,7 +1686,7 @@ const Card = ({ data, productId }) => {
                             >
                               <Image
                                 loading="lazy"
-                                src="/icons/closeicon.svg"
+                                src="icons/cancel.svg"
                                 alt="close"
                                 width={20}
                                 height={30}

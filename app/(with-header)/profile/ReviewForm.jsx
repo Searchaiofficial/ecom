@@ -8,7 +8,7 @@ const ReviewForm = ({ addReview, categoryData }) => {
   const [sidebarContent, setSidebarContent] = useState(null);
   const [dynamicRatings, setDynamicRatings] = useState([]);
   const [overallRating, setOverallRating] = useState(0);
-  
+
 
   useEffect(() => {
     if (categoryData) {
@@ -97,7 +97,7 @@ const ReviewForm = ({ addReview, categoryData }) => {
                       >
                         <Image
                           loading="lazy"
-                          src="/icons/closeicon.svg"
+                          src="icons/cancel.svg"
                           alt="close"
                           width={20}
                           height={30}
@@ -193,7 +193,7 @@ const ReviewForm = ({ addReview, categoryData }) => {
                             >
                               <Image
                                 loading="lazy"
-                                src="/icons/closeicon.svg"
+                                src="icons/cancel.svg"
                                 alt="close"
                                 width={15}
                                 height={15}

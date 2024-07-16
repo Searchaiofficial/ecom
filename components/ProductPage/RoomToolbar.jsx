@@ -485,7 +485,7 @@ const RoomToolbar = ({ data }) => {
                 <button className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer" onClick={handleClose} >
                   <Image
                     loading="lazy"
-                    src="/icons/closeicon.svg"
+                    src="icons/cancel.svg"
                     alt="close"
                     width={15}
                     height={15}

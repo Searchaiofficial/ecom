@@ -225,7 +225,7 @@ const Search = ({ places, onResultClick }) => {
                     {index === 0 ? "India" : `${item.name}`}
                   </div>
                   <Image loading="lazy"
-                    src="/icons/closeicon.svg"
+                    src="icons/cancel.svg"
                     height={20}
                     width={20}
                     alt="close"
@@ -302,7 +302,7 @@ const Search = ({ places, onResultClick }) => {
                     {`${item.name} ${item.address.streetAddress.slice(0, 20)}`}
                   </div>
                   <Image loading="lazy"
-                    src="/icons/closeicon.svg"
+                    src="icons/cancel.svg"
                     height={20}
                     width={20}
                     alt="close"

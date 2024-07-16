@@ -10,10 +10,10 @@ import "./../Imagechanger/styles.css";
 const MultiCardContent = (props) => {
   const { iconPath, iconSize, title, text } = props;
   return (
-    <div className="bg-white flex flex-col justify-between md:flex-col h-auto md:min-h-[370px] min-h-[350px] mb-[60px] p-3">
+    <div className="bg-white flex flex-col justify-between md:flex-col h-auto md:min-h-[400px] min-h-[350px] mb-[60px] p-3">
       {/* <div className="mt-8 ml-6">
         <Image loading="lazy" src={iconPath} width={iconSize} height={iconSize} alt="image" />
-      </div>
+    
       <h2 className="text-[28px] text-[#333333] font-bold ml-6 mr-12">{title}</h2>
       <div className="mt-2 ml-6 mr-12 text-[17px] font-normal mb-12">{text}</div>
 
@@ -33,7 +33,7 @@ const MultiCardContent = (props) => {
         <h2 className=" text-[21px] lg:text-[25px]  text-[#333333] font-semibold mb-[1em] ">{title}</h2>
         <div className=" text-[14px] lg:text-[15px] font-normal ">{text}</div>
       </div>
-      <div className=" ml-[24px] mb-[24px] max-w-fit  bg-[#333336] rounded-full">
+      <div className=" ml-[24px] mb-[24px] max-w-fit  bg-[#333336] rounded-full mt-10">
         <Image loading="lazy"
           className="min-w-[25px] min-h-[25px] p-1 m-2"
           src="/icons/Back_arrow_white.svg"
