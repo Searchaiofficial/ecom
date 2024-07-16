@@ -15,44 +15,32 @@ import UserReviewPosts from "../Cards/UserReviewPosts";
 import axios from "axios";
 import Carous from "../Carousel/Carous";
 
-const ProductPage = ({ title }) => {
-  const [data, setData] = useState([]);
+const ProductPage = ({ title, initialData }) => {
+  const [data, setData] = useState(initialData);
 
   const selectedData = useSelector(selectRoomData);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Fetch room data based on the title
-    dispatch({ type: "FETCH_ROOM_REQUEST", payload: title });
+    if (!initialData) {
+      dispatch({ type: "FETCH_ROOM_REQUEST", payload: title });
+    }
   }, [title, dispatch]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const cachedData = sessionStorage?.getItem("roomData");
-        if (cachedData) {
-          const parsedData = JSON.parse(cachedData);
-          setData(parsedData);
-          dispatch(setRoomData({ roomData: parsedData }));
-          if (parsedData?.productImages?.[0]?.color) {
-            dispatch({
-              type: "FETCH_IMAGE_DATA",
-              payload: parsedData?.productImages[0]?.color,
-            });
-          } else {
-            dispatch({
-              type: "FETCH_IMAGE_DATA",
-              payload: null,
-            });
-          }
-        }
+        dispatch({
+          type: "FETCH_IMAGE_DATA",
+          payload: null,
+        });
       } catch (error) {
         console.error("Error fetching cached data:", error);
       }
     };
 
     fetchData();
-  }, [dispatch]); // Fetch cached data only once when component mounts
+  }, [dispatch]);
 
   const [accessories, setAccessories] = useState([]);
 

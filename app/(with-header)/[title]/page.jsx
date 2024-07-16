@@ -1,5 +1,4 @@
 import { BreadcrumbJsonLd, ProductJsonLd } from "next-seo";
-import RoomPage from "./MainPage";
 import axios from "axios";
 import { getAggregateRating } from "@/utils/getAggregateRating";
 import ProductPage from "@/components/ProductPage/ProductPage";
@@ -83,7 +82,10 @@ const page = async ({ params }) => {
           },
         ]}
       />
-      <ProductPage title={params.title.replace(/-/g, " ")} />
+      <ProductPage
+        title={params.title.replace(/-/g, " ")}
+        initialData={response.data}
+      />
     </>
   );
 };
