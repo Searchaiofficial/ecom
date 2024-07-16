@@ -1,0 +1,257 @@
+.card-flex .review-icon-container {
+    margin-top: 220px;
+    margin-right: 220px;
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    border-radius: 40px;
+  }
+  
+  .card {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  
+  .card-img {
+    border-radius: 1rem;
+  }
+  
+  .card-title {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+  }
+  
+  .card-rating {
+    display: flex;
+  }
+  
+  .card-price {
+    padding-top: 0.4rem;
+    font-size: medium;
+    font-weight: 300;
+    display: flex;
+  }
+  
+  .carousel {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+  
+  @media only screen and (max-width: 866px) {
+    .carousel {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+    }
+  }
+  
+  .slide {
+    border-radius: 0.1rem;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .slide-hidden {
+    display: none;
+  }
+  
+  .arrow {
+    position: absolute;
+    filter: drop-shadow(0px 0px 5px rgba(0,0,0,0.12));
+    width: 30px;
+    height: 30px;
+    color: white;
+    margin-top: -13px;
+  }
+  
+  .card:hover .arrow {
+    position: absolute;
+    /* filter: drop-shadow(0px 2px 6px rgba(0,0,0,0.12)); */
+    width: 30px;
+    height: 30px;
+    color: white;
+    outline: #000;
+    
+  }
+  
+  .arrow:hover {
+    cursor: pointer;
+    opacity: 100%;
+    transform: scale(1.04);
+    filter: drop-shadow(0px,6px,16px,rgba(0, 0, 0, 0.0018));
+  }
+  
+  .arrow-left {
+    left: 1rem;
+    margin-top: 2px;
+  }
+  
+  
+  
+  .arrow-right {
+    right: 1rem;
+  }
+  
+  .indicators {
+    display: flex;
+    position: absolute;
+    /* bottom: 1rem; */
+  }
+  
+  .indicator {
+    background-color: white;
+    height: 0.5rem;
+    width: 0.5rem;
+    border: none;
+    outline: none;
+    margin: 0 0.2rem;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+  
+  .indicator-inactive {
+    background-color: #ccc;
+    opacity: 0.7;
+  }
+  
+  .swiper-container {
+    width: 100%;
+    height: 100%;
+    
+  }
+  
+  .swiper-button-prev,
+  .swiper-button-next {
+    width: 40px;
+    height: 40px;
+    color: black !important;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+  }
+  
+  .swiper-button-prev:hover,
+  .swiper-button-next:hover {
+    opacity: 1;
+  }
+  
+  .swiper-button-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .swiper-button-prev {
+    margin-left: 0%;
+  }
+  
+  .swiper-button-next {
+    margin-right: 0%;
+  }
+  
+  .swiper-horizontal > .swiper-scrollbar,
+  .swiper-scrollbar.swiper-scrollbar-horizontal {
+    transition-duration: 2s !important;
+    width: 100% !important;
+    left: 0% !important;
+    top: 99% !important;
+    height: 2.5px !important;
+  }
+  
+  /* .swiper-scrollbar-horizontal {
+    margin-bottom: -6px !important;
+  } */
+  
+  .fade-in {
+    animation: fadeIn ease 1.5s;
+    -webkit-animation: fadeIn ease 1.5s;
+    -moz-animation: fadeIn ease 1.5s;
+    -o-animation: fadeIn ease 1.5s;
+    -ms-animation: fadeIn ease 1.5s;
+  }
+  
+  .swiper-scrollbar{
+    background-color: white !important
+    
+  }
+  
+  .swiper-scrollbar-drag {
+    
+    background-color: #000 !important;
+    border-radius: 0px !important;
+  }
+  
+  .swiper-slide {
+    /* width: 400px;
+    height: 500px; */
+  }
+  
+  .card-flex {
+    height: 380px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* gap: 10px; */
+    width: 100%;
+  }
+  
+  .card1flex {
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* gap: 10px; */
+    width: 100%;
+  }
+  
+  .swiper-wrapper {
+    gap: 5px;
+    margin-left: 0px;
+    /* height: 450px !important; */
+  }
+  
+  @media (min-width: 400px) {
+    .screens{
+        max-height: 1010px;
+    }
+  }
+  @media (min-width: 400px) {
+    .screen{
+        height: 520px;
+    }
+  }
+  
+  
+  
+  /* styles.css */
+  .background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .background-overlay.open {
+    opacity: 1;
+    pointer-events: auto; /* Enable interaction with the overlay */
+  }
+  
+  /* .swiper .swiper-initialized .swiper-horizontal .swiper-backface-hidden{
+    padding-right: 10px;
+  } */

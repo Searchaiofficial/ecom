@@ -1,9 +1,10 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { allSelectedData } from "@/components/Features/Slices/virtualDataSlice";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import LiveRoomProductCard from "@/components/LiveRoom/LiveRoomProductCard";
+import LiveRoomProductSlider from "@/components/LiveRoom/LiveRoomProductSlider";
 import { useRouter } from "next/navigation";
 import { useSocket } from "@/providers/SocketProvider";
 import Image from "next/image";
@@ -16,6 +17,7 @@ const page = ({ params }) => {
   const [hasCallStarted, setHasCallStarted] = useState(false);
 
   const x = useSelector(allSelectedData);
+  console.log({ x });
 
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [similarProducts, setSimilarProducts] = useState([]);
@@ -36,6 +38,8 @@ const page = ({ params }) => {
       router.push("/virtualexperience/category");
     }
     const fetchVeProducts = async () => {
+      // const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/trending-products`;
+      // const response = await axios.get(apiUrl, {
       try {
         const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getVEFilter`;
         const response = await axios.post(apiUrl, x, {
@@ -43,6 +47,7 @@ const page = ({ params }) => {
             "Content-Type": "application/json",
           },
         });
+        console.log(response.data);
         setFilteredProducts(response.data);
       } catch (error) {
         console.error("Error fetching filtered products:", error);
@@ -277,18 +282,14 @@ const page = ({ params }) => {
 
   const handleHome = () => {
     exitCall();
-    router.push('/')
-  }
-
+    router.push("/");
+  };
   return (
     <div className="">
-      <div className="sm:px-4 flex px-[20px] h-screen py-4 flex-col md:flex-row">
-        <div className="relative w-full  md:w-[70%] bg-black py-4 border-2 border-black">
+      <div className="sm:px-4 flex px-[20px] h-screen py-4 flex-col md:flex-row overflow-y-hidden">
+        <div className="relative w-full h-full md:w-[70%] bg-black py-4 border-2 border-black">
           {myStream && (
             <div className="h-full w-full">
-              {/* <span className="block text-center font-semibold mb-2">
-                My Stream
-              </span> */}
               <video
                 className="w-full h-full"
                 autoPlay
@@ -302,13 +303,20 @@ const page = ({ params }) => {
               />
             </div>
           )}
-          <div className=" absolute bottom-8 w-full flex gap-2 justify-center">
+          {filteredProducts && filteredProducts.length > 0 && (
+            <div className="sticky md:hidden bottom-24 ">
+              <LiveRoomProductSlider products={filteredProducts} />
+            </div>
+          )}
+
+          <div className="absolute bottom-8 w-full flex gap-2 justify-center">
             <button
               onClick={toggleAudio}
               className="bg-red-500 p-2 hover:bg-red-400 text-xs text-center text-white font-medium shadow-sm  rounded-full w-10 h-10"
             >
               {myAudioEnabled ? (
-                <Image loading="lazy"
+                <Image
+                  loading="lazy"
                   src="/callingicon/ic_addaudio.svg"
                   alt="Add Microphone"
                   width={10}
@@ -316,7 +324,8 @@ const page = ({ params }) => {
                   className="object-cover w-full"
                 />
               ) : (
-                <Image loading="lazy"
+                <Image
+                  loading="lazy"
                   src="/callingicon/ic_removeaudio.svg"
                   alt="Remove Microphone"
                   width={10}
@@ -330,7 +339,8 @@ const page = ({ params }) => {
               className="bg-red-500 p-2 hover:bg-red-400 text-xs text-center text-white font-medium shadow-sm  rounded-full w-10 h-10"
             >
               {myVideoEnabled ? (
-                <Image loading="lazy"
+                <Image
+                  loading="lazy"
                   src="/callingicon/ic_advideo.svg"
                   alt="add video"
                   width={10}
@@ -338,7 +348,8 @@ const page = ({ params }) => {
                   className="object-cover w-full"
                 />
               ) : (
-                <Image loading="lazy"
+                <Image
+                  loading="lazy"
                   src="/callingicon/ic_removevideo.svg"
                   alt="remove video"
                   width={10}
@@ -376,7 +387,8 @@ const page = ({ params }) => {
                 onClick={startScreenShare}
                 className="bg-red-500 p-2 hover:bg-red-400 text-xs text-center text-white font-medium shadow-sm  rounded-full w-10 h-10"
               >
-                <Image loading="lazy"
+                <Image
+                  loading="lazy"
                   src="/callingicon/ic_adsharescreen.svg"
                   alt="Microphone"
                   width={10}
@@ -390,7 +402,8 @@ const page = ({ params }) => {
                 onClick={stopScreenShare}
                 className="bg-red-500 p-2 hover:bg-red-400 text-xs text-center text-white font-medium shadow-sm  rounded-full w-10 h-10"
               >
-                <Image loading="lazy"
+                <Image
+                  loading="lazy"
                   src="/callingicon/ic_removesharescreen.svg"
                   alt="Microphone"
                   width={10}
@@ -423,7 +436,7 @@ const page = ({ params }) => {
             ))}
           </div>
         </div>
-        <div className="relative flex flex-col w-full  md:w-[30%] pl-4">
+        <div className="hidden relative md:flex flex-col w-full  md:w-[30%] pl-4 ">
           <div className="relative w-full overflow-y-scroll h-[100%]">
             <div>
               <h1 className="text-2xl font-semibold mb-2">Related Products</h1>
