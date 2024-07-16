@@ -4,8 +4,7 @@ import { register } from "swiper/element/bundle";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { SwiperSlide, Swiper } from "swiper/react";
-
+import { SwiperSlide } from "swiper/react";
 
 const MainSlider = ({ initialData: { result: sliderData } }) => {
   const swiperRef = useRef(null);
@@ -76,16 +75,17 @@ const MainSlider = ({ initialData: { result: sliderData } }) => {
       onMouseLeave={() => {
         setIsHovering(false);
       }}
-      className="w-full sm:h-[546px] h-[405px] sm:mt-[96px] px-[12px] sm:px-0"
+      className="w-full h-[78vh] max-h-[546px] min-h-[300px] sm:mt-[96px] px-[12px] sm:px-0"
     >
       <div
         role="button"
         aria-label="Previous slide"
         tabindex="0"
-        className={`${isHovering
-          ? "opacity-100 pointer-events-auto"
-          : "opacity-0 pointer-events-none"
-          } transition absolute nav-prev left-2 sm:left-4 top-1/2 cursor-pointer translate-y-1/2 z-30 rounded-full  hidden sm:flex items-center justify-center p-1 rotate-180`}
+        className={`${
+          isHovering
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
+        } transition absolute nav-prev left-2 sm:left-4 top-1/2 cursor-pointer translate-y-1/2 z-30 rounded-full  hidden sm:flex items-center justify-center p-1 rotate-180`}
       >
         <Image
           src="/icons/rightarrow-w.svg"
@@ -99,10 +99,11 @@ const MainSlider = ({ initialData: { result: sliderData } }) => {
         role="button"
         aria-label="Next slide"
         tabindex="1"
-        className={`${isHovering
-          ? "opacity-100 pointer-events-auto"
-          : "opacity-0 pointer-events-none"
-          } transition absolute nav-next right-2 sm:right-4 cursor-pointer top-1/2 translate-y-1/2 z-30 rounded-full hidden sm:flex items-center justify-center p-1`}
+        className={`${
+          isHovering
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
+        } transition absolute nav-next right-2 sm:right-4 cursor-pointer top-1/2 translate-y-1/2 z-30 rounded-full hidden sm:flex items-center justify-center p-1`}
       >
         <Image
           src="/icons/rightarrow-w.svg"
@@ -128,27 +129,23 @@ const MainSlider = ({ initialData: { result: sliderData } }) => {
                 {!!data.link ? (
                   <Link href={`https://ayatrio.com/category/${data?.link}`}>
                     <Image
-
                       src={
                         windowWidth >= 600
                           ? data?.desktopImgSrc
                           : data?.mobileImgSrc
                       }
                       alt="slider"
-
                       fill
                     />
                   </Link>
                 ) : (
                   <Image
-
                     src={
                       windowWidth >= 600
                         ? data?.desktopImgSrc
                         : data?.mobileImgSrc
                     }
                     alt="slider"
-
                     fill
                   />
                 )}
