@@ -64,8 +64,6 @@ const CartMain = () => {
       dispatch(setFreeSamples(data));
     } catch (error) {
       console.error("Error Fetching samples from DB : ", error);
-    } finally {
-      setIsLoadingSamples(false);
     }
   };
 
@@ -463,7 +461,7 @@ const CartMain = () => {
               <Link
                 href={{
                   pathname: "/checkout/pin",
-                  query: { search: "rooms" },
+                  query: { freeSamples: true },
                 }}
                 className="border-2 h-10 w-[98%] text-white bg-black font-bold rounded-full flex items-center justify-center border-black"
               >
