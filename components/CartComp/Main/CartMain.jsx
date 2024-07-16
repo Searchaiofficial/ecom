@@ -461,7 +461,7 @@ const CartMain = () => {
               <Link
                 href={{
                   pathname: "/checkout/pin",
-                  query: { freeSamples: true },
+                  query: { freeSamples: isFreeSample },
                 }}
                 className="border-2 h-10 w-[98%] text-white bg-black font-bold rounded-full flex items-center justify-center border-black"
               >
@@ -1044,7 +1044,7 @@ const CartMain = () => {
               <Link
                 href={{
                   pathname: "/checkout/pin",
-                  query: { search: "rooms" },
+                  query: { freeSamples: isFreeSample },
                 }}
                 className="border-2 h-20 w-[98%] text-white bg-black font-bold rounded-full flex items-center justify-center border-black  text-black"
               >
