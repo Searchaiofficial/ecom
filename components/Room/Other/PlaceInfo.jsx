@@ -52,9 +52,9 @@ const PlaceInfo = (data) => {
                     <h4 className="font-semibold">
                       {item.heading}
                     </h4>
-                    <span className="mt-1 text-gray-500">
+                    <p className="mt-1 text-gray-500 md:w-[90%] line-clamp-1">
                       {item.text}
-                    </span>
+                    </p>
                   </div>
                 </div>
               ))

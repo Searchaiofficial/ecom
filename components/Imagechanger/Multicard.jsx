@@ -30,7 +30,7 @@ const Multicard = ({ forhomePage }) => {
   return (
     <div>
       <div className={`bg-zinc-50 pb-[20px] pt-[30px] ${forhomePage !== false ? "sm:pl-[50px] pl-[20px] lg:mt-0 lg:pl-[67px]" : "pl-0 lg:mt-0"}  overflow-x-auto`}>
-        <div className="text-2xl flex flex-col gap-[2px] font-semibold w-full">
+        <div className="text-2xl flex flex-col gap-[2px] font-semibold w-full pb-[20px] pt-[30px]">
           <h2>Ways to shopping at Ayatrio</h2>
 
           <h2>for home furnishing.</h2>
