@@ -396,6 +396,7 @@ const Delivery = () => {
               destinations: store.pincode
             }
           });
+
           const distanceText = response.data.rows[0].elements[0].distance.text;
           const distanceValue = response.data.rows[0].elements[0].distance.value;
           return {
@@ -413,9 +414,7 @@ const Delivery = () => {
       distances.sort((a, b) => a.distanceValue - b.distanceValue);
 
       console.log("Distances sorted by ascending order:");
-      console.log(distances);
       const distance = (distances[0].distanceValue / 1000).toFixed(1);
-      console.log(distance);
       setNearestDistance(distance);
       // FetchCost()
 

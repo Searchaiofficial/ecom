@@ -22,25 +22,115 @@ const Details = () => {
   const dispatch = useDispatch();
   const [CartData, setCartData] = useState([]);
   const [DeliverCost, setDeliveryCost] = useState(99);
+  const [STORE_MAP_DATA, SET_STORE_MAP_DATA] = useState([]);
+  const [nearestDistance, setNearestDistance] = useState(null);
+  const [deliveryPrice, setDeliveryPrice] = useState(null);
+  const [userPincode, setUserPincode] = useState(null);
+  const [form, setForm] = useState({});
 
   const closePaymentModal = () => {
     setIsPaymentModalOpen(false);
   };
 
-  const pickup = useSelector(selectPickupOption);
+  const fetchMapData = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/mapPlaces`
+      );
+      console.log(response.data);
+      SET_STORE_MAP_DATA(response.data);
+    } catch (error) {
+      console.error("Error fetching map data:", error);
+    }
+  };
+
+  const fetchDistances = async () => {
+    try {
+      const distances = await Promise.all(
+        STORE_MAP_DATA?.map(async (store) => {
+          const origins = !!form.postal ? form.postal : userPincode;
+          const response = await axios.get(
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/distance`,
+            {
+              params: {
+                origins: origins,
+                destinations: store.pincode,
+              },
+            }
+          );
+
+          const distanceText = response.data.rows[0].elements[0].distance.text;
+          const distanceValue =
+            response.data.rows[0].elements[0].distance.value;
+          return {
+            id: store.id,
+            name: store.name,
+            address: store.address,
+            pincode: store.pincode,
+            distanceText: distanceText,
+            distanceValue: distanceValue,
+          };
+        })
+      );
+
+      distances.sort((a, b) => a.distanceValue - b.distanceValue);
+
+      console.log("Distances sorted by ascending order:");
+      const distance = (distances[0].distanceValue / 1000).toFixed(1);
+      setNearestDistance(distance);
+      // FetchCost()
+
+      // localStorage.setItem("nearestStore", JSON.stringify(distances[0]));
+
+      // localStorage?.setItem("nearestStore", JSON.stringify({
+      //   nearestStore: distances[0],
+      //   userPincode
+      // }));
+      if (typeof window !== "undefined") {
+        localStorage.setItem(
+          "nearestStore",
+          JSON.stringify({
+            nearestStore: distances[0],
+            userPincode,
+          })
+        );
+      }
+    } catch (error) {
+      console.error("Error fetching distances:", error);
+    }
+  };
+
+  const FetchCost = async (distance) => {
+    if (nearestDistance === null) return;
+    const responce = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/calculateShippingCharge/${distance}`
+    );
+    setDeliveryCost(responce.data.charge);
+    setDeliveryPrice(responce.data.charge);
+    console.log(responce.data.charge);
+  };
 
   useEffect(() => {
-    if (pickup === "collect") {
-      setDeliveryCost(59);
+    fetchMapData();
+  }, []);
+
+  useEffect(() => {
+    if (STORE_MAP_DATA) {
+      fetchDistances();
     }
-  }, [pickup]);
+  }, [STORE_MAP_DATA, userPincode, form.postal]);
 
-  const deliveryPrice = useSelector(selectDeliveryPrice);
+  useEffect(() => {
+    if (nearestDistance !== null) {
+      FetchCost(nearestDistance);
+    }
+  }, [nearestDistance]);
 
-  console.log(deliveryPrice)
+  // const deliveryPrice = useSelector(selectDeliveryPrice);
+
+  console.log(deliveryPrice);
   const cartdata = useSelector(selecteddbItems);
-  console.log(cartdata)
-
+  console.log(cartdata);
 
   if (typeof window !== "undefined") {
     var id = localStorage.getItem("deviceId");
@@ -91,7 +181,7 @@ const Details = () => {
       //   (serviceTotal, service) => serviceTotal + parseFloat(service.cost),
       //   0
       // );
-      const itemTotalPrice = (item.price) * item.quantity;
+      const itemTotalPrice = item.price * item.quantity;
       return total + itemTotalPrice;
     }, 0);
   }
@@ -102,50 +192,56 @@ const Details = () => {
   //   );
   // }
 
-  console.log(totalPrice)
+  console.log(totalPrice);
   let totalServicesPrice = 0;
 
   if (cartdata) {
     totalServicesPrice = cartdata.items.reduce((total, item) => {
       const serviceTotalCost = item.selectedServices.reduce(
-        (serviceTotal, service) => serviceTotal + parseFloat(service.cost * service.quantity),
-        0
-      );
-      return (total + serviceTotalCost);
-    }, 0);
-  }
-
-  console.log(cartdata)
-
-  console.log(totalServicesPrice)
-
-  let totalAccessoryPrice = 0;
-
-  if (cartdata) {
-    totalAccessoryPrice = cartdata.items.reduce((total, item) => {
-      const serviceTotalCost = item.selectedAccessories.reduce(
-        (serviceTotal, service) => serviceTotal + parseFloat(service.perUnitPrice * service.quantity),
+        (serviceTotal, service) =>
+          serviceTotal + parseFloat(service.cost * service.quantity),
         0
       );
       return total + serviceTotalCost;
     }, 0);
   }
 
-  console.log(totalAccessoryPrice)
+  console.log(cartdata);
+
+  console.log(totalServicesPrice);
+
+  let totalAccessoryPrice = 0;
+
+  if (cartdata) {
+    totalAccessoryPrice = cartdata.items.reduce((total, item) => {
+      const serviceTotalCost = item.selectedAccessories.reduce(
+        (serviceTotal, service) =>
+          serviceTotal + parseFloat(service.perUnitPrice * service.quantity),
+        0
+      );
+      return total + serviceTotalCost;
+    }, 0);
+  }
+
+  console.log(totalAccessoryPrice);
 
   let SumtotalPrice = 0;
 
   if (cartdata) {
     SumtotalPrice = cartdata.items.reduce((total, item) => {
       const serviceTotalCost = item.selectedServices.reduce(
-        (serviceTotal, service) => serviceTotal + parseFloat(service.cost * service?.quantity),
+        (serviceTotal, service) =>
+          serviceTotal + parseFloat(service.cost * service?.quantity),
         0
       );
       const accessoriesTotalCost = item.selectedAccessories.reduce(
-        (accessoryTotal, accessory) => accessoryTotal + parseFloat(accessory.totalPrice * accessory?.quantity),
+        (accessoryTotal, accessory) =>
+          accessoryTotal +
+          parseFloat(accessory.totalPrice * accessory?.quantity),
         0
       );
-      const itemTotalPrice = (item.price + serviceTotalCost + accessoriesTotalCost) * item.quantity;
+      const itemTotalPrice =
+        (item.price + serviceTotalCost + accessoriesTotalCost) * item.quantity;
       return total + itemTotalPrice;
     }, 0);
   }
@@ -163,8 +259,6 @@ const Details = () => {
 
   const deviceId = cartdata?.owner;
   const cartId = cartdata?._id;
-
-  const [form, setForm] = useState({});
 
   const [postalValidation, setPostalValidation] = React.useState("");
   const [numberValidation, setNumberValidation] = React.useState("");
@@ -213,6 +307,10 @@ const Details = () => {
 
     // Check validation before submitting the form
     if (postalValidation !== "valid" || numberValidation !== "valid") {
+      return;
+    }
+
+    if (deliveryPrice === null) {
       return;
     }
 
@@ -277,7 +375,6 @@ const Details = () => {
   };
 
   const [userCoordinates, setUserCoordinates] = useState(null);
-  const [userPincode, setUserPincode] = useState(null);
   const [location, setLocation] = useState(null);
 
   const getDataFromCoordinates = async (lat, lng) => {
@@ -298,7 +395,7 @@ const Details = () => {
     };
 
     try {
-      console.log(lat)
+      console.log(lat);
       const response = await axios.request(options);
       setLocation(response.data.results[0].address);
     } catch (error) {
@@ -313,7 +410,7 @@ const Details = () => {
 
   useEffect(() => {
     if (userCoordinates) {
-      console.log(userCoordinates)
+      console.log(userCoordinates);
       getDataFromCoordinates(userCoordinates.lat, userCoordinates.lng);
     }
     if (localStorage?.getItem("userPincode")) {
@@ -363,9 +460,7 @@ const Details = () => {
                     <h3 className="text-md font-bold ">
                       Delivered to pick-up location via parcel at
                     </h3>
-                    <p className="text-sm text-gray-700">
-                      {location}
-                    </p>
+                    <p className="text-sm text-gray-700">{location}</p>
                   </div>
                   {/* <div className="mb-2">
                     <h3 className="text-md font-bold ">
@@ -603,7 +698,8 @@ const Details = () => {
                   ))} */}
                 {cartdata && cartdata.items && cartdata.items.length > 0 ? (
                   cartdata.items.map((item, index) => (
-                    <Image loading="lazy"
+                    <Image
+                      loading="lazy"
                       key={index}
                       src={item.productId.images[0]}
                       width={249}
@@ -616,16 +712,16 @@ const Details = () => {
                   <div className="text-lg text-gray-500 font-bold ">
                     {cartdata !== null ? "" : "Empty cart"}
                   </div>
-
-
                 )}
               </div>
               <div className="flex my-4">
-                {cartdata && cartdata.freeSamples.length > 0 && (
+                {cartdata &&
+                  cartdata.freeSamples.length > 0 &&
                   cartdata.freeSamples.map((item, index) => {
                     return (
                       <div>
-                        <Image loading="lazy"
+                        <Image
+                          loading="lazy"
                           src={item.images[0]}
                           width={249}
                           height={249}
@@ -635,8 +731,7 @@ const Details = () => {
                         {/* <p className="mt-[2px] text-[12px]  font-semibold">(Sample)</p> */}
                       </div>
                     );
-                  })
-                )}
+                  })}
               </div>
             </div>
             <h2 className="text-xl pb-3 font-bold">Order summary</h2>
@@ -644,7 +739,8 @@ const Details = () => {
               <span className="text-black">Products price </span>
               <div className=" text-black font-[700]">
                 <div className="flex items-center">
-                  <Image loading="lazy"
+                  <Image
+                    loading="lazy"
                     src="/icons/indianrupeesicon.svg"
                     width={18}
                     height={18}
@@ -659,7 +755,8 @@ const Details = () => {
               <span className="text-black">Services price </span>
               <div className=" text-black font-[700]">
                 <div className="flex items-center">
-                  <Image loading="lazy"
+                  <Image
+                    loading="lazy"
                     src="/icons/indianrupeesicon.svg"
                     width={18}
                     height={18}
@@ -674,7 +771,8 @@ const Details = () => {
               <span className="text-black">Accessories price </span>
               <div className=" text-black font-[700]">
                 <div className="flex items-center">
-                  <Image loading="lazy"
+                  <Image
+                    loading="lazy"
                     src="/icons/indianrupeesicon.svg"
                     width={18}
                     height={18}
@@ -689,14 +787,19 @@ const Details = () => {
               <span className="text-black">Delivery charge </span>
               <div className="text-black">
                 <div className="flex items-center">
-                  <Image loading="lazy"
+                  <Image
+                    loading="lazy"
                     src="/icons/indianrupeesicon.svg"
                     width={18}
                     height={18}
                     alt="rupees"
                     className="mr-1"
                   />
-                  {deliveryPrice === null ? DeliverCost : deliveryPrice}
+                  {deliveryPrice === null ? (
+                    <span className="text-xs">Calculating...</span>
+                  ) : (
+                    deliveryPrice
+                  )}
                 </div>
               </div>
             </div>
@@ -707,7 +810,8 @@ const Details = () => {
               <span className="text-black">Subtotal </span>
               <div className="font-[700] text-black text-2xl">
                 <div className="flex items-center">
-                  <Image loading="lazy"
+                  <Image
+                    loading="lazy"
                     src="/icons/indianrupeesicon.svg"
                     width={20}
                     height={20}
