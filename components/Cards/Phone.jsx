@@ -71,9 +71,9 @@ const Phone = () => {
             <span className="cursor-pointer hover:underline">
               <Link
                 href={`/category/${category.name.replace(/ /g, "-")}/all`}
-                // onClick={() =>
-                //   handleIncrementCategoryPopularity(category.name)
-                // }
+              // onClick={() =>
+              //   handleIncrementCategoryPopularity(category.name)
+              // }
               >
                 {category.name}
               </Link>

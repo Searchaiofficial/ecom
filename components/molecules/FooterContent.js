@@ -95,7 +95,7 @@ const FooterContent = (props) => {
         </div>
       ) : (
         <div className="col-span-1 space-y-5">
-          <h1 className="font-semibold">{categoryHeading}</h1>
+          <h3 className="font-semibold">{categoryHeading}</h3>
           <div className="space-y-3">
             {categoryData.map((curElement) => {
               return (

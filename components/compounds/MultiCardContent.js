@@ -30,7 +30,7 @@ const MultiCardContent = (props) => {
         <div className="pb-[9px]  h-[56px]">
           <Image loading="lazy" src={iconPath} width={iconSize} height={iconSize} alt={title} className="" />
         </div>
-        <h2 className=" text-[21px] lg:text-[25px]  text-[#333333] font-semibold mb-[1em] ">{title}</h2>
+        <h3 className=" text-[21px] lg:text-[25px]  text-[#333333] font-semibold mb-[1em] ">{title}</h3>
         <div className=" text-[14px] lg:text-[15px] font-normal ">{text}</div>
       </div>
       <div className=" ml-[24px] mb-[24px] max-w-fit  bg-[#333336] rounded-full mt-10">
