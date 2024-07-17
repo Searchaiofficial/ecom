@@ -34,9 +34,9 @@ const Phone = () => {
   }, []);
   return (
     <div className="lg:px-[15px] px-[20px] sm:px-[50px] ">
-      <h3 className="font-bold xl:text-4xl text-2xl py-4">
+      <h1 className="font-bold xl:text-4xl text-2xl py-4">
         Ayatrio is a global leader in life at home.
-      </h3>
+      </h1>
 
       <div className="text-sm sm:text-base">
         Whether you just moved into a new home or looking to revamp your current

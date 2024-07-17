@@ -766,7 +766,7 @@ const Tabs = ({
       <div className="lg:px-[67px] sm:px-[50px] px-[20px]">
         <div className="flex flex-col overflow-hidden">
           <div className="mt-36" />
-          <h2 className="Blinds font-semibold text-2xl pb-[20px] lg:pt-[30px] capitalize">
+          <h1 className="Blinds font-semibold text-2xl pb-[20px] lg:pt-[30px] capitalize">
             {
               pathname.split("/")[3] === "all" && (
                 <p>{heading}</p>
@@ -777,7 +777,7 @@ const Tabs = ({
                 <p>{pathname.split("/")[3].replace(/-/g, " ")}</p>
               )
             }
-          </h2>
+          </h1>
           <div className="flex items-center">
             {subCategory ? (
               <div className="group flex flex-row items-center justify-start gap-2 mb-4">
