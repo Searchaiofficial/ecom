@@ -6,10 +6,7 @@ import { selectRoomData } from "../../Features/Slices/roomSlice";
 import {
   pickupType,
   schedularToogle,
-  selectPickupOption,
   selectQuantity,
-  selectSchedular,
-  updateQuantity,
 } from "../../Features/Slices/calculationSlice";
 import { selecteddbItems, setDbItems } from "../../Features/Slices/cartSlice";
 import Link from "next/link";
@@ -121,9 +118,6 @@ const CartMain = () => {
     }
   }, [isFreeSample]);
 
-  console.log({ cartdata });
-  console.log(cartdata.freeSamples);
-
   let totalPrice = 0;
 
   if (cartStatus === "succeeded" && selectedItems) {
@@ -174,10 +168,6 @@ const CartMain = () => {
     }, 0);
   }
 
-  console.log(selectedItems);
-
-  console.log(totalServicesPrice);
-
   let totalAccessoryPrice = 0;
 
   if (cartStatus === "succeeded" && selectedItems) {
@@ -190,8 +180,6 @@ const CartMain = () => {
       return total + serviceTotalCost;
     }, 0);
   }
-
-  console.log(totalAccessoryPrice);
 
   //delete items from DB
   const postUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`;

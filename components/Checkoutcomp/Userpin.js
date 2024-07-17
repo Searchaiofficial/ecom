@@ -2,34 +2,98 @@
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectRoomData } from "../Features/Slices/roomSlice";
-import { selectQuantity } from "../Features/Slices/calculationSlice";
 import { setDbItems } from "../Features/Slices/cartSlice";
 import Link from "next/link";
 import axios from "axios";
 import { getPinFromCoordinates } from "@/utils/getPinFromCoordinates";
 import { upsertUserLocation } from "../Features/api";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import {
+  selectFreeSampleItems,
+  setFreeSamples,
+} from "../Features/Slices/freeSampleSlice";
 
 const Userpin = () => {
   const dispatch = useDispatch();
-  const selectedItems = useSelector((state) => state.rooms.selectedActivity);
-  const roomData = useSelector(selectRoomData);
-  const quantity = useSelector(selectQuantity);
   const [cartdata, setcartdata] = useState("");
   const [cartStatus, setCartStaus] = useState("");
-  const [sideMenu, setSideMenu] = useState(false);
-  const [newUserPin, setNewUserPin] = useState("")
-  const router = useRouter()
-
-  const dbItems = useSelector((state) => state.cart.dbItems);
-  if (typeof window !== "undefined") {
-    var id = localStorage.getItem("deviceId");
-    console.log(id);
-  }
+  const [newUserPin, setNewUserPin] = useState("");
+  const router = useRouter();
 
   const [userCoordinates, setUserCoordinates] = useState(null);
   const [userPincode, setUserPincode] = useState(null);
+
+  const searchParams = useSearchParams();
+
+  const isFreeSample = searchParams.get("freeSamples") === "true";
+  const freeSamples = useSelector(selectFreeSampleItems);
+  const [deviceId, setDeviceId] = useState(null);
+
+  const fetchData = async () => {
+    try {
+      setCartStaus("loading");
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
+        {
+          params: {
+            deviceId: deviceId,
+          },
+        }
+      );
+      // console.log(response);
+      if (response.status !== 200) {
+        throw new Error("HTTP status " + response.status);
+      }
+      const data = response.data; // Extract JSON from the response
+      // console.log("response from DB", data);
+
+      setcartdata(data);
+      // console.log("response from DB", cartdata);
+      setCartStaus("succeeded");
+      // console.log("cartStatus", cartStatus);
+      dispatch(setDbItems(data));
+      // console.log("this is data from redux (db)", dbItems);
+    } catch (error) {
+      // console.error("Error Fetching data from DB : ", error);
+
+      setCartStaus("failed");
+    }
+  };
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const id = localStorage.getItem("deviceId");
+      setDeviceId(id);
+    }
+  }, []);
+
+  const fetchFreeSamples = async () => {
+    if (!deviceId) return;
+
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart/freeSampling`,
+        {
+          params: {
+            deviceId,
+          },
+        }
+      );
+
+      const data = response.data;
+      dispatch(setFreeSamples(data));
+    } catch (error) {
+      console.error("Error Fetching samples from DB : ", error);
+    }
+  };
+
+  console.log({ freeSamples });
+
+  useEffect(() => {
+    if (deviceId && isFreeSample) {
+      fetchFreeSamples();
+    }
+  }, [isFreeSample, deviceId]);
 
   useEffect(() => {
     localStorage?.getItem("userCoordinates") &&
@@ -67,38 +131,10 @@ const Userpin = () => {
   }, [userCoordinates]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setCartStaus("loading");
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
-          {
-            params: {
-              deviceId: id,
-            },
-          }
-        );
-        // console.log(response);
-        if (response.status !== 200) {
-          throw new Error("HTTP status " + response.status);
-        }
-        const data = response.data; // Extract JSON from the response
-        // console.log("response from DB", data);
-
-        setcartdata(data);
-        // console.log("response from DB", cartdata);
-        setCartStaus("succeeded");
-        // console.log("cartStatus", cartStatus);
-        dispatch(setDbItems(data));
-        // console.log("this is data from redux (db)", dbItems);
-      } catch (error) {
-        // console.error("Error Fetching data from DB : ", error);
-
-        setCartStaus("failed");
-      }
-    };
-    fetchData();
-  }, [dispatch]);
+    if (deviceId && !isFreeSample) {
+      fetchData();
+    }
+  }, [deviceId]);
 
   useEffect(() => {
     console.log("Updated cartdata", cartdata);
@@ -117,25 +153,28 @@ const Userpin = () => {
       //   (serviceTotal, service) => serviceTotal + parseFloat(service.cost),
       //   0
       // );
-      const itemTotalPrice = (item.price) * item.quantity;
+      const itemTotalPrice = item.price * item.quantity;
       return total + itemTotalPrice;
     }, 0);
   }
-
 
   let SumtotalPrice = 0;
 
   if (cartStatus === "succeeded" && cartdata) {
     SumtotalPrice = cartdata.items.reduce((total, item) => {
       const serviceTotalCost = item.selectedServices.reduce(
-        (serviceTotal, service) => serviceTotal + parseFloat(service.cost * service?.quantity),
+        (serviceTotal, service) =>
+          serviceTotal + parseFloat(service.cost * service?.quantity),
         0
       );
       const accessoriesTotalCost = item.selectedAccessories.reduce(
-        (accessoryTotal, accessory) => accessoryTotal + parseFloat(accessory.totalPrice * accessory?.quantity),
+        (accessoryTotal, accessory) =>
+          accessoryTotal +
+          parseFloat(accessory.totalPrice * accessory?.quantity),
         0
       );
-      const itemTotalPrice = (item.price + serviceTotalCost + accessoriesTotalCost) * item.quantity;
+      const itemTotalPrice =
+        (item.price + serviceTotalCost + accessoriesTotalCost) * item.quantity;
       return total + itemTotalPrice;
     }, 0);
   }
@@ -145,41 +184,47 @@ const Userpin = () => {
   if (cartStatus === "succeeded" && cartdata) {
     totalServicesPrice = cartdata.items.reduce((total, item) => {
       const serviceTotalCost = item.selectedServices.reduce(
-        (serviceTotal, service) => serviceTotal + parseFloat(service.cost * service.quantity),
-        0
-      );
-      return (total + serviceTotalCost);
-    }, 0);
-  }
-
-  console.log(cartdata)
-
-  console.log(totalServicesPrice)
-
-  let totalAccessoryPrice = 0;
-
-  if (cartStatus === "succeeded" && cartdata) {
-    totalAccessoryPrice = cartdata.items.reduce((total, item) => {
-      const serviceTotalCost = item.selectedAccessories.reduce(
-        (serviceTotal, service) => serviceTotal + parseFloat(service.perUnitPrice * service.quantity),
+        (serviceTotal, service) =>
+          serviceTotal + parseFloat(service.cost * service.quantity),
         0
       );
       return total + serviceTotalCost;
     }, 0);
   }
 
-  console.log(totalAccessoryPrice)
+  console.log(cartdata);
+
+  console.log(totalServicesPrice);
+
+  let totalAccessoryPrice = 0;
+
+  if (cartStatus === "succeeded" && cartdata) {
+    totalAccessoryPrice = cartdata.items.reduce((total, item) => {
+      const serviceTotalCost = item.selectedAccessories.reduce(
+        (serviceTotal, service) =>
+          serviceTotal + parseFloat(service.perUnitPrice * service.quantity),
+        0
+      );
+      return total + serviceTotalCost;
+    }, 0);
+  }
+
+  console.log(totalAccessoryPrice);
 
   const delcharge = 100;
 
   const handleClick = () => {
     if (newUserPin !== "") {
-      const currentPinCode = localStorage.getItem('userPincode');
-      console.log('Current Pin Code:', currentPinCode);
-      localStorage.setItem('userPincode', newUserPin);
+      const currentPinCode = localStorage.getItem("userPincode");
+      console.log("Current Pin Code:", currentPinCode);
+      localStorage.setItem("userPincode", newUserPin);
     }
-    router.push("/checkout/delivery")
-  }
+    if (isFreeSample) {
+      router.push(`/checkout/delivery?freeSamples=true`);
+    } else {
+      router.push("/checkout/delivery");
+    }
+  };
 
   return (
     <div className="p-2 lg:px-[67px] pt-[6rem] pb-[3rem] ">
@@ -266,10 +311,13 @@ const Userpin = () => {
                   )}
                 </h3>
                 <div className="mb-8 mt-4">
-                  <input onChange={(e) => setNewUserPin(e.target.value)} className="w-full h-10  border-solid border border-gray-400 rounded-sm focus:border-blue-800 outline-none px-4 " />
+                  <input
+                    onChange={(e) => setNewUserPin(e.target.value)}
+                    className="w-full h-10  border-solid border border-gray-400 rounded-sm focus:border-blue-800 outline-none px-4 "
+                  />
                   <span className="text-xs text-gray-400">eg:500001</span>
                 </div>
-                <div onClick={handleClick} >
+                <div onClick={handleClick}>
                   <button className="bg-black text-sm font-bold h-12 text-white w-full rounded-full p-2 mb-8">
                     View delivery options
                   </button>
@@ -356,7 +404,9 @@ const Userpin = () => {
         </div>
         <div className="lg:col-span-4 col-span-1 sm:block order-1 lg:order-2 bg-white  border-gray-300 rounded-lg  overflow-hidden  p-[0.6rem]  text-slate-600 pt-[20px]">
           <div className="flex justify-between">
-            <h3 className="text-black text-xl font-semibold mb-2">Your Order</h3>
+            <h3 className="text-black text-xl font-semibold mb-2">
+              Your Order
+            </h3>
             <Link href={"/cart"} className="underline">
               {" "}
               Edit
@@ -364,42 +414,64 @@ const Userpin = () => {
           </div>
           <div className="">
             <div className="flex my-4">
-              {cartStatus === "loading" && <p>Loading...</p>}
-              {cartStatus === "failed" && <p>Error loading data from DB.</p>}
-              {cartStatus === "succeeded" && cartdata ? (
-                cartdata.items.map((item, index) => {
-                  return (
-                    <Image loading="lazy"
-                      src={item.productId.images[0]}
-                      width={249}
-                      height={249}
-                      alt={item.name}
-                      className="w-20 h-20 mr-5"
-                    />
-                  );
-                })
-              ) : (
-                <div className="text-lg text-gray-500 font-bold px-5">
-                  Empty cart
-                </div>
-              )}
-              <div className="flex ">
-                {cartdata && cartdata.freeSamples.length > 0 && (
-                  cartdata.freeSamples.map((item, index) => {
+              {isFreeSample && freeSamples?.products.length > 0
+                ? freeSamples.products.map((item, index) => {
                     return (
-                      <div>
-                        <Image loading="lazy"
-                          src={item.images[0]}
-                          width={249}
-                          height={249}
-                          alt={""}
-                          className="w-20 h-20 mr-5"
-                        />
-                        {/* <p className="mt-[2px] text-[12px]  font-semibold">(Sample)</p> */}
-                      </div>
+                      <Image
+                        src={item.images[0]}
+                        width={249}
+                        height={249}
+                        alt={item.name}
+                        className="w-20 h-20 mr-5"
+                      />
                     );
                   })
-                )}
+                : isFreeSample && (
+                    <div className="text-lg text-gray-500 font-bold px-5">
+                      Empty cart
+                    </div>
+                  )}
+
+              {cartStatus === "loading" && <p>Loading...</p>}
+              {cartStatus === "failed" && <p>Error loading data from DB.</p>}
+              {cartStatus === "succeeded" && cartdata && !isFreeSample
+                ? cartdata.items.map((item, index) => {
+                    return (
+                      <Image
+                        loading="lazy"
+                        src={item.productId.images[0]}
+                        width={249}
+                        height={249}
+                        alt={item.name}
+                        className="w-20 h-20 mr-5"
+                      />
+                    );
+                  })
+                : !isFreeSample && (
+                    <div className="text-lg text-gray-500 font-bold px-5">
+                      Empty cart
+                    </div>
+                  )}
+              <div className="flex ">
+                {
+                  // cartdata &&
+                  //   cartdata.freeSamples.length > 0 &&
+                  //   cartdata.freeSamples.map((item, index) => {
+                  //     return (
+                  //       <div>
+                  //         <Image
+                  //           loading="lazy"
+                  //           src={item.images[0]}
+                  //           width={249}
+                  //           height={249}
+                  //           alt={""}
+                  //           className="w-20 h-20 mr-5"
+                  //         />
+                  //         {/* <p className="mt-[2px] text-[12px]  font-semibold">(Sample)</p> */}
+                  //       </div>
+                  //     );
+                  //   })
+                }
               </div>
             </div>
           </div>
@@ -408,14 +480,15 @@ const Userpin = () => {
             <span className="text-[#767677]">Products price </span>
             <div className="font-[700] text-black">
               <div className="flex items-center">
-                <Image loading="lazy"
+                <Image
+                  loading="lazy"
                   src="/icons/indianrupeesicon.svg"
                   width={18}
                   height={18}
                   alt="rupees"
                   className="mr-1"
                 />
-                {totalPrice}
+                {isFreeSample ? 0 : totalPrice}
               </div>
             </div>
           </div>
@@ -423,14 +496,15 @@ const Userpin = () => {
             <span className="text-[#767677]">Services price </span>
             <div className="font-[700] text-black">
               <div className="flex items-center">
-                <Image loading="lazy"
+                <Image
+                  loading="lazy"
                   src="/icons/indianrupeesicon.svg"
                   width={18}
                   height={18}
                   alt="rupees"
                   className="mr-1"
                 />
-                {totalServicesPrice}
+                {isFreeSample ? 0 : totalServicesPrice}
               </div>
             </div>
           </div>
@@ -438,14 +512,15 @@ const Userpin = () => {
             <span className="text-[#767677]">Accessories price </span>
             <div className="font-[700] text-black">
               <div className="flex items-center">
-                <Image loading="lazy"
+                <Image
+                  loading="lazy"
                   src="/icons/indianrupeesicon.svg"
                   width={18}
                   height={18}
                   alt="rupees"
                   className="mr-1"
                 />
-                {totalAccessoryPrice}
+                {isFreeSample ? 0 : totalAccessoryPrice}
               </div>
             </div>
           </div>
@@ -460,14 +535,15 @@ const Userpin = () => {
             <span className="text-[#767677]">Subtotal </span>
             <div className="font-[700] text-black text-2xl">
               <div className="flex items-center">
-                <Image loading="lazy"
+                <Image
+                  loading="lazy"
                   src="/icons/indianrupeesicon.svg"
                   width={20}
                   height={20}
                   alt="rupees"
                   className="mr-1"
                 />
-                {SumtotalPrice}
+                {isFreeSample ? 0 : SumtotalPrice}
               </div>
             </div>
           </div>
