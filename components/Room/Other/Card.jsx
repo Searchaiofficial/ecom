@@ -1745,7 +1745,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                                     ? data?.specialprice?.price
                                     : data.perUnitPrice}
                                 </h2>{" "}
-                                <span> &nbsp;/roll</span>
+                                <span> &nbsp;/{data.unitType}</span>
                               </div>
                               {data?.specialprice?.price && (
                                 <div className="flex flex-col">
@@ -1819,7 +1819,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                                               ? product?.specialprice?.price
                                               : product.perUnitPrice}
                                           </h2>{" "}
-                                          <span> &nbsp;/roll</span>
+                                          <span> &nbsp;/{data.unitType}</span>
                                         </div>
                                       </div>
                                     </div>
