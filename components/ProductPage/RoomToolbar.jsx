@@ -28,7 +28,9 @@ const RoomToolbar = ({ data }) => {
 
   const handleJoinLive = () => {
     // Store category data in local storage
-    localStorage.setItem("selectedCategory", category);
+    sessionStorage.setItem("previousProduct", data.productTitle);
+
+    router.push("/liveroom");
   };
 
   const [allProducts, setAllProducts] = useState([]);
@@ -288,16 +290,12 @@ const RoomToolbar = ({ data }) => {
         />
         <span className="text-white text-xs">Live</span>
       </div>
-      <Link
-        href={{
-          pathname: "/liveroom",
-        }}
-        passHref
+      <button
         onClick={handleJoinLive}
         className="py-2 focus:outline-none text-black flex items-center ml-2 h-8"
       >
         <span className="text-sm">Join Live</span>
-      </Link>
+      </button>
       <span></span>
       <div
         onClick={handleFreeSampling}
@@ -743,14 +741,14 @@ const RoomToolbar = ({ data }) => {
                   Request Free Samples
                 </p>
               </button>
-              <Link
-                href={"/liveroom"}
+              <button
+                onClick={handleJoinLive}
                 className={`bg-black hover:bg-gray-900 text-white px-2 flex items-center justify-center sm:h-11 h-9 rounded-full transition duration-300`}
               >
                 <p className="flex gap-2 text-center font-semibold text-[16px]">
                   Explore samples in liveroom
                 </p>
-              </Link>
+              </button>
             </div>
           </div>
         </div>
