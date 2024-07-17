@@ -373,6 +373,9 @@ const Delivery = () => {
     console.log(deliveryCost);
     dispatch(deliveryPrice(deliveryCost));
 
+    if (isFreeSample) {
+      return router.push("/checkout/details?freeSamples=true");
+    }
     router.push("/checkout/details");
   };
 
