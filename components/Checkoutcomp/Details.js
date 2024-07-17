@@ -399,7 +399,7 @@ const Details = () => {
       );
 
       if (response.ok && isFreeSample && deliveryPrice === 0) {
-        return router.push("/success");
+        return router.push("/freesamplesuccess");
       }
 
       if (response.ok) {
@@ -415,8 +415,12 @@ const Details = () => {
             amount: isFreeSample
               ? deliveryPrice * 100
               : (SumtotalPrice + deliveryPrice) * 100,
-            callbackUrl: `${BASE_URL}/success`,
-            redirectUrl: `${BASE_URL}/success`,
+            callbackUrl: isFreeSample
+              ? `${BASE_URL}/freesamplesuccess`
+              : `${BASE_URL}/success`,
+            redirectUrl: isFreeSample
+              ? `${BASE_URL}/freesamplesuccess`
+              : `${BASE_URL}/success`,
           },
         });
 
