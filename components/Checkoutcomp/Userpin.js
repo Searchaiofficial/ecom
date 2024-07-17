@@ -419,6 +419,7 @@ const Userpin = () => {
                     return (
                       <Image
                         src={item.images[0]}
+                        key={index}
                         width={249}
                         height={249}
                         alt={item.name}
