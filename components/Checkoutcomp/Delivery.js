@@ -19,7 +19,11 @@ import axios from "axios";
 import { setDbItems } from "../Features/Slices/cartSlice";
 import { getPinFromCoordinates } from "@/utils/getPinFromCoordinates";
 import { upsertUserLocation } from "../Features/api";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import {
+  selectFreeSampleItems,
+  setFreeSamples,
+} from "../Features/Slices/freeSampleSlice";
 // import STORE_MAP_DATA from "@/constants/store-map-data"
 
 // const STORE_MAP_DATA = [
@@ -121,9 +125,6 @@ import { useRouter } from "next/navigation";
 //   },
 // ];
 
-
-
-
 const Delivery = () => {
   const [selectedOption, setSelectedOption] = useState("option3");
   const dispatch = useDispatch();
@@ -134,29 +135,64 @@ const Delivery = () => {
   const [cartStatus, setCartStaus] = useState("");
   const [sideMenu, setSideMenu] = useState(false);
   const [deliveryChoice, setDeliveryChoice] = useState(99);
-  const [STORE_MAP_DATA, SET_STORE_MAP_DATA] = useState([])
+  const [STORE_MAP_DATA, SET_STORE_MAP_DATA] = useState([]);
 
   const [userCoordinates, setUserCoordinates] = useState(null);
   // const [userPinCode, setUserPincode] = useState(null);
   const [userPincode, setUserPincode] = useState(null);
   const [previousUserPinCode, setPreviousUserPinCode] = useState(null);
-  const router = useRouter()
+  const router = useRouter();
 
-  
   const [estimatedDelivery, setEstimatedDelivery] = useState(null);
 
+  const searchParams = useSearchParams();
 
+  const isFreeSample = searchParams.get("freeSamples") === "true";
+  const freeSamples = useSelector(selectFreeSampleItems);
+  const [deviceId, setDeviceId] = useState(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const id = localStorage.getItem("deviceId");
+      setDeviceId(id);
+    }
+  }, []);
+
+  const fetchFreeSamples = async () => {
+    if (!deviceId) return;
+
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart/freeSampling`,
+        {
+          params: {
+            deviceId,
+          },
+        }
+      );
+
+      const data = response.data;
+      dispatch(setFreeSamples(data));
+    } catch (error) {
+      console.error("Error Fetching samples from DB : ", error);
+    }
+  };
+
+  useEffect(() => {
+    if (deviceId && isFreeSample) {
+      fetchFreeSamples();
+    }
+  }, [isFreeSample, deviceId]);
 
   useEffect(() => {
     if (window !== "undefined") {
       localStorage?.getItem("userCoordinates") &&
-        setUserCoordinates(JSON.parse(localStorage?.getItem("userCoordinates")));
-      setPreviousUserPinCode(localStorage?.getItem('userPincode'))
+        setUserCoordinates(
+          JSON.parse(localStorage?.getItem("userCoordinates"))
+        );
+      setPreviousUserPinCode(localStorage?.getItem("userPincode"));
     }
   }, []);
-
-  console.log(userCoordinates)
-  console.log(userPincode)
 
   useEffect(() => {
     if (window !== "undefined") {
@@ -207,39 +243,42 @@ const Delivery = () => {
     console.log(id);
   }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setCartStaus("loading");
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
-          {
-            params: {
-              deviceId: id,
-            },
-          }
-        );
-        // console.log(response);
-        if (response.status !== 200) {
-          throw new Error("HTTP status " + response.status);
+  const fetchData = async () => {
+    try {
+      setCartStaus("loading");
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
+        {
+          params: {
+            deviceId: id,
+          },
         }
-        const data = response.data; // Extract JSON from the response
-        // console.log("response from DB", data);
-
-        setcartdata(data);
-        // console.log("response from DB", cartdata);
-        setCartStaus("succeeded");
-        // console.log("cartStatus", cartStatus);
-        dispatch(setDbItems(data));
-        // console.log("this is data from redux (db)", dbItems);
-      } catch (error) {
-        // console.error("Error Fetching data from DB : ", error);
-
-        setCartStaus("failed");
+      );
+      // console.log(response);
+      if (response.status !== 200) {
+        throw new Error("HTTP status " + response.status);
       }
-    };
-    fetchData();
-  }, [dispatch]);
+      const data = response.data; // Extract JSON from the response
+      // console.log("response from DB", data);
+
+      setcartdata(data);
+      // console.log("response from DB", cartdata);
+      setCartStaus("succeeded");
+      // console.log("cartStatus", cartStatus);
+      dispatch(setDbItems(data));
+      // console.log("this is data from redux (db)", dbItems);
+    } catch (error) {
+      // console.error("Error Fetching data from DB : ", error);
+
+      setCartStaus("failed");
+    }
+  };
+
+  useEffect(() => {
+    if (deviceId && !isFreeSample) {
+      fetchData();
+    }
+  }, [deviceId, isFreeSample]);
 
   useEffect(() => {
     console.log("Updated cartdata", cartdata);
@@ -258,7 +297,7 @@ const Delivery = () => {
       //   (serviceTotal, service) => serviceTotal + parseFloat(service.cost),
       //   0
       // );
-      const itemTotalPrice = (item.price) * item.quantity;
+      const itemTotalPrice = item.price * item.quantity;
       return total + itemTotalPrice;
     }, 0);
   }
@@ -268,14 +307,18 @@ const Delivery = () => {
   if (cartStatus === "succeeded" && cartdata) {
     SumtotalPrice = cartdata.items.reduce((total, item) => {
       const serviceTotalCost = item.selectedServices.reduce(
-        (serviceTotal, service) => serviceTotal + parseFloat(service.cost * service?.quantity),
+        (serviceTotal, service) =>
+          serviceTotal + parseFloat(service.cost * service?.quantity),
         0
       );
       const accessoriesTotalCost = item.selectedAccessories.reduce(
-        (accessoryTotal, accessory) => accessoryTotal + parseFloat(accessory.totalPrice * accessory?.quantity),
+        (accessoryTotal, accessory) =>
+          accessoryTotal +
+          parseFloat(accessory.totalPrice * accessory?.quantity),
         0
       );
-      const itemTotalPrice = (item.price + serviceTotalCost + accessoriesTotalCost) * item.quantity;
+      const itemTotalPrice =
+        (item.price + serviceTotalCost + accessoriesTotalCost) * item.quantity;
       return total + itemTotalPrice;
     }, 0);
   }
@@ -285,30 +328,32 @@ const Delivery = () => {
   if (cartStatus === "succeeded" && cartdata) {
     totalServicesPrice = cartdata.items.reduce((total, item) => {
       const serviceTotalCost = item.selectedServices.reduce(
-        (serviceTotal, service) => serviceTotal + parseFloat(service.cost * service.quantity),
-        0
-      );
-      return (total + serviceTotalCost);
-    }, 0);
-  }
-
-  console.log(cartdata)
-
-  console.log(totalServicesPrice)
-
-  let totalAccessoryPrice = 0;
-
-  if (cartStatus === "succeeded" && cartdata) {
-    totalAccessoryPrice = cartdata.items.reduce((total, item) => {
-      const serviceTotalCost = item.selectedAccessories.reduce(
-        (serviceTotal, service) => serviceTotal + parseFloat(service.perUnitPrice * service.quantity),
+        (serviceTotal, service) =>
+          serviceTotal + parseFloat(service.cost * service.quantity),
         0
       );
       return total + serviceTotalCost;
     }, 0);
   }
 
-  console.log(totalAccessoryPrice)
+  console.log(cartdata);
+
+  console.log(totalServicesPrice);
+
+  let totalAccessoryPrice = 0;
+
+  if (cartStatus === "succeeded" && cartdata) {
+    totalAccessoryPrice = cartdata.items.reduce((total, item) => {
+      const serviceTotalCost = item.selectedAccessories.reduce(
+        (serviceTotal, service) =>
+          serviceTotal + parseFloat(service.perUnitPrice * service.quantity),
+        0
+      );
+      return total + serviceTotalCost;
+    }, 0);
+  }
+
+  console.log(totalAccessoryPrice);
 
   const handlePrice = () => {
     // if (nearestDistance <= 2) {
@@ -325,7 +370,7 @@ const Delivery = () => {
     //   dispatch(deliveryPrice(deliveryChoice));
     //   router.push("/checkout/details");
     // }
-    console.log(deliveryCost)
+    console.log(deliveryCost);
     dispatch(deliveryPrice(deliveryCost));
 
     router.push("/checkout/details");
@@ -344,7 +389,7 @@ const Delivery = () => {
         setDeliveryChoice(79);
         break;
       case "option3":
-        setDeliveryChoice(deliveryCost)
+        setDeliveryChoice(deliveryCost);
         break;
       default:
         setDeliveryChoice(99);
@@ -352,19 +397,15 @@ const Delivery = () => {
     }
   };
 
-
   // console.log(localStorage?.getItem("userCoordinates"));
 
-
-
-  console.log(userCoordinates)
-  console.log(deliveryChoice)
+  console.log(userCoordinates);
+  console.log(deliveryChoice);
 
   // console.log(STORE_MAP_DATA)
 
-  const [nearestDistance, setNearestDistance] = useState(null)
-  const [deliveryCost, setDeliveryCost] = useState(null)
-
+  const [nearestDistance, setNearestDistance] = useState(null);
+  const [deliveryCost, setDeliveryCost] = useState(null);
 
   // console.log(typeof deliveryChoice);
   // console.log(deliveryChoice);
@@ -375,7 +416,9 @@ const Delivery = () => {
   const delcharge = 100;
   const fetchMapData = async () => {
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/mapPlaces`);
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/mapPlaces`
+      );
       console.log(response.data);
       SET_STORE_MAP_DATA(response.data);
     } catch (error) {
@@ -387,32 +430,33 @@ const Delivery = () => {
   //   fetchMapData()
   // }, [])
 
-
-
   const fetchDistances = async () => {
     try {
       const distances = await Promise.all(
         STORE_MAP_DATA.map(async (store) => {
-          const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/distance`, {
-            params: {
-              origins: userPincode,
-              destinations: store.pincode
+          const response = await axios.get(
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/distance`,
+            {
+              params: {
+                origins: userPincode,
+                destinations: store.pincode,
+              },
             }
-          });
+          );
 
           const distanceText = response.data.rows[0].elements[0].distance.text;
-          const distanceValue = response.data.rows[0].elements[0].distance.value;
+          const distanceValue =
+            response.data.rows[0].elements[0].distance.value;
           return {
             id: store.id,
             name: store.name,
             address: store.address,
             pincode: store.pincode,
             distanceText: distanceText,
-            distanceValue: distanceValue
+            distanceValue: distanceValue,
           };
         })
       );
-
 
       distances.sort((a, b) => a.distanceValue - b.distanceValue);
 
@@ -428,10 +472,13 @@ const Delivery = () => {
       //   userPincode
       // }));
       if (typeof window !== "undefined") {
-        localStorage.setItem("nearestStore", JSON.stringify({
-          nearestStore: distances[0],
-          userPincode
-        }));
+        localStorage.setItem(
+          "nearestStore",
+          JSON.stringify({
+            nearestStore: distances[0],
+            userPincode,
+          })
+        );
       }
     } catch (error) {
       console.error("Error fetching distances:", error);
@@ -446,18 +493,18 @@ const Delivery = () => {
   };
 
   const FetchCost = async (distance) => {
-    console.log(nearestDistance)
+    console.log(nearestDistance);
 
-    if (nearestDistance === null) return
-    const responce = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/calculateShippingDetails/${distance}`)
-    setDeliveryCost(responce.data.charge)
-    setEstimatedDelivery(responce.data.estimatedDelivery)
-    console.log(responce.data.charge)
-  }
+    if (nearestDistance === null) return;
+    const responce = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/calculateShippingDetails/${distance}`
+    );
+    setDeliveryCost(responce.data.charge);
+    setEstimatedDelivery(responce.data.estimatedDelivery);
+    console.log(responce.data.charge);
+  };
 
-
-  console.log(deliveryCost)
-
+  console.log(deliveryCost);
 
   // const fetchDistancesIfNeeded = async () => {
   //   const nearestStore = localStorage.getItem('nearestStore');
@@ -504,10 +551,9 @@ const Delivery = () => {
   //   }
   // };
 
-
   const fetchDistancesIfNeeded = async () => {
     if (typeof window !== "undefined") {
-      const storedData = localStorage.getItem('nearestStore');
+      const storedData = localStorage.getItem("nearestStore");
 
       if (storedData) {
         const nearestStoreDetails = JSON.parse(storedData);
@@ -531,8 +577,6 @@ const Delivery = () => {
     }
   };
 
-
-
   // useEffect(() => {
   //   console.log(userPincode);
   //   // fetchMapData()
@@ -544,7 +588,7 @@ const Delivery = () => {
   }, []);
 
   useEffect(() => {
-    console.log(STORE_MAP_DATA.length)
+    console.log(STORE_MAP_DATA.length);
     if (STORE_MAP_DATA.length > 0) {
       fetchDistancesIfNeeded();
     }
@@ -556,7 +600,6 @@ const Delivery = () => {
     }
   }, [nearestDistance]);
 
-
   useEffect(() => {
     if (userPincode && userPincode !== previousUserPinCode) {
       setPreviousUserPinCode(userPincode);
@@ -564,16 +607,11 @@ const Delivery = () => {
     }
   }, [userPincode]);
 
-
-
-
-
   // useEffect(() => {
   //   if (nearestDistance !== null) {
   //     FetchCost(nearestDistance);
   //   }
   // }, [nearestDistance]);
-
 
   return (
     <div className="p-2 lg:px-[67px]  pt-[6rem] pb-[3rem] ">
@@ -666,10 +704,11 @@ const Delivery = () => {
                 <div className=" flex flex-col">
                   <label
                     className={` flex items-center space-x-2 p-4 cursor-pointer border-solid border-black border-l
-               ${selectedOption === "option1"
-                        ? "border-2 border-solid border-blue-800"
-                        : "border-none"
-                      }`}
+               ${
+                 selectedOption === "option1"
+                   ? "border-2 border-solid border-blue-800"
+                   : "border-none"
+               }`}
                   >
                     <input
                       type="radio"
@@ -706,7 +745,7 @@ const Delivery = () => {
                               Estimated pick-up Date
                             </p>
                             <p className="text-md text-gray-500 py-2">
-                               11:00 AM - 5:00 PM
+                              11:00 AM - 5:00 PM
                             </p>
                             <button className="rounded-full text-black text-sm font-bold border border-solid border-black p-2 my-2">
                               Change slot
@@ -717,7 +756,8 @@ const Delivery = () => {
                       <div>
                         <div className="text-md font-bold">
                           <div className="flex items-center">
-                            <Image loading="lazy"
+                            <Image
+                              loading="lazy"
                               src="/icons/indianrupeesicon.svg"
                               width={18}
                               height={18}
@@ -732,10 +772,11 @@ const Delivery = () => {
                   </label>
 
                   <label
-                    className={`flex items-center space-x-2 p-4 cursor-pointer ${selectedOption === "option2"
-                      ? "border-2 border-solid border-blue-800"
-                      : "border-none"
-                      }`}
+                    className={`flex items-center space-x-2 p-4 cursor-pointer ${
+                      selectedOption === "option2"
+                        ? "border-2 border-solid border-blue-800"
+                        : "border-none"
+                    }`}
                   >
                     <input
                       type="radio"
@@ -778,7 +819,7 @@ const Delivery = () => {
                               Estimated collection time:
                             </p>
                             <p className="text-md text-gray-500 py-2">
-                               11:00 AM - 5:00 PM
+                              11:00 AM - 5:00 PM
                             </p>
                           </>
                         )}
@@ -786,7 +827,8 @@ const Delivery = () => {
                       <div>
                         <div className="text-md font-bold">
                           <div className="flex items-center">
-                            <Image loading="lazy"
+                            <Image
+                              loading="lazy"
                               src="/icons/indianrupeesicon.svg"
                               width={18}
                               height={18}
@@ -823,10 +865,11 @@ const Delivery = () => {
                   <div className=" flex flex-col">
                     <label
                       className={`flex items-center space-x-2 p-4 cursor-pointer border-solid border-black border-l
-       ${selectedOption === "option3"
-                          ? "border-2 border-solid border-blue-800"
-                          : "border-none"
-                        }`}
+       ${
+         selectedOption === "option3"
+           ? "border-2 border-solid border-blue-800"
+           : "border-none"
+       }`}
                     >
                       <input
                         type="radio"
@@ -843,14 +886,15 @@ const Delivery = () => {
                             className="lg:text-lg text-[18px] font-bold mb-6"
                             htmlFor="option1"
                           >
-                            {
-                              deliveryCost === 0 ? "Free delivery" : "Regular delivery"
-                            }
+                            {deliveryCost === 0
+                              ? "Free delivery"
+                              : "Regular delivery"}
                           </label>
                           {selectedOption !== "option3" ? (
                             <>
                               <p className="lg:text-md text-[14px] text-gray-500 py-2">
-                                Estimated delivery {getExpectedDeliveryDate(estimatedDelivery)}
+                                Estimated delivery{" "}
+                                {getExpectedDeliveryDate(estimatedDelivery)}
                               </p>
                             </>
                           ) : (
@@ -859,7 +903,8 @@ const Delivery = () => {
                                 Estimated delivery
                               </h3>
                               <p className="text-md font-bold text-gray-500 py-2">
-                              {getExpectedDeliveryDate(estimatedDelivery)} 9:00 AM - 9:00 PM
+                                {getExpectedDeliveryDate(estimatedDelivery)}{" "}
+                                9:00 AM - 9:00 PM
                               </p>
                             </>
                           )}
@@ -867,16 +912,15 @@ const Delivery = () => {
                         <div>
                           <div className="text-md font-bold">
                             <div className="flex items-center">
-                              <Image loading="lazy"
+                              <Image
+                                loading="lazy"
                                 src="/icons/indianrupeesicon.svg"
                                 width={18}
                                 height={18}
                                 alt="rupees"
                                 className="mr-1"
                               />
-                              {
-                                deliveryCost
-                              }
+                              {deliveryCost}
                             </div>
                           </div>
                         </div>
@@ -981,13 +1025,12 @@ const Delivery = () => {
           </div>
           <div className="flex">
             <div className="flex my-4">
-              {cartStatus === "loading" && <p>Loading...</p>}
-              {cartStatus === "failed" && <p>Error loading data from DB.</p>}
-              {cartStatus === "succeeded" && cartdata ? (
-                cartdata.items.map((item, index) => {
+              {isFreeSample && freeSamples?.products.length > 0 ? (
+                freeSamples.products.map((item, index) => {
                   return (
-                    <Image loading="lazy"
-                      src={item.productId.images[0]}
+                    <Image
+                      loading="lazy"
+                      src={item.images[0]}
                       width={249}
                       height={249}
                       alt={item.name}
@@ -1000,24 +1043,48 @@ const Delivery = () => {
                   Empty cart
                 </div>
               )}
-            </div>
-            <div className="flex my-4 ">
-              {cartdata && cartdata.freeSamples.length > 0 && (
-                cartdata.freeSamples.map((item, index) => {
-                  return (
-                    <div>
-                      <Image loading="lazy"
-                        src={item.images[0]}
+
+              {cartStatus === "loading" && <p>Loading...</p>}
+              {cartStatus === "failed" && <p>Error loading data from DB.</p>}
+              {!isFreeSample && cartStatus === "succeeded" && cartdata
+                ? cartdata.items.map((item, index) => {
+                    return (
+                      <Image
+                        loading="lazy"
+                        src={item.productId.images[0]}
                         width={249}
                         height={249}
-                        alt={""}
-                        className="w-20 h-20 mr-5"
+                        alt={item.name}
+                        className=" w-20 h-20 mr-4"
                       />
-                      {/* <p className="mt-[2px] text-[12px]  font-semibold">(Sample)</p> */}
+                    );
+                  })
+                : !isFreeSample && (
+                    <div className="text-lg text-gray-500 font-bold px-5">
+                      Empty cart
                     </div>
-                  );
-                })
-              )}
+                  )}
+            </div>
+            <div className="flex my-4 ">
+              {
+                // cartdata &&
+                //   cartdata.freeSamples.length > 0 &&
+                //   cartdata.freeSamples.map((item, index) => {
+                //     return (
+                //       <div>
+                //         <Image
+                //           loading="lazy"
+                //           src={item.images[0]}
+                //           width={249}
+                //           height={249}
+                //           alt={""}
+                //           className="w-20 h-20 mr-5"
+                //         />
+                //         {/* <p className="mt-[2px] text-[12px]  font-semibold">(Sample)</p> */}
+                //       </div>
+                //     );
+                //   })
+              }
             </div>
           </div>
           <h2 className="text-xl pb-3 font-bold">Order summary</h2>
@@ -1025,14 +1092,15 @@ const Delivery = () => {
             <span className="text-[#767677]">Products price </span>
             <div className="text-black font-[700]">
               <div className="flex items-center">
-                <Image loading="lazy"
+                <Image
+                  loading="lazy"
                   src="/icons/indianrupeesicon.svg"
                   width={18}
                   height={18}
                   alt="rupees"
                   className="mr-1"
                 />
-                {totalPrice}
+                {isFreeSample ? 0 : totalPrice}
               </div>
             </div>
           </div>
@@ -1040,14 +1108,15 @@ const Delivery = () => {
             <span className="text-[#767677]">Services price </span>
             <div className="text-black font-[700]">
               <div className="flex items-center">
-                <Image loading="lazy"
+                <Image
+                  loading="lazy"
                   src="/icons/indianrupeesicon.svg"
                   width={18}
                   height={18}
                   alt="rupees"
                   className="mr-1"
                 />
-                {totalServicesPrice}
+                {isFreeSample ? 0 : totalServicesPrice}
               </div>
             </div>
           </div>
@@ -1055,14 +1124,15 @@ const Delivery = () => {
             <span className="text-[#767677]">Accessory price </span>
             <div className="text-black font-[700]">
               <div className="flex items-center">
-                <Image loading="lazy"
+                <Image
+                  loading="lazy"
                   src="/icons/indianrupeesicon.svg"
                   width={18}
                   height={18}
                   alt="rupees"
                   className="mr-1"
                 />
-                {totalAccessoryPrice}
+                {isFreeSample ? 0 : totalAccessoryPrice}
               </div>
             </div>
           </div>
@@ -1070,7 +1140,8 @@ const Delivery = () => {
             <span className="text-[#767677]">Delivery charge </span>
             <span className="text-black">
               <div className="flex items-center">
-                <Image loading="lazy"
+                <Image
+                  loading="lazy"
                   src="/icons/indianrupeesicon.svg"
                   width={18}
                   height={18}
@@ -1088,14 +1159,15 @@ const Delivery = () => {
             <span className="text-black">Subtotal </span>
             <span className="font-[700] text-black text-2xl">
               <div className="flex items-center">
-                <Image loading="lazy"
+                <Image
+                  loading="lazy"
                   src="/icons/indianrupeesicon.svg"
                   width={20}
                   height={20}
                   alt="rupees"
                   className="mr-1"
                 />
-                {SumtotalPrice + deliveryCost}
+                {isFreeSample ? deliveryCost : SumtotalPrice + deliveryCost}
               </div>
             </span>
           </div>
@@ -1167,7 +1239,7 @@ const Delivery = () => {
           </div>
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 

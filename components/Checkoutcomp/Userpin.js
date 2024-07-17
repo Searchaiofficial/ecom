@@ -87,8 +87,6 @@ const Userpin = () => {
     }
   };
 
-  console.log({ freeSamples });
-
   useEffect(() => {
     if (deviceId && isFreeSample) {
       fetchFreeSamples();
