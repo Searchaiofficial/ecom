@@ -57,7 +57,6 @@ function Scene1({ texture, texture_type }) {
     scene.add(setup);
     setup.position.set(0, 1, 0);
     // setup.scale.set(0.1, 0.1, 0.1);
-    // setup.children[9].material.map = textureLoader.load("/404.webp");
     // setup.children[9].material.map = textureLoader.load("https://m.media-amazon.com/images/I/61AHiYyu3ZL._SL1500_.jpg");
     if (texture_type == "Flooring") {
       setup.children[9].material.map = textureLoader.load(texture);

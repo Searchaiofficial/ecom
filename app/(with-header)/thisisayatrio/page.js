@@ -58,7 +58,7 @@ const ThisIsAyatrioPage = () => {
         <section>
           <div className="flex flex-col w-full gap-6">
             <div className="flex flex-col md:w-2/3 space-y-5">
-              <h1 className="font-bold text-4xl">This is AYATRIO</h1>
+              <h3 className="font-bold text-4xl">This is AYATRIO</h3>
               <p className="font-bold text-lg">
                 A better everyday life for the many people.
               </p>
