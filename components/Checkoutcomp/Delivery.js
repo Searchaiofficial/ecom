@@ -1028,24 +1028,24 @@ const Delivery = () => {
           </div>
           <div className="flex">
             <div className="flex my-4">
-              {isFreeSample && freeSamples?.products.length > 0 ? (
-                freeSamples.products.map((item, index) => {
-                  return (
-                    <Image
-                      loading="lazy"
-                      src={item.images[0]}
-                      width={249}
-                      height={249}
-                      alt={item.name}
-                      className=" w-20 h-20 mr-4"
-                    />
-                  );
-                })
-              ) : (
-                <div className="text-lg text-gray-500 font-bold px-5">
-                  Empty cart
-                </div>
-              )}
+              {isFreeSample && freeSamples?.products.length > 0
+                ? freeSamples.products.map((item, index) => {
+                    return (
+                      <Image
+                        loading="lazy"
+                        src={item.images[0]}
+                        width={249}
+                        height={249}
+                        alt={item.name}
+                        className=" w-20 h-20 mr-4"
+                      />
+                    );
+                  })
+                : isFreeSample && (
+                    <div className="text-lg text-gray-500 font-bold px-5">
+                      Empty cart
+                    </div>
+                  )}
 
               {cartStatus === "loading" && <p>Loading...</p>}
               {cartStatus === "failed" && <p>Error loading data from DB.</p>}
