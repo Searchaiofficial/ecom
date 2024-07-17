@@ -22,7 +22,7 @@ import ResponseCache from "next/dist/server/response-cache";
 import { updateQuantity } from "../../Features/Slices/calculationSlice.js";
 import { setDbItems } from "@/components/Features/Slices/cartSlice";
 
-const Card = ({ data, productId }) => {
+const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
   const quantity = useSelector(selectQuantity);
   const [Stars, setStars] = useState();
   const router = useRouter();
@@ -190,6 +190,14 @@ const Card = ({ data, productId }) => {
   }, [reviews]);
 
   const [sidebarContect, setsidebarContent] = useState(null);
+
+  useEffect(() => {
+    if (!!sidebarContect) {
+      setIsModalOpen?.(true);
+    } else {
+      setIsModalOpen?.(false);
+    }
+  }, [sidebarContect, setIsModalOpen]);
 
   const handlePaletteType = (value) => {
     setPaletteType(value === "color" ? "image" : "color");
@@ -744,7 +752,7 @@ const Card = ({ data, productId }) => {
 
   return (
     <>
-      <div className="flex justify-start md:min-w-[25vw] gap-1 mt-2.5 w-[100%] ml-0">
+      <div className="flex justify-start md:min-w-[25vw] gap-1 mt-2.5 w-[100%] ml-0 z-[9997]">
         <div className=" w-[100%] prefence-text">
           <div className="textHolders flex flex-col">
             {data.demandtype && (
@@ -990,7 +998,7 @@ const Card = ({ data, productId }) => {
 
             {/* Modal */}
             {sidebarContect && (
-              <div className="">
+              <div>
                 <div className="w-1/2 flex flex-col justify-between gap-4 h-full bg-white rounded-3xl p-7">
                   {sidebarContect === "zeroCostEMI" && (
                     <div className="fixed z-[9999] h-full w-screen bg-black/50 top-0 left-0">

@@ -18,6 +18,8 @@ import Carous from "../Carousel/Carous";
 const ProductPage = ({ title, initialData }) => {
   const [data, setData] = useState(initialData);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const selectedData = useSelector(selectRoomData);
   const dispatch = useDispatch();
 
@@ -89,8 +91,14 @@ const ProductPage = ({ title, initialData }) => {
           </div>
           <RoomImageList images={data?.images} alt={data?.productTitle} />
           <ImageCaresoul images={data?.images} />
-          <div className="block md:hidden">
-            <Card data={data} productId={data._id} accessories={accessories} />
+          <div className="block md:hidden relative z-[9999]">
+            <Card
+              data={data}
+              productId={data._id}
+              accessories={accessories}
+              isModalOpen={isModalOpen}
+              setIsModalOpen={setIsModalOpen}
+            />
           </div>
           <RoomToolbar data={data} />
           <RoomInfo data={data} />
@@ -102,8 +110,17 @@ const ProductPage = ({ title, initialData }) => {
           />
         </div>
         <div className="h-full w-full relative p-4 hidden md:block">
-          <div className="w-full h-fit sticky top-2">
-            <Card data={data} productId={data._id} />
+          <div
+            className={`w-full h-fit sticky top-2 ${
+              isModalOpen ? "z-[9999]" : ""
+            }`}
+          >
+            <Card
+              data={data}
+              productId={data._id}
+              isModalOpen={isModalOpen}
+              setIsModalOpen={setIsModalOpen}
+            />
           </div>
         </div>
       </div>
