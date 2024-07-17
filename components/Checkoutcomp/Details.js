@@ -2,10 +2,6 @@
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectDeliveryPrice,
-  selectPickupOption,
-} from "../Features/Slices/calculationSlice";
 import Link from "next/link";
 import axios from "axios";
 
@@ -15,8 +11,13 @@ import { useRouter } from "next/navigation";
 
 import { updateFormData, selectFormData } from "../Features/Slices/formSlice";
 
-import { selecteddbItems } from "../Features/Slices/cartSlice";
+import { selecteddbItems, setDbItems } from "../Features/Slices/cartSlice";
 import { BASE_URL } from "@/constants/base-url";
+import { useSearchParams } from "next/navigation";
+import {
+  selectFreeSampleItems,
+  setFreeSamples,
+} from "../Features/Slices/freeSampleSlice";
 
 const Details = () => {
   const dispatch = useDispatch();
@@ -27,10 +28,81 @@ const Details = () => {
   const [deliveryPrice, setDeliveryPrice] = useState(null);
   const [userPincode, setUserPincode] = useState(null);
   const [form, setForm] = useState({});
+  const [isDeliveryLoading, setIsDeliveryLoading] = useState(true);
 
-  const closePaymentModal = () => {
-    setIsPaymentModalOpen(false);
+  const [cartdata, setcartdata] = useState("");
+
+  const searchParams = useSearchParams();
+
+  const isFreeSample = searchParams.get("freeSamples") === "true";
+  const freeSamples = useSelector(selectFreeSampleItems);
+  const [deviceId, setDeviceId] = useState(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const id = localStorage.getItem("deviceId");
+      setDeviceId(id);
+    }
+  }, []);
+
+  const fetchFreeSamples = async () => {
+    if (!deviceId) return;
+
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart/freeSampling`,
+        {
+          params: {
+            deviceId,
+          },
+        }
+      );
+
+      const data = response.data;
+      dispatch(setFreeSamples(data));
+    } catch (error) {
+      console.error("Error Fetching samples from DB : ", error);
+    }
   };
+
+  useEffect(() => {
+    if (deviceId && isFreeSample) {
+      fetchFreeSamples();
+    }
+  }, [isFreeSample, deviceId]);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
+        {
+          params: {
+            deviceId: id,
+          },
+        }
+      );
+      // console.log(response);
+      if (response.status !== 200) {
+        throw new Error("HTTP status " + response.status);
+      }
+      const data = response.data; // Extract JSON from the response
+      // console.log("response from DB", data);
+
+      setcartdata(data);
+      // console.log("response from DB", cartdata);
+      // console.log("cartStatus", cartStatus);
+      dispatch(setDbItems(data));
+      // console.log("this is data from redux (db)", dbItems);
+    } catch (error) {
+      console.error("Error Fetching data from DB : ", error);
+    }
+  };
+
+  useEffect(() => {
+    if (deviceId && !isFreeSample) {
+      fetchData();
+    }
+  }, [deviceId, isFreeSample]);
 
   const fetchMapData = async () => {
     try {
@@ -101,6 +173,7 @@ const Details = () => {
   };
 
   const FetchCost = async (distance) => {
+    setIsDeliveryLoading(true);
     if (nearestDistance === null) return;
     const responce = await axios.get(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/calculateShippingDetails/${distance}`
@@ -108,6 +181,7 @@ const Details = () => {
     setDeliveryCost(responce.data.charge);
     setDeliveryPrice(responce.data.charge);
     console.log(responce.data.charge);
+    setIsDeliveryLoading(false);
   };
 
   useEffect(() => {
@@ -129,39 +203,12 @@ const Details = () => {
   // const deliveryPrice = useSelector(selectDeliveryPrice);
 
   console.log(deliveryPrice);
-  const cartdata = useSelector(selecteddbItems);
   console.log(cartdata);
 
   if (typeof window !== "undefined") {
     var id = localStorage.getItem("deviceId");
     console.log(id);
   }
-
-  // useEffect(() => {
-  //   if (!cartdata) {
-  //     const fetchData = async () => {
-  //       try {
-  //         const id = localStorage.getItem("deviceId");
-  //         const response = await axios.get(
-  //           `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
-  //           {
-  //             params: {
-  //               deviceId: id,
-  //             },
-  //           }
-  //         );
-  //         if (response.status !== 200) {
-  //           throw new Error("HTTP status " + response.status);
-  //         }
-  //         const data = response.data;
-  //         setCartData(data);
-  //       } catch (error) {
-  //         console.log("Error fetching data from API:", error);
-  //       }
-  //     };
-  //     fetchData();
-  //   }
-  // }, [cartdata, dispatch]);
 
   // console.log("Card Data", cartdata)
   console.log("Fetched Card Data", CartData);
@@ -257,7 +304,7 @@ const Details = () => {
   let selecteddate = formData.selectedDate;
   let selectedtime = formData.selectedTime;
 
-  const deviceId = cartdata?.owner;
+  // const deviceId = cartdata?.owner;
   const cartId = cartdata?._id;
 
   const [postalValidation, setPostalValidation] = React.useState("");
@@ -310,7 +357,7 @@ const Details = () => {
       return;
     }
 
-    if (deliveryPrice === null) {
+    if (isDeliveryLoading || deliveryPrice === null) {
       return;
     }
 
@@ -341,9 +388,19 @@ const Details = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ address, deviceId: id, cartId }),
+          body: JSON.stringify({
+            address,
+            deviceId: id,
+            cartId,
+            isFreeSample,
+            freeSampleCartId: freeSamples?._id,
+          }),
         }
       );
+
+      if (response.ok && isFreeSample && deliveryPrice === 0) {
+        return router.push("/success");
+      }
 
       if (response.ok) {
         const data = await response.json();
@@ -355,7 +412,9 @@ const Details = () => {
           method: "POST",
           url: `${apiBaseUrl}/api/makepayment`,
           data: {
-            amount: (SumtotalPrice + deliveryPrice) * 100,
+            amount: isFreeSample
+              ? deliveryPrice * 100
+              : (SumtotalPrice + deliveryPrice) * 100,
             callbackUrl: `${BASE_URL}/success`,
             redirectUrl: `${BASE_URL}/success`,
           },
@@ -683,55 +742,65 @@ const Details = () => {
             </div>
             <div className="flex">
               <div className="flex my-4">
-                {/* {cartdata &&
-                  cartdata.items &&
-                  cartdata.items.length > 0 &&
-                  cartdata.items.map((item, index) => (
-                    <Image loading="lazy"
-                      key={index}
-                      src={item.productId.images[0]}
-                      width={249}
-                      height={249}
-                      alt={item.name}
-                      className="w-20 h-20 mr-4"
-                    />
-                  ))} */}
-                {cartdata && cartdata.items && cartdata.items.length > 0 ? (
-                  cartdata.items.map((item, index) => (
-                    <Image
-                      loading="lazy"
-                      key={index}
-                      src={item.productId.images[0]}
-                      width={249}
-                      height={249}
-                      alt={item.name}
-                      className="w-20 h-20 mr-4"
-                    />
-                  ))
-                ) : (
-                  <div className="text-lg text-gray-500 font-bold ">
-                    {cartdata !== null ? "" : "Empty cart"}
-                  </div>
-                )}
+                {isFreeSample && freeSamples?.products.length > 0
+                  ? freeSamples.products.map((item, index) => (
+                      <Image
+                        loading="lazy"
+                        key={index}
+                        src={item.images[0]}
+                        width={249}
+                        height={249}
+                        alt={item.productTitle}
+                        className="w-20 h-20 mr-4"
+                      />
+                    ))
+                  : isFreeSample && (
+                      <div className="text-lg text-gray-500 font-bold ">
+                        {cartdata !== null ? "" : "Empty cart"}
+                      </div>
+                    )}
+
+                {!isFreeSample &&
+                cartdata &&
+                cartdata.items &&
+                cartdata.items.length > 0
+                  ? cartdata.items.map((item, index) => (
+                      <Image
+                        loading="lazy"
+                        key={index}
+                        src={item.productId.images[0]}
+                        width={249}
+                        height={249}
+                        alt={item.name}
+                        className="w-20 h-20 mr-4"
+                      />
+                    ))
+                  : !isFreeSample && (
+                      <div className="text-lg text-gray-500 font-bold ">
+                        {cartdata !== null ? "" : "Empty cart"}
+                      </div>
+                    )}
               </div>
               <div className="flex my-4">
-                {cartdata &&
-                  cartdata.freeSamples.length > 0 &&
-                  cartdata.freeSamples.map((item, index) => {
-                    return (
-                      <div>
-                        <Image
-                          loading="lazy"
-                          src={item.images[0]}
-                          width={249}
-                          height={249}
-                          alt={""}
-                          className="w-20 h-20 mr-5"
-                        />
-                        {/* <p className="mt-[2px] text-[12px]  font-semibold">(Sample)</p> */}
-                      </div>
-                    );
-                  })}
+                {
+                  // cartdata &&
+                  //   cartdata.freeSamples.length > 0 &&
+                  //   cartdata.freeSamples.map((item, index) => {
+                  //     return (
+                  //       <div>
+                  //         <Image
+                  //           loading="lazy"
+                  //           src={item.images[0]}
+                  //           width={249}
+                  //           height={249}
+                  //           alt={""}
+                  //           className="w-20 h-20 mr-5"
+                  //         />
+                  //         {/* <p className="mt-[2px] text-[12px]  font-semibold">(Sample)</p> */}
+                  //       </div>
+                  //     );
+                  //   })
+                }
               </div>
             </div>
             <h2 className="text-xl pb-3 font-bold">Order summary</h2>
@@ -747,7 +816,7 @@ const Details = () => {
                     alt="rupees"
                     className="mr-1"
                   />
-                  {totalPrice}
+                  {isFreeSample ? 0 : totalPrice}
                 </div>
               </div>
             </div>
@@ -763,7 +832,7 @@ const Details = () => {
                     alt="rupees"
                     className="mr-1"
                   />
-                  {totalServicesPrice}
+                  {isFreeSample ? 0 : totalServicesPrice}
                 </div>
               </div>
             </div>
@@ -779,7 +848,7 @@ const Details = () => {
                     alt="rupees"
                     className="mr-1"
                   />
-                  {totalAccessoryPrice}
+                  {isFreeSample ? 0 : totalAccessoryPrice}
                 </div>
               </div>
             </div>
@@ -820,7 +889,7 @@ const Details = () => {
                     alt="rupees"
                     className="mr-1"
                   />
-                  {SumtotalPrice + deliveryPrice}
+                  {isFreeSample ? deliveryPrice : SumtotalPrice + deliveryPrice}
                 </div>
               </div>
             </div>
@@ -841,16 +910,13 @@ const Details = () => {
             <span>Total </span>
             <span>$1000</span>
           </div> */}
-
             {/* <div className=" fixed h-full w-screen lg:hidden bg-black/50  backdrop:blur-sm top-0 right-0"></div> */}
-
             {/* <Link
             href="#"
             className="bg-slate-200 text-slate-900 rounded-lg py-2 px-4 font-normal"
           >
             Continue to Payment
           </Link> */}
-
             <div className="flex gap-4  items-center font-bold mt-5 lg:mt-14">
               <span>
                 <svg
@@ -868,7 +934,6 @@ const Details = () => {
                 60 days and additional 30-day returns with Ayatrio Family
               </div>
             </div>
-
             <div className="flex gap-4  items-center font-bold mt-4">
               <span className="">
                 <svg
