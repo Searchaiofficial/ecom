@@ -351,7 +351,6 @@ const Details = () => {
 
   const handleData = async (event) => {
     event.preventDefault();
-
     // Check validation before submitting the form
     if (
       !form.postal &&
@@ -365,6 +364,7 @@ const Details = () => {
     }
 
     const id = localStorage.getItem("deviceId");
+    console.log(id)
 
     dispatch(updateFormData(updatedForm));
     console.log("form-dispatch", updatedForm);
@@ -399,6 +399,11 @@ const Details = () => {
             cartId,
             isFreeSample,
             freeSampleCartId: freeSamples?._id,
+            amount : {
+              deliveryPrice : deliveryPrice,
+              productPrice : isFreeSample ? 0 : SumtotalPrice,
+              totalPrice : isFreeSample ? deliveryPrice : SumtotalPrice + deliveryPrice
+            }
           }),
         }
       );
