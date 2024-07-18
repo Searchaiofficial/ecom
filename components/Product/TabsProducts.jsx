@@ -765,7 +765,7 @@ const Tabs = ({
       {openAll && <div className="background-overlay open"></div>}
       <div className="lg:px-[67px] sm:px-[50px] px-[20px]">
         <div className="flex flex-col overflow-hidden">
-          <div className="mt-36" />
+          <div className="md:mt-36 mt-10" />
           <h1 className="Blinds font-semibold text-2xl pb-[20px] lg:pt-[30px] capitalize">
             {
               pathname.split("/")[3] === "all" && (

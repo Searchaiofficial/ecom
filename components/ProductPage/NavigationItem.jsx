@@ -48,7 +48,7 @@ const NavigationItem = ({ product: data }) => {
         </>
       )}
       <Link href={`/${data?.category?.replace(/ /g, "-")}/category/all`}>
-        <span className="hover:text-gray-500 cursor-pointer ">
+        <span className="hover:text-gray-500 cursor-pointer line-clamp-1">
           {data?.category}
         </span>
       </Link>
@@ -65,7 +65,7 @@ const NavigationItem = ({ product: data }) => {
           "-"
         )}/category/${data?.subcategory?.replace(/ /g, "-")}`}
       >
-        <span className="hover:text-gray-500 cursor-pointer ">
+        <span className="hover:text-gray-500 cursor-pointer line-clamp-1">
           {data?.subcategory}
         </span>
       </Link>
@@ -76,7 +76,7 @@ const NavigationItem = ({ product: data }) => {
         height={10}
         className="opacity-100 h-[8px]"
       />
-      <span className="text-gray-500 cursor-pointer ">
+      <span className="text-gray-500 cursor-pointer line-clamp-1">
         {data?.productTitle}
       </span>
     </div>
