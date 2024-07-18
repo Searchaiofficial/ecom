@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 
 import { updateFormData, selectFormData } from "../Features/Slices/formSlice";
 
-import { selecteddbItems, setDbItems } from "../Features/Slices/cartSlice";
+import { setDbItems } from "../Features/Slices/cartSlice";
 import { BASE_URL } from "@/constants/base-url";
 import { useSearchParams } from "next/navigation";
 import {
@@ -404,9 +404,7 @@ const Details = () => {
 
       if (response.ok) {
         const data = await response.json();
-        // console.log("Dataaaa", data);
-
-        // if the API response is 200
+        const orderId = data.orderId;
 
         const paymentResponse = await axios.request({
           method: "POST",
@@ -415,12 +413,8 @@ const Details = () => {
             amount: isFreeSample
               ? deliveryPrice * 100
               : (SumtotalPrice + deliveryPrice) * 100,
-            callbackUrl: isFreeSample
-              ? `${BASE_URL}/freesamplesuccess`
-              : `${BASE_URL}/success`,
-            redirectUrl: isFreeSample
-              ? `${BASE_URL}/freesamplesuccess`
-              : `${BASE_URL}/success`,
+            callbackUrl: `${BASE_URL}/api/paymentcallback/${orderId}`,
+            redirectUrl: `${BASE_URL}/api/paymentcallback/${orderId}`,
           },
         });
 
@@ -723,7 +717,6 @@ const Details = () => {
                     {/* <Link href={"/payment"}> */}
                     <button
                       type="submit"
-                      // onClick={() => setIsPaymentModalOpen(true)}
                       className="bg-[#0058a3] text-white flex justify-center items-center border-solid border border-gray-300 p-8 h-12 rounded-full my-4 text-md font-bold w-full m-auto"
                     >
                       Continue to payment{" "}
