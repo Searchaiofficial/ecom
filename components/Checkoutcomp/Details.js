@@ -317,7 +317,7 @@ const Details = () => {
       // Validate postal code
       const postalCode = parseInt(value, 10);
 
-      if (isNaN(postalCode) || postalCode < 100000 || postalCode > 999999) {
+      if (isNaN(form.postal) || postalCode < 100000 || postalCode > 999999) {
         setPostalValidation("invalid");
       } else {
         setPostalValidation("valid");
@@ -353,7 +353,10 @@ const Details = () => {
     event.preventDefault();
 
     // Check validation before submitting the form
-    if (postalValidation !== "valid" || numberValidation !== "valid") {
+    if (
+      !form.postal &&
+      (postalValidation !== "valid" || numberValidation !== "valid")
+    ) {
       return;
     }
 
@@ -368,11 +371,13 @@ const Details = () => {
     console.log("deviceId", deviceId);
     console.log("cartId", cartId);
 
+    console.log({ formpostal: form.postal });
+
     const address = {
       firstName: updatedForm.first,
       lastName: updatedForm.last,
       address: updatedForm.address,
-      postalCode: updatedForm.postal,
+      postalCode: form.postal,
       city: updatedForm.local,
       country: updatedForm.country,
       state: updatedForm.state,
