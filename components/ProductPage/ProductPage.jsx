@@ -14,6 +14,7 @@ import AccessoriesPosts from "../Cards/AccessoriesPosts";
 import UserReviewPosts from "../Cards/UserReviewPosts";
 import axios from "axios";
 import Carous from "../Carousel/Carous";
+import { viewItem } from "@/tag-manager/events/view_item";
 
 const ProductPage = ({ title, initialData }) => {
   const [data, setData] = useState(initialData);
@@ -81,6 +82,12 @@ const ProductPage = ({ title, initialData }) => {
       }
     }
   }, [selectedData, dispatch]);
+
+  useEffect(() => {
+    if (data) {
+      viewItem({ item: data });
+    }
+  }, [data]);
 
   return (
     <div className="px-4 sm:px-6">
