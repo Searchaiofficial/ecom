@@ -201,8 +201,8 @@ const Tabs = ({
           currency: "INR",
           quantity: 1,
         })),
-        itemListId: `category-${categoryName}`,
-        itemListName: categoryName,
+        itemListId: `category-${parentCategory}`,
+        itemListName: parentCategory,
       });
     }
   }, [filterData]);
