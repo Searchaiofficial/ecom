@@ -8,7 +8,6 @@ import DesignServices from '../HeaderServices/DesignServices';
 import Offers from '../Offers/Offers';
 
 import axios from "axios";
-import styles from '../styles.module.css'
 
 const SwiperComponent = ({ hoveredIndex, setHoveredIndex, handleChange, toggleMobileMenu, handleClick }) => {
   const [allOffers, setAllOffers] = useState([]);

@@ -1,31 +1,9 @@
-/* .navbar {
-  display: flex;
-  flex-flow: row;
-  /* justify-content: space-evenly; */
-/* height: 64px;
-  width: 100%;
-  flex: 1 2 1;
-} */
+
 
 .search_icon_mar {
   margin: 3px 10px;
 }
 
-/* .profile-menu{
-  position: relative;
-}
-.profile-menu::after {
-  content: "";
-  position: absolute;
-  top: -0.125rem;
-  left: -0.125rem;
-  right: -0.125rem;
-  bottom: -0.125rem;
-  z-index: -1;
-}
-.profile-menu:hover::after {
-  transform: scale(1.1); 
-} */
 
 .text-costom-co {
   color: #707072;
@@ -37,16 +15,6 @@
   flex: 3;
 }
 
-/* .icon_container {
-  width: 2.5rem;
-  height: 2.5rem;
-  padding: 7px;
-}
-
-.icon_container:hover {
-  background-color: #efefef;
-  border-radius: 50%;
-} */
 
 .navbar-left {
   flex: 1;
@@ -214,12 +182,6 @@
     display: none;
   }
 
-  /* .map-icon {
-    display: block;
-  } */
-  /* .right {
-    display: none;
-  } */
 }
 
 .MuiBackdrop-root.MuiBackdrop-invisible.MuiModal-backdrop.css-g3hgs1-MuiBackdrop-root-MuiModal-backdrop::-webkit-scrollbar {

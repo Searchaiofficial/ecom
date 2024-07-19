@@ -1,5 +1,4 @@
 import { Poppins } from "next/font/google";
-// import localFont from "next/font/local";
 import "./globals.css";
 import { Providers } from "@/provider";
 import { GoogleTagManager } from "@next/third-parties/google";
@@ -7,9 +6,6 @@ import FooterWrapper from "@/components/FooterWrapper/FooterWrapper";
 import NextTopLoader from "nextjs-toploader";
 import { BASE_URL } from "@/constants/base-url";
 import Script from "next/script";
-// const myFont = localFont({
-//   src: "../public/Font/Jost-Regular.ttf",
-// });
 
 const poppins = Poppins({
   subsets: ["latin"],

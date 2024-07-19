@@ -166,16 +166,8 @@ export default function NewMainSlider({ initialData }) {
                     alt={data.imgTitle || "Swiper image"}
                     priority
                     className="object-fill  px-[10px]  swiper-slide  lg:px-[0px] w-full"
-                  // objectFit="cover"
                   />
                 )}
-                {/* <div className="absolute flex text-lg text-white sm:bottom-[2.5rem] bottom-[96px] left-[3rem] flex-col md:flex-row gap-4 md:items-center">
-                  <div className="w-full md:w-auto flex gap-2 flex-col">
-                    <p className="text-[12px] font-[500] drop-shadow-xl text-black">
-                      {data?.imgTitle}
-                    </p>
-                  </div>
-                </div> */}
                 {data &&
                   data.circles.length > 0 &&
                   data.circles[0].productTitle && (

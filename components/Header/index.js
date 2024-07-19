@@ -10,10 +10,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import TopHeader from "./TopHeader";
-import {
-  selectQuantity,
-  updateQuantity,
-} from "../Features/Slices/calculationSlice";
 import { headerLinks } from "@/Model/Dropdown/AsideData/AsideData";
 import Midsection from "./Midsection/Midsection";
 import { useDispatch, useSelector } from "react-redux";
@@ -76,8 +72,6 @@ function Header({ setIsHeaderMounted }) {
   const toggleMobileMenu = () => {
     console.log(isMobileMenuOpen);
     setIsMobileMenuOpen(!isMobileMenuOpen);
-    // setSidebarNavigationItem("")
-    // setIsOpen(false)
     setHoveredIndex(null);
     if (toptext !== "") {
       setTopText("");
@@ -115,11 +109,6 @@ function Header({ setIsHeaderMounted }) {
     setIsHovered(false);
   };
 
-  // const handleClick = (idx) => {
-  //   if (idx === 3) router.push("/customerservice");
-
-  // };
-
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
@@ -144,7 +133,6 @@ function Header({ setIsHeaderMounted }) {
     router.push("/login");
   };
   const handleProfileNav = () => {
-    // console.log("Profile");
     handleLinkClick("/login");
   };
   const onClose = () => {
@@ -168,13 +156,11 @@ function Header({ setIsHeaderMounted }) {
 
   const handleModalOpen = () => {
     setModalOpen(true);
-    // document.body.style.overflow = "hidden";
     if (window.matchMedia("(max-width: 768px)").matches) {
       document.body.style.overflow = "hidden";
     }
   };
   const handleModalClose = (event) => {
-    // event.stopPropagation();
     setModalOpen(false);
     document.body.style.overflow = "auto";
     onClose();
@@ -268,8 +254,6 @@ function Header({ setIsHeaderMounted }) {
     setTopText((prev) => [...prev, data.name]);
   };
 
-  const [selectedValue, setSelectedValue] = useState("");
-
   const handleChange = (value) => {
     console.log(value);
     setIsHovered(value);
@@ -352,9 +336,6 @@ function Header({ setIsHeaderMounted }) {
                             label={value.label}
                           />
                         )}
-                        {/* {value.label === "Rooms" && hoveredIndex === idx && (
-                          <Midsection />
-                        )} */}
                       </div>
                     ))}
                   </nav>
@@ -383,18 +364,6 @@ function Header({ setIsHeaderMounted }) {
                     Search for <span ref={textElementRef}></span>
                   </p>
                 </div>
-                {/* <div
-                  className="md:hidden block w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer"
-                  onClick={handleModalOpen}
-                >
-                  <Image loading="lazy"
-                    src="/icons/search.svg"
-                    alt="Search Icon"
-                    width={20}
-                    height={20}
-                    className="header-div-icon"
-                  />
-                </div> */}
                 <div className="sm:block hidden w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer">
                   <Link href={"/login"}>
                     <Image
@@ -471,13 +440,6 @@ function Header({ setIsHeaderMounted }) {
 
                 {/* for only mobole search */}
                 {isModalOPen && (
-                  /* <SearchModal
-                isOpen={isModalOPen}
-                onClose={handleModalClose}
-                onSearch={(e) =>
-                  dispatch(searchProductsRequest(e.target.value))
-                }
-              /> */
                   <Expandedbar
                     searchText={searchQuery}
                     onClose={handleModalClose}
@@ -486,24 +448,6 @@ function Header({ setIsHeaderMounted }) {
                 )}
               </div>
             </div>
-            {/* {atTop && <div className="flex  w-full items-center  md:hidden px-[20px] sm:px-[50px] lg:px-[67px] mb-3">
-              <div
-                className="md:hidden py-[8px] flex items-center justify-between w-full bg-zinc-100 rounded-full   h-[45px] p-[9px] hover:bg-zinc-200 hover:rounded-full cursor-pointer"
-                onClick={handleModalOpen}
-              >
-                <div className="flex items-center">
-                  <Image loading="lazy"
-                    src="/icons/search.svg"
-                    alt="Search Icon"
-                    width={20}
-                    height={20}
-                    className="ml-[10px]"
-                  />
-                  <p className="ml-3 line-clamp-1 text-[13px] mt-[2px]  text-gray-400">Search for <span ref={textElementRef2}></span></p>
-                </div>
-                <Image loading="lazy" src={"/icons/camera.svg"} width={20} height={20} alt="camera icon" className="mr-[10px] ml-[10px]" />
-              </div>
-            </div>} */}
           </>
         ) : (
           <Expandedbar

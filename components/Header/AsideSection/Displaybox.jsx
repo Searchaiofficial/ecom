@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from "react";
-import ListContent from "./ListContent";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import axios from "axios";
 
 const Displaybox = (props) => {
   const router = useRouter();
   const [currentCategory, setCurrentCategory] = useState("");
 
   const handleClick = (value) => {
-    // const category = value.replace(/\s+/g, "-").toLowerCase();
     if (window.innerWidth < 800) {
       props.toggleMobileMenu();
     }
-    // handleIncrementCategoryPopularity();
-    // handleIncrementSubCategoryPopularity(value);
     const category = value.replace(/ /g, "-");
     const newPath = `/${currentCategory}/${props.parentCategory}/${category}`;
     router.push(newPath);
@@ -32,26 +27,6 @@ const Displaybox = (props) => {
     }
   }, [props.data.name]);
 
-  // const handleIncrementCategoryPopularity = async () => {
-  //   try {
-  //     await axios.get(
-  //       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/incrementCategoryPopularity?category=${props.data.name}`
-  //     );
-  //   } catch (error) {
-  //     console.error("Error incrementing category popularity:", error);
-  //   }
-  // };
-
-  // const handleIncrementSubCategoryPopularity = async (subCategory) => {
-  //   try {
-  //     const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/incrementSubCategoryPopularity?category=${props.data.name}&subCategory=${subCategory}`;
-  //     console.log(url);
-  //     const encodedUrl = encodeURI(url);
-  //     await axios.get(encodedUrl);
-  //   } catch (error) {
-  //     console.error("Error incrementing category popularity:", error);
-  //   }
-  // };
 
   return (
     <main className="w-full noto-sans-200 h-full border-l px-4 border-solid border-[#f5f5f5]">
