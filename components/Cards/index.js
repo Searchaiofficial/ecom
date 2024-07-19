@@ -1,42 +1,30 @@
 // "use client";
 import dynamic from "next/dynamic";
-import "./styles.css";
 const Footer = dynamic(() => import("../Footer/Footer"));
 const Multicard = dynamic(() => import("../Imagechanger/Multicard"));
 const TabsWrapper = dynamic(() => import("./TabsWrapper"));
 const Profile = dynamic(() => import("./Profile"));
 const Phone = dynamic(() => import("./Phone"));
-const Trending = dynamic(() => import("./Trending"));
+// const Trending = dynamic(() => import("./Trending"));
 const Suggestion = dynamic(() => import("./Suggestion"));
-// <<<<<<< HEAD
-// const MulticardService = dynamic(() => import("./MultiCardService"))
-// import Dataslider from "./Dataslider";
-// import { useDispatch, useSelector } from "react-redux";
-// import { selectRecommendedProduct } from "../Features/Slices/recommendationSlice";
-// import NewMainSlider from "../MainSlider/NewMainSlider";
-// import RoomTypes from "../Rooms/RoomTypes";
-// import Display from "./Display";
-// import RoomCard from "./RoomCard";
-// import CategoriesSlider from "./categorySlider"
-// import Splashscreen from "../Splashscreen/Splashscreen";
-// const Cookies = dynamic(() => import("./Cookies"));
-// =======
 const Cookies = dynamic(() => import("./Cookies"));
 const MulticardService = dynamic(() => import("./MultiCardService"));
 const ShopByRoomSlider = dynamic(() => import("./ShopByRoomSlider"));
-import Display from "./Display";
-import RoomCard from "./RoomCard";
-import DataSliderWrapper from "./DataSliderWrapper";
+const Display = dynamic(() => import("./Display"));
+const RoomCard = dynamic(() => import("./RoomCard"));
+const DataSliderWrapper = dynamic(() => import("./DataSliderWrapper"));
+const UserReviewPosts = dynamic(() => import("./UserReviewPosts"));
+
+// import Display from "./Display";
+// import RoomCard from "./RoomCard";
+// import DataSliderWrapper from "./DataSliderWrapper";
+// import UserReviewPosts from "./UserReviewPosts";
+
 import MainSliderWrapper from "../MainSlider/MainSliderWrapper";
 import CategoriesSlider from "./categorySlider";
-import OfferSlider from "./OfferSlider";
-import UserReviewPosts from "./UserReviewPosts";
+import Trending from "./Trending";
 
 function Cards() {
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, []);
-
   if (typeof window !== "undefined") {
     sessionStorage.removeItem("navigationItem");
   }
@@ -65,10 +53,8 @@ function Cards() {
       <Suggestion />
 
       <div className="sm:px-[50px]  px-[20px]  lg:px-[67px]">
-
         <UserReviewPosts slidesPerView={3.2} />
       </div>
-
 
       <MulticardService />
 

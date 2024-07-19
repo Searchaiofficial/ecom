@@ -348,7 +348,8 @@ function Card(props) {
                   alt={`Image of ${props.title}`}
                   height={300}
                   width={300}
-                  onClick={() => handleClick(props.title, props.category)}
+                  // onClick={() => handleClick(props.title, props.category)}
+                  loading="eager"
                   className={slide === idx ? "aspect-square w-[400px]" : "slide-hidden"}
                 />
               </Link>

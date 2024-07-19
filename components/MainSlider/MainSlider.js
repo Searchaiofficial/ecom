@@ -136,6 +136,7 @@ const MainSlider = ({ initialData: { result: sliderData } }) => {
                       }
                       alt="slider"
                       fill
+                      loading="eager"
                     />
                   </Link>
                 ) : (
@@ -147,6 +148,7 @@ const MainSlider = ({ initialData: { result: sliderData } }) => {
                     }
                     alt="slider"
                     fill
+                    loading="eager"
                   />
                 )}
                 {data &&
