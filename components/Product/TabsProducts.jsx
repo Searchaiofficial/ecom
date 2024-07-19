@@ -41,6 +41,7 @@ import Link from "next/link";
 import axios from "axios";
 import TabsProductCard from "./TabsProductCard";
 import { selecteddbItems } from "../Features/Slices/cartSlice";
+import { viewItemList } from "@/tag-manager/events/view_item_list";
 const Tabs = ({
   filteredProductData,
   heading,
@@ -56,54 +57,6 @@ const Tabs = ({
   totalPages,
   currentPage,
 }) => {
-  console.log({ filteredProductData });
-  // console.log({ dimensions: filteredProductData[0].dimensions });
-  // console.log({ style: filteredProductData[0].style });
-
-  // const [allColors, setAllColors] = useState(() => {
-  //   const colors = new Set();
-  //   filteredProductData.forEach((product) => {
-  //     product.colors.forEach((color) => {
-  //       colors.add(color);
-  //     });
-  //   });
-  // <<<<<<< Updated upstream
-
-  //   //   return Array.from(colors);
-  //   // });
-  // =======
-
-  //   //   return Array.from(colors);
-  //   // });
-
-  // >>>>>>> Stashed changes
-
-  // const [allStyles, setAllStyles] = useState(() => {
-  //   const styles = new Set();
-  //   filteredProductData.forEach((product) => {
-  //     styles.add(product.style);
-  //   });
-
-  //   return Array.from(styles);
-  // });
-
-  // const [allDimensions, setAllDimensions] = useState(() => {
-  //   const dimensions = new Set();
-  //   filteredProductData.forEach((product) => {
-  //     product.dimensions.forEach((dimension) => {
-  //       dimensions.add({
-  //         length: dimension.length,
-  //         width: dimension.width,
-  //         thickness: dimension.thickness,
-  //       });
-  //     });
-  //   });
-
-  //   return Array.from(dimensions);
-  // });
-
-  // console.log("Filtered products:", filteredProducts);
-  const [swiperRef, setSwiperRef] = useState(null);
   const router = useRouter();
   const dispatch = useDispatch();
   const swiper1Ref = useRef(null);
@@ -163,51 +116,7 @@ const Tabs = ({
   const [allOffers, setAllOffers] = useState([]);
   const [allDemandType, setAllDemandType] = useState([]);
   const [AllsubCategory, setAllSubcategory] = useState([]);
-  // <<<<<<< Updated upstream
-  //   // const [allDimensions, setAllDimensions] = useState([]);
-  // =======
 
-  //   // console.log(filterData)
-
-  // >>>>>>> Stashed changes
-
-  // useEffect(() => {
-  //   const colors = filterData.flatMap((product) => product.colors);
-  //   const uniqueColors = [...new Set(colors)];
-  //   console.log("Unique colors:", uniqueColors);
-  //   setAllColors(uniqueColors);
-
-  //   const types = filterData.map((product) => product.types);
-  //   const uniqueTypes = [...new Set(types)];
-  //   setAllProductTypes(uniqueTypes);
-
-  //   const offers = filterData.map((product) => product.offer);
-  //   const uniqueOffers = [...new Set(offers)];
-  //   setAllOffers(uniqueOffers);
-
-  //   const demandTypes = filterData.map((product) => product.demandtype);
-  //   const uniqueDemandTypes = [...new Set(demandTypes)];
-  //   console.log(uniqueDemandTypes);
-  //   setAllDemandType(uniqueDemandTypes);
-
-  // }, [filteredProductData]);
-
-  // console.log(allDemandType);
-
-  // =======
-  //     // setAllProductTypes(uniqueTypes)
-
-  //     // // product.dimensions is the array of all the dimensions of the product and each dimension is the object of length , width and height of the product
-
-  //     // const dimensions = filterData.map((product) => product.dimensions);
-  //     // console.log(dimensions.flat())
-
-  //     // const uniqueDimensions = [...new Set(dimensions)];
-  //     // setAllDimensions(uniqueDimensions);
-
-  //   }, [filterData]);
-
-  // >>>>>>> Stashed changes
   const [selectedResult, setselectedResult] = useState(0);
   const [clearSelectedResult, setClearSelectedResult] = useState(false);
   const handleColorChange = (color) => {
@@ -228,11 +137,11 @@ const Tabs = ({
       return product.subcategory === selectedSubCategory;
     });
 
-    console.log(filteredProducts)
+    console.log(filteredProducts);
     setFilterdata(filteredProducts);
     setClearSelectedResult(true);
     setselectedResult(filteredProducts?.length);
-  }
+  };
 
   // >>>>>>> Stashed changes
 
@@ -281,9 +190,26 @@ const Tabs = ({
     }
   };
 
+  useEffect(() => {
+    if (filterData && filterData.length > 0) {
+      viewItemList({
+        items: filterData.map((product) => ({
+          item_id: product._id,
+          item_name: product.productTitle,
+          item_category: product.category,
+          price: product.perUnitPrice,
+          currency: "INR",
+          quantity: 1,
+        })),
+        itemListId: `category-${categoryName}`,
+        itemListName: categoryName,
+      });
+    }
+  }, [filterData]);
+
   const [openFilter, setOpenFilter] = useState("");
 
-  const handleFilterClick = (Filter) => { };
+  const handleFilterClick = (Filter) => {};
   const [openAllsort, setopenallsort] = useState(false);
   const handleAllsort = () => {
     setopenallsort(!openAllsort);
@@ -735,8 +661,9 @@ const Tabs = ({
       pages.push(
         <button
           key={i}
-          className={`bg-gray-200 px-3 py-1 rounded ${currentPage === i ? "bg-gray-400" : ""
-            }`}
+          className={`bg-gray-200 px-3 py-1 rounded ${
+            currentPage === i ? "bg-gray-400" : ""
+          }`}
           onClick={() => onPageChange(i)}
         >
           {i}
@@ -747,18 +674,19 @@ const Tabs = ({
   };
 
   console.log(pathname.split("/")[3]);
-  const [filteredSubCategory, setSubCategory] = useState(null)
+  const [filteredSubCategory, setSubCategory] = useState(null);
 
-  console.log(subCategory)
+  console.log(subCategory);
 
   useEffect(() => {
     if (pathname.split("/")[3] !== "all") {
-      const filtered = subCategory?.filter((data) => data.name === pathname.split("/")[3].replace(/-/g, " "))
-      setSubCategory(filtered)
-      console.log(filteredSubCategory)
+      const filtered = subCategory?.filter(
+        (data) => data.name === pathname.split("/")[3].replace(/-/g, " ")
+      );
+      setSubCategory(filtered);
+      console.log(filteredSubCategory);
     }
-  }, [subCategory])
-
+  }, [subCategory]);
 
   return (
     <div className="">
@@ -767,16 +695,10 @@ const Tabs = ({
         <div className="flex flex-col overflow-hidden">
           <div className="md:mt-36 mt-10" />
           <h1 className="Blinds font-semibold text-2xl pb-[20px] lg:pt-[30px] capitalize">
-            {
-              pathname.split("/")[3] === "all" && (
-                <p>{heading}</p>
-              )
-            }
-            {
-              pathname.split("/")[3] !== "all" && (
-                <p>{pathname.split("/")[3].replace(/-/g, " ")}</p>
-              )
-            }
+            {pathname.split("/")[3] === "all" && <p>{heading}</p>}
+            {pathname.split("/")[3] !== "all" && (
+              <p>{pathname.split("/")[3].replace(/-/g, " ")}</p>
+            )}
           </h1>
           <div className="flex items-center">
             {subCategory ? (
@@ -808,9 +730,8 @@ const Tabs = ({
                   }}
                   breakpoints={breakpoints}
                 >
-                  {
-                    pathname.split("/")[3] === "all" ? (
-                      subCategory?.map((curElement, idx) => {
+                  {pathname.split("/")[3] === "all"
+                    ? subCategory?.map((curElement, idx) => {
                         return (
                           <SwiperSlide className="max-w-[130px]" key={idx}>
                             <div
@@ -835,35 +756,31 @@ const Tabs = ({
                           </SwiperSlide>
                         );
                       })
-                    ) :
-                      (
-                        filteredSubCategory?.map((curElement, idx) => {
-                          return (
-                            <div className="max-w-[130px]" key={idx}>
-                              <div
-                                className="cursor-pointer"
-                                onClick={() => setType(curElement.name)}
-                              >
-                                <div className="flex flex-col ">
-                                  <div className="lg:mb-[12px] ">
-                                    <Image
-                                      src={curElement.img}
-                                      width={200}
-                                      height={130}
-                                      alt={curElement.name}
-                                      className="w-[200px] h-[70px]"
-                                    />
-                                  </div>
-                                  <h2 className="text-[#333333] text-[14px] hover:underline line-clamp-1">
-                                    {curElement.name}
-                                  </h2>
+                    : filteredSubCategory?.map((curElement, idx) => {
+                        return (
+                          <div className="max-w-[130px]" key={idx}>
+                            <div
+                              className="cursor-pointer"
+                              onClick={() => setType(curElement.name)}
+                            >
+                              <div className="flex flex-col ">
+                                <div className="lg:mb-[12px] ">
+                                  <Image
+                                    src={curElement.img}
+                                    width={200}
+                                    height={130}
+                                    alt={curElement.name}
+                                    className="w-[200px] h-[70px]"
+                                  />
                                 </div>
+                                <h2 className="text-[#333333] text-[14px] hover:underline line-clamp-1">
+                                  {curElement.name}
+                                </h2>
                               </div>
                             </div>
-                          );
-                        })
-                      )
-                  }
+                          </div>
+                        );
+                      })}
                 </Swiper>
               </div>
             ) : (
@@ -1179,18 +1096,21 @@ const Tabs = ({
                   handleTabClick();
                 }}
                 className={`Tabbtn z-0 bg-gray-100
-                  ${openAll
-                    ? `active-tabs  border border-black px-[24px] text-[14px] font-medium ${commonClasses}`
-                    : `tabS  border border-white px-[24px] ${commonClasses} text-[14px] font-medium`
+                  ${
+                    openAll
+                      ? `active-tabs  border border-black px-[24px] text-[14px] font-medium ${commonClasses}`
+                      : `tabS  border border-white px-[24px] ${commonClasses} text-[14px] font-medium`
                   }
-                  ${typeof window !== "undefined" && window.innerWidth <= 450
-                    ? " justify-center px-[24px] text-[14px] font-medium"
-                    : " justify-between px-[24px] text-[14px] font-medium"
+                  ${
+                    typeof window !== "undefined" && window.innerWidth <= 450
+                      ? " justify-center px-[24px] text-[14px] font-medium"
+                      : " justify-between px-[24px] text-[14px] font-medium"
                   }
                   `}
               >
                 All Filters &nbsp;
-                <Image loading="lazy"
+                <Image
+                  loading="lazy"
                   src="/icons/choserightfloor.svg"
                   width={40}
                   height={40}
@@ -1212,7 +1132,8 @@ const Tabs = ({
                   Filter and sort
                 </p>
 
-                <Image loading="lazy"
+                <Image
+                  loading="lazy"
                   className="absolute right-3 px-[2px]"
                   src="icons/cancel.svg"
                   width={20}
@@ -1230,7 +1151,8 @@ const Tabs = ({
                       className="flex justify-between text-left text-[14px] font-semibold "
                     >
                       Sort &nbsp;
-                      <Image loading="lazy"
+                      <Image
+                        loading="lazy"
                         src="/icons/backarrow.svg"
                         width={40}
                         height={40}
@@ -1286,7 +1208,8 @@ const Tabs = ({
                           className="flex justify-between text-left"
                         >
                           Design style &nbsp;
-                          <Image loading="lazy"
+                          <Image
+                            loading="lazy"
                             src="/icons/backarrow.svg"
                             width={40}
                             height={40}
@@ -1313,7 +1236,8 @@ const Tabs = ({
                       className="flex justify-between text-left text-[14px] font-semibold "
                     >
                       Color &nbsp;
-                      <Image loading="lazy"
+                      <Image
+                        loading="lazy"
                         src="/icons/backarrow.svg"
                         width={40}
                         height={40}
@@ -1342,7 +1266,8 @@ const Tabs = ({
                           className="flex justify-between text-left text-[14px] font-semibold "
                         >
                           Design style &nbsp;
-                          <Image loading="lazy"
+                          <Image
+                            loading="lazy"
                             src="/icons/backarrow.svg"
                             width={40}
                             height={40}
@@ -1369,7 +1294,8 @@ const Tabs = ({
                       className="flex justify-between text-left text-[14px] font-semibold "
                     >
                       Latest &nbsp;
-                      <Image loading="lazy"
+                      <Image
+                        loading="lazy"
                         src="/icons/backarrow.svg"
                         width={40}
                         height={40}
@@ -1377,7 +1303,6 @@ const Tabs = ({
                 ${openAllDemandType ? " rotate-90" : "-rotate-90"}
 
                 `}
-
                         alt="arrow icon"
                       />
                     </div>
@@ -1396,7 +1321,8 @@ const Tabs = ({
                       className="flex justify-between text-left text-[14px] font-semibold "
                     >
                       Offer &nbsp;
-                      <Image loading="lazy"
+                      <Image
+                        loading="lazy"
                         src="/icons/backarrow.svg"
                         width={40}
                         height={40}
@@ -1472,10 +1398,11 @@ const Tabs = ({
                 </button>
                 <button
                   onClick={handleRemoveallFilters}
-                  className={` ${clearSelectedResult
-                    ? "bg-white border-[1.5px] border-black"
-                    : "bg-[#929292] opacity-50"
-                    } text-[14px] font-semibold text-black  w-full h-9 rounded-full`}
+                  className={` ${
+                    clearSelectedResult
+                      ? "bg-white border-[1.5px] border-black"
+                      : "bg-[#929292] opacity-50"
+                  } text-[14px] font-semibold text-black  w-full h-9 rounded-full`}
                 >
                   Clear all
                 </button>
