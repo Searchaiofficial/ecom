@@ -3,12 +3,16 @@ import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectRoomData } from "../Features/Slices/roomSlice";
-import { selectQuantity, updateQuantity } from "../Features/Slices/calculationSlice";
+import {
+  selectQuantity,
+  updateQuantity,
+} from "../Features/Slices/calculationSlice";
 import { selecteddbItems, setDbItems } from "../Features/Slices/cartSlice";
 import Link from "next/link";
 import axios from "axios";
 import Emptycart from "./EmptyCart";
 import CartProduct from "./Main/CartProduct";
+import { removeFromCart } from "@/tag-manager/events/remove_from_cart";
 
 const AddCart = () => {
   const dispatch = useDispatch();
@@ -20,7 +24,7 @@ const AddCart = () => {
   const [cartStatus, setCartStaus] = useState("");
   const dbItems = useSelector((state) => state.cart.dbItems);
 
-  const cartdata = useSelector(selecteddbItems)
+  const cartdata = useSelector(selecteddbItems);
   // console.log(cartdata)
   // console.log()
 
@@ -30,7 +34,6 @@ const AddCart = () => {
     console.log(id);
   }
 
-
   useEffect(() => {
     console.log("Updated cartdata", cartdata);
     console.log("Updated cartStatus", cartStatus);
@@ -39,53 +42,57 @@ const AddCart = () => {
   let totalPrice = 0;
   let quantities = 0;
 
-
   let totalServicesPrice = 0;
 
   if (cartdata) {
     totalServicesPrice = cartdata.items.reduce((total, item) => {
       const serviceTotalCost = item.selectedServices.reduce(
-        (serviceTotal, service) => serviceTotal + parseFloat(service.cost * service.quantity),
-        0
-      );
-      return (total + serviceTotalCost);
-    }, 0);
-  }
-
-  console.log(cartdata)
-
-  console.log(totalServicesPrice)
-
-  let totalAccessoryPrice = 0;
-
-  if (cartdata) {
-    totalAccessoryPrice = cartdata.items.reduce((total, item) => {
-      const serviceTotalCost = item.selectedAccessories.reduce(
-        (serviceTotal, service) => serviceTotal + parseFloat(service.perUnitPrice * service.quantity),
+        (serviceTotal, service) =>
+          serviceTotal + parseFloat(service.cost * service.quantity),
         0
       );
       return total + serviceTotalCost;
     }, 0);
   }
 
-  console.log(totalAccessoryPrice)
+  console.log(cartdata);
 
+  console.log(totalServicesPrice);
+
+  let totalAccessoryPrice = 0;
+
+  if (cartdata) {
+    totalAccessoryPrice = cartdata.items.reduce((total, item) => {
+      const serviceTotalCost = item.selectedAccessories.reduce(
+        (serviceTotal, service) =>
+          serviceTotal + parseFloat(service.perUnitPrice * service.quantity),
+        0
+      );
+      return total + serviceTotalCost;
+    }, 0);
+  }
+
+  console.log(totalAccessoryPrice);
 
   let SumtotalPrice = 0;
 
-  console.log(cartdata)
+  console.log(cartdata);
 
   if (cartdata) {
     SumtotalPrice = cartdata.items.reduce((total, item) => {
       const serviceTotalCost = item.selectedServices.reduce(
-        (serviceTotal, service) => serviceTotal + parseFloat(service.cost * service?.quantity),
+        (serviceTotal, service) =>
+          serviceTotal + parseFloat(service.cost * service?.quantity),
         0
       );
       const accessoriesTotalCost = item.selectedAccessories.reduce(
-        (accessoryTotal, accessory) => accessoryTotal + parseFloat(accessory.totalPrice * accessory?.quantity),
+        (accessoryTotal, accessory) =>
+          accessoryTotal +
+          parseFloat(accessory.totalPrice * accessory?.quantity),
         0
       );
-      const itemTotalPrice = (item.price + serviceTotalCost + accessoriesTotalCost) * item.quantity;
+      const itemTotalPrice =
+        (item.price + serviceTotalCost + accessoriesTotalCost) * item.quantity;
       return total + itemTotalPrice;
     }, 0);
   }
@@ -98,8 +105,6 @@ const AddCart = () => {
       return total + (item?.quantity || 0);
     }, 0);
   }
-
-
 
   const postUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`;
   const postData = {
@@ -120,7 +125,7 @@ const AddCart = () => {
         },
       });
 
-      console.log(response.data)
+      console.log(response.data);
 
       if (response.status !== 200) {
         console.error("HTTP status", response.status);
@@ -151,8 +156,11 @@ const AddCart = () => {
   console.log(cartdata);
 
   const handleItemDelete = async (productId) => {
-    console.log(productId)
-    console.log(id)
+    removeFromCart({
+      item: cartdata?.items?.find?.((item) => item.productId._id === productId)
+        ?.productId,
+    });
+
     try {
       const response = await axios.delete(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
@@ -163,7 +171,7 @@ const AddCart = () => {
           },
         }
       );
-      console.log(response.data)
+      console.log(response.data);
       if (response.status === 200) {
         setCartStaus("succeeded");
         // console.log(responce.data)
@@ -235,20 +243,19 @@ const AddCart = () => {
       setCartStaus("failed");
       console.error("Error updating quantity in database:", error);
     }
-  }
+  };
 
   const handleServiceIncrease = (productId, serviceId, quantity) => {
-
-    let Quant = quantity + 1
-    updateServiceQuantity(productId, serviceId, Quant)
-  }
+    let Quant = quantity + 1;
+    updateServiceQuantity(productId, serviceId, Quant);
+  };
 
   const handleServiceDecrease = (productId, serviceId, quantity) => {
-    let Quant = quantity - 1
+    let Quant = quantity - 1;
     if (Quant > 0) {
-      updateServiceQuantity(productId, serviceId, Quant)
+      updateServiceQuantity(productId, serviceId, Quant);
     }
-  }
+  };
 
   const updateAccessoryQuantity = async (productId, accessoryId, Quant) => {
     const postUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart/accessory/quantity`;
@@ -258,12 +265,11 @@ const AddCart = () => {
       accessoryId: accessoryId,
       quantity: Quant,
     };
-    console.log(postData)
+    console.log(postData);
     try {
       const response = await axios.post(postUrl, postData);
-      console.log(response.data)
+      console.log(response.data);
       if (response.status === 200) {
-
         // fetchData();
         dispatch(setDbItems(response.data));
         // setcartdata(response.data)
@@ -275,22 +281,20 @@ const AddCart = () => {
       setCartStaus("failed");
       console.error("Error updating quantity in database:", error);
     }
-  }
-
+  };
 
   const handleAccessoriesIncrease = (productId, accessoryId, quantity) => {
-    let Quant = quantity + 1
-    console.log(Quant)
-    updateAccessoryQuantity(productId, accessoryId, Quant)
-  }
+    let Quant = quantity + 1;
+    console.log(Quant);
+    updateAccessoryQuantity(productId, accessoryId, Quant);
+  };
   const handleAccessoriesDecrease = (productId, accessoryId, quantity) => {
-    let Quant = quantity - 1
-    console.log(Quant)
+    let Quant = quantity - 1;
+    console.log(Quant);
     if (Quant > 1) {
-      updateAccessoryQuantity(productId, accessoryId, Quant)
+      updateAccessoryQuantity(productId, accessoryId, Quant);
     }
-
-  }
+  };
 
   return (
     <div className="px-[67px]">
@@ -301,19 +305,20 @@ const AddCart = () => {
           <div className="flex-1">
             <h1 className="text-xl font-semibold mb-6">Bag</h1>
             <>
-              {cartdata && cartdata.items && cartdata.items.map((item) => (
-                <CartProduct
-                  cartItem={item}
-                  handleItemDelete={handleItemDelete}
-                  handleItemIncr={handleItemIncr}
-                  handleItemDecr={handleItemDecr}
-                  handleServiceIncrease={handleServiceIncrease}
-                  handleServiceDecrease={handleServiceDecrease}
-                  handleAccessoriesIncrease={handleAccessoriesIncrease}
-                  handleAccessoriesDecrease={handleAccessoriesDecrease}
-
-                />
-              ))}
+              {cartdata &&
+                cartdata.items &&
+                cartdata.items.map((item) => (
+                  <CartProduct
+                    cartItem={item}
+                    handleItemDelete={handleItemDelete}
+                    handleItemIncr={handleItemIncr}
+                    handleItemDecr={handleItemDecr}
+                    handleServiceIncrease={handleServiceIncrease}
+                    handleServiceDecrease={handleServiceDecrease}
+                    handleAccessoriesIncrease={handleAccessoriesIncrease}
+                    handleAccessoriesDecrease={handleAccessoriesDecrease}
+                  />
+                ))}
               {/* {
                 cartdata && cartdata.freeSamples.length > 0 && (
                   <div className="mt-5 flex flex-col gap-4">
@@ -367,7 +372,6 @@ const AddCart = () => {
                 )
               } */}
             </>
-
           </div>
         ) : (
           <>
@@ -377,9 +381,7 @@ const AddCart = () => {
         )}
         {cartdata && cartdata?.items?.length > 0 && (
           <div className="right-cart flex flex-col sm:w-1/3 w-[90vw] p-4 ">
-            <h1 className="text-xl font-semibold mb-6">
-              Order Summary
-            </h1>
+            <h1 className="text-xl font-semibold mb-6">Order Summary</h1>
             <div className="subtotal flex justify-between items-center mb-3 opacity-70">
               <div className="text-base">Product price</div>
               <div className="text-base font-bold flex">
@@ -402,7 +404,6 @@ const AddCart = () => {
                   height={20}
                   alt="rupees"
                   loading="lazy"
-
                 />
                 {totalServicesPrice}
               </div>
@@ -416,7 +417,6 @@ const AddCart = () => {
                   height={20}
                   alt="rupees"
                   loading="lazy"
-
                 />
                 {totalAccessoryPrice}
               </div>
@@ -435,9 +435,7 @@ const AddCart = () => {
             </div>
             <hr className="my-4 border-black border-[1px]" />
             <div className="total flex justify-between items-center mb-6">
-              <div className="text-lg font-semibold">
-                Total
-              </div>
+              <div className="text-lg font-semibold">Total</div>
               <div className="text-3xl font-semibold flex">
                 <Image
                   src="/icons/indianrupeesicon.svg"
@@ -445,7 +443,6 @@ const AddCart = () => {
                   height={25}
                   alt="rupees"
                   loading="lazy"
-
                 />
                 {SumtotalPrice}
               </div>
@@ -478,53 +475,53 @@ const AddCart = () => {
               </button>
             </Link>
           </div>
-
         )}
       </div>
       <div className="middle-cart">
-        {selectedItems && Object.values(selectedItems).map((item) => (
-          <div key={item.id} className="cartitem flex mb-6 border-b pb-4">
-            <div className="img w-48 h-48 mr-8">
-              <img
-                src={item?.image}
-                className="w-full h-full object-cover rounded-md"
-                alt={item?.title}
-              />
-            </div>
-            <div className="cartContent flex flex-col justify-between">
-              <div className="mainright">
-                <div className="leftContent flex flex-col">
-                  <h2 className="sm:text-xl text-lg sm:font-semibold font-medium  mb-2">
-                    {item?.title}
-                  </h2>
-                  <h3 className="text-gray-600">{item?.category}</h3>
-                </div>
-                <div className="flex rightContent sm:text-xl text-lg sm:font-semibold font-medium">
-                  <Image
-                    src="/icons/indianrupeesicon.svg"
-                    width={20}
-                    height={15}
-                    alt="rupees"
-                    loading="lazy"
-
-                  />{item?.price}
-                </div>
-                <div className="icons flex items-center space-x-2 mt-4 justify-around">
-                  <img
-                    src="/icons/delete-icon.svg"
-                    alt="delete"
-                    className="w-6 h-6 hover:text-slate-500 cursor-pointer "
-                  />
-                  <img
-                    src="/icons/info.svg"
-                    alt="broken heart"
-                    className="text-red-700 hover:text-red-500 cursor-pointer w-6 h-6"
-                  />
+        {selectedItems &&
+          Object.values(selectedItems).map((item) => (
+            <div key={item.id} className="cartitem flex mb-6 border-b pb-4">
+              <div className="img w-48 h-48 mr-8">
+                <img
+                  src={item?.image}
+                  className="w-full h-full object-cover rounded-md"
+                  alt={item?.title}
+                />
+              </div>
+              <div className="cartContent flex flex-col justify-between">
+                <div className="mainright">
+                  <div className="leftContent flex flex-col">
+                    <h2 className="sm:text-xl text-lg sm:font-semibold font-medium  mb-2">
+                      {item?.title}
+                    </h2>
+                    <h3 className="text-gray-600">{item?.category}</h3>
+                  </div>
+                  <div className="flex rightContent sm:text-xl text-lg sm:font-semibold font-medium">
+                    <Image
+                      src="/icons/indianrupeesicon.svg"
+                      width={20}
+                      height={15}
+                      alt="rupees"
+                      loading="lazy"
+                    />
+                    {item?.price}
+                  </div>
+                  <div className="icons flex items-center space-x-2 mt-4 justify-around">
+                    <img
+                      src="/icons/delete-icon.svg"
+                      alt="delete"
+                      className="w-6 h-6 hover:text-slate-500 cursor-pointer "
+                    />
+                    <img
+                      src="/icons/info.svg"
+                      alt="broken heart"
+                      className="text-red-700 hover:text-red-500 cursor-pointer w-6 h-6"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );
