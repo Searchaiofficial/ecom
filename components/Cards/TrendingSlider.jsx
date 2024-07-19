@@ -3,6 +3,7 @@
 import { register } from "swiper/element/bundle";
 import { useEffect, useRef } from "react";
 import Card from "./card";
+import { viewItemList } from "@/tag-manager/events/view_item_list";
 
 const TrendingSlider = ({ trendingData, isProductInCart, setPopupVisible }) => {
   const swiperRef = useRef(null);
@@ -59,6 +60,23 @@ const TrendingSlider = ({ trendingData, isProductInCart, setPopupVisible }) => {
 
     swiperRef.current.initialize();
   }, []);
+
+  useEffect(() => {
+    if (trendingData?.length) {
+      viewItemList({
+        items: trendingData.map((product) => ({
+          item_id: product._id,
+          item_name: product.productTitle,
+          item_category: product.category,
+          price: product.perUnitPrice,
+          currency: "INR",
+          quantity: 1,
+        })),
+        itemListId: "trending",
+        itemListName: "Trending",
+      });
+    }
+  }, [trendingData]);
 
   return (
     <div>

@@ -9,6 +9,7 @@ import "swiper/css/free-mode";
 import "swiper/css/mousewheel";
 import "swiper/css/scrollbar";
 import { Pagination, Scrollbar, Mousewheel, FreeMode } from "swiper/modules";
+import { viewItemList } from "@/tag-manager/events/view_item_list";
 
 const Dataslider = ({ category, data, sliderIndex }) => {
   const swiperRef = useRef(null);
@@ -29,27 +30,42 @@ const Dataslider = ({ category, data, sliderIndex }) => {
 
   const [productData, setProductData] = useState([]);
   useEffect(() => {
-    const Data = data.filter((item) => item.subcategory !== "Accessories")
-    console.log(Data)
+    const Data = data.filter((item) => item.subcategory !== "Accessories");
     if (Data.length > 0) {
       setProductData(Data);
     }
   }, [data]);
 
   useEffect(() => {
-    // console.log(productData);
-  }, []);
+    if (productData.length > 0) {
+      viewItemList({
+        items: productData.map((product) => ({
+          item_id: product._id,
+          item_name: product.productTitle,
+          item_category: product.category,
+          price: product.perUnitPrice,
+          currency: "INR",
+          quantity: 1,
+        })),
+        itemListId: "category-slider" + category,
+        itemListName: category,
+      });
+    }
+  }, [productData]);
   return (
     <div>
       <div className=" bg-white mt-[30px] lg:mt-0  px-[15px] ">
         <div className="w-full flex justify-between items-center">
-          <h2 className="font-semibold text-2xl pb-[20px] pt-[30px]">{category}</h2>
+          <h2 className="font-semibold text-2xl pb-[20px] pt-[30px]">
+            {category}
+          </h2>
           <div className="Slidenav flex text-2xl cursor-pointer text-white rounded-full gap-2">
             <div
               onClick={() => swiperRef.current.swiper.slidePrev()}
               className={`custom-prev-button-${sliderIndex} hover:bg-400 hover:scale-110 hover:text-slate-100 pr-6`}
             >
-              <Image loading="lazy"
+              <Image
+                loading="lazy"
                 src="/icons/left-icon.svg"
                 width={20}
                 height={20}
@@ -61,7 +77,8 @@ const Dataslider = ({ category, data, sliderIndex }) => {
               onClick={() => swiperRef.current.swiper.slideNext()}
               className={`custom-next-button-${sliderIndex} hover:bg-400 sm:translate-y-0 translate-y-10 hover:scale-110 hover:text-slate-100`}
             >
-              <Image loading="lazy"
+              <Image
+                loading="lazy"
                 src="/icons/right-icon.svg"
                 width={20}
                 height={20}
