@@ -1,9 +1,9 @@
 "use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ToastContainer, toast } from "react-toastify";
+// import { ToastContainer, toast } from "react-toastify";
 import IncDecCounter from "@/components/Count/Count";
-import "react-toastify/dist/ReactToastify.css";
+// import "react-toastify/dist/ReactToastify.css";
 import React from "react";
 import { useState, useEffect } from "react";
 import Calculation from "./Calculation";
@@ -668,7 +668,8 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
           }
         );
         if (response.status === 200) {
-          toast.success("Request sent successfully");
+          // toast.success("Request sent successfully");
+          console.log("success")
         }
 
         alert("Successfully requested!");
@@ -1969,13 +1970,13 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
             </div>
           </div>
         </div>
-        <ToastContainer
+        {/* <ToastContainer
           position="top-right"
           autoClose={5000}
           newestOnTop={true}
           theme="light"
           style={{ zIndex: "9999999999999" }}
-        />
+        /> */}
       </div>
     </>
   );

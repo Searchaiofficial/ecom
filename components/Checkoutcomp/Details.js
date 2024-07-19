@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import axios from "axios";
 
-import { FcOk } from "react-icons/fc";
 
 import { useRouter } from "next/navigation";
 
@@ -364,7 +363,7 @@ const Details = () => {
     }
 
     const id = localStorage.getItem("deviceId");
-    console.log(id)
+    console.log(id);
 
     dispatch(updateFormData(updatedForm));
     console.log("form-dispatch", updatedForm);
@@ -399,11 +398,13 @@ const Details = () => {
             cartId,
             isFreeSample,
             freeSampleCartId: freeSamples?._id,
-            amount : {
-              deliveryPrice : deliveryPrice,
-              productPrice : isFreeSample ? 0 : SumtotalPrice,
-              totalPrice : isFreeSample ? deliveryPrice : SumtotalPrice + deliveryPrice
-            }
+            amount: {
+              deliveryPrice: deliveryPrice,
+              productPrice: isFreeSample ? 0 : SumtotalPrice,
+              totalPrice: isFreeSample
+                ? deliveryPrice
+                : SumtotalPrice + deliveryPrice,
+            },
           }),
         }
       );
@@ -515,7 +516,14 @@ const Details = () => {
                   <div className="flex justify-between items-center  mb-4">
                     <div className="flex items-center  ">
                       <span>
-                        <FcOk size={40} />
+                        {/* <FcOk size={40} /> */}
+                        <img
+                          alt="speedDelivery"
+                          loading="lazy"
+                          src={"/icons/speeddelivery.svg"}
+                          height={25}
+                          width={25}
+                        />
                       </span>
                       <h3 className="text-lg font-bold ">
                         Collect information

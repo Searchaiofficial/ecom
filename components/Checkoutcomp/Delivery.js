@@ -10,7 +10,6 @@ import {
   selectQuantity,
   selectSchedular,
 } from "../Features/Slices/calculationSlice";
-import { LiaWarehouseSolid } from "react-icons/lia";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setDbItems } from "../Features/Slices/cartSlice";
@@ -580,9 +579,6 @@ const Delivery = () => {
               {/* ----------------- */}
               <div className="">
                 <div className="bg-[#e5e5e5] flex justify-center items-center p-[16px] rounded-tr-md rounded-tl-md">
-                  <span className="p-1 mr-2">
-                    <LiaWarehouseSolid size={30} />
-                  </span>
                   <h3>
                     <span className="text-[16px] font-semibold text-black">
                       {" "}
@@ -744,7 +740,7 @@ const Delivery = () => {
                 <div className="mt-4">
                   <div className="bg-gray-300 flex justify-start items-center p-2 rounded-tr-md rounded-tl-md">
                     <span className="p-1 mr-2">
-                      <LiaWarehouseSolid size={30} />
+                      {/* <LiaWarehouseSolid size={30} /> */}
                     </span>
                     <h3>
                       <span className="lg:text-lg text-[18px] font-bold text-black-500">

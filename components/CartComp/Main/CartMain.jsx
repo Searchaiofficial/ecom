@@ -12,7 +12,7 @@ import { selecteddbItems, setDbItems } from "../../Features/Slices/cartSlice";
 import Link from "next/link";
 import axios from "axios";
 import CartProduct from "./CartProduct";
-import { ArrowRight, X } from "lucide-react";
+// import { ArrowRight, X } from "lucide-react";
 import { getPinFromCoordinates } from "@/utils/getPinFromCoordinates";
 import { upsertUserLocation } from "@/components/Features/api";
 import { useSearchParams } from "next/navigation";
@@ -422,7 +422,8 @@ const CartMain = () => {
               </div>
 
               <div className="w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer md:hidden">
-                <X onClick={() => setSideMenu(false)} />
+                {/* <X onClick={() => setSideMenu(false)} /> */}
+                  <span onClick={() => setSideMenu(false)}>X</span>
               </div>
             </div>
             <div className="flex flex-col p-2">
@@ -791,7 +792,8 @@ const CartMain = () => {
               >
                 Continue to checkout
                 <div className=" hidden lg:flex w-10 h-10  items-center rounded-3xl bg-white ">
-                  <ArrowRight className="translate-x-2 text-black" />
+                  {/* <ArrowRight className="translate-x-2 text-black" /> */}
+                  right
                 </div>
               </button>
 
@@ -940,7 +942,8 @@ const CartMain = () => {
               >
                 Continue to checkout
                 <div className=" hidden lg:flex w-10 h-10  items-center rounded-3xl bg-white ">
-                  <ArrowRight className="translate-x-2 text-black" />
+                  {/* <ArrowRight className="translate-x-2 text-black" /> */}
+                  right
                 </div>
               </button>
               {/* <div className="flex items-center justify-between py-4 font-bold">

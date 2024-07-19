@@ -17,7 +17,7 @@ import {
 import { headerLinks } from "@/Model/Dropdown/AsideData/AsideData";
 import Midsection from "./Midsection/Midsection";
 import { useDispatch, useSelector } from "react-redux";
-import { MenuIcon, X } from "lucide-react";
+// import { MenuIcon, X } from "lucide-react";
 import TopHeaderWrapper from "./TopHeaderWrapper";
 import { useScrollVisibility } from "@/hooks/useScrollVisibility";
 import axios from "axios";
@@ -588,7 +588,8 @@ function Header({ setIsHeaderMounted }) {
 
               {toptext.length === 0 && (
                 <div className="w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer md:hidden">
-                  <X onClick={toggleMobileMenu} />
+                  <span onClick={toggleMobileMenu} >X</span>
+                  {/* <X onClick={toggleMobileMenu} /> */}
                 </div>
               )}
             </div>
