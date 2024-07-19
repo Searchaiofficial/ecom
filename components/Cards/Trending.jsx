@@ -46,39 +46,6 @@ const Trending = () => {
     }
   }, [newTrendingData]);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
-  //         {
-  //           params: {
-  //             deviceId: localStorage.getItem("deviceId"),
-  //           },
-  //         }
-  //       );
-  //       if (response.status !== 200) {
-  //         throw new Error("HTTP status " + response.status);
-  //       }
-  //       const data = response.data;
-  //       console.log("Fetched cart data:", data);
-
-  //       // Ensure cartData is an array
-  //       if (data && Array.isArray(data.items)) {
-  //         setCartData(data.items);
-  //       } else {
-  //         console.error("Cart data items are not an array:", data);
-  //         setCartData([]);
-  //       }
-  //     } catch (error) {
-  //       console.log("Error fetching cart data:", error);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
-
-  // console.log(cartData);
-
   const closePopup = () => {
     setPopupVisible(false);
   };

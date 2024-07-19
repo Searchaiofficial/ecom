@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -13,13 +13,16 @@ import { Pagination, Scrollbar, Mousewheel, FreeMode } from "swiper/modules";
 
 import SuggestionCard from "./SuggestionCard";
 import { useSelector, useDispatch } from "react-redux";
-import { selectBlogCardData, selectBlogCardStatus } from "../Features/Slices/blogCardSlice";
+import {
+  selectBlogCardData,
+  selectBlogCardStatus,
+} from "../Features/Slices/blogCardSlice";
 
 const Suggestion = () => {
   const blogCardData = useSelector(selectBlogCardData);
-  const blogCardStatus = useSelector(selectBlogCardStatus)
-  console.log(blogCardData, "blogCardData")
-  console.log(blogCardStatus, "blogCardStatus")
+  const blogCardStatus = useSelector(selectBlogCardStatus);
+  console.log(blogCardData, "blogCardData");
+  console.log(blogCardStatus, "blogCardStatus");
   const dispatch = useDispatch();
 
   const backgroundColors = [
@@ -32,34 +35,12 @@ const Suggestion = () => {
     "bg-[#FFF6EB]",
   ];
 
-  // useEffect(() => {
-  //   console.log('suggestion')
-  //   if (blogCardData.length === 0) {
-  //     dispatch({ type: "FETCH_BLOG_CARD_DATA", payload: "blogCard" });
-  //   }
-
-
-
-  // prevent infinite loop
-
   useEffect(() => {
-    console.log('suggestion')
+    console.log("suggestion");
     if (blogCardStatus === "idle" || blogCardStatus === "failed") {
       dispatch({ type: "FETCH_BLOG_CARD_DATA", payload: "blogCard" });
     }
-  }
-    , [blogCardData]);
-
-  // useEffect(() => {
-  //   console.log('suggestion')
-  //   if (blogCardData.length === 0) {
-  //     dispatch({ type: "FETCH_BLOG_CARD_DATA", payload: "blogCard" });
-  //   }
-  //   if (blogCardData) {
-  //     setSuggestionSlider(blogCardData);
-  //   }
-
-  // }, [blogCardData]);
+  }, [blogCardData]);
 
   const swiperOptions2 = {
     slidesPerView: 4.08,

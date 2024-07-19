@@ -24,27 +24,6 @@ function Card(props) {
     props.setPopupVisible(true);
   };
 
-  // const [reviews, setReviews] = useState([]);
-  // const [stars, setStars] = useState([]);
-
-  // const fetchReviews = async () => {
-  //   try {
-  //     console.log("props.id", props.id);
-  //     const response = await axios.get(
-  //       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getReview?productId=${props.id}`
-  //     );
-
-  //     console.log("reviews", response.data);
-
-  //     if (Array.isArray(response.data) && response.data.length > 0) {
-  //       setReviews(response.data);
-  //     } else {
-  //       console.error("Empty or invalid response data:", response.data);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching reviews:", error);
-  //   }
-  // };
 
   function renderStars(averageRating) {
     const maxStars = 5;
@@ -132,13 +111,6 @@ function Card(props) {
     day: "numeric",
   });
 
-  // const [formattedDate, setFormattedDate] = useState({
-  //   startDate: "",
-  //   endDate: "",
-  // });
-
-  console.log(props);
-
   const imageData = props.productImages?.map((item) => {
     return {
       color: item.color,
@@ -164,13 +136,6 @@ function Card(props) {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getReview?productId=${props.id}`
       );
-      console.log("reviews", response.data);
-
-      // if (Array.isArray(response.data) && response.data.length > 0) {
-      //   setReviews(response.data);
-      // } else {
-      //   console.error("Empty or invalid response data:", response.data);
-      // }
 
       setReviews(response.data);
     } catch (error) {
@@ -230,11 +195,8 @@ function Card(props) {
   useEffect(() => {
     fetchReviews();
 
-    // const stars = renderStars(3.6);
-    // setStars(stars)
   }, [props.id]);
 
-  // console.log(Reviews)
 
   function calculateAverageRating(reviews) {
     if (reviews.length > 0) {
@@ -349,7 +311,7 @@ function Card(props) {
                   height={300}
                   width={300}
                   // onClick={() => handleClick(props.title, props.category)}
-                  loading="eager"
+                  // loading="eager"
                   className={slide === idx ? "aspect-square w-[400px]" : "slide-hidden"}
                 />
               </Link>
@@ -372,8 +334,6 @@ function Card(props) {
               <div
                 key={idx}
                 className={`h-[0.4rem] w-[0.4rem] rounded-[50%] mr-1 ${slide === idx ? 'bg-white' : 'bg-[#cccc]'}`}
-
-              // onClick={() => setSlide(idx)}
               ></div>
             ))}
           </span>
@@ -450,34 +410,11 @@ function Card(props) {
           )}
         </div>
 
-        {/* {props.expectedDelivery && (
-            <div className="flex items-center">
-              {props.expectedDelivery <= 5 && (
-                <Image
-                  alt="speedDelivery"
-                  loading="lazy"
-                  src={"/icons/speeddelivery.svg"}
-                  height={70}
-                  width={70}
-                />
-              )}
-              <p className="text-[#757575] text-[12px]  ml-2">
-                Expected delivery on &nbsp;
-                <span className="text-[#0152be] font-md font-semibold">
-                  {getExpectedDeliveryDate(props.expectedDelivery)}
-                </span>
-              </p>
-            </div>
-          )} */}
-
         {props?.specialPrice?.price && (
           <div className="flex flex-col my-3">
             <p className="text-[#757575] text-[12px] pt-[3px]">
               Regular price: Rs.{props?.price} (incl. of all taxes)
             </p>
-
-            {/* <div className="flex flex-col mt-[6px]">
-                <p className="text-[#757575] text-[12px] pt-[3px]">Regular price: Rs.{props?.totalPrice} (incl. of all taxes)</p> */}
 
             {props?.specialPrice?.startDate &&
               props?.specialPrice?.endDate && (
@@ -519,19 +456,6 @@ function Card(props) {
             </p>
           </div>
         )}
-
-        {/* <div className="flex lg:gap-2 gap-1 mt-2 ">
-            <Image loading="lazy" src={"/icons/adtocart.svg"} height={25} width={25} className="mr-2 cursor-pointer" />
-            <Image loading="lazy" src={"/icons/like.svg"} height={30} width={25} className=" cursor-pointer" />
-          </div> */}
-
-        {/* {
-            Starts &&
-            <div className="flex items-center mt-1">
-              {Starts}
-              <p className="text-[14px] mt-1 ml-2">({Reviews.length})</p>
-            </div>
-          } */}
 
         {imageData?.length > 1 && (
           <div className="colorContainer flex flex-col sm:w-auto w-[80vw] mt-1">

@@ -1,11 +1,12 @@
 // "use client";
 import dynamic from "next/dynamic";
+import MainSliderWrapper from "../MainSlider/MainSliderWrapper";
 const Footer = dynamic(() => import("../Footer/Footer"));
 const Multicard = dynamic(() => import("../Imagechanger/Multicard"));
 const TabsWrapper = dynamic(() => import("./TabsWrapper"));
 const Profile = dynamic(() => import("./Profile"));
 const Phone = dynamic(() => import("./Phone"));
-// const Trending = dynamic(() => import("./Trending"));
+const Trending = dynamic(() => import("./Trending"));
 const Suggestion = dynamic(() => import("./Suggestion"));
 const Cookies = dynamic(() => import("./Cookies"));
 const MulticardService = dynamic(() => import("./MultiCardService"));
@@ -14,15 +15,16 @@ const Display = dynamic(() => import("./Display"));
 const RoomCard = dynamic(() => import("./RoomCard"));
 const DataSliderWrapper = dynamic(() => import("./DataSliderWrapper"));
 const UserReviewPosts = dynamic(() => import("./UserReviewPosts"));
+const CategoriesSlider = dynamic(() => import("./categorySlider"));
 
 // import Display from "./Display";
 // import RoomCard from "./RoomCard";
+// import Profile from "./Profile";
 // import DataSliderWrapper from "./DataSliderWrapper";
 // import UserReviewPosts from "./UserReviewPosts";
 
-import MainSliderWrapper from "../MainSlider/MainSliderWrapper";
-import CategoriesSlider from "./categorySlider";
-import Trending from "./Trending";
+// import CategoriesSlider from "./CategoriesSlider";
+// import Trending from "./Trending";
 
 function Cards() {
   if (typeof window !== "undefined") {
