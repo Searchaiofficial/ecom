@@ -1,7 +1,6 @@
 import { gtmEvent } from "..";
 
 export const addToCart = ({ item }) => {
-  console.log("Add to cart event fired", item);
   gtmEvent({
     params: {
       ecommerce: null,
