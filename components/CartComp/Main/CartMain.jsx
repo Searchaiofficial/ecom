@@ -20,6 +20,7 @@ import {
   selectFreeSampleItems,
   setFreeSamples,
 } from "@/components/Features/Slices/freeSampleSlice";
+import { removeFreeSample } from "@/tag-manager/events/remove_free_sample";
 const CartMain = () => {
   const dispatch = useDispatch();
   const selectedItems = useSelector(selecteddbItems);
@@ -337,6 +338,10 @@ const CartMain = () => {
   }, []);
 
   const handleSampleDelete = async (sampleId) => {
+    removeFreeSample({
+      item: freeSamples.products.find((p) => p._id === sampleId),
+    });
+
     try {
       const responce = await axios.delete(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart/freeSampling`,
@@ -423,7 +428,7 @@ const CartMain = () => {
 
               <div className="w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer md:hidden">
                 {/* <X onClick={() => setSideMenu(false)} /> */}
-                  <span onClick={() => setSideMenu(false)}>X</span>
+                <span onClick={() => setSideMenu(false)}>X</span>
               </div>
             </div>
             <div className="flex flex-col p-2">
