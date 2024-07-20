@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import "./styles.css";
 import { useRouter } from "next/navigation";
-import ImageCaresoul from "@/components/Room/imagecaresoul";
+import { addFreeSamples } from "@/tag-manager/events/add_free_samples";
 
 const { default: axios } = require("axios");
 const { default: Image } = require("next/image");
@@ -152,6 +152,7 @@ const RoomToolbar = ({ data }) => {
   };
 
   const handleBuySamples = async () => {
+    addFreeSamples({ items: selectedSamples });
     setOpenFreeSample(false);
     document.body.style.overflow = "auto";
     try {
