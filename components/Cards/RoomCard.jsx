@@ -23,7 +23,7 @@ const RoomCard = async () => {
             </p>
             <div class="border hidden border-black rounded-full lg:flex items-center justify-center h-[40px] cursor-pointer hover:border-gray-700 transition-colors">
               <Link
-                href={`heading/offers/${gallery.items[0].offer.replace(
+                href={`offers/new/${gallery.items[0].offer.replace(
                   / /g,
                   "-"
                 )}`}
@@ -40,8 +40,8 @@ const RoomCard = async () => {
       </div>
       {gallery && (
         <div className="px-[15px] flex justify-between mx-auto mb-[12px] lg:mb-10 ">
-          <div className=" w-full flex justify-center max-h-[1000px] screens ">
-            <div className="w-full  h-[730px] grid grid-cols-2 lg:grid-cols-12 gap-y-4  gap-x-4 auto-rows-fr">
+          <div className=" w-full flex justify-center  screens ">
+            <div className="w-full h-[1000px] md:h-[730px] grid grid-cols-2 lg:grid-cols-12 gap-y-4  gap-x-4 auto-rows-fr">
               {/* 1 */}
               <div
                 className="parent col-start-1 col-end-3 row-start-1  lg:mb-0 row-end-6
@@ -49,7 +49,7 @@ const RoomCard = async () => {
             "
               >
                 <Link
-                  href={`heading/offers/${gallery.items[0].offer.replace(
+                  href={`offers/new/${gallery.items[0].offer.replace(
                     / /g,
                     "-"
                   )}`}
