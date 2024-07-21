@@ -280,7 +280,6 @@ function Card(props) {
           )}
 
           <div className="">
-            {console.log({ colors, selectedColor })}
             {selectedColor !== ""
               ? productImages
                   .find((item) => item.color === selectedColor)

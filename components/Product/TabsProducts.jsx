@@ -1436,6 +1436,7 @@ const Tabs = ({
                     specialprice={text.specialprice}
                     productDescription={text.productDescription}
                     productTitle={text.productTitle}
+                    productImages={text.productImages}
                     images={text.images}
                     idx={idx}
                     handlenav={handlenav}

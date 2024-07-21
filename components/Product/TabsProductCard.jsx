@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import "./styles.css";
 import axios from "axios";
-import {
-  selectQuantity,
-  updateQuantity,
-} from "../Features/Slices/calculationSlice";
 import { setDbItems } from "../Features/Slices/cartSlice";
 
 function TabsProductCard(props) {
@@ -166,7 +162,7 @@ function TabsProductCard(props) {
     day: "numeric",
   });
 
-  const [selectedColor, setSelectedColor] = useState("");
+  // const [selectedColor, setSelectedColor] = useState("");
   const [colorImage, setColorImage] = useState("");
   const [showCart, SetShowCart] = useState(false);
 
@@ -219,6 +215,14 @@ function TabsProductCard(props) {
     expectedDate.setDate(today.getDate() + expectedDelivery);
     return expectedDate.toDateString(); // Format the date as a readable string
   };
+
+  const colors = props.productImages?.map((item) => item.color);
+  const [selectedColor, setSelectedColor] = useState(colors[0] || "");
+  const productImages = props.productImages;
+  const [isNavigationHovered, setIsNavigationHovered] = useState(false);
+
+  console.log({ productImagesTest: props.images });
+
   return (
     <>
       <div
@@ -229,8 +233,9 @@ function TabsProductCard(props) {
         <div className="relative z[-999999] w-fit">
           <div
             onClick={(event) => event.stopPropagation()}
-            className={`flex justify-between text-black   checkbox-div absolute top-0 right-0 z-50 ${props.selectedpdt.includes(props.text) ? "visible" : "visible"
-              }`}
+            className={`flex justify-between text-black   checkbox-div absolute top-0 right-0 z-50 ${
+              props.selectedpdt.includes(props.text) ? "visible" : "visible"
+            }`}
           >
             <input
               type="checkbox"
@@ -253,15 +258,13 @@ function TabsProductCard(props) {
             >
               {props.offer}
             </div>
-          ) : (props.demandtype || props.productType === "special") ? (
+          ) : props.demandtype || props.productType === "special" ? (
             <div
               className={
                 "flex text-[12px] justify-between text-black font-normal bg-white py-[.1rem] px-[.5rem] absolute top-2 left-2 z-10"
               }
             >
-              {props.productType === "special"
-                ? "Top Rated"
-                : props.demandtype}
+              {props.productType === "special" ? "Top Rated" : props.demandtype}
             </div>
           ) : (
             ""
@@ -275,6 +278,8 @@ function TabsProductCard(props) {
           >
             {isHovered && slide !== 0 && (
               <Image
+                onMouseEnter={() => setIsNavigationHovered(true)}
+                onMouseLeave={() => setIsNavigationHovered(false)}
                 loading="lazy"
                 src="/icons/backarrow-w.svg"
                 height={20}
@@ -284,36 +289,69 @@ function TabsProductCard(props) {
                 className="arrow arrow-left hover:opacity-100"
               />
             )}
-            {props.images?.map((item, idx) => {
-              return (
-                <Link
-                  href={`/${props.productTitle.replace(/ /g, "-")}`}
-                  onClick={() => handleclick(props.productTitle)}
-                >
-                  <Image
-                    loading="lazy"
-                    src={
-                      isHovered
-                        ? props.images[1]
-                        : colorImage
-                          ? colorImage
-                          : item
-                    }
-                    alt={props.productTitle}
-                    key={idx}
-                    height={300}
-                    width={300}
-                    className={
-                      slide === idx ? "aspect-square w-[400px]" : "hidden"
-                    }
-                  />
-                </Link>
-              );
-            })}
+            {selectedColor !== ""
+              ? productImages
+                  .find((item) => item.color === selectedColor)
+                  ?.images?.map((src, idx) => {
+                    return (
+                      <Link
+                        href={`/${props.productTitle.replace(/ /g, "-")}`}
+                        onClick={() => handleclick(props.productTitle)}
+                      >
+                        <Image
+                          loading="lazy"
+                          src={
+                            isHovered && !isNavigationHovered
+                              ? productImages.find(
+                                  (item) =>
+                                    item.color ===
+                                    colors.find(
+                                      (item) => item === selectedColor
+                                    )
+                                )?.images[1]
+                              : src
+                          }
+                          alt={props.productTitle}
+                          key={idx}
+                          height={300}
+                          width={300}
+                          className={
+                            slide === idx ? "aspect-square w-[400px]" : "hidden"
+                          }
+                        />
+                      </Link>
+                    );
+                  })
+              : props.images?.map((item, idx) => {
+                  return (
+                    <Link
+                      href={`/${props.productTitle.replace(/ /g, "-")}`}
+                      onClick={() => handleclick(props.productTitle)}
+                    >
+                      <Image
+                        loading="lazy"
+                        src={
+                          isHovered && !isNavigationHovered
+                            ? props.images[1]
+                            : item
+                        }
+                        alt={props.productTitle}
+                        key={idx}
+                        height={300}
+                        width={300}
+                        className={
+                          slide === idx ? "aspect-square w-[400px]" : "hidden"
+                        }
+                      />
+                    </Link>
+                  );
+                })}
 
             {isHovered && (
               <div>
                 <Image
+                  onMouseEnter={() => setIsNavigationHovered(true)}
+                  onMouseLeave={() => setIsNavigationHovered(false)}
                   loading="lazy"
                   src="/icons/rightarrow-w.svg"
                   height={20}
@@ -361,9 +399,7 @@ function TabsProductCard(props) {
                   Ayatrio Member Favorite
                 </p>
               )}
-              <h3
-                className={` text-[14px] font-semibold `}
-              >
+              <h3 className={` text-[14px] font-semibold `}>
                 {props.productTitle}
               </h3>
             </div>
@@ -378,10 +414,11 @@ function TabsProductCard(props) {
               <div className=" flex h-[40px] pb-[6px] items-center justify-between mt-2">
                 <div className="flex gap-1 items-end">
                   <h2
-                    className={`text-3xl flex font-semibold leading-[0.5]  tracking-wide ${props?.specialprice?.price
-                      ? "bg-[#FFD209] px-2 pt-3 pb-1 w-fit shadow-lg"
-                      : ""
-                      } `}
+                    className={`text-3xl flex font-semibold leading-[0.5]  tracking-wide ${
+                      props?.specialprice?.price
+                        ? "bg-[#FFD209] px-2 pt-3 pb-1 w-fit shadow-lg"
+                        : ""
+                    } `}
                     style={
                       props?.specialprice?.price
                         ? { boxShadow: "3px 3px #C31952" }
@@ -389,8 +426,9 @@ function TabsProductCard(props) {
                     }
                   >
                     <span
-                      className={`text-sm ${props?.specialprice?.price ? "" : "pt-3.5"
-                        }`}
+                      className={`text-sm ${
+                        props?.specialprice?.price ? "" : "pt-3.5"
+                      }`}
                     >
                       Rs. &nbsp;
                     </span>{" "}
@@ -494,15 +532,19 @@ function TabsProductCard(props) {
                     {imageData?.map((item, index) => (
                       <div
                         key={index}
-                        onClick={() => handleColor(item.image)}
+                        onClick={() => {
+                          setSelectedColor(item.color);
+                          handleColor(item.image);
+                        }}
                         // onMouseLeave={() => setColorImage(null)}
 
                         className={`parent relative w-[40px] h-[40px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
-            ${selectedColor === item.color ||
-                            (index === 0 && selectedColor === "")
-                            ? " border-black "
-                            : " border-black"
-                          }   
+            ${
+              selectedColor === item.color ||
+              (index === 0 && selectedColor === "")
+                ? " border-black "
+                : " border-black"
+            }   
           `}
                       >
                         <Image
@@ -525,7 +567,7 @@ function TabsProductCard(props) {
                           } */}
 
                         {colorImage === item.image ||
-                          (index === 0 && colorImage === "") ? (
+                        (index === 0 && colorImage === "") ? (
                           <div className="w-[100%] h-[2px] bg-black mt-[50px]" />
                         ) : (
                           ""
