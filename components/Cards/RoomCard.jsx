@@ -41,11 +41,11 @@ const RoomCard = async () => {
       {gallery && (
         <div className="px-[15px] flex justify-between mx-auto mb-[12px] lg:mb-10 ">
           <div className=" w-full flex justify-center max-h-[1000px] screens ">
-            <div className="w-full  lg:h-[730px] grid grid-cols-2 lg:grid-cols-12 gap-y-4  gap-x-4 auto-rows-fr">
+            <div className="w-full  h-[730px] grid grid-cols-2 lg:grid-cols-12 gap-y-4  gap-x-4 auto-rows-fr">
               {/* 1 */}
               <div
                 className="parent col-start-1 col-end-3 row-start-1  lg:mb-0 row-end-6
-              lg:col-start-1 lg:col-end-7 lg:row-start-1 lg:row-end-12
+              lg:col-start-1 lg:col-end-7 lg:row-start-1 lg:row-end-12 
             "
               >
                 <Link
