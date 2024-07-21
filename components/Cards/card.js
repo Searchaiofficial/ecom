@@ -1,29 +1,14 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import "./styles.css";
-
-import Carousel from "./swip";
-
-import PopUp from "../Reviews/PopUp";
-import { useRouter } from "next/navigation";
 import axios from "axios";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
-import {
-  selectQuantity,
-  updateQuantity,
-} from "../Features/Slices/calculationSlice";
 import { selecteddbItems, setDbItems } from "../Features/Slices/cartSlice";
-import ResponseCache from "next/dist/server/response-cache";
 
 function Card(props) {
   const dispatch = useDispatch();
-
-  const handleImageClick = () => {
-    props.setPopupVisible(true);
-  };
-
 
   function renderStars(averageRating) {
     const maxStars = 5;
@@ -80,14 +65,6 @@ function Card(props) {
     setStars(stars);
   }, [props.id]);
 
-  const handleclick = async (id, category) => {
-    const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getSingleProduct?id=${id}`;
-    const response = await axios.get(url);
-    const data = response.data;
-    dispatch({ type: "FETCH_ROOM_REQUEST", payload: id });
-
-    // router.push(`/product`);
-  };
   const [slide, setSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -118,15 +95,18 @@ function Card(props) {
     };
   });
 
+  const colors = props.productImages?.map((item) => item.color);
+  const [selectedColor, setSelectedColor] = useState(colors[0] || "");
+  const productImages = props.productImages;
+
+  console.log({
+    selectedColor,
+    colorImages: productImages.find((item) => item.color === selectedColor),
+  });
+
   const [colorImage, setColorImage] = useState("");
 
-  console.log(imageData);
-  const [selectedColor, setSelectedColor] = useState("");
-
-  const handleColor = (imagesrc) => {
-    console.log(imagesrc);
-    setColorImage(imagesrc);
-  };
+  const [isNavigationHovered, setIsNavigationHovered] = useState(false);
 
   const [Reviews, setReviews] = useState([]);
   const [Starts, setStars] = useState();
@@ -194,9 +174,7 @@ function Card(props) {
 
   useEffect(() => {
     fetchReviews();
-
   }, [props.id]);
-
 
   function calculateAverageRating(reviews) {
     if (reviews.length > 0) {
@@ -260,7 +238,6 @@ function Card(props) {
   };
 
   return (
-
     <div
       key={props.cardkey}
       className="card pb-12 "
@@ -278,9 +255,7 @@ function Card(props) {
               "flex text-[12px] justify-between text-black font-normal bg-white absolute top-2 left-2 z-10 py-[.1rem] px-[.5rem]"
             }
           >
-            {props.productType === "special"
-              ? "Top Rated"
-              : props.demandtype}
+            {props.productType === "special" ? "Top Rated" : props.demandtype}
             {/* {props.demandtype} */}
           </div>
         )}
@@ -292,6 +267,8 @@ function Card(props) {
         >
           {isHovered && slide !== 0 && (
             <Image
+              onMouseEnter={() => setIsNavigationHovered(true)}
+              onMouseLeave={() => setIsNavigationHovered(false)}
               loading="lazy"
               src="/icons/backarrow-w.svg"
               height={20}
@@ -303,23 +280,68 @@ function Card(props) {
           )}
 
           <div className="">
-            {props.imgSrc?.map((item, idx) => (
-              <Link href={`/${props.title.replace(/ /g, "-")}`} key={idx} aria-label={`View details about ${props.title}`} >
-                <Image
-                  src={isHovered ? props.imgSrc[1] : colorImage || item}
-                  alt={`Image of ${props.title}`}
-                  height={300}
-                  width={300}
-                  // onClick={() => handleClick(props.title, props.category)}
-                  // loading="eager"
-                  className={slide === idx ? "aspect-square w-[400px]" : "slide-hidden"}
-                />
-              </Link>
-            ))}
+            {console.log({ colors, selectedColor })}
+            {selectedColor !== ""
+              ? productImages
+                  .find((item) => item.color === selectedColor)
+                  ?.images?.map((src, idx) => (
+                    <Link
+                      href={`/${props.title.replace(/ /g, "-")}`}
+                      key={idx}
+                      aria-label={`View details about ${props.title}`}
+                    >
+                      <Image
+                        src={
+                          isHovered && !isNavigationHovered
+                            ? productImages.find(
+                                (item) => item.color === colors[0]
+                              )?.images[1]
+                            : src
+                        }
+                        alt={`Image of ${props.title}`}
+                        height={300}
+                        width={300}
+                        // onClick={() => handleClick(props.title, props.category)}
+                        // loading="eager"
+                        className={
+                          slide === idx
+                            ? "aspect-square w-[400px]"
+                            : "slide-hidden"
+                        }
+                      />
+                    </Link>
+                  ))
+              : props.imgSrc?.map((item, idx) => (
+                  <Link
+                    href={`/${props.title.replace(/ /g, "-")}`}
+                    key={idx}
+                    aria-label={`View details about ${props.title}`}
+                  >
+                    <Image
+                      src={
+                        isHovered && !isNavigationHovered
+                          ? props.imgSrc[1]
+                          : colorImage || item
+                      }
+                      alt={`Image of ${props.title}`}
+                      height={300}
+                      width={300}
+                      // onClick={() => handleClick(props.title, props.category)}
+                      // loading="eager"
+                      className={
+                        slide === idx
+                          ? "aspect-square w-[400px]"
+                          : "slide-hidden"
+                      }
+                    />
+                  </Link>
+                ))}
           </div>
 
           {isHovered && (
             <Image
+              onMouseEnter={() => setIsNavigationHovered(true)}
+              onMouseLeave={() => setIsNavigationHovered(false)}
               src="/icons/rightarrow-w.svg"
               height={30}
               width={30}
@@ -333,7 +355,9 @@ function Card(props) {
             {props.imgSrc.map((_, idx) => (
               <div
                 key={idx}
-                className={`h-[0.4rem] w-[0.4rem] rounded-[50%] mr-1 ${slide === idx ? 'bg-white' : 'bg-[#cccc]'}`}
+                className={`h-[0.4rem] w-[0.4rem] rounded-[50%] mr-1 ${
+                  slide === idx ? "bg-white" : "bg-[#cccc]"
+                }`}
               ></div>
             ))}
           </span>
@@ -358,14 +382,14 @@ function Card(props) {
         </p>
 
         <div className=" flex h-[40px] pb-[6px] items-center justify-between mt-2">
-          {props.productType === "normal" ||
-            props.productType === "special" ? (
+          {props.productType === "normal" || props.productType === "special" ? (
             <div className="flex gap-1 items-end">
               <p
-                className={`text-3xl flex font-semibold leading-[0.5] tracking-wide ${props.specialPrice?.price
-                  ? "bg-[#FFD209] px-2 pt-3 pb-1 w-fit shadow-lg"
-                  : ""
-                  }`}
+                className={`text-3xl flex font-semibold leading-[0.5] tracking-wide ${
+                  props.specialPrice?.price
+                    ? "bg-[#FFD209] px-2 pt-3 pb-1 w-fit shadow-lg"
+                    : ""
+                }`}
                 style={
                   props?.specialPrice?.price
                     ? { boxShadow: "3px 3px #C31952" }
@@ -373,8 +397,9 @@ function Card(props) {
                 }
               >
                 <span
-                  className={`text-sm ${props?.specialPrice?.price ? "" : "pt-3.5"
-                    }`}
+                  className={`text-sm ${
+                    props?.specialPrice?.price ? "" : "pt-3.5"
+                  }`}
                 >
                   Rs. &nbsp;
                 </span>{" "}
@@ -416,12 +441,11 @@ function Card(props) {
               Regular price: Rs.{props?.price} (incl. of all taxes)
             </p>
 
-            {props?.specialPrice?.startDate &&
-              props?.specialPrice?.endDate && (
-                <p className="text-[#757575] text-[12px] ">
-                  Price valid {formattedStartDate} - {formattedEndDate}
-                </p>
-              )}
+            {props?.specialPrice?.startDate && props?.specialPrice?.endDate && (
+              <p className="text-[#757575] text-[12px] ">
+                Price valid {formattedStartDate} - {formattedEndDate}
+              </p>
+            )}
           </div>
         )}
         {props?.rating > 0 && (
@@ -462,13 +486,14 @@ function Card(props) {
             <div className="w-full flex justify-between mb-1">
               <p className="text-[12px] font-normal">Colours</p>
             </div>
-            <div className="colors flex gap-1.5">
+            <div className=" flex gap-1.5">
               {imageData.map((item, index) => (
                 <div
                   key={index}
-                  onClick={() => handleColor(item.image)}
+                  // onClick={() => handleColor(item.image)}
+                  onClick={() => setSelectedColor(item.color)}
                   className={`relative w-[40px] h-[40px] text-center flex justify-center items-center cursor-pointer
-            ${selectedColor === item.color || (index === 0 && selectedColor === "") ? "border-black" : "border-black"}
+            ${selectedColor === item.color ? "border-black" : "border-black"}
           `}
                 >
                   <Image
@@ -479,7 +504,7 @@ function Card(props) {
                     objectFit="cover"
                     loading="lazy"
                   />
-                  {colorImage === item.image || (index === 0 && colorImage === "") ? (
+                  {selectedColor === item.color ? (
                     <div className="w-full h-[2px] bg-black mt-[50px]" />
                   ) : null}
                 </div>
@@ -489,7 +514,6 @@ function Card(props) {
         )}
       </div>
     </div>
-
   );
 }
 
