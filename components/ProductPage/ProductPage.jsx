@@ -96,7 +96,11 @@ const ProductPage = ({ title, initialData }) => {
           <div className="mb-4">
             <NavigationItem product={data} />
           </div>
-          <RoomImageList images={data?.images} alt={data?.productTitle} />
+          <RoomImageList
+            data={data}
+            images={data?.images}
+            alt={data?.productTitle}
+          />
           <ImageCaresoul images={data?.images} />
           <div className="block md:hidden relative z-[9999]">
             <Card

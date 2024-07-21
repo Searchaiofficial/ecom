@@ -1,20 +1,28 @@
 import React, { useState, useCallback, useRef } from "react";
 import Image from "next/image";
 import { useSelector } from "react-redux";
-import {
-  selectProductImages,
-  selectImages,
-} from "../Features/Slices/imageDataSlice";
+import { selectProductImages } from "../Features/Slices/imageDataSlice";
 import "./styles.css";
 import Link from "next/link";
+import { selectColor } from "../Features/Slices/productColorSlice";
 
-export default function RoomImageList({ images, alt }) {
+export default function RoomImageList({ data, images, alt }) {
   const [zoomedImageIndex, setZoomedImageIndex] = useState(null);
   const imageContainerRefs = useRef([]);
   const productImages = useSelector(selectProductImages);
 
+  const selectedColor = useSelector(selectColor);
+
+  const colorImages = data.productImages.find(
+    (item) => item.color === selectedColor
+  )?.images;
+
   const imagesToDisplay =
-    productImages.length > 0 ? productImages[0].images : images;
+    colorImages?.length > 0
+      ? colorImages
+      : productImages.length > 0
+      ? productImages[0].images
+      : images;
 
   const handleImageClick = (index, e) => {
     setZoomedImageIndex((prevIndex) => (prevIndex === index ? null : index));
@@ -27,15 +35,18 @@ export default function RoomImageList({ images, alt }) {
     e.currentTarget.style.transformOrigin = `${x}% ${y}%`;
   };
 
-  const handleMouseMove = useCallback((e, index) => {
-    if (zoomedImageIndex !== index) return;
+  const handleMouseMove = useCallback(
+    (e, index) => {
+      if (zoomedImageIndex !== index) return;
 
-    const rect = e.target.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
+      const rect = e.target.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
 
-    e.target.style.transformOrigin = `${x}% ${y}%`;
-  }, [zoomedImageIndex]);
+      e.target.style.transformOrigin = `${x}% ${y}%`;
+    },
+    [zoomedImageIndex]
+  );
 
   return (
     <div className="flex flex-col relative">
@@ -58,7 +69,9 @@ export default function RoomImageList({ images, alt }) {
           {imagesToDisplay?.map((image, index) => (
             <div
               key={index}
-              className={`sm:col-span-1 sm:row-start-${index + 1} image-container `}
+              className={`sm:col-span-1 sm:row-start-${
+                index + 1
+              } image-container `}
               onClick={(e) => handleImageClick(index, e)}
               onMouseMove={(e) => handleMouseMove(e, index)}
               ref={(el) => (imageContainerRefs.current[index] = el)}
@@ -69,12 +82,12 @@ export default function RoomImageList({ images, alt }) {
                 alt={alt}
                 width={800}
                 height={800}
-                className={`sm:w-full aspect-square object-cover ${zoomedImageIndex === index ? "zoomed" : ""}`}
+                className={`sm:w-full aspect-square object-cover ${
+                  zoomedImageIndex === index ? "zoomed" : ""
+                }`}
               />
-
             </div>
           ))}
-
         </div>
       </div>
       {imagesToDisplay?.length > 4 && (

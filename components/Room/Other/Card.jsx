@@ -16,12 +16,19 @@ import {
 import "../styles.css";
 import axios from "axios";
 import Image from "next/image";
-import { selectProductImages } from "@/components/Features/Slices/imageDataSlice";
+import {
+  selectProductImages,
+  setProductImages,
+} from "@/components/Features/Slices/imageDataSlice";
 import { colorsData } from "../../../Model/ColorsData/Colors.js";
 import ResponseCache from "next/dist/server/response-cache";
 import { updateQuantity } from "../../Features/Slices/calculationSlice.js";
 import { setDbItems } from "@/components/Features/Slices/cartSlice";
 import { addToCart } from "@/tag-manager/events/add_to_cart";
+import {
+  selectColor,
+  setColor,
+} from "@/components/Features/Slices/productColorSlice";
 
 const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
   const quantity = useSelector(selectQuantity);
@@ -33,7 +40,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
   const [pricestate, setpricestate] = useState(0);
   const [coststate, setcoststate] = useState(7000);
   const [rollstate, setrollstate] = useState(0);
-  const [selectedColor, setSelectedColor] = useState("");
+  // const [selectedColor, setSelectedColor] = useState("");
   const [paletteType, setPaletteType] = useState("color");
   const dispatch = useDispatch();
   const [isActive, setIsActive] = useState("EMI Plans");
@@ -44,6 +51,18 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
 
   const [user, setUser] = useState({});
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const selectedColor = useSelector(selectColor);
+
+  const setSelectedColor = (color) => {
+    dispatch(setColor(color));
+  };
+
+  const colors = data.productImages?.map((item) => item.color);
+
+  useEffect(() => {
+    setSelectedColor(colors[0]);
+  }, []);
 
   // State to hold the selected specification
   const [selectedSpec, setSelectedSpec] = useState(null);
@@ -264,30 +283,10 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
       type: "FETCH_IMAGE_DATA",
       payload: color,
     });
-    console.log(color);
   };
 
   const postUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`;
-  const postRoomData = async () => {
-    try {
-      console.log("Posting room data:", {
-        deviceId: id,
-        productId: roomData._id,
-        quantity: quantity,
-      });
 
-      const postData = {
-        deviceId: id,
-        productId: roomData._id,
-        quantity: quantity,
-      };
-
-      const response = await axios.post(postUrl, postData);
-      if (response.status === 200) console.log(response);
-    } catch (error) {
-      console.error("Error posting room data:", error);
-    }
-  };
   // const dispatch = useDispatch()
 
   const [inCart, setInCart] = useState(false);
@@ -669,7 +668,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
         );
         if (response.status === 200) {
           // toast.success("Request sent successfully");
-          console.log("success")
+          console.log("success");
         }
 
         alert("Successfully requested!");
