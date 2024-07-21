@@ -294,7 +294,9 @@ function Card(props) {
                         src={
                           isHovered && !isNavigationHovered
                             ? productImages.find(
-                                (item) => item.color === colors[0]
+                                (item) =>
+                                  item.color ===
+                                  colors.find((item) => item === selectedColor)
                               )?.images[1]
                             : src
                         }
