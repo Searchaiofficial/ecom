@@ -70,7 +70,7 @@ const ReviewForm = ({ addReview, categoryData }) => {
   };
 
   return (
-    <div className="my-8">
+    <div className="">
       <button
         onClick={() => {
           setSidebarContent("addReview");

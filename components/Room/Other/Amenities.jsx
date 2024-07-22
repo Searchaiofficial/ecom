@@ -46,36 +46,59 @@ const Amenities = ({ data }) => {
   };
 
   const groupedAmenities = [];
-  for (let i = 0; i < amenities?.length; i += 3) {
-    groupedAmenities.push(amenities.slice(i, i + 3));
+  for (let i = 0; i < amenities?.length; i += 5) {
+    groupedAmenities.push(amenities.slice(i, i + 5));
   }
 
   return (
     <>
       {amenities.length > 0 && (
-        <div className="place-offerings mt-[16px] pt-[32px] mb-[25px] ">
-          <h3 className="mb-6 text-xl font-semibold">
+        <div className="place-offerings  py-[16px]  ">
+          <h3 className=" text-[#222222] text-[20px] font-medium">
             Amenities
           </h3>
 
-          <div className={`hidden amenities md:grid ${amenities.length > 5 ? 'grid-cols-2' : 'grid-cols-1'} sm:w-auto mb-6`}>
-            {amenities.map((amenity) => (
-              <div key={amenity._id} className="flex items-center my-2">
-                <div className="mr-4">
-                  <Image
-                    loading="lazy"
-                    width={24}
-                    height={24}
-                    src={amenity.image}
-                    alt={amenity.name}
-                  />
+          <div className={`hidden amenities mt-4 md:grid ${amenities.length > 5 ? 'grid-cols-2' : 'grid-cols-1'} sm:w-auto `}>
+
+            <div className="col-span-1">
+              {amenities.slice(0, 5).map((amenity) => (
+                <div key={amenity._id} className="flex items-center pt-[16px]">
+                  <div className="mr-4 w-[30px] h-[30px]">
+                    <Image
+                      loading="lazy"
+                      width={30}
+                      height={30}
+                      src={amenity.image}
+                      alt={amenity.name}
+                      className="h-full w-full"
+                    />
+                  </div>
+                  <span className="font-normal text-[16px] text-[#222222]">{amenity.text}</span>
                 </div>
-                <span className="font-medium">{amenity.text}</span>
+              ))}
+            </div>
+            {amenities.length > 5 && (
+              <div className="col-span-1">
+                {amenities.slice(5).map((amenity) => (
+                  <div key={amenity._id} className="flex items-center pt-[16px]">
+                    <div className="mr-4 w-[30px] h-[30px]">
+                      <Image
+                        loading="lazy"
+                        width={30}
+                        height={30}
+                        src={amenity.image}
+                        alt={amenity.name}
+                        className="h-full w-full"
+                      />
+                    </div>
+                    <span className="font-normal text-[16px] text-[#222222]">{amenity.text}</span>
+                  </div>
+                ))}
               </div>
-            ))}
+            )}
           </div>
 
-          <div className="md:hidden h-auto max-h-[300px] w-full mb-6">
+          <div className="md:hidden h-auto max-h-[300px] w-full mt-2">
             <Swiper
               {...swiperOptions}
               ref={swiper1Ref}
@@ -93,8 +116,8 @@ const Amenities = ({ data }) => {
               }}
               breakpoints={{
                 300: {
-                  slidesPerView: 2,
-                  spaceBetween: 10,
+                  slidesPerView: 1.1,
+                  spaceBetween: 0,
                 },
                 640: {
                   slidesPerView: 2,
@@ -109,22 +132,23 @@ const Amenities = ({ data }) => {
               allowSlidePrev={true}
               slideNextClass="custom-next-button"
               slidePrevClass="custom-prev-button"
-              className="p-10"
+              className=""
             >
               {groupedAmenities.map((group, index) => (
-                <SwiperSlide key={index}>
+                <SwiperSlide key={index} className=" mb-[20px]">
                   {group.map((amenity) => (
-                    <div key={amenity._id} className="flex my-4 items-center w-auto">
-                      <div className="mr-4">
+                    <div key={amenity._id} className="flex my-4   items-center w-auto">
+                      <div className=" w-[40px] h-[40px] mr-4">
                         <Image
                           loading="lazy"
-                          width={24}
-                          height={24}
+                          width={30}
+                          height={30}
                           src={amenity.image}
                           alt={amenity.name}
+                          className="h-full w-full"
                         />
                       </div>
-                      <span className="font-medium">{amenity.text}</span>
+                      <span className="font-normal text-[16px]">{amenity.text}</span>
                     </div>
                   ))}
                 </SwiperSlide>
@@ -147,7 +171,7 @@ const Amenities = ({ data }) => {
               <p className="text-[#0066CC] text-xs cursor-pointer font-normal hover:underline">Chat with a Specialist</p>
             </div>
           </div> */}
-        </div >
+        </div>
       )}
     </>
   );

@@ -333,17 +333,32 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
                     <div className="dropdown-item sm:font-medium  pb-2 text-[14px]  text-[#707072]">
                       Popular Searches
                     </div>
-                    {popularSearchProducts.map((item) => (
-                      <Link
-                        key={item._id}
-                        className="dropdown-item sm:font-medium  py-2  text-[20px] font-medium "
-                        href={`/product/${item.category.replace(/\s/g, "-")}/${item.subcategory.replace(/\s/g, "-")}`}
-                        onClick={onClose}
-                      >
-                        {item.productTitle}
-                      </Link>
-                    ))
-                    }
+                    <div className={`md:flex hidden flex-col  ${searchQuery ? "max-w-[300px]" : ""}`}>
+                      {popularSearchProducts.map((item) => (
+                        <Link
+                          key={item._id}
+                          className="dropdown-item sm:font-medium   py-2  text-[20px] font-medium "
+                          href={`/product/${item.category.replace(/\s/g, "-")}/${item.subcategory.replace(/\s/g, "-")}`}
+                          onClick={onClose}
+                        >
+                          {item.productTitle}
+                        </Link>
+                      ))
+                      }
+                    </div>
+                    <div className="flex flex-col md:hidden y h-full">
+                      {popularSearchProducts.slice(0, 3).map((item) => (
+                        <Link
+                          key={item._id}
+                          className="dropdown-item sm:font-medium   py-2  text-[20px] font-medium "
+                          href={`/product/${item.category.replace(/\s/g, "-")}/${item.subcategory.replace(/\s/g, "-")}`}
+                          onClick={onClose}
+                        >
+                          {item.productTitle}
+                        </Link>
+                      ))
+                      }
+                    </div>
                   </>
                 )
             }
@@ -351,7 +366,7 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
 
           {
             data && path !== "/ayatrio-map" &&
-            <div className="grid sm:grid-cols-5 grid-cols-2 gap-4 sm:ml-32 px-[24px] lg:px-[0px] lg:mt-0 mt-10">
+            <div className="grid sm:grid-cols-4 grid-cols-2 gap-4  px-[24px] lg:px-[0px] lg:mt-0 mt-10">
               {(!data) || isLoading ? (
                 <p className="flex flex-row justify-center items-center">
                   No results found

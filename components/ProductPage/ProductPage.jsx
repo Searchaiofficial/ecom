@@ -102,7 +102,7 @@ const ProductPage = ({ title, initialData }) => {
             alt={data?.productTitle}
           />
           <ImageCaresoul images={data?.images} />
-          <div className="block md:hidden relative z-[9999]">
+          <div className="block md:hidden relative z-[9997]">
             <Card
               data={data}
               productId={data._id}
@@ -122,9 +122,8 @@ const ProductPage = ({ title, initialData }) => {
         </div>
         <div className="h-full w-full relative p-4 hidden md:block">
           <div
-            className={`w-full h-fit sticky top-2 ${
-              isModalOpen ? "z-[9999]" : ""
-            }`}
+            className={`w-full h-fit sticky top-2 ${isModalOpen ? "z-[9999]" : ""
+              }`}
           >
             <Card
               data={data}

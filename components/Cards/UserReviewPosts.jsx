@@ -113,7 +113,7 @@ const UserReviewPosts = ({ slidesPerView, SubcategoryName }) => {
     return (
         <div>
             {openModal && <div className="background-overlay open"></div>}
-            <div className={`bg-white ${openModal ? 'overflow-hidden' : ''}`}>
+            <div className={`bg-white mt-2 ${openModal ? 'overflow-hidden' : ''}`}>
                 <div className="mb-2 pr-[20px] w-full flex justify-between items-center">
                     <div className="mb-[32px]">
                         <h2 className="font-semibold text-2xl pb-[8px] ">

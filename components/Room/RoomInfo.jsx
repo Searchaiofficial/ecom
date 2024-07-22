@@ -100,108 +100,112 @@ const RoomInfo = ({ data }) => {
 
   return (
     <div className="w-full">
+
+
+
       <div className="font-normal text-sm  flex flex-col gap-4 my-6">
         <>
           <div>
             <div
-              className={`relative ${
-                showMore ? "" : "line-clamp-2"
-              } overflow-hidden`}
+              className={`relative md:w-[80%] w-full ${showMore ? "" : "line-clamp-3"
+                } overflow-hidden`}
               ref={descriptionRef}
             >
-              <p className="inline">{data?.productDescription}</p>
+              <p className="text-[16px] text-[#222222]">{data?.productDescription}</p>
             </div>
             {isClamped && (
               <span
-                className="cursor-pointer hover:underline font-semibold"
+                className="cursor-pointer hover:underline text-[16px] font-semibold"
                 onClick={() => setShowMore(!showMore)}
               >
-                {showMore ? "View less" : "View more"}
+                <p className="text-[16px] font-medium underline">{showMore ? "View less" : "View more"}</p>
               </span>
             )}
-          </div>
-          {categoryDetails?.maintenanceDetails &&
-            categoryDetails?.certification && (
-              <p className="font-medium ">
-                <span className="font-normal">More information: </span>
-                <Link
-                  href={categoryDetails.maintenanceDetails}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:underline hover:text-gray-900 font-semibold "
-                >
-                  Maintenance Details
-                </Link>
-                {" | "}
-                <Link
-                  href={categoryDetails.certification}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:underline hover:text-gray-900 font-semibold "
-                >
-                  Certification Download
-                </Link>
-              </p>
-            )}
-        </>
-      </div>
-
-      <div>
-        <div>
-          {(data.productType === "special" ||
-            data.productType === "requested") && (
-            <div className="border border-gray-300 px-2  sm:h-20 h-auto sm:gap-0 gap-3 sm:w-fit w-[100%] rounded-lg  flex flex-row justify-center items-center">
-              {data.productType === "requested" && (
-                <div
-                  id="box1"
-                  className="flex flex-row border-r pr-4 sm:order-1 order-2"
-                >
-                  <img
-                    className="h-10 scale-x-[-1]"
-                    alt=""
-                    src="/icons/amf/rightGold.svg"
-                  />
-                  <div
-                    className="text-lg text-[#bf9b30] text-center pl-2 pr-2"
-                    style={{ lineHeight: "1" }}
+            {categoryDetails?.maintenanceDetails &&
+              categoryDetails?.certification && (
+                <p className="font-medium mt-2 ">
+                  <span className="font-normal">More information: </span>
+                  <Link
+                    href={categoryDetails.maintenanceDetails}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:underline hover:text-gray-900 font-semibold "
                   >
-                    Ayatrio member <br />
-                    favourite
-                  </div>
-
-                  <img
-                    className="h-10 "
-                    alt=""
-                    src="/icons/amf/rightGold.svg"
-                  />
-                </div>
+                    Maintenance Details
+                  </Link>
+                  {" | "}
+                  <Link
+                    href={categoryDetails.certification}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:underline hover:text-gray-900 font-semibold "
+                  >
+                    Certification Download
+                  </Link>
+                </p>
               )}
-              {data.productType === "special" && (
-                <div
-                  id="box1"
-                  className="flex flex-row border-r pr-4 sm:order-1 order-2"
-                >
-                  <img
-                    className="h-10 scale-x-[-1]"
-                    alt=""
-                    src="/icons/amf/rightBlack.svg"
-                  />
-                  <div
-                    className="text-lg text-center pl-2 pr-2"
-                    style={{ lineHeight: "1" }}
-                  >
-                    Ayatrio member <br />
-                    favourite
-                  </div>
+          </div>
+        </>
 
-                  <img
-                    className="h-10 "
-                    alt=""
-                    src="/icons/amf/rightBlack.svg"
-                  />
+        <div>
+          <div>
+            {(data.productType === "special" ||
+              data.productType === "requested") && (
+                <div className="border my-4 py-4 md:px-6  px-2 border-gray-300   sm:h-20 h-auto sm:gap-0 gap-3 sm:w-fit w-[100%] rounded-lg  flex flex-row justify-center items-center">
+                  {data.productType === "requested" && (
+                    <div
+                      id="box1"
+                      className="flex flex-row border-r pr-4 sm:order-1 order-2"
+                    >
+                      <img
+                        className="h-10 scale-x-[-1]"
+                        alt=""
+                        src="/icons/amf/rightGold.svg"
+                      />
+                      <div
+                        className="text-lg text-[#bf9b30] text-center pl-2 pr-2"
+                        style={{ lineHeight: "1" }}
+                      >
+                        Ayatrio member <br />
+                        favourite
+                      </div>
 
+                      <img
+                        className="h-10 "
+                        alt=""
+                        src="/icons/amf/rightGold.svg"
+                      />
+                    </div>
+                  )}
+                  {data.productType === "special" && (
+                    <div
+                      id="box1"
+                      className="flex flex-row items-center border-r  sm:order-1 order-2"
+                    >
+                      <img
+                        className="h-10 scale-x-[-1]"
+                        alt=""
+                        src="/icons/ayatrio famaily faveriot right.svg"
+                      />
+                      <div
+                        className="text-[16px] font-medium text-center "
+                        style={{ lineHeight: "1" }}
+                      >
+                        Ayatrio member <br />
+                        favourite
+                      </div>
+
+                      <img
+                        className="h-10 "
+                        alt=""
+                        src="/icons/ayatrio famaily faveriot right.svg"
+                      />
+                    </div>
+                  )}
+
+                  {/* text */}
                   <div
-                    className="pl-4 pr-5 sm:block hidden  font-medium sm:order-2"
+                    className="pl-4 pr-5 sm:block hidden text-[14px]  font-medium sm:order-2"
                     style={{ lineHeight: "1.2" }}
                   >
                     One of the most loved homes furnishing on
@@ -211,9 +215,9 @@ const RoomInfo = ({ data }) => {
 
                   <div
                     id="box3"
-                    className="flex sm:pb-0 pb-4 flex-col pl-3 sm:order-4 order-3"
+                    className="flex sm:pb-0  flex-col  sm:order-4 order-3"
                   >
-                    <div className="text-center text-xl font-bold">
+                    <div className="text-center lg:text-xl text-[18px] font-bold">
                       {calculateOverallAverageRating}{" "}
                     </div>
                     <div className="underline text-sm  flex">
@@ -231,60 +235,38 @@ const RoomInfo = ({ data }) => {
                       ))}
                     </div>
                   </div>
+                  <div id="box3" class="flex sm:pb-0  flex-col md:pl-4  sm:order-4 border-3"><div class="text-center text-xl font-bold">1</div><div class="underline text-sm -mt-2">Reviews</div></div>
                 </div>
               )}
-
-              {/* text */}
-
-              <div
-                id="box3"
-                className="flex sm:pb-0 pb-4 flex-col pl-3 sm:order-4 order-3"
-              >
-                <div className="text-center text-xl font-bold">
-                  {reviews.length}
-                </div>
-                <div className="underline text-sm -mt-2">Reviews</div>
-              </div>
-            </div>
-          )}
+          </div>
         </div>
-      </div>
 
-      {/* place features and information */}
-      <PlaceInfo data={data} />
 
-      {/* ----------------- bedding cards ------------ */}
+        <PlaceInfo data={data} />
 
-      {/* ----------------- what this place offers ------------ */}
-      <Amenities data={data} />
+        <Amenities data={data} />
 
-      <div className="flex">
-        {data?.author && (
-          <div className="flex flex-col my-10 gap-6 w-full ">
-            <div className="flex items-start gap-4">
-              <Link
-                href={`/profile/${data.author._id}`}
-                className="flex-shrink-0"
-              >
-                <Image
-                  src={data.author.image}
-                  height={150}
-                  width={150}
-                  alt="avatar"
-                  className="rounded-full"
-                />
-              </Link>
-              <div className="flex flex-col">
-                <Link
-                  href={`/profile/${data.author._id}`}
-                  className=" text-[#1D1D1F] font-bold text-xl"
-                >
-                  {data.author.displayName}
+        <div className="flex">
+          {data?.author && (
+            <div className="flex flex-col my-10 gap-6 w-full ">
+              <div className="flex items-start gap-4">
+                <Link href={`/profile/${data.author._id}`} className="flex-shrink-0">
+                  <Image
+                    src={data.author.image}
+                    height={150}
+                    width={150}
+                    alt="avatar"
+                    className="rounded-full"
+                  />
                 </Link>
-                <p className="text-[#1D1D1F] font-semibold text-sm pt-3 line-clamp-5 md:w-[70%]">
-                  {data.author.authorDetails.description}
-                </p>
-                {/* <div className="grid grid-cols-3 gap-4 mt-4 w-full">
+                <div className="flex flex-col">
+                  <Link href={`/profile/${data.author._id}`} className=" text-[#1D1D1F] font-bold text-xl">
+                    {data.author.displayName}
+                  </Link>
+                  <p className="text-[#1D1D1F] font-semibold text-sm pt-3 line-clamp-5 md:w-[70%]">
+                    {data.author.authorDetails.description}
+                  </p>
+                  {/* <div className="grid grid-cols-3 gap-4 mt-4 w-full">
                   <div className="flex flex-col items-center">
                     <p className="text-[#1D1D1F] font-semibold text-lg">
                       {data.author.purchase}
@@ -304,82 +286,83 @@ const RoomInfo = ({ data }) => {
                     <p className="text-[#1D1D1F] text-sm">Year of Creation</p>
                   </div>
                 </div> */}
+                </div>
               </div>
-            </div>
 
-            {otherProductByAuthorId.length > 0 && (
-              <Swiper
-                className="w-full mt-4"
-                ref={swiper1Ref}
-                {...swiperOptions2}
-                modules={[Navigation, Pagination, A11y]}
-                navigation={{
-                  nextEl: ".right",
-                  prevEl: ".back",
-                }}
-                draggable={true}
-                style={{
-                  "--swiper-navigation-size": "24px",
-                  maxHeight: "120px",
-                }}
-                mousewheel={{
-                  forceToAxis: true,
-                  invert: false,
-                }}
-                freeMode={{
-                  enabled: false,
-                  sticky: true,
-                }}
-                breakpoints={{
-                  300: {
-                    slidesPerView: 1,
-                    spaceBetween: 10,
-                  },
-                  768: {
-                    slidesPerView: 2,
-                    spaceBetween: 10,
-                  },
-                  1024: {
-                    slidesPerView: 2,
-                    spaceBetween: 10,
-                  },
-                }}
-              >
-                {otherProductByAuthorId.map((item, idx) => (
-                  <SwiperSlide key={idx} className="max-w-[130px] px-1">
-                    <Link
-                      className="flex flex-col items-center"
-                      href={`/${item.productTitle.replace(/ /g, "-")}`}
-                    >
-                      <div className="mb-[12px] ">
-                        <Image
-                          loading="lazy"
-                          src={item.images[0]}
-                          width={200}
-                          height={130}
-                          className="h-[70px] object-cover"
-                        />
-                      </div>
-                      <div className="flex justify-between">
-                        <h2 className="text-[#333333] text-[14px] hover:underline line-clamp-1">
-                          {item.productTitle}
-                        </h2>
-                        <Image
-                          src="/icons/Back_arrow.svg"
-                          alt="arrow"
-                          width={15}
-                          height={15}
-                          loading="lazy"
-                        />
-                      </div>
-                    </Link>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            )}
-          </div>
-        )}
+              {otherProductByAuthorId.length > 0 &&
+                <Swiper
+                  className="w-full mt-4"
+                  ref={swiper1Ref}
+                  {...swiperOptions2}
+                  modules={[Navigation, Pagination, A11y]}
+                  navigation={{
+                    nextEl: ".right",
+                    prevEl: ".back",
+                  }}
+                  draggable={true}
+                  style={{
+                    "--swiper-navigation-size": "24px",
+                    maxHeight: "120px",
+                  }}
+                  mousewheel={{
+                    forceToAxis: true,
+                    invert: false,
+                  }}
+                  freeMode={{
+                    enabled: false,
+                    sticky: true,
+                  }}
+                  breakpoints={{
+                    300: {
+                      slidesPerView: 1,
+                      spaceBetween: 10,
+                    },
+                    768: {
+                      slidesPerView: 2,
+                      spaceBetween: 10,
+                    },
+                    1024: {
+                      slidesPerView: 2,
+                      spaceBetween: 10,
+                    },
+                  }}
+                >
+                  {otherProductByAuthorId.map((item, idx) => (
+                    <SwiperSlide key={idx} className="max-w-[130px] px-1">
+                      <Link
+                        className="flex flex-col items-center"
+                        href={`/${item.productTitle.replace(/ /g, "-")}`}
+                      >
+                        <div className="mb-[12px] ">
+                          <Image
+                            loading="lazy"
+                            src={item.images[0]}
+                            width={200}
+                            height={130}
+                            className="h-[70px] object-cover"
+                          />
+                        </div>
+                        <div className="flex justify-between">
+                          <h2 className="text-[#333333] text-[14px] hover:underline line-clamp-1">
+                            {item.productTitle}
+                          </h2>
+                          <Image
+                            src="/icons/Back_arrow.svg"
+                            alt="arrow"
+                            width={15}
+                            height={15}
+                            loading="lazy"
+                          />
+                        </div>
+                      </Link>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>}
+            </div>
+          )}
+        </div>
       </div>
+
     </div>
   );
 };

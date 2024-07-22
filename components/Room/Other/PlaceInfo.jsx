@@ -37,22 +37,22 @@ const PlaceInfo = (data) => {
     <>
       {data?.data?.coreValues ? (
         <>
-          <div className={`place-features mb-4 hidden md:grid ${data?.data?.coreValues.length > 3 ? 'grid grid-cols-2 gap-4' : ''}`}>
+          <div className={`place-features hidden md:grid ${data?.data?.coreValues.length > 6 ? 'grid grid-cols-2 gap-4' : ''}`}>
             {
               data?.data?.coreValues.length > 0 && data?.data?.coreValues.map((item, index) => (
-                <div className="hosted-by flex flex-start items-center py-4 font-lg" key={index}>
-                  <div className="mr-4 w-[40px] h-[40px]">
+                <div className="hosted-by flex flex-start items-center pb-4 font-lg" key={index}>
+                  <div className="mr-4 w-[30px] h-[30px]">
                     <img
-                      className="w-full min-w-[40px] min-h-[40px]"
+                      className="w-full h-full"
                       src={item.image}
                       alt=""
                     />
                   </div>
                   <div>
-                    <h4 className="font-semibold">
+                    <h4 className="font-medium text-[16px] mb-[4px]">
                       {item.heading}
                     </h4>
-                    <p className="mt-1 text-gray-500 md:w-[90%] line-clamp-1">
+                    <p className="md:w-[100%] font-normal text-[14px text-[#6A6A6A] line-clamp-1">
                       {item.text}
                     </p>
                   </div>
@@ -61,7 +61,7 @@ const PlaceInfo = (data) => {
             }
           </div>
 
-          <div className="md:hidden h-auto max-h-[300px] w-full">
+          <div className="md:hidden h-auto max-h-[300px] w-full mb-4">
             <Swiper
               ref={swiper2Ref}
               {...swiperOptions}
@@ -79,7 +79,7 @@ const PlaceInfo = (data) => {
               }}
               breakpoints={{
                 300: {
-                  slidesPerView: 1.1,
+                  slidesPerView: 1,
                   spaceBetween: 10,
                 },
                 640: {
@@ -97,15 +97,15 @@ const PlaceInfo = (data) => {
               slidePrevClass="custom-prev-button"
               className="px-10 ">
               {groupedCoreValues.map((group, groupIndex) => (
-                <SwiperSlide key={groupIndex}>
+                <SwiperSlide key={groupIndex} className="min-h-[210px]">
                   {group.map((item, index) => (
-                    <div className="hosted-by flex flex-start items-center py-4 font-lg" key={index}>
+                    <div className="hosted-by gap-3 flex flex-start items-center pb-4 font-lg" key={index}>
                       <div className="mr-4 w-[40px] h-[40px]">
                         <img className="w-full min-w-[40px] min-h-[40px]" src={item.image} alt="" />
                       </div>
                       <div>
-                        <h4 className="font-semibold">{item.heading}</h4>
-                        <span className="mt-1 text-gray-500">{item.text}</span>
+                        <h4 className="font-medium text-[16px] mb-1">{item.heading}</h4>
+                        <span className="  text-[#6A6A6A] text-[14px] ">{item.text}</span>
                       </div>
                     </div>
                   ))}
@@ -116,7 +116,7 @@ const PlaceInfo = (data) => {
         </>
       ) : (
         <>
-          <div className="place-features my-4 sm:w-auto">
+          <div className="place-features  sm:w-auto">
             <div className="hosted-by flex flex-start py-4 border-b font-lg">
               <div className="mr-4">
                 <img
@@ -194,7 +194,7 @@ const PlaceInfo = (data) => {
           </div> */}
         </>
       )}
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 ">
         <p className="text-[#484848] text-xs font-normal">Pattern Number</p>
         <div className="flex">
           <p className="bg-black px-4 py-1 text-white text-xs font-bold min-w-min">{data?.data?.patternNumber}</p>

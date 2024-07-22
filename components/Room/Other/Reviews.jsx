@@ -20,9 +20,8 @@ const ratingsData = [
         {[1, 2, 3, 4, 5].map((number, index) => (
           <div
             key={index}
-            className={`border mb-2 ${
-              index === 0 ? "border-black bg-black" : "bg-gray-300"
-            }  w-32 h-1.5 flex flex-row items-center justify-start`}
+            className={`border mb-2 ${index === 0 ? "border-black bg-black" : "bg-gray-300"
+              }  w-32 h-1.5 flex flex-row items-center justify-start`}
           >
             <span className="-ml-3 text-sm">{number}</span>
           </div>
@@ -331,64 +330,55 @@ const Reviews = ({ productId, data }) => {
 
   return (
     <>
-      <div className="pb-12 sm:w-auto overflow-x-hidden">
+      <div className=" sm:w-auto overflow-x-hidden">
         {(data.productType === "special" ||
           data.productType === "requested") && (
-          <div>
-            <div className="flex flex-col justify-center mx-auto">
-              {data.productType === "requested" && (
-                <div className="flex items-center justify-center overflow-hidden flex-row ">
-                  <img
-                    className="h-36 scale-x-[-1]"
-                    alt=""
-                    src="/icons/amf/rightGold.svg"
-                  />
-                  <div className="text-[6rem] font-bold text-[#bf9b30] pb-5">
-                    {calculateOverallAverageRating || "5.0"}
+            <div className="md:mb-[34px] mb-[16px]" >
+              <div className="flex flex-col justify-center mx-auto">
+                {data.productType === "requested" && (
+                  <div className="flex items-center justify-center overflow-hidden flex-row ">
+                    <img
+                      className="h-36 scale-x-[-1]"
+                      alt=""
+                      src="/icons/amf/rightGold.svg"
+                    />
+                    <div className="text-[6rem] font-medium text-[#bf9b30] pb-5">
+                      {calculateOverallAverageRating || "5.0"}
+                    </div>
+                    <img
+                      className="h-36 "
+                      alt=""
+                      src="/icons/amf/rightGold.svg"
+                    />
                   </div>
-                  <img
-                    className="h-36 "
-                    alt=""
-                    src="/icons/amf/rightGold.svg"
-                  />
-                </div>
-              )}
-              {data.productType === "special" && (
-                <div className="flex items-center justify-center overflow-hidden flex-row ">
-                  <img
-                    className="h-36 scale-x-[-1]"
-                    alt=""
-                    src="/icons/amf/rightBlack.svg"
-                  />
-                  <div className="text-[6rem] font-bold text-gray-700 pb-5">
-                    {calculateOverallAverageRating || "5.0"}
+                )}
+                {data.productType === "special" && (
+                  <div className="flex gap-2 items-center justify-center overflow-hidden flex-row ">
+                    <img
+                      className="h-36 scale-x-[-1]"
+                      alt=""
+                      src="/icons/ayatrio famaily faveriot right.svg"
+                    />
+                    <div className="text-[6rem] font-medium text-gray-700 pb-5">
+                      {calculateOverallAverageRating || "5.0"}
+                    </div>
+                    <img
+                      className="h-36 "
+                      alt=""
+                      src="/icons/ayatrio famaily faveriot right.svg"
+                    />
                   </div>
-                  <img
-                    className="h-36 "
-                    alt=""
-                    src="/icons/amf/rightBlack.svg"
-                  />
-                </div>
-              )}
-              <div className="flex justify-center items-center flex-col ">
-                <div
-                  className={`text-xl font-bold -mt-5  ${
-                    data.productType === "requested"
-                      ? "text-[#bf9b30]"
-                      : "text-black"
-                  }`}
-                >
-                  Guest favourite
-                </div>
-                <div className="text-lg text-gray-500">
-                  One of the most loved homes on Ayatrio
-                  <br />
-                  based on ratings, reviews, and reliability
+                )}
+                <div className="flex justify-center items-center flex-col ">
+                  <div className={`text-xl mb-1 font-bold   ${data.productType === "requested" ? "text-[#bf9b30]" : "text-black"}`} >Guest favourite</div>
+                  <div className=" text-center text-gray-500">
+                    <p className="text-[14px]">One of the most loved homes on Ayatrio</p>
+                    <p className="text-[14px]">based on {showRatingTypes?.map((item) => item.name).join(", ")}</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
 
         {/* <div className="rating-map flex justify-around mt-12 w-full overflow-x-auto">
           {ratingsData.map((item, index) => (
@@ -401,7 +391,7 @@ const Reviews = ({ productId, data }) => {
         </div> */}
 
         {reviews?.length > 0 && showRatingTypes?.length > 0 && (
-          <div className="rating-map flex justify-between mt-2 w-full overflow-x-auto">
+          <div className="rating-map  hidden md:flex justify-between  mt-6 w-full overflow-x-auto lg:mb-8 mb-4  ">
             {/* Overall Ratings */}
 
             <div className="flex flex-col items-center">
@@ -417,9 +407,8 @@ const Reviews = ({ productId, data }) => {
                         <div
                           className="h-full bg-black rounded-r-full"
                           style={{
-                            width: `${
-                              (ratingCounts[number] / reviews.length) * 100
-                            }%`,
+                            width: `${(ratingCounts[number] / reviews.length) * 100
+                              }%`,
                           }}
                         ></div>
                       </div>
@@ -433,9 +422,8 @@ const Reviews = ({ productId, data }) => {
             {showRatingTypes?.map((item, index) => (
               <div
                 key={item._id}
-                className={`flex flex-col items-center text-center min-w-[110px] ${
-                  index === showRatingTypes.length - 1 ? "mr-8" : ""
-                }`}
+                className={`flex flex-col items-center text-center min-w-[110px] ${index === showRatingTypes.length - 1 ? "mr-8" : ""
+                  }`}
               >
                 <div className="font-semibold text-gray-700 mb-4 capitalize">
                   {item.name}
@@ -455,7 +443,7 @@ const Reviews = ({ productId, data }) => {
           </div>
         )}
 
-        <div className="flex justify-between items-baseline pt-4">
+        <div className="flex justify-between items-baseline mt-10 mb-2 ">
           <div className="flex mb-1 text-xl font-semibold space-x-1">
             {calculateOverallAverageRating > 0 && (
               <>
@@ -489,7 +477,7 @@ const Reviews = ({ productId, data }) => {
           </>
         </div>
         <div
-          className="reviews-container hidden mt-6 md:grid sm:grid-cols-2 grids-col-1  gap-4 mx-auto "
+          className="reviews-container hidden mt-4 md:grid sm:grid-cols-2 grids-col-1  gap-4 mx-auto "
           style={{ overflowX: "hidden" }}
         >
           {reviews.map((review, index) => (

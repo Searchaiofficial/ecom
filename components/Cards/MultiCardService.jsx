@@ -113,6 +113,7 @@ const MulticardService = () => {
                     touchRatio={1} // Adjust touch sensitivity (optional)
                     touchReleaseOnEdges={true} // Release touch event when the edge is reached
                     resistanceRatio={0.85} // Adjust resistance ratio for a smoother experience
+                    initialSlide={0}
                 >
                     {data.map((data) => {
                         return (
