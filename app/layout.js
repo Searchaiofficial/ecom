@@ -5,7 +5,6 @@ import { GoogleTagManager } from "@next/third-parties/google";
 import FooterWrapper from "@/components/FooterWrapper/FooterWrapper";
 import NextTopLoader from "nextjs-toploader";
 import { BASE_URL } from "@/constants/base-url";
-import Script from "next/script";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -60,22 +59,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={poppins.className}>
       <GoogleTagManager gtmId={gtmId} />
-      <Script
-        strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=G-46J3H63RLT`}
-      />
-      <Script
-        id="gtag-init"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-46J3H63RLT');
-          `,
-        }}
-      />
       <body>
         <Providers>
           <NextTopLoader color="#000" showSpinner={false} zIndex={99999} />
