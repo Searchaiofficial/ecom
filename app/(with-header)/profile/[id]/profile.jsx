@@ -14,6 +14,7 @@ const Profile = ({ id }) => {
   const [reviews, setReviews] = useState([]);
   const [editProfile, setEditProfile] = useState(false);
   const [editedUser, setEditedUser] = useState({});
+  const [updateLoading, setUpdateLoading] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
@@ -132,6 +133,7 @@ const Profile = ({ id }) => {
   };
 
   const handleUpdateProfile = async () => {
+    setUpdateLoading(true);
     const formData = new FormData();
     formData.append("displayName", editedUser.displayName);
     formData.append("image", editedUser.image);
@@ -158,9 +160,12 @@ const Profile = ({ id }) => {
       );
       console.log("response", response.data);
       setUser(response.data.user);
+      setEditedUser({});
       setEditProfile(false);
+      setUpdateLoading(false);
     } catch (error) {
       console.log("error", error);
+      setUpdateLoading(false);
     }
   };
 
@@ -265,7 +270,7 @@ const Profile = ({ id }) => {
                       htmlFor="image"
                       className="font-medium cursor-pointer"
                     >
-                      Upload
+                      Change
                     </label>
                     <input
                       type="file"
@@ -302,7 +307,7 @@ const Profile = ({ id }) => {
                     <textarea
                       id="description"
                       className="border border-gray-300 rounded-lg px-4 py-2 mt-2"
-                      value={editedUser.authorDetails.description}
+                      value={editedUser.authorDetails?.description}
                       onChange={(e) =>
                         setEditedUser({
                           ...editedUser,
@@ -327,7 +332,7 @@ const Profile = ({ id }) => {
                       type="text"
                       id="experience"
                       className="border border-gray-300 rounded-lg px-4 py-2 mt-2"
-                      value={editedUser.authorDetails.experience}
+                      value={editedUser.authorDetails?.experience}
                       onChange={(e) =>
                         setEditedUser({
                           ...editedUser,
@@ -349,7 +354,7 @@ const Profile = ({ id }) => {
                       type="text"
                       id="award"
                       className="border border-gray-300 rounded-lg px-4 py-2 mt-2"
-                      value={editedUser.authorDetails.award}
+                      value={editedUser.authorDetails?.award}
                       onChange={(e) =>
                         setEditedUser({
                           ...editedUser,
@@ -364,16 +369,19 @@ const Profile = ({ id }) => {
                 )}
                 <div className="flex justify-end w-full mt-4 gap-2">
                   <button
-                    onClick={() => setEditProfile(false)}
+                    onClick={() => {
+                      setEditProfile(false);
+                    }}
                     className="bg-red-500 text-white px-4 py-2 mt-4 rounded-md"
                   >
                     Cancel
                   </button>
                   <button
                     onClick={handleUpdateProfile}
-                    className="bg-blue-500 text-white px-4 py-2 mt-4 rounded-md"
+                    disabled={updateLoading}
+                    className="bg-blue-500 text-white px-4 py-2 mt-4 rounded-md disabled:bg-gray-400"
                   >
-                    Update Profile
+                    {updateLoading ? "Updating..." : "Update"}
                   </button>
                 </div>
               </div>
@@ -387,19 +395,19 @@ const Profile = ({ id }) => {
                 {user.authorDetails?.description}
               </p>
               <div className="mt-4 w-full max-w-2xl">
-                {user.authorDetails.experience && (
+                {user.authorDetails?.experience && (
                   <div className="mt-2 flex gap-2 ">
                     <span className="font-semibold">Experience:</span>
                     <span className="text-gray-600 ">
-                      {user.authorDetails.experience} year of experience
+                      {user.authorDetails?.experience} year of experience
                     </span>
                   </div>
                 )}
-                {user.authorDetails.award && (
+                {user.authorDetails?.award && (
                   <div className="mt-2 flex gap-2 ">
                     <span className="font-semibold">Award:</span>
                     <span className="text-gray-600 ">
-                      {user.authorDetails.award}
+                      {user.authorDetails?.award}
                     </span>
                   </div>
                 )}
