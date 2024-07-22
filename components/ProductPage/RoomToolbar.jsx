@@ -313,9 +313,8 @@ const RoomToolbar = ({ data }) => {
       </div>
       {openFreeSAmple && (
         <div
-          className={`fixed px-[24px] lg:px-[32px] gap-10 flex top-0 z-[9999] overflow-y-auto md:overflow-hidden right-0 w-[100%] lg:w-[70%] h-full bg-white shadow-lg transition-transform transform ${
-            openFreeSAmple ? "translate-x-0" : "translate-x-full"
-          }`}
+          className={`fixed px-[24px] lg:px-[32px] gap-10 flex top-0 z-[9999] overflow-y-auto md:overflow-hidden right-0 w-[100%] lg:w-[70%] h-full bg-white shadow-lg transition-transform transform ${openFreeSAmple ? "translate-x-0" : "translate-x-full"
+            }`}
         >
           <div className="w-[33.33%] mt-7 hidden md:flex flex-col gap-5 over">
             <div className="grid grid-cols-3 items-center gap-4">
@@ -358,28 +357,11 @@ const RoomToolbar = ({ data }) => {
                 {/* Render Images */}
                 {selectedSamples[selectedSamples.length - 1]?.images
                   ? selectedSamples[selectedSamples.length - 1]?.images.map(
-                      (src, idx) => (
-                        <div
-                          key={idx}
-                          className={
-                            activeIndex === idx ? "absolute inset-0" : "hidden"
-                          }
-                        >
-                          <Image
-                            src={src}
-                            alt="NA"
-                            layout="fill"
-                            objectFit="cover"
-                            className="w-full h-full"
-                          />
-                        </div>
-                      )
-                    )
-                  : data?.images.map((src, idx) => (
+                    (src, idx) => (
                       <div
                         key={idx}
                         className={
-                          activeIndex === idx ? "absolute inset-0" : "hidden"
+                          activeIndex === idx ? "absolute inset-0  " : "hidden"
                         }
                       >
                         <Image
@@ -387,10 +369,27 @@ const RoomToolbar = ({ data }) => {
                           alt="NA"
                           layout="fill"
                           objectFit="cover"
-                          className="w-full h-full"
+                          className="w-full h-full "
                         />
                       </div>
-                    ))}
+                    )
+                  )
+                  : data?.images.map((src, idx) => (
+                    <div
+                      key={idx}
+                      className={
+                        activeIndex === idx ? "absolute inset-0" : "hidden"
+                      }
+                    >
+                      <Image
+                        src={src}
+                        alt="NA"
+                        layout="fill"
+                        objectFit="cover"
+                        className="w-full h-full"
+                      />
+                    </div>
+                  ))}
 
                 {/* Slide Indicators */}
                 <span className="flex absolute bottom-4 left-1/2 transform -translate-x-1/2">
@@ -398,9 +397,8 @@ const RoomToolbar = ({ data }) => {
                     (_, idx) => (
                       <button
                         key={idx}
-                        className={`${
-                          activeIndex === idx ? "bg-white" : "bg-[#cccc]"
-                        } h-[0.4rem] w-[0.4rem] rounded-full mr-1`}
+                        className={`${activeIndex === idx ? "bg-white" : "bg-[#cccc]"
+                          } h-[0.4rem] w-[0.4rem] rounded-full mr-1`}
                         onClick={() => goToSlide(idx)}
                       ></button>
                     )
@@ -466,12 +464,11 @@ const RoomToolbar = ({ data }) => {
                 </p>
                 <div className="flex gap-1 items-end">
                   <p
-                    className={`text-3xl flex font-semibold leading-[0.5] tracking-wide ${
-                      selectedSamples[selectedSamples.length - 1]?.specialPrice
-                        ?.price || data.specialPrice?.price
-                        ? "bg-[#FFD209] px-2 pt-3 pb-1 w-fit shadow-lg"
-                        : ""
-                    }`}
+                    className={`text-3xl flex font-semibold leading-[0.5] tracking-wide ${selectedSamples[selectedSamples.length - 1]?.specialPrice
+                      ?.price || data.specialPrice?.price
+                      ? "bg-[#FFD209] px-2 pt-3 pb-1 w-fit shadow-lg"
+                      : ""
+                      }`}
                     style={
                       selectedSamples[selectedSamples.length - 1]?.specialPrice
                         ?.price || data.specialPrice?.price
@@ -480,12 +477,11 @@ const RoomToolbar = ({ data }) => {
                     }
                   >
                     <span
-                      className={`text-sm ${
-                        selectedSamples[selectedSamples.length - 1]
-                          ?.specialPrice?.price || data.specialPrice?.price
-                          ? ""
-                          : "pt-3.5"
-                      }`}
+                      className={`text-sm ${selectedSamples[selectedSamples.length - 1]
+                        ?.specialPrice?.price || data.specialPrice?.price
+                        ? ""
+                        : "pt-3.5"
+                        }`}
                     >
                       Rs. &nbsp;
                     </span>{" "}
@@ -501,11 +497,10 @@ const RoomToolbar = ({ data }) => {
                     )}
                   </p>
                   {selectedSamples[selectedSamples.length - 1]?.unitType ||
-                  data.unitType ? (
-                    <span className="tracking-wide text-sm font-semibold">{`/${
-                      selectedSamples[selectedSamples.length - 1]?.unitType ||
+                    data.unitType ? (
+                    <span className="tracking-wide text-sm font-semibold">{`/${selectedSamples[selectedSamples.length - 1]?.unitType ||
                       data.unitType
-                    }`}</span>
+                      }`}</span>
                   ) : (
                     ""
                   )}
@@ -515,7 +510,7 @@ const RoomToolbar = ({ data }) => {
           </div>
           <div className="md:w-[66.66%] w-[100%] lg:overflow-y-auto">
             <div className="flex flex-col md:fixed top-0 bg-white w-full z-50 ">
-              <div className="flex items-center  mt-5 justify-between lg:mr-[430px]">
+              <div className="flex items-center  mt-5 justify-between w-[100%] md:w-[60%]">
                 <div className="flex justify-between">
                   <div className="flex flex-col">
                     <h1 className="text-[16px] font-semibold">
@@ -601,20 +596,18 @@ const RoomToolbar = ({ data }) => {
                     src="/icons/backarrow.svg"
                     width={40}
                     height={40}
-                    className={`w-4 h-4 mt-1 block  ${
-                      categoryFilterOpen && "rotate-90"
-                    } -rotate-90`}
+                    className={`w-4 h-4 mt-1 block  ${categoryFilterOpen && "rotate-90"
+                      } -rotate-90`}
                     alt="arrow icon"
                   />
                   {categoryFilterOpen &&
                     allSubCategories &&
                     allSubCategories.length > 0 && (
                       <div
-                        className={`md:w-[300px] w-[150px] cursor-pointer absolute ${
-                          selectedSamples.length > 0
-                            ? "top-[270px] md:top-[125px]"
-                            : "top-[150px] md:top-[125px]"
-                        }  z-50 h-fit bg-white border border-gray-200 rounded-lg`}
+                        className={`md:w-[300px] w-[150px] cursor-pointer absolute ${selectedSamples.length > 0
+                          ? "top-[270px] md:top-[125px]"
+                          : "top-[150px] md:top-[125px]"
+                          }  z-50 h-fit bg-white border border-gray-200 rounded-lg`}
                       >
                         <p
                           onClick={() =>
@@ -649,18 +642,16 @@ const RoomToolbar = ({ data }) => {
                     src="/icons/backarrow.svg"
                     width={40}
                     height={40}
-                    className={`w-4 h-4 mt-1 block  ${
-                      ColorfilterOpen && "rotate-90"
-                    } -rotate-90`}
+                    className={`w-4 h-4 mt-1 block  ${ColorfilterOpen && "rotate-90"
+                      } -rotate-90`}
                     alt="arrow icon"
                   />
                   {ColorfilterOpen && allColors && allColors.length > 0 && (
                     <div
-                      className={`md:w-[300px] w-[150px] cursor-pointer absolute ${
-                        selectedSamples.length > 0
-                          ? "top-[270px] md:top-[125px]"
-                          : "top-[150px] md:top-[125px]"
-                      }  z-50 h-fit bg-white border border-gray-200 rounded-lg`}
+                      className={`md:w-[300px] w-[150px] cursor-pointer absolute ${selectedSamples.length > 0
+                        ? "top-[270px] md:top-[125px]"
+                        : "top-[150px] md:top-[125px]"
+                        }  z-50 h-fit bg-white border border-gray-200 rounded-lg`}
                     >
                       <p
                         onClick={() => handleColorFilter("All Colors")}
@@ -712,7 +703,7 @@ const RoomToolbar = ({ data }) => {
                             width={200}
                             height={130}
                             alt={item.productTitle}
-                            className="w-full h-[150px] lg:h-[180px] "
+                            className=" aspect-square "
                             onClick={() => handleChecked(item)}
                           />
                           {selectedSamples && selectedSamples.length < 3 && (
@@ -733,10 +724,10 @@ const RoomToolbar = ({ data }) => {
                 ))}
             </div>
 
-            <div className="w-full grid sm:grid-cols-2 gap-2 mt-6">
+            <div className=" md:w-[60%] w-[90%] grid sm:grid-cols-2 gap-2 mt-6 fixed bottom-10">
               <button
                 onClick={handleBuySamples}
-                className={`bg-black hover:bg-gray-900 text-white px-2 flex items-center justify-center sm:h-11 h-9 rounded-full transition duration-300`}
+                className={`bg-black  hover:bg-gray-900 text-white px-2 flex items-center justify-center sm:h-11 h-9 rounded-full transition duration-300`}
               >
                 <p className="flex gap-2 text-center font-semibold text-[16px]">
                   Request Free Samples
@@ -744,7 +735,7 @@ const RoomToolbar = ({ data }) => {
               </button>
               <button
                 onClick={handleJoinLive}
-                className={`bg-black hover:bg-gray-900 text-white px-2 flex items-center justify-center sm:h-11 h-9 rounded-full transition duration-300`}
+                className={`bg-black  hover:bg-gray-900 text-white px-2 flex items-center justify-center sm:h-11 h-9 rounded-full transition duration-300`}
               >
                 <p className="flex gap-2 text-center font-semibold text-[16px]">
                   Explore samples in liveroom
