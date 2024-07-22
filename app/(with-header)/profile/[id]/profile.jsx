@@ -193,10 +193,10 @@ const Profile = ({ id }) => {
               />
             </div>
             <div className="flex flex-col">
-              <h1 className="text-2xl sm:text-3xl font-semibold">
+              <h1 className="text-xl sm:text-3xl font-semibold">
                 {user.displayName}
               </h1>
-              <h2 className="text-gray-600">{user.email}</h2>
+              <h2 className="text-gray-600 text-xs sm:text-base">{user.email}</h2>
               <h3 className="text-slate-400">
                 {user?.isLiveStreamHost && "Liveroom Host"}
               </h3>
@@ -244,6 +244,7 @@ const Profile = ({ id }) => {
                     id="displayName"
                     className="border border-gray-300 rounded-lg px-4 py-2 mt-2"
                     value={editedUser.displayName}
+                    disabled={updateLoading}
                     onChange={(e) =>
                       setEditedUser({
                         ...editedUser,
@@ -277,6 +278,7 @@ const Profile = ({ id }) => {
                       id="image"
                       className="hidden"
                       onChange={handleImageChange}
+                      disabled={updateLoading}
                     />
                   </div>
                 </div>
@@ -288,6 +290,7 @@ const Profile = ({ id }) => {
                     id="userType"
                     className="border border-gray-300 rounded-lg px-4 py-2 mt-2"
                     value={editedUser.userType}
+                    disabled={updateLoading}
                     onChange={(e) =>
                       setEditedUser({ ...editedUser, userType: e.target.value })
                     }
@@ -308,6 +311,7 @@ const Profile = ({ id }) => {
                       id="description"
                       className="border border-gray-300 rounded-lg px-4 py-2 mt-2"
                       value={editedUser.authorDetails?.description}
+                      disabled={updateLoading}
                       onChange={(e) =>
                         setEditedUser({
                           ...editedUser,
@@ -333,6 +337,7 @@ const Profile = ({ id }) => {
                       id="experience"
                       className="border border-gray-300 rounded-lg px-4 py-2 mt-2"
                       value={editedUser.authorDetails?.experience}
+                      disabled={updateLoading}
                       onChange={(e) =>
                         setEditedUser({
                           ...editedUser,
@@ -355,6 +360,7 @@ const Profile = ({ id }) => {
                       id="award"
                       className="border border-gray-300 rounded-lg px-4 py-2 mt-2"
                       value={editedUser.authorDetails?.award}
+                      disabled={updateLoading}
                       onChange={(e) =>
                         setEditedUser({
                           ...editedUser,
@@ -370,9 +376,12 @@ const Profile = ({ id }) => {
                 <div className="flex justify-end w-full mt-4 gap-2">
                   <button
                     onClick={() => {
+                      setEditedUser({});
+                      setUpdateLoading(false);
                       setEditProfile(false);
                     }}
-                    className="bg-red-500 text-white px-4 py-2 mt-4 rounded-md"
+                    disabled={updateLoading}
+                    className="bg-red-500 text-white px-4 py-2 mt-4 rounded-md disabled:bg-gray-400"
                   >
                     Cancel
                   </button>

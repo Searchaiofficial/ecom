@@ -20,8 +20,9 @@ const ratingsData = [
         {[1, 2, 3, 4, 5].map((number, index) => (
           <div
             key={index}
-            className={`border mb-2 ${index === 0 ? "border-black bg-black" : "bg-gray-300"
-              }  w-32 h-1.5 flex flex-row items-center justify-start`}
+            className={`border mb-2 ${
+              index === 0 ? "border-black bg-black" : "bg-gray-300"
+            }  w-32 h-1.5 flex flex-row items-center justify-start`}
           >
             <span className="-ml-3 text-sm">{number}</span>
           </div>
@@ -117,9 +118,8 @@ const Reviews = ({ productId, data }) => {
     2: 0,
     3: 0,
     4: 0,
-    5: 0
+    5: 0,
   });
-
 
   useEffect(() => {
     const fetchCategoryRatingTypes = async () => {
@@ -127,7 +127,7 @@ const Reviews = ({ productId, data }) => {
         if (data && data.category) {
           const category = await getCategoryByName(data.category);
           setCategoryData(category);
-          setShowRatingTypes(category.availableRatingTypes)
+          setShowRatingTypes(category.availableRatingTypes);
         }
       } catch (error) {
         console.error("Error fetching category:", error);
@@ -136,7 +136,6 @@ const Reviews = ({ productId, data }) => {
 
     fetchCategoryRatingTypes();
   }, [data, data.category]);
-
 
   console.log(data._id);
   console.log("product data", data);
@@ -172,18 +171,17 @@ const Reviews = ({ productId, data }) => {
         2: 0,
         3: 0,
         4: 0,
-        5: 0
+        5: 0,
       };
 
       // Count ratings
-      reviews.forEach(review => {
+      reviews.forEach((review) => {
         counts[review.rating]++;
       });
 
       setRatingCounts(counts);
     }
   }, [reviews]);
-
 
   // overall avg rating of the product
   const calculateOverallAverageRating = useMemo(() => {
@@ -192,7 +190,6 @@ const Reviews = ({ productId, data }) => {
     const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
     return (totalRating / reviews.length).toFixed(1);
   }, [reviews]);
-
 
   const handleReview = () => {
     setIsReview(!isReview);
@@ -248,9 +245,7 @@ const Reviews = ({ productId, data }) => {
       );
       console.log("reviews", response.data);
 
-
       setReviews(response.data);
-
     } catch (error) {
       console.error("Error fetching reviews:", error);
       setReviews([]);
@@ -339,53 +334,61 @@ const Reviews = ({ productId, data }) => {
       <div className="pb-12 sm:w-auto overflow-x-hidden">
         {(data.productType === "special" ||
           data.productType === "requested") && (
-            <div>
-              <div className="flex flex-col justify-center mx-auto">
-                {data.productType === "requested" && (
-                  <div className="flex items-center justify-center overflow-hidden flex-row ">
-                    <img
-                      className="h-36 scale-x-[-1]"
-                      alt=""
-                      src="/icons/amf/rightGold.svg"
-                    />
-                    <div className="text-[6rem] font-bold text-[#bf9b30] pb-5">
-                      5.0
-                    </div>
-                    <img
-                      className="h-36 "
-                      alt=""
-                      src="/icons/amf/rightGold.svg"
-                    />
+          <div>
+            <div className="flex flex-col justify-center mx-auto">
+              {data.productType === "requested" && (
+                <div className="flex items-center justify-center overflow-hidden flex-row ">
+                  <img
+                    className="h-36 scale-x-[-1]"
+                    alt=""
+                    src="/icons/amf/rightGold.svg"
+                  />
+                  <div className="text-[6rem] font-bold text-[#bf9b30] pb-5">
+                    {calculateOverallAverageRating || "5.0"}
                   </div>
-                )}
-                {data.productType === "special" && (
-                  <div className="flex items-center justify-center overflow-hidden flex-row ">
-                    <img
-                      className="h-36 scale-x-[-1]"
-                      alt=""
-                      src="/icons/amf/rightBlack.svg"
-                    />
-                    <div className="text-[6rem] font-bold text-gray-700 pb-5">
-                      5.0
-                    </div>
-                    <img
-                      className="h-36 "
-                      alt=""
-                      src="/icons/amf/rightBlack.svg"
-                    />
+                  <img
+                    className="h-36 "
+                    alt=""
+                    src="/icons/amf/rightGold.svg"
+                  />
+                </div>
+              )}
+              {data.productType === "special" && (
+                <div className="flex items-center justify-center overflow-hidden flex-row ">
+                  <img
+                    className="h-36 scale-x-[-1]"
+                    alt=""
+                    src="/icons/amf/rightBlack.svg"
+                  />
+                  <div className="text-[6rem] font-bold text-gray-700 pb-5">
+                    {calculateOverallAverageRating || "5.0"}
                   </div>
-                )}
-                <div className="flex justify-center items-center flex-col ">
-                  <div className={`text-xl font-bold -mt-5  ${data.productType === "requested" ? "text-[#bf9b30]" : "text-black"}`} >Guest favourite</div>
-                  <div className="text-lg text-gray-500">
-                    One of the most loved homes on Ayatrio
-                    <br />
-                    based on ratings, reviews, and reliability
-                  </div>
+                  <img
+                    className="h-36 "
+                    alt=""
+                    src="/icons/amf/rightBlack.svg"
+                  />
+                </div>
+              )}
+              <div className="flex justify-center items-center flex-col ">
+                <div
+                  className={`text-xl font-bold -mt-5  ${
+                    data.productType === "requested"
+                      ? "text-[#bf9b30]"
+                      : "text-black"
+                  }`}
+                >
+                  Guest favourite
+                </div>
+                <div className="text-lg text-gray-500">
+                  One of the most loved homes on Ayatrio
+                  <br />
+                  based on ratings, reviews, and reliability
                 </div>
               </div>
             </div>
-          )}
+          </div>
+        )}
 
         {/* <div className="rating-map flex justify-around mt-12 w-full overflow-x-auto">
           {ratingsData.map((item, index) => (
@@ -402,7 +405,9 @@ const Reviews = ({ productId, data }) => {
             {/* Overall Ratings */}
 
             <div className="flex flex-col items-center">
-              <div className="font-semibold text-gray-700 mb-2 capitalize">Overall Ratings</div>
+              <div className="font-semibold text-gray-700 mb-2 capitalize">
+                Overall Ratings
+              </div>
               <div className="mt-2">
                 {[5, 4, 3, 2, 1].map((number, index) => (
                   <div className="flex">
@@ -411,7 +416,11 @@ const Reviews = ({ productId, data }) => {
                       <div className="h-1 bg-gray-300 w-full overflow-hidden">
                         <div
                           className="h-full bg-black rounded-r-full"
-                          style={{ width: `${(ratingCounts[number] / reviews.length) * 100}%` }}
+                          style={{
+                            width: `${
+                              (ratingCounts[number] / reviews.length) * 100
+                            }%`,
+                          }}
                         ></div>
                       </div>
                     </div>
@@ -422,9 +431,18 @@ const Reviews = ({ productId, data }) => {
 
             {/* Rating Types */}
             {showRatingTypes?.map((item, index) => (
-              <div key={item._id} className={`flex flex-col items-center text-center min-w-[110px] ${index === showRatingTypes.length - 1 ? 'mr-8' : ''}`}>
-                <div className="font-semibold text-gray-700 mb-4 capitalize">{item.name}</div>
-                <div className="text-lg font-semibold text-gray-900 my-2">{computeAverageRatings[item._id]}</div>
+              <div
+                key={item._id}
+                className={`flex flex-col items-center text-center min-w-[110px] ${
+                  index === showRatingTypes.length - 1 ? "mr-8" : ""
+                }`}
+              >
+                <div className="font-semibold text-gray-700 mb-4 capitalize">
+                  {item.name}
+                </div>
+                <div className="text-lg font-semibold text-gray-900 my-2">
+                  {computeAverageRatings[item._id]}
+                </div>
                 <Image
                   src={item.image}
                   alt={item.name}
@@ -439,7 +457,7 @@ const Reviews = ({ productId, data }) => {
 
         <div className="flex justify-between items-baseline pt-4">
           <div className="flex mb-1 text-xl font-semibold space-x-1">
-            {calculateOverallAverageRating > 0 &&
+            {calculateOverallAverageRating > 0 && (
               <>
                 <Image
                   loading="lazy"
@@ -452,7 +470,7 @@ const Reviews = ({ productId, data }) => {
                 {calculateOverallAverageRating}
                 <span aria-hidden="true">·</span>
               </>
-            }
+            )}
             <div className="text-lg underline">
               {reviews.length}
               <span> reviews</span>
@@ -461,14 +479,12 @@ const Reviews = ({ productId, data }) => {
           <>
             {isLoading ? (
               <p>Loading...</p>
+            ) : !isReview ? (
+              <ReviewForm addReview={addReview} categoryData={categoryData} />
             ) : (
-              !isReview ? (
-                <ReviewForm addReview={addReview} categoryData={categoryData} />
-              ) : (
-                <div>
-                  {/* This section can be used for further review-related content */}
-                </div>
-              )
+              <div>
+                {/* This section can be used for further review-related content */}
+              </div>
             )}
           </>
         </div>
@@ -479,7 +495,10 @@ const Reviews = ({ productId, data }) => {
           {reviews.map((review, index) => (
             <div key={index} className="sm:mr-12 mb-8 m-0 sm:block ">
               <div className="flex justify-between">
-                <Link className="review-header flex items-center" href={`/profile/${review?.userId}`}>
+                <Link
+                  className="review-header flex items-center"
+                  href={`/profile/${review?.userId}`}
+                >
                   <div className="w-[48px] h-[48px] mr-4">
                     <img
                       className="w-full h-full rounded-full object-cover"
@@ -591,7 +610,10 @@ const Reviews = ({ productId, data }) => {
           >
             {reviews.map((review, index) => (
               <SwiperSlide>
-                <div key={index} className="sm:mr-12 mb-8 flex flex-col justify-between m-0 sm:block rounded-sm p-4 border shadow-sm min-h-[230px] ">
+                <div
+                  key={index}
+                  className="sm:mr-12 mb-8 flex flex-col justify-between m-0 sm:block rounded-sm p-4 border shadow-sm min-h-[230px] "
+                >
                   <div className="flex flex-col justify-between h-full">
                     <div>
                       <div className="ratings flex mt-3">
@@ -607,7 +629,10 @@ const Reviews = ({ productId, data }) => {
                           />
                         ))}
                         <span className="text-sm font-semibold ml-2 text-gray-600">
-                          {new Date(review.createdAt).toLocaleString('default', { month: 'long', year: 'numeric' })}
+                          {new Date(review.createdAt).toLocaleString(
+                            "default",
+                            { month: "long", year: "numeric" }
+                          )}
                         </span>
                       </div>
 
@@ -616,8 +641,6 @@ const Reviews = ({ productId, data }) => {
                           {review.showFullComment
                             ? review.comment
                             : `${review.comment.slice(0, 100)}...`}
-
-
                         </p>
                         {review.comment.length > 100 && (
                           <button
@@ -629,11 +652,12 @@ const Reviews = ({ productId, data }) => {
                         )}
                       </div>
                     </div>
-
-
                   </div>
                   <div className="flex justify-between mt-5">
-                    <Link className="review-header flex items-center" href={`/profile/${review?.userId}`}>
+                    <Link
+                      className="review-header flex items-center"
+                      href={`/profile/${review?.userId}`}
+                    >
                       <div className="w-[48px] h-[48px] mr-4">
                         <img
                           className="w-full h-full rounded-full object-cover"
@@ -645,9 +669,7 @@ const Reviews = ({ productId, data }) => {
                         <span className="font-semibold text-[16px]">
                           {review.name}
                         </span>
-                        <span className="font-normal text-[14px] text-gray-500">
-
-                        </span>
+                        <span className="font-normal text-[14px] text-gray-500"></span>
                       </div>
                     </Link>
                     {isAuthenticated && user.email === review.userEmail && (
@@ -658,8 +680,6 @@ const Reviews = ({ productId, data }) => {
                       </div>
                     )}
                   </div>
-
-
 
                   {review.images.length > 0 && (
                     <div className="flex gap-2 mb-4 mt-4">
@@ -676,10 +696,8 @@ const Reviews = ({ productId, data }) => {
                 </div>
               </SwiperSlide>
             ))}
-
           </Swiper>
         </div>
-
 
         {/* <Carous data={data} /> */}
       </div>
