@@ -13,9 +13,13 @@ const Profile = ({ id }) => {
   const [isCurrentUser, setIsCurrentUser] = useState(false);
   const [reviews, setReviews] = useState([]);
   const [editProfile, setEditProfile] = useState(false);
+  const [editedUser, setEditedUser] = useState({});
+
+  const [loading, setLoading] = useState(false);
+
   const [authorProduct, setAuthorProduct] = useState([]);
 
-  const fetchUerById = async () => {
+  const fetchUserById = async () => {
     try {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/user/${id}`
@@ -104,8 +108,8 @@ const Profile = ({ id }) => {
     if (user) {
       fetchAllReviewByUserId(user._id);
     }
-    if (user && user.authorDetails && user.authorDetails.author) {
-      fetchAllProductPyAuthor(user.authorDetails.author._id);
+    if (user && user.userType === "author") {
+      fetchAllProductPyAuthor(user._id);
     }
     if (loggedInUser && user) {
       setIsCurrentUser(loggedInUser._id === user._id);
@@ -113,8 +117,10 @@ const Profile = ({ id }) => {
   }, [user, loggedInUser]);
 
   useEffect(() => {
+    setLoading(true);
     storeTokenInLocalStorage();
-    fetchUerById();
+    fetchUserById();
+    setLoading(false);
   }, []);
 
   const handleLogout = () => {
@@ -125,9 +131,52 @@ const Profile = ({ id }) => {
     );
   };
 
+  const handleUpdateProfile = async () => {
+    const formData = new FormData();
+    formData.append("displayName", editedUser.displayName);
+    formData.append("image", editedUser.image);
+    formData.append("userType", editedUser.userType);
+    formData.append(
+      "authorDetails[description]",
+      editedUser.authorDetails.description
+    );
+    formData.append(
+      "authorDetails[experience]",
+      editedUser.authorDetails.experience
+    );
+    formData.append("authorDetails[award]", editedUser.authorDetails.award);
+
+    try {
+      const response = await axios.put(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/update-user/${id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log("response", response.data);
+      setUser(response.data.user);
+      setEditProfile(false);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
+  const [preview, setPreview] = useState("");
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setEditedUser({ ...editedUser, image: file });
+      setPreview(URL.createObjectURL(file));
+    }
+  };
   return (
     <div className="flex flex-col items-start w-full px-4 sm:px-6 lg:px-8 pt-5 sm:pt-20">
-      {user ? (
+      {loading ? (
+        <div>Loading...</div>
+      ) : user ? (
         <>
           <div className="flex items-center gap-4 w-full mt-10 pb-8 border-b">
             <div className="relative w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0">
@@ -148,7 +197,19 @@ const Profile = ({ id }) => {
               </h3>
               {isAuthenticated && isCurrentUser && (
                 <div className="flex justify-start w-full mt-4 gap-2">
-                  <button className="bg-blue-500 text-white px-4 text-sm py-2 rounded-full">
+                  <button
+                    onClick={() => {
+                      setEditProfile(true);
+                      setEditedUser({
+                        displayName: user.displayName,
+                        image: user.image,
+                        userType: user.userType,
+                        authorDetails: user.authorDetails,
+                      });
+                      setPreview(user.image);
+                    }}
+                    className="bg-blue-500 text-white px-4 text-sm py-2 rounded-full"
+                  >
                     Edit Profile
                   </button>
                   <button
@@ -162,45 +223,192 @@ const Profile = ({ id }) => {
             </div>
           </div>
 
+          {editProfile && (
+            <div className="mt-8 w-full max-w-md m-auto shadow-md p-4">
+              <h2 className="text-2xl  font-bold">Edit Profile</h2>
+              <div className="mt-6 w-full">
+                <div className="flex flex-col">
+                  <label
+                    htmlFor="displayName"
+                    className="text-lg font-semibold"
+                  >
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    id="displayName"
+                    className="border border-gray-300 rounded-lg px-4 py-2 mt-2"
+                    value={editedUser.displayName}
+                    onChange={(e) =>
+                      setEditedUser({
+                        ...editedUser,
+                        displayName: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+                <div className="flex flex-col mt-4">
+                  <label htmlFor="image" className="text-lg font-semibold">
+                    Profile Image
+                  </label>
 
-
-          {user.authorDetails && user.authorDetails.author && (
-            <div className="mt-8 flex flex-col items-center w-full">
-              <h2 className="text-xl text-red-500 font-bold">Author</h2>
-              <p className="text-gray-600 text-center">
-                {user.authorDetails.author.description}
-              </p>
-              <div className="mt-4 w-full max-w-2xl">
-                <div className="mt-2 flex gap-2 ">
-                  <span className="font-semibold">Experience:</span>
-                  <span className="text-gray-600 ">
-                    {user.authorDetails.author.experience} year of experience
-                  </span>
+                  <div className="flex items-center gap-4 mt-2">
+                    <div className="relative w-16 h-16">
+                      <Image
+                        src={preview}
+                        alt="profile"
+                        layout="fill"
+                        className="rounded-full object-cover"
+                      />
+                    </div>
+                    <label
+                      htmlFor="image"
+                      className="font-medium cursor-pointer"
+                    >
+                      Upload
+                    </label>
+                    <input
+                      type="file"
+                      id="image"
+                      className="hidden"
+                      onChange={handleImageChange}
+                    />
+                  </div>
                 </div>
-                <div className="mt-2 flex gap-2 ">
-                  <span className="font-semibold">Rating:</span>
-                  <span className="text-gray-600 ">
-                    {user.authorDetails.author.rating}
-                  </span>
+                <div className="flex flex-col mt-4">
+                  <label htmlFor="userType" className="text-lg font-semibold">
+                    User Type
+                  </label>
+                  <select
+                    id="userType"
+                    className="border border-gray-300 rounded-lg px-4 py-2 mt-2"
+                    value={editedUser.userType}
+                    onChange={(e) =>
+                      setEditedUser({ ...editedUser, userType: e.target.value })
+                    }
+                  >
+                    <option value="user">User</option>
+                    <option value="author">Author</option>
+                  </select>
                 </div>
-                <div className="mt-2 flex gap-2 ">
-                  <span className="font-semibold">Purchases:</span>
-                  <span className="text-gray-600 ">
-                    {user.authorDetails.author.purchase}
-                  </span>
-                </div>
-                <div className="mt-2 flex gap-2 ">
-                  <span className="font-semibold">Awards:</span>
-                  <span className="text-gray-600 ">
-                    {user.authorDetails.author.awards.join(", ")}
-                  </span>
+                {editedUser.userType === "author" && (
+                  <div className="flex flex-col mt-4">
+                    <label
+                      htmlFor="description"
+                      className="text-lg font-semibold"
+                    >
+                      Description
+                    </label>
+                    <textarea
+                      id="description"
+                      className="border border-gray-300 rounded-lg px-4 py-2 mt-2"
+                      value={editedUser.authorDetails.description}
+                      onChange={(e) =>
+                        setEditedUser({
+                          ...editedUser,
+                          authorDetails: {
+                            ...editedUser.authorDetails,
+                            description: e.target.value,
+                          },
+                        })
+                      }
+                    />
+                  </div>
+                )}
+                {editedUser.userType === "author" && (
+                  <div className="flex flex-col mt-4">
+                    <label
+                      htmlFor="experience"
+                      className="text-lg font-semibold"
+                    >
+                      Experience
+                    </label>
+                    <input
+                      type="text"
+                      id="experience"
+                      className="border border-gray-300 rounded-lg px-4 py-2 mt-2"
+                      value={editedUser.authorDetails.experience}
+                      onChange={(e) =>
+                        setEditedUser({
+                          ...editedUser,
+                          authorDetails: {
+                            ...editedUser.authorDetails,
+                            experience: e.target.value,
+                          },
+                        })
+                      }
+                    />
+                  </div>
+                )}
+                {editedUser.userType === "author" && (
+                  <div className="flex flex-col mt-4">
+                    <label htmlFor="award" className="text-lg font-semibold">
+                      Awards
+                    </label>
+                    <input
+                      type="text"
+                      id="award"
+                      className="border border-gray-300 rounded-lg px-4 py-2 mt-2"
+                      value={editedUser.authorDetails.award}
+                      onChange={(e) =>
+                        setEditedUser({
+                          ...editedUser,
+                          authorDetails: {
+                            ...editedUser.authorDetails,
+                            award: e.target.value,
+                          },
+                        })
+                      }
+                    />
+                  </div>
+                )}
+                <div className="flex justify-end w-full mt-4 gap-2">
+                  <button
+                    onClick={() => setEditProfile(false)}
+                    className="bg-red-500 text-white px-4 py-2 mt-4 rounded-md"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleUpdateProfile}
+                    className="bg-blue-500 text-white px-4 py-2 mt-4 rounded-md"
+                  >
+                    Update Profile
+                  </button>
                 </div>
               </div>
             </div>
           )}
 
-          {user.authorDetails &&
-            user.authorDetails.author &&
+          {user.userType === "author" && user.authorDetails && (
+            <div className="mt-8 flex flex-col items-center w-full">
+              <h2 className="text-xl text-red-500 font-bold">Author</h2>
+              <p className="text-gray-600 text-center">
+                {user.authorDetails?.description}
+              </p>
+              <div className="mt-4 w-full max-w-2xl">
+                {user.authorDetails.experience && (
+                  <div className="mt-2 flex gap-2 ">
+                    <span className="font-semibold">Experience:</span>
+                    <span className="text-gray-600 ">
+                      {user.authorDetails.experience} year of experience
+                    </span>
+                  </div>
+                )}
+                {user.authorDetails.award && (
+                  <div className="mt-2 flex gap-2 ">
+                    <span className="font-semibold">Award:</span>
+                    <span className="text-gray-600 ">
+                      {user.authorDetails.award}
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {user.userType === "author" &&
+            user.authorDetails &&
             authorProduct &&
             authorProduct.length > 0 && (
               <div className="mt-8 w-full">
@@ -226,7 +434,6 @@ const Profile = ({ id }) => {
                       // setPopupVisible={setPopupVisible}
                       cssClass={"card1flex"}
                       // inCart={inCart}
-                      totalPrice={product.totalPrice}
                       unitType={product.unitType}
                       productType={product.productType}
                       expectedDelivery={product.expectedDelivery}

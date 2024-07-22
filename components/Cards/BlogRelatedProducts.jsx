@@ -126,7 +126,6 @@ const BlogRecommendedProducts = ({ relatedProducts, title }) => {
                       setPopupVisible={setPopupVisible}
                       cssClass={"card1flex"}
                       // inCart={inCart}
-                      totalPrice={product.totalPrice}
                       unitType={product.unitType}
                       productType={product.productType}
                       expectedDelivery={product.expectedDelivery}

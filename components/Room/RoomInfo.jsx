@@ -77,30 +77,6 @@ const RoomInfo = ({ data }) => {
 
   return (
     <div className="w-full">
-      {/* <div className="room-details pb-4">
-          <h2 className="sm:text-2xl text-lg sm:font-semibold font-medium sm:mt-0">
-            Room Details
-          </h2>
-          <div className=" text-base">
-            16+ guests 4 bedrooms 5 beds 3 bathrooms
-          </div>
-        </div> */}
-      {/* <div className="flex mb-10 justify-center">
-
-          <div className="flex flex-col items-center max-w-48  gap-2">
-            <Image loading="lazy"src={"/icons/backarrowRevarce.svg"} height={35} width={35} alt="downarrow" className="rotate-90  hover:text-gray-600" />
-            <p className="text-[#1D1D1F] font-semibold   text-xs">Get free delivery, or pick up available items at an Apple Store</p>
-          </div>
-          <div className="flex flex-col items-center max-w-48  gap-2">
-            <Image loading="lazy"src={"/icons/backarrowRevarce.svg"} height={35} width={35} alt="downarrow" className="rotate-90 hover:text-gray-600" />
-            <p className="text-[#1D1D1F] font-semibold text-xs">Get 6 months of Ayatrio free with your HomePod miniFootnote*</p>
-          </div>
-          <div className="flex flex-col items-center max-w-48  gap-2">
-            <Image loading="lazy"src={"/icons/backarrowRevarce.svg"} height={35} width={35} alt="downarrow" className="rotate-90 hover:text-gray-600" />
-            <p className="text-[#1D1D1F] font-semibold text-xs">Free and easy returns</p>
-          </div>
-
-        </div> */}
 
 
       <div className="font-normal text-sm  flex flex-col gap-4 my-6">
@@ -238,7 +214,7 @@ const RoomInfo = ({ data }) => {
         {data?.author && (
           <div className="flex flex-col my-10 gap-6 w-full ">
             <div className="flex items-start gap-4">
-              <Link href={`/profile/${data.author.userId}`} className="flex-shrink-0">
+              <Link href={`/profile/${data.author._id}`} className="flex-shrink-0">
                 <Image
                   src={data.author.image}
                   height={150}
@@ -248,11 +224,11 @@ const RoomInfo = ({ data }) => {
                 />
               </Link>
               <div className="flex flex-col">
-                <Link href={`/profile/${data.author.userId}`} className=" text-[#1D1D1F] font-bold text-xl">
-                  {data.author.name}
+                <Link href={`/profile/${data.author._id}`} className=" text-[#1D1D1F] font-bold text-xl">
+                  {data.author.displayName}
                 </Link>
                 <p className="text-[#1D1D1F] font-semibold text-sm pt-3 line-clamp-5 md:w-[70%]">
-                  {data.author.description}
+                  {data.author.authorDetails.description}
                 </p>
                 {/* <div className="grid grid-cols-3 gap-4 mt-4 w-full">
                   <div className="flex flex-col items-center">

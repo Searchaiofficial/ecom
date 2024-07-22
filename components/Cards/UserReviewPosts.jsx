@@ -219,16 +219,16 @@ const UserReviewPosts = ({ slidesPerView, SubcategoryName }) => {
                                                         <p className="text-[14px] text-[#484848]">{item.collectionName}</p>
 
                                                         {/* {
-                                                            item.discountedprice ? (<p className="lg:text-[28px] text-[24px] font-semibold">{item.discountedprice}</p>) : (<p className="lg:text-[28px] text-[24px] font-semibold">{item.totalPrice}</p>)
+                                                            item.discountedprice ? (<p className="lg:text-[28px] text-[24px] font-semibold">{item.discountedprice}</p>) : (<p className="lg:text-[28px] text-[24px] font-semibold">{item.perUnitPrice}</p>)
                                                         } */}
                                                         <h2 className={`text-3xl flex font-semibold leading-[0.5]  tracking-wide ${item.specialprice ? "bg-[#FFD209] px-2 pt-3 w-fit shadow-lg" : ""} `} style={item?.specialprice ? { boxShadow: '3px 3px #ad3535' } : {}}>
                                                             <span className={`text-sm ${item?.specialprice?.price ? "" : "pt-3.5"}`}>Rs. &nbsp;</span>{" "}
-                                                            {item?.specialprice?.price ? item?.specialprice.price : <p className="pt-3">{item.totalPrice}</p>}
+                                                            {item?.specialprice?.price ? item?.specialprice.price : <p className="pt-3">{item.perUnitPrice}</p>}
                                                         </h2>{" "}
                                                         {
                                                             item?.specialprice && (
                                                                 <div className="flex flex-col mt-2">
-                                                                    <p className="text-[#757575] text-[12px] pt-[3px]">Regular price: Rs.{item?.totalPrice} (incl. of all taxes)</p>
+                                                                    <p className="text-[#757575] text-[12px] pt-[3px]">Regular price: Rs.{item?.perUnitPrice} (incl. of all taxes)</p>
                                                                     {
                                                                         item?.specialprice?.startDate && item?.specialprice?.endDate && (
                                                                             <p className="text-[#757575] text-[12px] pb-[10px]">Price valid {formatDate(item.specialprice.startDate)} - {formatDate(item.specialprice.endDate)} or while supply lasts</p>

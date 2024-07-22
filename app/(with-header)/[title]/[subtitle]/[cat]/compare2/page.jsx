@@ -95,7 +95,7 @@ const page = () => {
                       {item?.specialprice?.price ? (
                         item?.specialprice?.price
                       ) : (
-                        <p className="pt-3 ">{item.totalPrice}</p>
+                        <p className="pt-3 ">{item.perUnitPrice}</p>
                       )}
                     </h2>
                     {item.unitType ? (

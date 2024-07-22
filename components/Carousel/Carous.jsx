@@ -158,7 +158,6 @@ const Carous = ({ data }) => {
                       setPopupVisible={setPopupVisible}
                       cssClass={"card1flex"}
                       // inCart={inCart}
-                      totalPrice={product.totalPrice}
                       unitType={product.unitType}
                       productType={product.productType}
                       expectedDelivery={product.expectedDelivery}

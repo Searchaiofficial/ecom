@@ -836,7 +836,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                 {data?.specialprice?.price && (
                   <div className="flex flex-col">
                     <p className="text-[#757575] text-[12px] pt-[3px]">
-                      Regular price: Rs.{data?.totalPrice} (incl. of all taxes)
+                      Regular price: Rs.{data?.perUnitPrice} (incl. of all taxes)
                     </p>
                     {data?.specialprice?.startDate &&
                       data?.specialprice?.endDate && (
@@ -1758,7 +1758,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                               {data?.specialprice?.price && (
                                 <div className="flex flex-col">
                                   <p className="text-[#757575] text-[12px] pt-[3px]">
-                                    Regular price: Rs.{data?.totalPrice}{" "}
+                                    Regular price: Rs.{data?.perUnitPrice}{" "}
                                   </p>
                                   {data?.specialprice?.startDate &&
                                     data?.specialprice?.endDate && (

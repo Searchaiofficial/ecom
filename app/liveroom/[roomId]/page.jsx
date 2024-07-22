@@ -457,7 +457,6 @@ const page = ({ params }) => {
                       productId={product.productId}
                       ratings={product.ratings}
                       stars={stars}
-                      totalPrice={product.totalPrice}
                       productDescription={product.productDescription}
                     />
                   </div>
@@ -491,7 +490,6 @@ const page = ({ params }) => {
                       productId={product.productId}
                       ratings={product.ratings}
                       stars={stars}
-                      totalPrice={product.totalPrice}
                       productDescription={product.productDescription}
                     />
                   </div>

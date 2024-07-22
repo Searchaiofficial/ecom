@@ -92,7 +92,7 @@ const LiveRoomProductSlider = ({ products }) => {
                                 </span>
                               </p>
                               <p className="text-sm mt-2 text-gray-500">
-                                Regular price: Rs.{item.totalPrice}
+                                Regular price: Rs.{item.perUnitPrice}
                               </p>
 
                               {item.specialprice.startDate &&
@@ -107,7 +107,7 @@ const LiveRoomProductSlider = ({ products }) => {
                             <p className="text-sm font-semibold">
                               Rs.
                               <span className="text-3xl">
-                                {item.totalPrice}
+                                {item.perUnitPrice}
                               </span>
                             </p>
                           )}

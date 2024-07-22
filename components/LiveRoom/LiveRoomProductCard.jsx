@@ -106,7 +106,7 @@ function LiveRoomProductCard(props) {
                     </span>
                   </p>
                   <p className="text-sm mt-2 text-gray-500">
-                    Regular price: Rs.{props.totalPrice}
+                    Regular price: Rs.{props.perUnitPrice}
                   </p>
 
                   {props.specialprice.startDate &&
@@ -119,7 +119,7 @@ function LiveRoomProductCard(props) {
                 </div>
               ) : (
                 <p className="text-sm font-semibold">
-                  Rs.<span className="text-3xl">{props.totalPrice}</span>
+                  Rs.<span className="text-3xl">{props.perUnitPrice}</span>
                 </p>
               )}
               {/* {props.ratings?.length > 0 && ( */}

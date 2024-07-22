@@ -435,7 +435,7 @@ function TabsProductCard(props) {
                     {props?.specialprice?.price ? (
                       props?.specialprice?.price
                     ) : (
-                      <p className="pt-3 ">{props.totalPrice}</p>
+                      <p className="pt-3 ">{props.perUnitPrice}</p>
                     )}
                   </h2>
                   {props.unitType ? (
@@ -463,7 +463,7 @@ function TabsProductCard(props) {
               {props?.specialprice?.price && (
                 <div className="flex flex-col my-3">
                   <p className="text-[#757575] text-[12px] pt-[3px]">
-                    Regular price: Rs.{props?.totalPrice} (incl. of all taxes)
+                    Regular price: Rs.{props?.perUnitPrice} (incl. of all taxes)
                   </p>
                   {props?.specialPrice?.startDate &&
                     props?.specialPrice?.endDate && (
@@ -588,7 +588,7 @@ function TabsProductCard(props) {
               Rs.<span className="text-3xl">{props.discountedprice}</span>
             </p>
             <p className="text-sm mt-2 text-gray-500">
-              Regular price: Rs.{props.totalPrice}
+              Regular price: Rs.{props.perUnitPrice}
             </p>
           </div>
         ) : props.specialprice ? (
@@ -597,7 +597,7 @@ function TabsProductCard(props) {
               Rs.<span className="text-3xl">{props.specialprice?.price}</span>
             </p>
             <p className="text-sm mt-2 text-gray-500">
-              Regular price: Rs.{props.totalPrice}
+              Regular price: Rs.{props.perUnitPrice}
             </p>
 
             {props.specialprice.startDate && props.specialprice.endDate && (
@@ -609,7 +609,7 @@ function TabsProductCard(props) {
           </div>
         ) : (
           <p className="text-sm font-semibold">
-            Rs.<span className="text-3xl">{props.totalPrice}</span>
+            Rs.<span className="text-3xl">{props.perUnitPrice}</span>
           </p>
         )} */}
         {/* {props.ratings?.length > 0 && (

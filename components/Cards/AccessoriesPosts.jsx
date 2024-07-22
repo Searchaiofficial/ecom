@@ -85,7 +85,6 @@ const AccessoriesPosts = ({ accessories }) => {
                 category={product.category}
                 productId={product.productId}
                 cssClass={"card1flex"}
-                totalPrice={product.totalPrice}
                 unitType={product.unitType}
               />
             </SwiperSlide>
