@@ -50,6 +50,10 @@ const Display = async () => {
               >
                 <TabImage
                   src={apiData[0].room.imgSrc}
+                  href={`/${apiData[0].room?.productCategory.replace(
+                    / /g,
+                    "-"
+                  )}/category/all`}
                   alt={`Image  of Children`}
                   width={1000}
                   height={338}
@@ -63,10 +67,10 @@ const Display = async () => {
                       {apiData[0].text}
                     </h2>
                     <Link
-                      href={`/rooms/${apiData[0]?.room.roomType.replace(
+                      href={`/${apiData[0].room?.productCategory.replace(
                         / /g,
                         "-"
-                      )}`}
+                      )}/category/all`}
                     >
                       <p className="text-blue-500 text-[12px] font-semibold">
                         View More
@@ -94,6 +98,10 @@ const Display = async () => {
               >
                 <TabImage
                   src={apiData[1]?.room.imgSrc}
+                  href={`/${apiData[1].room?.productCategory.replace(
+                    / /g,
+                    "-"
+                  )}/category/all`}
                   alt={`Image  of Children`}
                   width={1000}
                   height={338}
@@ -106,10 +114,10 @@ const Display = async () => {
                     </h2>
 
                     <Link
-                      href={`/rooms/${apiData[1]?.room.roomType.replace(
+                      href={`/${apiData[1].room?.productCategory.replace(
                         / /g,
                         "-"
-                      )}`}
+                      )}/category/all`}
                     >
                       <p className="text-blue-500 text-[12px] font-semibold">
                         View More

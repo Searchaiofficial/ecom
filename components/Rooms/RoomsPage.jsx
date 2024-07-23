@@ -24,7 +24,7 @@ import {
   FreeMode,
 } from "swiper/modules";
 import TabImage from "../Cards/TabImage";
-import Multicard from "@/components/Imagechanger/Multicard"
+import Multicard from "@/components/Imagechanger/Multicard";
 import Card from "../Cards/card";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -177,6 +177,10 @@ export const RoomsPage = ({ params }) => {
               {name === "mainImage" && (
                 <div className="mt-20 relative w-full h-[550px]">
                   <TabImage
+                    href={`/${roomMain.mainImage.productCategory.replace(
+                      / /g,
+                      "-"
+                    )}/category/all`}
                     src={roomMain.mainImage.imgSrc}
                     alt={`Image  of Children`}
                     layout="fill"
@@ -199,6 +203,10 @@ export const RoomsPage = ({ params }) => {
                     <div className="relative h-[449px]  lg:min-h-[730px] w-full">
                       <TabImage
                         src={roomMain.twoGrid.twoGridRooms[0].imgSrc}
+                        href={`/${roomMain.twoGrid.twoGridRooms[0].productCategory.replace(
+                          / /g,
+                          "-"
+                        )}/category/all`}
                         alt={`Image  of Children`}
                         layout="fill"
                         width={1000}
@@ -210,7 +218,12 @@ export const RoomsPage = ({ params }) => {
                     <div className="relative h-[449px]  lg:min-h-[730px] w-full">
                       <TabImage
                         src={roomMain.twoGrid.twoGridRooms[1].imgSrc}
+                        href={`/${roomMain.twoGrid.twoGridRooms[1].productCategory.replace(
+                          / /g,
+                          "-"
+                        )}/category/all`}
                         alt={`Image  of Children`}
+                        s
                         layout="fill"
                         width={1000}
                         height={1000}
@@ -235,21 +248,26 @@ export const RoomsPage = ({ params }) => {
                         {roomMain.fiveGrid.fiveGridRooms.map((room, index) => (
                           <div
                             key={index}
-                            className={`parent ${index === 0
-                              ? "col-start-1 col-end-3 row-start-1 row-end-6 lg:col-start-1 lg:col-end-7 lg:row-start-1 lg:row-end-12"
-                              : index === 1
+                            className={`parent ${
+                              index === 0
+                                ? "col-start-1 col-end-3 row-start-1 row-end-6 lg:col-start-1 lg:col-end-7 lg:row-start-1 lg:row-end-12"
+                                : index === 1
                                 ? "col-start-1 col-end-2 row-start-6 row-span-2 lg:col-start-7 lg:col-end-10 lg:row-start-1 lg:row-end-6"
                                 : index === 2
-                                  ? "col-start-2 col-end-3 row-start-6 row-span-3 lg:col-start-10 lg:col-end-13 lg:row-start-1 lg:row-end-7"
-                                  : index === 3
-                                    ? "col-start-1 col-end-2 row-start-8 row-span-3 lg:col-start-7 lg:col-end-10 lg:row-start-6 lg:row-end-12"
-                                    : "col-start-2 col-end-3 row-start-9 row-span-2 lg:col-start-10 lg:col-end-13 lg:row-start-7 lg:row-end-12"
-                              }`}
+                                ? "col-start-2 col-end-3 row-start-6 row-span-3 lg:col-start-10 lg:col-end-13 lg:row-start-1 lg:row-end-7"
+                                : index === 3
+                                ? "col-start-1 col-end-2 row-start-8 row-span-3 lg:col-start-7 lg:col-end-10 lg:row-start-6 lg:row-end-12"
+                                : "col-start-2 col-end-3 row-start-9 row-span-2 lg:col-start-10 lg:col-end-13 lg:row-start-7 lg:row-end-12"
+                            }`}
                             onMouseEnter={() => handleMouseEnter(index)}
                             onMouseLeave={handleMouseLeave}
                           >
                             <div className="relative w-full h-full">
                               <TabImage
+                                href={`/${room?.productCategory.replace(
+                                  / /g,
+                                  "-"
+                                )}/category/all`}
                                 src={room.imgSrc}
                                 alt={`Image of Children`}
                                 width={1000}
@@ -267,33 +285,22 @@ export const RoomsPage = ({ params }) => {
               )}
 
               {name === "firstSlider" && (
-                <BlogRelatedProducts
-                  relatedProducts={roomMain.firstSlider}
-                />
+                <BlogRelatedProducts relatedProducts={roomMain.firstSlider} />
               )}
               {name === "secondSlider" && (
-                <BlogRelatedProducts
-                  relatedProducts={roomMain.secondSlider}
-                />
+                <BlogRelatedProducts relatedProducts={roomMain.secondSlider} />
               )}
               {name === "thirdSlider" && (
-                <BlogRelatedProducts
-                  relatedProducts={roomMain.firstSlider}
-                />
+                <BlogRelatedProducts relatedProducts={roomMain.firstSlider} />
               )}
               {name === "forthSlider" && (
-                <BlogRelatedProducts
-                  relatedProducts={roomMain.secondSlider}
-                />
+                <BlogRelatedProducts relatedProducts={roomMain.secondSlider} />
               )}
               {name === "fifthSlider" && (
-                <BlogRelatedProducts
-                  relatedProducts={roomMain.secondSlider}
-                />
+                <BlogRelatedProducts relatedProducts={roomMain.secondSlider} />
               )}
             </div>
           ))}
-
 
         <div className="flex mt-20  lg:max-h-[490px] lg:flex-row w-full flex-col">
           <div className="lg:w-2/3 h-[446px]">
@@ -333,267 +340,6 @@ export const RoomsPage = ({ params }) => {
           <Tabs data={productSelect} />
         )}
       </div>
-      {/* <div className=" px-[20px] sm:px-[50px] lg:px-[67px] flex justify-center ">
-        <div className="mt-36 w-full flex flex-col">
-          <h1 className="lg:text-[30px] text-[24px] font-semibold">
-            {roomMain?.title}
-          </h1>
-          <div className="mt-5 lg:w-[70%] w-full">
-            <p className="line-clamp-3 mb-5">{roomMain?.description}</p>
-          </div>
-          <a className="my-5" href="/">
-            click here for size guide
-          </a>
-
-          <div onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} className="w-full lg:min-h-[730px] lg:max-h-[730px] min-h-[449px]">
-            <TabImage
-              src={roomMain?.img}
-              alt={`Image `}
-              width={500}
-              height={100}
-              labelData={roomMain?.children}
-              hovered={hovered}
-            />
-          </div>
-          <h1 className=" text-2xl font-semibold">
-            {roomMain && roomMain.details && roomMain.details[0]?.title}
-          </h1>
-          <div className="flex justify-between items-end">
-            <p className="">
-              {roomMain && roomMain.details && roomMain.details[0]?.description}
-            </p>
-            <button className="mt-5 border-2 border-black rounded-full p-2 lg:p-3">
-              see all double beds
-            </button>
-          </div>
-
-          {roomMain &&
-            roomMain.firstSlider &&
-            roomMain.firstSlider.length > 0 && (
-              <BlogRelatedProducts relatedProducts={roomMain.firstSlider} />
-            )}
-
-          {
-            roomMain &&
-            roomMain.fiveRooms &&
-            roomMain.fiveRooms.length === 5 && (
-              <>
-                <div className="flex justify-between mb-10">
-                  <div className="w-full flex justify-center max-h-[915px] screens">
-                    <div className="w-full lg:h-[730px] grid grid-cols-2 lg:grid-cols-12 gap-y-4 gap-x-4 auto-rows-fr">
-                      {roomMain.fiveRooms.map((room, index) => (
-                        <div
-                          key={index}
-                          className={`parent ${index === 0
-                            ? "col-start-1 col-end-3 row-start-1 row-end-6 lg:col-start-1 lg:col-end-7 lg:row-start-1 lg:row-end-12"
-                            : index === 1
-                              ? "col-start-1 col-end-2 row-start-6 row-span-2 lg:col-start-7 lg:col-end-10 lg:row-start-1 lg:row-end-6"
-                              : index === 2
-                                ? "col-start-2 col-end-3 row-start-6 row-span-3 lg:col-start-10 lg:col-end-13 lg:row-start-1 lg:row-end-7"
-                                : index === 3
-                                  ? "col-start-1 col-end-2 row-start-8 row-span-3 lg:col-start-7 lg:col-end-10 lg:row-start-6 lg:row-end-12"
-                                  : "col-start-2 col-end-3 row-start-9 row-span-2 lg:col-start-10 lg:col-end-13 lg:row-start-7 lg:row-end-12"
-                            }`}
-                          onMouseEnter={() => handleMouseEnter(index)}
-                          onMouseLeave={handleMouseLeave}
-                        >
-                          <div className="relative w-full h-full">
-                            <TabImage
-                              src={room.imgSrc}
-                              alt={`Image of Children`}
-                              width={1000}
-                              height={338}
-                              labelData={room.children}
-                              hovered={hoveredIndex === index}
-                            />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </>
-            )
-          }
-          {roomMain &&
-            roomMain.secondSlider &&
-            roomMain.secondSlider.length > 0 && (
-              <BlogRelatedProducts relatedProducts={roomMain.secondSlider} />
-            )}
-          <div className="flex lg:flex-row flex-col justify-between items-center">
-            <h1 className=" text-[24x] lg:text-[30px] font-semibold">
-              Looking for Bedroom Storage options ?
-            </h1>
-            <button className="border-2 border-black rounded-full p-3">
-              Explore all Bedroom storage solution
-            </button>
-          </div>
-
-          <div className="flex mt-8  lg:max-h-[490px] lg:flex-row w-full flex-col relative  ">
-            <div className="relative lg:w-2/3 min-h-[446px]">
-              {reviewRoom && (
-                <div onMouseEnter={() => setReviewhovered(true)} onMouseLeave={() => setReviewhovered(false)}>
-                  <TabImage
-                    src={reviewRoom.imgSrc}
-                    alt={`Image  of Children`}
-                    width={1000}
-                    height={338}
-                    labelData={reviewRoom.children}
-                    hovered={reviewhovered}
-                  />
-                </div>
-              )}
-            </div>
-            <div className="md:w-1/3 min-h-[363px]   bg-zinc-100  lg:p-12 p-10 ">
-              <div className="flex flex-col ">
-                <div>
-                  <p>{reviewData && reviewData.comment}</p>
-                </div>
-                <div className="flex mt-5 flex-row items-center gap-2 ">
-                  <Image loading="lazy"
-                    src={reviewData && reviewData.image}
-                    width={45}
-                    height={45}
-                    alt={reviewData && reviewData.name}
-                    className=" aspect-square object-cover rounded-full"
-                  />
-                  <p>{reviewData && reviewData.name}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="lg:mt-20 mt-10">
-            <h1 className="text-2xl font-semibold">
-              {roomMain && roomMain.details && roomMain.details[1]?.title}
-            </h1>
-            <div className="mt-5  flex justify-between items-end">
-              <p className="">
-                {roomMain &&
-                  roomMain.details &&
-                  roomMain.details[1]?.description}
-              </p>
-              <button className="border-2 border-black rounded-full p-3">
-                See all guest beds & day beds
-              </button>
-            </div>
-          </div>
-          <div className="flex lg:flex-row flex-col gap-3 mt-5">
-            {roomMain &&
-              roomMain.rooms &&
-              roomMain.rooms.length > 0 &&
-              roomMain.rooms.map((room, index) => (
-                <div key={index} className="lg:w-1/2 lg:max-h-[730px]">
-                  <TabImage
-                    src={room.imgSrc}
-                    alt={`Image ${index + 1} of Product`}
-                    width={500}
-                    height={100}
-                    labelData={room.children}
-                  />
-                </div>
-              ))}
-          </div>
-          <div className="">
-            <h1 className="text-2xl font-semibold">
-              {roomMain && roomMain.details && roomMain.details[2]?.title}
-            </h1>
-            <div className="flex justify-between items-end">
-              <p className="">
-                {roomMain &&
-                  roomMain.details &&
-                  roomMain.details[2]?.description}
-              </p>
-            </div>
-          </div>
-
-          {roomMain &&
-            roomMain.thirdSlider &&
-            roomMain.thirdSlider.length > 0 && (
-              <BlogRelatedProducts relatedProducts={roomMain.thirdSlider} />
-            )}
-
-          <div className="bg-white ">
-            <div className="mb-2 w-full flex justify-between items-center">
-              <div className="Slidenav flex  bg-white text-2xl cursor-pointer  text-white rounded-full gap-2">
-                <div
-                  onClick={() => swiper1Ref.current.swiper.slidePrev()}
-                  className="custom-prev-button bg-slate-500  rounded-full  hover:bg-400 hover:scale-110 hover:text-slate-100"
-                ></div>
-                <div
-                  onClick={() => swiper1Ref.current.swiper.slideNext()}
-                  className="custom-next-button bg-slate-500  rounded-full hover:bg-400 hover:scale-110 hover:text-slate-100"
-                ></div>
-              </div>
-            </div>
-            <Swiper
-              ref={swiper1Ref}
-              {...swiperOptions2}
-              scrollbar={{
-                hide: false,
-                draggable: true,
-              }}
-              mousewheel={{
-                forceToAxis: true,
-                invert: false,
-              }}
-              freeMode={{
-                enabled: false,
-                sticky: true,
-              }}
-              breakpoints={{
-                300: {
-                  slidesPerView: 1,
-                  spaceBetween: 1,
-                },
-
-                1024: {
-                  slidesPerView: 4.07,
-                  spaceBetween: 5,
-                },
-              }}
-              allowSlideNext={true}
-              allowSlidePrev={true}
-              slideNextClass="custom-next-button"
-              slidePrevClass="custom-prev-button"
-              onSwiper={setSwiperRef}
-              className="px-10"
-            >
-              {!productSelect ? (
-                <SwiperSlide>
-                  ll
-                  <div className="flex"></div>
-                </SwiperSlide>
-              ) : (
-                productSelect.map((product, idx) => {
-                  return (
-                    <SwiperSlide key={idx} className="ml-0">
-                      <div className="grid grid-cols-1 mt-2 w-full  h-full fade-in ">
-                        <Card
-                          title={product.productTitle}
-                          price={product.perUnitPrice}
-                          desc={product.productTitle}
-                          imgSrc={product.images}
-                          rating={product.ratings}
-                          key={idx}
-                          id={product._id}
-                          category={product.category}
-                          productId={product.productId}
-                          productType={product.productType}
-                          cssClass={"card1flex"}
-                        />
-                      </div>
-                    </SwiperSlide>
-                  );
-                })
-              )}
-            </Swiper>
-          </div>
-
-          {productSelect && productSelect.length > 0 && (
-            <Tabs data={productSelect} />
-          )}
-        </div>
-      </div> */}
     </div>
   );
 };

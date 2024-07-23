@@ -146,6 +146,10 @@ const Suggestion = ({ id }) => {
                 <div className="mt-20 relative w-full h-[550px]">
                   <TabImage
                     src={suggestion.mainImage.imgSrc}
+                    href={`/${suggestion.mainImage.productCategory.replace(
+                      / /g,
+                      "-"
+                    )}/category/all`}
                     alt={`Image  of Children`}
                     layout="fill"
                     width={1000}
@@ -167,6 +171,10 @@ const Suggestion = ({ id }) => {
                     <div className="relative h-[449px]  lg:min-h-[730px] w-full">
                       <TabImage
                         src={suggestion.twoGrid.twoGridRooms[0].imgSrc}
+                        href={`/${suggestion.twoGrid.twoGridRooms[0].productCategory.replace(
+                          / /g,
+                          "-"
+                        )}/category/all`}
                         alt={`Image  of Children`}
                         layout="fill"
                         width={1000}
@@ -178,6 +186,10 @@ const Suggestion = ({ id }) => {
                     <div className="relative h-[449px]  lg:min-h-[730px] w-full">
                       <TabImage
                         src={suggestion.twoGrid.twoGridRooms[1].imgSrc}
+                        href={`/${suggestion.twoGrid.twoGridRooms[1].productCategory.replace(
+                          / /g,
+                          "-"
+                        )}/category/all`}
                         alt={`Image  of Children`}
                         layout="fill"
                         width={1000}
@@ -204,21 +216,26 @@ const Suggestion = ({ id }) => {
                           (room, index) => (
                             <div
                               key={index}
-                              className={`parent ${index === 0
-                                ? "col-start-1 col-end-3 row-start-1 row-end-6 lg:col-start-1 lg:col-end-7 lg:row-start-1 lg:row-end-12"
-                                : index === 1
+                              className={`parent ${
+                                index === 0
+                                  ? "col-start-1 col-end-3 row-start-1 row-end-6 lg:col-start-1 lg:col-end-7 lg:row-start-1 lg:row-end-12"
+                                  : index === 1
                                   ? "col-start-1 col-end-2 row-start-6 row-span-2 lg:col-start-7 lg:col-end-10 lg:row-start-1 lg:row-end-6"
                                   : index === 2
-                                    ? "col-start-2 col-end-3 row-start-6 row-span-3 lg:col-start-10 lg:col-end-13 lg:row-start-1 lg:row-end-7"
-                                    : index === 3
-                                      ? "col-start-1 col-end-2 row-start-8 row-span-3 lg:col-start-7 lg:col-end-10 lg:row-start-6 lg:row-end-12"
-                                      : "col-start-2 col-end-3 row-start-9 row-span-2 lg:col-start-10 lg:col-end-13 lg:row-start-7 lg:row-end-12"
-                                }`}
+                                  ? "col-start-2 col-end-3 row-start-6 row-span-3 lg:col-start-10 lg:col-end-13 lg:row-start-1 lg:row-end-7"
+                                  : index === 3
+                                  ? "col-start-1 col-end-2 row-start-8 row-span-3 lg:col-start-7 lg:col-end-10 lg:row-start-6 lg:row-end-12"
+                                  : "col-start-2 col-end-3 row-start-9 row-span-2 lg:col-start-10 lg:col-end-13 lg:row-start-7 lg:row-end-12"
+                              }`}
                               onMouseEnter={() => handleMouseEnter(index)}
                               onMouseLeave={handleMouseLeave}
                             >
                               <div className="relative w-full h-full">
                                 <TabImage
+                                  href={`/${room.productCategory.replace(
+                                    / /g,
+                                    "-"
+                                  )}/category/all`}
                                   src={room.imgSrc}
                                   alt={`Image of Children`}
                                   width={1000}
@@ -237,9 +254,7 @@ const Suggestion = ({ id }) => {
               )}
 
               {name === "firstSlider" && (
-                <BlogRelatedProducts
-                  relatedProducts={suggestion.firstSlider}
-                />
+                <BlogRelatedProducts relatedProducts={suggestion.firstSlider} />
               )}
               {name === "secondSlider" && (
                 <BlogRelatedProducts
@@ -247,9 +262,7 @@ const Suggestion = ({ id }) => {
                 />
               )}
               {name === "thirdSlider" && (
-                <BlogRelatedProducts
-                  relatedProducts={suggestion.firstSlider}
-                />
+                <BlogRelatedProducts relatedProducts={suggestion.firstSlider} />
               )}
               {name === "forthSlider" && (
                 <BlogRelatedProducts
