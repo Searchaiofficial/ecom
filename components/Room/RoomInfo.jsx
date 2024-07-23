@@ -100,9 +100,6 @@ const RoomInfo = ({ data }) => {
 
   return (
     <div className="w-full">
-
-
-
       <div className="font-normal text-sm  flex flex-col gap-4 my-6">
         <>
           <div>
@@ -362,7 +359,6 @@ const RoomInfo = ({ data }) => {
           )}
         </div>
       </div>
-
     </div>
   );
 };

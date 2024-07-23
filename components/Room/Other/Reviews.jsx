@@ -104,6 +104,7 @@ const ratingsData = [
 
 const Reviews = ({ productId, data }) => {
   const [reviews, setReviews] = useState([]);
+  const [sidebarContent, setSidebarContent] = useState(null);
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -359,7 +360,7 @@ const Reviews = ({ productId, data }) => {
                       alt=""
                       src="/icons/ayatrio famaily faveriot right.svg"
                     />
-                    <div className="text-[6rem] font-medium text-gray-700 pb-5">
+                    <div className="text-[6rem] font-medium text-black pb-5">
                       {calculateOverallAverageRating || "5.0"}
                     </div>
                     <img
@@ -477,10 +478,10 @@ const Reviews = ({ productId, data }) => {
           </>
         </div>
         <div
-          className="reviews-container hidden mt-4 md:grid sm:grid-cols-2 grids-col-1  gap-4 mx-auto "
+          className="reviews-container hidden mt-4 max-w-[80%] md:flex md:flex-col   gap-4  "
           style={{ overflowX: "hidden" }}
         >
-          {reviews.map((review, index) => (
+          {reviews.slice(0, 3).map((review, index) => (
             <div key={index} className="sm:mr-12 mb-8 m-0 sm:block ">
               <div className="flex justify-between">
                 <Link
@@ -532,8 +533,8 @@ const Reviews = ({ productId, data }) => {
                 <p className="text-gray-600 font-[16px] leading-6  sm:w-auto text-left w-[100%]">
                   {review.showFullComment
                     ? review.comment
-                    : `${review.comment.slice(0, 80)}...`}
-                  {review.comment.length > 80 && (
+                    : `${review.comment.slice(0, 150)}...`}
+                  {review.comment.length > 150 && (
                     <button
                       className="underline font-medium cursor-pointer ml-1"
                       onClick={() => toggleShowMore(index)}
@@ -559,6 +560,18 @@ const Reviews = ({ productId, data }) => {
             </div>
           ))}
         </div>
+        {
+          reviews.length > 3 && (
+            <button
+              onClick={() => {
+                setSidebarContent("showReviews");
+              }}
+              className="font-semibold hidden md:flex  mb-4 py-2 px-4  border hover:bg-zinc-100"
+            >
+              Show all reviews
+            </button>
+          )
+        }
 
         <div className="md:hidden max-h-[300px] w-full">
           <Swiper
@@ -596,7 +609,7 @@ const Reviews = ({ productId, data }) => {
             slidePrevClass="custom-prev-button"
             className="px-10 "
           >
-            {reviews.map((review, index) => (
+            {reviews.slice(0, 3).map((review, index) => (
               <SwiperSlide>
                 <div
                   key={index}
@@ -686,6 +699,130 @@ const Reviews = ({ productId, data }) => {
             ))}
           </Swiper>
         </div>
+        {
+          reviews.length > 3 && (
+            <button
+              onClick={() => {
+                setSidebarContent("showReviews");
+              }}
+              className="font-semibold flex md:hidden  mb-4 py-2 px-4 mt-6  border hover:bg-zinc-100"
+            >
+              Show all reviews
+            </button>
+          )
+        }
+
+        {sidebarContent === "showReviews" && (
+          <div className="fixed z-[99999] h-full w-screen bg-black/50 top-0 left-0">
+            <section className="text-black bg-white flex-col absolute right-0 top-0 h-full z-[99999] w-full lg:w-[35%] flex overflow-y-auto">
+              <div className="flex flex-col">
+                <div className="px-[25px] pb-[32px]">
+                  <div>
+                    <div className="flex bg-white flex-col  fixed top-0 w-[90%] md:w-[32%]">
+                      <div className="flex items-center justify-between pt-2 mt-[10px] mb-[10px] h-[72px]">
+                        <p className="text-[24px] font-semibold text-[#111111]">
+                          All Reviews
+                        </p>
+                        <button
+                          className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
+                          onClick={() => setSidebarContent(null)}
+                        >
+                          <Image
+                            loading="lazy"
+                            src="icons/cancel.svg"
+                            alt="close"
+                            width={20}
+                            height={30}
+                            className="py-2"
+                          />
+                        </button>
+                      </div>
+                    </div>
+                    <div className="mt-20">
+                      {reviews.map((review, index) => (
+                        <>
+                          <div
+                            key={index}
+                            className=" flex flex-col mb-2 border-b-2 pb-2  justify-between m-0 sm:block rounded-sm  "
+                          >
+                            <div className="flex flex-col justify-between h-full">
+                              <div>
+                                <div className="ratings flex mt-3">
+                                  {[...Array(review.rating)].map((_, i) => (
+                                    <Image
+                                      loading="lazy" KW
+                                      key={i}
+                                      src="/icons/star-full-black.svg"
+                                      width={10}
+                                      height={10}
+                                      alt="star"
+                                      className="m-[2px]"
+                                    />
+                                  ))}
+                                  <span className="text-sm font-semibold ml-2 text-gray-600">
+                                    {new Date(review.createdAt).toLocaleString(
+                                      "default",
+                                      { month: "long", year: "numeric" }
+                                    )}
+                                  </span>
+                                </div>
+
+                                <div className="review mt-1">
+                                  KW
+                                  {review.comment}
+                                </div>
+                              </div>
+                            </div>
+                            <div className="flex justify-between mt-5">
+                              <Link
+                                className="review-header flex items-center"
+                                href={`/profile/${review?.userId}`}
+                              >
+                                <div className="w-[48px] h-[48px] mr-4">
+                                  <img
+                                    className="w-full h-full rounded-full object-cover"
+                                    src={review.profilePic}
+                                    alt="User Avatar"
+                                  />
+                                </div>
+                                <div className="flex flex-col">
+                                  <span className="font-semibold text-[16px]">
+                                    {review.name}
+                                  </span>
+                                  <span className="font-normal text-[14px] text-gray-500"></span>
+                                </div>
+                              </Link>
+                              {isAuthenticated && user.email === review.userEmail && (
+                                <div className="flex items-center">
+                                  <button onClick={() => handleDelete(review._id)}>
+                                    Delete
+                                  </button>
+                                </div>
+                              )}
+                            </div>
+
+                            {review.images.length > 0 && (
+                              <div className="flex gap-2 mb-4 mt-4">
+                                {review.images.map((image, index) => (
+                                  <img
+                                    key={index}
+                                    src={image}
+                                    alt="review"
+                                    className="w-[100px] h-[100px] object-cover"
+                                  />
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        )}
 
         {/* <Carous data={data} /> */}
       </div>

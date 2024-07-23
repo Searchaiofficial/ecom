@@ -51,7 +51,7 @@ const Carous = ({ data }) => {
   const swiperOptions2 = {
     slidesPerView: 4,
     centeredSlides: false,
-    spaceBetween: 1,
+    spaceBetween: 10,
     modules: [Pagination, Scrollbar, Mousewheel, FreeMode],
     navigation: {
       nextEl: ".custom-next-button",

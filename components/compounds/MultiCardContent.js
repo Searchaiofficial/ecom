@@ -10,7 +10,7 @@ import "./../Imagechanger/styles.css";
 const MultiCardContent = (props) => {
   const { iconPath, iconSize, title, text } = props;
   return (
-    <div className="bg-white flex flex-col justify-between md:flex-col h-auto md:min-h-[400px] min-h-[350px] mb-[60px] p-3">
+    <div className="bg-white flex flex-col justify-between md:flex-col h-auto md:min-h-[370px] min-h-[350px] mb-[60px] p-3">
       {/* <div className="mt-8 ml-6">
         <Image loading="lazy" src={iconPath} width={iconSize} height={iconSize} alt="image" />
     
@@ -30,7 +30,7 @@ const MultiCardContent = (props) => {
         <div className=" h-[56px]">
           <Image loading="lazy" src={iconPath} width={iconSize} height={iconSize} alt={title} className="" />
         </div>
-        <h3 className=" text-[21px] lg:text-[25px]  text-[#333333] font-semibold mb-[1em] ">{title}</h3>
+        <h3 className=" text-[21px] lg:text-[25px]  text-[#333333] font-semibold mb-[10px] ">{title}</h3>
         <div className=" text-[14px] lg:text-[15px] font-normal ">{text}</div>
       </div>
       <div className=" ml-[24px] mb-[24px] max-w-fit  bg-[#333336] rounded-full mt-10">
