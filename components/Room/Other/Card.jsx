@@ -54,6 +54,75 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
 
   const selectedColor = useSelector(selectColor);
 
+  const [STORE_MAP_DATA, SET_STORE_MAP_DATA] = useState([]);
+  const [userPincode, setUserPincode] = useState("");
+  const [nearestShop, setNearestShop] = useState([]);
+
+  const fetchMapData = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/mapPlaces`
+      );
+      console.log(response.data);
+      SET_STORE_MAP_DATA(response.data);
+    } catch (error) {
+      console.error("Error fetching map data:", error);
+    }
+  };
+
+  const fetchDistances = async () => {
+    try {
+      const distances = await Promise.all(
+        STORE_MAP_DATA.map(async (store) => {
+          const response = await axios.get(
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/distance`,
+            {
+              params: {
+                origins: userPincode,
+                destinations: store.pincode,
+              },
+            }
+          );
+
+          const distanceText = response.data.rows[0].elements[0].distance.text;
+          const distanceValue =
+            response.data.rows[0].elements[0].distance.value;
+          return {
+            id: store.id,
+            name: store.name,
+            address: store.address,
+            pincode: store.pincode,
+            distanceText: distanceText,
+            distanceValue: distanceValue,
+          };
+        })
+      );
+
+      console.log("Distances:", distances);
+
+      distances.sort((a, b) => a.distanceValue - b.distanceValue);
+      setNearestShop(distances);
+    } catch (error) {
+      console.error("Error fetching distances:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchMapData();
+    if (typeof window !== "undefined") {
+      const userPincode = localStorage.getItem("userPincode");
+      setUserPincode(userPincode);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (STORE_MAP_DATA.length > 0 && userPincode) {
+      fetchDistances();
+    } else {
+      console.log("No data in STORE_MAP_DATA");
+    }
+  }, [STORE_MAP_DATA, userPincode]);
+
   const setSelectedColor = (color) => {
     dispatch(setColor(color));
   };
@@ -814,6 +883,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                       className={`text-3xl leading-[0.5] tracking-wide ${data?.specialprice?.price
                         ? "bg-[#FFD209] px-2 pt-3 w-fit shadow-lg"
                         : ""
+<<<<<<< Updated upstream
                         } `}
                       style={
                         data?.specialprice?.price
@@ -830,6 +900,40 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                           : data.perUnitPrice}
                     </p>{" "}
                     <span> &nbsp;/{data.unitType}</span>
+=======
+                    } `}
+                    style={
+                      data?.specialprice?.price
+                        ? { boxShadow: "3px 3px #ad3535" }
+                        : {}
+                    }
+                  >
+                    <span className="text-sm">Rs. &nbsp;</span>{" "}
+                    {/* {data?.specialprice?.price ? data?.specialprice.price : data.perUnitPrice} */}
+                    {data?.specialprice?.price
+                      ? data?.specialprice.price
+                      : selectedSpecData?.specialprice
+                      ? selectedSpecData.price
+                      : data.perUnitPrice}
+                  </p>{" "}
+                  <span> &nbsp;/{data.unitType}</span>
+                </div>
+
+                {data?.specialprice?.price && (
+                  <div className="flex flex-col">
+                    <p className="text-[#757575] text-[12px] pt-[3px]">
+                      Regular price: Rs.{data?.perUnitPrice} (incl. of all
+                      taxes)
+                    </p>
+                    {data?.specialprice?.startDate &&
+                      data?.specialprice?.endDate && (
+                        <p className="text-[#757575] text-[12px] pb-[10px]">
+                          Price valid {formattedStartDate} - {formattedEndDate}{" "}
+                          or while supply lasts
+                        </p>
+                      )}
+                    {/* <p className="text-[#757575] text-[12px] pb-[10px]">Price valid May 02 - May 29 or while supply lasts</p> */}
+>>>>>>> Stashed changes
                   </div>
 
                   {data?.specialprice?.price && (
@@ -1598,8 +1702,8 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                 </div>
 
                 {sidebarContect === "deliveryOption" && (
-                  <div className=" fixed z-[99999] h-full w-screen  bg-black/50  top-0 left-0">
-                    <section className="text-black z-[99999] bg-white flex-col absolute right-0 top-0 h-screen w-full  lg:w-[35%] flex ">
+                  <div className=" fixed z-[99999] h-full w-screen  bg-black/50  top-0 left-0 ">
+                    <section className="text-black z-[99999] bg-white flex-col absolute right-0 top-0 h-screen overflow-y-scroll w-full  lg:w-[35%] flex ">
                       <div className="flex flex-col">
                         <div className="px-[40px] pb-[32px]">
                           <div>
@@ -1628,11 +1732,20 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                               </p>
                             </div>
                             <div className="my-[16px] flex flex-col">
-                              <lable className="text-[14px] font-normal text-[#484848]">
+                              <label className="text-[14px] font-normal text-[#484848]">
                                 Enter a PIN code
-                              </lable>
+                              </label>
                               <div className="w-full px-[6px] border-2 border-[#484848]  rounded-md h-[48px]">
-                                <input className="w-full h-full focus-within:outline-none" />
+                                <input
+                                  onChange={(e) => {
+                                    setUserPincode(e.target.value);
+                                    // e.target.value.length === 6 &&
+                                    //   fetchDistances(userPincode);
+                                  }}
+                                  value={userPincode}
+                                  type="number"
+                                  className="w-full h-full focus-within:outline-none"
+                                />
                               </div>
                               <p className="text-xs text-[#767676]">
                                 e.g. 560075
@@ -1645,10 +1758,48 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                                 Please note that your location won’t be shared.
                               </p>
                             </div>
+
+                            {nearestShop &&
+                              nearestShop.length > 0 &&
+                              nearestShop.map((shop) => (
+                                <div className="py-[32px] border-t flex items-center">
+                                  <div>
+                                    <h3 className="text-[14px] font-bold">
+                                      {shop.name}
+                                    </h3>
+                                    <p className="text-[14px] text-[#484848] font-normal mb-[8px]">
+                                      {shop.address}
+                                    </p>
+                                    <div className="flex gap-2 items-center">
+                                      <div className="h-3 w-3 border-red-700 border-2 rounded-full" />
+                                      <p className="text-[14px] font-normal text-[#484848]">
+                                        Click & Collect - Currently unavailable
+                                      </p>
+                                    </div>
+                                    <div className="flex gap-2 items-center">
+                                      <div className="h-3 w-3 bg-green-600 rounded-full" />
+                                      <p className="text-[14px] font-normal text-[#484848]">
+                                        Store - In stock
+                                      </p>
+                                    </div>
+                                  </div>
+                                  <div>
+                                    <Image
+                                      loading="lazy"
+                                      src="/icons/arrow_right.svg"
+                                      height={50}
+                                      width={50}
+                                      alt="arrow-right"
+                                    />
+                                  </div>
+                                </div>
+                              ))}
                           </div>
                         </div>
                         <div className="p-6 border-t lg:mt-32">
-                          <button className="bg-black text-white w-[100%] sm:h-14 h-10 rounded-full hover:bg-gray-900 transition duration-300 px-4">
+                          <button
+                            className="bg-black text-white w-[100%] sm:h-14 h-10 rounded-full hover:bg-gray-900 transition duration-300 px-4"
+                          >
                             Buy Now
                           </button>
                         </div>
