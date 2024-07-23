@@ -46,7 +46,7 @@ const ProductPage = ({ params }) => {
   const demandtype = queryParams?.demandtype;
 
   const pathname = usePathname();
-  const [type, setType] = useState(params.cat.replace(/-/g, " "));
+  const [type, setType] = useState(params.cat.replace(/-/g, " ").replace(/percent/g, "%"));
   const [isFilterVisible, setIsFilterVisible] = useState(true);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
