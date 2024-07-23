@@ -883,7 +883,6 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                       className={`text-3xl leading-[0.5] tracking-wide ${data?.specialprice?.price
                         ? "bg-[#FFD209] px-2 pt-3 w-fit shadow-lg"
                         : ""
-<<<<<<< Updated upstream
                         } `}
                       style={
                         data?.specialprice?.price
@@ -900,40 +899,6 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                           : data.perUnitPrice}
                     </p>{" "}
                     <span> &nbsp;/{data.unitType}</span>
-=======
-                    } `}
-                    style={
-                      data?.specialprice?.price
-                        ? { boxShadow: "3px 3px #ad3535" }
-                        : {}
-                    }
-                  >
-                    <span className="text-sm">Rs. &nbsp;</span>{" "}
-                    {/* {data?.specialprice?.price ? data?.specialprice.price : data.perUnitPrice} */}
-                    {data?.specialprice?.price
-                      ? data?.specialprice.price
-                      : selectedSpecData?.specialprice
-                      ? selectedSpecData.price
-                      : data.perUnitPrice}
-                  </p>{" "}
-                  <span> &nbsp;/{data.unitType}</span>
-                </div>
-
-                {data?.specialprice?.price && (
-                  <div className="flex flex-col">
-                    <p className="text-[#757575] text-[12px] pt-[3px]">
-                      Regular price: Rs.{data?.perUnitPrice} (incl. of all
-                      taxes)
-                    </p>
-                    {data?.specialprice?.startDate &&
-                      data?.specialprice?.endDate && (
-                        <p className="text-[#757575] text-[12px] pb-[10px]">
-                          Price valid {formattedStartDate} - {formattedEndDate}{" "}
-                          or while supply lasts
-                        </p>
-                      )}
-                    {/* <p className="text-[#757575] text-[12px] pb-[10px]">Price valid May 02 - May 29 or while supply lasts</p> */}
->>>>>>> Stashed changes
                   </div>
 
                   {data?.specialprice?.price && (
