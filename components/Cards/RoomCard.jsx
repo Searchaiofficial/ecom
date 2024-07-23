@@ -86,10 +86,10 @@ const RoomCard = async () => {
                     {gallery.mode == "room" && (
                       <TabImage
                         src={gallery?.rooms[0]?.imgSrc}
-                        href={`/rooms/${gallery?.rooms[0]?.roomType.replace(
+                        href={`/${gallery?.rooms[0]?.productCategory.replace(
                           / /g,
                           "-"
-                        )}`}
+                        )}/category/all`}
                         alt={`Image  of Children`}
                         width={1000}
                         height={338}
@@ -112,10 +112,10 @@ const RoomCard = async () => {
                       <TabImage
                         src={gallery?.rooms[1]?.imgSrc}
                         alt={`Image  of Children`}
-                        href={`/rooms/${gallery?.rooms[1]?.roomType.replace(
+                        href={`/${gallery?.rooms[1]?.productCategory.replace(
                           / /g,
                           "-"
-                        )}`}
+                        )}/category/all`}
                         width={1000}
                         height={338}
                         labelData={gallery?.rooms[1]?.children}
@@ -136,10 +136,10 @@ const RoomCard = async () => {
                       <TabImage
                         src={gallery?.rooms[2]?.imgSrc}
                         alt={`Image  of Children`}
-                        href={`/rooms/${gallery?.rooms[2]?.roomType.replace(
+                        href={`/${gallery?.rooms[2]?.productCategory.replace(
                           / /g,
                           "-"
-                        )}`}
+                        )}/category/all`}
                         width={1000}
                         height={338}
                         labelData={gallery?.rooms[2]?.children}
@@ -159,10 +159,10 @@ const RoomCard = async () => {
                     {gallery.mode === "room" && (
                       <TabImage
                         src={gallery?.rooms[3]?.imgSrc}
-                        href={`/rooms/${gallery?.rooms[3]?.roomType.replace(
+                        href={`/${gallery?.rooms[3]?.productCategory.replace(
                           / /g,
                           "-"
-                        )}`}
+                        )}/category/all`}
                         alt={`Image  of Children`}
                         width={1000}
                         height={338}
