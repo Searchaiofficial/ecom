@@ -104,18 +104,23 @@ const RoomInfo = ({ data }) => {
         <>
           <div>
             <div
-              className={`relative md:w-[80%] w-full ${showMore ? "" : "line-clamp-3"
-                } overflow-hidden`}
+              className={`relative md:w-[80%] w-full ${
+                showMore ? "" : "line-clamp-3"
+              } overflow-hidden`}
               ref={descriptionRef}
             >
-              <p className="text-[16px] text-[#222222]">{data?.productDescription}</p>
+              <p className="text-[16px] text-[#222222]">
+                {data?.productDescription}
+              </p>
             </div>
             {isClamped && (
               <span
                 className="cursor-pointer hover:underline text-[16px] font-semibold"
                 onClick={() => setShowMore(!showMore)}
               >
-                <p className="text-[16px] font-medium underline">{showMore ? "View less" : "View more"}</p>
+                <p className="text-[16px] font-medium underline">
+                  {showMore ? "View less" : "View more"}
+                </p>
               </span>
             )}
             {categoryDetails?.maintenanceDetails &&
@@ -148,96 +153,101 @@ const RoomInfo = ({ data }) => {
           <div>
             {(data.productType === "special" ||
               data.productType === "requested") && (
-                <div className="border my-4 py-4 md:px-6  px-2 border-gray-300   sm:h-20 h-auto sm:gap-0 gap-3 sm:w-fit w-[100%] rounded-lg  flex flex-row justify-center items-center">
-                  {data.productType === "requested" && (
-                    <div
-                      id="box1"
-                      className="flex flex-row border-r pr-4 sm:order-1 order-2"
-                    >
-                      <img
-                        className="h-10 scale-x-[-1]"
-                        alt=""
-                        src="/icons/amf/rightGold.svg"
-                      />
-                      <div
-                        className="text-lg text-[#bf9b30] text-center pl-2 pr-2"
-                        style={{ lineHeight: "1" }}
-                      >
-                        Ayatrio member <br />
-                        favourite
-                      </div>
-
-                      <img
-                        className="h-10 "
-                        alt=""
-                        src="/icons/amf/rightGold.svg"
-                      />
-                    </div>
-                  )}
-                  {data.productType === "special" && (
-                    <div
-                      id="box1"
-                      className="flex flex-row items-center border-r  sm:order-1 order-2"
-                    >
-                      <img
-                        className="h-10 scale-x-[-1]"
-                        alt=""
-                        src="/icons/ayatrio famaily faveriot right.svg"
-                      />
-                      <div
-                        className="text-[16px] font-medium text-center "
-                        style={{ lineHeight: "1" }}
-                      >
-                        Ayatrio member <br />
-                        favourite
-                      </div>
-
-                      <img
-                        className="h-10 "
-                        alt=""
-                        src="/icons/ayatrio famaily faveriot right.svg"
-                      />
-                    </div>
-                  )}
-
-                  {/* text */}
+              <div className="border my-4 py-4 md:px-6  px-2 border-gray-300   sm:h-20 h-auto sm:gap-0 gap-3 sm:w-fit w-[100%] rounded-lg  flex flex-row justify-center items-center">
+                {data.productType === "requested" && (
                   <div
-                    className="pl-4 pr-5 sm:block hidden text-[14px]  font-medium sm:order-2"
-                    style={{ lineHeight: "1.2" }}
+                    id="box1"
+                    className="flex flex-row border-r pr-4 sm:order-1 order-2"
                   >
-                    One of the most loved homes furnishing on
-                    <br />
-                    Ayatrio, according to members
-                  </div>
+                    <img
+                      className="h-10 scale-x-[-1]"
+                      alt=""
+                      src="/icons/amf/rightGold.svg"
+                    />
+                    <div
+                      className="text-lg text-[#bf9b30] text-center pl-2 pr-2"
+                      style={{ lineHeight: "1" }}
+                    >
+                      Ayatrio member <br />
+                      favourite
+                    </div>
 
-                  <div
-                    id="box3"
-                    className="flex sm:pb-0  flex-col  sm:order-4 order-3"
-                  >
-                    <div className="text-center text-xl font-bold">
-                      {calculateOverallAverageRating || "5.0"}
-                    </div>
-                    <div className="underline text-sm  flex">
-                      {Array.from({
-                        length: calculateOverallAverageRating || "5.0",
-                      }).map((_, idx) => (
-                        <Image
-                          loading="lazy"
-                          src="/icons/star-full-black.svg"
-                          width={10}
-                          height={10}
-                          alt="star"
-                          className="m-[2px]"
-                        />
-                      ))}
-                    </div>
+                    <img
+                      className="h-10 "
+                      alt=""
+                      src="/icons/amf/rightGold.svg"
+                    />
                   </div>
-                  <div id="box3" class="flex sm:pb-0  flex-col md:pl-4  sm:order-4 border-3"><div class="text-center text-xl font-bold">1</div><div class="underline text-sm -mt-2">Reviews</div></div>
+                )}
+                {data.productType === "special" && (
+                  <div
+                    id="box1"
+                    className="flex flex-row items-center border-r  sm:order-1 order-2"
+                  >
+                    <img
+                      className="h-10 scale-x-[-1]"
+                      alt=""
+                      src="/icons/ayatrio famaily faveriot right.svg"
+                    />
+                    <div
+                      className="text-[16px] font-medium text-center "
+                      style={{ lineHeight: "1" }}
+                    >
+                      Ayatrio member <br />
+                      favourite
+                    </div>
+
+                    <img
+                      className="h-10 "
+                      alt=""
+                      src="/icons/ayatrio famaily faveriot right.svg"
+                    />
+                  </div>
+                )}
+
+                {/* text */}
+                <div
+                  className="pl-4 pr-5 sm:block hidden text-[14px]  font-medium sm:order-2"
+                  style={{ lineHeight: "1.2" }}
+                >
+                  One of the most loved homes furnishing on
+                  <br />
+                  Ayatrio, according to members
                 </div>
-              )}
+
+                <div
+                  id="box3"
+                  className="flex sm:pb-0  flex-col  sm:order-4 order-3"
+                >
+                  <div className="text-center text-xl font-bold">
+                    {calculateOverallAverageRating || "5.0"}
+                  </div>
+                  <div className="underline text-sm  flex">
+                    {Array.from({
+                      length: calculateOverallAverageRating || "5.0",
+                    }).map((_, idx) => (
+                      <Image
+                        loading="lazy"
+                        src="/icons/star-full-black.svg"
+                        width={10}
+                        height={10}
+                        alt="star"
+                        className="m-[2px]"
+                      />
+                    ))}
+                  </div>
+                </div>
+                <div
+                  id="box3"
+                  class="flex sm:pb-0  flex-col md:pl-4  sm:order-4 border-3"
+                >
+                  <div class="text-center text-xl font-bold">{reviews.length}</div>
+                  <div class="underline text-sm -mt-2">Reviews</div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
-
 
         <PlaceInfo data={data} />
 
@@ -247,7 +257,10 @@ const RoomInfo = ({ data }) => {
           {data?.author && (
             <div className="flex flex-col my-10 gap-6 w-full ">
               <div className="flex items-start gap-4">
-                <Link href={`/profile/${data.author._id}`} className="flex-shrink-0">
+                <Link
+                  href={`/profile/${data.author._id}`}
+                  className="flex-shrink-0"
+                >
                   <Image
                     src={data.author.image}
                     height={150}
@@ -257,7 +270,10 @@ const RoomInfo = ({ data }) => {
                   />
                 </Link>
                 <div className="flex flex-col">
-                  <Link href={`/profile/${data.author._id}`} className=" text-[#1D1D1F] font-bold text-xl">
+                  <Link
+                    href={`/profile/${data.author._id}`}
+                    className=" text-[#1D1D1F] font-bold text-xl"
+                  >
                     {data.author.displayName}
                   </Link>
                   <p className="text-[#1D1D1F] font-semibold text-sm pt-3 line-clamp-5 md:w-[70%]">
@@ -286,7 +302,7 @@ const RoomInfo = ({ data }) => {
                 </div>
               </div>
 
-              {otherProductByAuthorId.length > 0 &&
+              {otherProductByAuthorId.length > 0 && (
                 <Swiper
                   className="w-full mt-4"
                   ref={swiper1Ref}
@@ -354,7 +370,8 @@ const RoomInfo = ({ data }) => {
                       </Link>
                     </SwiperSlide>
                   ))}
-                </Swiper>}
+                </Swiper>
+              )}
             </div>
           )}
         </div>
