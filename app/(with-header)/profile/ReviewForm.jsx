@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
-const ReviewForm = ({ addReview, categoryData }) => {
+const ReviewForm = ({ addReview, categoryData, isAuthenticated }) => {
+  const pathname = usePathname();
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   const [images, setImages] = useState([]);
@@ -9,7 +11,7 @@ const ReviewForm = ({ addReview, categoryData }) => {
   const [dynamicRatings, setDynamicRatings] = useState([]);
   const [overallRating, setOverallRating] = useState(0);
 
-
+  console.log("isAuthenticated", isAuthenticated);
   useEffect(() => {
     if (categoryData) {
       setDynamicRatings(
@@ -23,8 +25,14 @@ const ReviewForm = ({ addReview, categoryData }) => {
   }, [categoryData]);
 
   useEffect(() => {
-    const totalDynamicRatings = dynamicRatings.reduce((acc, rating) => acc + rating.value, 0);
-    const averageRating = dynamicRatings.length > 0 ? totalDynamicRatings / dynamicRatings.length : 0;
+    const totalDynamicRatings = dynamicRatings.reduce(
+      (acc, rating) => acc + rating.value,
+      0
+    );
+    const averageRating =
+      dynamicRatings.length > 0
+        ? totalDynamicRatings / dynamicRatings.length
+        : 0;
     setOverallRating(Math.floor(averageRating));
   }, [dynamicRatings]);
 
@@ -42,7 +50,9 @@ const ReviewForm = ({ addReview, categoryData }) => {
     setImages([]);
     setSidebarContent(null);
     document.body.classList.remove("no-scroll");
-    document.querySelectorAll("input[type=file]").forEach((input) => (input.value = ""));
+    document
+      .querySelectorAll("input[type=file]")
+      .forEach((input) => (input.value = ""));
   };
 
   const handleImageChange = (event) => {
@@ -69,16 +79,45 @@ const ReviewForm = ({ addReview, categoryData }) => {
     );
   };
 
+  const handleGoogleLogin = async () => {
+    try {
+      window.open(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/google?returnTo=${pathname}`,
+        "_self"
+      );
+    } catch (error) {
+      console.error("Error initiating Google OAuth:", error);
+    }
+  };
+
+
+
   return (
     <div className="">
-      <button
-        onClick={() => {
-          setSidebarContent("addReview");
-        }}
-        className="font-semibold py-2 px-4 rounded-full border hover:bg-zinc-100"
-      >
-        Add Review
-      </button>
+      {isAuthenticated ? (
+        <button
+          onClick={() => {
+            setSidebarContent("addReview");
+          }}
+          className="font-semibold py-2 px-4 rounded-full border hover:bg-zinc-100"
+        >
+          Add Review
+        </button>
+      ) : (
+        <button
+          onClick={handleGoogleLogin}
+          className="font-semibold py-2 px-4 rounded-full border hover:bg-zinc-100 flex items-center gap-2"
+        >
+          <Image
+            loading="lazy"
+            src="/icons/googlelogin.svg"
+            width={20}
+            height={20}
+            alt="up"
+          />
+          Login to write a review
+        </button>
+      )}
 
       {sidebarContent === "addReview" && (
         <div className="fixed z-[99999] h-full w-screen bg-black/50 top-0 left-0">
@@ -122,8 +161,11 @@ const ReviewForm = ({ addReview, categoryData }) => {
                                   onClick={() =>
                                     handleRatingChange(index, i + 1)
                                   }
-                                  className={`w-8 h-[4px] mr-1 focus:outline-none ${i < ratingType.value ? "bg-black" : "bg-gray-300"
-                                    }`}
+                                  className={`w-8 h-[4px] mr-1 focus:outline-none ${
+                                    i < ratingType.value
+                                      ? "bg-black"
+                                      : "bg-gray-300"
+                                  }`}
                                 />
                               ))}
                             </div>
@@ -132,7 +174,10 @@ const ReviewForm = ({ addReview, categoryData }) => {
                       </div>
 
                       <div className="mb-4">
-                        <label htmlFor="rating" className="block font-bold mb-2">
+                        <label
+                          htmlFor="rating"
+                          className="block font-bold mb-2"
+                        >
                           Overall Rating
                         </label>
                         <input
@@ -142,12 +187,17 @@ const ReviewForm = ({ addReview, categoryData }) => {
                           max="5"
                           className="appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
                           value={overallRating}
-                          onChange={(e) => setOverallRating(Number(e.target.value))}
+                          onChange={(e) =>
+                            setOverallRating(Number(e.target.value))
+                          }
                           required
                         />
                       </div>
                       <div className="mb-4">
-                        <label htmlFor="comment" className="block font-bold mb-2">
+                        <label
+                          htmlFor="comment"
+                          className="block font-bold mb-2"
+                        >
                           Comment
                         </label>
                         <textarea

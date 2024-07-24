@@ -111,7 +111,6 @@ const RoomPage = () => {
   }, [selectedData, dispatch]);
 
 
-  console.log(data);
 
   // useEffect(() => {
   //   const handleScroll = () => {
@@ -161,7 +160,6 @@ const RoomPage = () => {
   const fetchAccessories = async () => {
     try {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/productByCategoryAndSubCategory?category=${data?.category}&subcategory=Accessories`);
-      console.log("Accessories :", response.data);
       setAccessories(response.data);
     } catch (error) {
       console.log(error);
@@ -181,7 +179,6 @@ const RoomPage = () => {
   const fetchAllProducts = async () => {
     try {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/products?limit=1000`);
-      console.log("AllProducts :", response.data);
       setAllProducts(response.data)
     } catch (error) {
       console.log(error);
@@ -190,7 +187,6 @@ const RoomPage = () => {
   const fetchAllCategories = async () => {
     try {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/categories`);
-      console.log("AllCategories :", response.data);
       setAllCategories(response.data)
     } catch (error) {
       console.log(error);
@@ -215,7 +211,6 @@ const RoomPage = () => {
   }, [allProducts])
 
 
-  console.log(data)
   const [selectedSamples, setSelectedSamples] = useState([]);
 
   // useEffect(() => {
@@ -259,7 +254,6 @@ const RoomPage = () => {
   };
 
   const handleFreeSampling = () => {
-    console.log("Free Sampling")
     setOpenFreeSample(true)
     document.body.style.overflow = "hidden";
     if (selectedSamples.length < 3) {
@@ -285,7 +279,6 @@ const RoomPage = () => {
         deviceId: localStorage.getItem("deviceId"),
         freeSampleIds: selectedSamples.map(sample => sample._id),
       });
-      console.log("Free Sampling:", response.data);
       if (response.status === 200) {
         dispatch(setDbItems(response.data));
         router.push("/checkout");
@@ -297,16 +290,13 @@ const RoomPage = () => {
 
 
   const fetchProductsbyCategory = async (category) => {
-    console.log(category)
     try {
       if (category === "All Categories") {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/products?limit=1000`);
-        console.log("AllProducts :", response.data);
         const excludeAccessories = response.data?.filter(item => item?.subcategory !== "Accessories")
         setFilteredProducts(excludeAccessories)
       } else {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/fetchProductsByCategory/${category}`);
-        console.log("AllCategories :", response.data);
         const excludeAccessories = response.data?.filter(item => item?.subcategory !== "Accessories")
         setFilteredProducts(excludeAccessories)
       }
@@ -317,7 +307,6 @@ const RoomPage = () => {
 
   const handleCategoryFilter = (item) => {
     setSelectedCategory(item)
-    console.log(item)
     fetchProductsbyCategory(item)
 
   }
@@ -570,7 +559,6 @@ const RoomPage = () => {
                       <p onClick={() => handleCategoryFilter("All Categories")} className="flex text-[14px] font-semibold px-4 py-2">All Categories</p>
                       {
                         allCategories.map((item) => {
-                          console.log(item)
                           return (
                             <p onClick={() => handleCategoryFilter(item.name)} className="flex cursor-pointer text-[14px] font-semibold px-4 py-2">{item.name}</p>
                           )
@@ -596,7 +584,6 @@ const RoomPage = () => {
                       <p onClick={() => handleColorFilter("All Colors")} className="flex text-[14px] font-semibold px-4 py-2">All Colors</p>
                       {
                         allColors.map((item) => {
-                          console.log(item)
                           return (
                             <p onClick={() => handleColorFilter(item)} className="flex cursor-pointer text-[14px] font-semibold px-4 py-2">{item}</p>
                           )

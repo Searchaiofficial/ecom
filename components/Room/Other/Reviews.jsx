@@ -121,6 +121,18 @@ const Reviews = ({ productId, data }) => {
     5: 0,
   });
 
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window?.location?.search);
+    const token = urlParams.get("token");
+
+    if (token) {
+      localStorage.setItem("token", token);
+      // urlParams.delete("token");
+      window.history.replaceState({}, "", `${window.location.pathname}`);
+    }
+  }, []);
+
   useEffect(() => {
     const fetchCategoryRatingTypes = async () => {
       try {
@@ -215,6 +227,7 @@ const Reviews = ({ productId, data }) => {
         setIsAuthenticated(true);
       }
     } catch (error) {
+      setIsAuthenticated(false);
       console.error("Error:", error);
     } finally {
       setIsLoading(false);
@@ -224,7 +237,7 @@ const Reviews = ({ productId, data }) => {
   useEffect(() => {
     checkUser();
   }, []);
-  console.log(productId);
+  // console.log(productId);
   // const fetchReviews = async () => {
   //   try {
   //     const response = await axios.get(
@@ -469,7 +482,7 @@ const Reviews = ({ productId, data }) => {
             {isLoading ? (
               <p>Loading...</p>
             ) : !isReview ? (
-              <ReviewForm addReview={addReview} categoryData={categoryData} />
+              <ReviewForm addReview={addReview} categoryData={categoryData}  isAuthenticated={isAuthenticated}/>
             ) : (
               <div>
                 {/* This section can be used for further review-related content */}

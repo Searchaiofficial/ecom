@@ -63,7 +63,6 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/mapPlaces`
       );
-      console.log(response.data);
       SET_STORE_MAP_DATA(response.data);
     } catch (error) {
       console.error("Error fetching map data:", error);
@@ -97,8 +96,6 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
           };
         })
       );
-
-      console.log("Distances:", distances);
 
       distances.sort((a, b) => a.distanceValue - b.distanceValue);
       setNearestShop(distances);
@@ -142,7 +139,6 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
       const responce = await axios.get(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/productByCategoryAndSubCategory?category=${data?.category}&subcategory=Accessories `
       );
-      console.log("Accessories :", responce.data);
       setAccessories(responce.data);
     } catch (error) {
       console.log(error);
@@ -155,14 +151,6 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
     }
   }, [data]);
 
-  // useEffect(() => {
-  //   if (accessories?.length > 0) {
-  //     setAccessoriesData(accessories)
-  //   }
-  // }, [accessories])
-
-  console.log(accessories);
-  // console.log(accessoriesData)
 
   // Handler for clicking a specification
   const handleSpecClick = (spec) => {
@@ -178,7 +166,6 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getReview?productId=${productId}`
       );
-      console.log("reviews", response.data);
 
       if (Array.isArray(response.data) && response.data.length > 0) {
         setReviews(response.data);
@@ -317,8 +304,6 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
     };
   });
 
-  console.log(imageData);
-
   const colorSep = data.productImages?.map((item) => {
     let hexCode = "";
     for (const category of colorsData) {
@@ -336,14 +321,13 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
       hexCode: hexCode,
     };
   });
-  console.log(colorSep);
+  // console.log(colorSep);
   const roomData = useSelector(selectRoomData);
-  console.log(roomData);
+  // console.log(roomData);
   const roomStatus = useSelector(selectRoomStatus);
   //posting data to database
   if (typeof window !== "undefined") {
     var id = localStorage.getItem("deviceId");
-    console.log("deviceId : ", id);
   }
 
   const handleColor = (color) => {
@@ -376,7 +360,6 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
           throw new Error("HTTP status " + response.status);
         }
         const data = response.data;
-        console.log("Fetched cart data:", data);
 
         // Ensure cartData is an array
         if (data && Array.isArray(data.items)) {
@@ -393,7 +376,6 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
   }, []);
 
   const isProductInCart = (productId) => {
-    console.log("Checking product ID:", productId);
     return cartData.some((cartItem) => {
       console.log(
         "Comparing with cart item product ID:",
@@ -436,7 +418,6 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
         }
       );
 
-      console.log(response.data);
       if (response.status === 200) {
         setInCart(true);
         dispatch(setDbItems(response.data));
@@ -481,7 +462,6 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
   const [selectedServices, setSelectedServices] = useState([]);
   const [selectedAccessories, setSelectedAccessories] = useState([]);
 
-  console.log(selectedAccessories);
 
   const handleServiceChange = (service) => {
     setSelectedServices((prevSelectedServices) => {
@@ -523,8 +503,6 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
     document.body.style.overflow = "auto";
     try {
       // Validate quantity, productId, and deviceId
-      console.log(selectedServices);
-      console.log(selectedAccessories);
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
         {
@@ -552,7 +530,6 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
   //   router.push("/checkout");
   // };
 
-  console.log(data);
 
   const [Modal, setModal] = useState(false);
   const [delivery, setDelivery] = useState(false);
@@ -598,7 +575,6 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
     });
   }, []);
 
-  console.log("ProductData", data);
 
   // const fetchCategoryDetails = async () => {
   //   const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getCategoryByName/${data?.category}`)
@@ -619,7 +595,6 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
   };
 
   const [avaliableServices, setavaliableServices] = useState([]);
-  console.log(avaliableServices);
   const fetchCategoryData = async () => {
     const responce = await axios.get(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getCategoryByName/${data?.category}`
@@ -640,10 +615,10 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
     router.push("/checkout");
     document.body.style.overflow = "auto";
   };
-  console.log(avaliableServices);
+  // console.log(avaliableServices);
 
   const [initialServiceQuantity, setinitialServiceQuantity] = useState(1);
-  console.log(selectedServices);
+  // console.log(selectedServices);
 
   const handleServiceIncrease = (serviceId) => {
     setSelectedServices((prevSelectedServices) =>
@@ -682,7 +657,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
     );
   };
 
-  console.log(selectedAccessories);
+  // console.log(selectedAccessories);
 
   const handleDecreaseAccessory = (productId) => {
     setSelectedAccessories((prevSelected) =>
@@ -711,7 +686,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
 
       const userData = response.data;
       if (userData.isAuthenticated) {
-        console.log("user data", userData);
+        // console.log("user data", userData);
         setUser(userData.user);
         setIsAuthenticated(true);
       }
@@ -741,7 +716,6 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
         }
 
         alert("Successfully requested!");
-        console.log(response);
 
         // Redirect to the checkout page
       } catch (error) {

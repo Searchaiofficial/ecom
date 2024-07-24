@@ -441,7 +441,7 @@ function Header({ setIsHeaderMounted }) {
                         loading="lazy"
                         src={loggedInUser?.image}
                         alt="Profile Icon"
-                        className="header-div-icon"
+                        className="header-div-icon rounded-full"
                         width={22}
                         height={22}
                       />
