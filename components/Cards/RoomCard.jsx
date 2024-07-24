@@ -60,7 +60,7 @@ const RoomCard = async () => {
                 >
                   <div className="parent relative w-full h-full">
                     <Image
-                      loading="lazy"
+                      loading="eager"
                       className="child object-cover rounded-sm"
                       src={gallery.items[0].img}
                       layout="fill"
