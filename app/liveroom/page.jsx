@@ -21,7 +21,7 @@ const page = async () => {
   const router = useRouter();
 
   if (isLoading) {
-    return <Splashscreen />;
+    return null;
   }
 
   return (
