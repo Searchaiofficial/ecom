@@ -49,7 +49,7 @@ function Header({ setIsHeaderMounted }) {
         const data = response.data;
 
         dispatch(setDbItems(data));
-      } catch (error) { }
+      } catch (error) {}
     };
     fetchData();
   }, []);
@@ -129,17 +129,10 @@ function Header({ setIsHeaderMounted }) {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  const handleLoginNav = () => {
-    router.push("/login");
-  };
-  const handleProfileNav = () => {
-    handleLinkClick("/login");
-  };
+
   const onClose = () => {
     setSearchQuery("");
   };
-  const loginStatus =
-    typeof window !== "undefined" ? localStorage.getItem("Login") : null;
 
   const [isLoading, setIsLoading] = useState(false);
   const handleLinkClick = (path) => {
@@ -259,6 +252,45 @@ function Header({ setIsHeaderMounted }) {
     setIsHovered(value);
   };
 
+  const [loggedInUser, setLoggedInUser] = useState(null);
+
+  const checkUser = async () => {
+    try {
+      const token = localStorage?.getItem("token");
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/user`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = response.data;
+
+      if (data.isAuthenticated) {
+        setLoggedInUser(data.user);
+      } else {
+        setLoggedInUser(null);
+      }
+    } catch (error) {
+      setLoggedInUser(null);
+      console.error("Error:", error);
+    }
+  };
+
+  useEffect(() => {
+    checkUser();
+  }, []);
+
+  const handleLoginNav = () => {
+    router.push("/login");
+  };
+  const handleProfileNav = (id) => {
+    handleLinkClick(`/profile/${id}`);
+  };
+
   return (
     <div className="">
       <TopHeaderWrapper>
@@ -266,12 +298,15 @@ function Header({ setIsHeaderMounted }) {
       </TopHeaderWrapper>
       {isHovered && <div className="overlay"></div>}
       <div
-        className={`fixed w-full sm:bg-none ${!pathname.includes("/checkout") && !pathname.includes("/ayatrio-map") && !pathname.includes("/profile")
-          ? typeof window !== "undefined" && window.scrollY < 20
-            ? "md:top-[35px] top-[0px]"
+        className={`fixed w-full sm:bg-none ${
+          !pathname.includes("/checkout") &&
+          !pathname.includes("/ayatrio-map") &&
+          !pathname.includes("/profile")
+            ? typeof window !== "undefined" && window.scrollY < 20
+              ? "md:top-[35px] top-[0px]"
+              : "top-0"
             : "top-0"
-          : "top-0"
-          } z-[9998]
+        } z-[9998]
        ${isScrolled ? "bg-white" : "bg-white"} 
       ${isFilterVisible ? "block" : "hidden"}
       `}
@@ -280,8 +315,9 @@ function Header({ setIsHeaderMounted }) {
         {!searchQuery ? (
           <>
             <div
-              className={`${isScrolled ? " border-b-[0.5px] border-[#f5f5f5]" : ""
-                } flex flex-row justify-between z-[99999px] items-center sm:px-[20px] px-[20px] h-[60px]`}
+              className={`${
+                isScrolled ? " border-b-[0.5px] border-[#f5f5f5]" : ""
+              } flex flex-row justify-between z-[99999px] items-center sm:px-[20px] px-[20px] h-[60px]`}
             >
               {/* main-logo */}
               <div className=" flex mainlogo items-center mr-20 justify-start">
@@ -311,18 +347,20 @@ function Header({ setIsHeaderMounted }) {
                         key={idx}
                         onMouseEnter={() => handleMouseEnter(idx)}
                         onMouseLeave={() => handleMouseLeave()}
-                      // onClick={() => handleClick(idx)}
+                        // onClick={() => handleClick(idx)}
                       >
                         <span
-                          className={`text-md cursor-pointer font-semibold  ${isOpen ? "border-b-2 border-black" : ""
-                            }`}
+                          className={`text-md cursor-pointer font-semibold  ${
+                            isOpen ? "border-b-2 border-black" : ""
+                          }`}
                           onClick={() => toggleDropdown(value.label)}
                         >
                           <p
-                            className={`block font-medium py-[15px] px-[5px] border-b-2  ${hoveredIndex === idx
-                              ? "border-black"
-                              : "border-transparent"
-                              }`}
+                            className={`block font-medium py-[15px] px-[5px] border-b-2  ${
+                              hoveredIndex === idx
+                                ? "border-black"
+                                : "border-transparent"
+                            }`}
                           >
                             {value.label}
                           </p>
@@ -394,14 +432,14 @@ function Header({ setIsHeaderMounted }) {
                       </div>
                     )}
                   </div>
-                  {loginStatus === "true" ? (
+                  {loggedInUser ? (
                     <div
-                      className="pro w-10 h-10 flex p-[9px] hover:bg-zinc-100 hover:rounded-full whitespace-nowrap "
-                      onClick={handleProfileNav}
+                      className="pro w-10 h-10 flex p-[9px] hover:bg-zinc-100 hover:rounded-full whitespace-nowrap cursor-pointer"
+                      onClick={() => handleProfileNav(loggedInUser._id)}
                     >
                       <Image
                         loading="lazy"
-                        src="/icons/profile.svg"
+                        src={loggedInUser?.image}
                         alt="Profile Icon"
                         className="header-div-icon"
                         width={22}
@@ -411,12 +449,11 @@ function Header({ setIsHeaderMounted }) {
                   ) : (
                     <div
                       className="pro w-10 h-10 flex p-[9px] hover:bg-zinc-100 hover:rounded-full whitespace-nowrap cursor-pointer "
-                      onClick={handleProfileNav}
+                      onClick={handleLoginNav}
                     >
                       <Image
                         loading="lazy"
                         src="/icons/profile.svg"
-                        onClick={handleLoginNav}
                         alt="Profile Icon"
                         width={18}
                         height={18}
@@ -532,7 +569,7 @@ function Header({ setIsHeaderMounted }) {
 
               {toptext.length === 0 && (
                 <div className="w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer md:hidden">
-                  <span onClick={toggleMobileMenu} >X</span>
+                  <span onClick={toggleMobileMenu}>X</span>
                   {/* <X onClick={toggleMobileMenu} /> */}
                 </div>
               )}
@@ -545,19 +582,21 @@ function Header({ setIsHeaderMounted }) {
                   key={idx}
                   onMouseEnter={() => handleMouseEnter(idx)}
                   onMouseLeave={handleMouseLeave}
-                // onClick={() => handleClick(idx)}
+                  // onClick={() => handleClick(idx)}
                 >
                   <Link
-                    className={`text-md  font-semibold flex items-center justify-between  ${isOpen ? "border-b-2 border-black" : ""
-                      }`}
+                    className={`text-md  font-semibold flex items-center justify-between  ${
+                      isOpen ? "border-b-2 border-black" : ""
+                    }`}
                     href="#"
                     onClick={() => toggleDropdown(value.label)}
                   >
                     <p
-                      className={`block p-2 text-lg font-medium border-b-2 ${hoveredIndex === idx
-                        ? "border-black"
-                        : "border-transparent"
-                        }`}
+                      className={`block p-2 text-lg font-medium border-b-2 ${
+                        hoveredIndex === idx
+                          ? "border-black"
+                          : "border-transparent"
+                      }`}
                       onClick={() => handleTopValue(value.label)}
                     >
                       {value.label}
@@ -607,7 +646,7 @@ function Header({ setIsHeaderMounted }) {
                 <div onClick={() => handleClick("/customerservice")}>
                   <p className="text-[14px] py-[8px] font-normal">Help</p>
                 </div>
-                {loginStatus === true ? (
+                {loggedInUser ? (
                   <p
                     className="text-[14px] font-medium"
                     onClick={handleLogoutClick}

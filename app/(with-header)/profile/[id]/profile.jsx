@@ -490,13 +490,6 @@ const Profile = ({ id }) => {
                           </span>
                         </div>
                       </Link>
-                      {isAuthenticated && user.email === review.userEmail && (
-                        <div className="flex items-center">
-                          <button onClick={() => handleDelete(review._id)}>
-                            Delete
-                          </button>
-                        </div>
-                      )}
                     </div>
                     <div className="ratings flex mt-3">
                       {[...Array(review.rating)].map((_, i) => (
