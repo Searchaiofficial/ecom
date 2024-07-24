@@ -333,52 +333,48 @@ function Header({ setIsHeaderMounted }) {
                 </Link>
               </div>
               {/* center-list */}
-              <div className=" flex justify-center items-center gap-1 md:gap-5 ">
-                {/* <div className=" profile-menu font-bold p-[9px] hover:bg-zinc-100 hover:rounded-full">
-                <Menu />
-              </div> */}
-                {/* for only mobile search */}
-
-                <div className="">
-                  <nav className="hidden md:flex">
-                    {headerLinks.map((value, idx) => (
-                      <div
-                        className="px-[12px]"
-                        key={idx}
-                        onMouseEnter={() => handleMouseEnter(idx)}
-                        onMouseLeave={() => handleMouseLeave()}
-                        // onClick={() => handleClick(idx)}
-                      >
-                        <span
-                          className={`text-md cursor-pointer font-semibold  ${
-                            isOpen ? "border-b-2 border-black" : ""
-                          }`}
-                          onClick={() => toggleDropdown(value.label)}
+              {!pathname.includes("/profile") && (
+                <div className=" flex justify-center items-center gap-1 md:gap-5 ">
+                  <div className="">
+                    <nav className="hidden md:flex">
+                      {headerLinks.map((value, idx) => (
+                        <div
+                          className="px-[12px]"
+                          key={idx}
+                          onMouseEnter={() => handleMouseEnter(idx)}
+                          onMouseLeave={() => handleMouseLeave()}
+                          // onClick={() => handleClick(idx)}
                         >
-                          <p
-                            className={`block font-medium py-[15px] px-[5px] border-b-2  ${
-                              hoveredIndex === idx
-                                ? "border-black"
-                                : "border-transparent"
+                          <span
+                            className={`text-md cursor-pointer font-semibold  ${
+                              isOpen ? "border-b-2 border-black" : ""
                             }`}
+                            onClick={() => toggleDropdown(value.label)}
                           >
-                            {value.label}
-                          </p>
-                        </span>
-                        {hoveredIndex === idx && (
-                          // <Asidebox asideSectionList={value.asideSectionList} />
-                          <Asidebox
-                            handleChange={handleChange}
-                            hoveredIndex={hoveredIndex}
-                            setHoveredIndex={setHoveredIndex}
-                            label={value.label}
-                          />
-                        )}
-                      </div>
-                    ))}
-                  </nav>
+                            <p
+                              className={`block font-medium py-[15px] px-[5px] border-b-2  ${
+                                hoveredIndex === idx
+                                  ? "border-black"
+                                  : "border-transparent"
+                              }`}
+                            >
+                              {value.label}
+                            </p>
+                          </span>
+                          {hoveredIndex === idx && (
+                            <Asidebox
+                              handleChange={handleChange}
+                              hoveredIndex={hoveredIndex}
+                              setHoveredIndex={setHoveredIndex}
+                              label={value.label}
+                            />
+                          )}
+                        </div>
+                      ))}
+                    </nav>
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* search-bar */}
 
@@ -402,18 +398,20 @@ function Header({ setIsHeaderMounted }) {
                     Search for <span ref={textElementRef}></span>
                   </p>
                 </div>
-                <div className="sm:block hidden w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer">
-                  <Link href={"/login"}>
-                    <Image
-                      loading="lazy"
-                      src="/icons/like.svg"
-                      alt="Like Icon"
-                      className="header-div-icon"
-                      width={22}
-                      height={22}
-                    />
-                  </Link>
-                </div>
+                {!pathname.includes("/profile") && (
+                  <div className="sm:block hidden w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer">
+                    <Link href={"/login"}>
+                      <Image
+                        loading="lazy"
+                        src="/icons/like.svg"
+                        alt="Like Icon"
+                        className="header-div-icon"
+                        width={22}
+                        height={22}
+                      />
+                    </Link>
+                  </div>
+                )}
                 <div className="flex items-center flex-row-reverse lg:flex-row">
                   <div className="w-10 h-10 p-[9px] hover:bg-zinc-100 hover:rounded-full cursor-pointer">
                     <Link href={"/cart"}>

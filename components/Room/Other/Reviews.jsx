@@ -763,7 +763,7 @@ const Reviews = ({ productId, data }) => {
                                 <div className="ratings flex mt-3">
                                   {[...Array(review.rating)].map((_, i) => (
                                     <Image
-                                      loading="lazy" KW
+                                      loading="lazy" 
                                       key={i}
                                       src="/icons/star-full-black.svg"
                                       width={10}
@@ -781,7 +781,6 @@ const Reviews = ({ productId, data }) => {
                                 </div>
 
                                 <div className="review mt-1">
-                                  KW
                                   {review.comment}
                                 </div>
                               </div>
