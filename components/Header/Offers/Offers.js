@@ -77,7 +77,7 @@ const OfferDisplayBox = ({ selectedOffer, handleClick }) => {
         if (window.innerWidth < 700) {
             handleClick();
         }
-        router.push(`/offers/new/${offer.type.replace(/ /g, "-")}`);
+        router.push(`/offers/new/${offer.type.replace(/%/g, "percent").replace(/ /g, "-")}`);
     };
 
     return (
