@@ -151,7 +151,6 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
     }
   }, [data]);
 
-
   // Handler for clicking a specification
   const handleSpecClick = (spec) => {
     setSelectedSpec(spec);
@@ -462,7 +461,6 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
   const [selectedServices, setSelectedServices] = useState([]);
   const [selectedAccessories, setSelectedAccessories] = useState([]);
 
-
   const handleServiceChange = (service) => {
     setSelectedServices((prevSelectedServices) => {
       if (prevSelectedServices.some((s) => s.name === service.name)) {
@@ -530,7 +528,6 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
   //   router.push("/checkout");
   // };
 
-
   const [Modal, setModal] = useState(false);
   const [delivery, setDelivery] = useState(false);
   const [store, setStore] = useState(false);
@@ -574,7 +571,6 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
       endDate: `${endMonth} ${endDay}`,
     });
   }, []);
-
 
   // const fetchCategoryDetails = async () => {
   //   const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getCategoryByName/${data?.category}`)
@@ -801,6 +797,21 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
     },
   ];
 
+  const [categoryDetails, setCategoryDetails] = useState(null)
+  const fetchCategoryDetails = async () => {
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getCategoryByName/${data?.category}`
+    );
+    console.log(response.data);
+    setCategoryDetails(response.data);
+  };
+
+  useEffect(() => {
+    if (data?.category) {
+      fetchCategoryDetails();
+    }
+  }, [data?.category]);
+
   return (
     <>
       <div className="flex justify-start md:min-w-[25vw] gap-1 mt-2.5 w-[100%] ml-0 z-[9997]">
@@ -851,47 +862,49 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
             </div> */}
             {(data?.productType === "normal" ||
               data?.productType === "special") && (
-                <div className="price">
-                  <div className="font-bold items-end flex mb-1 mt-[10px]">
-                    <p
-                      className={`text-3xl leading-[0.5] tracking-wide ${data?.specialprice?.price
+              <div className="price">
+                <div className="font-bold items-end flex mb-1 mt-[10px]">
+                  <p
+                    className={`text-3xl leading-[0.5] tracking-wide ${
+                      data?.specialprice?.price
                         ? "bg-[#FFD209] px-2 pt-3 w-fit shadow-lg"
                         : ""
-                        } `}
-                      style={
-                        data?.specialprice?.price
-                          ? { boxShadow: "3px 3px #ad3535" }
-                          : {}
-                      }
-                    >
-                      <span className="text-sm">Rs. &nbsp;</span>{" "}
-                      {/* {data?.specialprice?.price ? data?.specialprice.price : data.perUnitPrice} */}
-                      {data?.specialprice?.price
-                        ? data?.specialprice.price
-                        : selectedSpecData?.specialprice
-                          ? selectedSpecData.price
-                          : data.perUnitPrice}
-                    </p>{" "}
-                    <span> &nbsp;/{data.unitType}</span>
-                  </div>
-
-                  {data?.specialprice?.price && (
-                    <div className="flex flex-col">
-                      <p className="text-[#757575] text-[12px] pt-[3px]">
-                        Regular price: Rs.{data?.perUnitPrice} (incl. of all taxes)
-                      </p>
-                      {data?.specialprice?.startDate &&
-                        data?.specialprice?.endDate && (
-                          <p className="text-[#757575] text-[12px] pb-[10px]">
-                            Price valid {formattedStartDate} - {formattedEndDate}{" "}
-                            or while supply lasts
-                          </p>
-                        )}
-                      {/* <p className="text-[#757575] text-[12px] pb-[10px]">Price valid May 02 - May 29 or while supply lasts</p> */}
-                    </div>
-                  )}
+                    } `}
+                    style={
+                      data?.specialprice?.price
+                        ? { boxShadow: "3px 3px #ad3535" }
+                        : {}
+                    }
+                  >
+                    <span className="text-sm">Rs. &nbsp;</span>{" "}
+                    {/* {data?.specialprice?.price ? data?.specialprice.price : data.perUnitPrice} */}
+                    {data?.specialprice?.price
+                      ? data?.specialprice.price
+                      : selectedSpecData?.specialprice
+                      ? selectedSpecData.price
+                      : data.perUnitPrice}
+                  </p>{" "}
+                  <span> &nbsp;/{data.unitType}</span>
                 </div>
-              )}
+
+                {data?.specialprice?.price && (
+                  <div className="flex flex-col">
+                    <p className="text-[#757575] text-[12px] pt-[3px]">
+                      Regular price: Rs.{data?.perUnitPrice} (incl. of all
+                      taxes)
+                    </p>
+                    {data?.specialprice?.startDate &&
+                      data?.specialprice?.endDate && (
+                        <p className="text-[#757575] text-[12px] pb-[10px]">
+                          Price valid {formattedStartDate} - {formattedEndDate}{" "}
+                          or while supply lasts
+                        </p>
+                      )}
+                    {/* <p className="text-[#757575] text-[12px] pb-[10px]">Price valid May 02 - May 29 or while supply lasts</p> */}
+                  </div>
+                )}
+              </div>
+            )}
             {/* <div className="py-2 mt-[10px]">
               <IncDecCounter />
             </div> */}
@@ -906,10 +919,11 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                     <button
                       key={dim._id}
                       onClick={() => handleSpecClick(dim._id)}
-                      className={`px-2 py-1  ${selectedSpec === dim._id
-                        ? "bg-green-500 text-white"
-                        : "bg-zinc-100 text-black hover:bg-zinc-200"
-                        }`}
+                      className={`px-2 py-1  ${
+                        selectedSpec === dim._id
+                          ? "bg-green-500 text-white"
+                          : "bg-zinc-100 text-black hover:bg-zinc-200"
+                      }`}
                     >
                       {`${dim.thickness.value} ${dim.length.unit}`}
                     </button>
@@ -934,11 +948,12 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                       key={index}
                       onClick={() => handleColor(item.color)}
                       className={`parent relative w-[55px] h-[55px] text-gray-900 text-center text-xs flex justify-center items-center cursor-pointer
-            ${selectedColor === item.color ||
-                          (index === 0 && selectedColor === "")
-                          ? " border-black "
-                          : " border-black"
-                        }   
+            ${
+              selectedColor === item.color ||
+              (index === 0 && selectedColor === "")
+                ? " border-black "
+                : " border-black"
+            }   
           `}
                     >
                       <Image
@@ -951,7 +966,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                         objectFit="cover"
                       />
                       {selectedColor === item.color ||
-                        (index === 0 && selectedColor === "") ? (
+                      (index === 0 && selectedColor === "") ? (
                         <div className="w-[100%] h-[2px] bg-black mt-[57px]" />
                       ) : (
                         ""
@@ -1007,42 +1022,46 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
               </div>
             </div>
             <hr className="border-[#e5e7eb]" />
-            <div className="flex flex-row ">
-              <div
-                className="flex flex-col col-span-2 w-1/2 p-[14px] hover:bg-[#f5f5f5] cursor-pointer border-b-[1px] border-l-[1px] border-[#e5e7eb]"
-                onClick={() => handleOptionClick("deliveryOption")}
-              >
-                <div className="flex flex-row gap-2">
-                  <Image
-                    loading="lazy"
-                    src="/icons/delivary.svg"
-                    height={25}
-                    width={25}
-                    alt="icon"
-                    className=" w-[25px] h-[25px]"
-                  />
-                  <p className="font-medium text-sm">Delivery Option</p>
+            { categoryDetails && categoryDetails.showCalculator &&
+              <div className="flex flex-row ">
+                <div
+                  className="flex flex-col col-span-2 w-1/2 p-[14px] hover:bg-[#f5f5f5] cursor-pointer border-b-[1px] border-l-[1px] border-[#e5e7eb]"
+                  onClick={() => handleOptionClick("deliveryOption")}
+                >
+                  <div className="flex flex-row gap-2">
+                    <Image
+                      loading="lazy"
+                      src="/icons/delivary.svg"
+                      height={25}
+                      width={25}
+                      alt="icon"
+                      className=" w-[25px] h-[25px]"
+                    />
+                    <p className="font-medium text-sm">Delivery Option</p>
+                  </div>
+                  <p className="text-[11px] pt-[5px]">Check availability</p>
                 </div>
-                <p className="text-[11px] pt-[5px]">Check availability</p>
-              </div>
-              <div
-                className="flex flex-col col-span-2 w-1/2 p-[14px] hover:bg-[#f5f5f5] cursor-pointer border-b-[1px] border-r-[1px] border-[#e5e7eb]"
-                onClick={() => handleOptionClick("calculator")}
-              >
-                <div className="flex flex-row gap-2">
-                  <Image
-                    loading="lazy"
-                    src="/icons/calculator.svg"
-                    height={25}
-                    width={25}
-                    alt="icon"
-                    className=" w-[25px] h-[25px]"
-                  />
-                  <p className="font-medium text-sm">Calculator</p>
+                <div
+                  className="flex flex-col col-span-2 w-1/2 p-[14px] hover:bg-[#f5f5f5] cursor-pointer border-b-[1px] border-r-[1px] border-[#e5e7eb]"
+                  onClick={() => handleOptionClick("calculator")}
+                >
+                  <div className="flex flex-row gap-2">
+                    <Image
+                      loading="lazy"
+                      src="/icons/calculator.svg"
+                      height={25}
+                      width={25}
+                      alt="icon"
+                      className=" w-[25px] h-[25px]"
+                    />
+                    <p className="font-medium text-sm">Calculator</p>
+                  </div>
+                  <p className="text-[11px] pt-[5px]">
+                    As per your requirement
+                  </p>
                 </div>
-                <p className="text-[11px] pt-[5px]">As per your requirement</p>
               </div>
-            </div>
+            }
 
             {/* Modal */}
             {sidebarContect && (
@@ -1057,19 +1076,21 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                               <div className="flex-1 flex">
                                 <div
                                   onClick={() => setIsActive("Offers for you")}
-                                  className={`flex-1 cursor-pointer flex items-center justify-center h-[50px] ${isActive === "Offers for you"
-                                    ? "border-b-4 border-[#2e2e2e] text-black"
-                                    : "border-[#8E8E8E] text-[#8E8E8E]"
-                                    }`}
+                                  className={`flex-1 cursor-pointer flex items-center justify-center h-[50px] ${
+                                    isActive === "Offers for you"
+                                      ? "border-b-4 border-[#2e2e2e] text-black"
+                                      : "border-[#8E8E8E] text-[#8E8E8E]"
+                                  }`}
                                 >
                                   <p className="text-[16px]">Offers for you</p>
                                 </div>
                                 <div
                                   onClick={() => setIsActive("EMI Plans")}
-                                  className={`flex-1 cursor-pointer flex items-center justify-center h-[50px] ${isActive === "EMI Plans"
-                                    ? "border-b-4 border-[#2e2e2e] text-black"
-                                    : "border-[#8E8E8E] text-[#8E8E8E]"
-                                    }`}
+                                  className={`flex-1 cursor-pointer flex items-center justify-center h-[50px] ${
+                                    isActive === "EMI Plans"
+                                      ? "border-b-4 border-[#2e2e2e] text-black"
+                                      : "border-[#8E8E8E] text-[#8E8E8E]"
+                                  }`}
                                 >
                                   <p className="text-[16px]">EMI Plans</p>
                                 </div>
@@ -1172,19 +1193,21 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                                     onClick={(e) =>
                                       setEmiOption("Credit Card EMI")
                                     }
-                                    className={`${EmiOption === "Credit Card EMI"
-                                      ? "bg-black text-white py-[16px] hover:bg-gray-900 px-[30px] text-center text-[14px] rounded-full"
-                                      : "py-[16px] border-2  px-[30px] rounded-full  text-[14px] text-center"
-                                      }`}
+                                    className={`${
+                                      EmiOption === "Credit Card EMI"
+                                        ? "bg-black text-white py-[16px] hover:bg-gray-900 px-[30px] text-center text-[14px] rounded-full"
+                                        : "py-[16px] border-2  px-[30px] rounded-full  text-[14px] text-center"
+                                    }`}
                                   >
                                     Credit Card EMI
                                   </button>
                                   <button
                                     onClick={(e) => setEmiOption("Debit Card")}
-                                    className={`${EmiOption === "Debit Card"
-                                      ? "bg-black hover:bg-gray-900 flex-1 text-white py-[16px] px-[30px] text-center text-[14px]  rounded-full"
-                                      : "py-[16px] flex-1 border-2 px-[30px]  rounded-full  text-[14px] text-center"
-                                      }`}
+                                    className={`${
+                                      EmiOption === "Debit Card"
+                                        ? "bg-black hover:bg-gray-900 flex-1 text-white py-[16px] px-[30px] text-center text-[14px]  rounded-full"
+                                        : "py-[16px] flex-1 border-2 px-[30px]  rounded-full  text-[14px] text-center"
+                                    }`}
                                   >
                                     Debit Card & EMI
                                   </button>
@@ -1736,9 +1759,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                           </div>
                         </div>
                         <div className="p-6 border-t lg:mt-32">
-                          <button
-                            className="bg-black text-white w-[100%] sm:h-14 h-10 rounded-full hover:bg-gray-900 transition duration-300 px-4"
-                          >
+                          <button className="bg-black text-white w-[100%] sm:h-14 h-10 rounded-full hover:bg-gray-900 transition duration-300 px-4">
                             Buy Now
                           </button>
                         </div>
@@ -1820,10 +1841,11 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                               </p>
                               <div className="font-bold items-end flex mb-1 my-[5px]">
                                 <h2
-                                  className={`text-3xl leading-[0.5] tracking-wide ${data?.specialprice?.price
-                                    ? "bg-[#FFD209] px-2 pt-3 w-fit shadow-lg"
-                                    : ""
-                                    } `}
+                                  className={`text-3xl leading-[0.5] tracking-wide ${
+                                    data?.specialprice?.price
+                                      ? "bg-[#FFD209] px-2 pt-3 w-fit shadow-lg"
+                                      : ""
+                                  } `}
                                   style={
                                     data?.specialprice?.price
                                       ? { boxShadow: "3px 3px #ad3535" }
@@ -1860,7 +1882,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                             </h2>
                             <div className="">
                               {categoryProducts &&
-                                categoryProducts.length > 0 ? (
+                              categoryProducts.length > 0 ? (
                                 categoryProducts.map((product) => (
                                   <div
                                     key={product._id}
@@ -1888,16 +1910,17 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                                         </p>
                                         <div className="font-bold items-end flex mb-1 my-[5px]">
                                           <h2
-                                            className={`text-3xl leading-[0.5] tracking-wide ${product?.specialprice?.price
-                                              ? "bg-[#FFD209] px-2 pt-3 w-fit shadow-lg"
-                                              : ""
-                                              } `}
+                                            className={`text-3xl leading-[0.5] tracking-wide ${
+                                              product?.specialprice?.price
+                                                ? "bg-[#FFD209] px-2 pt-3 w-fit shadow-lg"
+                                                : ""
+                                            } `}
                                             style={
                                               product?.specialprice?.price
                                                 ? {
-                                                  boxShadow:
-                                                    "3px 3px #ad3535",
-                                                }
+                                                    boxShadow:
+                                                      "3px 3px #ad3535",
+                                                  }
                                                 : {}
                                             }
                                           >
