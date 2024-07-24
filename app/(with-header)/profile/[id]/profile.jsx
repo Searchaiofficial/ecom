@@ -100,6 +100,7 @@ const Profile = ({ id }) => {
       const data = response.data;
       if (data.isAuthenticated) {
         localStorage?.setItem("token", token);
+        window.history.replaceState({}, "", `${window.location.pathname}`);
       }
     }
     checkUser();
