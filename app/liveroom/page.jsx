@@ -14,6 +14,7 @@ const page = async () => {
 
     if (token) {
       localStorage.setItem("token", token);
+      window.history.replaceState({}, "", `${window.location.pathname}`);
     }
   }, []);
   const { userInfo, isLoading } = useUserInfo();
