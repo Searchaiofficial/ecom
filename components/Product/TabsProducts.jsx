@@ -911,7 +911,7 @@ const Tabs = ({
             AllsubCategory &&
             AllsubCategory.length > 0 && (
               <TabsProductContent
-                filterName={"Sub Category"}
+                filterName={"Styles"}
                 commonClasses={commonClasses}
                 isFilterOpen={opensubcategory}
                 handleAll={handleAll}
