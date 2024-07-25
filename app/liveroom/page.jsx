@@ -7,14 +7,14 @@ import { useUserInfo } from "@/hooks/useUserInfo";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-const page = async () => {
+const page =  () => {
   useEffect(() => {
     const urlParams = new URLSearchParams(window?.location?.search);
     const token = urlParams.get("token");
 
     if (token) {
       localStorage.setItem("token", token);
-      window.history.replaceState({}, "", `${window.location.pathname}`);
+      // window.history.replaceState({}, "", `${window.location.pathname}`);
     }
   }, []);
   const { userInfo, isLoading } = useUserInfo();
