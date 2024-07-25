@@ -220,11 +220,11 @@ const RoomInfo = ({ data }) => {
                   className="flex sm:pb-0  flex-col  sm:order-4 order-3"
                 >
                   <div className="text-center text-xl font-bold">
-                    {calculateOverallAverageRating || "5.0"}
+                    {calculateOverallAverageRating}
                   </div>
                   <div className="underline text-sm  flex">
                     {Array.from({
-                      length: calculateOverallAverageRating || "5.0",
+                      length: calculateOverallAverageRating,
                     }).map((_, idx) => (
                       <Image
                         loading="lazy"

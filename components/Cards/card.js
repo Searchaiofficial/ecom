@@ -375,7 +375,9 @@ function Card(props) {
                 Ayatrio Member Favorite
               </p>
             )}
-            <h3 className="text-[15px] font-semibold">{props.title}</h3>
+            <h3 className="text-[15px] font-semibold">
+              {props.title}
+            </h3>
           </div>
         </div>
         <p className="font-normal mb-1 text-[14px] py-[2px]">
@@ -407,7 +409,11 @@ function Card(props) {
                 {props?.specialPrice?.price ? (
                   props?.specialPrice?.price
                 ) : (
-                  <p className="pt-3">{props?.discountedprice ? props?.discountedprice : props?.price}</p>
+                  <p className="pt-3">
+                    {props?.discountedprice
+                      ? props?.discountedprice
+                      : props?.price}
+                  </p>
                 )}
               </p>
               {props.unitType ? (
@@ -449,17 +455,17 @@ function Card(props) {
             )}
           </div>
         )}
-        {props?.rating > 0 && (
-          <>
-            <div className="card-rating">{props.rating}</div>
-            {Starts && (
-              <div className="flex items-center mt-1">
-                {Starts}
-                <p className="text-[14px] mt-1 ml-2">({Reviews?.length})</p>
-              </div>
-            )}
-          </>
-        )}
+        {/* {props?.rating > 0 && ( */}
+        <>
+          {/* <div className="card-rating">{props.rating}</div> */}
+          {Starts && (
+            <div className="flex items-center mt-1">
+              {Starts}
+              <p className="text-[14px] mt-1 ml-2">({Reviews?.length})</p>
+            </div>
+          )}
+        </>
+        {/* )} */}
         {props.expectedDelivery && (
           <div className="flex flex-col items-start mt-2">
             <div className="flex items-center">
