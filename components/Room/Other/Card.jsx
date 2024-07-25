@@ -540,37 +540,37 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
     setsidebarContent(content);
   };
 
-  const startDate = new Date(data?.specialprice?.startDate);
-  const endDate = new Date(data?.specialprice?.endDate);
+  // const startDate = new Date(data?.specialprice?.startDate);
+  // const endDate = new Date(data?.specialprice?.endDate);
 
-  const formattedStartDate = startDate.toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric",
-  });
-  const formattedEndDate = endDate.toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric",
-  });
+  // const formattedStartDate = startDate.toLocaleDateString("en-US", {
+  //   month: "long",
+  //   day: "numeric",
+  // });
+  // const formattedEndDate = endDate.toLocaleDateString("en-US", {
+  //   month: "long",
+  //   day: "numeric",
+  // });
 
-  const [formattedDate, setFormattedDate] = useState({
-    startDate: "",
-    endDate: "",
-  });
+  // const [formattedDate, setFormattedDate] = useState({
+  //   startDate: "",
+  //   endDate: "",
+  // });
 
-  useEffect(() => {
-    const startDate = new Date(data.specialprice?.startDate);
-    const endDate = new Date(data.specialprice?.endDate);
+  // useEffect(() => {
+  //   const startDate = new Date(data.specialprice?.startDate);
+  //   const endDate = new Date(data.specialprice?.endDate);
 
-    const startMonth = startDate.toLocaleString("default", { month: "long" });
-    const startDay = startDate.getDate();
+  //   const startMonth = startDate.toLocaleString("default", { month: "long" });
+  //   const startDay = startDate.getDate();
 
-    const endMonth = endDate.toLocaleString("default", { month: "long" });
-    const endDay = endDate.getDate();
-    setFormattedDate({
-      startDate: `${startMonth} ${startDay}`,
-      endDate: `${endMonth} ${endDay}`,
-    });
-  }, []);
+  //   const endMonth = endDate.toLocaleString("default", { month: "long" });
+  //   const endDay = endDate.getDate();
+  //   setFormattedDate({
+  //     startDate: `${startMonth} ${startDay}`,
+  //     endDate: `${endMonth} ${endDay}`,
+  //   });
+  // }, []);
 
   // const fetchCategoryDetails = async () => {
   //   const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getCategoryByName/${data?.category}`)
@@ -797,7 +797,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
     },
   ];
 
-  const [categoryDetails, setCategoryDetails] = useState(null)
+  const [categoryDetails, setCategoryDetails] = useState(null);
   const fetchCategoryDetails = async () => {
     const response = await axios.get(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getCategoryByName/${data?.category}`
@@ -811,6 +811,14 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
       fetchCategoryDetails();
     }
   }, [data?.category]);
+
+  const formatDate = (date) => {
+    return new Date(date).toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+    });
+  };
+
 
   return (
     <>
@@ -882,29 +890,36 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                       ? data?.specialprice.price
                       : selectedSpecData?.specialprice
                       ? selectedSpecData.price
-                      : data?.discountedprice 
-                      ? data?.discountedprice 
-                      : selectedSpecData?.discountedprice
-                      ? selectedSpecData.discountedprice
+                      : data?.discountedprice.price
+                      ? data?.discountedprice.price
+                      : selectedSpecData?.discountedprice.price
+                      ? selectedSpecData.discountedprice.price
                       : data.perUnitPrice}
                   </p>{" "}
                   <span> &nbsp;/{data.unitType}</span>
                 </div>
 
-                {(data?.specialprice?.price || data?.discountedprice) && (
-                  <div className="flex flex-col">
+                {(data?.specialprice?.price ||
+                  data?.discountedprice?.price) && (
+                  <div className="flex flex-col my-3">
                     <p className="text-[#757575] text-[12px] pt-[3px]">
-                      Regular price: Rs.{data?.perUnitPrice} (incl. of all
-                      taxes)
+                      Regular price: Rs.{data?.price} (incl. of all taxes)
                     </p>
+
                     {data?.specialprice?.startDate &&
-                      data?.specialprice?.endDate && (
-                        <p className="text-[#757575] text-[12px] pb-[10px]">
-                          Price valid {formattedStartDate} - {formattedEndDate}{" "}
-                          or while supply lasts
-                        </p>
-                      )}
-                    {/* <p className="text-[#757575] text-[12px] pb-[10px]">Price valid May 02 - May 29 or while supply lasts</p> */}
+                    data?.specialprice?.endDate ? (
+                      <p className="text-[#757575] text-[12px] ">
+                        Price valid {formatDate(data?.specialprice?.startDate)}{" "}
+                        - {formatDate(data?.specialprice?.endDate)}
+                      </p>
+                    ) : data?.discountedprice?.startDate &&
+                      data?.discountedprice?.endDate ? (
+                      <p className="text-[#757575] text-[12px] ">
+                        Price valid{" "}
+                        {formatDate(data?.discountedprice?.startDate)} -{" "}
+                        {formatDate(data?.discountedprice?.endDate)}
+                      </p>
+                    ) : null}
                   </div>
                 )}
               </div>
@@ -1026,7 +1041,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
               </div>
             </div>
             <hr className="border-[#e5e7eb]" />
-            { categoryDetails && categoryDetails.showCalculator &&
+            {categoryDetails && categoryDetails.showCalculator && (
               <div className="flex flex-row ">
                 <div
                   className="flex flex-col col-span-2 w-1/2 p-[14px] hover:bg-[#f5f5f5] cursor-pointer border-b-[1px] border-l-[1px] border-[#e5e7eb]"
@@ -1065,7 +1080,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                   </p>
                 </div>
               </div>
-            }
+            )}
 
             {/* Modal */}
             {sidebarContect && (
@@ -1859,8 +1874,8 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                                   <span className="text-sm">Rs. &nbsp;</span>{" "}
                                   {data?.specialprice?.price
                                     ? data?.specialprice?.price
-                                    : data?.discountedprice
-                                    ? data?.discountedprice
+                                    : data?.discountedprice?.price
+                                    ? data?.discountedprice?.price
                                     : data.perUnitPrice}
                                 </h2>{" "}
                                 <span> &nbsp;/{data.unitType}</span>

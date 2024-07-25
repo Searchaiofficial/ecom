@@ -76,17 +76,24 @@ function Card(props) {
     setSlide(slide === 0 ? props.imgSrc.length - 1 : slide - 1);
   };
 
-  const startDate = new Date(props?.specialPrice?.startDate);
-  const endDate = new Date(props?.specialPrice?.endDate);
+  // const startDate = new Date(props?.specialPrice?.startDate);
+  // const endDate = new Date(props?.specialPrice?.endDate);
 
-  const formattedStartDate = startDate.toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric",
-  });
-  const formattedEndDate = endDate.toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric",
-  });
+  // const formattedStartDate = startDate.toLocaleDateString("en-US", {
+  //   month: "long",
+  //   day: "numeric",
+  // });
+  // const formattedEndDate = endDate.toLocaleDateString("en-US", {
+  //   month: "long",
+  //   day: "numeric",
+  // });
+
+  const formatDate = (date) => {
+    return new Date(date).toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+    });
+  };
 
   const imageData = props.productImages?.map((item) => {
     return {
@@ -375,9 +382,7 @@ function Card(props) {
                 Ayatrio Member Favorite
               </p>
             )}
-            <h3 className="text-[15px] font-semibold">
-              {props.title}
-            </h3>
+            <h3 className="text-[15px] font-semibold">{props.title}</h3>
           </div>
         </div>
         <p className="font-normal mb-1 text-[14px] py-[2px]">
@@ -410,8 +415,8 @@ function Card(props) {
                   props?.specialPrice?.price
                 ) : (
                   <p className="pt-3">
-                    {props?.discountedprice
-                      ? props?.discountedprice
+                    {props?.discountedprice?.price
+                      ? props?.discountedprice?.price
                       : props?.price}
                   </p>
                 )}
@@ -442,17 +447,24 @@ function Card(props) {
           )}
         </div>
 
-        {(props?.specialPrice?.price || props?.discountedprice) && (
+        {(props?.specialPrice?.price || props?.discountedprice?.price) && (
           <div className="flex flex-col my-3">
             <p className="text-[#757575] text-[12px] pt-[3px]">
               Regular price: Rs.{props?.price} (incl. of all taxes)
             </p>
 
-            {props?.specialPrice?.startDate && props?.specialPrice?.endDate && (
+            {props?.specialPrice?.startDate && props?.specialPrice?.endDate ? (
               <p className="text-[#757575] text-[12px] ">
-                Price valid {formattedStartDate} - {formattedEndDate}
+                Price valid {formatDate(props?.specialPrice?.startDate)} -{" "}
+                {formatDate(props?.specialPrice?.endDate)}
               </p>
-            )}
+            ) : props?.discountedprice?.startDate &&
+              props?.discountedprice?.endDate ? (
+              <p className="text-[#757575] text-[12px] ">
+                Price valid {formatDate(props?.discountedprice?.startDate)} -{" "}
+                {formatDate(props?.discountedprice?.endDate)}
+              </p>
+            ) : null}
           </div>
         )}
         {/* {props?.rating > 0 && ( */}

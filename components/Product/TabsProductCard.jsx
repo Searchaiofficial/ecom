@@ -122,25 +122,32 @@ function TabsProductCard(props) {
     dispatch({ type: "FETCH_ROOM_REQUEST", payload: title });
   };
 
-  const [formattedDate, setFormattedDate] = useState({
-    startDate: "",
-    endDate: "",
-  });
+  // const [formattedDate, setFormattedDate] = useState({
+  //   startDate: "",
+  //   endDate: "",
+  // });
 
-  useEffect(() => {
-    const startDate = new Date(props.specialprice?.startDate);
-    const endDate = new Date(props.specialprice?.endDate);
+  // useEffect(() => {
+  //   const startDate = new Date(props.specialprice?.startDate);
+  //   const endDate = new Date(props.specialprice?.endDate);
 
-    const startMonth = startDate.toLocaleString("default", { month: "long" });
-    const startDay = startDate.getDate();
+  //   const startMonth = startDate.toLocaleString("default", { month: "long" });
+  //   const startDay = startDate.getDate();
 
-    const endMonth = endDate.toLocaleString("default", { month: "long" });
-    const endDay = endDate.getDate();
-    setFormattedDate({
-      startDate: `${startMonth} ${startDay}`,
-      endDate: `${endMonth} ${endDay}`,
+  //   const endMonth = endDate.toLocaleString("default", { month: "long" });
+  //   const endDay = endDate.getDate();
+  //   setFormattedDate({
+  //     startDate: `${startMonth} ${startDay}`,
+  //     endDate: `${endMonth} ${endDay}`,
+  //   });
+  // }, []);
+
+  const formatDate = (date) => {
+    return new Date(date).toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
     });
-  }, []);
+  };
 
   const nextSlide = () => {
     setSlide(slide === props.images.length - 1 ? 0 : slide + 1);
@@ -223,6 +230,7 @@ function TabsProductCard(props) {
 
   console.log({ productImagesTest: props.images });
 
+  
   return (
     <>
       <div
@@ -436,8 +444,8 @@ function TabsProductCard(props) {
                       props?.specialprice?.price
                     ) : (
                       <p className="pt-3 ">
-                        {props.discountedprice
-                          ? props.discountedprice
+                        {props?.discountedprice?.price
+                          ? props?.discountedprice?.price
                           : props.perUnitPrice}
                       </p>
                     )}
@@ -464,17 +472,27 @@ function TabsProductCard(props) {
                   </div>
                 )}
               </div>
-              {(props?.specialprice?.price || props?.discountedprice) && (
+              {(props?.specialprice?.price ||
+                props?.discountedprice?.price) && (
                 <div className="flex flex-col my-3">
                   <p className="text-[#757575] text-[12px] pt-[3px]">
-                    Regular price: Rs.{props?.perUnitPrice} (incl. of all taxes)
+                    Regular price: Rs.{props?.price} (incl. of all taxes)
                   </p>
-                  {props?.specialPrice?.startDate &&
-                    props?.specialPrice?.endDate && (
-                      <p className="text-[#757575] text-[12px] ">
-                        Price valid {formattedStartDate} - {formattedEndDate}
-                      </p>
-                    )}
+
+                  {props?.specialprice?.startDate &&
+                  props?.specialprice?.endDate ? (
+                    <p className="text-[#757575] text-[12px] ">
+                      Price valid {formatDate(props?.specialprice?.startDate)} -{" "}
+                      {formatDate(props?.specialprice?.endDate)}
+                    </p>
+                  ) : props?.discountedprice?.startDate &&
+                    props?.discountedprice?.endDate ? (
+                    <p className="text-[#757575] text-[12px] ">
+                      Price valid{" "}
+                      {formatDate(props?.discountedprice?.startDate)} -{" "}
+                      {formatDate(props?.discountedprice?.endDate)}
+                    </p>
+                  ) : null}
                 </div>
               )}
             </>
@@ -491,17 +509,17 @@ function TabsProductCard(props) {
             </div>
           )}
 
-          {/* {props?.rating > 0 && (
+          {props?.rating > 0 && (
             <>
-              <div className="card-rating">{props.rating}</div> */}
-          {Starts && (
-            <div className="flex items-center mt-1">
-              {Starts}
-              <p className="text-[14px] mt-1 ml-2">({Reviews?.length})</p>
-            </div>
+              <div className="card-rating">{props.rating}</div>
+              {Starts && (
+                <div className="flex items-center mt-1">
+                  {Starts}
+                  <p className="text-[14px] mt-1 ml-2">({Reviews?.length})</p>
+                </div>
+              )}
+            </>
           )}
-          {/* </>
-          )} */}
 
           {props.expectedDelivery && (
             <div className="flex flex-col items-start mt-2">
