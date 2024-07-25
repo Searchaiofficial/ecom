@@ -230,7 +230,6 @@ function TabsProductCard(props) {
 
   console.log({ productImagesTest: props.images });
 
-  
   return (
     <>
       <div
@@ -509,17 +508,17 @@ function TabsProductCard(props) {
             </div>
           )}
 
-          {props?.rating > 0 && (
-            <>
-              <div className="card-rating">{props.rating}</div>
-              {Starts && (
-                <div className="flex items-center mt-1">
-                  {Starts}
-                  <p className="text-[14px] mt-1 ml-2">({Reviews?.length})</p>
-                </div>
-              )}
-            </>
+          {/* {props?.rating > 0 && (
+            <> */}
+          <div className="card-rating">{props.rating}</div>
+          {Starts && (
+            <div className="flex items-center mt-1">
+              {Starts}
+              <p className="text-[14px] mt-1 ml-2">({Reviews?.length})</p>
+            </div>
           )}
+          {/* </>
+          )} */}
 
           {props.expectedDelivery && (
             <div className="flex flex-col items-start mt-2">
