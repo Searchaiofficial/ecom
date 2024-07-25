@@ -240,7 +240,11 @@ function TabsProductCard(props) {
         <div className="relative z[-999999] w-fit">
           <div
             onClick={(event) => event.stopPropagation()}
-            className={`flex justify-between text-black   checkbox-div absolute top-0 right-0 z-50 ${
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            onTouchStart={() => setIsHovered(true)} // for touch devices
+            onTouchEnd={() => setIsHovered(false)} // for touch devices
+            className={`flex justify-between text-black ${isHovered ? "flex" : "hidden"}    checkbox-div absolute top-0 right-0 z-50 ${
               props.selectedpdt.includes(props.text) ? "visible" : "visible"
             }`}
           >

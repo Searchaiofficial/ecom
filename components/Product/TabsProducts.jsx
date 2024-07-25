@@ -697,7 +697,7 @@ const Tabs = ({
           <h1 className="Blinds font-semibold text-2xl pb-[20px] lg:pt-[30px] capitalize">
             {pathname.split("/")[3] === "all" && <p>{heading}</p>}
             {pathname.split("/")[3] !== "all" && (
-              <p>{pathname.split("/")[3].replace(/-/g, " ")}</p>
+              <p>{pathname.split("/")[3].replace(/-/g, " ").replace(/percent/g, "%")}</p>
             )}
           </h1>
           <div className="flex items-center">
