@@ -46,8 +46,8 @@ export default function NewMainSlider({ initialData }) {
 
   const [sliderApiData, setSliderApiData] = useState([]);
   useEffect(() => {
-    if (SliderViewData && SliderViewData.result) {
-      setSliderApiData(SliderViewData.result);
+    if (SliderViewData && SliderViewData?.result) {
+      setSliderApiData(SliderViewData?.result);
     }
   }, [SliderViewData]);
   const router = useRouter();

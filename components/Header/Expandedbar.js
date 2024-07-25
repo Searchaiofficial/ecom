@@ -338,7 +338,7 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
                         <Link
                           key={item._id}
                           className="dropdown-item sm:font-medium   py-2  text-[20px] font-medium "
-                          href={`/product/${item.category.replace(/\s/g, "-")}/${item.subcategory.replace(/\s/g, "-")}`}
+                          href={`/${item.category.replace(/\s/g, "-")}/product/${item.subcategory.replace(/\s/g, "-")}`}
                           onClick={onClose}
                         >
                           {item.productTitle}
@@ -351,7 +351,7 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
                         <Link
                           key={item._id}
                           className="dropdown-item sm:font-medium   py-2  text-[20px] font-medium "
-                          href={`/product/${item.category.replace(/\s/g, "-")}/${item.subcategory.replace(/\s/g, "-")}`}
+                          href={`/${item.category.replace(/\s/g, "-")}/product/${item.subcategory.replace(/\s/g, "-")}`}
                           onClick={onClose}
                         >
                           {item.productTitle}
@@ -376,7 +376,7 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
                   ? data
                   : []
                 ).map((item) => (
-                  <Link href={`/product/${item.productTitle}`} onClick={onClose}>
+                  <Link href={`/${props.title.replace(/ /g, "-")}`} onClick={onClose}>
                     <div
                       key={item.id}
                       className="col-span-1"

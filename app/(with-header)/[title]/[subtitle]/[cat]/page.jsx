@@ -42,16 +42,16 @@ const page = async ({ params }) => {
 
   const category = await getCategoryByName(params.title.replace(/-/g, " "));
 
-  const subcategories = category.subcategories;
+  const subcategories = category?.subcategories;
 
   const subcategoriesJsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    itemListElement: subcategories.map((subcategory, index) => ({
+    itemListElement: subcategories?.map((subcategory, index) => ({
       "@type": "ListItem",
       position: index + 1,
-      name: subcategory.name,
-      description: subcategory.description || "",
+      name: subcategory?.name,
+      description: subcategory?.description || "",
     })),
   };
 
