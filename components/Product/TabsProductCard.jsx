@@ -257,25 +257,19 @@ function TabsProductCard(props) {
               className="accent-black"
             />
           </div>
-          {props.parentCategory === "offers" ? (
-            <div
-              className={
-                "flex text-[12px] justify-between text-black font-normal bg-white py-[.1rem] px-[.5rem] absolute top-2 left-2 z-10"
-              }
-            >
-              {props.offer}
-            </div>
-          ) : props.demandtype ? (
-            <div
-              className={
-                "flex text-[12px] justify-between text-black font-normal bg-white py-[.1rem] px-[.5rem] absolute top-2 left-2 z-10"
-              }
-            >
-              {props.demandtype}
-            </div>
-          ) : (
-            ""
-          )}
+
+          <div className="absolute top-2 left-2 z-10 flex gap-2">
+            {props.demandtype && (
+              <p className="text-[12px] text-black font-normal bg-white py-[.1rem] px-[.5rem]">
+                {props.demandtype}
+              </p>
+            )}
+            {props.parentCategory === "offers" && (
+              <p className="text-[12px] text-black font-normal bg-white py-[.1rem] px-[.5rem]">
+                {props.offer}
+              </p>
+            )}
+          </div>
           <div
             className="relative flex h-full w-full items-center justify-center  aspect-square"
             onMouseEnter={() => setIsHovered(true)}
