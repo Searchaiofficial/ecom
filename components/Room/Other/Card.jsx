@@ -819,7 +819,6 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
     });
   };
 
-
   return (
     <>
       <div className="flex justify-start md:min-w-[25vw] gap-1 mt-2.5 w-[100%] ml-0 z-[9997]">
@@ -903,7 +902,8 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                   data?.discountedprice?.price) && (
                   <div className="flex flex-col my-3">
                     <p className="text-[#757575] text-[12px] pt-[3px]">
-                      Regular price: Rs.{data?.price} (incl. of all taxes)
+                      Regular price: Rs.{data?.perUnitPrice} (incl. of all
+                      taxes)
                     </p>
 
                     {data?.specialprice?.startDate &&
@@ -1880,19 +1880,37 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                                 </h2>{" "}
                                 <span> &nbsp;/{data.unitType}</span>
                               </div>
-                              {data?.specialprice?.price && (
-                                <div className="flex flex-col">
+                              {(data?.specialprice?.price ||
+                                data?.discountedprice?.price) && (
+                                <div className="flex flex-col my-3">
                                   <p className="text-[#757575] text-[12px] pt-[3px]">
                                     Regular price: Rs.{data?.perUnitPrice}{" "}
+                                    (incl. of all taxes)
                                   </p>
+
                                   {data?.specialprice?.startDate &&
-                                    data?.specialprice?.endDate && (
-                                      <p className="text-[#757575] text-[12px] pb-[10px]">
-                                        Price valid {formattedStartDate} -{" "}
-                                        {formattedEndDate}{" "}
-                                      </p>
-                                    )}
-                                  {/* <p className="text-[#757575] text-[12px] pb-[10px]">Price valid May 02 - May 29 or while supply lasts</p> */}
+                                  data?.specialprice?.endDate ? (
+                                    <p className="text-[#757575] text-[12px] ">
+                                      Price valid{" "}
+                                      {formatDate(
+                                        data?.specialprice?.startDate
+                                      )}{" "}
+                                      -{" "}
+                                      {formatDate(data?.specialprice?.endDate)}
+                                    </p>
+                                  ) : data?.discountedprice?.startDate &&
+                                    data?.discountedprice?.endDate ? (
+                                    <p className="text-[#757575] text-[12px] ">
+                                      Price valid{" "}
+                                      {formatDate(
+                                        data?.discountedprice?.startDate
+                                      )}{" "}
+                                      -{" "}
+                                      {formatDate(
+                                        data?.discountedprice?.endDate
+                                      )}
+                                    </p>
+                                  ) : null}
                                 </div>
                               )}
                             </div>
@@ -1950,6 +1968,8 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                                             </span>{" "}
                                             {product?.specialprice?.price
                                               ? product?.specialprice?.price
+                                              : product?.discountedprice?.price
+                                              ? product?.discountedprice?.price
                                               : product.perUnitPrice}
                                           </h2>{" "}
                                           <span> &nbsp;/{data.unitType}</span>
