@@ -23,7 +23,7 @@ export async function generateMetadata({ params }) {
   }
 
   const currentSubcategory = subcategories?.find(
-    (subcategory) => subcategory.name === params.cat
+    (subcategory) => subcategory.name === params.cat.replace(/-/g, " ")
   );
 
   return {
