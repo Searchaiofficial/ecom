@@ -888,11 +888,11 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                     {data?.specialprice?.price
                       ? data?.specialprice.price
                       : selectedSpecData?.specialprice
-                      ? selectedSpecData.price
-                      : data?.discountedprice.price
-                      ? data?.discountedprice.price
-                      : selectedSpecData?.discountedprice.price
-                      ? selectedSpecData.discountedprice.price
+                      ? selectedSpecData?.price
+                      : data?.discountedprice?.price
+                      ? data?.discountedprice?.price
+                      : selectedSpecData?.discountedprice?.price
+                      ? selectedSpecData.discountedprice?.price
                       : data.perUnitPrice}
                   </p>{" "}
                   <span> &nbsp;/{data.unitType}</span>

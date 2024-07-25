@@ -257,20 +257,24 @@ function Header({ setIsHeaderMounted }) {
   const checkUser = async () => {
     try {
       const token = localStorage?.getItem("token");
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/user`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
+      if (token) {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/user`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const data = response.data;
+
+        if (data.isAuthenticated) {
+          setLoggedInUser(data.user);
+        } else {
+          setLoggedInUser(null);
         }
-      );
-
-      const data = response.data;
-
-      if (data.isAuthenticated) {
-        setLoggedInUser(data.user);
       } else {
         setLoggedInUser(null);
       }
