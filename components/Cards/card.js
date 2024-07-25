@@ -407,7 +407,7 @@ function Card(props) {
                 {props?.specialPrice?.price ? (
                   props?.specialPrice?.price
                 ) : (
-                  <p className="pt-3">{props?.price}</p>
+                  <p className="pt-3">{props?.discountedprice ? props?.discountedprice : props?.price}</p>
                 )}
               </p>
               {props.unitType ? (
@@ -436,7 +436,7 @@ function Card(props) {
           )}
         </div>
 
-        {props?.specialPrice?.price && (
+        {(props?.specialPrice?.price || props?.discountedprice) && (
           <div className="flex flex-col my-3">
             <p className="text-[#757575] text-[12px] pt-[3px]">
               Regular price: Rs.{props?.price} (incl. of all taxes)

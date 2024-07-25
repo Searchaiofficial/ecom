@@ -140,6 +140,7 @@ const Dataslider = ({ category, data, sliderIndex }) => {
                     productImages={product?.productImages}
                     productType={product.productType}
                     expectedDelivery={product.expectedDelivery}
+                    discountedprice={product.discountedprice}
                   />
                 </div>
               </SwiperSlide>

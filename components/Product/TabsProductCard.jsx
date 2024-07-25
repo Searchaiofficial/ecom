@@ -435,7 +435,7 @@ function TabsProductCard(props) {
                     {props?.specialprice?.price ? (
                       props?.specialprice?.price
                     ) : (
-                      <p className="pt-3 ">{props.perUnitPrice}</p>
+                      <p className="pt-3 ">{props.discountedprice ? props.discountedprice : props.perUnitPrice}</p>
                     )}
                   </h2>
                   {props.unitType ? (
@@ -460,7 +460,7 @@ function TabsProductCard(props) {
                   </div>
                 )}
               </div>
-              {props?.specialprice?.price && (
+              {(props?.specialprice?.price || props?.discountedprice) && (
                 <div className="flex flex-col my-3">
                   <p className="text-[#757575] text-[12px] pt-[3px]">
                     Regular price: Rs.{props?.perUnitPrice} (incl. of all taxes)

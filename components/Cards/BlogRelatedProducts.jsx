@@ -129,6 +129,7 @@ const BlogRecommendedProducts = ({ relatedProducts, title }) => {
                       unitType={product.unitType}
                       productType={product.productType}
                       expectedDelivery={product.expectedDelivery}
+                      discountedprice={product.discountedprice}
                     />
                   </div>
                 </SwiperSlide>
