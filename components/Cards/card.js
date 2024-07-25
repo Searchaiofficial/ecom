@@ -262,8 +262,7 @@ function Card(props) {
               "flex text-[12px] justify-between text-black font-normal bg-white absolute top-2 left-2 z-10 py-[.1rem] px-[.5rem]"
             }
           >
-            {props.productType === "special" ? "Top Rated" : props.demandtype}
-            {/* {props.demandtype} */}
+            {props.demandtype}
           </div>
         )}
 

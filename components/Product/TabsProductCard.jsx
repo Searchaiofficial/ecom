@@ -265,13 +265,13 @@ function TabsProductCard(props) {
             >
               {props.offer}
             </div>
-          ) : props.demandtype || props.productType === "special" ? (
+          ) : props.demandtype ? (
             <div
               className={
                 "flex text-[12px] justify-between text-black font-normal bg-white py-[.1rem] px-[.5rem] absolute top-2 left-2 z-10"
               }
             >
-              {props.productType === "special" ? "Top Rated" : props.demandtype}
+              {props.demandtype}
             </div>
           ) : (
             ""
