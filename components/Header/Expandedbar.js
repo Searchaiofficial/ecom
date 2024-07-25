@@ -376,7 +376,7 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
                   ? data
                   : []
                 ).map((item) => (
-                  <Link href={`/${props.title.replace(/ /g, "-")}`} onClick={onClose}>
+                  <Link href={`/${item.productTitle?.replace(/ /g, "-")}`} onClick={onClose}>
                     <div
                       key={item.id}
                       className="col-span-1"
@@ -398,7 +398,7 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
                         {item.category}
                       </div>
                       <div className="lg:text-[16px] text-[14px]  font-medium pt-[7px]  text-black">
-                        Rs. {item.totalPrice}
+                        Rs. {item.specialprice?.price || item.discountedprice?.price || item.perUnitPrice}
                       </div>
                     </div>
                   </Link>
