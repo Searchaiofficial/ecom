@@ -256,7 +256,7 @@ function Card(props) {
       onTouchEnd={() => setIsHovered(false)} // for touch devices
     >
       <div className={`relative`}>
-        {props.demandtype && (
+        {/* {props.demandtype && (
           <div
             className={
               "flex text-[12px] justify-between text-black font-normal bg-white absolute top-2 left-2 z-10 py-[.1rem] px-[.5rem]"
@@ -264,7 +264,20 @@ function Card(props) {
           >
             {props.demandtype}
           </div>
-        )}
+        )} */}
+
+        <div className="absolute top-2 left-2 z-10 flex gap-2">
+          {props.demandtype && (
+            <p className="text-[12px] text-black font-normal bg-white py-[.1rem] px-[.5rem]">
+              {props.demandtype}
+            </p>
+          )}
+          {props.offer && (
+            <p className="text-[12px] text-[#C31952] font-normal bg-white py-[.1rem] px-[.5rem]">
+              {props.offer}
+            </p>
+          )}
+        </div>
 
         <div
           className="relative flex h-full w-full items-center justify-center cursor-pointer aspect-square"

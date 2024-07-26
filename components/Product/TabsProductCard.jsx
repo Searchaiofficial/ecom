@@ -269,7 +269,7 @@ function TabsProductCard(props) {
               </p>
             )}
             {props.offer && (
-              <p className="text-[12px] text-black font-normal bg-white py-[.1rem] px-[.5rem]">
+              <p className="text-[12px] text-[#C31952] font-normal bg-white py-[.1rem] px-[.5rem]">
                 {props.offer}
               </p>
             )}

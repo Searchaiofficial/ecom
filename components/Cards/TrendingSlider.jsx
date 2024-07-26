@@ -127,6 +127,7 @@ const TrendingSlider = ({ trendingData, isProductInCart, setPopupVisible }) => {
                       productType={product.productType}
                       expectedDelivery={product.expectedDelivery}
                       discountedprice={product.discountedprice}
+                      offer={product.offer}
                     />
                   </div>
                 </swiper-slide>
