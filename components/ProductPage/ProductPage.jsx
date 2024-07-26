@@ -101,7 +101,7 @@ const ProductPage = ({ title, initialData }) => {
             images={data?.images}
             alt={data?.productTitle}
           />
-          <ImageCaresoul images={data?.images} />
+          <ImageCaresoul data={data} images={data?.images} />
           <div className="block md:hidden relative z-[9997]">
             <Card
               data={data}

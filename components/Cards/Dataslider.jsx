@@ -141,6 +141,7 @@ const Dataslider = ({ category, data, sliderIndex }) => {
                     productType={product.productType}
                     expectedDelivery={product.expectedDelivery}
                     discountedprice={product.discountedprice}
+                    shortDescription={product.shortDescription}
                   />
                 </div>
               </SwiperSlide>

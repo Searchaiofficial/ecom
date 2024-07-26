@@ -268,7 +268,7 @@ function TabsProductCard(props) {
                 {props.demandtype}
               </p>
             )}
-            {props.parentCategory === "offers" && (
+            {props.offer && (
               <p className="text-[12px] text-black font-normal bg-white py-[.1rem] px-[.5rem]">
                 {props.offer}
               </p>

@@ -1,10 +1,11 @@
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import { selectProductImages } from "../Features/Slices/imageDataSlice";
 import "./styles.css";
 import Link from "next/link";
 import { selectColor } from "../Features/Slices/productColorSlice";
+import axios from "axios";
 
 export default function RoomImageList({ data, images, alt }) {
   const [zoomedImageIndex, setZoomedImageIndex] = useState(null);
@@ -13,7 +14,7 @@ export default function RoomImageList({ data, images, alt }) {
 
   const selectedColor = useSelector(selectColor);
 
-  const colorImages = data.productImages.find(
+  const colorImages = data?.productImages?.find(
     (item) => item.color === selectedColor
   )?.images;
 
@@ -48,24 +49,142 @@ export default function RoomImageList({ data, images, alt }) {
     [zoomedImageIndex]
   );
 
+  const [loggedInUser, setLoggedInUser] = useState(null);
+  const [isLiked, setIsLiked] = useState(false);
+  const [totalLikes, setTotalLikes] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const checkUser = async () => {
+    try {
+      const token = localStorage?.getItem("token");
+      if (token) {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/user`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const data = response.data;
+
+        if (data.isAuthenticated) {
+          setLoggedInUser(data.user);
+        } else {
+          setLoggedInUser(null);
+        }
+      } else {
+        setLoggedInUser(null);
+      }
+    } catch (error) {
+      setLoggedInUser(null);
+      console.error("Error:", error);
+    }
+  };
+
+  useEffect(() => {
+    checkUser();
+  }, [data]);
+
+  useEffect(() => {
+    if (loggedInUser) {
+      const checkProductLiked = loggedInUser.likedProducts.includes(data._id);
+      setIsLiked(checkProductLiked);
+    }
+  }, [loggedInUser]);
+
+  const handleLike = async () => {
+    setLoading(true);
+    if (loggedInUser && !isLiked) {
+      const response = await axios.patch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/likeProduct`,
+        {
+          productId: data._id,
+          userId: loggedInUser._id,
+        }
+      );
+
+      if (response.status === 200) {
+        setIsLiked(true);
+        setTotalLikes(response.data.likes);
+      }
+    }
+    setLoading(false);
+  };
+
+  const handleUnlike = async () => {
+    setLoading(true);
+    if (loggedInUser && isLiked) {
+      const response = await axios.patch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/unlikeProduct`,
+        {
+          productId: data._id,
+          userId: loggedInUser._id,
+        }
+      );
+
+      if (response.status === 200) {
+        setIsLiked(false);
+        setTotalLikes(response.data.likes);
+      }
+    }
+    setLoading(false);
+  };
+
   return (
     <div className="flex flex-col relative">
       <div className="imggallery w-[60vw]">
         <div className="sm:grid hidden sm:grid-cols-2 sm:grid-rows-2 gap-3">
-          <Link
-            href={"/login"}
-            className="absolute z-10 top-3 right-3 opacity-85 hover:opacity-100 bg-white p-[6px] hover:scale-105 transition-transform rounded-full"
-            style={{ boxShadow: "0 2px 6px 0 rgba(0, 0, 0, 0.12)" }}
-          >
-            <Image
-              loading="lazy"
-              src={"/icons/like.svg"}
-              height={20}
-              width={20}
-              className="cursor-pointer"
-              alt="like icon"
-            />
-          </Link>
+          {loggedInUser ? (
+            <div
+              className="absolute z-10 top-3 right-4 opacity-85 hover:opacity-100 flex gap-2 bg-white p-[6px]  rounded-full"
+              style={{ boxShadow: "0 2px 6px 0 rgba(0, 0, 0, 0.12)" }}
+            >
+              {isLiked ? (
+                <button disabled={loading} onClick={handleUnlike}>
+                  <Image
+                    loading="lazy"
+                    src={"/icons/like-fill.svg"}
+                    height={20}
+                    width={20}
+                    className={`cursor-pointer  hover:scale-105 transition-transform`}
+                    alt="like icon"
+                  />
+                </button>
+              ) : (
+                <button disabled={loading} onClick={handleLike}>
+                  <Image
+                    loading="lazy"
+                    src={"/icons/like.svg"}
+                    height={20}
+                    width={20}
+                    className={`cursor-pointer hover:scale-105 transition-transform`}
+                    alt="like icon"
+                  />
+                </button>
+              )}
+              {totalLikes || data?.likes}
+            </div>
+          ) : (
+            <Link
+              href={"/login"}
+              className="absolute z-10 top-3 right-3 opacity-85 hover:opacity-100 flex gap-2 bg-white p-[6px] rounded-full"
+              style={{ boxShadow: "0 2px 6px 0 rgba(0, 0, 0, 0.12)" }}
+            >
+              <Image
+                loading="lazy"
+                src={"/icons/like.svg"}
+                height={20}
+                width={20}
+                className="cursor-pointer  hover:scale-105 transition-transform"
+                alt="like icon"
+              />
+
+              {totalLikes || data?.likes}
+            </Link>
+          )}
           {imagesToDisplay?.map((image, index) => (
             <div
               key={index}
