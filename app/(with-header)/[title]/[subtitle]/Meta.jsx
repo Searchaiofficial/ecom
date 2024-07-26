@@ -44,7 +44,7 @@ const ProductPage = ({ params }) => {
   };
   const queryParams = parseQueryString(queryString);
   const demandtype = queryParams?.demandtype;
-  const offer = queryParams?.offer.replace(/-/g, " ").replace(/percent/g, "%");
+  const offer = queryParams?.offer?.replace(/-/g, " ").replace(/percent/g, "%");
 
   const pathname = usePathname();
   const [type, setType] = useState(params.cat.replace(/-/g, " ").replace(/percent/g, "%"));
