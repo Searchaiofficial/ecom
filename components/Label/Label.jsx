@@ -9,7 +9,7 @@ const Label = ({ data }) => {
   const router = useRouter();
   console.log(data)
   const handleTab = () => {
-    router.push(`/${data?.ProductLink}`);
+    router.push(`${data?.productLink}`);
   };
 
   console.log(data)
