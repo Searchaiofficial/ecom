@@ -98,6 +98,35 @@ const RoomInfo = ({ data }) => {
   };
   const swiper1Ref = useRef(null);
 
+  const [loading, setLoading] = useState(false);
+
+  async function downloadProductPDF(data) {
+    setLoading(true);
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/generateMaintenanceDetailPdf`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          productId: data._id,
+        }),
+      }
+    );
+
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "Maintenance Details.pdf";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    window.URL.revokeObjectURL(url);
+    setLoading(false);
+  }
+
   return (
     <div className="w-full">
       <div className="font-normal text-sm  flex flex-col gap-4 my-6">
@@ -127,14 +156,14 @@ const RoomInfo = ({ data }) => {
               categoryDetails?.certification && (
                 <p className="font-medium mt-2 ">
                   <span className="font-normal">More information: </span>
-                  <Link
-                    href={categoryDetails.maintenanceDetails}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    onClick={() => downloadProductPDF(data)}
                     className="hover:underline hover:text-gray-900 font-semibold "
                   >
-                    Maintenance Details
-                  </Link>
+                    {loading
+                      ? "Maintenance Details (Downloading...)"
+                      : "Maintenance Details"}
+                  </button>
                   {" | "}
                   <Link
                     href={categoryDetails.certification}
@@ -241,7 +270,9 @@ const RoomInfo = ({ data }) => {
                   id="box3"
                   class="flex sm:pb-0  flex-col md:pl-4  sm:order-4 border-3"
                 >
-                  <div class="text-center text-xl font-bold">{reviews.length}</div>
+                  <div class="text-center text-xl font-bold">
+                    {reviews.length}
+                  </div>
                   <div class="underline text-sm -mt-2">Reviews</div>
                 </div>
               </div>

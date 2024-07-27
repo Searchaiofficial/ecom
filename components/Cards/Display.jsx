@@ -50,7 +50,7 @@ const Display = async () => {
               >
                 <TabImage
                   src={apiData[0].room.imgSrc}
-                  href={`/${apiData[0].room?.productCategory.replace(
+                  href={`/${apiData[0].room?.productCategory?.replace(
                     / /g,
                     "-"
                   )}/category/all`}
@@ -67,7 +67,7 @@ const Display = async () => {
                       {apiData[0].text}
                     </h2>
                     <Link
-                      href={`/${apiData[0].room?.productCategory.replace(
+                      href={`/${apiData[0].room?.productCategory?.replace(
                         / /g,
                         "-"
                       )}/category/all`}
@@ -98,7 +98,7 @@ const Display = async () => {
               >
                 <TabImage
                   src={apiData[1]?.room.imgSrc}
-                  href={`/${apiData[1].room?.productCategory.replace(
+                  href={`/${apiData[1].room?.productCategory?.replace(
                     / /g,
                     "-"
                   )}/category/all`}
@@ -114,7 +114,7 @@ const Display = async () => {
                     </h2>
 
                     <Link
-                      href={`/${apiData[1].room?.productCategory.replace(
+                      href={`/${apiData[1].room?.productCategory?.replace(
                         / /g,
                         "-"
                       )}/category/all`}
@@ -139,7 +139,7 @@ const Display = async () => {
         </div>
       </div>
       <div className="flex h-[60px] border-b px-[15px] items-center justify-between lg:hidden">
-        <Link href={`/rooms/${apiData[0]?.room.roomType.replace(/ /g, "-")}`}>
+        <Link href={`/rooms/${apiData[0]?.room?.productCategory?.replace(/ /g, "-")}`}>
           <p class="text-[14px] font-semibold">For more floor inspiration</p>
         </Link>
         <Image
