@@ -8,17 +8,30 @@ import {
 import { BASE_URL } from "@/constants/base-url";
 import { getAggregateRating } from "@/utils/getAggregateRating";
 import axios from "axios";
+import { getOffer } from "@/actions/getOffer";
 
 export async function generateMetadata({ params }) {
   const category = await getCategoryByName(params.title.replace(/-/g, " "));
   const subcategories = category?.subcategories;
 
   const isCategoryPage = params.title !== "offers" && params.cat === "all";
+  const isOfferPage = params.title === "offers";
 
   if (isCategoryPage) {
     return {
       title: category?.metadata?.title || category?.name || params.title,
       description: category?.description || "",
+    };
+  }
+
+  if (isOfferPage) {
+    const offerType = params.cat?.replace(/-/g, " ").replace("percent", "%");
+
+    const offer = await getOffer(offerType);
+
+    return {
+      title: offer.metadata?.title || offerType,
+      description: offer.description || "",
     };
   }
 
