@@ -51,7 +51,7 @@ const RoomCard = async () => {
               <div
                 className="parent col-start-1 col-end-3 row-start-1  lg:mb-0 row-end-6
               lg:col-start-1 lg:col-end-7 lg:row-start-1 lg:row-end-12 
-            "
+            "d
               >
                 <Link
                   href={`offers/new/${gallery.items[0].offer
@@ -66,7 +66,7 @@ const RoomCard = async () => {
                       layout="fill"
                       alt={gallery.items[0].heading}
                     />
-                    <div className="absolute md:top-[20rem] left-3  lg:left-20 lg:-bottom-72  bottom-8 flex flex-col justify-center items-center p-2">
+                    <div className="absolute bottom-0 left-0 justify-start p-[30px] items-center ">
                       <div className="flex flex-col">
                         <h2 className="text-white  text-[12px]">
                           {gallery.items[0].heading}
