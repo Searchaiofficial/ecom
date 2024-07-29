@@ -38,6 +38,8 @@ import Tabs from "../Cards/Tabs";
 import BlogRelatedProducts from "../Cards/BlogRelatedProducts";
 import { usePathname } from "next/navigation";
 
+import RankedProducts from "@/components/Cards/RankedProducts";
+
 export const RoomsPage = ({ params }) => {
   const pathname = usePathname();
 
@@ -301,7 +303,7 @@ export const RoomsPage = ({ params }) => {
               )}
             </div>
           ))}
-
+        <RankedProducts />
         <div className="flex mt-20  lg:max-h-[490px] lg:flex-row w-full flex-col">
           <div className="lg:w-2/3 h-[446px]">
             {reviewRoom && (

@@ -11,6 +11,7 @@ import { cartSaga } from "./cartSaga";
 import { watchSelectedProductsSaga } from "./compareSaga";
 import { watchVirtualGet } from "./virtualSaga";
 import { watchFetchTrendingData } from "./trendingSaga";
+import {watchFetchRankedProductsData} from './rankedProductsSaga'
 import { watchMultiCardData } from "./multiCardSaga";
 import { watchFetchImagechangerData } from "./ImageChangerSaga";
 import { watchFetchDisplayData } from "./displaySaga";
@@ -51,5 +52,6 @@ export default function* rootSaga() {
     watchFetchRoomMainData(),
     watchFetchProductsFromDemandType(),
     watchFetchProductsFromOffers(),
+    watchFetchRankedProductsData(),
   ]);
 }

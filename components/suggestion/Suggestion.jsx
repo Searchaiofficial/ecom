@@ -25,6 +25,7 @@ import {
 } from "swiper/modules";
 import { usePathname } from "next/navigation";
 import Multicard from "../Imagechanger/Multicard";
+import RankedProducts from "../Cards/RankedProducts";
 
 const Suggestion = ({ id }) => {
   const pathname = usePathname();
@@ -279,6 +280,7 @@ const Suggestion = ({ id }) => {
 
         {/* <QuiltSelector /> */}
 
+        <RankedProducts />
         <div className="flex my-8  lg:max-h-[490px] lg:flex-row w-full flex-col">
           <div className="lg:w-2/3 h-[446px]">
             {reviewRoom && (

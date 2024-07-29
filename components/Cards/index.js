@@ -7,6 +7,7 @@ const TabsWrapper = dynamic(() => import("./TabsWrapper"));
 const Profile = dynamic(() => import("./Profile"));
 const Phone = dynamic(() => import("./Phone"));
 const Trending = dynamic(() => import("./Trending"));
+const RankedProducts = dynamic(() => import("./RankedProducts"));
 const Suggestion = dynamic(() => import("./Suggestion"));
 const Cookies = dynamic(() => import("./Cookies"));
 const MulticardService = dynamic(() => import("./MultiCardService"));
@@ -42,6 +43,7 @@ function Cards() {
         <RoomCard />
         <DataSliderWrapper />
         <Display />
+        <RankedProducts />
         <DataSliderWrapper
           sliderIndexStart={2}
           sliderIndexEnd={4}

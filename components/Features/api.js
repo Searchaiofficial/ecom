@@ -268,3 +268,11 @@ export const getOffers = async () => {
     console.error(`Error fetching offers: ${error.message}`);
   }
 };
+
+
+export const fetchRankedProductsFoEachCategory = async () => {
+  const response = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getRankedProductsFoEachCategory`
+  );
+  return response.data;
+};
