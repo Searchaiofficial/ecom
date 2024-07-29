@@ -19,16 +19,29 @@ import SwiperCore, {
 } from "swiper/core";
 import { useSelector, useDispatch } from "react-redux";
 import { selectRankedProductsData } from "../Features/Slices/rankedProductsSlice";
+import {
+  selectRecommendationLoader,
+  selectRecommendationStatus,
+  selectRecommendedProduct,
+} from "../Features/Slices/recommendationSlice";
 
 const RankedProducts = () => {
-  const rankedData = useSelector(selectRankedProductsData);
-  const dispatch = useDispatch();
-
   const [data, setData] = useState([]);
   const colors = [
     { header: "#848c71", rank: "#f5c518" },
     { header: "#7c6e65", rank: "#f5c518" },
   ];
+  const rankedData = useSelector(selectRankedProductsData);
+  const dispatch = useDispatch();
+  const recommended = useSelector(selectRecommendedProduct);
+  const isRecommendedLoading = useSelector(selectRecommendationLoader);
+  const recommendedStatus = useSelector(selectRecommendationStatus);
+
+  useEffect(() => {
+    if (recommendedStatus === "idle" && !isRecommendedLoading) {
+      dispatch({ type: "RECOMMENDATION_REQUEST" });
+    }
+  }, [dispatch, isRecommendedLoading, recommendedStatus]);
 
   useEffect(() => {
     dispatch({ type: "FETCH_RANKED_DATA", payload: "rankedProducts" });
@@ -38,10 +51,21 @@ const RankedProducts = () => {
     if (rankedData.length === 0) {
       dispatch({ type: "FETCH_RANKED_DATA", payload: "rankedProducts" });
     }
-    if (rankedData) {
-      setData(rankedData);
-    }
   }, [rankedData]);
+
+  useEffect(() => {
+    if (rankedData.length > 0) {
+      const categories = recommended?.recommendations?.recommendedProducts?.map(
+        (item) => item.category
+      );
+      let uniqueCategories = [...new Set(categories)];
+      uniqueCategories = uniqueCategories.slice(0, 4);
+      const data = rankedData.filter(
+        (item) => !uniqueCategories.includes(item.category)
+      );
+      setData(data);
+    }
+  }, [rankedData, recommended]);
 
   SwiperCore.use([
     Pagination,
@@ -94,23 +118,32 @@ const RankedProducts = () => {
   };
 
   return (
-    <div className="py-20">
-      <Swiper
-        {...swiperOptions}
-        style={{ paddingRight: "10px", paddingBottom: "10px" }}
-      >
-        {data &&
-          data.map((item, index) => (
-            <SwiperSlide key={index}>
-              <Card
-                category={item.category}
-                products={item.products}
-                colors={colors[index % 2]}
-              />
-            </SwiperSlide>
-          ))}
-      </Swiper>
-    </div>
+    <>
+      {data && data.length > 0 && (
+        <div className="py-20">
+          <div className="mb-2 pl-[10px] w-full flex justify-between items-center">
+            <h2 className=" font-semibold text-2xl pb-[20px] lg:pt-[30px]">
+              Top Saler
+            </h2>
+          </div>
+          <Swiper
+            {...swiperOptions}
+            style={{ paddingRight: "10px", paddingBottom: "10px" }}
+          >
+            {data &&
+              data.map((item, index) => (
+                <SwiperSlide key={index}>
+                  <Card
+                    category={item.category}
+                    products={item.products}
+                    colors={colors[index % 2]}
+                  />
+                </SwiperSlide>
+              ))}
+          </Swiper>
+        </div>
+      )}
+    </>
   );
 };
 

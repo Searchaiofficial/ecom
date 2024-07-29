@@ -43,12 +43,12 @@ function Cards() {
         <RoomCard />
         <DataSliderWrapper />
         <Display />
-        <RankedProducts />
         <DataSliderWrapper
           sliderIndexStart={2}
           sliderIndexEnd={4}
           sliderIndexOffset={2}
         />
+        <RankedProducts />
       </div>
 
       <Multicard />

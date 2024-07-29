@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const Card = ({ category, products, colors }) => {
   return (
@@ -36,19 +37,35 @@ const Card = ({ category, products, colors }) => {
           {products.map((item, index) => (
             <div key={index} className="flex items-center mb-4 py-2 gap-4">
               <div
-                className="text-2xl font-bold  text-center max-w-4 w-full"
-                style={{
-                  color:
-                    index === 0
-                      ? "gold"
-                      : index === 1
-                      ? "silver"
-                      : index === 2
-                      ? "bronze"
-                      : "inherit",
-                }}
+                className="text-2xl font-bold  text-center max-w-6 w-full"
               >
-                {index + 1}
+                {index === 0 && (
+                  <Image
+                    src={`/batch/firstbatch.svg`}
+                    width={20}
+                    height={20}
+                    alt="Rank"
+                    className="w-6 h-6"
+                  />
+                )}
+                {index === 1 && (
+                  <Image
+                    src={`/batch/secondbatch.svg`}
+                    width={20}
+                    height={20}
+                    alt="Rank"
+                    className="w-6 h-6"
+                  />
+                )}
+                {index === 2 && (
+                  <Image
+                    src={`/batch/thirdbatch.svg`}
+                    width={20}
+                    height={20}
+                    alt="Rank"
+                    className="w-6 h-6"
+                  />
+                )}
               </div>
               <Link href={`/${item.productTitle.replace(/ /g, "-")}`}>
                 <img
