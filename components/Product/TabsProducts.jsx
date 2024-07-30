@@ -697,7 +697,12 @@ const Tabs = ({
           <h1 className="Blinds font-semibold text-2xl pb-[20px] lg:pt-[30px] capitalize">
             {pathname.split("/")[3] === "all" && <p>{heading}</p>}
             {pathname.split("/")[3] !== "all" && (
-              <p>{pathname.split("/")[3].replace(/-/g, " ").replace(/percent/g, "%")}</p>
+              <p>
+                {pathname
+                  .split("/")[3]
+                  .replace(/-/g, " ")
+                  .replace(/percent/g, "%")}
+              </p>
             )}
           </h1>
           <div className="flex items-center">
@@ -1428,32 +1433,34 @@ const Tabs = ({
               filterData.map((text, idx) => {
                 const inCart = isProductInCart(text?._id);
                 return (
-                  <TabsProductCard
-                    id={text._id}
-                    text={text}
-                    totalPrice={text.totalPrice}
-                    discountedprice={text.discountedprice}
-                    specialprice={text.specialprice}
-                    productDescription={text.productDescription}
-                    productTitle={text.productTitle}
-                    productImages={text.productImages}
-                    images={text.images}
-                    idx={idx}
-                    handlenav={handlenav}
-                    selectedpdt={selectedpdt}
-                    handleCheckbox={handleCheckbox}
-                    setShowcompare={setShowcompare}
-                    demandtype={text.demandtype}
-                    ratings={text.ratings}
-                    stars={stars}
-                    parentCategory={parentCategory}
-                    offer={text.offer}
-                    inCart={inCart}
-                    shortDescription={text.shortDescription}
-                    perUnitPrice={text.perUnitPrice}
-                    productType={text.productType}
-                    expectedDelivery={text.expectedDelivery}
-                  />
+                  <>
+                    <TabsProductCard
+                      id={text._id}
+                      text={text}
+                      totalPrice={text.totalPrice}
+                      discountedprice={text.discountedprice}
+                      specialprice={text.specialprice}
+                      productDescription={text.productDescription}
+                      productTitle={text.productTitle}
+                      productImages={text.productImages}
+                      images={text.images}
+                      idx={idx}
+                      handlenav={handlenav}
+                      selectedpdt={selectedpdt}
+                      handleCheckbox={handleCheckbox}
+                      setShowcompare={setShowcompare}
+                      demandtype={text.demandtype}
+                      ratings={text.ratings}
+                      stars={stars}
+                      parentCategory={parentCategory}
+                      offer={text.offer}
+                      inCart={inCart}
+                      shortDescription={text.shortDescription}
+                      perUnitPrice={text.perUnitPrice}
+                      productType={text.productType}
+                      expectedDelivery={text.expectedDelivery}
+                    />
+                  </>
                 );
               })
             ) : (

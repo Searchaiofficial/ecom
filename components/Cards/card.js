@@ -482,7 +482,7 @@ function Card(props) {
           {props?.shortDescription}
         </p>
 
-        <div className=" flex h-[40px] pb-[6px] items-center justify-between mt-2">
+        <div className=" flex h-[40px]  items-center justify-between mt-2">
           {props.productType === "normal" || props.productType === "special" ? (
             <div className="flex gap-1 items-end">
               <p
@@ -529,7 +529,7 @@ function Card(props) {
         </div>
 
         {(props?.specialPrice?.price || props?.discountedprice?.price) && (
-          <div className="flex flex-col my-3">
+          <div className="flex flex-col mb-3">
             <p className="text-[#757575] text-[12px] pt-[3px]">
               Regular price:{" "}
               <span className="font-bold text-black">
@@ -542,7 +542,7 @@ function Card(props) {
             {props?.specialPrice?.startDate && props?.specialPrice?.endDate ? (
               <p className="text-[#757575] text-[12px] ">
                 <span className="font-bold text-black">
-                  Last chance to buy{" "}
+                  Price valid {" "}
                 </span>{" "}
                 {formatDate(props?.specialPrice?.startDate)} -{" "}
                 {formatDate(props?.specialPrice?.endDate)}
@@ -551,7 +551,7 @@ function Card(props) {
               props?.discountedprice?.endDate ? (
               <p className="text-[#757575] text-[12px] ">
                 <span className="font-bold text-black">
-                  Last chance to buy{" "}
+                  Price valid {" "}
                 </span>{" "}
                 {formatDate(props?.discountedprice?.startDate)} -{" "}
                 {formatDate(props?.discountedprice?.endDate)}
@@ -560,6 +560,13 @@ function Card(props) {
           </div>
         )}
         {/* {props?.rating > 0 && ( */}
+
+        {Starts && (
+          <div className="flex items-center mt-1">
+            {Starts}
+            <p className="text-[14px] mt-1 ml-2">({Reviews?.length})</p>
+          </div>
+        )}
 
         <div className="flex my-2 items-center gap-4">
           <div
@@ -615,15 +622,6 @@ function Card(props) {
           )}
         </div>
 
-        <>
-          {/* <div className="card-rating">{props.rating}</div> */}
-          {Starts && (
-            <div className="flex items-center mt-1">
-              {Starts}
-              <p className="text-[14px] mt-1 ml-2">({Reviews?.length})</p>
-            </div>
-          )}
-        </>
         {/* )} */}
         {props.expectedDelivery && (
           <div className="flex flex-col items-start mt-2">

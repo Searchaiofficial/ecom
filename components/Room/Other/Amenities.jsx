@@ -135,10 +135,10 @@ const Amenities = ({ data }) => {
               className=""
             >
               {groupedAmenities.map((group, index) => (
-                <SwiperSlide key={index} className=" mb-[20px]">
+                <SwiperSlide key={index} className=" mb-[30px]">
                   {group.map((amenity) => (
                     <div key={amenity._id} className="flex my-4   items-center w-auto">
-                      <div className=" w-[20px] h-[20px] mr-4">
+                      <div className=" w-[30px] h-[30px] mr-4">
                         <Image
                           loading="lazy"
                           width={30}

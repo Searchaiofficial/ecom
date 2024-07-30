@@ -922,13 +922,13 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                     {data?.specialprice?.startDate &&
                     data?.specialprice?.endDate ? (
                       <p className="text-[#757575] text-[12px] ">
-                        <span className="font-bold text-black">Last chance to buy </span> {formatDate(data?.specialprice?.startDate)}{" "}
+                        <span className="font-bold text-black">Price valid  </span> {formatDate(data?.specialprice?.startDate)}{" "}
                         - {formatDate(data?.specialprice?.endDate)}
                       </p>
                     ) : data?.discountedprice?.startDate &&
                       data?.discountedprice?.endDate ? (
                       <p className="text-[#757575] text-[12px] ">
-                       <span className="font-bold text-black">Last chance to buy</span> {" "}
+                       <span className="font-bold text-black">Price valid </span> {" "}
                         {formatDate(data?.discountedprice?.startDate)} -{" "}
                         {formatDate(data?.discountedprice?.endDate)}
                       </p>
@@ -1912,7 +1912,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                                   data?.specialprice?.endDate ? (
                                     <p className="text-[#757575] text-[12px] ">
                                       <span className="font-bold text-black">
-                                        Last chance to buy{" "}
+                                        Price valid {" "}
                                       </span>
                                       {formatDate(
                                         data?.specialprice?.startDate
@@ -1924,7 +1924,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                                     data?.discountedprice?.endDate ? (
                                     <p className="text-[#757575] text-[12px] ">
                                       <span className="font-bold text-black">
-                                        Last chance to buy{" "}
+                                        Price valid {" "}
                                       </span>
                                       {formatDate(
                                         data?.discountedprice?.startDate

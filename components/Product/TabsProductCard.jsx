@@ -499,7 +499,7 @@ function TabsProductCard(props) {
 
           {props.productType === "normal" || props.productType === "special" ? (
             <>
-              <div className=" flex h-[40px] pb-[6px] items-center justify-between mt-2">
+              <div className=" flex h-[40px] items-center justify-between mt-2">
                 <div className="flex gap-1 items-end">
                   <h2
                     className={`text-3xl flex font-semibold leading-[0.5]  tracking-wide ${
@@ -539,7 +539,7 @@ function TabsProductCard(props) {
               </div>
               {(props?.specialprice?.price ||
                 props?.discountedprice?.price) && (
-                <div className="flex flex-col my-3">
+                <div className="flex flex-col mb-3">
                   <p className="text-[#757575] text-[12px] pt-[3px]">
                     Regular price:{" "}
                     <span className="font-bold text-black">
@@ -554,18 +554,14 @@ function TabsProductCard(props) {
                   {props?.specialprice?.startDate &&
                   props?.specialprice?.endDate ? (
                     <p className="text-[#757575] text-[12px] ">
-                      <span className="font-bold text-black">
-                        Last chance to buy{" "}
-                      </span>{" "}
+                      <span className="font-bold text-black">Price valid </span>{" "}
                       {formatDate(props?.specialprice?.startDate)} -{" "}
                       {formatDate(props?.specialprice?.endDate)}
                     </p>
                   ) : props?.discountedprice?.startDate &&
                     props?.discountedprice?.endDate ? (
                     <p className="text-[#757575] text-[12px] ">
-                      <span className="font-bold text-black">
-                        Last chance to buy{" "}
-                      </span>
+                      <span className="font-bold text-black">Price valid </span>
                       {formatDate(props?.discountedprice?.startDate)} -{" "}
                       {formatDate(props?.discountedprice?.endDate)}
                     </p>
@@ -583,6 +579,14 @@ function TabsProductCard(props) {
                   Request now
                 </h2>
               </div>
+            </div>
+          )}
+
+          <div className="card-rating">{props.rating}</div>
+          {Starts && (
+            <div className="flex items-center mt-1">
+              {Starts}
+              <p className="text-[14px] mt-1 ml-2">({Reviews?.length})</p>
             </div>
           )}
 
@@ -642,13 +646,7 @@ function TabsProductCard(props) {
 
           {/* {props?.rating > 0 && (
             <> */}
-          <div className="card-rating">{props.rating}</div>
-          {Starts && (
-            <div className="flex items-center mt-1">
-              {Starts}
-              <p className="text-[14px] mt-1 ml-2">({Reviews?.length})</p>
-            </div>
-          )}
+
           {/* </>
           )} */}
 
