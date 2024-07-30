@@ -171,7 +171,7 @@ function TabsProductCard(props) {
 
   // const [selectedColor, setSelectedColor] = useState("");
   const [colorImage, setColorImage] = useState("");
-  const [showCart, SetShowCart] = useState(false);
+  // const [showCart, SetShowCart] = useState(false);
 
   useEffect(() => {
     setInCart(props.inCart);
@@ -230,6 +230,87 @@ function TabsProductCard(props) {
 
   console.log({ productImagesTest: props.images });
 
+  const [loggedInUser, setLoggedInUser] = useState(null);
+  const [isLiked, setIsLiked] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const checkUser = async () => {
+    try {
+      const token = localStorage?.getItem("token");
+      if (token) {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/user`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const data = response.data;
+
+        if (data.isAuthenticated) {
+          setLoggedInUser(data.user);
+        } else {
+          setLoggedInUser(null);
+        }
+      } else {
+        setLoggedInUser(null);
+      }
+    } catch (error) {
+      setLoggedInUser(null);
+      console.error("Error:", error);
+    }
+  };
+
+  useEffect(() => {
+    checkUser();
+  }, [props._id]);
+
+  useEffect(() => {
+    if (loggedInUser) {
+      const checkProductLiked = loggedInUser.likedProducts.includes(props.id);
+      setIsLiked(checkProductLiked);
+    }
+  }, [loggedInUser]);
+
+  const handleLike = async () => {
+    setLoading(true);
+    if (loggedInUser && !isLiked) {
+      const response = await axios.patch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/likeProduct`,
+        {
+          productId: props.id,
+          userId: loggedInUser._id,
+        }
+      );
+
+      if (response.status === 200) {
+        setIsLiked(true);
+      }
+    }
+    setLoading(false);
+  };
+
+  const handleUnlike = async () => {
+    setLoading(true);
+    if (loggedInUser && isLiked) {
+      const response = await axios.patch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/unlikeProduct`,
+        {
+          productId: props.id,
+          userId: loggedInUser._id,
+        }
+      );
+
+      if (response.status === 200) {
+        setIsLiked(false);
+      }
+    }
+    setLoading(false);
+  };
+
   return (
     <>
       <div
@@ -244,7 +325,9 @@ function TabsProductCard(props) {
             onMouseLeave={() => setIsHovered(false)}
             onTouchStart={() => setIsHovered(true)} // for touch devices
             onTouchEnd={() => setIsHovered(false)} // for touch devices
-            className={`flex justify-between text-black ${isHovered ? "flex" : "hidden"}    checkbox-div absolute top-0 right-0 z-50 ${
+            className={`flex justify-between text-black ${
+              isHovered ? "flex" : "hidden"
+            }    checkbox-div absolute top-0 right-0 z-50 ${
               props.selectedpdt.includes(props.text) ? "visible" : "visible"
             }`}
           >
@@ -394,8 +477,8 @@ function TabsProductCard(props) {
           {props.productTitle}
         </p> */}
         <div
-          onMouseEnter={() => SetShowCart(true)}
-          onMouseLeave={() => SetShowCart(false)}
+        // onMouseEnter={() => SetShowCart(true)}
+        // onMouseLeave={() => SetShowCart(false)}
         >
           <div className="flex items-center justify-between pt-2 ">
             <div className=" flex flex-col">
@@ -453,39 +536,36 @@ function TabsProductCard(props) {
                     ""
                   )}
                 </div>
-                {showCart && (
-                  <div
-                    className="bg-[#0152be] p-[6px] mr-2 rounded-full"
-                    onClick={addProductToCart}
-                  >
-                    <Image
-                      loading="lazy"
-                      src={"/icons/ad-to-cart.svg"}
-                      height={20}
-                      width={20}
-                      className="cursor-pointer rounded-full"
-                      alt="add to cart icon"
-                    />
-                  </div>
-                )}
               </div>
               {(props?.specialprice?.price ||
                 props?.discountedprice?.price) && (
                 <div className="flex flex-col my-3">
                   <p className="text-[#757575] text-[12px] pt-[3px]">
-                    Regular price: <span className="font-bold text-black">Rs.{props?.perUnitPrice}</span> (incl. of all taxes)
+                    Regular price:{" "}
+                    <span className="font-bold text-black">
+                      Rs.
+                      <span className="line-through  text-base">
+                        {props?.perUnitPrice}
+                      </span>
+                    </span>{" "}
+                    (incl. of all taxes)
                   </p>
 
                   {props?.specialprice?.startDate &&
                   props?.specialprice?.endDate ? (
                     <p className="text-[#757575] text-[12px] ">
-                      <span className="font-bold text-black">Last chance to buy </span> {formatDate(props?.specialprice?.startDate)} -{" "}
+                      <span className="font-bold text-black">
+                        Last chance to buy{" "}
+                      </span>{" "}
+                      {formatDate(props?.specialprice?.startDate)} -{" "}
                       {formatDate(props?.specialprice?.endDate)}
                     </p>
                   ) : props?.discountedprice?.startDate &&
                     props?.discountedprice?.endDate ? (
                     <p className="text-[#757575] text-[12px] ">
-                      <span className="font-bold text-black">Last chance to buy </span>
+                      <span className="font-bold text-black">
+                        Last chance to buy{" "}
+                      </span>
                       {formatDate(props?.discountedprice?.startDate)} -{" "}
                       {formatDate(props?.discountedprice?.endDate)}
                     </p>
@@ -505,6 +585,60 @@ function TabsProductCard(props) {
               </div>
             </div>
           )}
+
+          <div className="flex my-2 items-center gap-4">
+            <div
+              className="bg-[#0152be] p-1.5 mr-2 rounded-full"
+              onClick={addProductToCart}
+            >
+              <Image
+                loading="lazy"
+                src={"/icons/ad-to-cart.svg"}
+                height={25}
+                width={25}
+                className="cursor-pointer rounded-full"
+              />
+            </div>
+
+            {loggedInUser ? (
+              <div className="flex items-center">
+                {isLiked ? (
+                  <button disabled={loading} onClick={handleUnlike}>
+                    <Image
+                      loading="lazy"
+                      src={"/icons/like-fill.svg"}
+                      height={25}
+                      width={25}
+                      className={`cursor-pointer  hover:scale-105 transition-transform`}
+                      alt="like icon"
+                    />
+                  </button>
+                ) : (
+                  <button disabled={loading} onClick={handleLike}>
+                    <Image
+                      loading="lazy"
+                      src={"/icons/like.svg"}
+                      height={25}
+                      width={25}
+                      className={`cursor-pointer hover:scale-105 transition-transform`}
+                      alt="like icon"
+                    />
+                  </button>
+                )}
+              </div>
+            ) : (
+              <Link href={"/login"}>
+                <Image
+                  loading="lazy"
+                  src={"/icons/like.svg"}
+                  height={25}
+                  width={25}
+                  className="cursor-pointer  hover:scale-105 transition-transform"
+                  alt="like icon"
+                />
+              </Link>
+            )}
+          </div>
 
           {/* {props?.rating > 0 && (
             <> */}

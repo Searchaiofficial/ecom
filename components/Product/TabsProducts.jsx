@@ -1013,14 +1013,14 @@ const Tabs = ({
               />
             )}
 
-          {filteredProductData?.length > 0 && (
+          {/* {filteredProductData?.length > 0 && (
             <button
               onClick={handleRemoveallFilters}
               className="bg-gray-100 px-[24px] text-[14px] font-medium mr-[10px] py-3 rounded-full min-w-fit"
             >
               Remove all filters
             </button>
-          )}
+          )} */}
 
           {/* Type - dropdown5 */}
           {/* <<<<<<< Updated upstream

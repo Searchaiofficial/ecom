@@ -222,7 +222,7 @@ function Card(props) {
     }
   };
 
-  const [showCart, SetShowCart] = useState(false);
+  // const [showCart, SetShowCart] = useState(false);
 
   useEffect(() => {
     setInCart(props.inCart);
@@ -242,6 +242,87 @@ function Card(props) {
     const expectedDate = new Date(today);
     expectedDate.setDate(today.getDate() + expectedDelivery);
     return expectedDate.toDateString(); // Format the date as a readable string
+  };
+
+  const [loggedInUser, setLoggedInUser] = useState(null);
+  const [isLiked, setIsLiked] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const checkUser = async () => {
+    try {
+      const token = localStorage?.getItem("token");
+      if (token) {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/user`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const data = response.data;
+
+        if (data.isAuthenticated) {
+          setLoggedInUser(data.user);
+        } else {
+          setLoggedInUser(null);
+        }
+      } else {
+        setLoggedInUser(null);
+      }
+    } catch (error) {
+      setLoggedInUser(null);
+      console.error("Error:", error);
+    }
+  };
+
+  useEffect(() => {
+    checkUser();
+  }, [props._id]);
+
+  useEffect(() => {
+    if (loggedInUser) {
+      const checkProductLiked = loggedInUser.likedProducts.includes(props.id);
+      setIsLiked(checkProductLiked);
+    }
+  }, [loggedInUser]);
+
+  const handleLike = async () => {
+    setLoading(true);
+    if (loggedInUser && !isLiked) {
+      const response = await axios.patch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/likeProduct`,
+        {
+          productId: props.id,
+          userId: loggedInUser._id,
+        }
+      );
+
+      if (response.status === 200) {
+        setIsLiked(true);
+      }
+    }
+    setLoading(false);
+  };
+
+  const handleUnlike = async () => {
+    setLoading(true);
+    if (loggedInUser && isLiked) {
+      const response = await axios.patch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/unlikeProduct`,
+        {
+          productId: props.id,
+          userId: loggedInUser._id,
+        }
+      );
+
+      if (response.status === 200) {
+        setIsLiked(false);
+      }
+    }
+    setLoading(false);
   };
 
   return (
@@ -384,8 +465,8 @@ function Card(props) {
         </div>
       </div>
       <div
-        onMouseEnter={() => SetShowCart(true)}
-        onMouseLeave={() => SetShowCart(false)}
+      // onMouseEnter={() => SetShowCart(true)}
+      // onMouseLeave={() => SetShowCart(false)}
       >
         <div className="flex items-center justify-between pt-2">
           <div className="flex flex-col">
@@ -443,43 +524,97 @@ function Card(props) {
             <div className="flex gap-1 items-end">Request Now</div>
           )}
 
-          {showCart && (
-            <div
-              className="bg-[#0152be] p-1.5 mr-2 rounded-full"
-              onClick={addProductToCart}
-            >
-              <Image
-                loading="lazy"
-                src={"/icons/ad-to-cart.svg"}
-                height={20}
-                width={20}
-                className="cursor-pointer rounded-full"
-              />
-            </div>
-          )}
+          {/* {showCart && ( */}
+          {/* )} */}
         </div>
 
         {(props?.specialPrice?.price || props?.discountedprice?.price) && (
           <div className="flex flex-col my-3">
             <p className="text-[#757575] text-[12px] pt-[3px]">
-              Regular price: <span className="font-bold text-black">Rs.{props?.price}{" "}</span> (incl. of all taxes)
+              Regular price:{" "}
+              <span className="font-bold text-black">
+                Rs.{" "}
+                <span className="line-through  text-base">{props?.price}</span>
+              </span>{" "}
+              (incl. of all taxes)
             </p>
 
             {props?.specialPrice?.startDate && props?.specialPrice?.endDate ? (
               <p className="text-[#757575] text-[12px] ">
-                <span className="font-bold text-black">Last chance to buy</span> {formatDate(props?.specialPrice?.startDate)} -{" "}
+                <span className="font-bold text-black">
+                  Last chance to buy{" "}
+                </span>{" "}
+                {formatDate(props?.specialPrice?.startDate)} -{" "}
                 {formatDate(props?.specialPrice?.endDate)}
               </p>
             ) : props?.discountedprice?.startDate &&
               props?.discountedprice?.endDate ? (
               <p className="text-[#757575] text-[12px] ">
-                <span className="font-bold text-black">Last chance to buy </span> {formatDate(props?.discountedprice?.startDate)} -{" "}
+                <span className="font-bold text-black">
+                  Last chance to buy{" "}
+                </span>{" "}
+                {formatDate(props?.discountedprice?.startDate)} -{" "}
                 {formatDate(props?.discountedprice?.endDate)}
               </p>
             ) : null}
           </div>
         )}
         {/* {props?.rating > 0 && ( */}
+
+        <div className="flex my-2 items-center gap-4">
+          <div
+            className="bg-[#0152be] p-1.5 mr-2 rounded-full"
+            onClick={addProductToCart}
+          >
+            <Image
+              loading="lazy"
+              src={"/icons/ad-to-cart.svg"}
+              height={25}
+              width={25}
+              className="cursor-pointer rounded-full"
+            />
+          </div>
+
+          {loggedInUser ? (
+            <div className="flex items-center">
+              {isLiked ? (
+                <button disabled={loading} onClick={handleUnlike}>
+                  <Image
+                    loading="lazy"
+                    src={"/icons/like-fill.svg"}
+                    height={25}
+                    width={25}
+                    className={`cursor-pointer  hover:scale-105 transition-transform`}
+                    alt="like icon"
+                  />
+                </button>
+              ) : (
+                <button disabled={loading} onClick={handleLike}>
+                  <Image
+                    loading="lazy"
+                    src={"/icons/like.svg"}
+                    height={25}
+                    width={25}
+                    className={`cursor-pointer hover:scale-105 transition-transform`}
+                    alt="like icon"
+                  />
+                </button>
+              )}
+            </div>
+          ) : (
+            <Link href={"/login"}>
+              <Image
+                loading="lazy"
+                src={"/icons/like.svg"}
+                height={25}
+                width={25}
+                className="cursor-pointer  hover:scale-105 transition-transform"
+                alt="like icon"
+              />
+            </Link>
+          )}
+        </div>
+
         <>
           {/* <div className="card-rating">{props.rating}</div> */}
           {Starts && (

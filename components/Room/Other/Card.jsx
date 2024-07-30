@@ -909,20 +909,26 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                   data?.discountedprice?.price) && (
                   <div className="flex flex-col my-3">
                     <p className="text-[#757575] text-[12px] pt-[3px]">
-                      Regular price: Rs.{data?.perUnitPrice} (incl. of all
-                      taxes)
+                      Regular price:{" "}
+                      <span className="font-bold text-black">
+                        Rs.{" "}
+                        <span className="line-through  text-base">
+                          {data?.perUnitPrice}
+                        </span>
+                      </span>{" "}
+                      (incl. of all taxes)
                     </p>
 
                     {data?.specialprice?.startDate &&
                     data?.specialprice?.endDate ? (
                       <p className="text-[#757575] text-[12px] ">
-                        Price valid {formatDate(data?.specialprice?.startDate)}{" "}
+                        <span className="font-bold text-black">Last chance to buy </span> {formatDate(data?.specialprice?.startDate)}{" "}
                         - {formatDate(data?.specialprice?.endDate)}
                       </p>
                     ) : data?.discountedprice?.startDate &&
                       data?.discountedprice?.endDate ? (
                       <p className="text-[#757575] text-[12px] ">
-                        Price valid{" "}
+                       <span className="font-bold text-black">Last chance to buy</span> {" "}
                         {formatDate(data?.discountedprice?.startDate)} -{" "}
                         {formatDate(data?.discountedprice?.endDate)}
                       </p>
@@ -1892,14 +1898,22 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                                 data?.discountedprice?.price) && (
                                 <div className="flex flex-col my-3">
                                   <p className="text-[#757575] text-[12px] pt-[3px]">
-                                    Regular price: <span className="font-bold text-black">Rs.{data?.perUnitPrice}{" "}</span>
+                                    Regular price:{" "}
+                                    <span className="font-bold text-black">
+                                      Rs.{" "}
+                                      <span className="line-through text-base">
+                                        {data?.perUnitPrice}
+                                      </span>{" "}
+                                    </span>
                                     (incl. of all taxes)
                                   </p>
 
                                   {data?.specialprice?.startDate &&
                                   data?.specialprice?.endDate ? (
                                     <p className="text-[#757575] text-[12px] ">
-                                      <span className="font-bold text-black">Last chance to buy </span>
+                                      <span className="font-bold text-black">
+                                        Last chance to buy{" "}
+                                      </span>
                                       {formatDate(
                                         data?.specialprice?.startDate
                                       )}{" "}
@@ -1909,7 +1923,9 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                                   ) : data?.discountedprice?.startDate &&
                                     data?.discountedprice?.endDate ? (
                                     <p className="text-[#757575] text-[12px] ">
-                                      <span className="font-bold text-black">Last chance to buy </span>
+                                      <span className="font-bold text-black">
+                                        Last chance to buy{" "}
+                                      </span>
                                       {formatDate(
                                         data?.discountedprice?.startDate
                                       )}{" "}
