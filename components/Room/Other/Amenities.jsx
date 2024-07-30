@@ -138,7 +138,7 @@ const Amenities = ({ data }) => {
                 <SwiperSlide key={index} className=" mb-[20px]">
                   {group.map((amenity) => (
                     <div key={amenity._id} className="flex my-4   items-center w-auto">
-                      <div className=" w-[40px] h-[40px] mr-4">
+                      <div className=" w-[20px] h-[20px] mr-4">
                         <Image
                           loading="lazy"
                           width={30}

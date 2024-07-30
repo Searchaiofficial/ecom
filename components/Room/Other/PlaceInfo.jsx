@@ -100,8 +100,8 @@ const PlaceInfo = (data) => {
                 <SwiperSlide key={groupIndex} className="min-h-[210px]">
                   {group.map((item, index) => (
                     <div className="hosted-by gap-3 flex flex-start items-center pb-4 font-lg" key={index}>
-                      <div className="mr-4 w-[40px] h-[40px]">
-                        <img className="w-full min-w-[40px] min-h-[40px]" src={item.image} alt="" />
+                      <div className="mr-4 w-[30px] h-[30px]">
+                        <img className="w-full min-w-[30px] min-h-[30px]" src={item.image} alt="" />
                       </div>
                       <div>
                         <h4 className="font-medium text-[16px] mb-1">{item.heading}</h4>
