@@ -98,10 +98,11 @@ const RoomInfo = ({ data }) => {
   };
   const swiper1Ref = useRef(null);
 
-  const [loading, setLoading] = useState(false);
+  const [loadingMaintenance, setLoadingMaintenance] = useState(false);
+  const [loadingInstallation, setLoadingInstallation] = useState(false);
 
-  async function downloadProductPDF(data) {
-    setLoading(true);
+  async function downloadMaintenancePDF(data) {
+    setLoadingMaintenance(true);
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/generateMaintenanceDetailPdf`,
       {
@@ -124,7 +125,34 @@ const RoomInfo = ({ data }) => {
     a.click();
     a.remove();
     window.URL.revokeObjectURL(url);
-    setLoading(false);
+    setLoadingMaintenance(false);
+  }
+
+  async function downloadInstallationPDF(data) {
+    setLoadingInstallation(true);
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/generateInstallationDetailPdf`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          productId: data._id,
+        }),
+      }
+    );
+
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "Installation Details.pdf";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    window.URL.revokeObjectURL(url);
+    setLoadingInstallation(false);
   }
 
   return (
@@ -153,26 +181,26 @@ const RoomInfo = ({ data }) => {
               </span>
             )}
             {categoryDetails?.maintenanceDetails &&
-              categoryDetails?.certification && (
+              categoryDetails?.installationDetails && (
                 <p className="font-medium mt-2 ">
                   <span className="font-normal">More information: </span>
                   <button
-                    onClick={() => downloadProductPDF(data)}
+                    onClick={() => downloadInstallationPDF(data)}
                     className="hover:underline hover:text-gray-900 font-semibold "
                   >
-                    {loading
+                    {loadingInstallation
+                      ? "Installation Details (Downloading...)"
+                      : "Installation Details"}
+                  </button>
+                  {" | "}
+                  <button
+                    onClick={() => downloadMaintenancePDF(data)}
+                    className="hover:underline hover:text-gray-900 font-semibold "
+                  >
+                    {loadingMaintenance
                       ? "Maintenance Details (Downloading...)"
                       : "Maintenance Details"}
                   </button>
-                  {" | "}
-                  <Link
-                    href={categoryDetails.certification}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:underline hover:text-gray-900 font-semibold "
-                  >
-                    Certification Download
-                  </Link>
                 </p>
               )}
           </div>

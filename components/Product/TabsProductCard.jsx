@@ -473,7 +473,7 @@ function TabsProductCard(props) {
                 props?.discountedprice?.price) && (
                 <div className="flex flex-col my-3">
                   <p className="text-[#757575] text-[12px] pt-[3px]">
-                    Regular price: Rs.{props?.price} (incl. of all taxes)
+                    Regular price: Rs.{props?.perUnitPrice} (incl. of all taxes)
                   </p>
 
                   {props?.specialprice?.startDate &&
