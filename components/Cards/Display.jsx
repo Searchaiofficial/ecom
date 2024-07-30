@@ -22,7 +22,7 @@ const Display = async () => {
             </p>
             <div class="border hidden border-black rounded-full lg:flex items-center justify-center h-[40px] cursor-pointer hover:border-gray-700 transition-colors">
               <Link
-                href={`/rooms/${apiData[0]?.room.roomType.replace(/ /g, "-")}`}
+                href={`/rooms/${apiData[0]?.room?.productCategory.replace(/ /g, "-")}`}
               >
                 <div className="flex items-center px-6 gap-5">
                   <p class="text-[12px] font-semibold">

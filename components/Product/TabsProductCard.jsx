@@ -473,19 +473,19 @@ function TabsProductCard(props) {
                 props?.discountedprice?.price) && (
                 <div className="flex flex-col my-3">
                   <p className="text-[#757575] text-[12px] pt-[3px]">
-                    Regular price: Rs.{props?.perUnitPrice} (incl. of all taxes)
+                    Regular price: <span className="font-bold text-black">Rs.{props?.perUnitPrice}</span> (incl. of all taxes)
                   </p>
 
                   {props?.specialprice?.startDate &&
                   props?.specialprice?.endDate ? (
                     <p className="text-[#757575] text-[12px] ">
-                      Price valid {formatDate(props?.specialprice?.startDate)} -{" "}
+                      <span className="font-bold text-black">Last chance to buy </span> {formatDate(props?.specialprice?.startDate)} -{" "}
                       {formatDate(props?.specialprice?.endDate)}
                     </p>
                   ) : props?.discountedprice?.startDate &&
                     props?.discountedprice?.endDate ? (
                     <p className="text-[#757575] text-[12px] ">
-                      Price valid{" "}
+                      <span className="font-bold text-black">Last chance to buy </span>
                       {formatDate(props?.discountedprice?.startDate)} -{" "}
                       {formatDate(props?.discountedprice?.endDate)}
                     </p>

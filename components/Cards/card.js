@@ -462,18 +462,18 @@ function Card(props) {
         {(props?.specialPrice?.price || props?.discountedprice?.price) && (
           <div className="flex flex-col my-3">
             <p className="text-[#757575] text-[12px] pt-[3px]">
-              Regular price: Rs.{props?.price} (incl. of all taxes)
+              Regular price: <span className="font-bold text-black">Rs.{props?.price}{" "}</span> (incl. of all taxes)
             </p>
 
             {props?.specialPrice?.startDate && props?.specialPrice?.endDate ? (
               <p className="text-[#757575] text-[12px] ">
-                Price valid {formatDate(props?.specialPrice?.startDate)} -{" "}
+                <span className="font-bold text-black">Last chance to buy</span> {formatDate(props?.specialPrice?.startDate)} -{" "}
                 {formatDate(props?.specialPrice?.endDate)}
               </p>
             ) : props?.discountedprice?.startDate &&
               props?.discountedprice?.endDate ? (
               <p className="text-[#757575] text-[12px] ">
-                Price valid {formatDate(props?.discountedprice?.startDate)} -{" "}
+                <span className="font-bold text-black">Last chance to buy </span> {formatDate(props?.discountedprice?.startDate)} -{" "}
                 {formatDate(props?.discountedprice?.endDate)}
               </p>
             ) : null}

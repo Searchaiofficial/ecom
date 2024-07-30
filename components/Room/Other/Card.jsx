@@ -885,15 +885,22 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                   >
                     <span className="text-sm">Rs. &nbsp;</span>{" "}
                     {/* {data?.specialprice?.price ? data?.specialprice.price : data.perUnitPrice} */}
-                    {data?.specialprice?.price
+                    {/* {data?.specialprice?.price
                       ? data?.specialprice.price
                       : selectedSpecData?.specialprice
                       ? selectedSpecData?.price
                       : data?.discountedprice?.price
                       ? data?.discountedprice?.price
-                      : selectedSpecData?.discountedprice?.price
-                      ? selectedSpecData.discountedprice?.price
-                      : data.perUnitPrice}
+                      : selectedSpecData?.discountedprice
+                      ? selectedSpecData.discountedprice
+                      : data.perUnitPrice} */}
+                    {selectedSpecData
+                      ? selectedSpecData?.specialprice?.price ||
+                        selectedSpecData?.discountedprice ||
+                        selectedSpecData?.price
+                      : data?.specialprice?.price ||
+                        data?.discountedprice?.price ||
+                        data.perUnitPrice}
                   </p>{" "}
                   <span> &nbsp;/{data.unitType}</span>
                 </div>
@@ -944,7 +951,8 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                           : "bg-zinc-100 text-black hover:bg-zinc-200"
                       }`}
                     >
-                      {`${dim.thickness.value} ${dim.length.unit}`}
+                      {`${dim.dimension}`}
+                      {/* {`${dim.thickness.value} ${dim.length.unit}`} */}
                     </button>
                   ))}
                 </div>
@@ -1884,14 +1892,14 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                                 data?.discountedprice?.price) && (
                                 <div className="flex flex-col my-3">
                                   <p className="text-[#757575] text-[12px] pt-[3px]">
-                                    Regular price: Rs.{data?.perUnitPrice}{" "}
+                                    Regular price: <span className="font-bold text-black">Rs.{data?.perUnitPrice}{" "}</span>
                                     (incl. of all taxes)
                                   </p>
 
                                   {data?.specialprice?.startDate &&
                                   data?.specialprice?.endDate ? (
                                     <p className="text-[#757575] text-[12px] ">
-                                      Price valid{" "}
+                                      <span className="font-bold text-black">Last chance to buy </span>
                                       {formatDate(
                                         data?.specialprice?.startDate
                                       )}{" "}
@@ -1901,7 +1909,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                                   ) : data?.discountedprice?.startDate &&
                                     data?.discountedprice?.endDate ? (
                                     <p className="text-[#757575] text-[12px] ">
-                                      Price valid{" "}
+                                      <span className="font-bold text-black">Last chance to buy </span>
                                       {formatDate(
                                         data?.discountedprice?.startDate
                                       )}{" "}
