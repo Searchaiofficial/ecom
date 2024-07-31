@@ -315,7 +315,7 @@ const RoomInfo = ({ data }) => {
         <div className="flex">
           {data?.author && (
             <div className="flex flex-col my-10 gap-6 w-full ">
-              <div className="flex items-start gap-4">
+              <div className="flex items-center gap-4">
                 <Link
                   href={`/profile/${data.author._id}`}
                   className="flex-shrink-0"
@@ -325,39 +325,22 @@ const RoomInfo = ({ data }) => {
                     height={150}
                     width={150}
                     alt="avatar"
-                    className="rounded-full"
+                    className="rounded-full w-[100px] h-[100px] md:w-[150px] md:h-[150px]"
                   />
                 </Link>
                 <div className="flex flex-col">
                   <Link
                     href={`/profile/${data.author._id}`}
-                    className=" text-[#1D1D1F] font-bold text-xl"
+                    className=" text-[#1D1D1F] font-bold text-[18px]"
                   >
                     {data.author.displayName}
                   </Link>
-                  <p className="text-[#1D1D1F] font-semibold text-sm pt-3 line-clamp-5 md:w-[70%]">
-                    {data.author.authorDetails.description}
+                  <p className="text-[#1D1D1F] font-semibold text-sm pt-3 line-clamp-5 md:w-[80%]">
+                    {`${data.author.authorDetails.description.slice(
+                      0,
+                      180
+                    )}...`}
                   </p>
-                  {/* <div className="grid grid-cols-3 gap-4 mt-4 w-full">
-                  <div className="flex flex-col items-center">
-                    <p className="text-[#1D1D1F] font-semibold text-lg">
-                      {data.author.purchase}
-                    </p>
-                    <p className="text-[#1D1D1F] text-sm">Purchase</p>
-                  </div>
-                  <div className="flex flex-col items-center">
-                    <p className="text-[#1D1D1F] font-semibold text-lg">
-                      {data.author.rating}
-                    </p>
-                    <p className="text-[#1D1D1F] text-sm">Rating</p>
-                  </div>
-                  <div className="flex flex-col items-center">
-                    <p className="text-[#1D1D1F] font-semibold text-lg">
-                      {data.author.experience}
-                    </p>
-                    <p className="text-[#1D1D1F] text-sm">Year of Creation</p>
-                  </div>
-                </div> */}
                 </div>
               </div>
 

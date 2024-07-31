@@ -352,15 +352,15 @@ const Reviews = ({ productId, data }) => {
                 {data.productType === "requested" && (
                   <div className="flex items-center justify-center overflow-hidden flex-row ">
                     <img
-                      className="h-36 scale-x-[-1]"
+                      className="h-32 scale-x-[-1]"
                       alt=""
                       src="/icons/amf/rightGold.svg"
                     />
-                    <div className="text-[6rem] font-medium text-[#bf9b30] pb-5">
+                    <div className="text-[5rem] font-medium text-[#bf9b30] pb-5">
                       {calculateOverallAverageRating || "5.0"}
                     </div>
                     <img
-                      className="h-36 "
+                      className="h-32 "
                       alt=""
                       src="/icons/amf/rightGold.svg"
                     />
@@ -369,15 +369,15 @@ const Reviews = ({ productId, data }) => {
                 {data.productType === "special" && (
                   <div className="flex gap-2 items-center justify-center overflow-hidden flex-row ">
                     <img
-                      className="h-36 scale-x-[-1]"
+                      className="h-32 scale-x-[-1]"
                       alt=""
                       src="/icons/ayatrio famaily faveriot right.svg"
                     />
-                    <div className="text-[6rem] font-medium text-black pb-5">
+                    <div className="text-[5rem] font-medium text-black pb-5">
                       {calculateOverallAverageRating || "5.0"}
                     </div>
                     <img
-                      className="h-36 "
+                      className="h-32 "
                       alt=""
                       src="/icons/ayatrio famaily faveriot right.svg"
                     />

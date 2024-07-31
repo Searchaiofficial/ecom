@@ -554,14 +554,14 @@ function TabsProductCard(props) {
                   {props?.specialprice?.startDate &&
                   props?.specialprice?.endDate ? (
                     <p className="text-[#757575] text-[12px] ">
-                      <span className="font-bold text-black">Price valid </span>{" "}
+                      <span>Price valid </span>{" "}
                       {formatDate(props?.specialprice?.startDate)} -{" "}
                       {formatDate(props?.specialprice?.endDate)}
                     </p>
                   ) : props?.discountedprice?.startDate &&
                     props?.discountedprice?.endDate ? (
                     <p className="text-[#757575] text-[12px] ">
-                      <span className="font-bold text-black">Price valid </span>
+                      <span>Price valid </span>
                       {formatDate(props?.discountedprice?.startDate)} -{" "}
                       {formatDate(props?.discountedprice?.endDate)}
                     </p>
@@ -675,7 +675,7 @@ function TabsProductCard(props) {
           {imageData?.length > 1 && (
             <div className="colorContainer flex flex-col sm:w-auto w-[80vw] mt-1 ">
               <div className="w-full flex justify-between mb-1">
-                <p className="text-[12px] font-medium">Colours</p>
+                <p className="text-[12px] font-medium">More options</p>
               </div>
               {
                 <>
