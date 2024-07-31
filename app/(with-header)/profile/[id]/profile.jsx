@@ -139,15 +139,25 @@ const Profile = ({ id }) => {
     formData.append("displayName", editedUser.displayName);
     formData.append("image", editedUser.image);
     formData.append("userType", editedUser.userType);
-    formData.append(
-      "authorDetails[description]",
-      editedUser.authorDetails.description
-    );
-    formData.append(
-      "authorDetails[experience]",
-      editedUser.authorDetails.experience
-    );
-    formData.append("authorDetails[award]", editedUser.authorDetails.award);
+
+    formData.append("links[linkedin]", editedUser.links?.linkedin || "");
+    formData.append("links[instagram]", editedUser.links?.instagram || "");
+    formData.append("links[youtube]", editedUser.links?.youtube || "");
+
+    if (editedUser.authorDetails) {
+      formData.append(
+        "authorDetails[description]",
+        editedUser.authorDetails.description || ""
+      );
+      formData.append(
+        "authorDetails[experience]",
+        editedUser.authorDetails.experience || ""
+      );
+      formData.append(
+        "authorDetails[award]",
+        editedUser.authorDetails.award || ""
+      );
+    }
 
     try {
       const response = await axios.put(
@@ -197,7 +207,9 @@ const Profile = ({ id }) => {
               <h1 className="text-xl sm:text-3xl font-semibold">
                 {user.displayName}
               </h1>
-              <h2 className="text-gray-600 text-xs sm:text-base">{user.email}</h2>
+              <h2 className="text-gray-600 text-xs sm:text-base">
+                {user.email}
+              </h2>
               <h3 className="text-slate-400">
                 {user?.isLiveStreamHost && "Liveroom Host"}
               </h3>
@@ -211,6 +223,7 @@ const Profile = ({ id }) => {
                         image: user.image,
                         userType: user.userType,
                         authorDetails: user.authorDetails,
+                        links: user.links,
                       });
                       setPreview(user.image);
                     }}
@@ -282,6 +295,67 @@ const Profile = ({ id }) => {
                       disabled={updateLoading}
                     />
                   </div>
+                </div>
+
+                <div className="flex flex-col mt-4">
+                  <label htmlFor="linkedin" className="text-lg font-semibold">
+                    LinkedIn
+                  </label>
+                  <input
+                    type="text"
+                    id="linkedin"
+                    className="border border-gray-300 rounded-lg px-4 py-2 mt-2"
+                    value={editedUser.links?.linkedin}
+                    disabled={updateLoading}
+                    onChange={(e) =>
+                      setEditedUser({
+                        ...editedUser,
+                        links: {
+                          ...editedUser.links,
+                          linkedin: e.target.value,
+                        },
+                      })
+                    }
+                  />
+                </div>
+                <div className="flex flex-col mt-4">
+                  <label htmlFor="instagram" className="text-lg font-semibold">
+                    Instagram
+                  </label>
+                  <input
+                    type="text"
+                    id="instagram"
+                    className="border border-gray-300 rounded-lg px-4 py-2 mt-2"
+                    value={editedUser.links?.instagram}
+                    disabled={updateLoading}
+                    onChange={(e) =>
+                      setEditedUser({
+                        ...editedUser,
+                        links: {
+                          ...editedUser.links,
+                          instagram: e.target.value,
+                        },
+                      })
+                    }
+                  />
+                </div>
+                <div className="flex flex-col mt-4">
+                  <label htmlFor="youtube" className="text-lg font-semibold">
+                    Youtube
+                  </label>
+                  <input
+                    type="text"
+                    id="youtube"
+                    className="border border-gray-300 rounded-lg px-4 py-2 mt-2"
+                    value={editedUser.links?.youtube}
+                    disabled={updateLoading}
+                    onChange={(e) =>
+                      setEditedUser({
+                        ...editedUser,
+                        links: { ...editedUser.links, youtube: e.target.value },
+                      })
+                    }
+                  />
                 </div>
                 <div className="flex flex-col mt-4">
                   <label htmlFor="userType" className="text-lg font-semibold">

@@ -322,23 +322,30 @@ const RoomInfo = ({ data }) => {
                 >
                   <Image
                     src={data.author.image}
-                    height={150}
-                    width={150}
+                    height={120}
+                    width={120}
                     alt="avatar"
-                    className="rounded-full w-[100px] h-[100px] md:w-[150px] md:h-[150px]"
+                    className="rounded-full w-[100px] h-[100px] md:w-[120px] md:h-[120px]"
                   />
                 </Link>
                 <div className="flex flex-col">
+                  <span className="text-[#757575]">Collaboration</span>
                   <Link
                     href={`/profile/${data.author._id}`}
                     className=" text-[#1D1D1F] font-bold text-[18px]"
                   >
                     {data.author.displayName}
                   </Link>
-                  <p className="text-[#1D1D1F] font-semibold text-sm pt-3 line-clamp-5 md:w-[80%]">
+                  <p className="hidden md:block text-[#1D1D1F] font-semibold text-sm pt-3 line-clamp-5 md:w-[80%]">
                     {`${data.author.authorDetails.description.slice(
                       0,
                       180
+                    )}...`}
+                  </p>
+                  <p className="md:hidden text-[#1D1D1F] font-semibold text-sm pt-3 line-clamp-5 md:w-[80%]">
+                    {`${data.author.authorDetails.description.slice(
+                      0,
+                      50
                     )}...`}
                   </p>
                 </div>

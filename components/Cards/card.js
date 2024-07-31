@@ -648,7 +648,7 @@ function Card(props) {
         {imageData?.length > 1 && (
           <div className="colorContainer flex flex-col sm:w-auto w-[80vw] mt-1">
             <div className="w-full flex justify-between mb-1">
-              <p className="text-[12px] font-normal">More options</p>
+              <p className="text-[12px] font-normal text-[#757575]">More options</p>
             </div>
             <div className=" flex gap-1.5">
               {imageData.map((item, index) => (
