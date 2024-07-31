@@ -63,6 +63,7 @@ const ProductPage = ({ params }) => {
   if (parentCategory === "offers" && offerProductData && offerProductData.length > 0) {
     offerCategory = offerProductData.map((product) => product.category);
     if (offerCategory.length > 0) offerCategory = [...new Set(offerCategory)];
+    card
     if (selectedOfferCategory) {
       offerProductData = offerProductData.filter(
         (product) => product.category === selectedOfferCategory

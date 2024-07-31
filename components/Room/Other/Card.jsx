@@ -819,6 +819,54 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
     });
   };
 
+  const splitPeriod = (startDate, endDate, chunkSize) => {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const result = [];
+
+    while (start <= end) {
+      const chunkEnd = new Date(start);
+      chunkEnd.setDate(start.getDate() + chunkSize - 1);
+      result.push({
+        from: start.toISOString().split("T")[0],
+        to:
+          chunkEnd <= end
+            ? chunkEnd.toISOString().split("T")[0]
+            : end.toISOString().split("T")[0],
+      });
+      start.setDate(start.getDate() + chunkSize);
+    }
+
+    return result;
+  };
+
+  const [currentPeriod, setCurrentPeriod] = useState(null);
+
+  useEffect(() => {
+    const currentDate = new Date(); // Use current date
+    const startDate =
+      data.specialPrice?.startDate || data.discountedprice?.startDate;
+    const endDate = data.specialPrice?.endDate || data.discountedprice?.endDate;
+    const chunkSize =
+      data.specialPrice?.chunkSize || data.discountedprice?.chunkSize; // Example chunk size
+
+    const fetchAndSplitPeriod = async () => {
+      const splitPeriods = splitPeriod(startDate, endDate, chunkSize);
+      const periodWithCurrentDate = splitPeriods.find((period) => {
+        const from = new Date(period.from);
+        const to = new Date(period.to);
+        return currentDate >= from && currentDate <= to;
+      });
+      setCurrentPeriod(periodWithCurrentDate);
+    };
+
+    if (chunkSize) {
+      fetchAndSplitPeriod();
+    } else {
+      setCurrentPeriod({ from: startDate, to: endDate });
+    }
+  }, []);
+
   return (
     <>
       <div className="flex justify-start md:min-w-[25vw] gap-1 mt-2.5 w-[100%] ml-0 z-[9997]">
@@ -919,7 +967,14 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                       (incl. of all taxes)
                     </p>
 
-                    {data?.specialprice?.startDate &&
+                    {currentPeriod && (
+                      <p className="text-[#757575] text-[12px] ">
+                        Price valid {formatDate(currentPeriod?.from)} -{" "}
+                        {formatDate(currentPeriod?.to)}
+                      </p>
+                    )}
+
+                    {/* {data?.specialprice?.startDate &&
                     data?.specialprice?.endDate ? (
                       <p className="text-[#757575] text-[12px] ">
                         <span>Price valid </span>{" "}
@@ -933,7 +988,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                         {formatDate(data?.discountedprice?.startDate)} -{" "}
                         {formatDate(data?.discountedprice?.endDate)}
                       </p>
-                    ) : null}
+                    ) : null} */}
                   </div>
                 )}
               </div>

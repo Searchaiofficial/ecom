@@ -311,6 +311,55 @@ function TabsProductCard(props) {
     setLoading(false);
   };
 
+  const splitPeriod = (startDate, endDate, chunkSize) => {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const result = [];
+
+    while (start <= end) {
+      const chunkEnd = new Date(start);
+      chunkEnd.setDate(start.getDate() + chunkSize - 1);
+      result.push({
+        from: start.toISOString().split("T")[0],
+        to:
+          chunkEnd <= end
+            ? chunkEnd.toISOString().split("T")[0]
+            : end.toISOString().split("T")[0],
+      });
+      start.setDate(start.getDate() + chunkSize);
+    }
+
+    return result;
+  };
+
+  const [currentPeriod, setCurrentPeriod] = useState(null);
+
+  useEffect(() => {
+    const currentDate = new Date(); // Use current date
+    const startDate =
+      props.specialPrice?.startDate || props.discountedprice?.startDate;
+    const endDate =
+      props.specialPrice?.endDate || props.discountedprice?.endDate;
+    const chunkSize =
+      props.specialPrice?.chunkSize || props.discountedprice?.chunkSize; // Example chunk size
+
+    const fetchAndSplitPeriod = async () => {
+      const splitPeriods = splitPeriod(startDate, endDate, chunkSize);
+      const periodWithCurrentDate = splitPeriods.find((period) => {
+        const from = new Date(period.from);
+        const to = new Date(period.to);
+        return currentDate >= from && currentDate <= to;
+      });
+      setCurrentPeriod(periodWithCurrentDate);
+    };
+
+    if (chunkSize) {
+      fetchAndSplitPeriod();
+    } else {
+      setCurrentPeriod({ from: startDate, to: endDate });
+    }
+  }, []);
+
   return (
     <>
       <div
@@ -550,8 +599,13 @@ function TabsProductCard(props) {
                     </span>{" "}
                     (incl. of all taxes)
                   </p>
-
-                  {props?.specialprice?.startDate &&
+                  {currentPeriod && (
+                    <p className="text-[#757575] text-[12px] ">
+                      Price valid {formatDate(currentPeriod?.from)} -{" "}
+                      {formatDate(currentPeriod?.to)}
+                    </p>
+                  )}
+                  {/* {props?.specialprice?.startDate &&
                   props?.specialprice?.endDate ? (
                     <p className="text-[#757575] text-[12px] ">
                       <span>Price valid </span>{" "}
@@ -565,7 +619,7 @@ function TabsProductCard(props) {
                       {formatDate(props?.discountedprice?.startDate)} -{" "}
                       {formatDate(props?.discountedprice?.endDate)}
                     </p>
-                  ) : null}
+                  ) : null} */}
                 </div>
               )}
             </>
@@ -675,7 +729,9 @@ function TabsProductCard(props) {
           {imageData?.length > 1 && (
             <div className="colorContainer flex flex-col sm:w-auto w-[80vw] mt-1 ">
               <div className="w-full flex justify-between mb-1">
-                <p className="text-[12px] font-medium text-[#757575]">More options</p>
+                <p className="text-[12px] font-medium text-[#757575]">
+                  More options
+                </p>
               </div>
               {
                 <>

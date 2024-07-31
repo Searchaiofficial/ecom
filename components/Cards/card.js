@@ -88,12 +88,12 @@ function Card(props) {
   //   day: "numeric",
   // });
 
-  const formatDate = (date) => {
-    return new Date(date).toLocaleDateString("en-US", {
-      month: "long",
-      day: "numeric",
-    });
-  };
+  // const formatDate = (date) => {
+  //   return new Date(date).toLocaleDateString("en-US", {
+  //     month: "long",
+  //     day: "numeric",
+  //   });
+  // };
 
   const imageData = props.productImages?.map((item) => {
     return {
@@ -325,6 +325,60 @@ function Card(props) {
     setLoading(false);
   };
 
+  const formatDate = (date) => {
+    const options = { month: "long", day: "numeric" };
+    return new Date(date).toLocaleDateString("en-US", options);
+  };
+
+  const splitPeriod = (startDate, endDate, chunkSize) => {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const result = [];
+
+    while (start <= end) {
+      const chunkEnd = new Date(start);
+      chunkEnd.setDate(start.getDate() + chunkSize - 1);
+      result.push({
+        from: start.toISOString().split("T")[0],
+        to:
+          chunkEnd <= end
+            ? chunkEnd.toISOString().split("T")[0]
+            : end.toISOString().split("T")[0],
+      });
+      start.setDate(start.getDate() + chunkSize);
+    }
+
+    return result;
+  };
+
+  const [currentPeriod, setCurrentPeriod] = useState(null);
+
+  useEffect(() => {
+    const currentDate = new Date(); // Use current date
+    const startDate =
+      props.specialPrice?.startDate || props.discountedprice?.startDate;
+    const endDate =
+      props.specialPrice?.endDate || props.discountedprice?.endDate;
+    const chunkSize =
+      props.specialPrice?.chunkSize || props.discountedprice?.chunkSize; // Example chunk size
+
+    const fetchAndSplitPeriod = async () => {
+      const splitPeriods = splitPeriod(startDate, endDate, chunkSize);
+      const periodWithCurrentDate = splitPeriods.find((period) => {
+        const from = new Date(period.from);
+        const to = new Date(period.to);
+        return currentDate >= from && currentDate <= to;
+      });
+      setCurrentPeriod(periodWithCurrentDate);
+    };
+
+    if (chunkSize) {
+      fetchAndSplitPeriod();
+    } else {
+      setCurrentPeriod({ from: startDate, to: endDate });
+    }
+  }, []);
+
   return (
     <div
       key={props.cardkey}
@@ -539,24 +593,27 @@ function Card(props) {
               (incl. of all taxes)
             </p>
 
-            {props?.specialPrice?.startDate && props?.specialPrice?.endDate ? (
+            {currentPeriod && (
               <p className="text-[#757575] text-[12px] ">
-                <span >
-                  Price valid {" "}
-                </span>{" "}
+                Price valid {formatDate(currentPeriod?.from)} -{" "}
+                {formatDate(currentPeriod?.to)}
+              </p>
+            )}
+
+            {/* {props?.specialPrice?.startDate && props?.specialPrice?.endDate ? (
+              <p className="text-[#757575] text-[12px] ">
+                <span>Price valid </span>{" "}
                 {formatDate(props?.specialPrice?.startDate)} -{" "}
                 {formatDate(props?.specialPrice?.endDate)}
               </p>
             ) : props?.discountedprice?.startDate &&
               props?.discountedprice?.endDate ? (
               <p className="text-[#757575] text-[12px] ">
-                <span >
-                  Price valid {" "}
-                </span>{" "}
+                <span>Price valid </span>{" "}
                 {formatDate(props?.discountedprice?.startDate)} -{" "}
                 {formatDate(props?.discountedprice?.endDate)}
               </p>
-            ) : null}
+            ) : null} */}
           </div>
         )}
         {/* {props?.rating > 0 && ( */}
@@ -648,7 +705,9 @@ function Card(props) {
         {imageData?.length > 1 && (
           <div className="colorContainer flex flex-col sm:w-auto w-[80vw] mt-1">
             <div className="w-full flex justify-between mb-1">
-              <p className="text-[12px] font-normal text-[#757575]">More options</p>
+              <p className="text-[12px] font-normal text-[#757575]">
+                More options
+              </p>
             </div>
             <div className=" flex gap-1.5">
               {imageData.map((item, index) => (
