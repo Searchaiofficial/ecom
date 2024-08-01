@@ -531,9 +531,9 @@ function TabsProductCard(props) {
         >
           <div className="flex items-center justify-between pt-2 ">
             <div className=" flex flex-col">
-              {props.productType === "special" && (
+              {props.urgency && (
                 <p className="font-medium text-[#0152be]  mb-[3px] text-[12px]">
-                  Ayatrio Member Favorite
+                  {props.urgency}
                 </p>
               )}
               <h3 className={` text-[14px] font-semibold `}>

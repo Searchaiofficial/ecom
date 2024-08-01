@@ -525,9 +525,9 @@ function Card(props) {
       >
         <div className="flex items-center justify-between pt-2">
           <div className="flex flex-col">
-            {props.productType === "special" && (
-              <p className="font-medium text-[#0152be] mb-1 text-[12px]">
-                Ayatrio Member Favorite
+            {props.urgency && (
+              <p className="font-medium text-[#0152be]  mb-[3px] text-[12px]">
+                {props.urgency}
               </p>
             )}
             <h3 className="text-[15px] font-semibold">{props.title}</h3>

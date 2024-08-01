@@ -1529,6 +1529,7 @@ const Tabs = ({
                       shortDescription={text.shortDescription}
                       perUnitPrice={text.perUnitPrice}
                       productType={text.productType}
+                      urgency = {text.urgency}
                       expectedDelivery={text.expectedDelivery}
                     />
 
