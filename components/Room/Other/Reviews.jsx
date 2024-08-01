@@ -384,7 +384,7 @@ const Reviews = ({ productId, data }) => {
                   </div>
                 )}
                 <div className="flex justify-center items-center flex-col ">
-                  <div className={`text-xl mb-1 font-bold   ${data.productType === "requested" ? "text-[#bf9b30]" : "text-black"}`} >Guest favourite</div>
+                  <div className={`text-xl mb-1 font-bold   ${data.productType === "requested" ? "text-[#bf9b30]" : "text-black"}`} >Ayatrio Member Favourite</div>
                   <div className=" text-center text-gray-500">
                     <p className="text-[14px]">One of the most loved homes on Ayatrio</p>
                     <p className="text-[14px]">based on {showRatingTypes?.map((item) => item.name).join(", ")}</p>

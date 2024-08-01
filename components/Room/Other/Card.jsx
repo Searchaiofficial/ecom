@@ -828,13 +828,14 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
       const chunkEnd = new Date(start);
       chunkEnd.setDate(start.getDate() + chunkSize - 1);
       result.push({
-        from: start.toISOString().split("T")[0],
+        from: new Date(start), // Store date objects directly
         to:
           chunkEnd <= end
-            ? chunkEnd.toISOString().split("T")[0]
-            : end.toISOString().split("T")[0],
+            ? new Date(chunkEnd.setHours(23, 59, 59, 999))
+            : new Date(end.setHours(23, 59, 59, 999)),
       });
       start.setDate(start.getDate() + chunkSize);
+      start.setHours(0, 0, 0, 0); // Reset time to start of the day
     }
 
     return result;

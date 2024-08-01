@@ -63,7 +63,7 @@ const Card = ({ category, products, colors }) => {
                     width={20}
                     height={20}
                     alt="Rank"
-                    className="w-6 h-6"
+                    className="w-6c h-6"
                   />
                 )}
               </div>

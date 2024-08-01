@@ -56,6 +56,7 @@ const Tabs = ({
   onPageChange,
   totalPages,
   currentPage,
+  type,
 }) => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -688,6 +689,20 @@ const Tabs = ({
     }
   }, [subCategory]);
 
+  const [offerCategoryData, setOfferCategoryData] = useState([]);
+  useEffect(() => {
+    const fetchOfferCategory = async () => {
+      const apiUrl = `${
+        process.env.NEXT_PUBLIC_API_BASE_URL
+      }/api/getAllCategoryByOffer/${encodeURI(type)}`;
+      const response = await axios.get(apiUrl);
+      setOfferCategoryData(response.data);
+    };
+    if (parentCategory === "offers") {
+      fetchOfferCategory();
+    }
+  }, [type]);
+
   return (
     <div className="">
       {openAll && <div className="background-overlay open"></div>}
@@ -790,20 +805,74 @@ const Tabs = ({
               </div>
             ) : (
               parentCategory &&
-              (parentCategory === "offers" && offerCategory ? (
-                <div className="mt-4 grid mb-4 md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-2 gap-y-4">
-                  {offerCategory.map((category, idx) => (
-                    <div key={idx} className=" gap-2">
-                      <div className="flex items-center gap-4 cursor-pointer ">
-                        <h1
-                          className="text-black bg-zinc-200 hover:bg-zinc-100 px-4 py-2"
-                          onClick={() => setSelectedOfferCategory(category)}
+              (parentCategory === "offers" && offerCategoryData ? (
+                <div className="group flex flex-row items-center justify-start gap-2 mb-4">
+                  <Swiper
+                    ref={swiper1Ref}
+                    {...swiperOptions2}
+                    modules={[Navigation, Pagination, Scrollbar, A11y]}
+                    navigation={{
+                      nextEl: ".right",
+                      prevEl: ".back",
+                    }}
+                    draggable={true}
+                    style={{
+                      "--swiper-navigation-size": "24px",
+                      maxHeight: "120px",
+                    }}
+                    scrollbar={{
+                      hide: false,
+                      draggable: true,
+                    }}
+                    mousewheel={{
+                      forceToAxis: true,
+                      invert: false,
+                    }}
+                    freeMode={{
+                      enabled: false,
+                      sticky: true,
+                    }}
+                    breakpoints={breakpoints}
+                  >
+                    {offerCategoryData.map((category, idx) => (
+                      <SwiperSlide className="max-w-[130px]" key={idx}>
+                        <div
+                          className="cursor-pointer"
+                          onClick={() =>
+                            setSelectedOfferCategory(category.name)
+                          }
                         >
-                          {category}
-                        </h1>
-                      </div>
-                    </div>
-                  ))}
+                          <div className="flex flex-col ">
+                            <div className="lg:mb-[12px] ">
+                              <Image
+                                src={category.image}
+                                width={200}
+                                height={130}
+                                alt={category.name}
+                                className="w-[200px] h-[70px]"
+                              />
+                            </div>
+                            <h2 className="text-[#333333] text-center text-[14px] hover:underline line-clamp-1">
+                              {category.name}
+                            </h2>
+                          </div>
+                        </div>
+                      </SwiperSlide>
+
+                      // <div key={idx} className=" gap-2">
+                      //   <div className="flex items-center gap-4 cursor-pointer ">
+                      //     <h1
+                      //       className="text-black bg-zinc-200 hover:bg-zinc-100 px-4 py-2"
+                      //       onClick={() =>
+                      //         setSelectedOfferCategory(category.name)
+                      //       }
+                      //     >
+                      //       {category.name}
+                      //     </h1>
+                      //   </div>
+                      // </div>
+                    ))}
+                  </Swiper>
                 </div>
               ) : (
                 parentCategory === "demandtype" &&
