@@ -40,6 +40,7 @@ import Measure from "./meausrement";
 import Link from "next/link";
 import axios from "axios";
 import TabsProductCard from "./TabsProductCard";
+import CategoryGrid from "./CategoryGrid";
 import { selecteddbItems } from "../Features/Slices/cartSlice";
 import { viewItemList } from "@/tag-manager/events/view_item_list";
 const Tabs = ({
@@ -56,8 +57,10 @@ const Tabs = ({
   onPageChange,
   totalPages,
   currentPage,
+  grid,
   type,
 }) => {
+  console.log("harsh grid", grid);
   const router = useRouter();
   const dispatch = useDispatch();
   const swiper1Ref = useRef(null);
@@ -1529,6 +1532,13 @@ const Tabs = ({
                       productType={text.productType}
                       expectedDelivery={text.expectedDelivery}
                     />
+
+                    {grid && grid.firstGrid && idx == 2 && (
+                      <CategoryGrid grid={grid.firstGrid} />
+                    )}
+                    {grid && grid.secondSider && idx == 6 && (
+                      <CategoryGrid grid={grid.secondSider} />
+                    )}
                   </>
                 );
               })

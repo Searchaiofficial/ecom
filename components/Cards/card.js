@@ -415,7 +415,7 @@ function Card(props) {
         </div>
 
         <div
-          className="relative flex h-full w-full items-center justify-center cursor-pointer aspect-square"
+          className="relative flex h-full w-full items-center justify-center cursor-pointer aspect-square bg-[#f5f5f5]"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >

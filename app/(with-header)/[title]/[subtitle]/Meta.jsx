@@ -335,6 +335,12 @@ const ProductPage = ({ params }) => {
   // const newFilteredData = filteredProductData.filter(product => product.subcategory !== "Accessories ")
   // console.log(newFilteredData.length)
 
+  const [grid, setGrid] = useState(null);
+  useEffect(()=>{
+    if (subtitle === "category" && type === "all" && category &&  category.grid){
+      setGrid(category.grid)
+    }
+  }, [category])
   return (
     <>
       {/* ( */}
@@ -372,6 +378,7 @@ const ProductPage = ({ params }) => {
             : totalPages
           }
           onPageChange={handlePageChange}
+          grid={grid}
         />
       </div>
       {/* ) : (
