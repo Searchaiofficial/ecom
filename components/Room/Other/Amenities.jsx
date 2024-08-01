@@ -148,7 +148,7 @@ const Amenities = ({ data }) => {
                           className="h-full w-full"
                         />
                       </div>
-                      <span className="font-normal text-[16px]">{amenity.text}</span>
+                      <span className="font-normal max-w-[200px] text-[16px]">{amenity.text}</span>
                     </div>
                   ))}
                 </SwiperSlide>
