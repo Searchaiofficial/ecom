@@ -846,10 +846,10 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
   useEffect(() => {
     const currentDate = new Date(); // Use current date
     const startDate =
-      data.specialPrice?.startDate || data.discountedprice?.startDate;
-    const endDate = data.specialPrice?.endDate || data.discountedprice?.endDate;
+      data.specialprice?.startDate || data.discountedprice?.startDate;
+    const endDate = data.specialprice?.endDate || data.discountedprice?.endDate;
     const chunkSize =
-      data.specialPrice?.chunkSize || data.discountedprice?.chunkSize; // Example chunk size
+      data.specialprice?.chunkSize || data.discountedprice?.chunkSize; // Example chunk size
 
     const fetchAndSplitPeriod = async () => {
       const splitPeriods = splitPeriod(startDate, endDate, chunkSize);

@@ -362,6 +362,7 @@ function Card(props) {
     const chunkSize =
       props.specialPrice?.chunkSize || props.discountedprice?.chunkSize; // Example chunk size
 
+    console.log("harsh", startDate, endDate);
     const fetchAndSplitPeriod = async () => {
       const splitPeriods = splitPeriod(startDate, endDate, chunkSize);
       const periodWithCurrentDate = splitPeriods.find((period) => {

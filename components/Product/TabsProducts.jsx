@@ -60,7 +60,6 @@ const Tabs = ({
   grid,
   type,
 }) => {
-  console.log("harsh grid", grid);
   const router = useRouter();
   const dispatch = useDispatch();
   const swiper1Ref = useRef(null);

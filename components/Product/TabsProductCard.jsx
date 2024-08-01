@@ -337,11 +337,11 @@ function TabsProductCard(props) {
   useEffect(() => {
     const currentDate = new Date(); // Use current date
     const startDate =
-      props.specialPrice?.startDate || props.discountedprice?.startDate;
+      props.specialprice?.startDate || props.discountedprice?.startDate;
     const endDate =
-      props.specialPrice?.endDate || props.discountedprice?.endDate;
+      props.specialprice?.endDate || props.discountedprice?.endDate;
     const chunkSize =
-      props.specialPrice?.chunkSize || props.discountedprice?.chunkSize; // Example chunk size
+      props.specialprice?.chunkSize || props.discountedprice?.chunkSize; // Example chunk size
 
     const fetchAndSplitPeriod = async () => {
       const splitPeriods = splitPeriod(startDate, endDate, chunkSize);
