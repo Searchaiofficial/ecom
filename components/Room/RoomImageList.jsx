@@ -188,7 +188,7 @@ export default function RoomImageList({ data, images, alt }) {
           {imagesToDisplay?.map((image, index) => (
             <div
               key={index}
-              className={`sm:col-span-1 sm:row-start-${
+              className={`sm:col-span-1 bg-[#fafafa] sm:row-start-${
                 index + 1
               } image-container `}
               onClick={(e) => handleImageClick(index, e)}
