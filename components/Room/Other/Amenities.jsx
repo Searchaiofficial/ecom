@@ -55,7 +55,7 @@ const Amenities = ({ data }) => {
       {amenities.length > 0 && (
         <div className="place-offerings  py-[16px]  ">
           <h3 className=" text-[#222222] text-[20px] font-medium">
-            Amenities
+            Core Functionality
           </h3>
 
           <div className={`hidden amenities mt-4 md:grid ${amenities.length > 5 ? 'grid-cols-2' : 'grid-cols-1'} sm:w-auto `}>
