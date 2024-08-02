@@ -5,7 +5,7 @@ const filteredProductSlice = createSlice({
   initialState: {
     filteredproductitem: [],
     currentPage: 1,
-    itemsPerPage: 4,
+    itemsPerPage: 16,
     totalPages: 1,
   },
   reducers: {
