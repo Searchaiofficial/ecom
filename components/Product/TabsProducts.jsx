@@ -57,7 +57,8 @@ const Tabs = ({
   onPageChange,
   totalPages,
   currentPage,
-  grid,
+  firstGrid,
+  secondGrid,
   type,
 }) => {
   const router = useRouter();
@@ -1499,7 +1500,7 @@ const Tabs = ({
               </button>
             )}
           </div>
-          <div className="grid md:grid-cols-4 grid-cols-2 cursor-pointer gap-4 py-3">
+          <div className="grid md:grid-cols-4 grid-cols-2 cursor-pointer gap-x-4 py-3 gap-y-8">
             {filterData && filterData.length > 0 ? (
               filterData.map((text, idx) => {
                 const inCart = isProductInCart(text?._id);
@@ -1529,15 +1530,15 @@ const Tabs = ({
                       shortDescription={text.shortDescription}
                       perUnitPrice={text.perUnitPrice}
                       productType={text.productType}
-                      urgency = {text.urgency}
+                      urgency={text.urgency}
                       expectedDelivery={text.expectedDelivery}
                     />
 
-                    {grid && grid.firstGrid && idx == 2 && (
-                      <CategoryGrid grid={grid.firstGrid} />
+                    {firstGrid && idx == 2 && (
+                      <CategoryGrid grid={firstGrid} />
                     )}
-                    {grid && grid.secondSider && idx == 6 && (
-                      <CategoryGrid grid={grid.secondSider} />
+                    {secondGrid && idx == 6 && (
+                      <CategoryGrid grid={secondGrid} />
                     )}
                   </>
                 );

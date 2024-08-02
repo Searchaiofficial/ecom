@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { act, useEffect, useState } from "react";
 import "@/components/Product/styles.css";
 import Tabproduct from "@/components/Product/TabsProducts";
@@ -6,7 +6,12 @@ import axios from "axios";
 import { allSelectedData } from "@/components/Features/Slices/virtualDataSlice";
 import { usePathname, useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { selectFilteredProductCurrentPage, selectTotalPages, selectedFilteredProduct, setFilteredProductCurrentPage } from "@/components/Features/Slices/FilteredProduct";
+import {
+  selectFilteredProductCurrentPage,
+  selectTotalPages,
+  selectedFilteredProduct,
+  setFilteredProductCurrentPage,
+} from "@/components/Features/Slices/FilteredProduct";
 import {
   selectOfferProductCurrentPage,
   selectOfferProducts,
@@ -22,8 +27,8 @@ import {
 
 const ProductPage = ({ params }) => {
   // const [parentCategory, setParentCategory] = useState(params.parentCategory.replace(/-/g, " "))
-  const parentCategory = params.title.replace(/-/g, " ")
-  const subtitle = params.subtitle.replace(/-/g, " ")
+  const parentCategory = params.title.replace(/-/g, " ");
+  const subtitle = params.subtitle.replace(/-/g, " ");
   // console.log(parentCategory.replace(/-/g, " "))
   let queryString;
   if (typeof window !== "undefined") {
@@ -47,25 +52,31 @@ const ProductPage = ({ params }) => {
   const offer = queryParams?.offer?.replace(/-/g, " ").replace(/percent/g, "%");
 
   const pathname = usePathname();
-  const [type, setType] = useState(params.cat.replace(/-/g, " ").replace(/percent/g, "%"));
+  const [type, setType] = useState(
+    params.cat.replace(/-/g, " ").replace(/percent/g, "%")
+  );
   const [isFilterVisible, setIsFilterVisible] = useState(true);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
-  const currentPage = useSelector(selectFilteredProductCurrentPage)
+  const currentPage = useSelector(selectFilteredProductCurrentPage);
 
   let offerProduct = useSelector(selectOfferProducts);
-  console.log("check", offerProduct)
+  console.log("check", offerProduct);
   // console.log(offerProduct.length)
   let offerProductData = offerProduct;
   const [allTypes, setAllTypes] = useState([]);
   const [selectedOfferCategory, setSelectedOfferCategory] = useState("");
-  
+
   const [offerCategory, setOfferCategory] = useState([]);
 
-  if (parentCategory === "offers" && offerProductData && offerProductData.length > 0) {
+  if (
+    parentCategory === "offers" &&
+    offerProductData &&
+    offerProductData.length > 0
+  ) {
     // offerCategory = offerProductData.map((product) => product.category);
     // if (offerCategory.length > 0) offerCategory = [...new Set(offerCategory)];
-    
+
     if (selectedOfferCategory) {
       offerProductData = offerProductData.filter(
         (product) => product.category === selectedOfferCategory
@@ -77,7 +88,6 @@ const ProductPage = ({ params }) => {
     offerProductData = offerProduct;
   }, [type]);
 
-
   useEffect(() => {
     if (offerProductData.length === 0) offerProductData = offerProductData;
   }, [type]);
@@ -86,8 +96,7 @@ const ProductPage = ({ params }) => {
   const dispatch = useDispatch();
   let filteredProductData = useSelector(selectedFilteredProduct);
 
-  console.log(filteredProductData?.length)
-
+  console.log(filteredProductData?.length);
 
   let parentCategoryVar = parentCategory;
   const x = useSelector(allSelectedData);
@@ -135,17 +144,14 @@ const ProductPage = ({ params }) => {
     sessionStorage.setItem("navigationItem", JSON.stringify(newItem));
   };
 
-
-
-
   useEffect(() => {
     if (parentCategory === "offers") {
       handleSetItem("Offers");
       const encodedType = encodeURI(type);
-      console.log({encodedType})
+      console.log({ encodedType });
       dispatch({
         type: "FETCH_PRODUCTS_FROM_OFFER",
-        payload: encodedType
+        payload: encodedType,
       });
 
       const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getAllOffers`;
@@ -160,7 +166,7 @@ const ProductPage = ({ params }) => {
       const encodedType = encodeURI(type);
       dispatch({
         type: "FETCH_PRODUCTS_FROM_DEMAND_TYPE",
-        payload: encodedType
+        payload: encodedType,
       });
 
       const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getAllDemandTypes`;
@@ -272,18 +278,15 @@ const ProductPage = ({ params }) => {
     if (queryParams.offer) {
       if (offerProductData.length > 0)
         offerProductData = offerProductData?.filter(
-          (product) =>
-            product.offer.toLowerCase() === offer.toLowerCase()
+          (product) => product.offer.toLowerCase() === offer.toLowerCase()
         );
       if (filteredProductData.length > 0)
         filteredProductData = filteredProductData?.filter(
-          (product) =>
-            product.offer.toLowerCase() === offer.toLowerCase()
+          (product) => product.offer.toLowerCase() === offer.toLowerCase()
         );
       if (demandTypeProduct.length > 0)
         demandTypeProduct = demandTypeProduct?.filter(
-          (product) =>
-            product.offer.toLowerCase() === offer.toLowerCase()
+          (product) => product.offer.toLowerCase() === offer.toLowerCase()
         );
     }
   }
@@ -300,19 +303,19 @@ const ProductPage = ({ params }) => {
   //   });
   // }, [dispatch]);
 
-  const totalPages = useSelector(selectTotalPages)
-  const totalPagesOffer = useSelector(selectOfferTotalPages)
+  const totalPages = useSelector(selectTotalPages);
+  const totalPagesOffer = useSelector(selectOfferTotalPages);
 
   const handlePageChange = (pageNumber) => {
-    console.log(pageNumber)
-    console.log(parentCategory)
+    console.log(pageNumber);
+    console.log(parentCategory);
     if (parentCategory === "offers") {
       dispatch(setOfferProductCurrentPage(pageNumber));
       handleSetItem("Offers");
       const encodedType = encodeURI(type);
       dispatch({
         type: "FETCH_PRODUCTS_FROM_OFFER",
-        payload: encodedType
+        payload: encodedType,
       });
     }
 
@@ -335,12 +338,18 @@ const ProductPage = ({ params }) => {
   // const newFilteredData = filteredProductData.filter(product => product.subcategory !== "Accessories ")
   // console.log(newFilteredData.length)
 
-  const [grid, setGrid] = useState(null);
-  useEffect(()=>{
-    if (subtitle === "category" && type === "all" && category &&  category.grid){
-      setGrid(category.grid)
+  const [firstGrid, setFirstGrid] = useState(null);
+  const [secondGrid, setSecondGrid] = useState(null);
+  useEffect(() => {
+    if (subtitle === "category" && type === "all" && category) {
+      if (category.firstGrid) {
+        setFirstGrid(category.firstGrid);
+      }
+      if (category.secondGrid) {
+        setSecondGrid(category.secondGrid);
+      }
     }
-  }, [category])
+  }, [category]);
   return (
     <>
       {/* ( */}
@@ -350,10 +359,10 @@ const ProductPage = ({ params }) => {
             parentCategory === "virtualexperience"
               ? filteredProducts
               : parentCategory === "offers"
-                ? offerProductData
-                : parentCategory === "demandtype"
-                  ? demandTypeProduct
-                  : filteredProductData
+              ? offerProductData
+              : parentCategory === "demandtype"
+              ? demandTypeProduct
+              : filteredProductData
           }
           heading={
             parentCategory === "offers"
@@ -361,8 +370,8 @@ const ProductPage = ({ params }) => {
                 ? "Highest Offer"
                 : type
               : parentCategory === "demandtype"
-                ? type
-                : category.name
+              ? type
+              : category.name
           }
           type={type}
           description={category?.description}
@@ -373,12 +382,12 @@ const ProductPage = ({ params }) => {
           setType={setType}
           setSelectedOfferCategory={setSelectedOfferCategory}
           currentPage={currentPage}
-          totalPages={parentCategory === "offers"
-            ? totalPagesOffer
-            : totalPages
+          totalPages={
+            parentCategory === "offers" ? totalPagesOffer : totalPages
           }
           onPageChange={handlePageChange}
-          grid={grid}
+          firstGrid={firstGrid}
+          secondGrid={secondGrid}
         />
       </div>
       {/* ) : (
