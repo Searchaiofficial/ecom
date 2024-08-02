@@ -228,7 +228,13 @@ function TabsProductCard(props) {
   const productImages = props.productImages;
   const [isNavigationHovered, setIsNavigationHovered] = useState(false);
 
-  console.log({ productImagesTest: props.images });
+  useEffect(() => {
+    setSelectedColor(colors[0]);
+  }, [
+    props.productImages,
+    props.productImages?.length,
+    props.productImages?.[0],
+  ]);
 
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
