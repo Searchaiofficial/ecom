@@ -204,9 +204,59 @@ const Profile = ({ id }) => {
               />
             </div>
             <div className="flex flex-col">
-              <h1 className="text-xl sm:text-3xl font-semibold">
-                {user.displayName}
-              </h1>
+              <div className="text-[13px] lg:text-[16px]  flex gap-1 items-center font-bold ">
+                <h1 className="text-xl sm:text-3xl font-semibold">
+                  {user.displayName}
+                </h1>
+                {user.links?.linkedin && (
+                  <Link
+                    href={user.links?.linkedin}
+                    className="flex items-center"
+                    target="_blank"
+                  >
+                    <Image
+                      loading="lazy"
+                      className="sm:h-6 h-6 sm:w-6 w-6"
+                      src="/icons/social-icon/linkedln.svg"
+                      alt={`LinkedIn for ${user.links?.linkedin}`}
+                      width={24}
+                      height={24}
+                    />
+                  </Link>
+                )}
+                {user.links?.instagram && (
+                  <Link
+                    href={user.links?.instagram}
+                    className="flex items-center"
+                    target="_blank"
+                  >
+                    <Image
+                      loading="lazy"
+                      className="sm:h-6 h-6 sm:w-6 w-6"
+                      src="/icons/social-icon/instagram.svg"
+                      alt={`LinkedIn for ${user.links?.instagram}`}
+                      width={24}
+                      height={24}
+                    />
+                  </Link>
+                )}
+                {user.links?.youtube && (
+                  <Link
+                    href={user.links?.youtube}
+                    className="flex items-center"
+                    target="_blank"
+                  >
+                    <Image
+                      loading="lazy"
+                      className="sm:h-6 h-6 sm:w-6 w-6"
+                      src="/icons/social-icon/youtube.svg"
+                      alt={`LinkedIn for ${user.links?.youtube}`}
+                      width={24}
+                      height={24}
+                    />
+                  </Link>
+                )}
+              </div>
               <h2 className="text-gray-600 text-xs sm:text-base">
                 {user.email}
               </h2>

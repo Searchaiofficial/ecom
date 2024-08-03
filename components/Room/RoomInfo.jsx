@@ -330,12 +330,62 @@ const RoomInfo = ({ data }) => {
                 </Link>
                 <div className="flex flex-col">
                   <span className="text-[#757575]">Collaboration</span>
-                  <Link
-                    href={`/profile/${data.author._id}`}
-                    className=" text-[#1D1D1F] font-bold text-[18px]"
-                  >
-                    {data.author.displayName}
-                  </Link>
+                  <div className="text-[13px] lg:text-[16px] p-1 flex  items-center font-bold ">
+                    <Link
+                      href={`/profile/${data.author._id}`}
+                      className=" text-[#1D1D1F] font-bold text-[18px]"
+                    >
+                      {data.author.displayName}
+                    </Link>
+                    {data.author.links?.linkedin && (
+                      <Link
+                        href={data.author.links?.linkedin}
+                        className="flex items-center"
+                        target="_blank"
+                      >
+                        <Image
+                          loading="lazy"
+                          className="sm:h-6 h-6 sm:w-6 w-6"
+                          src="/icons/social-icon/linkedln.svg"
+                          alt={`LinkedIn for ${data.author.links?.linkedin}`}
+                          width={24}
+                          height={24}
+                        />
+                      </Link>
+                    )}
+                    {data.author.links?.instagram && (
+                      <Link
+                        href={data.author.links?.instagram}
+                        className="flex items-center"
+                        target="_blank"
+                      >
+                        <Image
+                          loading="lazy"
+                          className="sm:h-6 h-6 sm:w-6 w-6"
+                          src="/icons/social-icon/instagram.svg"
+                          alt={`LinkedIn for ${data.author.links?.instagram}`}
+                          width={24}
+                          height={24}
+                        />
+                      </Link>
+                    )}
+                    {data.author.links?.youtube && (
+                      <Link
+                        href={data.author.links?.youtube}
+                        className="flex items-center"
+                        target="_blank"
+                      >
+                        <Image
+                          loading="lazy"
+                          className="sm:h-6 h-6 sm:w-6 w-6"
+                          src="/icons/social-icon/youtube.svg"
+                          alt={`LinkedIn for ${data.author.links?.youtube}`}
+                          width={24}
+                          height={24}
+                        />
+                      </Link>
+                    )}
+                  </div>
                   <p className="hidden md:block text-[#1D1D1F] font-semibold text-sm pt-3 line-clamp-5 md:w-[80%]">
                     {`${data.author.authorDetails.description.slice(
                       0,
@@ -343,10 +393,7 @@ const RoomInfo = ({ data }) => {
                     )}...`}
                   </p>
                   <p className="md:hidden text-[#1D1D1F] font-semibold text-sm pt-3 line-clamp-5 md:w-[80%]">
-                    {`${data.author.authorDetails.description.slice(
-                      0,
-                      50
-                    )}...`}
+                    {`${data.author.authorDetails.description.slice(0, 50)}...`}
                   </p>
                 </div>
               </div>
