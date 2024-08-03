@@ -143,7 +143,7 @@ const Profile = ({ id }) => {
     formData.append("links[linkedin]", editedUser.links?.linkedin || "");
     formData.append("links[instagram]", editedUser.links?.instagram || "");
     formData.append("links[youtube]", editedUser.links?.youtube || "");
-
+    formData.append("role", editedUser.role || "");
     if (editedUser.authorDetails) {
       formData.append(
         "authorDetails[description]",
@@ -260,6 +260,7 @@ const Profile = ({ id }) => {
               <h2 className="text-gray-600 text-xs sm:text-base">
                 {user.email}
               </h2>
+
               <h3 className="text-slate-400">
                 {user?.isLiveStreamHost && "Liveroom Host"}
               </h3>
@@ -274,6 +275,7 @@ const Profile = ({ id }) => {
                         userType: user.userType,
                         authorDetails: user.authorDetails,
                         links: user.links,
+                        role: user.role,
                       });
                       setPreview(user.image);
                     }}
@@ -347,6 +349,24 @@ const Profile = ({ id }) => {
                   </div>
                 </div>
 
+                <div className="flex flex-col mt-4">
+                  <label htmlFor="role" className="text-lg font-semibold">
+                    Role
+                  </label>
+                  <input
+                    type="text"
+                    id="role"
+                    className="border border-gray-300 rounded-lg px-4 py-2 mt-2"
+                    value={editedUser.role}
+                    disabled={updateLoading}
+                    onChange={(e) =>
+                      setEditedUser({
+                        ...editedUser,
+                        role: e.target.value,
+                      })
+                    }
+                  />
+                </div>
                 <div className="flex flex-col mt-4">
                   <label htmlFor="linkedin" className="text-lg font-semibold">
                     LinkedIn
@@ -519,6 +539,13 @@ const Profile = ({ id }) => {
                   </button>
                 </div>
               </div>
+            </div>
+          )}
+
+          {user.role && (
+            <div className="mt-8 flex flex-col items-center w-full">
+              <h2 className="text-xl text-red-500 font-bold">Role</h2>
+              <p className="text-gray-600 ">{user.role}</p>
             </div>
           )}
 
