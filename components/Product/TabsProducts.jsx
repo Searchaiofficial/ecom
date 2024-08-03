@@ -34,6 +34,7 @@ import {
   renderOffer,
   renderDemand,
   renderSubCategory,
+  renderPrice,
 } from "./tabsRender";
 import TabsProductContent from "../compounds/TabsProductContent";
 import Measure from "./meausrement";
@@ -120,15 +121,33 @@ const Tabs = ({
   const [allOffers, setAllOffers] = useState([]);
   const [allDemandType, setAllDemandType] = useState([]);
   const [AllsubCategory, setAllSubcategory] = useState([]);
+  const allPrices = [
+    { name: "Less than 1000", value: 1000 },
+    { name: "Less than 5000", value: 5000 },
+    { name: "Less than 10000", value: 10000 },
+    { name: "Less than 20000", value: 20000 },
+    { name: "Less than 50000", value: 50000 },
+    { name: "Less than 100000", value: 100000 },
+    { name: "Less than 100000", value: 100000 },
+  ];
 
   const [selectedResult, setselectedResult] = useState(0);
   const [clearSelectedResult, setClearSelectedResult] = useState(false);
   const handleColorChange = (color) => {
     console.log("Selected color:", color);
     // Filter products by color
-    const filteredProducts = filteredProductData.filter((product) => {
-      return product.colors.includes(color);
-    });
+    // const filteredProducts = filteredProductData.filter((product) => {
+    //   return product.colors.includes(color);
+    // });
+
+    let filteredProducts = [];
+    if (color === "all") {
+      filteredProducts = filteredProductData;
+    } else {
+      filteredProducts = filteredProductData.filter((product) => {
+        return product.colors.includes(color);
+      });
+    }
     setFilterdata(filteredProducts);
     setClearSelectedResult(true);
     setselectedResult(filteredProducts?.length);
@@ -136,11 +155,14 @@ const Tabs = ({
 
   const handleSubCategoryChange = (selectedSubCategory) => {
     console.log("Selected subcategory:", selectedSubCategory);
-    // Filter products by color
-    const filteredProducts = filteredProductData.filter((product) => {
-      return product.subcategory === selectedSubCategory;
-    });
-
+    let filteredProducts = [];
+    if (selectedSubCategory === "all") {
+      filteredProducts = filteredProductData;
+    } else {
+      filteredProducts = filteredProductData.filter((product) => {
+        return product.subcategory === selectedSubCategory;
+      });
+    }
     console.log(filteredProducts);
     setFilterdata(filteredProducts);
     setClearSelectedResult(true);
@@ -158,9 +180,14 @@ const Tabs = ({
   };
 
   const handleOfferChange = (offer) => {
-    const filteredProducts = filteredProductData.filter((product) => {
-      return product.offer === offer;
-    });
+    let filteredProducts = [];
+    if (offer === "all") {
+      filteredProducts = filteredProductData;
+    } else {
+      filteredProducts = filteredProductData.filter((product) => {
+        return product.offer === offer;
+      });
+    }
     setFilterdata(filteredProducts);
     setClearSelectedResult(true);
     setselectedResult(filteredProducts?.length);
@@ -168,9 +195,36 @@ const Tabs = ({
 
   const handleDemandTypeChange = (demandType) => {
     console.log(demandType);
-    const filteredProducts = filteredProductData.filter((product) => {
-      return product.demandtype === demandType;
-    });
+    // const filteredProducts = filteredProductData.filter((product) => {
+    //   return product.demandtype === demandType;
+    // });
+    let filteredProducts = [];
+    if (demandType === "all") {
+      filteredProducts = filteredProductData;
+    } else {
+      filteredProducts = filteredProductData.filter((product) => {
+        return product.demandtype === demandType;
+      });
+    }
+    setFilterdata(filteredProducts);
+    setClearSelectedResult(true);
+    setselectedResult(filteredProducts?.length);
+  };
+
+  const handlePriceChange = (price) => {
+    console.log(price);
+    let filteredProducts = [];
+    if (price === "all") {
+      filteredProducts = filteredProductData;
+    } else {
+      filteredProducts = filteredProductData.filter((product) => {
+        return (
+          (product.specialprice.price ||
+            product.discountedprice.price ||
+            product.perUnitPrice) <= price
+        );
+      });
+    }
     setFilterdata(filteredProducts);
     setClearSelectedResult(true);
     setselectedResult(filteredProducts?.length);
@@ -188,7 +242,8 @@ const Tabs = ({
       openType === false &&
       openAll === false &&
       openCaategory === false &&
-      openOffer === false
+      openOffer === false &&
+      openPrice === false
     ) {
       setOpenSort(!openSort);
     }
@@ -232,7 +287,8 @@ const Tabs = ({
       openType === false &&
       openAll === false &&
       openCaategory === false &&
-      openOffer === false
+      openOffer === false &&
+      openPrice === false
     ) {
       setOpenSize(!openSize);
     }
@@ -253,15 +309,36 @@ const Tabs = ({
       openType === false &&
       openAll === false &&
       openCaategory === false &&
-      openOffer === false
+      openOffer === false &&
+      openPrice === false
     ) {
       setopenDemandTYpe(!openDemandTYpe);
+    }
+  };
+
+  const [openPrice, setOpenPrice] = useState(false);
+  const handlePrice = () => {
+    if (
+      openSize === false &&
+      openSort === false &&
+      opencolor === false &&
+      openDemandTYpe === false &&
+      openType === false &&
+      openAll === false &&
+      openOffer === false
+    ) {
+      setOpenPrice(!openPrice);
     }
   };
 
   const [openAllDemandType, setOpenAllDemandType] = useState(false);
   const handleAllDemandType = () => {
     setOpenAllDemandType(!openAllDemandType);
+  };
+
+  const [openAllPrice, setOpenAllPrice] = useState(false);
+  const handleAllPrice = () => {
+    setOpenAllPrice(!openAllPrice);
   };
 
   const [openallOfferType, setopenallOfferType] = useState(false);
@@ -290,7 +367,8 @@ const Tabs = ({
       openType === false &&
       openAll === false &&
       openCaategory === false &&
-      openOffer === false
+      openOffer === false &&
+      openPrice === false
     ) {
       setOpenColor(!opencolor);
     }
@@ -316,7 +394,8 @@ const Tabs = ({
       openAll === false &&
       openSize === false &&
       openOffer === false &&
-      opensubcategory === false
+      opensubcategory === false &&
+      openPrice === false
     ) {
       setOpenCategory(!openCaategory);
     }
@@ -349,7 +428,8 @@ const Tabs = ({
       openAll === false &&
       openCaategory === false &&
       openOffer === false &&
-      opensubcategory === false
+      opensubcategory === false &&
+      openPrice === false
     ) {
       setOpenType(!openType);
     }
@@ -369,7 +449,8 @@ const Tabs = ({
       openType === false &&
       openCaategory === false &&
       openOffer === false &&
-      opensubcategory === false
+      opensubcategory === false &&
+      openPrice === false
     ) {
       setOpenAll(true);
     }
@@ -385,7 +466,8 @@ const Tabs = ({
       openType === false &&
       openCaategory === false &&
       openAll === false &&
-      opensubcategory === false
+      opensubcategory === false &&
+      openPrice === false
     ) {
       setOpenOffer(!openOffer);
     }
@@ -401,7 +483,9 @@ const Tabs = ({
       openDemandTYpe === false &&
       openType === false &&
       openCaategory === false &&
-      openAll === false
+      openAll === false &&
+      openOffer === false &&
+      openPrice === false
     ) {
       setOpensubcategory(!opensubcategory);
     }
@@ -519,11 +603,6 @@ const Tabs = ({
     .fill("/icons/star-full-black.svg")
     .concat("/icons/star-half-black-half-white.svg");
 
-  // const firstPart = filterData;
-  // const firstPart = filterData.slice(0, 8);
-  // console.log("firtst is ", firstPart);
-  // console.log("gere")
-
   const swiperOptions2 = {
     slidesPerView: 4.08,
     centeredSlides: false,
@@ -538,37 +617,6 @@ const Tabs = ({
   const cartData = useSelector(selecteddbItems);
 
   console.log(cartData);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cart`,
-  //         {
-  //           params: {
-  //             deviceId: localStorage.getItem("deviceId"),
-  //           },
-  //         }
-  //       );
-  //       if (response.status !== 200) {
-  //         throw new Error("HTTP status " + response.status);
-  //       }
-  //       const data = response.data;
-  //       console.log("Fetched cart data:", data);
-
-  //       // Ensure cartData is an array
-  //       if (data && Array.isArray(data.items)) {
-  //         setCartData(data.items);
-  //       } else {
-  //         console.error("Cart data items are not an array:", data);
-  //         setCartData([]);
-  //       }
-  //     } catch (error) {
-  //       console.log("Error fetching cart data:", error);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
 
   const isProductInCart = (productId) => {
     return cartData?.items?.some((cartItem) => {
@@ -597,22 +645,7 @@ const Tabs = ({
 
   console.log(filterData);
 
-  // const handleFilterColor = (color) => {
-  //   console.log(color);
-  //   const newFilteredData = filterData?.filter((data) =>
-  //     data.productImages?.some((imageSet) => imageSet.color === color)
-  //   );
-  //   console.log(newFilteredData);
-  //   setFilterdata(newFilteredData)
-
-  // }
-  // let originalData = [...filterData];
-
   const handleFilterColor = (text) => {
-    // const checkbox = event.target;
-    // const color = checkbox.value;
-    // const isChecked = checkbox.checked;
-
     console.log(text);
 
     // console.log(`Color: ${color}, Checked: ${isChecked}`);
@@ -623,29 +656,6 @@ const Tabs = ({
     console.log(newFilteredData);
     setFilterdata(newFilteredData);
   };
-
-  // const renderColor = (text, idx) => (
-  //   <div className="flex justify-between items-center" key={idx}>
-  //     <label for="age1" className="">
-  //       {text}
-  //     </label>
-  //     <div className="flex gap-2">
-  //       {/* <Image loading="lazy" src={text.image} width={25} height={15} className="rounded-full w-5 h-5" /> */}
-  //       <input type="radio" onClick={() => handleColorChange(text)} />
-  //     </div>
-  //   </div>
-  // );
-  // const renderDemand = (text, idx) => (
-  //   <div className="flex justify-between items-center" key={idx}>
-  //     <label for="age1" className="">
-  //       {text}
-  //     </label>
-  //     <div className="flex gap-2">
-  //       {/* <Image loading="lazy" src={text.image} width={25} height={15} className="rounded-full w-5 h-5" /> */}
-  //       <input type="radio" onClick={() => handleDemandTypeChange(text)} />
-  //     </div>
-  //   </div>
-  // );
 
   const handleRemoveallFilters = () => {
     setFilterdata(filteredProductData);
@@ -861,19 +871,6 @@ const Tabs = ({
                           </div>
                         </div>
                       </SwiperSlide>
-
-                      // <div key={idx} className=" gap-2">
-                      //   <div className="flex items-center gap-4 cursor-pointer ">
-                      //     <h1
-                      //       className="text-black bg-zinc-200 hover:bg-zinc-100 px-4 py-2"
-                      //       onClick={() =>
-                      //         setSelectedOfferCategory(category.name)
-                      //       }
-                      //     >
-                      //       {category.name}
-                      //     </h1>
-                      //   </div>
-                      // </div>
                     ))}
                   </Swiper>
                 </div>
@@ -902,32 +899,7 @@ const Tabs = ({
         <p className="leading-2 mb-4 text-[14px] pt-[5px] text-[#484848] lg:w-[70%] line-clamp-2">
           {description}
         </p>
-        {/* <<<<<<< Updated upstream */}
-        {/* <div className="flex sticky top-0 z-20 bg-white py-5  scrollbar"> */}
-        {/* ======= */}
         <div className="flex sticky top-0 z-[9996] bg-white py-5 overflow-x-auto md:overflow-x-visible mb-[20px] md:mb-0">
-          {/* <TabsProductContent
-            filterName={"Sort"}
-            isFilterOpen={openSort}
-            handleFilter={handleOpen}
-            filterArr={srtarr}
-            renderFilter={(text, idx) =>
-              renderSortItem(text, idx, handleSorting)
-            }
-
-          />
-          <TabsProductContent
-            filterName={"Colors"}
-            isFilterOpen={opencolor}
-            handleFilter={handlecolor}
-          />
-          <TabsProductContent
-            filterName={"Type"}
-            isFilterOpen={openType}
-            handleFilter={handleType}
-          /> */}
-
-          {/* >>>>>>> Stashed changes */}
           {filteredProductData?.length > 0 && (
             <TabsProductContent
               filterName={"Sort"}
@@ -944,45 +916,6 @@ const Tabs = ({
             />
           )}
 
-          {/* <<<<<<< Updated upstream */}
-          {/* Size - dropdown2 */}
-          {/* ======= */}
-
-          {/* >>>>>>> Stashed changes */}
-          {/* <div className="">
-            <TabsProductContent
-              filterName={"Size"}
-              commonClasses={commonClasses}
-              isFilterOpen={openSize}
-              handleAll={handleAll}
-              handleTabClick={handleTabClick}
-              handleFilter={handleSize}
-              handleAllFilter={handleAllSize}
-              filterArr={Size}
-              renderFilter={rendersizewidth}
-            />
-          </div> */}
-
-          {/* <<<<<<< Updated upstream */}
-          {/* Design style - dropdown4 */}
-          {/* {pathname.includes("Wallpaper") ? (
-=======
-          {pathname.includes("Wallpaper") ? (
->>>>>>> Stashed changes
-            <TabsProductContent
-              filterName={"Design style"}
-              commonClasses={commonClasses}
-              isFilterOpen={openCaategory}
-              handleAll={handleAll}
-              handleTabClick={handleTabClick}
-              handleFilter={handleCategory}
-              handleAllFilter={handleAllCategory}
-              filterArr={categoryarr}
-              renderFilter={rendercategory}
-            />
-          ) : null} */}
-
-          {/* Color dropdown */}
           {filteredProductData &&
             filteredProductData?.length > 0 &&
             AllsubCategory &&
@@ -997,7 +930,12 @@ const Tabs = ({
                 handleAllFilter={handleallSubcategory}
                 filterArr={AllsubCategory}
                 renderFilter={(text, idx) =>
-                  renderSubCategory(text, idx, handleSubCategoryChange)
+                  renderSubCategory(
+                    text,
+                    idx,
+                    handleSubCategoryChange,
+                    AllsubCategory.length
+                  )
                 }
               />
             )}
@@ -1016,7 +954,7 @@ const Tabs = ({
                 handleAllFilter={handleAllcolor}
                 filterArr={allColors}
                 renderFilter={(text, idx) =>
-                  renderColor(text, idx, handleColorChange)
+                  renderColor(text, idx, handleColorChange, allColors.length)
                 }
               />
             )}
@@ -1035,42 +973,13 @@ const Tabs = ({
                 handleAllFilter={handleAllOfferType}
                 filterArr={allOffers}
                 renderFilter={(text, idx) =>
-                  renderOffer(text, idx, handleOfferChange)
+                  renderOffer(text, idx, handleOfferChange, allOffers.length)
                 }
                 openContent={openContent}
                 handleContent={handleContent}
               />
             )}
 
-          {/* {allStyles.length > 0 ? (
-            <TabsProductContent
-              filterName={"Styles"}
-              commonClasses={commonClasses}
-              isFilterOpen={openCaategory}
-              handleAll={handleAll}
-              handleTabClick={handleTabClick}
-              handleFilter={handleCategory}
-              handleAllFilter={handleAllCategory}
-              filterArr={allStyles}
-              renderFilter={rendercategory}
-            />
-          ) : null} */}
-
-          {/* {allDimensions.length > 0 ? (
-            <TabsProductContent
-              filterName={"Dimensions"}
-              commonClasses={commonClasses}
-              isFilterOpen={openWidth}
-              handleAll={handleAll}
-              handleTabClick={handleTabClick}
-              handleFilter={handleWidth}
-              handleAllFilter={handleHeight}
-              filterArr={allDimensions}
-              renderFilter={rendersizewidth}
-            />
-          ) : null} */}
-
-          {/* Collections - filter */}
           {filteredProductData &&
             filteredProductData?.length > 0 &&
             allDemandType &&
@@ -1085,85 +994,34 @@ const Tabs = ({
                 handleAllFilter={handleAllDemandType}
                 filterArr={allDemandType}
                 renderFilter={(text, idx) =>
-                  renderDemand(text, idx, handleDemandTypeChange)
+                  renderDemand(
+                    text,
+                    idx,
+                    handleDemandTypeChange,
+                    allDemandType.length
+                  )
                 }
               />
             )}
 
-          {/* {filteredProductData?.length > 0 && (
-            <button
-              onClick={handleRemoveallFilters}
-              className="bg-gray-100 px-[24px] text-[14px] font-medium mr-[10px] py-3 rounded-full min-w-fit"
-            >
-              Remove all filters
-            </button>
-          )} */}
-
-          {/* Type - dropdown5 */}
-          {/* <<<<<<< Updated upstream
-          {
-======= */}
-          {/* {
->>>>>>> Stashed changes
-            allTypes.length > 0 && (
+          {filteredProductData &&
+            filteredProductData?.length > 0 &&
+            allPrices &&
+            allPrices.length > 0 && (
               <TabsProductContent
-                filterName={"Type"}
+                filterName={"Price"}
                 commonClasses={commonClasses}
-                isFilterOpen={openType}
+                isFilterOpen={openPrice}
                 handleAll={handleAll}
                 handleTabClick={handleTabClick}
-                handleFilter={handleType}
-                handleAllFilter={handleAllType}
-                filterArr={allTypes}
-                renderFilter={renderType}
-                openContent={openContent}
-                handleContent={handleContent}
-                typeContent={typeContent}
-                renderTypeContent={(text, idx) => renderOfferItem(text, idx, setType)}
+                handleFilter={handlePrice}
+                handleAllFilter={handleAllPrice}
+                filterArr={allPrices}
+                renderFilter={(text, idx) =>
+                  renderPrice(text, idx, handlePriceChange, allPrices.length)
+                }
               />
-            )
-          } */}
-
-          {/* <TabsProductContent
-            filterName={"Colors"}
-            commonClasses={commonClasses}
-            isFilterOpen={opencolor}
-            handleAll={handleAll}
-            handleTabClick={handleTabClick}
-            handleFilter={handlecolor}
-            handleAllFilter={handleAllcolor}
-            filterArr={allColors}
-            renderFilter={renderColor}
-          /> */}
-
-          {/* <TabsProductContent
-            filterName={"Collections"}
-            commonClasses={commonClasses}
-            isFilterOpen={openCollection}
-            handleAll={handleAll}
-            handleTabClick={handleTabClick}
-            handleFilter={handleCollection}
-            handleAllFilter={handleAllCollection}
-            filterArr={collectionArr}
-            renderFilter={renderCollection}
-          /> */}
-
-          {/* <TabsProductContent
-            filterName={"Type"}
-            commonClasses={commonClasses}
-            isFilterOpen={openType}
-            handleFilter={handleType}
-            handleAll={handleAll}
-            handleTabClick={handleTabClick}
-            handleAllFilter={handleAllType}
-            filterArr={typearr}
-            renderFilter={renderType}
-            openContent={openContent}
-            handleContent={handleContent}
-            typeContent={typeContent}
-            renderTypeContent={renderTypeContent}
-          /> */}
-          {/* >>>>>>> Stashed changes */}
+            )}
 
           {filteredProductData && filteredProductData?.length > 0 && (
             <div>
@@ -1249,33 +1107,6 @@ const Tabs = ({
                     ) : null}
                   </div>
                   <hr />
-
-                  {/* <div className="flex flex-col gap-7">
-                      <div
-                        onClick={handleAllSize}
-                        className="flex justify-between text-left"
-                      >
-                        Size &nbsp;
-                        <Image loading="lazy"
-                          src="/icons/backarrow.svg"
-                          width={40}
-                          height={40}
-                          className={`w-6 h-6  mt-1
-                ${openAllSize ? " rotate-90" : "-rotate-90"}
-
-                `}
-                          alt=""
-                        />
-                      </div>
-                      {openAllSize ? (
-                        <div className="flex flex-col gap-7">
-
-                          {Size.map(rendersizewidth)}
-
-                        </div>
-                      ) : null}
-                    </div>
-                    <hr /> */}
 
                   {pathname.includes("Wallpaper") ? (
                     <>
@@ -1419,51 +1250,33 @@ const Tabs = ({
                     ) : null}
                   </div>
                   <hr />
-
-                  {/* <div className="flex flex-col gap-7">
-                      <div
-                        onClick={handleAllType}
-                        className="flex justify-between text-left text-[14px] font-semibold"
-                      >
-                        Type &nbsp;
-                        <Image loading="lazy"
-                          src="/icons/backarrow.svg"
-                          width={40}
-                          height={40}
-                          className={`w-5 h-5  mt-1
-                ${openAllType ? " rotate-90" : "-rotate-90"}
+                  <div className="flex flex-col gap-7">
+                    <div
+                      onClick={handleAllPrice}
+                      className="flex justify-between text-left text-[14px] font-semibold "
+                    >
+                      Price &nbsp;
+                      <Image
+                        loading="lazy"
+                        src="/icons/backarrow.svg"
+                        width={40}
+                        height={40}
+                        className={`w-5 h-5  mt-1
+                ${openAllPrice ? " rotate-90" : "-rotate-90"}
 
                 `}
-                          alt=""
-                        />
+                        alt="arrow icon"
+                      />
+                    </div>
+                    {openAllPrice ? (
+                      <div className="flex flex-col gap-7">
+                        {allPrices.map((text, idx) =>
+                          renderPrice(text, idx, handlePriceChange, allPrices.length)
+                        )}
                       </div>
-                      {openAllType ? (
-                        <div className="flex flex-col gap-7">
-                          {typearr.map(renderType)}
-
-                          <button
-                            className={`text-left underline
-                  ${openContent ? "hidden" : "block"}
-                  `}
-                            onClick={handleContent}
-                          >
-                            +7 more
-                          </button>
-                          {openContent
-                            ? typeContent.map(renderTypeContent)
-                            : null}
-
-                          <button
-                            onClick={handleContent}
-                            className={`text-left underline ${openContent ? "block" : "hidden"
-                              }`}
-                          >
-                            Less
-                          </button>
-                        </div>
-                      ) : null}
-                    </div> */}
-                  {/* <hr /> */}
+                    ) : null}
+                  </div>
+                  <hr />
                 </div>
               </div>
               <div className="flex bg-white z-50 flex-col absolute bottom-0 left-0 right-0 items-center justify-center gap-3 pt-3 px-4 pb-2">
@@ -1534,9 +1347,7 @@ const Tabs = ({
                       expectedDelivery={text.expectedDelivery}
                     />
 
-                    {firstGrid && idx == 2 && (
-                      <CategoryGrid grid={firstGrid} />
-                    )}
+                    {firstGrid && idx == 2 && <CategoryGrid grid={firstGrid} />}
                     {secondGrid && idx == 6 && (
                       <CategoryGrid grid={secondGrid} />
                     )}
@@ -1557,59 +1368,6 @@ const Tabs = ({
           <div className="self-center flex items-center  gap-2 mt-20">
             {renderPaginationControls()}
           </div>
-          {/* <div className="main-image-pdt pt-[32px] grid sm:grid-cols-4 grid-cols-2 sm:gap-6 gap-0">
-            {filteredProductData?.map((text, idx) => (
-              <div
-                className="flex flex-col gap-3 p-3 border-b border-r hover-divnine sm:border-none"
-                key={idx}
-                onClick={() => handlenav(text._id)}
-              >
-                <div className=" relative w-[250px] h-[250px]">
-                  <div
-                    onClick={(event) => event.stopPropagation()}
-                    className={`flex justify-between text-black gap-4  checkbox-div absolute top-0 left-0 z-10 ${selectedpdt.includes(text) ? "visible" : ""
-                      }`}
-                  >
-                    <input
-                      type="checkbox"
-                      onChange={(e) => {
-                        handleCheckbox(text, e.target.checked);
-                        setShowcompare(true);
-                      }}
-                      checked={selectedpdt.includes(text)}
-                    />
-                  </div>
-                  <Image loading="lazy"
-                    src={text.images[0]}
-                    alt=""
-                    className="absolute "
-                    layout="fill"
-                  />
-                </div>
-
-                <p className="text-sm font-semibold">{text.productTitle}</p>
-                <p className="text-sm">{text.productDescription}</p>
-                <p className="flex items-center justify-center h-10 text-sm font-semibold bg-yellow-400 price-box w-28">
-                  Rs.{" "}
-                  <span className="sm:text-3xl text-xl">
-                    {" "}
-                    {text.totalPrice}
-                  </span>
-                </p>
-                <p className="flex flex-row items-center gap-1 text-sm text-black">
-                  {stars.map((star, index) => (
-                    <Image loading="lazy"
-                      key={index}
-                      src={star}
-                      alt="star"
-                      width={15}
-                      height={15}
-                    />
-                  ))}
-                </p>
-              </div>
-            ))}
-          </div> */}
         </div>
       </div>
     </div>
