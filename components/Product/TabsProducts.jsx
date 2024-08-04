@@ -44,6 +44,7 @@ import TabsProductCard from "./TabsProductCard";
 import CategoryGrid from "./CategoryGrid";
 import { selecteddbItems } from "../Features/Slices/cartSlice";
 import { viewItemList } from "@/tag-manager/events/view_item_list";
+import { register } from "swiper/element";
 const Tabs = ({
   filteredProductData,
   heading,
@@ -604,13 +605,7 @@ const Tabs = ({
     .concat("/icons/star-half-black-half-white.svg");
 
   const swiperOptions2 = {
-    slidesPerView: 4.08,
-    centeredSlides: false,
-    spaceBetween: 5,
     modules: [Pagination, Scrollbar, Mousewheel, FreeMode],
-    noSwiping: true,
-    allowSlidePrev: true,
-    allowSlideNext: true,
   };
 
   // const [cartData, setCartData] = useState([]);
@@ -627,23 +622,6 @@ const Tabs = ({
       return cartItem?.productId?._id === productId;
     });
   };
-
-  const breakpoints = {
-    300: {
-      slidesPerView: Math.min(subCategory?.length, 2.5),
-      spaceBetween: 10,
-    },
-    768: {
-      slidesPerView: Math.min(subCategory?.length, 3),
-      spaceBetween: 10,
-    },
-    1024: {
-      slidesPerView: Math.min(subCategory?.length, 7),
-      spaceBetween: 10,
-    },
-  };
-
-  console.log(filterData);
 
   const handleFilterColor = (text) => {
     console.log(text);
@@ -716,6 +694,56 @@ const Tabs = ({
     }
   }, [type]);
 
+  useEffect(() => {
+    register();
+
+    const params = {
+      slidesPerView: 4.08,
+      centeredSlides: false,
+      spaceBetween: 5,
+      spaceBetween: 10,
+      draggable: true,
+      noSwiping: true,
+      allowSlidePrev: true,
+      allowSlideNext: true,
+      mousewheel: {
+        forceToAxis: true,
+        invert: false,
+      },
+      breakpoints: {
+        300: {
+          slidesPerView: Math.min(subCategory?.length, 2.5),
+          spaceBetween: 10,
+        },
+        768: {
+          slidesPerView: Math.min(subCategory?.length, 3),
+          spaceBetween: 10,
+        },
+        1024: {
+          slidesPerView: Math.min(subCategory?.length, 7),
+          spaceBetween: 10,
+        },
+      },
+      scrollbar: {
+        hide: false,
+        draggable: true,
+      },
+      mousewheel: {
+        forceToAxis: true,
+        invert: false,
+      },
+      freeMode: {
+        enabled: false,
+        sticky: true,
+      },
+    };
+
+    if (swiper1Ref.current) {
+      Object.assign(swiper1Ref.current, params);
+      swiper1Ref.current.initialize();
+    }
+  }, [swiper1Ref, swiper1Ref.current]);
+
   return (
     <div className="">
       {openAll && <div className="background-overlay open"></div>}
@@ -736,37 +764,23 @@ const Tabs = ({
           <div className="flex items-center">
             {subCategory ? (
               <div className="group flex flex-row items-center justify-start gap-2 mb-4">
-                <Swiper
+                <swiper-container
                   ref={swiper1Ref}
-                  {...swiperOptions2}
-                  modules={[Navigation, Pagination, Scrollbar, A11y]}
-                  navigation={{
-                    nextEl: ".right",
-                    prevEl: ".back",
-                  }}
-                  draggable={true}
                   style={{
                     "--swiper-navigation-size": "24px",
                     maxHeight: "120px",
+                    width: "100%",
                   }}
-                  scrollbar={{
-                    hide: false,
-                    draggable: true,
-                  }}
-                  mousewheel={{
-                    forceToAxis: true,
-                    invert: false,
-                  }}
-                  freeMode={{
-                    enabled: false,
-                    sticky: true,
-                  }}
-                  breakpoints={breakpoints}
                 >
                   {pathname.split("/")[3] === "all"
                     ? subCategory?.map((curElement, idx) => {
                         return (
-                          <SwiperSlide className="max-w-[130px]" key={idx}>
+                          <swiper-slide
+                            style={{
+                              maxWidth: "130px",
+                            }}
+                            key={idx}
+                          >
                             <div
                               className="cursor-pointer"
                               onClick={() => setType(curElement.name)}
@@ -786,7 +800,7 @@ const Tabs = ({
                                 </h2>
                               </div>
                             </div>
-                          </SwiperSlide>
+                          </swiper-slide>
                         );
                       })
                     : filteredSubCategory?.map((curElement, idx) => {
@@ -814,41 +828,28 @@ const Tabs = ({
                           </div>
                         );
                       })}
-                </Swiper>
+                </swiper-container>
               </div>
             ) : (
               parentCategory &&
               (parentCategory === "offers" && offerCategoryData ? (
                 <div className="group flex flex-row items-center justify-start gap-2 mb-4">
-                  <Swiper
+                  <swiper-container
                     ref={swiper1Ref}
                     {...swiperOptions2}
-                    modules={[Navigation, Pagination, Scrollbar, A11y]}
-                    navigation={{
-                      nextEl: ".right",
-                      prevEl: ".back",
-                    }}
-                    draggable={true}
                     style={{
                       "--swiper-navigation-size": "24px",
                       maxHeight: "120px",
+                      width: "100%",
                     }}
-                    scrollbar={{
-                      hide: false,
-                      draggable: true,
-                    }}
-                    mousewheel={{
-                      forceToAxis: true,
-                      invert: false,
-                    }}
-                    freeMode={{
-                      enabled: false,
-                      sticky: true,
-                    }}
-                    breakpoints={breakpoints}
                   >
                     {offerCategoryData.map((category, idx) => (
-                      <SwiperSlide className="max-w-[130px]" key={idx}>
+                      <swiper-slide
+                        style={{
+                          maxWidth: "130px",
+                        }}
+                        key={idx}
+                      >
                         <div
                           className="cursor-pointer"
                           onClick={() =>
@@ -870,9 +871,9 @@ const Tabs = ({
                             </h2>
                           </div>
                         </div>
-                      </SwiperSlide>
+                      </swiper-slide>
                     ))}
-                  </Swiper>
+                  </swiper-container>
                 </div>
               ) : (
                 parentCategory === "demandtype" &&
@@ -1271,7 +1272,12 @@ const Tabs = ({
                     {openAllPrice ? (
                       <div className="flex flex-col gap-7">
                         {allPrices.map((text, idx) =>
-                          renderPrice(text, idx, handlePriceChange, allPrices.length)
+                          renderPrice(
+                            text,
+                            idx,
+                            handlePriceChange,
+                            allPrices.length
+                          )
                         )}
                       </div>
                     ) : null}
