@@ -1,15 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useRef, useEffect, useState } from "react";
-import {
-  Navigation,
-  Pagination,
-  Scrollbar,
-  A11y,
-  Mousewheel,
-  FreeMode,
-} from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { register } from "swiper/element/bundle";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -18,7 +10,12 @@ import Link from "next/link";
 import axios from "axios";
 
 const CategoriesSlider = () => {
-  const swiper1Ref = useRef(null);
+  const swiperRef = useRef(null);
+
+  useEffect(() => {
+    register();
+  }, []);
+
   const [categories, setCategories] = useState([]);
 
   const fetchCategory = async () => {
@@ -40,34 +37,49 @@ const CategoriesSlider = () => {
     fetchCategory();
   }, []);
 
-  const breakpoints = {
-    300: {
-      slidesPerView: Math.min(categories?.length, 3.2),
-      spaceBetween: 10,
-    },
-    768: {
-      slidesPerView: Math.min(categories?.length, 3),
-      spaceBetween: 10,
-    },
-    1024: {
-      slidesPerView: Math.min(categories?.length, 8),
-      spaceBetween: 10,
-    },
-  };
+  useEffect(() => {
+    const params = {
+      slidewperView: 4.08,
+      centeredSlides: true,
+      spaceBetween: 5,
+      noSwiping: false,
+      allowSlidePrev: true,
+      allowSlideNext: true,
+      mousewheel: {
+        forceToAxis: true,
+        invert: false,
+      },
+      breakpoints: {
+        300: {
+          slidesPerView: Math.min(categories?.length, 3.2),
+          spaceBetween: 10,
+        },
+        768: {
+          slidesPerView: Math.min(categories?.length, 3),
+          spaceBetween: 10,
+        },
+        1024: {
+          slidesPerView: Math.min(categories?.length, 8),
+          spaceBetween: 10,
+        },
+      },
+      navigation: {
+        nextEl: ".right",
+        prevEl: ".back",
+      },
+      sticky: true,
+      draggable: true,
+      freeMode: true,
+    };
 
-  const swiperOptions2 = {
-    slidesPerView: 4.08,
-    centeredSlides: false,
-    spaceBetween: 5,
-    modules: [Pagination, Scrollbar, Mousewheel, FreeMode],
-    navigation: {
-      nextEl: ".custom-next-button",
-      prevEl: ".custom-prev-button",
-    },
-    noSwiping: false,
-    allowSlidePrev: true,
-    allowSlideNext: true,
-  };
+    if (swiperRef.current) {
+      Object.assign(swiperRef.current, params);
+
+      swiperRef.current.initialize();
+    }
+
+    console.log("ref test", swiperRef.current);
+  }, [swiperRef, swiperRef.current]);
 
   return (
     <div className="flex items-center justify-start">
@@ -84,65 +96,46 @@ const CategoriesSlider = () => {
                 className=" h-[28px] lg:-mt-5  mb-[50px] sm:mb-0  w-[28px] "
               />
             </div>
-            <Swiper
-              ref={swiper1Ref}
-              {...swiperOptions2}
-              modules={[Navigation, Pagination, Scrollbar, A11y]}
-              navigation={{
-                nextEl: ".right",
-                prevEl: ".back",
+            <swiper-container
+              ref={swiperRef}
+              init="false"
+              style={{
+                "--swiper-navigation-size": "24px",
+                maxHeight: "180px",
+                marginTop: "12px",
+                width: "100%",
               }}
-              sticky={true}
-              draggable={true}
-              style={{ "--swiper-navigation-size": "24px", maxHeight: "180px" }}
-              breakpoints={breakpoints}
-              // scrollbar={{
-              //     hide: false,
-              //     draggable: true,
-              // }}
-
-              mousewheel={{
-                forceToAxis: true,
-                invert: false,
-              }}
-              freeMode={{
-                enabled: false,
-                sticky: true,
-              }}
-              className="mt-[12px]"
             >
               {categories?.map((curElement, idx) => {
                 return (
-                  <SwiperSlide
-                    className=" max-w-[100px] lg:max-w-[120px] mr-[10px] min-h-[95px] mb-[30px] md:mb-0 "
-                    key={idx}
-                  >
-                    <Link
-                      href={`/${curElement.name.replace(
-                        / /g,
-                        "-"
-                      )}/category/all`}
-                      // onClick={() => handleIncrementCategoryPopularity(curElement.name)}
-                    >
-                      <div className="flex flex-col  items-center ">
-                        <div className="mb-[12px] ">
-                          <Image
-                            src={curElement.image || "/images/temp.svg"}
-                            width={200}
-                            height={130}
-                            alt={"category image"}
-                            className="w-[200px] h-[62px] lg:h-[95px] "
-                          />
+                  <swiper-slide key={idx}>
+                    <div className=" max-w-[100px] lg:max-w-[120px] mr-[10px] min-h-[95px] mb-[30px] md:mb-0 ">
+                      <Link
+                        href={`/${curElement.name.replace(
+                          / /g,
+                          "-"
+                        )}/category/all`}
+                      >
+                        <div className="flex flex-col  items-center ">
+                          <div className="mb-[12px] ">
+                            <Image
+                              src={curElement.image || "/images/temp.svg"}
+                              width={200}
+                              height={130}
+                              alt={"category image"}
+                              className="w-[200px] h-[62px] lg:h-[95px] "
+                            />
+                          </div>
+                          <h2 className="text-[#333333] lg:text-center line-clamp-1 font-semibold text-[14px] hover:underline">
+                            {curElement.name}
+                          </h2>
                         </div>
-                        <h2 className="text-[#333333] lg:text-center line-clamp-1 font-semibold text-[14px] hover:underline">
-                          {curElement.name}
-                        </h2>
-                      </div>
-                    </Link>
-                  </SwiperSlide>
+                      </Link>
+                    </div>
+                  </swiper-slide>
                 );
               })}
-            </Swiper>
+            </swiper-container>
             <div className="right rounded-full   group-hover:opacity-60 opacity-0   absolute right-5 z-10">
               <Image
                 loading="lazy"
