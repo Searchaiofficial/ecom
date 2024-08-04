@@ -1,7 +1,6 @@
 import Card from "./card";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
 import { register } from "swiper/element/bundle";
 import "./styles.css";
 import "swiper/css";
