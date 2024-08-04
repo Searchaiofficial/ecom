@@ -12,7 +12,6 @@ const TrendingSlider = ({ trendingData, isProductInCart, setPopupVisible }) => {
     register();
 
     const params = {
-      slidesPerView: 4.08,
       centeredSlides: false,
       spaceBetween: 12,
       navigation: {
@@ -128,7 +127,7 @@ const TrendingSlider = ({ trendingData, isProductInCart, setPopupVisible }) => {
                       expectedDelivery={product.expectedDelivery}
                       discountedprice={product.discountedprice}
                       offer={product.offer}
-                    urgency={product.urgency}
+                      urgency={product.urgency}
                     />
                   </div>
                 </swiper-slide>
