@@ -122,10 +122,6 @@ const Dataslider = ({ category, data, sliderIndex }) => {
         <swiper-container
           init="false"
           ref={swiperRef}
-          // style={{
-          //   paddingLeft: "20px",
-          //   overflowX: "auto",
-          // }}
           className="mySwiper pl-5 overflow-x-auto"
         >
           {!productData ? (
@@ -159,39 +155,6 @@ const Dataslider = ({ category, data, sliderIndex }) => {
                   />
                 </div>
               </swiper-slide>
-            ))
-          )}
-          {!productData ? (
-            <div>
-              <h1>loading</h1>
-            </div>
-          ) : (
-            productData.map((product) => (
-              <SwiperSlide key={product._id}>
-                <div className="grid grid-cols-1 mt-2 h-full fade-in ">
-                  <Card
-                    cardkey={product._id}
-                    specialPrice={product?.specialprice}
-                    title={product.productTitle}
-                    price={product.perUnitPrice}
-                    desc={product.subcategory}
-                    productId={product.productId}
-                    demandtype={product.demandtype}
-                    imgSrc={product.images}
-                    rating={product.ratings}
-                    id={product._id}
-                    setPopupVisible={setPopupVisible}
-                    cssClass={"card1flex"}
-                    productImages={product?.productImages}
-                    productType={product.productType}
-                    expectedDelivery={product.expectedDelivery}
-                    discountedprice={product.discountedprice}
-                    shortDescription={product.shortDescription}
-                    offer={product.offer}
-                    urgency={product.urgency}
-                  />
-                </div>
-              </SwiperSlide>
             ))
           )}
         </swiper-container>
