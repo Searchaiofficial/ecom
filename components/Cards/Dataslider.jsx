@@ -30,10 +30,6 @@ const Dataslider = ({ category, data, sliderIndex }) => {
       spaceBetween: 10,
       noSwiping: true,
       scrollbar: {
-        hide: false,
-        draggable: true,
-      },
-      scrollbar: {
         el: `.swiper-scrollbar-dataslider-${sliderIndex}`,
         draggable: true,
       },
