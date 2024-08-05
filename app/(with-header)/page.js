@@ -9,10 +9,12 @@ const ChatPrompt = dynamic(() =>
 );
 import SaveUserCoordinatesOnscroll from "@/utils/SaveUserCoordinatesOnScroll";
 import { OrganizationJsonLd, SiteLinksSearchBoxJsonLd } from "next-seo";
+import SiteNavigationElement from "@/components/JsonLd/SiteNavigationElement";
 
 export default async function Home() {
   return (
     <>
+      <SiteNavigationElement />
       <OrganizationJsonLd
         useAppDir={true}
         type={"Organization"}
