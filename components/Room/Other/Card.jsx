@@ -765,7 +765,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
     {
       title:
         "Secure transactions with hassle free 14 days Exchange and Returns",
-      icon: "payment",
+      icon: "suquer payment",
       content: (
         <>
           Tried on your item(s) and need a different size? Exchange your item(s)
@@ -791,7 +791,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
     },
     {
       title: "Save 5% on all Online Payments under ₹3000",
-      icon: "suquer payment",
+      icon: "offer",
       content:
         "Pay 5% less on all orders under ₹3000 when you choose online payment options. That's right – simply opt for online payment at checkout and enjoy instant savings on your purchase.",
     },

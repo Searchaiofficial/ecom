@@ -95,7 +95,7 @@ const CartProduct = ({
                   className=""
                 >
                   <Image loading="lazy"
-                    src="/icons/delete-icon.svg"
+                    src="/icons/delete icon.svg"
                     width={20}
                     height={20}
                     alt="Arrow"

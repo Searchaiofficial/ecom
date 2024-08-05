@@ -349,7 +349,7 @@ const AddCart = () => {
                             </p>
                             <div onClick={() => handleSampleDelete(sample._id)}>
                               <Image loading="lazy"
-                                src="/icons/delete-icon.svg"
+                                src="/icons/delete icon.svg"
                                 width={20}
                                 height={20}
                                 alt="Arrow"
@@ -508,7 +508,7 @@ const AddCart = () => {
                   </div>
                   <div className="icons flex items-center space-x-2 mt-4 justify-around">
                     <img
-                      src="/icons/delete-icon.svg"
+                      src="/icons/delete icon.svg"
                       alt="delete"
                       className="w-6 h-6 hover:text-slate-500 cursor-pointer "
                     />
