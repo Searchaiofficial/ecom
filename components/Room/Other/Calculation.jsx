@@ -54,7 +54,7 @@ const Calculation = ({ priceData }) => {
           {/* <span className=" self-start">Calculate</span> */}
           {/* {!hidden ? (
             <Image
-              src="/icons/arrow-circle-right-icon.svg"
+              src="/icons/arrow-circle-rightarrowblack.svg"
               width={23}
               height={23}
               alt="arrow right"
