@@ -2,7 +2,6 @@ import { getProductByProductId } from "@/actions/getProductByProductId";
 import ProductPage from "@/components/ProductPage/ProductPage";
 import { getAggregateRating } from "@/utils/getAggregateRating";
 import { BreadcrumbJsonLd, ProductJsonLd } from "next-seo";
-import { notFound } from "next/navigation";
 
 const Page = async ({ params }) => {
   const productId = params.subtitle;
@@ -14,7 +13,7 @@ const Page = async ({ params }) => {
   const product = await getProductByProductId(productId);
 
   if (!product) {
-    notFound();
+    return null;
   }
 
   const productImages = product?.images;
