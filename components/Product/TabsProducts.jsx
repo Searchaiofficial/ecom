@@ -653,12 +653,15 @@ const Tabs = ({
       pages.push(
         <button
           key={i}
-          className={`bg-gray-200 px-3 py-1 rounded ${
-            currentPage === i ? "bg-gray-400" : ""
+          // className={`bg-gray-200 px-3 py-1 rounded ${
+          //   currentPage === i ? "bg-gray-400" : ""
+          // }`}
+          className={`text-center text-[14px] font-semibold border max-w-fit p-2 px-4 rounded-full  border-black cursor-pointer ${
+            currentPage === i ? "bg-gray-200" : ""
           }`}
           onClick={() => onPageChange(i)}
         >
-          {i}
+          More
         </button>
       );
     }
