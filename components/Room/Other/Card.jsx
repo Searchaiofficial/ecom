@@ -187,7 +187,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
       starsArray.push(
         <img
           key={i}
-          src={"/icons/star-full-black.svg"}
+          src={"/icons/star full black.svg"}
           height={15}
           width={15}
           alt="star"
@@ -200,7 +200,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
       starsArray.push(
         <img
           key={fullStars}
-          src={"/icons/star-half-black-half-white.svg"}
+          src={"/icons/half black half white.svg"}
           height={15}
           width={15}
           alt="half-star"
@@ -213,7 +213,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
       starsArray.push(
         <img
           key={fullStars + halfStar + i}
-          src={"/icons/star-full-white.svg"}
+          src={"/icons/star full white.svg"}
           height={20}
           width={20}
           alt="empty-star"
@@ -765,7 +765,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
     {
       title:
         "Secure transactions with hassle free 14 days Exchange and Returns",
-      icon: "payment",
+      icon: "suquer payment",
       content: (
         <>
           Tried on your item(s) and need a different size? Exchange your item(s)
@@ -791,7 +791,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
     },
     {
       title: "Save 5% on all Online Payments under ₹3000",
-      icon: "suquer payment",
+      icon: "offer",
       content:
         "Pay 5% less on all orders under ₹3000 when you choose online payment options. That's right – simply opt for online payment at checkout and enjoy instant savings on your purchase.",
     },

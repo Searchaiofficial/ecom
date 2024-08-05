@@ -72,8 +72,8 @@ const page = ({ params }) => {
   }, []);
 
   const stars = new Array(4)
-    .fill("/icons/star-full-black.svg")
-    .concat("/icons/star-half-black-half-white.svg");
+    .fill("/icons/star full black.svg")
+    .concat("/icons/half black half white.svg");
 
   useEffect(() => {
     if (sessionStorage.getItem("roomId") !== roomId) {

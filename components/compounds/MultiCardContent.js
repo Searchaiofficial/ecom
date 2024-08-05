@@ -36,7 +36,7 @@ const MultiCardContent = (props) => {
       <div className=" ml-[24px] mb-[24px] max-w-fit  bg-[#333336] rounded-full mt-10">
         <Image loading="lazy"
           className="min-w-[25px] min-h-[25px] p-1 m-2"
-          src="/icons/Back_arrow_white.svg"
+          src="/icons/backarrowhite.svg"
           width={0}
           height={0}
           alt="Add icon"

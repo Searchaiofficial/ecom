@@ -40,7 +40,7 @@ const Label = ({ data }) => {
             <div className="flex  top-16 border-l border-zinc-200">
               <Image loading="lazy"
                 className="flex self-center rotate-180   mx-[4px] "
-                src="/icons/backarrow.svg"
+                src="/icons/downarrow.svg"
                 height={24}
                 width={24}
                 alt="arrow"

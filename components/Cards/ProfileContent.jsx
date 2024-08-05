@@ -120,7 +120,7 @@ const ProfileContent = ({ initialData }) => {
       <div className=" flex flex-row items-end justify-end gap-6 mt-[25px]">
         <Image
           loading="lazy"
-          src="/icons/backarrow-w.svg"
+          src="/icons/backarrowhite.svg"
           width={20}
           height={20}
           alt="Arrow"
@@ -128,7 +128,7 @@ const ProfileContent = ({ initialData }) => {
         />
         <Image
           loading="lazy"
-          src="/icons/rightarrow-w.svg"
+          src="/icons/rightarro-white.svg"
           width={20}
           height={20}
           alt="Arrow"

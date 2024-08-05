@@ -185,7 +185,7 @@ const PlaceInfo = (data) => {
             <div className=" flex gap-4 underline font-[16px]  mb-2 cursor-pointer">
               Show more
               <Image
-                src="/icons/arrow-circle-right-icon.svg"
+                src="/icons/arrow-circle-rightarrowblack.svg"
                 width={25}
                 height={25}
                 alt="right icon"

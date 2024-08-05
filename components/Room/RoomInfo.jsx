@@ -285,7 +285,7 @@ const RoomInfo = ({ data }) => {
                     }).map((_, idx) => (
                       <Image
                         loading="lazy"
-                        src="/icons/star-full-black.svg"
+                        src="/icons/star full black.svg"
                         width={10}
                         height={10}
                         alt="star"

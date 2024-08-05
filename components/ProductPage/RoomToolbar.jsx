@@ -416,7 +416,7 @@ const RoomToolbar = ({ data }) => {
                 >
                   <Image
                     loading="lazy"
-                    src="/icons/backarrow-w.svg"
+                    src="/icons/backarrowhite.svg"
                     height={20}
                     width={20}
                     alt="arrow"
@@ -431,7 +431,7 @@ const RoomToolbar = ({ data }) => {
                 >
                   <Image
                     loading="lazy"
-                    src="/icons/rightarrow-w.svg"
+                    src="/icons/rightarro-white.svg"
                     height={30}
                     width={30}
                     alt="arrow"
@@ -607,7 +607,7 @@ const RoomToolbar = ({ data }) => {
                   </p>
                   <Image
                     loading="lazy"
-                    src="/icons/backarrow.svg"
+                    src="/icons/downarrow.svg"
                     width={40}
                     height={40}
                     className={`w-4 h-4 mt-1 block  ${
@@ -655,7 +655,7 @@ const RoomToolbar = ({ data }) => {
                   <p>{selectedColor}</p>
                   <Image
                     loading="lazy"
-                    src="/icons/backarrow.svg"
+                    src="/icons/downarrow.svg"
                     width={40}
                     height={40}
                     className={`w-4 h-4 mt-1 block  ${
@@ -698,7 +698,7 @@ const RoomToolbar = ({ data }) => {
                   <p>Sort</p>
                   <Image
                     loading="lazy"
-                    src="/icons/backarrow.svg"
+                    src="/icons/downarrow.svg"
                     width={40}
                     height={40}
                     className={`w-4 h-4 mt-1 block -rotate-90`}
@@ -719,7 +719,7 @@ const RoomToolbar = ({ data }) => {
                   </p>
                   <Image
                     loading="lazy"
-                    src="/icons/backarrow.svg"
+                    src="/icons/downarrow.svg"
                     width={40}
                     height={40}
                     className={`w-4 h-4 mt-1 block  ${
@@ -767,7 +767,7 @@ const RoomToolbar = ({ data }) => {
                   <p>{selectedColor}</p>
                   <Image
                     loading="lazy"
-                    src="/icons/backarrow.svg"
+                    src="/icons/downarrow.svg"
                     width={40}
                     height={40}
                     className={`w-4 h-4 mt-1 block  ${
@@ -809,7 +809,7 @@ const RoomToolbar = ({ data }) => {
                   <p>Sort</p>
                   <Image
                     loading="lazy"
-                    src="/icons/backarrow.svg"
+                    src="/icons/downarrow.svg"
                     width={40}
                     height={40}
                     className={`w-4 h-4 mt-1 block -rotate-90`}

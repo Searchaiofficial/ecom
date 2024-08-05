@@ -66,7 +66,7 @@ const Dataslider = ({ category, data, sliderIndex }) => {
             >
               <Image
                 loading="lazy"
-                src="/icons/left-icon.svg"
+                src="/icons/backarrowblack.svg"
                 width={20}
                 height={20}
                 alt="Arrow"
@@ -79,7 +79,7 @@ const Dataslider = ({ category, data, sliderIndex }) => {
             >
               <Image
                 loading="lazy"
-                src="/icons/right-icon.svg"
+                src="/icons/rightarrowblack.svg"
                 width={20}
                 height={20}
                 alt="Arrow"

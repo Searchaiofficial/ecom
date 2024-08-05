@@ -32,7 +32,7 @@ function SuggestionCard(props) {
               {props.desc}
             </div>
             <div className="bg-[#333336] rounded-full max-w-fit p-2 mt-[60px] lg:mt-[90px]">
-              <Image src={"/icons/Back_arrow_white.svg"} height={25} width={25} className="p-1" alt="arrow icon" loading="lazy"/>
+              <Image src={"/icons/backarrowhite.svg"} height={25} width={25} className="p-1" alt="arrow icon" loading="lazy"/>
             </div>
           </div>
 

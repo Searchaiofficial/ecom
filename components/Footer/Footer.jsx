@@ -52,7 +52,7 @@ const Footer = () => {
                   width={35}
                   height={35}
                   className="list-socialicon"
-                  src="/icons/social-icon/facebook-icon.svg"
+                  src="/icons/social-icon/facebook.svg"
                   alt="facebook icon"
                 />
               </a>
@@ -61,7 +61,7 @@ const Footer = () => {
               <a href="#" className="me-4 hover:underline">
                 <img
                   className="list-socialicon"
-                  src="/icons/social-icon/instagram-icon.svg"
+                  src="/icons/social-icon/instagram.svg"
                   alt="insta icon"
                 />
               </a>
@@ -70,7 +70,7 @@ const Footer = () => {
               <a href="#" className="me-4 hover:underline">
                 <img
                   className="list-socialicon"
-                  src="/icons/social-icon/twitter-icon.svg"
+                  src="/icons/social-icon/twitter.svg"
                   alt="twitter icon"
                 />
               </a>
@@ -79,7 +79,7 @@ const Footer = () => {
               <a href="#" className="me-4 hover:underline">
                 <img
                   className="list-socialicon"
-                  src="/icons/social-icon/youtube-icon.svg"
+                  src="/icons/social-icon/youtube.svg"
                   alt="youtube icon"
                 />
               </a>

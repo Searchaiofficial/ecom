@@ -52,7 +52,7 @@ function ItemCard(props) {
           <div className="card-rating">
             <Image
               loading="lazy"
-              src="/icons/star-full-black.svg"
+              src="/icons/star full black.svg"
               width={20}
               height={20}
               alt="star"

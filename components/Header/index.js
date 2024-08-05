@@ -537,7 +537,7 @@ function Header({ setIsHeaderMounted }) {
           >
             <div className="flex justify-between items-center py-[5px] w-full h-fit mb-4">
               <div className=" flex items-center">
-                {/* <Image loading="lazy" src={"/icons/backarrow.svg"} height={20} width={20} className="rotate-180" /> */}
+                {/* <Image loading="lazy" src={"/icons/downarrow.svg"} height={20} width={20} className="rotate-180" /> */}
                 {toptext && toptext.length > 0 ? (
                   <div className="flex  items-center mt-2">
                     <Image
