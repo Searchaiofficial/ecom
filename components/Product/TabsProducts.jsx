@@ -656,7 +656,7 @@ const Tabs = ({
           // className={`bg-gray-200 px-3 py-1 rounded ${
           //   currentPage === i ? "bg-gray-400" : ""
           // }`}
-          className={`text-center text-[14px] font-semibold border max-w-fit p-2 px-4 rounded-full  border-black cursor-pointer ${
+          className={`text-center text-[14px] font-semibold border max-w-fit  bg-gray-100 cursor-pointer px-[24px] py-[0.65rem] mr-2.5 rounded-full flex  whitespace-nowrap${
             currentPage === i ? "bg-gray-200" : ""
           }`}
           onClick={() => onPageChange(i)}

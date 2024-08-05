@@ -392,7 +392,7 @@ function Header({ setIsHeaderMounted }) {
                       loading="lazy"
                       src="/icons/search.svg"
                       alt="Search Icon"
-                      className="absolute z-10 seachbar-div2-icon"
+                      className="absolute z-10  w-[18px] h-[18px]"
                       width={27}
                       height={27}
                     />
@@ -459,7 +459,7 @@ function Header({ setIsHeaderMounted }) {
                         alt="Profile Icon"
                         width={18}
                         height={18}
-                        className="header-div-icon p-[2px]"
+                        className="header-div-icon p-[1px]"
                       />
                     </div>
                   )}

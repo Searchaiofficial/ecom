@@ -311,6 +311,20 @@ const RoomToolbar = ({ data }) => {
         />
         <span className="text-sm">Free Sampling</span>
       </div>
+      <span></span>
+      <div
+        className="py-2 focus:outline-none h-8 flex items-center cursor-pointer space-x-2 "
+      >
+        <Image
+          src="/icons/3d.svg"
+          alt="3d"
+          width={20}
+          height={25}
+          loading="lazy"
+        />
+        <span className="text-sm">3D</span>
+      </div>
+
       {openFreeSAmple && (
         <div
           className={`fixed px-[24px] lg:px-[32px] gap-10 flex top-0 z-[9999] overflow-y-auto md:overflow-hidden right-0 w-[100%] lg:w-[70%] h-full bg-white shadow-lg transition-transform transform ${
