@@ -547,7 +547,7 @@ const RoomPage = () => {
               <div onClick={() => setCategoryFilterOpen(!categoryFilterOpen)} className={`${commonClasses} text-[14px] flex items-center gap-2 font-semibold rounded-full bg-gray-100`}>
                 <p>{selectedCategory}</p>
                 <Image loading="lazy"
-                  src="/icons/backarrow.svg"
+                  src="/icons/downarrow.svg"
                   width={40}
                   height={40}
                   className={`w-4 h-4 mt-1 block  ${categoryFilterOpen && "rotate-90"} -rotate-90`}
@@ -572,7 +572,7 @@ const RoomPage = () => {
               <div onClick={() => setColorFilterOpen(!ColorfilterOpen)} className={`${commonClasses} text-[14px] flex items-center gap-2 font-semibold rounded-full bg-gray-100`}>
                 <p>{selectedColor}</p>
                 <Image loading="lazy"
-                  src="/icons/backarrow.svg"
+                  src="/icons/downarrow.svg"
                   width={40}
                   height={40}
                   className={`w-4 h-4 mt-1 block  ${ColorfilterOpen && "rotate-90"} -rotate-90`}

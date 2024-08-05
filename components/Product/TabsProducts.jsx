@@ -601,8 +601,8 @@ const Tabs = ({
     selectedpdt.length < 2 ? "bg-gray-300 text-white" : "bg-black text-white";
 
   const stars = new Array(4)
-    .fill("/icons/star-full-black.svg")
-    .concat("/icons/star-half-black-half-white.svg");
+    .fill("/icons/star full black.svg")
+    .concat("/icons/half black half white.svg");
 
   const swiperOptions2 = {
     modules: [Pagination, Scrollbar, Mousewheel, FreeMode],
@@ -1050,7 +1050,7 @@ const Tabs = ({
                 All Filters &nbsp;
                 <Image
                   loading="lazy"
-                  src="/icons/choserightfloor.svg"
+                  src="/icons/filter.svg"
                   width={40}
                   height={40}
                   className={`w-4 h-4 mt-1  sm:block hidden
@@ -1092,7 +1092,7 @@ const Tabs = ({
                       Sort &nbsp;
                       <Image
                         loading="lazy"
-                        src="/icons/backarrow.svg"
+                        src="/icons/downarrow.svg"
                         width={40}
                         height={40}
                         className={`w-5 h-5  mt-1
@@ -1122,7 +1122,7 @@ const Tabs = ({
                           Design style &nbsp;
                           <Image
                             loading="lazy"
-                            src="/icons/backarrow.svg"
+                            src="/icons/downarrow.svg"
                             width={40}
                             height={40}
                             className={`w-6 h-6  mt-1
@@ -1150,7 +1150,7 @@ const Tabs = ({
                       Color &nbsp;
                       <Image
                         loading="lazy"
-                        src="/icons/backarrow.svg"
+                        src="/icons/downarrow.svg"
                         width={40}
                         height={40}
                         className={`w-5 h-5  mt-1
@@ -1180,7 +1180,7 @@ const Tabs = ({
                           Design style &nbsp;
                           <Image
                             loading="lazy"
-                            src="/icons/backarrow.svg"
+                            src="/icons/downarrow.svg"
                             width={40}
                             height={40}
                             className={`w-5 h-5  mt-1
@@ -1208,7 +1208,7 @@ const Tabs = ({
                       Latest &nbsp;
                       <Image
                         loading="lazy"
-                        src="/icons/backarrow.svg"
+                        src="/icons/downarrow.svg"
                         width={40}
                         height={40}
                         className={`w-5 h-5  mt-1
@@ -1235,7 +1235,7 @@ const Tabs = ({
                       Offer &nbsp;
                       <Image
                         loading="lazy"
-                        src="/icons/backarrow.svg"
+                        src="/icons/downarrow.svg"
                         width={40}
                         height={40}
                         className={`w-5 h-5  mt-1
@@ -1262,7 +1262,7 @@ const Tabs = ({
                       Price &nbsp;
                       <Image
                         loading="lazy"
-                        src="/icons/backarrow.svg"
+                        src="/icons/downarrow.svg"
                         width={40}
                         height={40}
                         className={`w-5 h-5  mt-1

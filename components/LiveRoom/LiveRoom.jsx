@@ -187,7 +187,7 @@ const LiveRoom = ({ userInfo }) => {
                 className="flex gap-1 items-center absolute top-4 left-4 px-4 py-2 rounded-full hover:bg-gray-200/45 transition"
               >
                 <Image
-                  src="/icons/backarrow.svg"
+                  src="/icons/downarrow.svg"
                   width={16}
                   height={16}
                   alt="back"

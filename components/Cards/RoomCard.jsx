@@ -190,7 +190,7 @@ const RoomCard = async () => {
           <p class="text-[14px] font-semibold">Shop all New lower price</p>
           <Image
             loading="lazy"
-            src={"/icons/backarrow.svg"}
+            src={"/icons/downarrow.svg"}
             width={15}
             height={15}
             alt="arrow icon"

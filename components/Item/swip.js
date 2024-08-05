@@ -22,7 +22,7 @@ function Carousel({ data }) {
       onMouseLeave={() => setIsHovered(false)}
     >
       {isHovered && slide !== 0 && (
-        <Image  loading="lazy" src="/icons/backarrow.svg" width={20} height={20} alt="back arrow" />
+        <Image  loading="lazy" src="/icons/downarrow.svg" width={20} height={20} alt="back arrow" />
         // <BsArrowLeftCircleFill
         //   onClick={prevSlide}
         //   className="arrow arrow-left"

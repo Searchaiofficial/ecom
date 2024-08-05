@@ -54,7 +54,7 @@ const Blinds = () => {
                 onClick={() => swiper2Ref.current.swiper.slidePrev()}
                 className="custom-prev-button hover:bg-400 hover:scale-110 hover:text-slate-100  "
               >
-                <img className="w-8 h-8" src="/icons/backarrow.svg" alt="left" />
+                <img className="w-8 h-8" src="/icons/downarrow.svg" alt="left" />
               </div>
               <div
                 onClick={() => swiper2Ref.current.swiper.slideNext()}

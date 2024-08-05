@@ -463,7 +463,7 @@ const Reviews = ({ productId, data }) => {
               <>
                 <Image
                   loading="lazy"
-                  src="/icons/star-full-black.svg"
+                  src="/icons/star full black.svg"
                   width={15}
                   height={15}
                   alt="star"
@@ -530,7 +530,7 @@ const Reviews = ({ productId, data }) => {
                   <Image
                     loading="lazy"
                     key={i}
-                    src="/icons/star-full-black.svg"
+                    src="/icons/star full black.svg"
                     width={15}
                     height={15}
                     alt="star"
@@ -635,7 +635,7 @@ const Reviews = ({ productId, data }) => {
                           <Image
                             loading="lazy"
                             key={i}
-                            src="/icons/star-full-black.svg"
+                            src="/icons/star full black.svg"
                             width={10}
                             height={10}
                             alt="star"
@@ -765,7 +765,7 @@ const Reviews = ({ productId, data }) => {
                                     <Image
                                       loading="lazy" 
                                       key={i}
-                                      src="/icons/star-full-black.svg"
+                                      src="/icons/star full black.svg"
                                       width={10}
                                       height={10}
                                       alt="star"

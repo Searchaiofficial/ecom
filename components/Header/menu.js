@@ -114,7 +114,7 @@ ${mainContent ? "block" : "hidden"}
                         >
                           <p>{text.lebel}</p>
                           <img
-                            src="/icons/backarrow.svg"
+                            src="/icons/downarrow.svg"
                             className="w-5 h-5 rotate-180"
                             alt="back arrow icon"
                             onClick={() => {

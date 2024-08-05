@@ -21,7 +21,7 @@ function Card(props) {
       starsArray.push(
         <img
           key={i}
-          src={"/icons/star-full-black.svg"}
+          src={"/icons/star full black.svg"}
           height={20}
           width={20}
           alt="star"
@@ -34,7 +34,7 @@ function Card(props) {
       starsArray.push(
         <img
           key={fullStars}
-          src={"/icons/star-half-black-half-white.svg"}
+          src={"/icons/half black half white.svg"}
           height={20}
           width={20}
           alt="half-star"
@@ -47,7 +47,7 @@ function Card(props) {
       starsArray.push(
         <img
           key={fullStars + halfStar + i}
-          src={"/icons/star-full-white.svg"}
+          src={"/icons/star full white.svg"}
           height={20}
           width={20}
           alt="empty-star"
@@ -141,7 +141,7 @@ function Card(props) {
       starsArray.push(
         <img
           key={i}
-          src={"/icons/star-full-black.svg"}
+          src={"/icons/star full black.svg"}
           height={15}
           width={15}
           alt="star"
@@ -154,7 +154,7 @@ function Card(props) {
       starsArray.push(
         <img
           key={fullStars}
-          src={"/icons/star-half-black-half-white.svg"}
+          src={"/icons/half black half white.svg"}
           height={15}
           width={15}
           alt="half-star"
@@ -167,7 +167,7 @@ function Card(props) {
       starsArray.push(
         <img
           key={fullStars + halfStar + i}
-          src={"/icons/star-full-white.svg"}
+          src={"/icons/star full white.svg"}
           height={15}
           width={15}
           alt="empty-star"
@@ -425,7 +425,7 @@ function Card(props) {
               onMouseEnter={() => setIsNavigationHovered(true)}
               onMouseLeave={() => setIsNavigationHovered(false)}
               loading="lazy"
-              src="/icons/backarrow-w.svg"
+              src="/icons/backarrowhite.svg"
               height={20}
               width={20}
               alt="arrow"
@@ -502,7 +502,7 @@ function Card(props) {
             <Image
               onMouseEnter={() => setIsNavigationHovered(true)}
               onMouseLeave={() => setIsNavigationHovered(false)}
-              src="/icons/rightarrow-w.svg"
+              src="/icons/rightarro-white.svg"
               height={30}
               width={30}
               alt="arrow"

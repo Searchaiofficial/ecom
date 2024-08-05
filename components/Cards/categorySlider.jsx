@@ -77,7 +77,7 @@ const CategoriesSlider = () => {
             <div className="back rounded-full   group-hover:opacity-60  opacity-0  absolute left-5 z-10">
               <Image
                 loading="lazy"
-                src="/icons/backarrow-w.svg"
+                src="/icons/backarrowhite.svg"
                 width={20}
                 height={20}
                 alt="Arrow"
@@ -146,7 +146,7 @@ const CategoriesSlider = () => {
             <div className="right rounded-full   group-hover:opacity-60 opacity-0   absolute right-5 z-10">
               <Image
                 loading="lazy"
-                src="/icons/rightarrow-w.svg"
+                src="/icons/rightarro-white.svg"
                 width={20}
                 height={20}
                 alt="Arrow"

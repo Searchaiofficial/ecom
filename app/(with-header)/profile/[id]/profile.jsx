@@ -649,7 +649,7 @@ const Profile = ({ id }) => {
                         <Image
                           loading="lazy"
                           key={i}
-                          src="/icons/star-full-black.svg"
+                          src="/icons/star full black.svg"
                           width={15}
                           height={15}
                           alt="star"

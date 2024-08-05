@@ -41,7 +41,7 @@ const Profile = async () => {
             <Link href="/freesample" className="bg-black pt-3 pb-3 pr-[25px] pl-[25px] mb-5 lg:mb-12 rounded-full flex justify-center items-center text-white w-72">
               <p>Book an appointment</p>
               <div className="ml-5">
-                <Image src={"/icons/Back_arrow_white.svg"} alt="arrow profile" height={15} width={15} loading="lazy" />
+                <Image src={"/icons/backarrowhite.svg"} alt="arrow profile" height={15} width={15} loading="lazy" />
               </div>
             </Link>
           </div>

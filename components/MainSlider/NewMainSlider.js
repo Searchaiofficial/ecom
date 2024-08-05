@@ -125,7 +125,7 @@ export default function NewMainSlider({ initialData }) {
       >
         <div className={`${navigationVisible ? "block" : "hidden"}`}>
           <Image loading="lazy"
-            src="/icons/backarrow-w.svg"
+            src="/icons/backarrowhite.svg"
             width={30}
             height={30}
             alt="arrow"
@@ -228,7 +228,7 @@ export default function NewMainSlider({ initialData }) {
         })}
         <div className={`${navigationVisible ? "block" : "hidden"}`}>
           <Image loading="lazy"
-            src="/icons/rightarrow-w.svg"
+            src="/icons/rightarro-white.svg"
             width={30}
             height={30}
             alt="arrow"

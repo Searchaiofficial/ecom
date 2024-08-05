@@ -249,7 +249,7 @@ const Carousel = ({ images: prodImage, data }) => {
           <div className="z-50 custom-prev-button">
             <Image
               loading="lazy"
-              src="/icons/backarrow-w.svg"
+              src="/icons/backarrowhite.svg"
               height={20}
               width={20}
               alt="arrow"
@@ -261,7 +261,7 @@ const Carousel = ({ images: prodImage, data }) => {
           <div className="z-50 custom-next-button">
             <Image
               loading="lazy"
-              src="/icons/rightarrow-w.svg"
+              src="/icons/rightarro-white.svg"
               height={30}
               width={30}
               alt="arrow"

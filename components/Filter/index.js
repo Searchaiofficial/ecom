@@ -298,7 +298,7 @@ function Filter({ isFilterHovered, onFilterHover }) {
             <div className="at">
               {" "}
               <img
-                src={choserightfloor}
+                src={filter}
                 alt=""
                 className="seachbar-div2-icon"
               />{" "}
@@ -311,7 +311,7 @@ function Filter({ isFilterHovered, onFilterHover }) {
             <div className="at">
               {" "}
               <img
-                src={choserightfloor}
+                src={filter}
                 alt=""
                 className="seachbar-div2-icon"
               />{" "}
