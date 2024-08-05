@@ -16,7 +16,7 @@ import axios from "axios";
 import Carous from "../Carousel/Carous";
 import { viewItem } from "@/tag-manager/events/view_item";
 
-const ProductPage = ({ title, productId, initialData }) => {
+const ProductPage = ({ productId, initialData }) => {
   const [data, setData] = useState(initialData);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,7 +29,7 @@ const ProductPage = ({ title, productId, initialData }) => {
       // dispatch({ type: "FETCH_ROOM_REQUEST", payload: title });
       dispatch({ type: "FETCH_PRODUCT_BY_ID", payload: productId });
     }
-  }, [title, dispatch]);
+  }, [productId, dispatch]);
 
   useEffect(() => {
     const fetchData = async () => {
