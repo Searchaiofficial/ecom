@@ -178,7 +178,7 @@ const Tabs = ({ data }) => {
 
 
         {activeTab === "all" ? (
-          <div ref={navbarRef} className={`classic-tabs ${isSticky ? "mt-20" : ""}`}>
+          <div ref={navbarRef} className={`classic-tabs  ${isSticky ? "mt-20" : ""}`}>
 
             <div className=" text-green-800 grid sm:grid-cols-3 grid-cols-2 gap-3 grid-rows-3">
               <TabImage

@@ -322,7 +322,7 @@ const RoomToolbar = ({ data }) => {
           height={25}
           loading="lazy"
         />
-        <span className="text-sm">3D</span>
+        <span className="text-sm">See on the wall</span>
       </div>
 
       {openFreeSAmple && (
@@ -831,7 +831,7 @@ const RoomToolbar = ({ data }) => {
                   />
                 </div>
                 <button
-                  className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer z-[999999] font-semibold hidden md:block ml-36"
+                  className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer z-[999999] font-semibold hidden md:block ml-20"
                   onClick={handleClose}
                 >
                    <Image

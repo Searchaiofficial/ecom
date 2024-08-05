@@ -392,7 +392,7 @@ function Header({ setIsHeaderMounted }) {
                       loading="lazy"
                       src="/icons/search.svg"
                       alt="Search Icon"
-                      className="absolute z-10  w-[18px] h-[18px]"
+                      className="absolute z-10  w-[18px] h-[18px] mt-[2px] "
                       width={27}
                       height={27}
                     />

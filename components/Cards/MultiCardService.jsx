@@ -80,7 +80,7 @@ const MulticardService = () => {
 
   return (
     <div>
-      <div className="bg-zinc-50 pt-[5rem] pl-[20px] sm:pl-[50px]  lg:pl-[67px] overflow-x-auto">
+      <div className="bg-zinc-50 pt-[5rem] pb-[5rem] pl-[20px] sm:pl-[50px]  lg:pl-[67px] overflow-x-auto">
         <div className="w-full flex justify-between items-center">
           <h2 className="font-semibold text-2xl pb-[20px] pt-[30px]">
             Service and Financial help on shopping
