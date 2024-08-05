@@ -314,7 +314,7 @@ const RoomInfo = ({ data }) => {
 
         <div className="flex">
           {data?.author && (
-            <div className="flex flex-col my-4 gap-6 w-full ">
+            <div className="flex flex-col my-4 gap-6 w-full max-w-3xl">
               <div className="flex items-center gap-4">
                 <Link
                   href={`/profile/${data.author._id}`}
