@@ -20,12 +20,12 @@ const data = [
     {
         id: 1,
         headerTitle: "Shop online with click and collect at store",
-        iconPath: "/icons/click-and-collect.svg",
+        iconPath: "/icons/click and collect.svg",
     },
     {
         id: 2,
         headerTitle: "Furnishing & Measuring service",
-        iconPath: "/icons/meausaring.svg",
+        iconPath: "/icons/maserment.svg",
     },
     {
         id: 3,
@@ -35,7 +35,7 @@ const data = [
     {
         id: 4,
         headerTitle: "buyback & resell",
-        iconPath: "/icons/buy-back.svg",
+        iconPath: "/icons/buy back.svg",
     },
     {
         id: 5,

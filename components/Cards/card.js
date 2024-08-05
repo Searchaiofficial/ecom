@@ -637,7 +637,7 @@ function Card(props) {
           >
             <Image
               loading="lazy"
-              src={"/icons/ad-to-cart.svg"}
+              src={"/icons/adtocart plush.svg"}
               height={25}
               width={25}
               className="cursor-pointer rounded-full"

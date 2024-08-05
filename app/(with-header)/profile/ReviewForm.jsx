@@ -136,7 +136,7 @@ const ReviewForm = ({ addReview, categoryData, isAuthenticated }) => {
                       >
                         <Image
                           loading="lazy"
-                          src="icons/cancel.svg"
+                          src="/icons/cancel.svg"
                           alt="close"
                           width={20}
                           height={30}
@@ -243,7 +243,7 @@ const ReviewForm = ({ addReview, categoryData, isAuthenticated }) => {
                             >
                               <Image
                                 loading="lazy"
-                                src="icons/cancel.svg"
+                                src="/icons/cancel.svg"
                                 alt="close"
                                 width={15}
                                 height={15}
