@@ -354,7 +354,7 @@ const RoomToolbar = ({ data }) => {
               You can select a maximum of three samples at a time
             </p>
             <div className=" flex flex-col">
-              <div className="relative w-full h-[300px]">
+              <div className="relative  aspect-square ">
                 {/* Render Images */}
                 {selectedSamples[selectedSamples.length - 1]?.images
                   ? selectedSamples[selectedSamples.length - 1]?.images.map(
@@ -372,7 +372,7 @@ const RoomToolbar = ({ data }) => {
                             alt="NA"
                             layout="fill"
                             objectFit="cover"
-                            className="w-full h-full "
+                            className="w-[400px] aspect-square"
                           />
                         </div>
                       )
@@ -496,10 +496,12 @@ const RoomToolbar = ({ data }) => {
                       selectedSamples[selectedSamples.length - 1]?.specialPrice
                         ?.price || data.specialPrice?.price
                     ) : selectedSamples[selectedSamples.length - 1]
-                        ?.discountedprice?.price || data.discountedprice?.price ? (
+                        ?.discountedprice?.price ||
+                      data.discountedprice?.price ? (
                       <p className="pt-3">
                         {selectedSamples[selectedSamples.length - 1]
-                          ?.discountedprice?.price || data.discountedprice?.price}
+                          ?.discountedprice?.price ||
+                          data.discountedprice?.price}
                       </p>
                     ) : (
                       <p className="pt-3">
@@ -523,14 +525,7 @@ const RoomToolbar = ({ data }) => {
           </div>
           <div className="md:w-[66.66%] w-[100%] lg:overflow-y-auto">
             <div className="flex flex-col md:fixed top-0 bg-white w-full z-50 ">
-              <div className="flex items-center  mt-5 justify-between w-[100%] md:w-[60%]">
-                <div className="flex justify-between">
-                  <div className="flex flex-col">
-                    <h1 className="text-[16px] font-semibold">
-                      Free sample products
-                    </h1>
-                  </div>
-                </div>
+              {/* <div className="flex items-center  mt-5 justify-between w-[100%] md:w-[60%]">
                 <button
                   className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer"
                   onClick={handleClose}
@@ -544,9 +539,24 @@ const RoomToolbar = ({ data }) => {
                     className="py-2"
                   />
                 </button>
-              </div>
+              </div> */}
 
-              <div className="flex md:hidden items-center my-2 gap-4">
+              <button
+                className=" md:hidden text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer absolute right-2 top-2"
+                onClick={handleClose}
+              >
+                {/* <Image
+                  loading="lazy"
+                  src="icons/cancel.svg"
+                  alt="close"
+                  width={15}
+                  height={15}
+                  className="py-2"
+                /> */}
+                Close
+              </button>
+
+              <div className="flex md:hidden items-center my-2 gap-4 mt-12">
                 {selectedSamples &&
                   selectedSamples.length > 0 &&
                   selectedSamples.map((item) => (
@@ -581,20 +591,11 @@ const RoomToolbar = ({ data }) => {
 
               <div className="flex md:hidden justify-between my-2 ">
                 {selectedSamples && selectedSamples?.length > 0 && (
-                  <div className=" w-full">
-                    {/* <button
-                      onClick={handleBuySamples}
-                      className={`bg-black w-full hover:bg-gray-900 text-white px-4 flex items-center justify-center sm:h-11 h-9 rounded-full transition duration-300`}
-                    >
-                      <p className="flex gap-2 text-center font-semibold text-[16px]">
-                        Buy Free Samples
-                      </p>
-                    </button> */}
-                  </div>
+                  <div className=" w-full"></div>
                 )}
               </div>
 
-              <div className="flex overflow-x-scroll lg:overflow-x-hidden items-center lg:gap-2 gap-2 my-3">
+              {/* <div className="flex overflow-x-scroll lg:overflow-x-hidden items-center lg:gap-2 gap-2 my-3">
                 <div
                   onClick={handleCategoryFilterOpen}
                   className={`${commonClasses} text-[14px] flex items-center gap-2 font-semibold rounded-full bg-gray-100`}
@@ -704,10 +705,127 @@ const RoomToolbar = ({ data }) => {
                     alt="arrow icon"
                   />
                 </div>
+              </div> */}
+
+              <div className="flex overflow-x-scroll  lg:overflow-x-hidden items-center lg:gap-2 gap-2 my-3">
+                <div
+                  onClick={handleCategoryFilterOpen}
+                  className={`${commonClasses} text-[14px] flex items-center gap-2 font-semibold rounded-full bg-gray-100`}
+                >
+                  <p>
+                    {selectedSubCategory === "All Subcategories"
+                      ? "All Styles"
+                      : selectedSubCategory}
+                  </p>
+                  <Image
+                    loading="lazy"
+                    src="/icons/backarrow.svg"
+                    width={40}
+                    height={40}
+                    className={`w-4 h-4 mt-1 block  ${
+                      categoryFilterOpen && "rotate-90"
+                    } -rotate-90`}
+                    alt="arrow icon"
+                  />
+                  {categoryFilterOpen &&
+                    allSubCategories &&
+                    allSubCategories.length > 0 && (
+                      <div
+                        className={`md:w-[300px] w-[150px] cursor-pointer absolute ${
+                          selectedSamples.length > 0
+                            ? "top-[180px] md:top-[60px]"
+                            : "top-[180px] md:top-[60px]"
+                        }  z-50 h-fit bg-white border border-gray-200 rounded-lg`}
+                      >
+                        <p
+                          onClick={() =>
+                            handleSubCategoryFilter("All Subcategories")
+                          }
+                          className="flex text-[14px] font-semibold px-4 py-2"
+                        >
+                          {" "}
+                          All Styles
+                        </p>
+                        {allSubCategories.map((item) => {
+                          console.log(item);
+                          return (
+                            <p
+                              onClick={() => handleSubCategoryFilter(item.name)}
+                              className="flex cursor-pointer text-[14px] font-semibold px-4 py-2"
+                            >
+                              {item.name}
+                            </p>
+                          );
+                        })}
+                      </div>
+                    )}
+                </div>
+                <div
+                  onClick={handleColorFilterOpen}
+                  className={`${commonClasses} text-[14px] flex items-center gap-2 font-semibold rounded-full bg-gray-100`}
+                >
+                  <p>{selectedColor}</p>
+                  <Image
+                    loading="lazy"
+                    src="/icons/backarrow.svg"
+                    width={40}
+                    height={40}
+                    className={`w-4 h-4 mt-1 block  ${
+                      ColorfilterOpen && "rotate-90"
+                    } -rotate-90`}
+                    alt="arrow icon"
+                  />
+                  {ColorfilterOpen && allColors && allColors.length > 0 && (
+                    <div
+                      className={`md:w-[300px] w-[150px] cursor-pointer absolute ${
+                        selectedSamples.length > 0
+                          ? "top-[180px] md:top-[60px]"
+                          : "top-[180px] md:top-[60px]"
+                      }  z-50 h-fit bg-white border border-gray-200 rounded-lg`}
+                    >
+                      <p
+                        onClick={() => handleColorFilter("All Colors")}
+                        className="flex text-[14px] font-semibold px-4 py-2"
+                      >
+                        All Colors
+                      </p>
+                      {allColors.map((item) => {
+                        console.log(item);
+                        return (
+                          <p
+                            onClick={() => handleColorFilter(item)}
+                            className="flex cursor-pointer text-[14px] font-semibold px-4 py-2"
+                          >
+                            {item}
+                          </p>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+                <div
+                  className={`${commonClasses} text-[14px] cursor-pointer flex items-center gap-2 font-semibold rounded-full bg-gray-100`}
+                >
+                  <p>Sort</p>
+                  <Image
+                    loading="lazy"
+                    src="/icons/backarrow.svg"
+                    width={40}
+                    height={40}
+                    className={`w-4 h-4 mt-1 block -rotate-90`}
+                    alt="arrow icon"
+                  />
+                </div>
+                <button
+                  className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer z-[999999] font-semibold hidden md:block ml-28"
+                  onClick={handleClose}
+                >
+                  close
+                </button>
               </div>
             </div>
 
-            <div className="grid lg:grid-cols-3 md:mt-36 grid-cols-2 gap-y-4 gap-4 ">
+            <div className="grid lg:grid-cols-3  md:mt-20  grid-cols-2 gap-y-4 gap-4 ">
               {FilteredProducts &&
                 FilteredProducts.length > 0 &&
                 FilteredProducts.map((item) => (
@@ -741,7 +859,7 @@ const RoomToolbar = ({ data }) => {
                 ))}
             </div>
 
-            <div className=" md:w-[60%] w-[90%] grid sm:grid-cols-2 gap-2 mt-6 fixed bottom-10">
+            <div className="bg-white  grid sm:grid-cols-2 gap-2 mt-6 sticky bottom-0 py-4">
               <button
                 onClick={handleBuySamples}
                 className={`bg-black  hover:bg-gray-900 text-white px-2 flex items-center justify-center sm:h-11 h-9 rounded-full transition duration-300`}

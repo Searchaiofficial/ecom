@@ -3,18 +3,12 @@
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 30 30" style="enable-background:new 0 0 30 30;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#ffffff;}
+	.st0{fill:#0071E3;}
 </style>
 <g>
-	<path class="st0" d="M15,29.5C7,29.5,0.5,23,0.5,15S7,0.5,15,0.5S29.5,7,29.5,15S23,29.5,15,29.5z M15,2.2C7.9,2.2,2.2,7.9,2.2,15
-		S7.9,27.8,15,27.8S27.8,22.1,27.8,15S22.1,2.2,15,2.2z"/>
-</g>
-<g>
-	<g>
-		<rect x="14.2" y="8.2" class="st0" width="1.7" height="13.6"/>
-	</g>
-	<g>
-		<rect x="8.2" y="14.2" class="st0" width="13.6" height="1.7"/>
-	</g>
+	<path class="st0" d="M15,0.1C6.8,0.1,0.1,6.8,0.1,15S6.8,29.8,15,29.8S29.8,23.2,29.8,15S23.2,0.1,15,0.1z M15,28.2
+		C7.7,28.2,1.9,22.3,1.9,15S7.7,1.9,15,1.9S28.2,7.7,28.2,15S22.3,28.2,15,28.2z"/>
+	<polygon class="st0" points="15.9,8 14.1,8 14.1,14.1 8,14.1 8,15.9 14.1,15.9 14.1,22 15.9,22 15.9,15.9 22,15.9 22,14.1 
+		15.9,14.1 	"/>
 </g>
 </svg>

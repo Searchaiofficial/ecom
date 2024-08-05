@@ -503,7 +503,7 @@ const Tabs = ({
   };
 
   const commonClasses =
-    "px-[24px] py-3 mr-2.5 rounded-full flex  whitespace-nowrap";
+    "px-[24px] py-[0.65rem] mr-2.5 rounded-full flex  whitespace-nowrap";
 
   // logic for stikey
   useEffect(() => {

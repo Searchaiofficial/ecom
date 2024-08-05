@@ -725,7 +725,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
   const contentData = [
     {
       title: "Free Delivery, Free Returns",
-      icon: "delivary",
+      icon: "free shiping and free delivery",
       content: (
         <>
           For all orders, delivery and Returns are free. If you are not entirely
@@ -742,7 +742,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
     },
     {
       title: "Delivery: Metro cities: 2-5 days, Others: 5-15 days",
-      icon: "free-shipping",
+      icon: "quick delivery",
       content: (
         <>
           Get free delivery on all orders above ₹3000. A shipping charge of ₹100
@@ -759,7 +759,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
     },
     {
       title: "COD available for orders below ₹3000",
-      icon: "tick",
+      icon: "COD",
       content: "Cash on Delivery is available for all orders below ₹3000.",
     },
     {
@@ -791,7 +791,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
     },
     {
       title: "Save 5% on all Online Payments under ₹3000",
-      icon: "price-tag-icon",
+      icon: "suquer payment",
       content:
         "Pay 5% less on all orders under ₹3000 when you choose online payment options. That's right – simply opt for online payment at checkout and enjoy instant savings on your purchase.",
     },
