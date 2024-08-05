@@ -14,15 +14,14 @@ export const metadata = {
   metadataBase: new URL(BASE_URL),
 
   title: {
-    default: "Ayatrio",
-    template: "Ayatrio - %s",
+    default: "Ayatrio India-Affordable Home Furnishing & Decor designs & ideas",
   },
   description:
-    "Custom Wallpaper, Wooden Flooring, Laminate & Vinyl Floors in India India&#039;s first Virtual Reality based Interior Design Solution",
+    "Buy affordable Wallpaper, Flooring, Curtain, Blinds, Mattresses and more at online.✔55,000+ Choices ✔Free Shipping ✔No Cost EMI ✔Easy Returns",
   openGraph: {
-    title: "Ayatrio",
+    title: "Ayatrio India-Affordable Home Furnishing & Decor designs & ideas",
     description:
-      "Custom Wallpaper, Wooden Flooring, Laminate & Vinyl Floors in India India&#039;s first Virtual Reality based Interior Design Solution",
+      "Buy affordable Wallpaper, Flooring, Curtain, Blinds, Mattresses and more at online.✔55,000+ Choices ✔Free Shipping ✔No Cost EMI ✔Easy Returns",
     images: [
       {
         url: "https://ayatrio.com/api/og",
