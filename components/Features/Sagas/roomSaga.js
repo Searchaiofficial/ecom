@@ -1,6 +1,40 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import { setRoomData } from "../Slices/roomSlice";
 import axios from "axios";
+import { getProductByProductId } from "@/actions/getProductByProductId";
+
+function* fetchProductById(action) {
+  try {
+    const product = yield call(async () => {
+      const response = await getProductByProductId(action.payload);
+
+      if (!response) {
+        throw new Error("Error fetching product by ID");
+      }
+
+      return response;
+    });
+
+    yield put(setRoomData({ roomData: product, status: "succeeded" }));
+
+    if (product.productImages && product.productImages.length > 0) {
+      yield put({
+        type: "FETCH_IMAGE_DATA",
+        payload: response.data.productImages[0].color,
+      });
+    } else {
+      yield put({ type: "FETCH_IMAGE_DATA", payload: null });
+    }
+
+    const productTitle = product.productTitle;
+
+    yield call(updateProductPopularity, productTitle);
+    yield call(sendPreferences, product);
+  } catch (error) {
+    console.error("Error fetching product by ID:", error);
+    yield put(setRoomData({ roomData: [], status: "failed" }));
+  }
+}
 
 function* fetchRoomData(action) {
   try {
@@ -12,10 +46,13 @@ function* fetchRoomData(action) {
 
     // Dispatch action to set room data
     yield put(setRoomData({ roomData: response.data, status: "succeeded" }));
-    if(response.data.productImages && response.data.productImages.length > 0) {
-      yield put({ type: "FETCH_IMAGE_DATA", payload: response.data.productImages[0].color});
+    if (response.data.productImages && response.data.productImages.length > 0) {
+      yield put({
+        type: "FETCH_IMAGE_DATA",
+        payload: response.data.productImages[0].color,
+      });
     } else {
-      yield put({type: "FETCH_IMAGE_DATA",payload: null});
+      yield put({ type: "FETCH_IMAGE_DATA", payload: null });
     }
 
     // Extract product ID and update popularity
@@ -25,7 +62,6 @@ function* fetchRoomData(action) {
 
     // Send preferences to the server
     yield call(sendPreferences, response.data); // Assuming productTitle is related to preferences
-
   } catch (error) {
     console.error("Error fetching room data:", error);
     yield put(setRoomData({ roomData: [], status: "failed" }));
@@ -59,8 +95,11 @@ function* sendPreferences(productData) {
       {
         deviceId: id, // Corrected variable name
         userPreferredCategories: [
-          { name: productData.category, subcategories: [productData.subcategory] }
-        ]
+          {
+            name: productData.category,
+            subcategories: [productData.subcategory],
+          },
+        ],
       }
     );
     console.log("Preferences sent successfully.");
@@ -72,4 +111,8 @@ function* sendPreferences(productData) {
 
 export function* watchFetchRoomData() {
   yield takeEvery("FETCH_ROOM_REQUEST", fetchRoomData);
+}
+
+export function* watchFetchProductById() {
+  yield takeEvery("FETCH_PRODUCT_BY_ID", fetchProductById);
 }

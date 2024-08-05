@@ -440,7 +440,9 @@ function Card(props) {
                   .find((item) => item.color === selectedColor)
                   ?.images?.map((src, idx) => (
                     <Link
-                      href={`/${props.title.replace(/ /g, "-")}`}
+                      href={`/${props.title.replace(/ /g, "-")}/${
+                        props.productId
+                      }`}
                       key={idx}
                       aria-label={`View details about ${props.title}`}
                     >
@@ -469,7 +471,9 @@ function Card(props) {
                   ))
               : props.imgSrc?.map((item, idx) => (
                   <Link
-                    href={`/${props.title.replace(/ /g, "-")}`}
+                    href={`/${props.title.replace(/ /g, "-")}/${
+                      props.productId
+                    }`}
                     key={idx}
                     aria-label={`View details about ${props.title}`}
                   >

@@ -438,7 +438,9 @@ function TabsProductCard(props) {
                   ?.images?.map((src, idx) => {
                     return (
                       <Link
-                        href={`/${props.productTitle.replace(/ /g, "-")}`}
+                        href={`/${props.productTitle.replace(/ /g, "-")}/${
+                          props.productId
+                        }`}
                         onClick={() => handleclick(props.productTitle)}
                       >
                         <Image
@@ -468,7 +470,9 @@ function TabsProductCard(props) {
               : props.images?.map((item, idx) => {
                   return (
                     <Link
-                      href={`/${props.productTitle.replace(/ /g, "-")}`}
+                      href={`/${props.productTitle.replace(/ /g, "-")}/${
+                        props.productId
+                      }`}
                       onClick={() => handleclick(props.productTitle)}
                     >
                       <Image

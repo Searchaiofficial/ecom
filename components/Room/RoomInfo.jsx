@@ -387,13 +387,16 @@ const RoomInfo = ({ data }) => {
                     )}
                   </div>
                   <p className="hidden md:block text-[#1D1D1F] font-semibold text-sm pt-3 line-clamp-5 md:w-[80%]">
-                    {`${data.author.authorDetails.description.slice(
+                    {`${data.author.authorDetails?.description.slice(
                       0,
                       180
                     )}...`}
                   </p>
                   <p className="md:hidden text-[#1D1D1F] font-semibold text-sm pt-3 line-clamp-5 md:w-[80%]">
-                    {`${data.author.authorDetails.description.slice(0, 50)}...`}
+                    {`${data.author.authorDetails?.description.slice(
+                      0,
+                      50
+                    )}...`}
                   </p>
                 </div>
               </div>

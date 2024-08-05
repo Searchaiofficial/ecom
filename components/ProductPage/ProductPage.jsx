@@ -16,7 +16,7 @@ import axios from "axios";
 import Carous from "../Carousel/Carous";
 import { viewItem } from "@/tag-manager/events/view_item";
 
-const ProductPage = ({ title, initialData }) => {
+const ProductPage = ({ title, productId, initialData }) => {
   const [data, setData] = useState(initialData);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,7 +26,8 @@ const ProductPage = ({ title, initialData }) => {
 
   useEffect(() => {
     if (!initialData) {
-      dispatch({ type: "FETCH_ROOM_REQUEST", payload: title });
+      // dispatch({ type: "FETCH_ROOM_REQUEST", payload: title });
+      dispatch({ type: "FETCH_PRODUCT_BY_ID", payload: productId });
     }
   }, [title, dispatch]);
 
@@ -122,8 +123,9 @@ const ProductPage = ({ title, initialData }) => {
         </div>
         <div className="h-full w-full relative p-4 hidden md:block">
           <div
-            className={`w-full h-fit sticky top-2 ${isModalOpen ? "z-[9999]" : ""
-              }`}
+            className={`w-full h-fit sticky top-2 ${
+              isModalOpen ? "z-[9999]" : ""
+            }`}
           >
             <Card
               data={data}

@@ -6,12 +6,12 @@ import { watchSearchProducts } from "./searchSaga";
 import { watchFetchFirstCard } from "./FirstCardSaga";
 import { watchSelectedItemsSaga } from "./selectedItemsSaga";
 import { watchFetchProfileData } from "./profileSaga";
-import { watchFetchRoomData } from "./roomSaga";
+import { watchFetchProductById, watchFetchRoomData } from "./roomSaga";
 import { cartSaga } from "./cartSaga";
 import { watchSelectedProductsSaga } from "./compareSaga";
 import { watchVirtualGet } from "./virtualSaga";
 import { watchFetchTrendingData } from "./trendingSaga";
-import {watchFetchRankedProductsData} from './rankedProductsSaga'
+import { watchFetchRankedProductsData } from "./rankedProductsSaga";
 import { watchMultiCardData } from "./multiCardSaga";
 import { watchFetchImagechangerData } from "./ImageChangerSaga";
 import { watchFetchDisplayData } from "./displaySaga";
@@ -35,6 +35,7 @@ export default function* rootSaga() {
     watchFetchProfileData(),
     watchFetchTrendingData(),
     watchFetchRoomData(),
+    watchFetchProductById(),
     watchSelectedItemsSaga(),
     cartSaga(),
     watchVirtualGet(),

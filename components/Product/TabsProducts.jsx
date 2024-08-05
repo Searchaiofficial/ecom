@@ -1335,6 +1335,7 @@ const Tabs = ({
                       productTitle={text.productTitle}
                       productImages={text.productImages}
                       images={text.images}
+                      productId={text.productId}
                       idx={idx}
                       handlenav={handlenav}
                       selectedpdt={selectedpdt}
