@@ -443,7 +443,9 @@ const RoomInfo = ({ data }) => {
                     <SwiperSlide key={idx} className="max-w-[130px] px-1">
                       <Link
                         className="flex flex-col items-center"
-                        href={`/${item.productTitle.replace(/ /g, "-")}`}
+                        href={`/${item.productTitle.replace(/ /g, "-")}/${
+                          item.productId
+                        }`}
                       >
                         <div className="mb-[12px] ">
                           <Image
