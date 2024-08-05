@@ -1074,7 +1074,7 @@ const Tabs = ({
                 <Image
                   loading="lazy"
                   className="absolute right-3 px-[2px]"
-                  src="icons/cancel.svg"
+                  src="/icons/cancel.svg"
                   width={20}
                   height={20}
                   onClick={closeAll}

@@ -1100,7 +1100,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                 <div className="flex flex-row gap-1">
                   <Image
                     loading="lazy"
-                    src="/icons/store-b.svg"
+                    src="/icons/store.svg"
                     height={25}
                     width={25}
                     alt="icon"
@@ -1192,7 +1192,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                                 >
                                   <Image
                                     loading="lazy"
-                                    src="icons/cancel.svg"
+                                    src="/icons/cancel.svg"
                                     alt="close"
                                     width={20}
                                     height={30}
@@ -1614,7 +1614,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                                   >
                                     <Image
                                       loading="lazy"
-                                      src="icons/cancel.svg"
+                                      src="/icons/cancel.svg"
                                       alt="close"
                                       width={30}
                                       height={30}
@@ -1769,7 +1769,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                               >
                                 <Image
                                   loading="lazy"
-                                  src="icons/cancel.svg"
+                                  src="/icons/cancel.svg"
                                   alt="close"
                                   width={20}
                                   height={30}
@@ -1872,7 +1872,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                             >
                               <Image
                                 loading="lazy"
-                                src="icons/cancel.svg"
+                                src="/icons/cancel.svg"
                                 alt="close"
                                 width={20}
                                 height={30}
@@ -1904,7 +1904,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                             >
                               <Image
                                 loading="lazy"
-                                src="icons/cancel.svg"
+                                src="/icons/cancel.svg"
                                 alt="close"
                                 width={20}
                                 height={30}
@@ -2066,7 +2066,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                                     >
                                       <Image
                                         loading="lazy"
-                                        src={"/icons/ad-to-cart.svg"}
+                                        src={"/icons/adtocart plush.svg"}
                                         height={20}
                                         width={20}
                                         alt="add to cart image"
@@ -2094,7 +2094,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
                                 </div>
 
                                 <div className="bg-[#0152be] p-1.5 rounded-full max-w-fit self-center md:mr-10 ">
-                                  <Image loading="lazy" src={"/icons/ad-to-cart.svg"} height={20} width={20} className="cursor-pointer rounded-full min-w-[20px] min-h-[20px]" />
+                                  <Image loading="lazy" src={"/icons/adtocart plush.svg"} height={20} width={20} className="cursor-pointer rounded-full min-w-[20px] min-h-[20px]" />
                                 </div>
                               </div> */}
                             </div>

@@ -303,7 +303,7 @@ const RoomToolbar = ({ data }) => {
         className="py-2 focus:outline-none h-8 flex items-center cursor-pointer space-x-2 "
       >
         <Image
-          src="/icons/free-sample.svg"
+          src="/icons/free sample.svg"
           alt="free-sample"
           width={20}
           height={25}
@@ -532,7 +532,7 @@ const RoomToolbar = ({ data }) => {
                 >
                   <Image
                     loading="lazy"
-                    src="icons/cancel.svg"
+                    src="/icons/cancel.svg"
                     alt="close"
                     width={15}
                     height={15}
@@ -545,15 +545,15 @@ const RoomToolbar = ({ data }) => {
                 className=" md:hidden text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer absolute right-2 top-2"
                 onClick={handleClose}
               >
-                {/* <Image
+                <Image
                   loading="lazy"
-                  src="icons/cancel.svg"
+                  src="/icons/cancel.svg"
                   alt="close"
                   width={15}
                   height={15}
                   className="py-2"
-                /> */}
-                Close
+                />
+                {/* Close */}
               </button>
 
               <div className="flex md:hidden items-center my-2 gap-4 mt-12">
@@ -817,10 +817,17 @@ const RoomToolbar = ({ data }) => {
                   />
                 </div>
                 <button
-                  className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer z-[999999] font-semibold hidden md:block ml-28"
+                  className="text-xl px-3 py-1 hover:bg-[#e5e5e5] rounded-full cursor-pointer z-[999999] font-semibold hidden md:block ml-36"
                   onClick={handleClose}
                 >
-                  close
+                   <Image
+                    loading="lazy"
+                    src="/icons/cancel.svg"
+                    alt="close"
+                    width={15}
+                    height={15}
+                    className="py-2"
+                  />
                 </button>
               </div>
             </div>
