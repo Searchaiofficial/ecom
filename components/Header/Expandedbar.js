@@ -287,7 +287,7 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
             }`}
         >
           <div
-            className={`items-start min-w-fit flex cursor-pointer pl-[24px] sm:pl-[0px] flex-col 
+            className={`items-start min-w-fit flex cursor-pointer pl-[24px] sm:pl-[0px] flex-col  pr-12
            
           `}
           >
@@ -314,22 +314,6 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
                 :
                 (
                   <>
-                    {/* <div className="dropdown-item sm:font-medium  pb-2 text-[14px]  text-[#707072]">
-                      Popular Searches
-                    </div>
-                    <div className="dropdown-item sm:font-medium  py-2   text-[20px] font-medium ">
-                      Engineering flooring
-                    </div>
-                    <div className="dropdown-item sm:font-medium  py-2  text-[20px] font-medium  ">
-                      Luxurious curtains
-                    </div>
-                    <div className="dropdown-item sm:font-medium  py-2   text-[20px] font-medium ">
-                      Wallpaper for home
-                    </div>
-                    <div className="dropdown-item sm:font-medium hidden sm:flex  py-2  text-[20px] font-medium ">
-                      Vinyl
-                    </div> */}
-
                     <div className="dropdown-item sm:font-medium  pb-2 text-[14px]  text-[#707072]">
                       Popular Searches
                     </div>
@@ -366,7 +350,7 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
 
           {
             data && path !== "/ayatrio-map" &&
-            <div className="grid sm:grid-cols-4 grid-cols-2 gap-4  px-[24px] lg:px-[0px] lg:mt-0 mt-10">
+            <div className="grid sm:grid-cols-5 grid-cols-2 gap-4  px-[24px] lg:px-[0px] lg:mt-0 mt-10">
               {(!data) || isLoading ? (
                 <p className="flex flex-row justify-center items-center">
                   No results found
@@ -382,7 +366,7 @@ const Expandedbar = ({ searchText, onClose, onSearch }) => {
                       className="col-span-1"
                       onClick={() => handleRoute(item)}
                     >
-                      <div className="lg:w-[170px] w-[150px] h-[150px] lg:h-[170px]">
+                      <div className="">
                         <Image loading="lazy"
                           src={item.images[0]}
                           width={170}
