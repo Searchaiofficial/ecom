@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer utilities {
   .main {
     box-shadow: 2px 2px 0 theme("colors.orange.600");
@@ -56,16 +55,15 @@ body {
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
-
 .no-scroll {
-  overflow: hidden !important; 
+  overflow: hidden !important;
 }
 
 details summary {
-  list-style: none; 
+  list-style: none;
   display: flex;
-  align-items: center; 
-  cursor: pointer; 
+  align-items: center;
+  cursor: pointer;
 }
 
 details summary::-webkit-details-marker {
@@ -74,4 +72,23 @@ details summary::-webkit-details-marker {
 
 details summary::marker {
   display: none; /* Hide marker in other browsers */
+}
+
+.category-slider swiper-container swiper-slide {
+  max-width: 100px;
+  margin-right: 10px;
+  min-height: 95px;
+  margin-bottom: 30px;
+}
+
+@media (min-width: 1000px) {
+  .category-slider swiper-container swiper-slide {
+    max-width: 120px;
+  }
+}
+
+@media (min-width: 800px) {
+  .category-slider swiper-container swiper-slide {
+    margin-bottom: 0px;
+  }
 }

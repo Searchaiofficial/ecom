@@ -16,6 +16,7 @@ import "swiper/css/navigation";
 import "./styles.css";
 import Link from "next/link";
 import axios from "axios";
+import CategorySlider from "./CategorySlider";
 
 const CategoriesSlider = () => {
   const swiper1Ref = useRef(null);
@@ -71,7 +72,7 @@ const CategoriesSlider = () => {
 
   return (
     <div className="flex items-center justify-start">
-      <div className=" pt-[2rem] lg:pt-[52px] pl-[15px]  overflow-x-auto  relative">
+      <div className=" pt-[2rem] lg:pt-[52px] pl-[15px]  overflow-x-auto  relative w-full">
         {categories.length > 0 && (
           <div className="flex flex-row group items-center justify-end gap-2 lg:mb-4">
             <div className="back rounded-full   group-hover:opacity-60  opacity-0  absolute left-5 z-10">
@@ -84,65 +85,7 @@ const CategoriesSlider = () => {
                 className=" h-[28px] lg:-mt-5  mb-[50px] sm:mb-0  w-[28px] "
               />
             </div>
-            <Swiper
-              ref={swiper1Ref}
-              {...swiperOptions2}
-              modules={[Navigation, Pagination, Scrollbar, A11y]}
-              navigation={{
-                nextEl: ".right",
-                prevEl: ".back",
-              }}
-              sticky={true}
-              draggable={true}
-              style={{ "--swiper-navigation-size": "24px", maxHeight: "180px" }}
-              breakpoints={breakpoints}
-              // scrollbar={{
-              //     hide: false,
-              //     draggable: true,
-              // }}
-
-              mousewheel={{
-                forceToAxis: true,
-                invert: false,
-              }}
-              freeMode={{
-                enabled: false,
-                sticky: true,
-              }}
-              className="mt-[12px]"
-            >
-              {categories?.map((curElement, idx) => {
-                return (
-                  <SwiperSlide
-                    className=" max-w-[100px] lg:max-w-[120px] mr-[10px] min-h-[95px] mb-[30px] md:mb-0 "
-                    key={idx}
-                  >
-                    <Link
-                      href={`/${curElement.name.replace(
-                        / /g,
-                        "-"
-                      )}/category/all`}
-                      // onClick={() => handleIncrementCategoryPopularity(curElement.name)}
-                    >
-                      <div className="flex flex-col  items-center ">
-                        <div className="mb-[12px] ">
-                          <Image
-                            src={curElement.image || "/images/temp.svg"}
-                            width={200}
-                            height={130}
-                            alt={"category image"}
-                            className="w-[200px] h-[62px] lg:h-[95px] "
-                          />
-                        </div>
-                        <h2 className="text-[#333333] lg:text-center line-clamp-1 font-semibold text-[14px] hover:underline">
-                          {curElement.name}
-                        </h2>
-                      </div>
-                    </Link>
-                  </SwiperSlide>
-                );
-              })}
-            </Swiper>
+            <CategorySlider categories={categories} />
             <div className="right rounded-full   group-hover:opacity-60 opacity-0   absolute right-5 z-10">
               <Image
                 loading="lazy"
