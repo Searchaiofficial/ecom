@@ -16,6 +16,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import MultiCardServiceContent from "../compounds/MultiCardServiceContect";
+import MultiCardServiceSlider from "./MultiCardServiceSlider";
 
 // a.Shop online with click and collect and delivery
 // b.Furnishing Design service
@@ -104,62 +105,7 @@ const MulticardService = () => {
             />
           </div>
         </div>{" "}
-        <Swiper
-          ref={swiper1Ref}
-          mousewheel={{
-            forceToAxis: true, // Ensures vertical scrolling on touchpad
-            invert: false, // Set to true if you want to invert scrolling direction
-          }}
-          freeMode={{
-            enabled: false,
-            sticky: true,
-          }}
-          modules={[
-            Navigation,
-            Pagination,
-            Scrollbar,
-            A11y,
-            FreeMode,
-            Mousewheel,
-          ]}
-          navigation={{
-            nextEl: ".right",
-            prevEl: ".back",
-          }}
-          draggable={true}
-          style={{ "--swiper-navigation-size": "24px" }}
-          breakpoints={{
-            300: {
-              slidesPerView: 1.2,
-              spaceBetween: 10,
-            },
-            768: {
-              slidesPerView: 2,
-              spaceBetween: 10,
-            },
-            1024: {
-              slidesPerView: 4.5,
-              spaceBetween: 10,
-            },
-          }}
-          touchEventsTarget="container" // Ensure Swiper listens for touch events on the container
-          touchRatio={1} // Adjust touch sensitivity (optional)
-          touchReleaseOnEdges={true} // Release touch event when the edge is reached
-          resistanceRatio={0.85} // Adjust resistance ratio for a smoother experience
-          initialSlide={0}
-        >
-          {data.map((data) => {
-            return (
-              <SwiperSlide key={data.id}>
-                <MultiCardServiceContent
-                  title={data.headerTitle}
-                  iconPath={data.iconPath}
-                  iconSize={data.iconSize}
-                />
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
+        <MultiCardServiceSlider data={data} />
       </div>
     </div>
   );
