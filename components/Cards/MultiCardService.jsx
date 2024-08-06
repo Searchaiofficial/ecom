@@ -47,7 +47,7 @@ const data = [
   {
     id: 5,
     headerTitle: "warranty Service",
-    iconPath: "/icons/ayatrio warranty.svg",
+    iconPath: "/icons/warranty registration.svg",
   },
   {
     id: 6,
