@@ -5,15 +5,6 @@ import React, { useEffect, useState, useRef, useMemo } from "react";
 import axios from "axios";
 import Link from "next/link";
 import "./styles.css";
-import { Swiper, SwiperSlide } from "swiper/react";
-import {
-  A11y,
-  FreeMode,
-  Mousewheel,
-  Navigation,
-  Pagination,
-  Scrollbar,
-} from "swiper/modules";
 import RoomInfoSlider from "./RoomInfoSlider";
 
 const RoomInfo = ({ data }) => {
@@ -26,7 +17,6 @@ const RoomInfo = ({ data }) => {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getReview?productId=${data._id}`
       );
-      console.log("reviews", response.data);
 
       setReviews(response.data);
     } catch (error) {
@@ -42,14 +32,11 @@ const RoomInfo = ({ data }) => {
     return (totalRating / reviews.length).toFixed(1);
   }, [reviews]);
 
-  const handleShowMore = () => {
-    setShowMore(!showMore);
-  };
   const fetchCategoryDetails = async () => {
     const response = await axios.get(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getCategoryByName/${data?.category}`
     );
-    console.log(response.data);
+
     setCategoryDetails(response.data);
   };
 
@@ -67,8 +54,7 @@ const RoomInfo = ({ data }) => {
     const response = await axios.get(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getAllProductByAuthorId/${authorId}`
     );
-    console.log(response.data);
-    // story only those product which are not the current product
+    // store only those product which are not the current product
 
     setOtherProductByAuthorId(
       response.data.filter((item) => item._id !== data._id)
@@ -87,17 +73,6 @@ const RoomInfo = ({ data }) => {
       setIsClamped(false);
     }
   }, [data]);
-
-  const swiperOptions2 = {
-    slidesPerView: 4.08,
-    centeredSlides: false,
-    spaceBetween: 5,
-    modules: [Pagination, Scrollbar, Mousewheel, FreeMode],
-    noSwiping: true,
-    allowSlidePrev: true,
-    allowSlideNext: true,
-  };
-  const swiper1Ref = useRef(null);
 
   const [loadingMaintenance, setLoadingMaintenance] = useState(false);
   const [loadingInstallation, setLoadingInstallation] = useState(false);
