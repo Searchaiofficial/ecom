@@ -1,6 +1,5 @@
 "use client";
 
-import { register } from "swiper/element/bundle";
 import React, { useEffect, useRef, useState } from "react";
 import "./imagecaresoul.css";
 import Image from "next/image";
@@ -20,8 +19,6 @@ const Carousel = ({ images: prodImage, data }) => {
   const swiperRef = useRef(null);
 
   useEffect(() => {
-    register();
-
     const params = {
       slidesPerView: 1,
       centeredSlides: true,

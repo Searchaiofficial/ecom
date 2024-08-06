@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter, usePathname } from "next/navigation";
 import { setselectedproduct } from "../Features/Slices/compareSlice";
 import { A11y } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
 import {
   Pagination,
   Navigation,
@@ -44,7 +43,6 @@ import TabsProductCard from "./TabsProductCard";
 import CategoryGrid from "./CategoryGrid";
 import { selecteddbItems } from "../Features/Slices/cartSlice";
 import { viewItemList } from "@/tag-manager/events/view_item_list";
-import { register } from "swiper/element";
 const Tabs = ({
   filteredProductData,
   heading,
@@ -698,8 +696,6 @@ const Tabs = ({
   }, [type]);
 
   useEffect(() => {
-    register();
-
     const params = {
       slidesPerView: 4.08,
       centeredSlides: false,
