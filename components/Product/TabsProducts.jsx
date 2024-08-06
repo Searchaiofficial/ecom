@@ -9,24 +9,12 @@ import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter, usePathname } from "next/navigation";
 import { setselectedproduct } from "../Features/Slices/compareSlice";
-import { A11y } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-import {
-  Pagination,
-  Navigation,
-  Scrollbar,
-  Mousewheel,
-  FreeMode,
-} from "swiper/modules";
+import { Pagination, Scrollbar, Mousewheel, FreeMode } from "swiper/modules";
 import {
   srtarr,
-  typeContent,
-  typearr,
   categoryarr,
   wallpaperCollectionArr,
   flooringCollectionArr,
-  colorarr,
-  Size,
 } from "./tabsArray";
 import {
   renderSortItem,
@@ -38,13 +26,11 @@ import {
 } from "./tabsRender";
 import TabsProductContent from "../compounds/TabsProductContent";
 import Measure from "./meausrement";
-import Link from "next/link";
 import axios from "axios";
 import TabsProductCard from "./TabsProductCard";
 import CategoryGrid from "./CategoryGrid";
 import { selecteddbItems } from "../Features/Slices/cartSlice";
 import { viewItemList } from "@/tag-manager/events/view_item_list";
-import { register } from "swiper/element";
 const Tabs = ({
   filteredProductData,
   heading,
@@ -698,8 +684,6 @@ const Tabs = ({
   }, [type]);
 
   useEffect(() => {
-    register();
-
     const params = {
       slidesPerView: 4.08,
       centeredSlides: false,

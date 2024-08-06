@@ -1,4 +1,3 @@
-import { register } from "swiper/element/bundle";
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -7,8 +6,6 @@ const CategorySliderSwiper = ({ categories }) => {
   const swiperRef = useRef(null);
 
   useEffect(() => {
-    register();
-
     const params = {
       slidesPerView: 4.08,
       centeredSlides: false,
