@@ -20,6 +20,17 @@ export default async function Home() {
         type={"Organization"}
         url="https://www.ayatrio.com"
         name="Ayatrio"
+        hasMerchantReturnPolicy={{
+          "@type": "MerchantReturnPolicy",
+          applicableCountry: ["IN"],
+          returnPolicyCountry: "IN",
+          returnPolicyCategory:
+            "https://schema.org/MerchantReturnFiniteReturnWindow",
+          merchantReturnDays: 30,
+          returnMethod: "https://schema.org/ReturnByMail",
+          returnFees: "https://schema.org/FreeReturn",
+          refundType: "https://schema.org/FullRefund",
+        }}
         contactPoint={[
           {
             telephone: "(+91) 9007404292",
