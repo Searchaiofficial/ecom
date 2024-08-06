@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useRef, useEffect } from "react";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
@@ -13,9 +13,6 @@ import MultiCardContent from "../compounds/MultiCardContent";
 import { useSelector, useDispatch } from "react-redux";
 import { selectMultiCardData } from "../Features/Slices/multiCardSlice";
 
-
-
-
 const Multicard = ({ forhomePage }) => {
   const swiper1Ref = useRef(null);
   const multiCardData = useSelector(selectMultiCardData);
@@ -26,13 +23,38 @@ const Multicard = ({ forhomePage }) => {
     }
   }, []);
 
-
   return (
     <div>
-      <div className={`bg-zinc-50 pb-[20px] mt-[30px] pt-[30px] ${forhomePage !== false ? "sm:pl-[50px] pl-[20px] lg:mt-0 lg:pl-[67px]" : "pl-0 lg:mt-0"}  overflow-x-auto`}>
-        <div className="text-2xl flex flex-col gap-[2px] font-semibold w-full pb-[20px] pt-[30px] mt-[30px]">
-          <h2>Ways to shopping at Ayatrio</h2>
-        </div>
+      <div
+        className={`bg-zinc-50 pb-[20px] mt-[30px] pt-[30px] ${
+          forhomePage !== false
+            ? "sm:pl-[50px] pl-[20px] lg:mt-0 lg:pl-[67px]"
+            : "pl-0 lg:mt-0"
+        }  overflow-x-auto`}
+      >
+        <div className="w-full flex justify-between items-center">
+          <h2 className="font-semibold text-2xl pb-[20px] pt-[30px]">
+            Ways to shopping at Ayatrio
+          </h2>
+          <div className=" flex text-2xl cursor-pointer text-white rounded-full gap-8">
+            <Image
+              loading="lazy"
+              src="/icons/backarrowblack.svg"
+              width={20}
+              height={20}
+              alt="Arrow"
+              className="back rounded-full h-7 w-7 "
+            />
+            <Image
+              loading="lazy"
+              src="/icons/rightarrowblack.svg"
+              width={20}
+              height={20}
+              alt="Arrow"
+              className="right lg:mr-16 mr-6 rounded-full h-7 w-7 "
+            />
+          </div>
+        </div>{" "}
         <Swiper
           ref={swiper1Ref}
           // scrollbar={{
@@ -82,7 +104,7 @@ const Multicard = ({ forhomePage }) => {
             );
           })}
 
-          <div className="flex flex-row items-end justify-end gap-4">
+          {/* <div className="flex flex-row items-end justify-end gap-4">
             <Image
               src="/icons/backarrowblack.svg"
               width={20}
@@ -97,7 +119,7 @@ const Multicard = ({ forhomePage }) => {
               alt="Arrow"
               className="right lg:mr-16 mr-6 rounded-full h-7 w-7 hover:opacity-100 mt-2"
             />
-          </div>
+          </div> */}
         </Swiper>
       </div>
     </div>

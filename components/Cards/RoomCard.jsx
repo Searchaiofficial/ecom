@@ -32,7 +32,7 @@ const RoomCard = async () => {
                   </p>
                   <Image
                     loading="lazy"
-                    src={"/icons/Back_arrow.svg"}
+                    src={"/icons/top_arrow-black.svg"}
                     height={15}
                     width={15}
                     alt="arrow icon"

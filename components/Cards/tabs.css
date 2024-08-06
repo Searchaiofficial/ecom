@@ -45,7 +45,10 @@
       top: 0;
       left: 0;
       right: 0;
-      margin-inline: 20px; /* Adjust margin as per your design */
+      /* margin-inline: 68px;  */
+      width: 100%;
+      padding-left: 70px;
+      padding-right: 70px;
       z-index: 1000;
       background-color: white;
     }

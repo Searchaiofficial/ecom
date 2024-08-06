@@ -11,7 +11,7 @@ const MultiCardServiceContent = (props) => {
     const { iconPath, title } = props;
     console.log(title)
     return (
-        <div className="bg-white flex flex-col md:flex-row h-auto min-h-[260px] mb-[20px]">
+        <div className="bg-white flex flex-col md:flex-row h-auto min-h-[260px] mt-2 mb-[20px]">
             {/* <div className="mt-8 ml-6">
         <Image src={iconPath} width={iconSize} height={iconSize} alt="image" />
       </div>

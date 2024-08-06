@@ -461,7 +461,7 @@ const RoomInfo = ({ data }) => {
                             {item.productTitle}
                           </h2>
                           <Image
-                            src="/icons/Back_arrow.svg"
+                            src="/icons/top_arrow-black.svg"
                             alt="arrow"
                             width={15}
                             height={15}
