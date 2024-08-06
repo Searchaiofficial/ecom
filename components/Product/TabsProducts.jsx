@@ -687,7 +687,6 @@ const Tabs = ({
     const params = {
       slidesPerView: 4.08,
       centeredSlides: false,
-      spaceBetween: 5,
       spaceBetween: 10,
       draggable: true,
       noSwiping: true,
@@ -712,7 +711,7 @@ const Tabs = ({
         },
       },
       scrollbar: {
-        hide: false,
+        hide: true,
         draggable: true,
       },
       mousewheel: {
@@ -727,6 +726,7 @@ const Tabs = ({
 
     if (swiper1Ref.current) {
       Object.assign(swiper1Ref.current, params);
+
       swiper1Ref.current.initialize?.();
     }
   }, [swiper1Ref, swiper1Ref.current]);
