@@ -1,5 +1,6 @@
 "use client";
 
+import { register } from "swiper/element/bundle";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -33,6 +34,8 @@ const MainSlider = ({ initialData: { result: sliderData } }) => {
   }, [handleResize]);
 
   useEffect(() => {
+    register();
+
     const params = {
       centeredSlides: true,
       loop: true,

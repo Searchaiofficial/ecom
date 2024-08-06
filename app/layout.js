@@ -5,7 +5,6 @@ import { GoogleTagManager } from "@next/third-parties/google";
 import FooterWrapper from "@/components/FooterWrapper/FooterWrapper";
 import NextTopLoader from "nextjs-toploader";
 import { BASE_URL } from "@/constants/base-url";
-import SwiperProvider from "@/providers/SwiperProvider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -61,11 +60,9 @@ export default function RootLayout({ children }) {
       <GoogleTagManager gtmId={gtmId} />
       <body>
         <Providers>
-          <SwiperProvider>
-            <NextTopLoader color="#000" showSpinner={false} zIndex={99999} />
-            {children}
-            <FooterWrapper />
-          </SwiperProvider>
+          <NextTopLoader color="#000" showSpinner={false} zIndex={99999} />
+          {children}
+          <FooterWrapper />
         </Providers>
       </body>
     </html>

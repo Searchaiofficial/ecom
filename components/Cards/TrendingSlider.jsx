@@ -1,5 +1,6 @@
 "use client";
 
+import { register } from "swiper/element/bundle";
 import { useEffect, useRef } from "react";
 import Card from "./card";
 import { viewItemList } from "@/tag-manager/events/view_item_list";
@@ -8,6 +9,8 @@ const TrendingSlider = ({ trendingData, isProductInCart, setPopupVisible }) => {
   const swiperRef = useRef(null);
 
   useEffect(() => {
+    register();
+
     const params = {
       centeredSlides: false,
       spaceBetween: 12,
