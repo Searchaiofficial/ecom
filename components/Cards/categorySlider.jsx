@@ -16,7 +16,7 @@ import "swiper/css/navigation";
 import "./styles.css";
 import Link from "next/link";
 import axios from "axios";
-import CategorySlider from "./CategorySlider";
+import CategorySliderSwiper from "./CategorySliderSwiper";
 
 const CategoriesSlider = () => {
   const swiper1Ref = useRef(null);
@@ -85,7 +85,7 @@ const CategoriesSlider = () => {
                 className=" h-[28px] lg:-mt-5  mb-[50px] sm:mb-0  w-[28px] "
               />
             </div>
-            <CategorySlider categories={categories} />
+            <CategorySliderSwiper categories={categories} />
             <div className="right rounded-full   group-hover:opacity-60 opacity-0   absolute right-5 z-10">
               <Image
                 loading="lazy"
