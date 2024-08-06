@@ -1,20 +1,13 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import "./styles.css";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-import MultiCardContent from "../compounds/MultiCardContent";
 import { useSelector, useDispatch } from "react-redux";
 import { selectMultiCardData } from "../Features/Slices/multiCardSlice";
+import MulticardSlider from "./MulticardSlider";
 
 const Multicard = ({ forhomePage }) => {
-  const swiper1Ref = useRef(null);
   const multiCardData = useSelector(selectMultiCardData);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -55,72 +48,7 @@ const Multicard = ({ forhomePage }) => {
             />
           </div>
         </div>{" "}
-        <Swiper
-          ref={swiper1Ref}
-          // scrollbar={{
-          //   hide: false,
-          //   draggable: true,
-          // }}
-          mousewheel={{
-            forceToAxis: true,
-            invert: false,
-          }}
-          freeMode={{
-            enabled: false,
-            sticky: true,
-          }}
-          modules={[Navigation, Pagination, Scrollbar, A11y]}
-          navigation={{
-            nextEl: ".right",
-            prevEl: ".back",
-          }}
-          draggable={false}
-          style={{ "--swiper-navigation-size": "24px" }}
-          breakpoints={{
-            300: {
-              slidesPerView: 1.2,
-              spaceBetween: 10,
-            },
-            768: {
-              slidesPerView: 2,
-              spaceBetween: 10,
-            },
-            1024: {
-              slidesPerView: 3.5,
-              spaceBetween: 10,
-            },
-          }}
-        >
-          {multiCardData.map((curElement, idx) => {
-            return (
-              <SwiperSlide key={idx}>
-                <MultiCardContent
-                  title={curElement.title}
-                  text={curElement.description}
-                  iconPath={curElement.icon}
-                  iconSize={40}
-                />
-              </SwiperSlide>
-            );
-          })}
-
-          {/* <div className="flex flex-row items-end justify-end gap-4">
-            <Image
-              src="/icons/backarrowblack.svg"
-              width={20}
-              height={20}
-              alt="Arrow"
-              className="back rounded-full h-7 w-7"
-            />
-            <Image
-              src="/icons/rightarrowblack.svg"
-              width={20}
-              height={20}
-              alt="Arrow"
-              className="right lg:mr-16 mr-6 rounded-full h-7 w-7 hover:opacity-100 mt-2"
-            />
-          </div> */}
-        </Swiper>
+        <MulticardSlider multicardData={multiCardData} />
       </div>
     </div>
   );
