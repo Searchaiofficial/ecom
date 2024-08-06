@@ -17,10 +17,6 @@ const MulticardSlider = ({ multicardData }) => {
       noSwiping: false,
       allowSlidePrev: true,
       allowSlideNext: true,
-      scrollbar: {
-        el: ".swiper-scrollbar-custom",
-        draggable: true,
-      },
       mousewheel: {
         forceToAxis: true,
         invert: false,
