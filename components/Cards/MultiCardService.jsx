@@ -1,28 +1,8 @@
 "use client";
 import React, { useRef } from "react";
-import {
-  Navigation,
-  Pagination,
-  Scrollbar,
-  A11y,
-  FreeMode,
-  Mousewheel,
-} from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
 import "./styles.css";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-import MultiCardServiceContent from "../compounds/MultiCardServiceContect";
 import MultiCardServiceSlider from "./MultiCardServiceSlider";
-
-// a.Shop online with click and collect and delivery
-// b.Furnishing Design service
-// c.Measuring Service
-// d.Installation Service
-// f.Gif Card this 5 for bellow one
 
 const data = [
   {
