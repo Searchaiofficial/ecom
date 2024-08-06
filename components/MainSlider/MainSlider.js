@@ -59,10 +59,12 @@ const MainSlider = ({ initialData: { result: sliderData } }) => {
       },
     };
 
-    Object.assign(swiperRef.current, params);
+    if (swiperRef.current) {
+      Object.assign(swiperRef.current, params);
 
-    swiperRef.current.initialize();
-  }, []);
+      swiperRef.current.initialize?.();
+    }
+  }, [swiperRef, swiperRef.current]);
 
   return (
     <div

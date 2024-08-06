@@ -53,10 +53,12 @@ const DataSliderSwiper = ({ productData, sliderIndex }) => {
       noSwiping: true,
     };
 
-    Object.assign(swiperRef.current, params);
+    if (swiperRef.current) {
+      Object.assign(swiperRef.current, params);
 
-    swiperRef.current.initialize();
-  }, []);
+      swiperRef.current.initialize?.();
+    }
+  }, [swiperRef, swiperRef.current]);
 
   return (
     <div>

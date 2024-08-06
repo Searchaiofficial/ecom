@@ -727,7 +727,7 @@ const Tabs = ({
 
     if (swiper1Ref.current) {
       Object.assign(swiper1Ref.current, params);
-      swiper1Ref.current.initialize();
+      swiper1Ref.current.initialize?.();
     }
   }, [swiper1Ref, swiper1Ref.current]);
 

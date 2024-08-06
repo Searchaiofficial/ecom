@@ -43,10 +43,12 @@ const Carousel = ({ images: prodImage, data }) => {
       },
     };
 
-    Object.assign(swiperRef.current, params);
+    if (swiperRef.current) {
+      Object.assign(swiperRef.current, params);
 
-    swiperRef.current.initialize();
-  }, [images]);
+      swiperRef.current.initialize?.();
+    }
+  }, [images, swiperRef, swiperRef.current]);
 
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
