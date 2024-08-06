@@ -14,6 +14,7 @@ import {
   Pagination,
   Scrollbar,
 } from "swiper/modules";
+import RoomInfoSlider from "./RoomInfoSlider";
 
 const RoomInfo = ({ data }) => {
   const [categoryDetails, setCategoryDetails] = useState();
@@ -402,76 +403,7 @@ const RoomInfo = ({ data }) => {
               </div>
 
               {otherProductByAuthorId.length > 0 && (
-                <Swiper
-                  className="w-full mt-4"
-                  ref={swiper1Ref}
-                  {...swiperOptions2}
-                  modules={[Navigation, Pagination, A11y]}
-                  navigation={{
-                    nextEl: ".right",
-                    prevEl: ".back",
-                  }}
-                  draggable={true}
-                  style={{
-                    "--swiper-navigation-size": "24px",
-                    maxHeight: "120px",
-                  }}
-                  mousewheel={{
-                    forceToAxis: true,
-                    invert: false,
-                  }}
-                  freeMode={{
-                    enabled: false,
-                    sticky: true,
-                  }}
-                  breakpoints={{
-                    300: {
-                      slidesPerView: 1,
-                      spaceBetween: 10,
-                    },
-                    768: {
-                      slidesPerView: 2,
-                      spaceBetween: 10,
-                    },
-                    1024: {
-                      slidesPerView: 2,
-                      spaceBetween: 10,
-                    },
-                  }}
-                >
-                  {otherProductByAuthorId.map((item, idx) => (
-                    <SwiperSlide key={idx} className="max-w-[130px] px-1">
-                      <Link
-                        className="flex flex-col items-center"
-                        href={`/${item.productTitle.replace(/ /g, "-")}/${
-                          item.productId
-                        }`}
-                      >
-                        <div className="mb-[12px] ">
-                          <Image
-                            loading="lazy"
-                            src={item.images[0]}
-                            width={200}
-                            height={130}
-                            className="h-[70px] object-cover"
-                          />
-                        </div>
-                        <div className="flex justify-between">
-                          <h2 className="text-[#333333] text-[14px] hover:underline line-clamp-1">
-                            {item.productTitle}
-                          </h2>
-                          <Image
-                            src="/icons/top_arrow-black.svg"
-                            alt="arrow"
-                            width={15}
-                            height={15}
-                            loading="lazy"
-                          />
-                        </div>
-                      </Link>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
+                <RoomInfoSlider data={otherProductByAuthorId} />
               )}
             </div>
           )}
