@@ -72,7 +72,7 @@ const AccessoriesPosts = ({ accessories }) => {
             <SwiperSlide>
               <Card
                 title={product.productTitle}
-                productImages={product?.productImages}
+                productImages={product.productImages}
                 specialPrice={product?.specialprice}
                 price={product.perUnitPrice}
                 desc={product.productTitle}
@@ -85,7 +85,13 @@ const AccessoriesPosts = ({ accessories }) => {
                 category={product.category}
                 productId={product.productId}
                 cssClass={"card1flex"}
+                // inCart={inCart}
                 unitType={product.unitType}
+                productType={product.productType}
+                expectedDelivery={product.expectedDelivery}
+                discountedprice={product.discountedprice}
+                offer={product.offer}
+                urgency={product.urgency}
               />
             </SwiperSlide>
           ))}
