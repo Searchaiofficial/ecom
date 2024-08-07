@@ -64,10 +64,10 @@ const CategorySliderSwiper = ({ categories }) => {
                   <div className="mb-[12px] ">
                     <Image
                       src={curElement.image || "/images/temp.svg"}
-                      width={200}
-                      height={130}
+                      width={120}
+                      height={78}
                       alt={"category image"}
-                      className="w-[200px] h-[62px] lg:h-[95px] "
+                      className="w-[120] h-[78px]"
                     />
                   </div>
                   <h2 className="text-[#333333] lg:text-center line-clamp-1 font-semibold text-[14px] hover:underline">
