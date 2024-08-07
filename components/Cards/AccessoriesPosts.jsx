@@ -7,6 +7,7 @@ import "swiper/css/free-mode";
 import "swiper/css/mousewheel";
 import "swiper/css/scrollbar";
 import Card from "../../components/Cards/card";
+import AccessoriesSlider from "./AccessoriesSlider";
 
 const AccessoriesPosts = ({ accessories }) => {
   const swiper1Ref = useRef(null);
@@ -28,74 +29,12 @@ const AccessoriesPosts = ({ accessories }) => {
     <div>
       {accessories && accessories.length > 0 && (
         <div>
-          <h2 className="font-semibold text-2xl pb-[8px] ">{accessories[0].subcategory}</h2>
+          <h2 className="font-semibold text-2xl pb-[8px] ">
+            {accessories[0].subcategory}
+          </h2>
         </div>
       )}
-      <Swiper
-        ref={swiper1Ref}
-        {...swiperOptions}
-        scrollbar={{
-          hide: false,
-          draggable: true,
-        }}
-        mousewheel={{
-          forceToAxis: true,
-          invert: false,
-        }}
-        freeMode={{
-          enabled: true,
-          sticky: true,
-        }}
-        breakpoints={{
-          300: {
-            slidesPerView: 1.5,
-            spaceBetween: 10,
-          },
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 10,
-          },
-          1024: {
-            slidesPerView: 3.5,
-            spaceBetween: 10,
-          },
-        }}
-        allowSlideNext={true}
-        allowSlidePrev={true}
-        slideNextClass="custom-next-button"
-        slidePrevClass="custom-prev-button"
-        className=""
-      >
-        {accessories &&
-          accessories.length > 0 &&
-          accessories.map((product, idx) => (
-            <SwiperSlide>
-              <Card
-                title={product.productTitle}
-                productImages={product.productImages}
-                specialPrice={product?.specialprice}
-                price={product.perUnitPrice}
-                desc={product.productTitle}
-                shortDescription={product.shortDescription}
-                demandtype={product.demandtype}
-                imgSrc={product.images}
-                rating={product.ratings}
-                key={idx}
-                id={product._id}
-                category={product.category}
-                productId={product.productId}
-                cssClass={"card1flex"}
-                // inCart={inCart}
-                unitType={product.unitType}
-                productType={product.productType}
-                expectedDelivery={product.expectedDelivery}
-                discountedprice={product.discountedprice}
-                offer={product.offer}
-                urgency={product.urgency}
-              />
-            </SwiperSlide>
-          ))}
-      </Swiper>
+      <AccessoriesSlider accessories={accessories} />
     </div>
   );
 };
