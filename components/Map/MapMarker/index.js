@@ -35,9 +35,6 @@ const MapMarker = ({ place, idx }) => {
 
   // console.log("Rendering MapMarker for", place);
 
-  const defaultImageUrl =
-    "https://bolt-gcdn.sc-cdn.net/3/Z2i0CKb1i5GtNvg8xNoP7.256.IRZXSOY?mo=GlgaFhoAGgAyAX06AQRCBgjm_5mrBlBJYAFaEERmTGFyZ2VUaHVtYm5haWyiARQIgAIiDwoCSAISACoHSVJaWFNPWaIBFAiaCiIPCgJIAxIAKgdJUlpYU09Z&uc=73";
-
   useEffect(() => {
     if (clickedItem?._id === place?._id) {
       handleMarkerClick()
@@ -60,7 +57,7 @@ const MapMarker = ({ place, idx }) => {
             <div
               className="info-image"
               style={{
-                backgroundImage: `url(${place.thumbnail || defaultImageUrl})`,
+                backgroundImage: `url(${place.profileImg || place.images[0]})`,
                 boxShadow: `${idx === 5 && "0 0 0 6px rgb(117, 56, 215)"}`,
 
               }}
