@@ -375,7 +375,9 @@ const ProductPage = ({ params }) => {
           }
           type={type}
           description={category?.description}
-          subCategory={category?.subcategories}
+          subCategory={category?.subcategories?.filter(
+            (subcategory) => !subcategory.isAccessories
+          )}
           allTypes={allTypes}
           parentCategory={parentCategory}
           offerCategory={offerCategory}

@@ -309,7 +309,7 @@ const RoomToolbar = ({ data }) => {
           height={25}
           loading="lazy"
         />
-        <span className="text-sm">Free Sampling</span>
+        <span className="text-sm">Sample request</span>
       </div>
       <span></span>
       <div

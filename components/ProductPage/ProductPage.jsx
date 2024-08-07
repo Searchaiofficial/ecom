@@ -10,7 +10,7 @@ import { selectRoomData } from "../Features/Slices/roomSlice";
 import RoomToolbar from "./RoomToolbar";
 import RoomInfo from "../Room/RoomInfo";
 import Reviews from "../Room/Other/Reviews";
-import AccessoriesPosts from "../Cards/AccessoriesPosts";
+// import AccessoriesPosts from "../Cards/AccessoriesPosts";
 import UserReviewPosts from "../Cards/UserReviewPosts";
 import axios from "axios";
 import Carous from "../Carousel/Carous";
@@ -51,8 +51,9 @@ const ProductPage = ({ productId, initialData }) => {
   const fetchAccessories = async () => {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/productByCategoryAndSubCategory?category=${data?.category}&subcategory=Accessories`
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/fetchAccessoriesByCategory/${data?.category}`
       );
+      console.log("harsh accessories", response.data)
       setAccessories(response.data);
     } catch (error) {
       console.log(error);
@@ -113,9 +114,9 @@ const ProductPage = ({ productId, initialData }) => {
             />
           </div>
           <RoomToolbar data={data} />
-          <RoomInfo data={data} />
+          <RoomInfo data={data} accessories={accessories} />
+          {/* <AccessoriesPosts accessories={accessories} /> */}
           <Reviews productId={data._id} data={data} />
-          <AccessoriesPosts accessories={accessories} />
           <UserReviewPosts
             slidesPerView={2.2}
             SubcategoryName={data.subcategory}

@@ -28,7 +28,7 @@ const AccessoriesPosts = ({ accessories }) => {
     <div>
       {accessories && accessories.length > 0 && (
         <div>
-          <h2 className="font-semibold text-2xl pb-[8px] ">Accessories</h2>
+          <h2 className="font-semibold text-2xl pb-[8px] ">{accessories[0].subcategory}</h2>
         </div>
       )}
       <Swiper
@@ -72,7 +72,7 @@ const AccessoriesPosts = ({ accessories }) => {
             <SwiperSlide>
               <Card
                 title={product.productTitle}
-                productImages={product?.productImages}
+                productImages={product.productImages}
                 specialPrice={product?.specialprice}
                 price={product.perUnitPrice}
                 desc={product.productTitle}
@@ -85,7 +85,13 @@ const AccessoriesPosts = ({ accessories }) => {
                 category={product.category}
                 productId={product.productId}
                 cssClass={"card1flex"}
+                // inCart={inCart}
                 unitType={product.unitType}
+                productType={product.productType}
+                expectedDelivery={product.expectedDelivery}
+                discountedprice={product.discountedprice}
+                offer={product.offer}
+                urgency={product.urgency}
               />
             </SwiperSlide>
           ))}
