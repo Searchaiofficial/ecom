@@ -741,7 +741,7 @@ const Tabs = ({
         <p className="leading-2 mb-4 text-[14px] pt-[5px] text-[#484848] lg:w-[70%] line-clamp-2">
           {description}
         </p>
-        <div className="flex sticky top-0 z-[9996] bg-white py-5 overflow-x-auto md:overflow-x-visible mb-[5px] md:mb-0">
+        <div className="flex sticky top-0 z-[9996] bg-white py-2 sm:py-5 overflow-x-auto md:overflow-x-visible mb-[5px] md:mb-0">
           {filteredProductData?.length > 0 && (
             <TabsProductContent
               filterName={"Sort"}
@@ -1160,7 +1160,7 @@ const Tabs = ({
               </button>
             )}
           </div>
-          <div className="grid md:grid-cols-4 grid-cols-2 cursor-pointer gap-x-4 py-3 gap-y-8 overflow-x-hidden">
+          <div className="grid md:grid-cols-4 grid-cols-2 cursor-pointer gap-x-4 py-1 sm:py-3 gap-y-8 overflow-x-hidden">
             {filterData && filterData.length > 0 ? (
               filterData.map((text, idx) => {
                 const inCart = isProductInCart(text?._id);
