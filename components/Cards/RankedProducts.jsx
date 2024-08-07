@@ -1,22 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import Card from "@/components/Rank/Card";
-
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import "swiper/css/free-mode";
-import "swiper/css/mousewheel";
-import "swiper/css/scrollbar";
-import SwiperCore, {
-  Pagination,
-  Navigation,
-  Scrollbar,
-  Mousewheel,
-  FreeMode,
-  A11y,
-} from "swiper/core";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectRankedProductsData } from "../Features/Slices/rankedProductsSlice";
 import {
@@ -24,6 +7,7 @@ import {
   selectRecommendationStatus,
   selectRecommendedProduct,
 } from "../Features/Slices/recommendationSlice";
+import RankedProductsSlider from "./RankedProductsSlider";
 
 const RankedProducts = () => {
   const [data, setData] = useState([]);
@@ -67,56 +51,6 @@ const RankedProducts = () => {
     }
   }, [rankedData, recommended]);
 
-  SwiperCore.use([
-    Pagination,
-    Navigation,
-    Scrollbar,
-    Mousewheel,
-    FreeMode,
-    A11y,
-  ]);
-
-  const swiperOptions = {
-    slidesPerView: 3.08,
-    centeredSlides: false,
-    spaceBetween: 5,
-    navigation: {
-      nextEl: ".custom-next-button",
-      prevEl: ".custom-prev-button",
-    },
-    breakpoints: {
-      300: {
-        slidesPerView: 1.2,
-        spaceBetween: 10,
-      },
-      640: {
-        slidesPerView: 2,
-        spaceBetween: 10,
-      },
-      1024: {
-        slidesPerView: 4,
-        spaceBetween: 10,
-      },
-    },
-    scrollbar: {
-      hide: false,
-      draggable: true,
-    },
-    mousewheel: {
-      forceToAxis: true,
-      invert: false,
-    },
-    freeMode: {
-      enabled: true,
-      sticky: true,
-      momentum: true,
-      momentumRatio: 0.5,
-      momentumBounceRatio: 0.5,
-    },
-    draggable: true,
-    touchEventsTarget: "wrapper",
-  };
-
   return (
     <>
       {data && data.length > 0 && (
@@ -126,21 +60,7 @@ const RankedProducts = () => {
               Top Saler
             </h2>
           </div>
-          <Swiper
-            {...swiperOptions}
-            style={{ paddingRight: "10px", paddingBottom: "10px" }}
-          >
-            {data &&
-              data.map((item, index) => (
-                <SwiperSlide key={index}>
-                  <Card
-                    category={item.category}
-                    products={item.products}
-                    colors={colors[index % 2]}
-                  />
-                </SwiperSlide>
-              ))}
-          </Swiper>
+          <RankedProductsSlider data={data} colors={colors} />
         </div>
       )}
     </>
