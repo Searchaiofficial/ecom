@@ -47,9 +47,6 @@ const TrendingSlider = ({ trendingData, isProductInCart, setPopupVisible }) => {
           spaceBetween: 10,
         },
       },
-      allowSlideNext: true,
-      allowSlidePrev: true,
-      noSwiping: true,
     };
 
     if (swiperRef.current) {
