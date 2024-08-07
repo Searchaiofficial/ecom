@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -9,7 +9,6 @@ import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter, usePathname } from "next/navigation";
 import { setselectedproduct } from "../Features/Slices/compareSlice";
-import { Pagination, Scrollbar, Mousewheel, FreeMode } from "swiper/modules";
 import {
   srtarr,
   categoryarr,
@@ -31,6 +30,8 @@ import TabsProductCard from "./TabsProductCard";
 import CategoryGrid from "./CategoryGrid";
 import { selecteddbItems } from "../Features/Slices/cartSlice";
 import { viewItemList } from "@/tag-manager/events/view_item_list";
+import SubcategorySlider from "./SubcategorySlider";
+import OfferSlider from "./OfferSlider";
 const Tabs = ({
   filteredProductData,
   heading,
@@ -51,7 +52,6 @@ const Tabs = ({
 }) => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const swiper1Ref = useRef(null);
   // const handlenav = (id) => {
   //   router.push(`/room/${id}`);
   // };
@@ -590,10 +590,6 @@ const Tabs = ({
     .fill("/icons/star full black.svg")
     .concat("/icons/half black half white.svg");
 
-  const swiperOptions2 = {
-    modules: [Pagination, Scrollbar, Mousewheel, FreeMode],
-  };
-
   // const [cartData, setCartData] = useState([]);
   const cartData = useSelector(selecteddbItems);
 
@@ -683,54 +679,6 @@ const Tabs = ({
     }
   }, [type]);
 
-  useEffect(() => {
-    const params = {
-      slidesPerView: 4.08,
-      centeredSlides: false,
-      spaceBetween: 10,
-      draggable: true,
-      noSwiping: true,
-      allowSlidePrev: true,
-      allowSlideNext: true,
-      mousewheel: {
-        forceToAxis: true,
-        invert: false,
-      },
-      breakpoints: {
-        300: {
-          slidesPerView: Math.min(subCategory?.length, 2.5),
-          spaceBetween: 10,
-        },
-        768: {
-          slidesPerView: Math.min(subCategory?.length, 3),
-          spaceBetween: 10,
-        },
-        1024: {
-          slidesPerView: Math.min(subCategory?.length, 7),
-          spaceBetween: 10,
-        },
-      },
-      scrollbar: {
-        hide: true,
-        draggable: true,
-      },
-      mousewheel: {
-        forceToAxis: true,
-        invert: false,
-      },
-      freeMode: {
-        enabled: false,
-        sticky: true,
-      },
-    };
-
-    if (swiper1Ref.current) {
-      Object.assign(swiper1Ref.current, params);
-
-      swiper1Ref.current.initialize?.();
-    }
-  }, [swiper1Ref, swiper1Ref.current]);
-
   return (
     <div className="">
       {openAll && <div className="background-overlay open"></div>}
@@ -751,116 +699,22 @@ const Tabs = ({
           <div className="flex items-center">
             {subCategory ? (
               <div className="group flex flex-row items-center justify-start gap-2 mb-4">
-                <swiper-container
-                  ref={swiper1Ref}
-                  style={{
-                    "--swiper-navigation-size": "24px",
-                    maxHeight: "120px",
-                    width: "100%",
-                  }}
-                >
-                  {pathname.split("/")[3] === "all"
-                    ? subCategory?.map((curElement, idx) => {
-                        return (
-                          <swiper-slide
-                            style={{
-                              maxWidth: "130px",
-                            }}
-                            key={idx}
-                          >
-                            <div
-                              className="cursor-pointer"
-                              onClick={() => setType(curElement.name)}
-                            >
-                              <div className="flex flex-col ">
-                                <div className="lg:mb-[12px] ">
-                                  <Image
-                                    src={curElement.img}
-                                    width={200}
-                                    height={130}
-                                    alt={curElement.name}
-                                    className="w-[200px] h-[70px]"
-                                  />
-                                </div>
-                                <h2 className="text-[#333333] text-[14px] hover:underline line-clamp-1">
-                                  {curElement.name}
-                                </h2>
-                              </div>
-                            </div>
-                          </swiper-slide>
-                        );
-                      })
-                    : filteredSubCategory?.map((curElement, idx) => {
-                        return (
-                          <div className="max-w-[130px]" key={idx}>
-                            <div
-                              className="cursor-pointer"
-                              onClick={() => setType(curElement.name)}
-                            >
-                              <div className="flex flex-col ">
-                                <div className="lg:mb-[12px] ">
-                                  <Image
-                                    src={curElement.img}
-                                    width={200}
-                                    height={130}
-                                    alt={curElement.name}
-                                    className="w-[200px] h-[70px]"
-                                  />
-                                </div>
-                                <h2 className="text-[#333333] text-[14px] hover:underline line-clamp-1">
-                                  {curElement.name}
-                                </h2>
-                              </div>
-                            </div>
-                          </div>
-                        );
-                      })}
-                </swiper-container>
+                <SubcategorySlider
+                  pathname={pathname}
+                  subCategory={subCategory}
+                  filteredSubCategory={filteredSubCategory}
+                  setType={setType}
+                />
               </div>
             ) : (
               parentCategory &&
               (parentCategory === "offers" && offerCategoryData ? (
                 <div className="group flex flex-row items-center justify-start gap-2 mb-4">
-                  <swiper-container
-                    ref={swiper1Ref}
-                    {...swiperOptions2}
-                    style={{
-                      "--swiper-navigation-size": "24px",
-                      maxHeight: "120px",
-                      width: "100%",
-                    }}
-                  >
-                    {offerCategoryData.map((category, idx) => (
-                      <swiper-slide
-                        style={{
-                          maxWidth: "130px",
-                        }}
-                        key={idx}
-                      >
-                        <div
-                          className="cursor-pointer"
-                          onClick={() =>
-                            setSelectedOfferCategory(category.name)
-                          }
-                        >
-                          <div className="flex flex-col ">
-                            <div className="lg:mb-[12px] ">
-                              <Image
-                                src={category.image}
-                                width={200}
-                                height={130}
-                                alt={category.name}
-                                className="w-[200px] h-[70px]"
-                              />
-                            </div>
-                            <h2 className="text-[#333333] text-center text-[14px] hover:underline line-clamp-1">
-                              {category.name}
-                            </h2>
-                          </div>
-                        </div>
-                      </swiper-slide>
-                    ))}
-                  </swiper-container>
+                  <OfferSlider
+                    offerCategoryData={offerCategoryData}
+                    setSelectedOfferCategory={setSelectedOfferCategory}
+                    subCategory={subCategory}
+                  />
                 </div>
               ) : (
                 parentCategory === "demandtype" &&
