@@ -35,12 +35,13 @@ const MainSlider = ({ initialData: { result: sliderData } }) => {
   useEffect(() => {
     const params = {
       centeredSlides: true,
+      draggable: false,
       loop: true,
       autoplay: {
         delay: 10000,
         disableOnInteraction: true,
       },
-      grabCursor: true,
+      grabCursor: false,
       navigation: {
         nextEl: ".nav-next",
         prevEl: ".nav-prev",
@@ -55,6 +56,7 @@ const MainSlider = ({ initialData: { result: sliderData } }) => {
         },
         1024: {
           slidesPerView: 1.36,
+          touchRatio: 0,
         },
       },
     };
