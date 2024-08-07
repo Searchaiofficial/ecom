@@ -37,10 +37,6 @@ const OfferSlider = ({
           spaceBetween: 10,
         },
       },
-      scrollbar: {
-        hide: true,
-        draggable: true,
-      },
       mousewheel: {
         forceToAxis: true,
         invert: false,
