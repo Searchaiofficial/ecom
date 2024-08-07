@@ -2,15 +2,24 @@ import { getProductByProductId } from "@/actions/getProductByProductId";
 import ProductPage from "@/components/ProductPage/ProductPage";
 import { getAggregateRating } from "@/utils/getAggregateRating";
 import { BreadcrumbJsonLd, ProductJsonLd } from "next-seo";
+import { notFound } from "next/navigation";
 
 const Page = async ({ params }) => {
   const productId = params.subtitle;
+
+  if (params.title === "category") {
+    notFound();
+  }
 
   if (productId?.endsWith(".html") || productId?.endsWith(".svg")) {
     return null;
   }
 
   const product = await getProductByProductId(productId);
+
+  if (product?.error) {
+    notFound();
+  }
 
   if (!product) {
     return null;

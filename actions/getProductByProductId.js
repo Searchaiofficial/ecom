@@ -11,5 +11,6 @@ export const getProductByProductId = async (productId) => {
     return response.data;
   } catch (error) {
     console.log(error);
+    return { error: error.message };
   }
 };
