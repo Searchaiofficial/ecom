@@ -36,9 +36,9 @@ const Dataslider = ({ category, data, sliderIndex }) => {
           <h2 className="font-semibold text-2xl pb-[20px] pt-[30px]">
             {category}
           </h2>
-          <div className="Slidenav flex text-2xl cursor-pointer text-white rounded-full gap-2">
+          <div className="Slidenav flex text-2xl cursor-pointer text-white rounded-full gap-4">
             <div
-              className={`custom-prev-button-${sliderIndex} hover:bg-400 hover:scale-110 hover:text-slate-100 pr-6`}
+              className={`custom-prev-button-${sliderIndex} hover:bg-400 hover:scale-110 hover:text-slate-100 `}
             >
               <Image
                 loading="lazy"
