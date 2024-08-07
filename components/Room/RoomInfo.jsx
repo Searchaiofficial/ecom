@@ -6,8 +6,9 @@ import axios from "axios";
 import Link from "next/link";
 import "./styles.css";
 import RoomInfoSlider from "./RoomInfoSlider";
+import AccessoriesPosts from "../Cards/AccessoriesPosts";
 
-const RoomInfo = ({ data }) => {
+const RoomInfo = ({ data, accessories }) => {
   const [categoryDetails, setCategoryDetails] = useState();
   const [showMore, setShowMore] = useState(false);
   const [reviews, setReviews] = useState([]);
@@ -287,6 +288,8 @@ const RoomInfo = ({ data }) => {
         <PlaceInfo data={data} />
 
         <Amenities data={data} />
+
+        <AccessoriesPosts accessories={accessories} />
 
         <div className="flex">
           {data?.author && (

@@ -28,7 +28,7 @@ const AccessoriesPosts = ({ accessories }) => {
     <div>
       {accessories && accessories.length > 0 && (
         <div>
-          <h2 className="font-semibold text-2xl pb-[8px] ">Accessories</h2>
+          <h2 className="font-semibold text-2xl pb-[8px] ">{accessories[0].subcategory}</h2>
         </div>
       )}
       <Swiper

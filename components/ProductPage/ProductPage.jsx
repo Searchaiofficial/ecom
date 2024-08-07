@@ -10,7 +10,7 @@ import { selectRoomData } from "../Features/Slices/roomSlice";
 import RoomToolbar from "./RoomToolbar";
 import RoomInfo from "../Room/RoomInfo";
 import Reviews from "../Room/Other/Reviews";
-import AccessoriesPosts from "../Cards/AccessoriesPosts";
+// import AccessoriesPosts from "../Cards/AccessoriesPosts";
 import UserReviewPosts from "../Cards/UserReviewPosts";
 import axios from "axios";
 import Carous from "../Carousel/Carous";
@@ -114,9 +114,9 @@ const ProductPage = ({ productId, initialData }) => {
             />
           </div>
           <RoomToolbar data={data} />
-          <RoomInfo data={data} />
+          <RoomInfo data={data} accessories={accessories} />
+          {/* <AccessoriesPosts accessories={accessories} /> */}
           <Reviews productId={data._id} data={data} />
-          <AccessoriesPosts accessories={accessories} />
           <UserReviewPosts
             slidesPerView={2.2}
             SubcategoryName={data.subcategory}
