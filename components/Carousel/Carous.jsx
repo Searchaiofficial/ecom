@@ -7,18 +7,14 @@ import "swiper/css/free-mode";
 import "swiper/css/mousewheel";
 import "swiper/css/scrollbar";
 import "swiper/swiper-bundle.css";
-// import { useScrollPosition } from "react-scroll-position";
-// import Cards from '../components/Cards';
 import axios from "axios";
 import Card from "../Cards/card";
-// import imageurl1.jpg from '..
-// import image from "../assets/roomswiper.jpg";
 
 const Carous = ({ data }) => {
-  const [showFilter, setShowFilter] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [relatedData, setrelatedData] = useState([]);
   const [popupVisible, setPopupVisible] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -60,57 +56,8 @@ const Carous = ({ data }) => {
     allowSlidePrev: true,
     allowSlideNext: true,
   };
-  const swiperOptions3 = {
-    slidesPerView: 1,
-    centeredSlides: false,
-    spaceBetween: 1,
-    modules: [Pagination, Scrollbar, Mousewheel, FreeMode],
-    navigation: {
-      nextEl: ".custom-next-button",
-      prevEl: ".custom-prev-button",
-    },
-    noSwiping: true,
-    allowSlidePrev: true,
-    allowSlideNext: true,
-  };
+
   const swiperRef = useRef(null);
-
-  useEffect(() => {
-    let prevScrollPos = window.scrollY;
-
-    const handleScroll = () => {
-      const currentScrollPos = window.scrollY;
-      setShowFilter(
-        currentScrollPos <= prevScrollPos || currentScrollPos < 100
-      );
-      prevScrollPos = currentScrollPos;
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  const [showHeader, setShowHeader] = useState(true);
-  const [prevScrollPos, setPrevScrollPos] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollPos = window.scrollY;
-      setShowHeader(
-        currentScrollPos <= prevScrollPos || currentScrollPos < 100
-      );
-      setPrevScrollPos(currentScrollPos);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [prevScrollPos]);
 
   return (
     <>
