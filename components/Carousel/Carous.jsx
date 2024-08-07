@@ -9,7 +9,6 @@ import "swiper/css/scrollbar";
 import "swiper/swiper-bundle.css";
 // import { useScrollPosition } from "react-scroll-position";
 // import Cards from '../components/Cards';
-import ItemCard from "../Item/ItemCard";
 import axios from "axios";
 import Card from "../Cards/card";
 // import imageurl1.jpg from '..
@@ -94,18 +93,10 @@ const Carous = ({ data }) => {
     };
   }, []);
 
-  // const [showHeader, setShowHeader] = useState(true);
-
-  // // This hook will update the showHeader state based on scroll position
-  // useScrollPosition(({ prevPos, currPos }) => {
-  //   setShowHeader(currPos.y > prevPos.y || currPos.y < 100);
-  // });
-
   const [showHeader, setShowHeader] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
 
   useEffect(() => {
-    // Function to handle scroll event
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
       setShowHeader(
@@ -114,23 +105,34 @@ const Carous = ({ data }) => {
       setPrevScrollPos(currentScrollPos);
     };
 
-    // Add event listener when component mounts
     window.addEventListener("scroll", handleScroll);
 
-    // Remove event listener when component unmounts
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [prevScrollPos]); // Dependency on prevScrollPos to update the effect when it changes
-  // const [showHeader, setShowHeader] = useState(true);
-  // console.log(relatedData)
+  }, [prevScrollPos]);
+
   return (
     <>
-      <div className="sm:w-full w-[80vw] sm:block hidden">
+      <div className="w-full">
         <h2 className="mb-4 text-xl mt-5 font-semibold">Similar products</h2>
-        <div className="swiper2 mt-5 sm:block hidden">
+        <div className="swiper2 mt-5 sm:block block">
           <Swiper
             {...swiperOptions2}
+            breakpoints={{
+              300: {
+                slidesPerView: 1.2,
+                spaceBetween: 10,
+              },
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 10,
+              },
+              1024: {
+                slidesPerView: 4,
+                spaceBetween: 10,
+              },
+            }}
             onSwiper={(swiper) => (swiperRef.current = swiper)}
           >
             {isLoading ? (
@@ -157,42 +159,10 @@ const Carous = ({ data }) => {
                       productId={product.productId}
                       setPopupVisible={setPopupVisible}
                       cssClass={"card1flex"}
-                      // inCart={inCart}
                       discountedprice={product.discountedprice}
                       unitType={product.unitType}
                       productType={product.productType}
                       expectedDelivery={product.expectedDelivery}
-                    />
-                  </div>
-                </SwiperSlide>
-              ))
-            )}
-          </Swiper>
-        </div>
-        {/* swiper only for mobile */}
-        <div className="swiper3 mt-10 sm:hidden block">
-          <Swiper
-            {...swiperOptions3}
-            onSwiper={(swiper) => (swiperRef.current = swiper)}
-          >
-            {isLoading ? (
-              <SwiperSlide>
-                <div className="flex">Loading...</div>
-              </SwiperSlide>
-            ) : (
-              newRelatedData.map((product, idx) => (
-                <SwiperSlide key={idx}>
-                  <div className="grid grid-cols-1 mt-2 h-full fade-in">
-                    <ItemCard
-                      title={product.productTitle}
-                      price={product.perUnitPrice}
-                      desc={product.subcategory}
-                      imgSrc={product.images[0]}
-                      imagesArr={product.images}
-                      ratings={product.ratings}
-                      key={idx}
-                      setPopupVisible={setPopupVisible}
-                      cssClass={"card1flex"}
                     />
                   </div>
                 </SwiperSlide>
