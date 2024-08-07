@@ -758,14 +758,14 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
       ),
     },
     {
-      title: "COD available for orders below ₹3000",
+      title: "COD available for orders below Rs 3000",
       icon: "COD",
       content: "Cash on Delivery is available for all orders below ₹3000.",
     },
     {
       title:
         "Secure transactions with hassle free 14 days Exchange and Returns",
-      icon: "suquer payment",
+      icon: "sequer transaction",
       content: (
         <>
           Tried on your item(s) and need a different size? Exchange your item(s)
@@ -790,7 +790,7 @@ const Card = ({ data, productId, isModalOpen, setIsModalOpen }) => {
       ),
     },
     {
-      title: "Save 5% on all Online Payments under ₹3000",
+      title: "Save 5% on all Online Payments above Rs 5000",
       icon: "offer",
       content:
         "Pay 5% less on all orders under ₹3000 when you choose online payment options. That's right – simply opt for online payment at checkout and enjoy instant savings on your purchase.",

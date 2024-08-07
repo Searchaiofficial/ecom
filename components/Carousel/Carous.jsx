@@ -110,6 +110,7 @@ const Carous = ({ data }) => {
                       unitType={product.unitType}
                       productType={product.productType}
                       expectedDelivery={product.expectedDelivery}
+                      urgency={product.urgency}
                     />
                   </div>
                 </SwiperSlide>

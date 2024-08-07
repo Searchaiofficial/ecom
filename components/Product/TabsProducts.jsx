@@ -741,7 +741,7 @@ const Tabs = ({
         <p className="leading-2 mb-4 text-[14px] pt-[5px] text-[#484848] lg:w-[70%] line-clamp-2">
           {description}
         </p>
-        <div className="flex sticky top-0 z-[9996] bg-white py-5 overflow-x-auto md:overflow-x-visible mb-[20px] md:mb-0">
+        <div className="flex sticky top-0 z-[9996] bg-white py-5 overflow-x-auto md:overflow-x-visible mb-[5px] md:mb-0">
           {filteredProductData?.length > 0 && (
             <TabsProductContent
               filterName={"Sort"}
