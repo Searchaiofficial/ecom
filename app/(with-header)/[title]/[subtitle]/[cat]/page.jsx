@@ -61,8 +61,6 @@ export async function generateMetadata({ params }) {
     (subcategory) => subcategory.name === params.cat.replace(/-/g, " ")
   );
 
-  console.log({ currentSubcategory });
-
   return {
     title:
       currentSubcategory?.metadata?.title ||
