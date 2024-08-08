@@ -31,14 +31,10 @@ export const generateMetadata = async ({ params }) => {
     openGraph: {
       title: product?.productTitle || params.title?.replace(/-/g, " "),
       description: product?.productDescription,
-      images: [
-        {
-          url: "/ayatrio-room.jpg",
-          width: 600,
-          height: 600,
-          alt: "Ayatrio India-Affordable Home Furnishing & Decor designs & ideas",
-        },
-      ],
+      images: product?.images.map((image) => ({
+        url: image,
+        alt: product?.productTitle || params.title?.replace(/-/g, " "),
+      })),
     },
   };
 };
