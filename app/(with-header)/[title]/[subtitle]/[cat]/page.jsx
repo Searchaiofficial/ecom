@@ -61,12 +61,27 @@ export async function generateMetadata({ params }) {
     (subcategory) => subcategory.name === params.cat.replace(/-/g, " ")
   );
 
+  console.log({ currentSubcategory });
+
   return {
     title:
       currentSubcategory?.metadata?.title ||
       currentSubcategory?.name ||
       params.cat,
     description: currentSubcategory?.description || "",
+    openGraph: {
+      title:
+        currentSubcategory?.metadata?.title ||
+        currentSubcategory?.name ||
+        params.cat,
+      description: currentSubcategory?.description || "",
+      images: [
+        {
+          url: currentSubcategory?.img,
+          alt: currentSubcategory?.name || params.cat,
+        },
+      ],
+    },
   };
 }
 
