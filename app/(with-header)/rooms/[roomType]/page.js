@@ -16,6 +16,18 @@ export const generateMetadata = async ({ params }) => {
   return {
     title: roomData?.metadata?.title || roomData?.roomType || params.roomType,
     description: roomData?.description || "",
+    openGraph: {
+      title: roomData?.metadata?.title || roomData?.roomType || params.roomType,
+      description: roomData?.description || "",
+      images: [
+        {
+          url: "/ayatrio-room.jpg",
+          width: 600,
+          height: 600,
+          alt: "Ayatrio India-Affordable Home Furnishing & Decor designs & ideas",
+        },
+      ],
+    },
   };
 };
 
