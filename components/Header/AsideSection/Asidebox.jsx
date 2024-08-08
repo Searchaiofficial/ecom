@@ -49,8 +49,12 @@ const Asidebox = (props) => {
   };
 
   const handleItemClick = (data) => {
-    props.onItemClick(data); // Call the parent component's function with the data
+    // props.onItemClick(data); // Call the parent component's function with the data
     setInnerData(true);
+    if (window.innerWidth > 800) {
+      props.handleChange(false);
+    }
+    HandleClick(false)
   };
 
   const [innerData, setInnerData] = useState(false);
@@ -85,7 +89,7 @@ const Asidebox = (props) => {
                 onMouseEnter={() => handleMouseEnter(idx, value)}
                 className={`lg:block flex items-center justify-between w-full lg:text-[14px] text-[18px] font-semibold ${defaultLinkIndex === idx ? "text-blue-600" : ""
                   } p-2 pt-0 hover:underline mb-2`}
-                href="#"
+                href={`/${value.name}/category/all`}
                 onClick={() => handleItemClick(value)} // Handle click event
               >
                 <span>{value.name}</span>
