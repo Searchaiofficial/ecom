@@ -117,6 +117,10 @@ const page = async ({ params }) => {
   );
   const categoryProducts = categoryProductsResponse.data;
 
+  const subcategoryProducts = categoryProducts?.filter(
+    (product) => product.subcategory === params.cat.replace(/-/g, " ")
+  );
+
   return (
     <>
       <script
@@ -174,48 +178,93 @@ const page = async ({ params }) => {
           },
         ]}
       />
-      {categoryProducts?.map((product) => {
-        const ratings = product.ratings;
+      {isCategoryPage &&
+        categoryProducts?.map((product) => {
+          const ratings = product.ratings;
 
-        const reviews = ratings?.map((review) => {
-          return {
-            author: review.name,
-            name: review.comment,
-            reviewBody: review.comment,
-            reviewRating: {
-              ratingValue: `${review.rating}`,
-            },
-          };
-        });
-
-        const aggregateRating = getAggregateRating(ratings);
-
-        return (
-          <ProductJsonLd
-            key={product._id}
-            useAppDir={true}
-            productName={product.productTitle}
-            description={product.productDescription}
-            images={product.productImages}
-            brand={product.brand || "Ayatrio"}
-            offers={[
-              {
-                price: product.specialprice?.price,
-                priceCurrency: "INR",
-                priceValidUntil: product.specialprice?.endDate,
-                itemCondition: "https://schema.org/NewCondition",
-                availability: "https://schema.org/InStock",
-                url: `${BASE_URL}/product/${product.productTitle}`,
-                seller: {
-                  name: "Ayatrio",
-                },
+          const reviews = ratings?.map((review) => {
+            return {
+              author: review.name,
+              name: review.comment,
+              reviewBody: review.comment,
+              reviewRating: {
+                ratingValue: `${review.rating}`,
               },
-            ]}
-            reviews={!!reviews?.length ? reviews : null}
-            aggregateRating={!!reviews?.length ? aggregateRating : null}
-          />
-        );
-      })}
+            };
+          });
+
+          const aggregateRating = getAggregateRating(ratings);
+
+          return (
+            <ProductJsonLd
+              key={product._id}
+              useAppDir={true}
+              productName={product.productTitle}
+              description={product.productDescription}
+              images={product.productImages}
+              brand={product.brand || "Ayatrio"}
+              offers={[
+                {
+                  price: product.specialprice?.price,
+                  priceCurrency: "INR",
+                  priceValidUntil: product.specialprice?.endDate,
+                  itemCondition: "https://schema.org/NewCondition",
+                  availability: "https://schema.org/InStock",
+                  url: `${BASE_URL}/product/${product.productTitle}`,
+                  seller: {
+                    name: "Ayatrio",
+                  },
+                },
+              ]}
+              reviews={!!reviews?.length ? reviews : null}
+              aggregateRating={!!reviews?.length ? aggregateRating : null}
+            />
+          );
+        })}
+      {!isCategoryPage &&
+        !isOfferPage &&
+        subcategoryProducts?.map((product) => {
+          const ratings = product.ratings;
+
+          const reviews = ratings?.map((review) => {
+            return {
+              author: review.name,
+              name: review.comment,
+              reviewBody: review.comment,
+              reviewRating: {
+                ratingValue: `${review.rating}`,
+              },
+            };
+          });
+
+          const aggregateRating = getAggregateRating(ratings);
+
+          return (
+            <ProductJsonLd
+              key={product._id}
+              useAppDir={true}
+              productName={product.productTitle}
+              description={product.productDescription}
+              images={product.productImages}
+              brand={product.brand || "Ayatrio"}
+              offers={[
+                {
+                  price: product.specialprice?.price,
+                  priceCurrency: "INR",
+                  priceValidUntil: product.specialprice?.endDate,
+                  itemCondition: "https://schema.org/NewCondition",
+                  availability: "https://schema.org/InStock",
+                  url: `${BASE_URL}/product/${product.productTitle}`,
+                  seller: {
+                    name: "Ayatrio",
+                  },
+                },
+              ]}
+              reviews={!!reviews?.length ? reviews : null}
+              aggregateRating={!!reviews?.length ? aggregateRating : null}
+            />
+          );
+        })}
       <ProductPage params={params} />
     </>
   );
