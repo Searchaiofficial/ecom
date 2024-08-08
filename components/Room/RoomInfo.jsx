@@ -273,12 +273,12 @@ const RoomInfo = ({ data, accessories }) => {
                 </div>
                 <div
                   id="box3"
-                  class="flex sm:pb-0  flex-col md:pl-4  sm:order-4 border-3"
+                  className="flex sm:pb-0  flex-col md:pl-4  sm:order-4 border-3"
                 >
-                  <div class="text-center text-xl font-bold">
+                  <div className="text-center text-xl font-bold">
                     {reviews.length}
                   </div>
-                  <div class="underline text-sm -mt-2">Reviews</div>
+                  <div className="underline text-sm -mt-2">Reviews</div>
                 </div>
               </div>
             )}

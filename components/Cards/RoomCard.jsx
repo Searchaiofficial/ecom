@@ -20,14 +20,14 @@ const RoomCard = async () => {
             <p className="text-[14px] lg:w-[70%] line-clamp-2 font-normal">
               {gallery.items[0]?.description}
             </p>
-            <div class="border hidden border-black rounded-full lg:flex items-center justify-center h-[40px] cursor-pointer hover:border-gray-700 transition-colors">
+            <div className="border hidden border-black rounded-full lg:flex items-center justify-center h-[40px] cursor-pointer hover:border-gray-700 transition-colors">
               <Link
                 href={`offers/new/${gallery.items[0].offer
                   .replace(/%/g, "percent")
                   .replace(/ /g, "-")}`}
               >
                 <div className="flex items-center gap-5 px-5">
-                  <p class="text-[12px] font-semibold">
+                  <p className="text-[12px] font-semibold">
                     Shop all New lower price
                   </p>
                   <Image
@@ -187,7 +187,7 @@ const RoomCard = async () => {
         href={`heading/offers/${gallery?.items[0].offer.replace(/ /g, "-")}`}
       >
         <div className="flex mb-[20px] h-[60px] border-b px-[15px] items-center justify-between lg:hidden">
-          <p class="text-[14px] font-semibold">Shop all New lower price</p>
+          <p className="text-[14px] font-semibold">Shop all New lower price</p>
           <Image
             loading="lazy"
             src={"/icons/downarrow.svg"}

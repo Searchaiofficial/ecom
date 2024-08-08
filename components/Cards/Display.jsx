@@ -20,12 +20,12 @@ const Display = async () => {
             <p className="text-[14px] lg:w-[70%] line-clamp-2 lg:line-clamp-none font-normal">
               {apiData[0]?.description}
             </p>
-            <div class="border hidden border-black rounded-full lg:flex items-center justify-center h-[40px] cursor-pointer hover:border-gray-700 transition-colors">
+            <div className="border hidden border-black rounded-full lg:flex items-center justify-center h-[40px] cursor-pointer hover:border-gray-700 transition-colors">
               <Link
                 href={`/rooms/${apiData[0]?.room?.productCategory.replace(/ /g, "-")}`}
               >
                 <div className="flex items-center px-6 gap-5">
-                  <p class="text-[12px] font-semibold">
+                  <p className="text-[12px] font-semibold">
                     For more floor inspiration
                   </p>
                   <Image
@@ -140,7 +140,7 @@ const Display = async () => {
       </div>
       <div className="flex h-[60px] border-b px-[15px] items-center justify-between lg:hidden">
         <Link href={`/rooms/${apiData[0]?.room?.productCategory?.replace(/ /g, "-")}`}>
-          <p class="text-[14px] font-semibold">For more floor inspiration</p>
+          <p className="text-[14px] font-semibold">For more floor inspiration</p>
         </Link>
         <Image
           loading="lazy"

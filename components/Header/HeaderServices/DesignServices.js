@@ -18,7 +18,7 @@ const DesignServices = ({ handleChange, toggleMobileMenu }) => {
         <div className="md:container mx-auto h-full overflow-y-auto md:overflow-hidden sm:h-[72vh]">
             <header className="flex flex-col sm:flex-col md:flex-row w-full h-screen overflow-auto md:overflow-hidden ">
                 <AsideBox services={services} onMouseEnter={handleMouseEnter} selectedService={selectedService} toggleMobileMenu={toggleMobileMenu} />
-                <div class="lg:inline-block lg:h-full lg:min-h-[1em] lg:w-[0.5px] lg:self-stretch lg:bg-[#f5f5f5] "></div>
+                <div className="lg:inline-block lg:h-full lg:min-h-[1em] lg:w-[0.5px] lg:self-stretch lg:bg-[#f5f5f5] "></div>
                 <DisplayBox selectedService={selectedService} handleChange={handleChange} toggleMobileMenu={toggleMobileMenu} />
             </header>
         </div>

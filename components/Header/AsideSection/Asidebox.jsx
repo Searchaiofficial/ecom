@@ -99,7 +99,7 @@ const Asidebox = (props) => {
               </Link>
             ))}
           </aside>
-          <div class="inline-block h-full w-[0.5px] self-stretch bg-[#e5e7eb]"></div>
+          <div className="inline-block h-full w-[0.5px] self-stretch bg-[#e5e7eb]"></div>
           <div
             className={`${innerData ? "block" : "hidden"} md:block absolute w-full bg-white md:h-auto md:w-auto md:static z-[99]`}
           >
