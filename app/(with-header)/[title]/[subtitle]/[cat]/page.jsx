@@ -21,6 +21,18 @@ export async function generateMetadata({ params }) {
     return {
       title: category?.metadata?.title || category?.name || params.title,
       description: category?.description || "",
+      openGraph: {
+        title: category?.metadata?.title || category?.name || params.title,
+        description: category?.description || "",
+        images: [
+          {
+            url: "/ayatrio-room.jpg",
+            width: 600,
+            height: 600,
+            alt: "Ayatrio India-Affordable Home Furnishing & Decor designs & ideas",
+          },
+        ],
+      },
     };
   }
 
@@ -32,6 +44,18 @@ export async function generateMetadata({ params }) {
     return {
       title: offer.metadata?.title || offerType,
       description: offer.description || "",
+      openGraph: {
+        title: offer.metadata?.title || offerType,
+        description: offer.description || "",
+        images: [
+          {
+            url: "/ayatrio-room.jpg",
+            width: 600,
+            height: 600,
+            alt: "Ayatrio India-Affordable Home Furnishing & Decor designs & ideas",
+          },
+        ],
+      },
     };
   }
 
