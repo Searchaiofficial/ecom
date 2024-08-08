@@ -195,13 +195,19 @@ const page = async ({ params }) => {
 
           const aggregateRating = getAggregateRating(ratings);
 
+          const images = [];
+
+          product.productImages.forEach((imageObject) => {
+            imageObject.images.forEach((image) => images.push(image));
+          });
+
           return (
             <ProductJsonLd
               key={product._id}
               useAppDir={true}
               productName={product.productTitle}
               description={product.productDescription}
-              images={product.productImages}
+              images={images}
               brand={product.brand || "Ayatrio"}
               offers={[
                 {
@@ -239,13 +245,19 @@ const page = async ({ params }) => {
 
           const aggregateRating = getAggregateRating(ratings);
 
+          const images = [];
+
+          product.productImages.forEach((imageObject) => {
+            imageObject.images.forEach((image) => images.push(image));
+          });
+
           return (
             <ProductJsonLd
               key={product._id}
               useAppDir={true}
               productName={product.productTitle}
               description={product.productDescription}
-              images={product.productImages}
+              images={images}
               brand={product.brand || "Ayatrio"}
               offers={[
                 {
