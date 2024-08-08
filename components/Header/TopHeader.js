@@ -12,7 +12,7 @@ const TopHeader = () => {
       >
         <div className="">
           <Link className="pr-[20px] text-sm underline underline-offset-4" href="#">For you</Link>
-          <Link className="text-sm" href="category/virtualexperience">For business</Link>
+          <Link className="text-sm" href="/business-to-business">For business</Link>
         </div>
         <div className="flex items-center">
           <div className="flex flex-row items-center gap-2  text-black  text-[12px]">
