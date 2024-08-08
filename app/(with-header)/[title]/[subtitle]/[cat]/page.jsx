@@ -77,9 +77,16 @@ const page = async ({ params }) => {
     return <ProductPage params={params} />;
   }
 
+  const isCategoryPage = params.title !== "offers" && params.cat === "all";
+  const isOfferPage = params.title === "offers";
+
   const category = await getCategoryByName(params.title.replace(/-/g, " "));
 
   const subcategories = category?.subcategories;
+
+  const currentSubcategory = subcategories?.find(
+    (subcategory) => subcategory.name === params.cat.replace(/-/g, " ")
+  );
 
   const subcategoriesJsonLd = {
     "@context": "https://schema.org",
@@ -111,9 +118,17 @@ const page = async ({ params }) => {
       <WebPageJsonLd
         useAppDir={true}
         name={
-          category?.metadata?.title || category?.name || params.parentCategory
+          isCategoryPage
+            ? category?.metadata?.title ||
+              category?.name ||
+              params.parentCategory
+            : currentSubcategory?.metadata?.title || currentSubcategory?.name
         }
-        description={category?.description || ""}
+        description={
+          isCategoryPage
+            ? category?.description || ""
+            : currentSubcategory?.description || ""
+        }
         id={`https://www.ayatrio.com/${params.title}/${params.subtitle}/${params.cat}`}
       />
       <BreadcrumbJsonLd
