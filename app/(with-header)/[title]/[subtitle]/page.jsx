@@ -4,6 +4,45 @@ import { getAggregateRating } from "@/utils/getAggregateRating";
 import { BreadcrumbJsonLd, ProductJsonLd } from "next-seo";
 import { notFound } from "next/navigation";
 
+export const generateMetadata = async ({ params }) => {
+  const productId = params.subtitle;
+
+  if (params.title === "category") {
+    return null;
+  }
+
+  if (productId?.endsWith(".html") || productId?.endsWith(".svg")) {
+    return null;
+  }
+
+  const product = await getProductByProductId(productId);
+
+  if (product?.error) {
+    return null;
+  }
+
+  if (!product) {
+    return null;
+  }
+
+  return {
+    title: product?.productTitle || params.title?.replace(/-/g, " "),
+    description: product?.productDescription || "",
+    openGraph: {
+      title: product?.productTitle || params.title?.replace(/-/g, " "),
+      description: product?.productDescription,
+      images: [
+        {
+          url: "/ayatrio-room.jpg",
+          width: 600,
+          height: 600,
+          alt: "Ayatrio India-Affordable Home Furnishing & Decor designs & ideas",
+        },
+      ],
+    },
+  };
+};
+
 const Page = async ({ params }) => {
   const productId = params.subtitle;
 
