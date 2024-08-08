@@ -21,10 +21,8 @@ export const generateMetadata = async ({ params }) => {
       description: roomData?.description || "",
       images: [
         {
-          url: "/ayatrio-room.jpg",
-          width: 600,
-          height: 600,
-          alt: "Ayatrio India-Affordable Home Furnishing & Decor designs & ideas",
+          url: roomData?.mainImage?.imgSrc,
+          alt: roomData?.roomType || params.roomType,
         },
       ],
     },
