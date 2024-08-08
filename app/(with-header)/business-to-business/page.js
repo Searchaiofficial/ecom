@@ -2,22 +2,23 @@ import Commercial from "@/components/Business/Commercial";
 import Home from "@/components/Business/HomePage";
 import Nav from "@/components/Business/Nav";
 import Projects from "@/components/Business/Projects";
-import Purchasing from "@/components/Business/Purchasing";
 import Recomend from "@/components/Business/Recomend";
-import Service from "@/components/Business/Service";
-import Tips from "@/components/Business/Tips";
+
+import Purchasing from "@/components/Business/Purchasing";
+
+import MulticardService from "@/components/Cards/MultiCardService";
 
 const page = () => {
   return (
-    <div>
+    <div className="md:mt-36 mt-10">
       <Nav />
       <Home />
       <Recomend />
       <Commercial />
       <Projects />
-      <Service />
       <Purchasing />
-      <Tips />
+
+      <MulticardService />
     </div>
   );
 };
