@@ -76,24 +76,6 @@ function Card(props) {
     setSlide(slide === 0 ? props.imgSrc.length - 1 : slide - 1);
   };
 
-  // const startDate = new Date(props?.specialPrice?.startDate);
-  // const endDate = new Date(props?.specialPrice?.endDate);
-
-  // const formattedStartDate = startDate.toLocaleDateString("en-US", {
-  //   month: "long",
-  //   day: "numeric",
-  // });
-  // const formattedEndDate = endDate.toLocaleDateString("en-US", {
-  //   month: "long",
-  //   day: "numeric",
-  // });
-
-  // const formatDate = (date) => {
-  //   return new Date(date).toLocaleDateString("en-US", {
-  //     month: "long",
-  //     day: "numeric",
-  //   });
-  // };
 
   const imageData = props.productImages?.map((item) => {
     return {
@@ -222,11 +204,8 @@ function Card(props) {
     }
   };
 
-  // const [showCart, SetShowCart] = useState(false);
-
   useEffect(() => {
     setInCart(props.inCart);
-    // console.log(inCart)
   }, [props.inCart]);
 
   useEffect(() => {
@@ -241,7 +220,7 @@ function Card(props) {
     const today = new Date();
     const expectedDate = new Date(today);
     expectedDate.setDate(today.getDate() + expectedDelivery);
-    return expectedDate.toDateString(); // Format the date as a readable string
+    return expectedDate.toDateString(); 
   };
 
   const [loggedInUser, setLoggedInUser] = useState(null);
@@ -388,19 +367,10 @@ function Card(props) {
         width: "100%",
         height: "100%",
       }}
-      onTouchStart={() => setIsHovered(true)} // for touch devices
-      onTouchEnd={() => setIsHovered(false)} // for touch devices
+      onTouchStart={() => setIsHovered(true)} 
+      onTouchEnd={() => setIsHovered(false)} 
     >
       <div className={`relative`}>
-        {/* {props.demandtype && (
-          <div
-            className={
-              "flex text-[12px] justify-between text-black font-normal bg-white absolute top-2 left-2 z-10 py-[.1rem] px-[.5rem]"
-            }
-          >
-            {props.demandtype}
-          </div>
-        )} */}
 
         <div className="absolute top-2 left-2 z-10 flex gap-2">
           {props.demandtype && (
@@ -459,8 +429,6 @@ function Card(props) {
                         alt={`Image of ${props.title}`}
                         height={300}
                         width={300}
-                        // onClick={() => handleClick(props.title, props.category)}
-                        // loading="eager"
                         className={
                           slide === idx
                             ? "aspect-square w-[400px]"
@@ -486,8 +454,6 @@ function Card(props) {
                       alt={`Image of ${props.title}`}
                       height={300}
                       width={300}
-                      // onClick={() => handleClick(props.title, props.category)}
-                      // loading="eager"
                       className={
                         slide === idx
                           ? "aspect-square w-[400px]"
@@ -524,8 +490,6 @@ function Card(props) {
         </div>
       </div>
       <div
-      // onMouseEnter={() => SetShowCart(true)}
-      // onMouseLeave={() => SetShowCart(false)}
       >
         <div className="flex items-center justify-between pt-2">
           <div className="flex flex-col">
@@ -582,9 +546,6 @@ function Card(props) {
           ) : (
             <div className="flex gap-1 items-end">Request Now</div>
           )}
-
-          {/* {showCart && ( */}
-          {/* )} */}
         </div>
 
         {(props?.specialPrice?.price || props?.discountedprice?.price) && (
@@ -604,21 +565,6 @@ function Card(props) {
                 {formatDate(currentPeriod?.to)}
               </p>
             )}
-
-            {/* {props?.specialPrice?.startDate && props?.specialPrice?.endDate ? (
-              <p className="text-[#757575] text-[12px] ">
-                <span>Price valid </span>{" "}
-                {formatDate(props?.specialPrice?.startDate)} -{" "}
-                {formatDate(props?.specialPrice?.endDate)}
-              </p>
-            ) : props?.discountedprice?.startDate &&
-              props?.discountedprice?.endDate ? (
-              <p className="text-[#757575] text-[12px] ">
-                <span>Price valid </span>{" "}
-                {formatDate(props?.discountedprice?.startDate)} -{" "}
-                {formatDate(props?.discountedprice?.endDate)}
-              </p>
-            ) : null} */}
           </div>
         )}
         {/* {props?.rating > 0 && ( */}
@@ -640,6 +586,7 @@ function Card(props) {
               src={"/icons/adtocart plush.svg"}
               height={25}
               width={25}
+              alt="add to cart icon"
               className="cursor-pointer rounded-full"
             />
           </div>

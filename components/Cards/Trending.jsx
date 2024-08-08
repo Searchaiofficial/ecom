@@ -3,12 +3,12 @@
 import React, { useEffect, useState } from "react";
 import PopUp from "../Reviews/PopUp";
 import "./styles.css";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import "swiper/css/free-mode";
-import "swiper/css/mousewheel";
-import "swiper/css/scrollbar";
+// import "swiper/css";
+// import "swiper/css/pagination";
+// import "swiper/css/navigation";
+// import "swiper/css/free-mode";
+// import "swiper/css/mousewheel";
+// import "swiper/css/scrollbar";
 import { useSelector, useDispatch } from "react-redux";
 import { selectTrendingData } from "../Features/Slices/trendingSlice";
 import { selecteddbItems } from "../Features/Slices/cartSlice";
@@ -21,7 +21,7 @@ const Trending = () => {
   const dispatch = useDispatch();
   const [isPopupVisible, setPopupVisible] = useState(false);
   const cartData = useSelector(selecteddbItems);
-  const [TrendingData, setTrendingData] = useState([]);
+  // const [TrendingData, setTrendingData] = useState([]);
 
   useEffect(() => {
     dispatch({ type: "FETCH_TRENDING_DATA", payload: "trending" });
@@ -36,15 +36,15 @@ const Trending = () => {
     }
   }, [trendingData]);
 
-  useEffect(() => {
-    const trendindData = newTrendingData.filter(
-      (item) => item.subcategory !== "Accessories"
-    );
-    console.log(trendindData);
-    if (trendindData.length > 0) {
-      setTrendingData(trendindData);
-    }
-  }, [newTrendingData]);
+  // useEffect(() => {
+  //   const trendindData = newTrendingData.filter(
+  //     (item) => item.subcategory !== "Accessories"
+  //   );
+  //   console.log(trendindData);
+  //   if (trendindData.length > 0) {
+  //     setTrendingData(trendindData);
+  //   }
+  // }, [newTrendingData]);
 
   const closePopup = () => {
     setPopupVisible(false);
@@ -73,7 +73,7 @@ const Trending = () => {
         </div>
         <PopUp isPopupVisible={isPopupVisible} closePopup={closePopup} />
         <TrendingSlider
-          trendingData={TrendingData}
+          trendingData={newTrendingData}
           isProductInCart={isProductInCart}
           setPopupVisible={setPopupVisible}
         />
