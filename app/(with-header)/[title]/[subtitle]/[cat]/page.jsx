@@ -26,10 +26,8 @@ export async function generateMetadata({ params }) {
         description: category?.description || "",
         images: [
           {
-            url: "/ayatrio-room.jpg",
-            width: 600,
-            height: 600,
-            alt: "Ayatrio India-Affordable Home Furnishing & Decor designs & ideas",
+            url: category?.image,
+            alt: category?.name || params.title,
           },
         ],
       },
