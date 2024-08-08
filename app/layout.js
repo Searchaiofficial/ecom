@@ -23,6 +23,14 @@ export const metadata = {
     title: "Ayatrio India-Affordable Home Furnishing & Decor designs & ideas",
     description:
       "Buy affordable Wallpaper, Flooring, Curtain, Blinds, Mattresses and more at online.✔55,000+ Choices ✔Free Shipping ✔No Cost EMI ✔Easy Returns",
+    images: [
+      {
+        url: "/ayatrio-room.jpg",
+        width: 600,
+        height: 600,
+        alt: "Ayatrio India-Affordable Home Furnishing & Decor designs & ideas",
+      },
+    ],
   },
   applicationName: "Ayatrio",
   keywords: [
