@@ -2,7 +2,7 @@ import { getProductByProductId } from "@/actions/getProductByProductId";
 import ProductPage from "@/components/ProductPage/ProductPage";
 import { getAggregateRating } from "@/utils/getAggregateRating";
 import { BreadcrumbJsonLd, ProductJsonLd } from "next-seo";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 export const generateMetadata = async ({ params }) => {
   const productId = params.subtitle;
@@ -44,6 +44,10 @@ const Page = async ({ params }) => {
 
   if (params.title === "category") {
     notFound();
+  }
+
+  if (productId === "category") {
+    return redirect(`/${params.title}/category/all`);
   }
 
   if (productId?.endsWith(".html") || productId?.endsWith(".svg")) {
