@@ -90,11 +90,7 @@ body {
 .images {
   margin-top: -3rem;
 }
-.images::-webkit-scrollbar {
-  /* WebKit */
-  width: 0;
-  height: 0;
-}
+
 .images2 {
   margin-top: -1.5rem;
 }
@@ -177,10 +173,6 @@ body {
   bottom: 85px;
 
   z-index: 9999;
-}
-
-.cont1::-webkit-scrollbar {
-  display: none;
 }
 
 @media screen and (max-width: 450px) {

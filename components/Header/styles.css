@@ -1,9 +1,6 @@
-
-
 .search_icon_mar {
   margin: 3px 10px;
 }
-
 
 .text-costom-co {
   color: #707072;
@@ -14,7 +11,6 @@
 .between {
   flex: 3;
 }
-
 
 .navbar-left {
   flex: 1;
@@ -181,14 +177,7 @@
   .text-costom-co {
     display: none;
   }
-
 }
-
-.MuiBackdrop-root.MuiBackdrop-invisible.MuiModal-backdrop.css-g3hgs1-MuiBackdrop-root-MuiModal-backdrop::-webkit-scrollbar {
-  width: 10px !important;
-  background-color: #333 !important;
-}
-
 
 .modal-overlay {
   position: fixed;
@@ -221,13 +210,7 @@
   text-align: center;
 }
 
-.bloc-tabs::-webkit-scrollbar {
-  display: none;
-  background-color: rgb(64, 180, 124);
-  border-radius: 20px;
-}
-
-@media screen and (max-width:450px) {
+@media screen and (max-width: 450px) {
   .modal-overlay {
     position: fixed;
     top: 0;
@@ -258,7 +241,6 @@
     width: 100%;
     text-align: center;
   }
-
 }
 
 .overlay {

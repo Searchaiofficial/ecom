@@ -30,10 +30,6 @@
   }
 }
 
-.Filter-array::-webkit-scrollbar {
-  display: none;
-}
-
 .Filter-array-element {
   display: flex;
   gap: 0.55rem;

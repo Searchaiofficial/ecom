@@ -208,15 +208,10 @@
   position: sticky;
 }
 
-.rating-map::-webkit-scrollbar {
-  display: none;
-}
-
-
 .image-container {
   position: relative;
   overflow: hidden;
-  cursor: url('/icons/plus.svg'), auto; 
+  cursor: url("/icons/plus.svg"), auto;
 }
 
 .image-container img {
@@ -225,5 +220,5 @@
 
 .zoomed {
   transform: scale(2);
-  cursor: url('/icons/single line.svg'), auto; 
+  cursor: url("/icons/single line.svg"), auto;
 }

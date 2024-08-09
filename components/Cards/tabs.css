@@ -3,9 +3,7 @@
     position: relative;
 
   }
-  .tabcategory::-webkit-scrollbar {
-    display: none;
-  }
+ 
   .carcular-conui {
     border: 1.5px solid rgba(264, 264, 264, 0.5);
     border-radius: 50%;

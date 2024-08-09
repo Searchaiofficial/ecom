@@ -5,10 +5,6 @@
   border-bottom: 1px solid #fafafa;
 }
 
-.slider::-webkit-scrollbar {
-  display: none;
-}
-
 .slider-cont {
   display: flex;
   overflow: scroll;
@@ -21,7 +17,7 @@
   height: 67vh;
   width: 40rem;
   flex-shrink: 0;
-  transition:2s ease;
+  transition: 2s ease;
 }
 
 .arrow-left {
@@ -64,9 +60,6 @@
   align-items: center;
 }
 
-.slider-cont::-webkit-scrollbar {
-  display: none;
-}
 .circle {
   position: absolute;
 }
@@ -123,5 +116,3 @@
     height: 57vh;
   }
 }
-
-
