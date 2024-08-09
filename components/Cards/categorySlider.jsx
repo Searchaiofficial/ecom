@@ -1,75 +1,21 @@
-"use client";
 import Image from "next/image";
-import React, { useRef, useEffect, useState } from "react";
-import {
-  Navigation,
-  Pagination,
-  Scrollbar,
-  A11y,
-  Mousewheel,
-  FreeMode,
-} from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import "./styles.css";
-import Link from "next/link";
+import React from "react";
 import axios from "axios";
 import CategorySliderSwiper from "./CategorySliderSwiper";
 
-const CategoriesSlider = () => {
-  const swiper1Ref = useRef(null);
-  const [categories, setCategories] = useState([]);
-
+const CategoriesSlider = async () => {
   const fetchCategory = async () => {
     try {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/trendingCategories`
       );
-      console.log("categories", response.data);
-
-      if (response.data && response.data.length > 0) {
-        setCategories(response.data);
-      }
+      return response.data;
     } catch (error) {
       console.error("Error fetching reviews:", error);
     }
   };
 
-  useEffect(() => {
-    fetchCategory();
-  }, []);
-
-  const breakpoints = {
-    300: {
-      slidesPerView: Math.min(categories?.length, 3.2),
-      spaceBetween: 10,
-    },
-    768: {
-      slidesPerView: Math.min(categories?.length, 3),
-      spaceBetween: 10,
-    },
-    1024: {
-      slidesPerView: Math.min(categories?.length, 8),
-      spaceBetween: 10,
-    },
-  };
-
-  const swiperOptions2 = {
-    slidesPerView: 4.08,
-    centeredSlides: false,
-    spaceBetween: 5,
-    modules: [Pagination, Scrollbar, Mousewheel, FreeMode],
-    navigation: {
-      nextEl: ".custom-next-button",
-      prevEl: ".custom-prev-button",
-    },
-    noSwiping: false,
-    allowSlidePrev: true,
-    allowSlideNext: true,
-  };
-
+  const categories = await fetchCategory();
   return (
     <div className="flex items-center justify-start">
       <div className=" pt-[2rem] lg:pt-[52px] pl-[15px]  overflow-x-auto  relative w-full">

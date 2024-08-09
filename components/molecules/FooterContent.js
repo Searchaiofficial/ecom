@@ -23,7 +23,7 @@ const FooterContent = (props) => {
   const { headingId, categoryHeading, categoryData } = props;
   const handleClick = (headingId, elementId) => {
     if (headingId === 1) {
-      elementId === 1 ? router.push("/login") : router.push("/home");
+      elementId === 1 ? router.push("/login") : elementId === 6 ? router.push("create-customer") : router.push("/");
     } else if (headingId === 2) {
       elementId === 1
         ? router.push("/deliveryservice")

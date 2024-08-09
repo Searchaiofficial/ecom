@@ -1,5 +1,4 @@
-"use client";
-import React, { useRef } from "react";
+import React from "react";
 import Image from "next/image";
 import "./styles.css";
 import MultiCardServiceSlider from "./MultiCardServiceSlider";
@@ -48,7 +47,6 @@ const data = [
 ];
 
 const MulticardService = () => {
-  const swiper1Ref = useRef(null);
   // const multiCardData = useState(data);
   // const dispatch = useDispatch();
   // useEffect(() => {

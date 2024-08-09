@@ -8,6 +8,7 @@ export const footerData = [
       { id: 3, text: "Member Offers" },
       { id: 4, text: "Member Workshop  Events" },
       { id: 5, text: "Member Feedback" },
+      { id: 6, text: "Member Login" },
     ],
   },
   {
